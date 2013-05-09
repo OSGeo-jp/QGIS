@@ -12602,7 +12602,7 @@ Errors: %3
     <message>
         <location filename="../src/app/qgisapp.cpp" line="1505"/>
         <source>Shows the map coordinates at the current cursor position. The display is continuously updated as the mouse is moved. It also allows editing to set the canvas center to a given position. The format is lat,lon or east,north</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">カーソル位置の地図座標を表示します。表示はマウスが動くたびに更新されます。また指定した位置を中心にして地図表示領域を変更することができます</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="1509"/>
@@ -12613,13 +12613,14 @@ Errors: %3
         <location filename="../src/app/qgisapp.cpp" line="2173"/>
         <source>Update of view in private qgis.db failed.
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">プライベートqgis.dbの表示更新に失敗しました
+%1</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="2314"/>
         <location filename="../src/app/qgisapp.cpp" line="3387"/>
         <source>&lt; Blank &gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt; 空白 &gt;</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="2378"/>
@@ -12739,7 +12740,7 @@ Errors: %3
         <location filename="../src/app/qgisapp.cpp" line="6528"/>
         <location filename="../src/app/qgisapp.cpp" line="6537"/>
         <source>To change brightness or contrast, you need to have a raster layer selected.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">輝度やコントラストを変更するためにはラスタレイヤを選択する必要があります.</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="7498"/>
@@ -14216,7 +14217,7 @@ QWT Version: %1.</source>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="2999"/>
         <source>Cannot get Oracle select dialog from provider.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Oracleセレクトダイアログをプロバイダから取得出来ません.</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3022"/>
@@ -14236,7 +14237,7 @@ QWT Version: %1.</source>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3043"/>
         <source>Cannot get WCS select dialog from provider.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">WCSセレクトダイアログをプロバイダから取得出来ません.</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3070"/>
@@ -14251,27 +14252,27 @@ QWT Version: %1.</source>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3257"/>
         <source>Default failed to open: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">デフォルトのオープンに失敗しました: %1</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3261"/>
         <source>Default not found: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">デフォルトが見つかりません: %1</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3263"/>
         <source>Open Template Project</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">テンプレートプロジェクトを開く</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3288"/>
         <source>Auto-open Project</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">プロジェクトを自動で開く</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3321"/>
         <source>Failed to open: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">オープンに失敗しました: %1</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3344"/>
