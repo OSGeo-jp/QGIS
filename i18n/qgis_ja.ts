@@ -14277,22 +14277,22 @@ QWT Version: %1.</source>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3344"/>
         <source>Not valid project file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">無効なプロジェクトファイルです: %1</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3357"/>
         <source>Project failed to open: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">プロジェクトを開くのに失敗しました: %1</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3364"/>
         <source>Default template has been reopened: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">デフォルトテンプレートを再びオープンしました: %1</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3371"/>
         <source>File not found: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ファイルが見つかりません: %1</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3440"/>
@@ -14315,27 +14315,27 @@ QWT Version: %1.</source>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3503"/>
         <source>Loading project: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">プロジェクトをロードしています: %1</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3562"/>
         <source>Security warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">セキュリティ警告</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3563"/>
         <source>project macros have been disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">プロジェクトのマクロが無効にされました.</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3568"/>
         <source>Enable macros</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">マクロを有効にする</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3597"/>
         <source>Project loaded</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">プロジェクトがロードされました</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3688"/>
@@ -14355,12 +14355,12 @@ QWT Version: %1.</source>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="4186"/>
         <source>Labeling Options</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ラベリングオプション</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="4187"/>
         <source>Please select a vector layer first</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ベクタレイヤを最初に選択して下さい</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="4196"/>
@@ -14370,7 +14370,7 @@ QWT Version: %1.</source>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="4352"/>
         <source>Cannot write raster error code: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ラスタの書き込みができません エラーコード: %1</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="4443"/>
@@ -14412,7 +14412,7 @@ Error: %1</source>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="4628"/>
         <source>Create unique print composer title</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ユニークなプリントコンポーザタイトルを作成</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="4631"/>
