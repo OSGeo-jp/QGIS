@@ -1350,23 +1350,23 @@ columns</source>
     <message>
         <location filename="../python/plugins/fTools/tools/frmIntersectLines.ui" line="27"/>
         <source>Input line layer</source>
-        <translation>ラインレイヤの入力</translation>
+        <translation>入力ラインレイヤ</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmIntersectLines.ui" line="41"/>
         <location filename="../python/plugins/fTools/tools/frmPointDistance.ui" line="41"/>
         <source>Input unique ID field</source>
-        <translation>ユニークIdフィールドの入力</translation>
+        <translation>入力ユニークIDフィールド</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmIntersectLines.ui" line="55"/>
         <source>Intersect line layer</source>
-        <translation>ラインレイヤの交差</translation>
+        <translation>交差ラインレイヤ</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmIntersectLines.ui" line="69"/>
         <source>Intersect unique ID field</source>
-        <translation>ユニークIDフィールドの交差</translation>
+        <translation>交差ユニークIDフィールド</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmIntersectLines.ui" line="96"/>
@@ -1387,7 +1387,7 @@ columns</source>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSpatialJoin.ui" line="42"/>
         <source>Join vector layer</source>
-        <translation>ベクタレイヤを結合する</translation>
+        <translation>結合するベクタレイヤ</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSpatialJoin.ui" line="188"/>
@@ -1547,7 +1547,7 @@ columns</source>
         <location filename="../python/plugins/fTools/tools/frmRandPoints.ui" line="105"/>
         <location filename="../python/plugins/fTools/tools/frmRegPoints.ui" line="149"/>
         <source>Use this number of points</source>
-        <translation>利用ポイント数</translation>
+        <translation>このポイント数を使う</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRandPoints.ui" line="96"/>
@@ -1744,7 +1744,7 @@ columns</source>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSpatialJoin.ui" line="99"/>
         <source>Take summary of intersecting features</source>
-        <translation>交差する全ての地物の属性を総合して利用する</translation>
+        <translation>交差する全ての地物の属性を集計して利用する</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSpatialJoin.ui" line="89"/>
@@ -2053,11 +2053,11 @@ This may cause unexpected results.</source>
     </message>
     <message>
         <source>Select features in:</source>
-        <translation>中の地物を選択する:</translation>
+        <translation>地物を選択するレイヤ:</translation>
     </message>
     <message>
         <source>that intersect features in:</source>
-        <translation>交差する地物が中にある:</translation>
+        <translation>交差する地物のレイヤ:</translation>
     </message>
     <message>
         <source>Modify current selection by:</source>
@@ -2225,8 +2225,8 @@ This may cause unexpected results.</source>
     <message>
         <source>Defined Projection For:
 %s.shp</source>
-        <translation>%s.shp用に
-定義された投影法</translation>
+        <translation>投影法が定義されました:
+%s.shp</translation>
     </message>
     <message>
         <source>Selected features: %s</source>
@@ -2393,7 +2393,7 @@ were reduced to %2 vertices after simplification</source>
         <source>Identical output spatial reference system chosen
 
 Are you sure you want to proceed?</source>
-        <translation>選択された空間参照システムの識別情報出力です
+        <translation>同一の空間参照システムが選択されました
 
 本当に実行しますか?</translation>
     </message>
@@ -2492,7 +2492,7 @@ Are you sure you want to proceed?</source>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSimplify.ui" line="20"/>
         <source>Input line or polygon layer</source>
-        <translation>ラインまたはポリゴンレイヤの入力</translation>
+        <translation>ラインまたはポリゴンの入力レイヤ</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSimplify.ui" line="46"/>
@@ -2502,7 +2502,7 @@ Are you sure you want to proceed?</source>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSimplify.ui" line="73"/>
         <source>Save to new file</source>
-        <translation>新規ファイルとしての保存</translation>
+        <translation>新規ファイルとして保存</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmEliminate.ui" line="93"/>
@@ -4805,7 +4805,7 @@ JPEG,JPEG2000,MrSID,ECW,のようなカラー索引をサポートしないデ�
     </message>
     <message>
         <source>Output shapefile</source>
-        <translation>シェープファイルへ出力</translation>
+        <translation>出力シェープファイル</translation>
     </message>
     <message>
         <source>Multipart to singleparts</source>
@@ -4878,7 +4878,7 @@ Would you like to add the new layer to the TOC?</source>
     </message>
     <message>
         <source>Output point shapefile</source>
-        <translation>点をシェープファイルへ出力する</translation>
+        <translation>点を出力するシェープファイル</translation>
     </message>
     <message>
         <source>Delaunay triangulation</source>
@@ -4914,7 +4914,7 @@ Would you like to add the new layer to the TOC?</source>
     </message>
     <message>
         <source>Output polygon shapefile</source>
-        <translation>ポリゴンのシェープファイル出力</translation>
+        <translation>ポリゴンの出力シェープファイル</translation>
     </message>
     <message>
         <source>Unable to delete existing shapefile.</source>
@@ -5021,7 +5021,7 @@ Please choose larger tolerance...</source>
     </message>
     <message>
         <source>Difference layer</source>
-        <translation>レイヤの差分</translation>
+        <translation>差分レイヤ</translation>
     </message>
     <message>
         <source>Difference</source>
@@ -5029,7 +5029,7 @@ Please choose larger tolerance...</source>
     </message>
     <message>
         <source>Intersect layer</source>
-        <translation>レイヤの交差</translation>
+        <translation>交差レイヤ</translation>
     </message>
     <message>
         <source>Intersect</source>
@@ -5041,7 +5041,7 @@ Please choose larger tolerance...</source>
     </message>
     <message>
         <source>Clip layer</source>
-        <translation>レイヤをクリップする</translation>
+        <translation>クリップレイヤ</translation>
     </message>
     <message>
         <source>Clip</source>
@@ -50286,7 +50286,7 @@ about SEXTANTE</source>
     </message>
     <message>
         <source>Total encountered errors</source>
-        <translation>トータルで遭遇したエラー</translation>
+        <translation>遭遇したエラーの総数</translation>
     </message>
     <message>
         <source>Error!</source>
@@ -50397,7 +50397,7 @@ Would you like to add the new layer to the TOC?</source>
     </message>
     <message>
         <source>Total unique values</source>
-        <translation>トータルユニーク値</translation>
+        <translation>ユニーク値の総数</translation>
     </message>
     <message>
         <source>Basics statistics</source>
