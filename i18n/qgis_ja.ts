@@ -313,7 +313,8 @@ Query:
     </message>
     <message>
         <source>Do you want to %s trigger %s?</source>
-        <translation>%s を%s のトリガーにしますか?</translation>
+        <translatorcomment>順にtrigger_action, trigger_name</translatorcomment>
+        <translation>次のトリガーを%sしますか? %s</translation>
     </message>
     <message>
         <source>Table trigger</source>
@@ -11628,7 +11629,7 @@ Error: %1</source>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="6901"/>
         <source>Project has layer(s) in edit mode with unsaved edits, which will NOT be saved!</source>
-        <translation>未保存のエディットモードレイヤがあります これらは保存されません！</translation>
+        <translation>未保存の編集モードのレイヤがあります.これらは保存されません!</translation>
     </message>
     <message>
         <source>Do you want to save the current project?%1</source>
@@ -12595,7 +12596,7 @@ SVG検索パス	%8
     <message>
         <location filename="../src/gui/qgsattributeeditor.cpp" line="870"/>
         <source>Save current page url in attribute</source>
-        <translation>カレントページのURLを属性に保存しり</translation>
+        <translation>カレントページのURLを属性に保存する</translation>
     </message>
     <message>
         <location filename="../src/gui/qgsattributeeditor.cpp" line="875"/>
@@ -13504,7 +13505,7 @@ Database: %3</source>
     <message>
         <location filename="../src/app/qgsbookmarks.cpp" line="85"/>
         <source>yMin</source>
-        <translation>ｙ最小値</translation>
+        <translation>y最小値</translation>
     </message>
     <message>
         <location filename="../src/app/qgsbookmarks.cpp" line="86"/>
@@ -21233,7 +21234,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/app/qgsfieldsproperties.cpp" line="766"/>
         <source>Web view</source>
-        <translation>ウェブ表示</translation>
+        <translation>ウェブビュー</translation>
     </message>
     <message>
         <location filename="../src/app/qgsfieldsproperties.cpp" line="767"/>
@@ -31385,7 +31386,7 @@ Extended error information:
     <message>
         <location filename="../src/app/qgsnewspatialitelayerdialog.cpp" line="325"/>
         <source>Registered new database!</source>
-        <translation>登録された新しいデータベース!</translation>
+        <translation>新しいデータベースが登録されました!</translation>
     </message>
     <message>
         <location filename="../src/app/qgsnewspatialitelayerdialog.cpp" line="392"/>
@@ -37235,7 +37236,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/app/pluginmanager/qgspluginmanager.cpp" line="147"/>
         <source>sort by downloads</source>
-        <translation>ダウンロードによるソート</translation>
+        <translation>ダウンロード数によるソート</translation>
     </message>
     <message>
         <location filename="../src/app/pluginmanager/qgspluginmanager.cpp" line="148"/>
@@ -43339,7 +43340,7 @@ enhancement</source>
         <location filename="../src/providers/spatialite/qgsspatialiteconnection.cpp" line="195"/>
         <location filename="../src/providers/spatialite/qgsspatialiteconnection.cpp" line="231"/>
         <source>table info on %1 failed</source>
-        <translation>%1のテーブル情報失敗</translation>
+        <translation>%1のテーブル情報の取得に失敗しました</translation>
     </message>
     <message>
         <location filename="../src/providers/spatialite/qgsspatialiteconnection.cpp" line="323"/>
@@ -43670,7 +43671,7 @@ but implies better performance thereafter.</source>
     <message>
         <location filename="../src/providers/spatialite/qgsspatialitesourceselect.cpp" line="434"/>
         <source>SpatiaLite getTableInfo Error</source>
-        <translation>SpatiaLite　getTableInfoエラー</translation>
+        <translation>SpatiaLite getTableInfoエラー</translation>
     </message>
     <message>
         <location filename="../src/providers/spatialite/qgsspatialitesourceselect.cpp" line="435"/>
@@ -45691,7 +45692,7 @@ There was a problem with your symbol database.</source>
     <message>
         <location filename="../src/app/qgstipfactory.cpp" line="66"/>
         <source>Is it &apos;QGIS&apos; or &apos;Quantum GIS&apos;?</source>
-        <translation>’QGIS’　それとも &apos;Quantum GIS&apos; ?</translation>
+        <translation>&apos;QGIS&apos; それとも &apos;Quantum GIS&apos; ?</translation>
     </message>
     <message>
         <location filename="../src/app/qgstipfactory.cpp" line="29"/>
@@ -45777,7 +45778,7 @@ There was a problem with your symbol database.</source>
     <message>
         <location filename="../src/app/qgstipfactory.cpp" line="86"/>
         <source>You can add a current date variable to your map layout. Create a regular text label and add the string $CURRENT_DATE(yyyy-MM-dd) to the text box. See the &lt;a href=&quot;http://qt-project.org/doc/qt-5.0/qtcore/qdate.html#toString&quot;&gt;QDate::toString format documentation&lt;/a&gt; for the possible date formats.</source>
-        <translation>地図のレイアウトに現在の日付を加えることができます.テキストボックスに通常のテキストラベルを作成して　$CURRENT_DATE(yyyy-MM-dd)という文字列を加えて下さい.&lt;a href=&quot;http://qt-project.org/doc/qt-5.0/qtcore/qdate.html#toString&quot;&gt;QDate::toString format documentation&lt;/a&gt;を参照すると利用可能な日付形式の情報があります.</translation>
+        <translation>地図のレイアウトに現在の日付を加えることができます.テキストボックスに通常のテキストラベルを作成して $CURRENT_DATE(yyyy-MM-dd)という文字列を加えて下さい.&lt;a href=&quot;http://qt-project.org/doc/qt-5.0/qtcore/qdate.html#toString&quot;&gt;QDate::toString format documentation&lt;/a&gt;を参照すると利用可能な日付形式の情報があります.</translation>
     </message>
     <message>
         <location filename="../src/app/qgstipfactory.cpp" line="94"/>
@@ -47669,7 +47670,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/providers/wms/qgswmssourceselect.cpp" line="1038"/>
         <source>Could not understand the response.  The %1 provider said:
 %2</source>
-        <translation>レスポンスが理解できません　%1プロバイダのメッセージ
+        <translation>レスポンスが理解できません. %1プロバイダのメッセージ:
 %2</translation>
     </message>
     <message>
@@ -48390,7 +48391,7 @@ Response was:
     <message>
         <location filename="../src/providers/wcs/qgswcsprovider.cpp" line="1698"/>
         <source>RasterIO error: </source>
-        <translation>ラスタIO　エラー:</translation>
+        <translation>ラスタIO エラー: </translation>
     </message>
 </context>
 <context>
@@ -49672,7 +49673,7 @@ SQL Anywhere エラーコード%1
     <message>
         <location filename="../src/plugins/sqlanywhere/sanewconnectionbase.ui" line="241"/>
         <source>Save the connection password in the registry (WARNING: NOT SECURE)</source>
-        <translation>接続パスワードをレジストリに保存する（警告　セキュアではありません）</translation>
+        <translation>接続パスワードをレジストリに保存する (警告: セキュアではありません)</translation>
     </message>
     <message>
         <location filename="../src/plugins/sqlanywhere/sanewconnectionbase.ui" line="254"/>
@@ -50010,7 +50011,7 @@ SQL Anywhereエラーコード %2
     <message>
         <location filename="../python/console/console_settings.ui" line="535"/>
         <source>Using prepared APIs file</source>
-        <translation>事前準備APIファイルを利用中</translation>
+        <translation>事前に準備されたAPIファイルを利用する</translation>
     </message>
     <message>
         <location filename="../python/console/console_settings.ui" line="556"/>
@@ -52352,7 +52353,7 @@ You only need to request the list of layers by clicking the &lt;label&gt;Connect
 </source>
         <translation>&lt;h3&gt;WMSの新しい接続を作る&lt;/h3&gt;
 WMSレイヤは簡単に追加できます, URLさえ知っていればWMSサーバへのアクセスは可能です.あなたは便利なサーバへの接続を作れます,サーバはデータ送信の方法としてHTTPを利用します.&lt;p&gt;
-QGISは現在 WMS1.1,　1.1.1, 1.3サーバのWMSクライアントとして機能できます.
+QGISは現在 WMS 1.1, 1.1.1, 1.3サーバのWMSクライアントとして機能できます.
 &lt;p&gt;
 &lt;a href=&quot;#serv&quot;&gt;サーバ&lt;/a&gt;&lt;br/&gt;
 &lt;a href=&quot;#load&quot;&gt;WMSレイヤをロードする&lt;/a&gt;&lt;br/&gt;
@@ -54483,7 +54484,7 @@ Note: Experimental plugins are generally unsuitable for production use. These pl
 &lt;/a&gt;
 &lt;p align=&apos;justify&apos;&gt;
 &lt;label&gt;オプション&lt;/label&gt; タブを利用するとプラグインインストーラの設定を行うことができます. 
-&lt;label&gt;起動時に更新を確認&lt;/label&gt; チェックボックスをチェックするとQGISは自動的にプラグインの更新を確認します. この機能が有効な場合デフォルトで&lt;label&gt;リポジトリ&lt;/label&gt; タブにあるすべてのリポジトリがプログラム起動時にチェックされます. 更新チェックの頻度はドロップダウンメニューで調整できます.たとえば毎日から毎月に調整できます.新規プラグインまたは更新がインストールされているプラグインに対して可能な場合はステータスバーに通知が表示されます.　チェックボックスがチェックされていない場合は更新や新規の知らせはプラグインインストーラをメニューから手動で起動した時のみにチェックされます.
+&lt;label&gt;起動時に更新を確認&lt;/label&gt; チェックボックスをチェックするとQGISは自動的にプラグインの更新を確認します. この機能が有効な場合デフォルトで&lt;label&gt;リポジトリ&lt;/label&gt; タブにあるすべてのリポジトリがプログラム起動時にチェックされます. 更新チェックの頻度はドロップダウンメニューで調整できます.たとえば毎日から毎月に調整できます.新規プラグインまたは更新がインストールされているプラグインに対して可能な場合はステータスバーに通知が表示されます. チェックボックスがチェックされていない場合は更新や新規の知らせはプラグインインストーラをメニューから手動で起動した時のみにチェックされます.
 &lt;/p&gt;
 
 &lt;p align=&apos;justify&apos;&gt;
@@ -55259,7 +55260,7 @@ Note: Experimental plugins are generally unsuitable for production use. These pl
 &lt;/a&gt;
 &lt;p align=&apos;justify&apos;&gt;
 &lt;label&gt;オプション&lt;/label&gt; タブを利用するとプラグインインストーラの設定を行うことができます. 
-&lt;label&gt;起動時に更新を確認&lt;/label&gt; チェックボックスをチェックするとQGISは自動的にプラグインの更新を確認します. この機能が有効な場合デフォルトで&lt;label&gt;リポジトリ&lt;/label&gt; タブにあるすべてのリポジトリがプログラム起動時にチェックされます. 更新チェックの頻度はドロップダウンメニューで調整できます.たとえば毎日から毎月に調整できます.新規プラグインまたは更新がインストールされているプラグインに対して可能な場合はステータスバーに通知が表示されます.　チェックボックスがチェックされていない場合は更新や新規の知らせはプラグインインストーラをメニューから手動で起動した時のみにチェックされます.
+&lt;label&gt;起動時に更新を確認&lt;/label&gt; チェックボックスをチェックするとQGISは自動的にプラグインの更新を確認します. この機能が有効な場合デフォルトで&lt;label&gt;リポジトリ&lt;/label&gt; タブにあるすべてのリポジトリがプログラム起動時にチェックされます. 更新チェックの頻度はドロップダウンメニューで調整できます.たとえば毎日から毎月に調整できます.新規プラグインまたは更新がインストールされているプラグインに対して可能な場合はステータスバーに通知が表示されます. チェックボックスがチェックされていない場合は更新や新規の知らせはプラグインインストーラをメニューから手動で起動した時のみにチェックされます.
 &lt;/p&gt;
 
 &lt;p align=&apos;justify&apos;&gt;
@@ -55649,6 +55650,8 @@ that will be automatically deleted after running.&lt;/li&gt;
 このアクションはシステムの一時ディレクトリに一時ファイルを保存します. それは実行後に自動的に削除されます.&lt;/li&gt;
 &lt;br&gt;
 &lt;li&gt;&lt;label&gt;事前にロードされたAPIファイルを利用する:&lt;/label&gt; 事前にロードされたAPIファイルを使うかあなたのシステムに保存されたAPIファイルをロードするか選択できます.&lt;/li&gt;
+&lt;br&gt;
+&lt;li&gt;&lt;label&gt;事前に準備されたAPIファイルを利用する:&lt;/label&gt; チェックした場合, *.papファイルがコードの補完に使われます. 事前に準備されたAPIファイルを生成するには少なくとも1つの*.apiファイルを読み込んだ後, &lt;label&gt;APIのコンパイル...&lt;/label&gt;ボタンをクリックします.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p style=&apos;border: 1px solid; background:#f6f6f6;&apos; align=&apos;justify&apos;&gt;
 	&lt;b&gt;注意:&lt;/b&gt; 閉じるボタンでPythonコンソールを閉じるとコンソールのウィジェットの状態を保存できます. これによって次回起動時に復元されるジオメトリを保存できます.
@@ -56319,12 +56322,12 @@ CNR, Milan Unit (Information Technology), Construction Technologies Institute.
     <message>
         <location filename="../src/plugins/evis/databaseconnection/evisdatabaseconnectiongui.cpp" line="239"/>
         <source>Error: No host name entered</source>
-        <translation>エラー:　ホスト名が入力されていません</translation>
+        <translation>エラー: ホスト名が入力されていません</translation>
     </message>
     <message>
         <location filename="../src/plugins/evis/databaseconnection/evisdatabaseconnectiongui.cpp" line="246"/>
         <source>Error: No database name entered</source>
-        <translation>エラー;　データベース名が入力されていません</translation>
+        <translation>エラー: データベース名が入力されていません</translation>
     </message>
     <message>
         <location filename="../src/plugins/evis/databaseconnection/evisdatabaseconnectiongui.cpp" line="288"/>
@@ -60651,7 +60654,7 @@ Convert a string into Qt data type.
     </message>
     <message>
         <source>Line length</source>
-        <translation>ライン　長さ</translation>
+        <translation>ライン 長さ</translation>
     </message>
     <message>
         <source>Point x ordinate</source>
@@ -60659,7 +60662,7 @@ Convert a string into Qt data type.
     </message>
     <message>
         <source>Point y ordinate</source>
-        <translation>ポイント ｙ座標</translation>
+        <translation>ポイント y座標</translation>
     </message>
 </context>
 <context>
@@ -60937,7 +60940,7 @@ Convert a string into Qt data type.
     <message>
         <location filename="../src/plugins/grass/grasslabels-i18n.cpp" line="59"/>
         <source>Change the type of bridges connecting area and island or 2 islands from boundary to line</source>
-        <translation>領域と島または2つの島の間の境界線からラインへのブリッジのタイプを変更します　　　</translation>
+        <translation>領域と島または2つの島の間の境界線からラインへのブリッジのタイプを変更します</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/grasslabels-i18n.cpp" line="60"/>
@@ -61282,7 +61285,7 @@ Convert a string into Qt data type.
     <message>
         <location filename="../src/plugins/grass/grasslabels-i18n.cpp" line="128"/>
         <source>Create red, green and blue rasters combining hue, intensity, and saturation (his) values from rasters</source>
-        <translation>別ラスタの色相　明度　彩度（HIS)を混合して赤、緑、青（RGB)のラスタを作ります</translation>
+        <translation>別ラスタの色相, 明度, 彩度 (HIS)を混合して赤, 緑, 青 (RGB)のラスタを作ります</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/grasslabels-i18n.cpp" line="129"/>
@@ -61817,7 +61820,7 @@ Convert a string into Qt data type.
     <message>
         <location filename="../src/plugins/grass/grasslabels-i18n.cpp" line="231"/>
         <source>Hue Intensity Saturation (HIS) to Red Green Blue (RGB) raster color transform function</source>
-        <translation>色相　明度　彩度（HIS)を赤、緑、青（RGB)ラスタカラーに変換する機能</translation>
+        <translation>色相, 明度, 彩度 (HIS)を赤, 緑, 青 (RGB)ラスタカラーに変換する機能</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/grasslabels-i18n.cpp" line="232"/>
@@ -62362,7 +62365,7 @@ Convert a string into Qt data type.
     <message>
         <location filename="../src/plugins/grass/grasslabels-i18n.cpp" line="345"/>
         <source>Red Green Blue (RGB) to Hue Intensity Saturation (HIS) raster color transformation function</source>
-        <translation>赤、緑、青（RGB)を色相　明度　彩度（HIS)ラスタカラーに変換する機能</translation>
+        <translation>赤, 緑, 青 (RGB)を色相, 明度, 彩度 (HIS)ラスタカラーに変換する機能</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/grasslabels-i18n.cpp" line="346"/>
@@ -62432,7 +62435,7 @@ Convert a string into Qt data type.
     <message>
         <location filename="../src/plugins/grass/grasslabels-i18n.cpp" line="359"/>
         <source>Remove vertices in threshold from lines and boundaries, boundary is pruned only if topology is not damaged (new intersection, changed attachement of centroid), first and last segment of the boundary is never changed</source>
-        <translation>ラインと境界線からの距離が閾値内の頂点を削除します　境界線はトポロジが損なわれない場合にのみ切り取りできます（重心の変更された付属物との新しい交差）境界線の最初と最後のセグメントは変更できません</translation>
+        <translation>ラインと境界線からの距離が閾値内の頂点を削除します. 境界線はトポロジが損なわれない場合にのみ切り取りできます（重心の変更された付属物との新しい交差）境界線の最初と最後のセグメントは変更できません</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/grasslabels-i18n.cpp" line="360"/>
@@ -62512,7 +62515,7 @@ Convert a string into Qt data type.
     <message>
         <location filename="../src/plugins/grass/grasslabels-i18n.cpp" line="374"/>
         <source>Set PostgreSQL DB connection</source>
-        <translation>PostgreSQL　DB接続を設定する</translation>
+        <translation>PostgreSQL DB接続を設定する</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/grasslabels-i18n.cpp" line="375"/>
