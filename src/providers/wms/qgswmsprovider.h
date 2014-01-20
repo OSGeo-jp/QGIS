@@ -97,6 +97,7 @@ struct QgsWmsRequestProperty
   QgsWmsOperationType     getMap;
   QgsWmsOperationType     getFeatureInfo;
   QgsWmsOperationType     getTile;
+  QgsWmsOperationType     getLegendGraphic;
 };
 
 /** Exception Property structure */
@@ -434,6 +435,23 @@ struct QgsWmsSupportedFormat
   QString label;
 };
 
+enum QgsWmsTileAttribute
+{
+  TileReqNo = QNetworkRequest::User + 0,
+  TileIndex = QNetworkRequest::User + 1,
+  TileRect  = QNetworkRequest::User + 2,
+  TileRetry = QNetworkRequest::User + 3,
+};
+
+enum QgsWmsDpiMode
+{
+  dpiNone = 0,
+  dpiQGIS = 1,
+  dpiUMN = 2,
+  dpiGeoServer = 4,
+  dpiAll = dpiQGIS | dpiUMN | dpiUMN,
+};
+
 /**
 
   \brief Data provider for OGC WMS layers.
@@ -606,6 +624,11 @@ class QgsWmsProvider : public QgsRasterDataProvider
      */
     virtual QString getTileUrl() const;
 
+    /**Return the GetLegendGraphic url
+     * @added in 2.1
+     */
+    virtual QString getLegendGraphicUrl() const;
+
     //! get WMS version string
     QString wmsVersion();
 
@@ -631,6 +654,19 @@ class QgsWmsProvider : public QgsRasterDataProvider
      */
     QStringList subLayerStyles() const;
 
+
+    /**
+     * \brief Get GetLegendGraphic if service is available otherwise QImage()
+     * \note the first call needs to specify a scale parameter otherwise it always return QImage()
+     * \todo some services don't expose GetLegendGraphic in capabilities, but add a LegendURL in
+     * the layer element inside capabilities. Parsing for this is not implemented => getLegendGraphic is
+     * only called if GetCapabilities expose it. Other drawback is that SLD_VERSION
+     * is inside LegendURL, so at this moment it is fixed to 1.1.0 waiting a correct parsing of LegendURL
+     * in getCapability
+     * \param scale Optional parameter that is the Scale of the wms layer
+     * \param forceRefresh Optional bool parameter to force refresh getLegendGraphic call
+     */
+    QImage getLegendGraphic( double scale = 0.0, bool forceRefresh = false );
 
     // TODO: Get the WMS connection
 
@@ -736,12 +772,25 @@ class QgsWmsProvider : public QgsRasterDataProvider
     void capabilitiesReplyProgress( qint64, qint64 );
     void identifyReplyFinished();
     void tileReplyFinished();
+    void getLegendGraphicReplyFinished();
+    void getLegendGraphicReplyProgress( qint64, qint64 );
 
   private:
     void showMessageBox( const QString& title, const QString& text );
 
     // case insensitive attribute value lookup
     static QString nodeAttribute( const QDomElement &e, QString name, QString defValue = QString::null );
+
+    /**
+     * \brief Relaunch tile request cloning previous request parameters and managing max repeat
+     *
+     * \note Development funded by Regione Toscana - SITA
+     *
+     * \param oldRequest request to clone to generate new tile request
+     *
+     * request is not launched if max retry is reached. Message is logged.
+     */
+    void repeatTileRequest( QNetworkRequest const &oldRequest );
 
     /**
      * \brief Retrieve and parse the (cached) Capabilities document from the server
@@ -903,6 +952,21 @@ class QgsWmsProvider : public QgsRasterDataProvider
     QDomDocument mCapabilitiesDom;
 
     /**
+     * GetLegendGraphic of the WMS (raw)
+     */
+    QByteArray mHttpGetLegendGraphicResponse;
+
+    /**
+     * GetLegendGraphic WMS Pixmap result
+     */
+    QImage mGetLegendGraphicImage;
+
+    /**
+     * GetLegendGraphic scale for the WMS Pixmap result
+     */
+    double mGetLegendGraphicScale;
+
+    /**
      * Last Service Exception Report from the WMS
      */
     QDomDocument mServiceExceptionReportDom;
@@ -991,6 +1055,11 @@ class QgsWmsProvider : public QgsRasterDataProvider
      * The reply to the capabilities request
      */
     QNetworkReply *mCapabilitiesReply;
+
+    /**
+     * The reply to the GetLegendGraphic request
+     */
+    QNetworkReply *mGetLegendGraphicReply;
 
     /**
      * The reply to the capabilities request
@@ -1085,6 +1154,7 @@ class QgsWmsProvider : public QgsRasterDataProvider
     bool mIgnoreAxisOrientation;
     bool mInvertAxisOrientation;
     bool mSmoothPixmapTransform;
+    enum QgsWmsDpiMode mDpiMode;
 
     //! supported formats for GetFeatureInfo in order of preference
     QStringList mSupportedGetFeatureFormats;

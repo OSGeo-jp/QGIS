@@ -13,6 +13,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "qgsapplication.h"
 #include "qgscursors.h"
 #include "qgsdistancearea.h"
 #include "qgsfeature.h"
@@ -57,6 +58,7 @@ QgsMapToolIdentifyAction::~QgsMapToolIdentifyAction()
   {
     mResultsDialog->done( 0 );
   }
+  deleteRubberBands();
 }
 
 QgsIdentifyResultsDialog *QgsMapToolIdentifyAction::resultsDialog()
@@ -90,13 +92,13 @@ void QgsMapToolIdentifyAction::canvasReleaseEvent( QMouseEvent *e )
   }
 
   resultsDialog()->clear();
-
   connect( this, SIGNAL( identifyProgress( int, int ) ), QgisApp::instance(), SLOT( showProgress( int, int ) ) );
   connect( this, SIGNAL( identifyMessage( QString ) ), QgisApp::instance(), SLOT( showStatusMessage( QString ) ) );
+
   QList<IdentifyResult> results = QgsMapToolIdentify::identify( e->x(), e->y() );
+
   disconnect( this, SIGNAL( identifyProgress( int, int ) ), QgisApp::instance(), SLOT( showProgress( int, int ) ) );
   disconnect( this, SIGNAL( identifyMessage( QString ) ), QgisApp::instance(), SLOT( showStatusMessage( QString ) ) );
-
 
   QList<IdentifyResult>::const_iterator result;
   for ( result = results.begin(); result != results.end(); ++result )
@@ -148,6 +150,7 @@ void QgsMapToolIdentifyAction::deactivate()
 {
   resultsDialog()->deactivate();
   QgsMapTool::deactivate();
+  deleteRubberBands();
 }
 
 QGis::UnitType QgsMapToolIdentifyAction::displayUnits()
@@ -162,4 +165,5 @@ void QgsMapToolIdentifyAction::handleCopyToClipboard( QgsFeatureStore & featureS
   QgsDebugMsg( QString( "features count = %1" ).arg( featureStore.features().size() ) );
   emit copyToClipboard( featureStore );
 }
+
 

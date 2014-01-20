@@ -57,7 +57,10 @@ class QgsMapCanvas : QGraphicsView
 
     QgsMapCanvasMap* map();
 
-    QgsMapRenderer* mapRenderer() /Transfer/;
+    // KeepReference is necessary because otherwise 
+    // mapRenderer().hasCrsTransformEnabled() was crashing, most probably because 
+    // QgsMapRenderer.hasCrsTransformEnabled() is both signal and function
+    QgsMapRenderer* mapRenderer() /KeepReference/;
 
     //! Accessor for the canvas paint device
     QPaintDevice &canvasPaintDevice();
@@ -335,4 +338,6 @@ class QgsMapCanvas : QGraphicsView
     //! called on resize or changed extent to notify canvas items to change their rectangle
     void updateCanvasItemPositions();
 
+private:
+    void connectNotify( const char * signal );
 }; // class QgsMapCanvas

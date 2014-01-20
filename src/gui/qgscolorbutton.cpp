@@ -45,6 +45,7 @@ QgsColorButton::QgsColorButton( QWidget *parent, QString cdt, QColorDialog::Colo
     , mColorDialogOptions( cdo )
     , mAcceptLiveUpdates( true )
     , mTempPNG( NULL )
+    , mColorSet( false )
 {
   connect( this, SIGNAL( clicked() ), this, SLOT( onButtonClicked() ) );
 }
@@ -69,7 +70,6 @@ void QgsColorButton::onButtonClicked()
 {
   //QgsDebugMsg( "entered" );
   QColor newColor;
-#if QT_VERSION >= 0x040500
   QSettings settings;
   if ( mAcceptLiveUpdates && settings.value( "/qgis/live_color_dialogs", false ).toBool() )
   {
@@ -81,9 +81,6 @@ void QgsColorButton::onButtonClicked()
   {
     newColor = QColorDialog::getColor( color(), this->parentWidget(), mColorDialogTitle, mColorDialogOptions );
   }
-#else
-  newColor = QColorDialog::getColor( color(), this->parentWidget() );
-#endif
   setValidColor( newColor );
 
   // reactivate button's window
@@ -134,7 +131,8 @@ void QgsColorButton::setColor( const QColor &color )
   QColor oldColor = mColor;
   mColor = color;
 
-  if ( oldColor != mColor )
+  // handle when initially set color is same as default (Qt::black); consider it a color change
+  if ( oldColor != mColor || ( mColor == QColor( Qt::black ) && !mColorSet ) )
   {
     setButtonBackground();
     if ( isEnabled() )
@@ -144,6 +142,7 @@ void QgsColorButton::setColor( const QColor &color )
       emit colorChanged( mColor );
     }
   }
+  mColorSet = true;
 }
 
 void QgsColorButton::setButtonBackground()

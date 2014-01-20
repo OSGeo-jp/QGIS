@@ -28,6 +28,7 @@ my $version;
 my $binary;
 my $root = "http://download.osgeo.org/osgeo4w";
 my $ininame = "setup.ini";
+my $arch = "x86_64";
 my $help;
 
 my $result = GetOptions(
@@ -40,6 +41,7 @@ my $result = GetOptions(
 		"shortname=s" => \$shortname,
 		"ininame=s" => \$ininame,
 		"mirror=s" => \$root,
+		"arch=s" => \$arch,
 		"help" => \$help
 	);
 
@@ -53,9 +55,13 @@ unless(-f "nsis/System.dll") {
 	die "download of System.dll failed" if $?;
 }
 
-mkdir "packages", 0755 unless -d "packages";
-chdir "packages";
+my $archpath    = $arch eq "" ? "" : "/$arch";
+my $archpostfix = $arch eq "" ? "" : "-$arch";
+my $unpacked    = "unpacked" . ($arch eq "" ? "" : "-$arch");
+my $packages    = "packages" . ($arch eq "" ? "" : "-$arch");
 
+mkdir $packages, 0755 unless -d $packages;
+chdir $packages;
 
 system "wget $wgetopt -c http://nsis.sourceforge.net/mediawiki/images/9/9d/Untgz.zip" unless -f "Untgz.zip";
 die "download of Untgz.zip failed" if $?;
@@ -66,7 +72,7 @@ my %lic;
 my %sdesc;
 my $package;
 
-system "wget $wgetopt -O setup.ini -c $root/$ininame";
+system "wget $wgetopt -O setup.ini -c $root$archpath/$ininame";
 die "download of setup.ini failed" if $?;
 open F, "setup.ini" || die "setup.ini not found";
 while(<F>) {
@@ -116,6 +122,10 @@ my @lic;
 my @desc;
 foreach my $p ( keys %pkgs ) {
 	my @f;
+	unless( exists $file{$p} ) {
+		print "No file for package $p found found.\n" if $verbose;
+		next;
+	}
 	push @f, "$root/$file{$p}";
 
 	if( exists $lic{$p} ) {
@@ -146,42 +156,63 @@ chdir "..";
 # Add addons
 #
 
-if( -d "unpacked" ) {
+if( -d $unpacked ) {
 	unless( $keep ) {
-		print "Removing unpacked directory\n" if $verbose;
-		system "rm -rf unpacked";
+		print "Removing $unpacked directory\n" if $verbose;
+		system "rm -rf $unpacked";
 	} else {
-		print "Keeping unpacked directory\n" if $verbose;
+		print "Keeping $unpacked directory\n" if $verbose;
 	}
 }
 
 my $taropt = "v" x $verbose;
 
-unless(-d "unpacked") {
-	mkdir "unpacked", 0755;
+unless(-d $unpacked ) {
+	mkdir "$unpacked", 0755;
+	mkdir "$unpacked/bin", 0755;
+	mkdir "$unpacked/etc", 0755;
+	mkdir "$unpacked/etc/setup", 0755;
 
-	foreach my $p ( keys %pkgs ) {
-		$p = $file{$p};
-		$p =~ s#^.*/#packages/#;
+	# Create package database
+	open O, ">$unpacked/etc/setup/installed.db";
+	print O "INSTALLED.DB 2\n";
+
+	foreach my $pn ( keys %pkgs ) {
+		my $p = $file{$pn};
+		unless( defined $p ) {
+			print "No package found for $pn\n" if $verbose;
+			next;
+		}
+
+		$p =~ s#^.*/#$packages/#;
+
+		unless( -r $p ) {
+			print "Package $p not found.\n" if $verbose;
+			next;
+		}
+
+		print O "$pn $p 0\n";
 
 		print "Unpacking $p...\n" if $verbose;
-		system "tar $taropt -C unpacked -xjf $p";
+		system "tar $taropt -C $unpacked -xjvf $p | gzip -c >$unpacked/etc/setup/$pn.lst.gz";
 		die "unpacking of $p failed" if $?;
 	}
 
-	chdir "unpacked";
+	close O;
+
+	chdir $unpacked;
 
 	mkdir "bin", 0755;
 
 	unless( -f "bin/nircmd.exe" ) {
-		unless( -f "../packages/nircmd.zip" ) {
-			system "cd ../packages; wget $wgetopt -c http://www.nirsoft.net/utils/nircmd.zip";
+		unless( -f "../$packages/nircmd.zip" ) {
+			system "cd ../$packages; wget $wgetopt -c http://www.nirsoft.net/utils/nircmd.zip";
 			die "download of nircmd.zip failed" if $?;
 		}
 
 		mkdir "apps", 0755;
 		mkdir "apps/nircmd", 0755;
-		system "cd apps/nircmd; unzip ../../../packages/nircmd.zip && mv nircmd.exe nircmdc.exe ../../bin";
+		system "cd apps/nircmd; unzip ../../../$packages/nircmd.zip && mv nircmd.exe nircmdc.exe ../../bin";
 		die "unpacking of nircmd failed" if $?;
 	}
 
@@ -210,7 +241,7 @@ print F "echo OSGEO4W_ROOT_MSYS=%OSGEO4W_ROOT_MSYS%>>postinstall.log 2>&1\r\n";
 print F "PATH %OSGEO4W_ROOT%\\bin;%PATH%>>postinstall.log 2>&1\r\n";
 print F "cd %OSGEO4W_ROOT%>>postinstall.log 2>&1\r\n";
 
-chdir "unpacked";
+chdir $unpacked;
 for my $p (<etc/postinstall/*.bat>) {
 	$p =~ s/\//\\/g;
 	my($dir,$file) = $p =~ /^(.+)\\([^\\]+)$/;
@@ -237,7 +268,7 @@ print F "echo OSGEO4W_ROOT_MSYS=%OSGEO4W_ROOT_MSYS%>>preremove.log 2>&1\r\n";
 print F "PATH %OSGEO4W_ROOT%\\bin;%PATH%>>preremove.log 2>&1\r\n";
 print F "cd %OSGEO4W_ROOT%>>preremove.log 2>&1\r\n";
 
-chdir "unpacked";
+chdir $unpacked;
 for my $p (<etc/preremove/*.bat>) {
 	$p =~ s/\//\\/g;
 	my($dir,$file) = $p =~ /^(.+)\\([^\\]+)$/;
@@ -271,8 +302,8 @@ close F;
 $version = "$major.$minor.$patch" unless defined $version;
 
 unless( defined $binary ) {
-	if( -f "binary-$version" ) {
-		open P, "binary-$version";
+	if( -f "binary$archpostfix-$version" ) {
+		open P, "binary$archpostfix-$version";
 		$binary = <P>;
 		close P;
 		$binary++;
@@ -282,7 +313,7 @@ unless( defined $binary ) {
 }
 
 unless(-d "untgz") {
-	system "unzip packages/Untgz.zip";
+	system "unzip $packages/Untgz.zip";
 	die "unpacking Untgz.zip failed" if $?;
 }
 
@@ -292,7 +323,7 @@ chdir "..";
 print "Creating license file\n" if $verbose;
 open O, ">license.tmp";
 my $lic;
-for my $l ( ( "osgeo4w/unpacked/apps/$shortname/doc/LICENSE", "../COPYING", "./Installer-Files/LICENSE.txt" ) ) {
+for my $l ( ( "osgeo4w/$unpacked/apps/$shortname/doc/LICENSE", "../COPYING", "./Installer-Files/LICENSE.txt" ) ) {
 	next unless -f $l;
 	$lic = $l;
 	last;
@@ -304,6 +335,7 @@ my $i = 0;
 if( @lic ) {
 	print O "License overview:\n";
 	print O "1. QGIS\n";
+	$i = 1;
 	for my $l ( @desc ) {
 		print O ++$i . ". $l\n";
 	}
@@ -322,7 +354,7 @@ close I;
 for my $l (@lic) {
 	print " Including license $l\n" if $verbose;
 
-	open I, "osgeo4w/packages/$l" or die "License $l not found.";
+	open I, "osgeo4w/$packages/$l" or die "License $l not found.";
 	print O "\n\n----------\n\n" . ++$i . ". License of '" . shift(@desc) . "'\n\n";
 	while(<I>) {
 		s/\s*$/\n/;
@@ -334,8 +366,8 @@ for my $l (@lic) {
 close O;
 
 my $license = "license.tmp";
-if( -f "osgeo4w/unpacked/apps/$shortname/doc/LICENSE" ) {
-	open O, ">osgeo4w/unpacked/apps/$shortname/doc/LICENSE";
+if( -f "osgeo4w/$unpacked/apps/$shortname/doc/LICENSE" ) {
+	open O, ">osgeo4w/$unpacked/apps/$shortname/doc/LICENSE";
 	open I, $license;
 	while(<I>) {
 		print O;
@@ -343,7 +375,7 @@ if( -f "osgeo4w/unpacked/apps/$shortname/doc/LICENSE" ) {
 	close O;
 	close I;
 
-	$license = "osgeo4w/unpacked/apps/$shortname/doc/LICENSE";
+	$license = "osgeo4w/$unpacked/apps/$shortname/doc/LICENSE";
 }
 
 
@@ -356,18 +388,19 @@ $cmd .= " -DVERSION_NUMBER='$version'";
 $cmd .= " -DBINARY_REVISION=$binary";
 $cmd .= sprintf( " -DVERSION_INT='%d%02d%02d%02d'", $major, $minor, $patch, $binary );
 $cmd .= " -DQGIS_BASE='$packagename $releasename'";
-$cmd .= " -DINSTALLER_NAME='QGIS-OSGeo4W-$version-$binary-Setup.exe'";
+$cmd .= " -DINSTALLER_NAME='$packagename-OSGeo4W-$version-$binary-Setup$archpostfix.exe'";
 $cmd .= " -DDISPLAYED_NAME='$packagename \'$releasename\' ($version)'";
 $cmd .= " -DSHORTNAME='$shortname'";
 $cmd .= " -DINSTALLER_TYPE=OSGeo4W";
-$cmd .= " -DPACKAGE_FOLDER=osgeo4w/unpacked";
+$cmd .= " -DPACKAGE_FOLDER=osgeo4w/$unpacked";
 $cmd .= " -DLICENSE_FILE='$license'";
+$cmd .= " -DARCH='$arch'";
 $cmd .= " QGIS-Installer.nsi";
 
 system $cmd;
 die "running nsis failed" if $?;
 
-open P, ">osgeo4w/binary-$version";
+open P, ">osgeo4w/binary$archpostfix-$version";
 print P $binary;
 close P;
 
@@ -392,6 +425,7 @@ creatensis.pl [options] [packages...]
     -packagename=s	name of package (defaults to 'QGIS')
     -shortname=s	shortname used for batch file (defaults to 'qgis')
     -mirror=s		default mirror (defaults to 'http://download.osgeo.org/osgeo4w')
+    -arch=s		architecture (x86 or x86_64; defaults to 'x86_64')
     -help		this help
 
   If no packages are given 'qgis-full' and it's dependencies will be retrieved

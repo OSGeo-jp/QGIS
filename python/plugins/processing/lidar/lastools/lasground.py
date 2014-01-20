@@ -7,6 +7,10 @@
     Date                 : August 2012
     Copyright            : (C) 2012 by Victor Olaya
     Email                : volayaf at gmail dot com
+    ---------------------
+    Date                 : September 2013
+    Copyright            : (C) 2013 by Martin Isenburg
+    Email                : martin near rapidlasso point com
 ***************************************************************************
 *                                                                         *
 *   This program is free software; you can redistribute it and/or modify  *
@@ -20,42 +24,54 @@
 __author__ = 'Victor Olaya'
 __date__ = 'August 2012'
 __copyright__ = '(C) 2012, Victor Olaya'
+
 # This will get replaced with a git SHA1 when you do a git archive
+
 __revision__ = '$Format:%H$'
 
 import os
 from PyQt4 import QtGui
-from processing.lidar.lastools.LasToolsUtils import LasToolsUtils
-from processing.lidar.lastools.LasToolsAlgorithm import LasToolsAlgorithm
+from processing.lidar.lastools.LAStoolsUtils import LAStoolsUtils
+from processing.lidar.lastools.LAStoolsAlgorithm import LAStoolsAlgorithm
+
+from processing.parameters.ParameterBoolean import ParameterBoolean
 from processing.parameters.ParameterSelection import ParameterSelection
-from processing.parameters.ParameterFile import ParameterFile
-from processing.outputs.OutputFile import OutputFile
 
-class lasground(LasToolsAlgorithm):
 
-    INPUT = "INPUT"
-    OUTPUT = "OUTPUT"
-    INTENSITY = "INTENSITY"
-    METHOD = "METHOD"
-    METHODS = ["terrain", "town", "city"]
+class lasground(LAStoolsAlgorithm):
+
+    AIRBORNE = 'AIRBORNE'
+    TERRAIN = 'TERRAIN'
+    TERRAINS = ['wilderness', 'nature', 'town', 'city', 'metro']
+    GRANULARITY = 'GRANULARITY'
+    GRANULARITIES = ['coarse', 'default', 'fine', 'extra_fine', 'ultra_fine']
 
     def defineCharacteristics(self):
-        self.name = "lasground"
-        self.group = "Tools"
-        self.addParameter(ParameterFile(lasground.INPUT, "Input las layer"))
-        self.addParameter(ParameterSelection(lasground.METHOD, "Method", lasground.METHODS))
-        self.addOutput(OutputFile(lasground.OUTPUT, "Output ground las file"))
-        self.addCommonParameters()
+        self.name = 'lasground'
+        self.group = 'LAStools'
+        self.addParametersVerboseGUI()
+        self.addParametersPointInputGUI()
+        self.addParametersHorizontalAndVerticalFeetGUI()
+        self.addParameter(ParameterBoolean(lasground.AIRBORNE, 'airborne LiDAR'
+                          , True))
+        self.addParameter(ParameterSelection(lasground.TERRAIN, 'terrain type'
+                          , lasground.TERRAINS, 1))
+        self.addParameter(ParameterSelection(lasground.GRANULARITY,
+                          'preprocessing', lasground.GRANULARITIES, 1))
+        self.addParametersPointOutputGUI()
 
     def processAlgorithm(self, progress):
-        commands = [os.path.join(LasToolsUtils.LasToolsPath(), "bin", "lasground.exe")]
-        commands.append("-i")
-        commands.append(self.getParameterValue(lasground.INPUT))
-        commands.append("-o")
-        commands.append(self.getOutputValue(lasground.OUTPUT))
-        method = self.getParameterValue(lasground.METHOD)
-        if method != 0:
-            commands.append("-" + lasground.METHODS[method])
-        self.addCommonParameterValuesToCommand(commands)
+        commands = [os.path.join(LAStoolsUtils.LAStoolsPath(), 'bin',
+                    'lasground.exe')]
+        self.addParametersVerboseCommands(commands)
+        self.addParametersPointInputCommands(commands)
+        self.addParametersHorizontalAndVerticalFeetCommands(commands)
+        method = self.getParameterValue(lasground.TERRAIN)
+        if method != 1:
+            commands.append('-' + lasground.TERRAINS[method])
+        granularity = self.getParameterValue(lasground.GRANULARITY)
+        if granularity != 1:
+            commands.append('-' + lasground.GRANULARITIES[granularity])
+        self.addParametersPointOutputCommands(commands)
 
-        LasToolsUtils.runLasTools(commands, progress)
+        LAStoolsUtils.runLAStools(commands, progress)

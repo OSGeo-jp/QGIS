@@ -18,25 +18,54 @@
 #define QGSATTRIBUTEDIALOG_H
 
 #include "qgsfeature.h"
+#include "qgsattributeeditorcontext.h"
 
 class QDialog;
-class QgsFeature;
 class QLayout;
-class QgsField;
-class QgsVectorLayer;
-class QgsHighlight;
+
 class QgsDistanceArea;
+class QgsFeature;
+class QgsField;
+class QgsHighlight;
+class QgsVectorLayer;
+class QgsVectorLayerTools;
 
 class GUI_EXPORT QgsAttributeDialog : public QObject
 {
     Q_OBJECT
 
   public:
+    /**
+     * Create an attribute dialog for a given layer and feature
+     *
+     * @param vl                The layer for which the dialog will be generated
+     * @param thepFeature       A feature for which the dialog will be generated
+     * @param featureOwner      Set to true, if the dialog should take ownership of the feature
+     * @param myDa              A QgsDistanceArea which will be used for expressions
+     * @param parent            A parent widget for the dialog
+     * @param showDialogButtons True: Show the dialog buttons accept/cancel
+     *
+     * @deprecated
+     */
     QgsAttributeDialog( QgsVectorLayer *vl, QgsFeature *thepFeature, bool featureOwner, QgsDistanceArea myDa, QWidget* parent = 0, bool showDialogButtons = true );
+
+    /**
+     * Create an attribute dialog for a given layer and feature
+     *
+     * @param vl                The layer for which the dialog will be generated
+     * @param thepFeature       A feature for which the dialog will be generated
+     * @param featureOwner      Set to true, if the dialog should take ownership of the feature
+     * @param parent            A parent widget for the dialog
+     * @param showDialogButtons True: Show the dialog buttons accept/cancel
+     * @param context           The context in which this dialog is created
+     *
+     */
+    QgsAttributeDialog( QgsVectorLayer *vl, QgsFeature *thepFeature, bool featureOwner, QWidget* parent = 0, bool showDialogButtons = true, QgsAttributeEditorContext context = QgsAttributeEditorContext() );
+
     ~QgsAttributeDialog();
 
     /** Saves the size and position for the next time
-     *  this dialog box was used.
+     *  this dialog box will be used.
      */
     void saveGeometry();
 
@@ -51,6 +80,13 @@ class GUI_EXPORT QgsAttributeDialog : public QObject
 
     QgsFeature* feature() { return mFeature; }
 
+    /**
+     * Is this dialog editable?
+     *
+     * @return returns true, if this dialog was created in an editable manner.
+     */
+    bool editable() { return mEditable; }
+
   public slots:
     void accept();
 
@@ -59,21 +95,29 @@ class GUI_EXPORT QgsAttributeDialog : public QObject
 
     void dialogDestroyed();
 
-  private:
+  protected:
     bool eventFilter( QObject *obj, QEvent *event );
+
+  private:
+    void init();
 
     QDialog *mDialog;
     QString mSettingsPath;
     // Used to sync multiple widgets for the same field
-    QMap<int, QWidget*> mProxyWidgets;
+    QgsAttributeEditorContext mContext;
     QgsVectorLayer *mLayer;
-    QgsFeature *mFeature;
+    QgsFeature* mFeature;
     bool mFeatureOwner;
     QgsHighlight *mHighlight;
     int mFormNr;
-    static int smFormCounter;
     bool mShowDialogButtons;
     QString mReturnvarname;
+
+    // true if this dialog is editable
+    bool mEditable;
+
+    static int sFormCounter;
+    static QString sSettingsPath;
 };
 
 #endif

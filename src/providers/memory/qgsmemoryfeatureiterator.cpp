@@ -62,7 +62,7 @@ QgsMemoryFeatureIterator::~QgsMemoryFeatureIterator()
 }
 
 
-bool QgsMemoryFeatureIterator::nextFeature( QgsFeature& feature )
+bool QgsMemoryFeatureIterator::fetchFeature( QgsFeature& feature )
 {
   feature.setValid( false );
 
@@ -86,7 +86,7 @@ bool QgsMemoryFeatureIterator::nextFeatureUsingList( QgsFeature& feature )
     if ( mRequest.filterType() == QgsFeatureRequest::FilterRect && mRequest.flags() & QgsFeatureRequest::ExactIntersect )
     {
       // do exact check in case we're doing intersection
-      if ( P->mFeatures[*mFeatureIdListIterator].geometry()->intersects( mSelectRectGeom ) )
+      if ( P->mFeatures[*mFeatureIdListIterator].geometry() && P->mFeatures[*mFeatureIdListIterator].geometry()->intersects( mSelectRectGeom ) )
         hasFeature = true;
     }
     else
@@ -95,14 +95,14 @@ bool QgsMemoryFeatureIterator::nextFeatureUsingList( QgsFeature& feature )
     if ( hasFeature )
       break;
 
-    mFeatureIdListIterator++;
+    ++mFeatureIdListIterator;
   }
 
   // copy feature
   if ( hasFeature )
   {
     feature = P->mFeatures[*mFeatureIdListIterator];
-    mFeatureIdListIterator++;
+    ++mFeatureIdListIterator;
   }
   else
     close();
@@ -131,13 +131,13 @@ bool QgsMemoryFeatureIterator::nextFeatureTraverseAll( QgsFeature& feature )
       if ( mRequest.flags() & QgsFeatureRequest::ExactIntersect )
       {
         // using exact test when checking for intersection
-        if ( mSelectIterator->geometry()->intersects( mSelectRectGeom ) )
+        if ( mSelectIterator->geometry() && mSelectIterator->geometry()->intersects( mSelectRectGeom ) )
           hasFeature = true;
       }
       else
       {
         // check just bounding box against rect when not using intersection
-        if ( mSelectIterator->geometry()->boundingBox().intersects( mRequest.filterRect() ) )
+        if ( mSelectIterator->geometry() && mSelectIterator->geometry()->boundingBox().intersects( mRequest.filterRect() ) )
           hasFeature = true;
       }
     }
@@ -145,14 +145,14 @@ bool QgsMemoryFeatureIterator::nextFeatureTraverseAll( QgsFeature& feature )
     if ( hasFeature )
       break;
 
-    mSelectIterator++;
+    ++mSelectIterator;
   }
 
   // copy feature
   if ( hasFeature )
   {
     feature = mSelectIterator.value();
-    mSelectIterator++;
+    ++mSelectIterator;
     feature.setValid( true );
     feature.setFields( &P->mFields ); // allow name-based attribute lookups
   }

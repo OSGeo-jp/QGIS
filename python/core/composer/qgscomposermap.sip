@@ -208,11 +208,11 @@ class QgsComposerMap : QgsComposerItem
     @note this function was added in version 1.4*/
     void setGridAnnotationFont( const QFont& f );
     QFont gridAnnotationFont() const;
-    
+
     /**Sets font color for grid annotations
     @note this function was added in version 2.0*/
     void setAnnotationFontColor( const QColor& c );
-    QColor annotationFontColor() const;     
+    QColor annotationFontColor() const;
 
     /**Sets coordinate precision for grid annotations
     @note this function was added in version 1.4*/
@@ -248,12 +248,38 @@ class QgsComposerMap : QgsComposerItem
     void setGridFrameWidth( double w );
     double gridFrameWidth() const;
     
+    /**Set grid frame pen thickness
+        @note: this function was added in version 2.1*/
+    void setGridFramePenSize( double w );
+    double gridFramePenSize() const;
+    
+    /**Sets pen color for grid frame
+        @note: this function was added in version 2.1*/
+    void setGridFramePenColor( const QColor& c );
+    /**Get pen color for grid frame
+        @note: this function was added in version 2.1*/
+    QColor gridFramePenColor() const;
+    
+    /**Sets first fill color for grid zebra frame
+        @note: this function was added in version 2.1*/
+    void setGridFrameFillColor1( const QColor& c );
+    /**Get first fill color for grid zebra frame
+        @note: this function was added in version 2.1*/
+    QColor gridFrameFillColor1() const;
+
+    /**Sets second fill color for grid zebra frame
+        @note: this function was added in version 2.1*/
+    void setGridFrameFillColor2( const QColor& c );
+    /**Get second fill color for grid zebra frame
+        @note: this function was added in version 2.1*/
+    QColor gridFrameFillColor2() const;          
+
     /** Returns the grid's blending mode
      @note added in version 2.0*/
     const QPainter::CompositionMode gridBlendMode() const;
     /** Sets the grid's blending mode
-     @note added in version 2.0*/    
-    void setGridBlendMode( const QPainter::CompositionMode blendMode );     
+     @note added in version 2.0*/
+    void setGridBlendMode( const QPainter::CompositionMode blendMode );
 
     /**In case of annotations, the bounding rectangle can be larger than the map item rectangle
     @note this function was added in version 1.4*/
@@ -267,7 +293,22 @@ class QgsComposerMap : QgsComposerItem
     void setCrossLength( double l );
     double crossLength();
 
+    /**Sets rotation for the map - this does not affect the composer item shape, only the
+      way the map is drawn within the item
+     * @deprecated Use setMapRotation( double rotation ) instead
+     */
+    void setRotation( double r );
+    /**Returns the rotation used for drawing the map within the composer item    
+     * @deprecated Use mapRotation() instead
+     */
+    double rotation() const;
+
+    /**Sets rotation for the map - this does not affect the composer item shape, only the
+      way the map is drawn within the item
+      @note this function was added in version 2.1*/
     void setMapRotation( double r );
+    /**Returns the rotation used for drawing the map within the composer item*/
+    double mapRotation() const;
 
     void updateItem();
 
@@ -293,21 +334,60 @@ class QgsComposerMap : QgsComposerItem
      /* Returns the blending mode for the overview frame
     @note added in version 1.9*/
     const QPainter::CompositionMode overviewBlendMode() const;
-    /* Sets the blending mode for the overview frame 
-    @note added in version 1.9*/    
+    /* Sets the blending mode for the overview frame
+    @note added in version 1.9*/
     void setOverviewBlendMode( const QPainter::CompositionMode blendMode );
-    
+
     /**Sets flag if overview frame should be inverted
     @note this function was added in version 1.9*/
     void setOverviewInverted( bool inverted );
-    bool overviewInverted() const;        
+    bool overviewInverted() const;
+
+    /** Returns true if the extent is forced to center on the overview */
+    bool overviewCentered() const;
+    /** Set the overview's centering mode */
+    void setOverviewCentered( bool centered );
 
     /**Sets mId to a number not yet used in the composition. mId is kept if it is not in use.
         Usually, this function is called before adding the composer map to the composition*/
     void assignFreeId();
+    
+    /**Calculates width and hight of the picture (in mm) such that it fits into the item frame with the given rotation
+     * @deprecated Use bool QgsComposerItem::imageSizeConsideringRotation( double& width, double& height, double rotation )
+     * instead
+     */
+    bool imageSizeConsideringRotation( double& width, double& height ) const;
+    /**Calculates corner point after rotation and scaling
+     * @deprecated Use QgsComposerItem::cornerPointOnRotatedAndScaledRect( double& x, double& y, double width, double height, double rotation )
+     * instead
+     */
+    bool cornerPointOnRotatedAndScaledRect( double& x, double& y, double width, double height ) const;
+    /**Calculates width / height of the bounding box of a rotated rectangle
+    * @deprecated Use QgsComposerItem::sizeChangedByRotation( double& width, double& height, double rotation )
+    * instead
+    */
+    void sizeChangedByRotation( double& width, double& height ); 
+    
+    /** Returns true if the map extent is set to follow the current atlas feature */
+    bool atlasDriven() const;
+    /** Set to true if the map extents should be set by the current atlas feature */
+    void setAtlasDriven( bool enabled );
+
+    /** Returns true if the map uses a fixed scale when in atlas mode */
+    bool atlasFixedScale() const;
+    /** Set to true if the map should use a fixed scale when in atlas mode */
+    void setAtlasFixedScale( bool fixed );
+
+    /** Returns the margin size (percentage) used when the map is in atlas mode */
+    double atlasMargin() const;
+    /** Sets the margin size (percentage) used when the map is in atlas mode */
+    void setAtlasMargin( double margin ); 
 
   signals:
     void extentChanged();
+    
+    /**Is emitted on rotation change to notify north arrow pictures*/
+    void mapRotationChanged( double newRotation );    
 
   public slots:
 

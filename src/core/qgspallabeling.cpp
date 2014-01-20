@@ -16,6 +16,7 @@
  ***************************************************************************/
 
 #include "qgspallabeling.h"
+#include "qgspalgeometry.h"
 
 #include <list>
 
@@ -59,7 +60,7 @@
 
 using namespace pal;
 
-
+#if 0
 class QgsPalGeometry : public PalGeometry
 {
   public:
@@ -76,7 +77,7 @@ class QgsPalGeometry : public PalGeometry
         , mWordSpacing( wordSpacing )
         , mCurvedLabeling( curvedLabeling )
     {
-      mStrId = FID_TO_STRING( id ).toAscii();
+      mStrId = FID_TO_STRING( mId ).toAscii();
       mDefinedFont = QFont();
     }
 
@@ -172,8 +173,16 @@ class QgsPalGeometry : public PalGeometry
 
     QFontMetricsF* getLabelFontMetrics() { return mFontMetrics; }
 
-    void setDiagramAttributes( const QgsAttributes& attrs ) { mDiagramAttributes = attrs; }
+    void setDiagramAttributes( const QgsAttributes& attrs, const QgsFields* fields ) { mDiagramAttributes = attrs; mDiagramFields = fields; }
     const QgsAttributes& diagramAttributes() { return mDiagramAttributes; }
+
+    void feature( QgsFeature& feature )
+    {
+      feature.setFeatureId( mId );
+      feature.setFields( mDiagramFields, false );
+      feature.setAttributes( mDiagramAttributes );
+      feature.setValid( true );
+    }
 
   protected:
     GEOSGeometry* mG;
@@ -193,7 +202,9 @@ class QgsPalGeometry : public PalGeometry
 
     /**Stores attribute values for diagram rendering*/
     QgsAttributes mDiagramAttributes;
+    const QgsFields* mDiagramFields;
 };
+#endif //0
 
 // -------------
 
@@ -1372,9 +1383,7 @@ void QgsPalLayerSettings::calculateLabelSize( const QFontMetricsF* fm, QString t
   }
   else // called externally with passed-in feature, evaluate data defined
   {
-    QVariant exprVal = QVariant();
-
-    exprVal = dataDefinedValue( QgsPalLayerSettings::MultiLineWrapChar, *f, *mCurFields );
+    QVariant exprVal = dataDefinedValue( QgsPalLayerSettings::MultiLineWrapChar, *f, *mCurFields );
     if ( exprVal.isValid() )
     {
       wrapchr = exprVal.toString();
@@ -3049,6 +3058,7 @@ QgsPalLabeling::QgsPalLabeling()
   mShowingCandidates = false;
   mShowingShadowRects = false;
   mShowingAllLabels = false;
+  mShowingPartialsLabels = p.getShowPartial();
 
   mLabelSearchTree = new QgsLabelSearchTree();
 }
@@ -3358,7 +3368,7 @@ void QgsPalLabeling::registerDiagramFeature( QgsVectorLayer* layer, QgsFeature& 
   QgsDiagramRendererV2* dr = layerIt.value().renderer;
   if ( dr )
   {
-    QSizeF diagSize = dr->sizeMapUnits( feat.attributes(), context );
+    QSizeF diagSize = dr->sizeMapUnits( feat, context );
     if ( diagSize.isValid() )
     {
       diagramWidth = diagSize.width();
@@ -3366,7 +3376,7 @@ void QgsPalLabeling::registerDiagramFeature( QgsVectorLayer* layer, QgsFeature& 
     }
 
     //append the diagram attributes to lbl
-    lbl->setDiagramAttributes( feat.attributes() );
+    lbl->setDiagramAttributes( feat.attributes(), feat.fields() );
   }
 
   //  feature to the layer
@@ -3443,6 +3453,8 @@ void QgsPalLabeling::init( QgsMapRenderer* mr )
   mPal->setPointP( mCandPoint );
   mPal->setLineP( mCandLine );
   mPal->setPolyP( mCandPolygon );
+
+  mPal->setShowPartial( mShowingPartialsLabels );
 
   clearActiveLayers(); // free any previous QgsDataDefined objects
   mActiveDiagramLayers.clear();
@@ -3842,6 +3854,15 @@ void QgsPalLabeling::drawLabeling( QgsRenderContext& context )
 
   painter->setRenderHint( QPainter::Antialiasing );
 
+  //dpi ration for QPicture
+  QPicture localPict;
+  QPainter localp;
+  localp.begin( &localPict );
+  double localdpi = ( localp.device()->logicalDpiX() + localp.device()->logicalDpiY() ) / 2;
+  double contextdpi = ( painter->device()->logicalDpiX() + painter->device()->logicalDpiY() ) / 2;
+  double dpiRatio = localdpi / contextdpi;
+  localp.end();
+
   // draw the labels
   std::list<LabelPosition*>::iterator it = labels->begin();
   for ( ; it != labels->end(); ++it )
@@ -3856,14 +3877,16 @@ void QgsPalLabeling::drawLabeling( QgsRenderContext& context )
     QString layerName = QString::fromUtf8(( *it )->getLayerName() );
     if ( palGeometry->isDiagram() )
     {
+      QgsFeature feature;
       //render diagram
       QHash<QgsVectorLayer*, QgsDiagramLayerSettings>::iterator dit = mActiveDiagramLayers.begin();
       for ( dit = mActiveDiagramLayers.begin(); dit != mActiveDiagramLayers.end(); ++dit )
       {
         if ( dit.key() && dit.key()->id().append( "d" ) == layerName )
         {
+          palGeometry->feature( feature );
           QgsPoint outPt = xform->transform(( *it )->getX(), ( *it )->getY() );
-          dit.value().renderer->renderDiagram( palGeometry->diagramAttributes(), context, QPointF( outPt.x(), outPt.y() ) );
+          dit.value().renderer->renderDiagram( feature, context, QPointF( outPt.x(), outPt.y() ) );
         }
       }
 
@@ -3936,15 +3959,15 @@ void QgsPalLabeling::drawLabeling( QgsRenderContext& context )
 
     if ( tmpLyr.shapeDraw )
     {
-      drawLabel( *it, context, tmpLyr, LabelShape );
+      drawLabel( *it, context, tmpLyr, LabelShape, dpiRatio );
     }
 
     if ( tmpLyr.bufferDraw )
     {
-      drawLabel( *it, context, tmpLyr, LabelBuffer );
+      drawLabel( *it, context, tmpLyr, LabelBuffer, dpiRatio );
     }
 
-    drawLabel( *it, context, tmpLyr, LabelText );
+    drawLabel( *it, context, tmpLyr, LabelText, dpiRatio );
 
     if ( mLabelSearchTree )
     {
@@ -4072,28 +4095,14 @@ void QgsPalLabeling::drawLabelCandidateRect( pal::LabelPosition* lp, QPainter* p
     drawLabelCandidateRect( lp->getNextPart(), painter, xform );
 }
 
-void QgsPalLabeling::drawLabel( pal::LabelPosition* label, QgsRenderContext& context, QgsPalLayerSettings& tmpLyr, DrawLabelType drawType )
+void QgsPalLabeling::drawLabel( pal::LabelPosition* label, QgsRenderContext& context, QgsPalLayerSettings& tmpLyr, DrawLabelType drawType, double dpiRatio )
 {
   // NOTE: this is repeatedly called for multi-part labels
   QPainter* painter = context.painter();
   const QgsMapToPixel* xform = &context.mapToPixel();
 
   QgsLabelComponent component;
-
-  // account for print output or image saving @ specific dpi
-  if ( !qgsDoubleNear( context.rasterScaleFactor(), 1.0, 0.1 ) )
-  {
-    // find relative dpi scaling for local painter
-    QPicture localPict;
-    QPainter localp;
-    localp.begin( &localPict );
-
-    double localdpi = ( localp.device()->logicalDpiX() + localp.device()->logicalDpiY() ) / 2;
-    double contextdpi = ( painter->device()->logicalDpiX() + painter->device()->logicalDpiY() ) / 2;
-    component.setDpiRatio( localdpi / contextdpi );
-
-    localp.end();
-  }
+  component.setDpiRatio( dpiRatio );
 
   QgsPoint outPt = xform->transform( label->getX(), label->getY() );
 //  QgsPoint outPt2 = xform->transform( label->getX() + label->getWidth(), label->getY() + label->getHeight() );
@@ -4292,7 +4301,7 @@ void QgsPalLabeling::drawLabel( pal::LabelPosition* label, QgsRenderContext& con
 
   // NOTE: this used to be within above multi-line loop block, at end. (a mistake since 2010? [LS])
   if ( label->getNextPart() )
-    drawLabel( label->getNextPart(), context, tmpLyr, drawType );
+    drawLabel( label->getNextPart(), context, tmpLyr, drawType, dpiRatio );
 }
 
 void QgsPalLabeling::drawLabelBuffer( QgsRenderContext& context,
@@ -4812,6 +4821,8 @@ void QgsPalLabeling::loadEngineSettings()
                           "PAL", "/ShowingShadowRects", false, &saved );
   mShowingAllLabels = QgsProject::instance()->readBoolEntry(
                         "PAL", "/ShowingAllLabels", false, &saved );
+  mShowingPartialsLabels = QgsProject::instance()->readBoolEntry(
+                             "PAL", "/ShowingPartialsLabels", p.getShowPartial(), &saved );
   mSavedWithProject = saved;
 }
 
@@ -4824,6 +4835,7 @@ void QgsPalLabeling::saveEngineSettings()
   QgsProject::instance()->writeEntry( "PAL", "/ShowingCandidates", mShowingCandidates );
   QgsProject::instance()->writeEntry( "PAL", "/ShowingShadowRects", mShowingShadowRects );
   QgsProject::instance()->writeEntry( "PAL", "/ShowingAllLabels", mShowingAllLabels );
+  QgsProject::instance()->writeEntry( "PAL", "/ShowingPartialsLabels", mShowingPartialsLabels );
   mSavedWithProject = true;
 }
 
@@ -4836,6 +4848,7 @@ void QgsPalLabeling::clearEngineSettings()
   QgsProject::instance()->removeEntry( "PAL", "/ShowingCandidates" );
   QgsProject::instance()->removeEntry( "PAL", "/ShowingShadowRects" );
   QgsProject::instance()->removeEntry( "PAL", "/ShowingAllLabels" );
+  QgsProject::instance()->removeEntry( "PAL", "/ShowingPartialsLabels" );
   mSavedWithProject = false;
 }
 
@@ -4845,5 +4858,6 @@ QgsLabelingEngineInterface* QgsPalLabeling::clone()
   lbl->mShowingAllLabels = mShowingAllLabels;
   lbl->mShowingCandidates = mShowingCandidates;
   lbl->mShowingShadowRects = mShowingShadowRects;
+  lbl->mShowingPartialsLabels = mShowingPartialsLabels;
   return lbl;
 }

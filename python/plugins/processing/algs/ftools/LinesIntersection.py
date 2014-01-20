@@ -20,46 +20,49 @@
 __author__ = 'Victor Olaya'
 __date__ = 'August 2012'
 __copyright__ = '(C) 2012, Victor Olaya'
+
 # This will get replaced with a git SHA1 when you do a git archive
+
 __revision__ = '$Format:%H$'
 
 from PyQt4.QtCore import *
 from qgis.core import *
 from processing.core.GeoAlgorithm import GeoAlgorithm
-from processing.core.QGisLayers import QGisLayers
 from processing.parameters.ParameterVector import ParameterVector
 from processing.parameters.ParameterTableField import ParameterTableField
 from processing.outputs.OutputVector import OutputVector
-from processing.algs.ftools import FToolsUtils as utils
+from processing.tools import dataobjects, vector
+
 
 class LinesIntersection(GeoAlgorithm):
 
-    INPUT_A = "INPUT_A"
-    INPUT_B = "INPUT_B"
-    FIELD_A = "FIELD_A"
-    FIELD_B = "FIELD_B"
+    INPUT_A = 'INPUT_A'
+    INPUT_B = 'INPUT_B'
+    FIELD_A = 'FIELD_A'
+    FIELD_B = 'FIELD_B'
 
-    OUTPUT = "OUTPUT"
-
-    #===========================================================================
-    # def getIcon(self):
-    #    return QtGui.QIcon(os.path.dirname(__file__) + "/icons/intersections.png")
-    #===========================================================================
+    OUTPUT = 'OUTPUT'
 
     def defineCharacteristics(self):
-        self.name = "Line intersections"
-        self.group = "Vector overlay tools"
+        self.name = 'Line intersections'
+        self.group = 'Vector overlay tools'
 
-        self.addParameter(ParameterVector(self.INPUT_A, "Input layer", [ParameterVector.VECTOR_TYPE_LINE]))
-        self.addParameter(ParameterVector(self.INPUT_B, "Intersect layer", [ParameterVector.VECTOR_TYPE_LINE]))
-        self.addParameter(ParameterTableField(self.FIELD_A, "Input unique ID field", self.INPUT_A))
-        self.addParameter(ParameterTableField(self.FIELD_B, "Intersect unique ID field", self.INPUT_B))
+        self.addParameter(ParameterVector(self.INPUT_A, 'Input layer',
+                          [ParameterVector.VECTOR_TYPE_LINE]))
+        self.addParameter(ParameterVector(self.INPUT_B, 'Intersect layer',
+                          [ParameterVector.VECTOR_TYPE_LINE]))
+        self.addParameter(ParameterTableField(self.FIELD_A,
+                          'Input unique ID field', self.INPUT_A))
+        self.addParameter(ParameterTableField(self.FIELD_B,
+                          'Intersect unique ID field', self.INPUT_B))
 
-        self.addOutput(OutputVector(self.OUTPUT, "Output layer"))
+        self.addOutput(OutputVector(self.OUTPUT, 'Output layer'))
 
     def processAlgorithm(self, progress):
-        layerA = QGisLayers.getObjectFromUri(self.getParameterValue(self.INPUT_A))
-        layerB = QGisLayers.getObjectFromUri(self.getParameterValue(self.INPUT_B))
+        layerA = dataobjects.getObjectFromUri(
+                self.getParameterValue(self.INPUT_A))
+        layerB = dataobjects.getObjectFromUri(
+                self.getParameterValue(self.INPUT_B))
         fieldA = self.getParameterValue(self.FIELD_A)
         fieldB = self.getParameterValue(self.FIELD_B)
 
@@ -67,13 +70,12 @@ class LinesIntersection(GeoAlgorithm):
         idxB = layerB.fieldNameIndex(fieldB)
 
         fieldList = [layerA.pendingFields()[idxA],
-                     layerB.pendingFields()[idxB]
-                    ]
+                     layerB.pendingFields()[idxB]]
 
         writer = self.getOutputFromName(self.OUTPUT).getVectorWriter(fieldList,
-                     QGis.WKBPoint, layerA.dataProvider().crs())
+                QGis.WKBPoint, layerA.dataProvider().crs())
 
-        spatialIndex = utils.createSpatialIndex(layerB)
+        spatialIndex = vector.spatialindex(layerB)
 
         inFeatA = QgsFeature()
         inFeatB = QgsFeature()
@@ -81,7 +83,7 @@ class LinesIntersection(GeoAlgorithm):
         inGeom = QgsGeometry()
         tmpGeom = QgsGeometry()
 
-        features = QGisLayers.features(layerA)
+        features = vector.features(layerA)
 
         current = 0
         total = 100.0 / float(len(features))
@@ -115,7 +117,8 @@ class LinesIntersection(GeoAlgorithm):
 
                             for j in points:
                                 outFeat.setGeometry(tempGeom.fromPoint(j))
-                                outFeat.setAttributes([attrsA[idxA], attrsB[idxB]])
+                                outFeat.setAttributes([attrsA[idxA],
+                                        attrsB[idxB]])
                                 writer.addFeature(outFeat)
 
             current += 1

@@ -41,7 +41,7 @@ class QgsLabelingGui;
 class QgsDiagramProperties;
 class QgsFieldsProperties;
 
-class QgsVectorLayerProperties : public QgsOptionsDialogBase, private Ui::QgsVectorLayerPropertiesBase
+class APP_EXPORT QgsVectorLayerProperties : public QgsOptionsDialogBase, private Ui::QgsVectorLayerPropertiesBase
 {
     Q_OBJECT
 
@@ -118,6 +118,8 @@ class QgsVectorLayerProperties : public QgsOptionsDialogBase, private Ui::QgsVec
 
     void on_mMinimumScaleSetCurrentPushButton_clicked();
     void on_mMaximumScaleSetCurrentPushButton_clicked();
+
+    void on_mSimplifyDrawingGroupBox_toggled( bool checked );
 
   signals:
 

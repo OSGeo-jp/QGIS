@@ -109,7 +109,10 @@ class GUI_EXPORT QgsSimpleMarkerSymbolLayerV2Widget : public QgsSymbolLayerV2Wid
     void on_mOffsetUnitComboBox_currentIndexChanged( int index );
     void on_mOutlineWidthUnitComboBox_currentIndexChanged( int index );
     void on_mDataDefinedPropertiesButton_clicked();
+    void on_mOutlineStyleComboBox_currentIndexChanged( int index );
     void on_mOutlineWidthSpinBox_valueChanged( double d );
+    void on_mHorizontalAnchorComboBox_currentIndexChanged( int index );
+    void on_mVerticalAnchorComboBox_currentIndexChanged( int index );
 
   protected:
     QgsSimpleMarkerSymbolLayerV2* mLayer;
@@ -147,6 +150,44 @@ class GUI_EXPORT QgsSimpleFillSymbolLayerV2Widget : public QgsSymbolLayerV2Widge
 
   protected:
     QgsSimpleFillSymbolLayerV2* mLayer;
+};
+
+
+///////////
+
+#include "ui_widget_gradientfill.h"
+
+class QgsGradientFillSymbolLayerV2;
+
+class GUI_EXPORT QgsGradientFillSymbolLayerV2Widget : public QgsSymbolLayerV2Widget, private Ui::WidgetGradientFill
+{
+    Q_OBJECT
+
+  public:
+    QgsGradientFillSymbolLayerV2Widget( const QgsVectorLayer* vl, QWidget* parent = NULL );
+
+    static QgsSymbolLayerV2Widget* create( const QgsVectorLayer* vl ) { return new QgsGradientFillSymbolLayerV2Widget( vl ); }
+
+    // from base class
+    virtual void setSymbolLayer( QgsSymbolLayerV2* layer );
+    virtual QgsSymbolLayerV2* symbolLayer();
+
+  public slots:
+    void setColor( const QColor& color );
+    void setColor2( const QColor& color );
+    void applyColorRamp();
+    void setGradientType( int index );
+    void setCoordinateMode( int index );
+    void setGradientSpread( int index );
+    void offsetChanged();
+    void referencePointChanged();
+    void on_mOffsetUnitComboBox_currentIndexChanged( int index );
+    void on_mDataDefinedPropertiesButton_clicked();
+    void colorModeChanged();
+    void on_mSpinAngle_valueChanged( double value );
+
+  protected:
+    QgsGradientFillSymbolLayerV2* mLayer;
 };
 
 
@@ -220,6 +261,9 @@ class GUI_EXPORT QgsSvgMarkerSymbolLayerV2Widget : public QgsSymbolLayerV2Widget
     void on_mBorderWidthUnitComboBox_currentIndexChanged( int index );
     void on_mOffsetUnitComboBox_currentIndexChanged( int index );
     void on_mDataDefinedPropertiesButton_clicked();
+    void on_mHorizontalAnchorComboBox_currentIndexChanged( int index );
+    void on_mVerticalAnchorComboBox_currentIndexChanged( int index );
+
 
   protected:
 
@@ -365,6 +409,8 @@ class GUI_EXPORT QgsFontMarkerSymbolLayerV2Widget : public QgsSymbolLayerV2Widge
     void setOffset();
     void on_mSizeUnitComboBox_currentIndexChanged( int index );
     void on_mOffsetUnitComboBox_currentIndexChanged( int index );
+    void on_mHorizontalAnchorComboBox_currentIndexChanged( int index );
+    void on_mVerticalAnchorComboBox_currentIndexChanged( int index );
 
   protected:
     QgsFontMarkerSymbolLayerV2* mLayer;

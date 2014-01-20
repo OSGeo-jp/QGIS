@@ -15,6 +15,7 @@
 #include "qgsogrfeatureiterator.h"
 
 #include "qgsogrprovider.h"
+#include "qgsogrgeometrysimplifier.h"
 
 #include "qgsapplication.h"
 #include "qgsgeometry.h"
@@ -38,6 +39,7 @@ QgsOgrFeatureIterator::QgsOgrFeatureIterator( QgsOgrProvider* p, const QgsFeatur
     , ogrDataSource( 0 )
     , ogrLayer( 0 )
     , mSubsetStringSet( false )
+    , mGeometrySimplifier( NULL )
 {
   mFeatureFetched = false;
 
@@ -84,19 +86,57 @@ QgsOgrFeatureIterator::QgsOgrFeatureIterator( QgsOgrProvider* p, const QgsFeatur
 
 QgsOgrFeatureIterator::~QgsOgrFeatureIterator()
 {
+  delete mGeometrySimplifier;
+  mGeometrySimplifier = NULL;
+
   close();
 }
 
 void QgsOgrFeatureIterator::ensureRelevantFields()
 {
-  bool needGeom = ( mRequest.filterType() == QgsFeatureRequest::FilterRect ) || !( mRequest.flags() & QgsFeatureRequest::NoGeometry );
+  mFetchGeometry = ( mRequest.filterType() == QgsFeatureRequest::FilterRect ) || !( mRequest.flags() & QgsFeatureRequest::NoGeometry );
   QgsAttributeList attrs = ( mRequest.flags() & QgsFeatureRequest::SubsetOfAttributes ) ? mRequest.subsetOfAttributes() : P->attributeIndexes();
-  P->setRelevantFields( needGeom, attrs );
+  P->setRelevantFields( ogrLayer, mFetchGeometry, attrs );
   P->mRelevantFieldsForNextFeature = true;
 }
 
+bool QgsOgrFeatureIterator::prepareSimplification( const QgsSimplifyMethod& simplifyMethod )
+{
+  delete mGeometrySimplifier;
+  mGeometrySimplifier = NULL;
 
-bool QgsOgrFeatureIterator::nextFeature( QgsFeature& feature )
+  // setup simplification of OGR-geometries fetched
+  if ( !( mRequest.flags() & QgsFeatureRequest::NoGeometry ) && simplifyMethod.methodType() != QgsSimplifyMethod::NoSimplification && !simplifyMethod.forceLocalOptimization() )
+  {
+    QgsSimplifyMethod::MethodType methodType = simplifyMethod.methodType();
+
+    if ( methodType == QgsSimplifyMethod::OptimizeForRendering )
+    {
+      int simplifyFlags = QgsMapToPixelSimplifier::SimplifyGeometry | QgsMapToPixelSimplifier::SimplifyEnvelope;
+      mGeometrySimplifier = new QgsOgrMapToPixelSimplifier( simplifyFlags, simplifyMethod.tolerance() );
+      return true;
+    }
+#if defined(GDAL_VERSION_NUM) && GDAL_VERSION_NUM >= 1900
+    else if ( methodType == QgsSimplifyMethod::PreserveTopology )
+    {
+      mGeometrySimplifier = new QgsOgrTopologyPreservingSimplifier( simplifyMethod.tolerance() );
+      return true;
+    }
+#endif
+    else
+    {
+      QgsDebugMsg( QString( "Simplification method type (%1) is not recognised by OgrFeatureIterator class" ).arg( methodType ) );
+    }
+  }
+  return QgsAbstractFeatureIterator::prepareSimplification( simplifyMethod );
+}
+
+bool QgsOgrFeatureIterator::providerCanSimplify( QgsSimplifyMethod::MethodType methodType ) const
+{
+  return methodType == QgsSimplifyMethod::OptimizeForRendering || methodType == QgsSimplifyMethod::PreserveTopology;
+}
+
+bool QgsOgrFeatureIterator::fetchFeature( QgsFeature& feature )
 {
   feature.setValid( false );
 
@@ -225,20 +265,24 @@ bool QgsOgrFeatureIterator::readFeature( OGRFeatureH fet, QgsFeature& feature )
   feature.initAttributes( P->fields().count() );
   feature.setFields( &P->mAttributeFields ); // allow name-based attribute lookups
 
-  bool fetchGeom    = !( mRequest.flags() & QgsFeatureRequest::NoGeometry );
   bool useIntersect = mRequest.flags() & QgsFeatureRequest::ExactIntersect;
   bool geometryTypeFilter = P->mOgrGeometryTypeFilter != wkbUnknown;
-  if ( fetchGeom || useIntersect || geometryTypeFilter )
+  if ( mFetchGeometry || useIntersect || geometryTypeFilter )
   {
     OGRGeometryH geom = OGR_F_GetGeometryRef( fet );
 
     if ( geom )
     {
+      if ( mGeometrySimplifier )
+        mGeometrySimplifier->simplifyGeometry( geom );
+
       // get the wkb representation
-      unsigned char *wkb = new unsigned char[OGR_G_WkbSize( geom )];
+      int memorySize = OGR_G_WkbSize( geom );
+      unsigned char *wkb = new unsigned char[memorySize];
       OGR_G_ExportToWkb( geom, ( OGRwkbByteOrder ) QgsApplication::endian(), wkb );
 
-      feature.setGeometryAndOwnership( wkb, OGR_G_WkbSize( geom ) );
+      QgsGeometry* geometry = feature.geometry();
+      if ( !geometry ) feature.setGeometryAndOwnership( wkb, memorySize ); else geometry->fromWkb( wkb, memorySize );
     }
     if (( useIntersect && ( !feature.geometry() || !feature.geometry()->intersects( mRequest.filterRect() ) ) )
         || ( geometryTypeFilter && ( !feature.geometry() || QgsOgrProvider::ogrWkbSingleFlatten(( OGRwkbGeometryType )feature.geometry()->wkbType() ) != P->mOgrGeometryTypeFilter ) ) )
@@ -248,7 +292,7 @@ bool QgsOgrFeatureIterator::readFeature( OGRFeatureH fet, QgsFeature& feature )
     }
   }
 
-  if ( !fetchGeom )
+  if ( !mFetchGeometry )
   {
     feature.setGeometry( 0 );
   }

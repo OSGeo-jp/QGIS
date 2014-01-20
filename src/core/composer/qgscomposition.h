@@ -41,6 +41,7 @@ class QGraphicsRectItem;
 class QgsMapRenderer;
 class QDomElement;
 class QgsComposerArrow;
+class QgsComposerMouseHandles;
 class QgsComposerHtml;
 class QgsComposerItem;
 class QgsComposerLabel;
@@ -54,6 +55,7 @@ class QgsComposerMultiFrame;
 class QgsComposerMultiFrameCommand;
 class QgsVectorLayer;
 class QgsComposer;
+class QgsFillSymbolV2;
 
 /** \ingroup MapComposer
  * Graphics scene for map printing. The class manages the paper item which always
@@ -82,6 +84,20 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
       Crosses
     };
 
+    enum ZValueDirection
+    {
+      ZValueBelow,
+      ZValueAbove
+    };
+
+    /**Composition atlas modes*/
+    enum AtlasMode
+    {
+      AtlasOff,     // Composition is not being controlled by an atlas
+      PreviewAtlas, // An atlas composition is being previewed in the app
+      ExportAtlas   // The composition is being exported as an atlas
+    };
+
     QgsComposition( QgsMapRenderer* mapRenderer );
     ~QgsComposition();
 
@@ -101,11 +117,54 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
     /**Note: added in version 1.9*/
     int numPages() const;
 
+    /**Note: added in version 2.1*/
+    void setPageStyleSymbol( QgsFillSymbolV2* symbol );
+    /**Note: added in version 2.1*/
+    QgsFillSymbolV2* pageStyleSymbol() { return mPageStyleSymbol; }
+
+    /**Returns the position within a page of a point in the composition
+      @note Added in QGIS 2.1
+    */
+    QPointF positionOnPage( const QPointF & position ) const;
+
+    /**Returns the page number corresponding to a point in the composition
+      @note Added in QGIS 2.1
+    */
+    int pageNumberForPoint( const QPointF & position ) const;
+
+    /**Sets the status bar message for the composer window
+      @note Added in QGIS 2.1
+    */
+    void setStatusMessage( const QString & message );
+
+    /**Refreshes the composition when composer related options change
+     *Note: added in version 2.1*/
+    void updateSettings();
+
     void setSnapToGridEnabled( bool b );
     bool snapToGridEnabled() const {return mSnapToGrid;}
 
+    void setGridVisible( bool b );
+    bool gridVisible() const {return mGridVisible;}
+
+    /**Hides / shows custom snap lines*/
+    void setSnapLinesVisible( bool visible );
+    bool snapLinesVisible() const {return mGuidesVisible;}
+
+    void setAlignmentSnap( bool s ) { mAlignmentSnap = s; }
+    bool alignmentSnap() const { return mAlignmentSnap; }
+
+    void setSmartGuidesEnabled( bool b ) { mSmartGuides = b; }
+    bool smartGuidesEnabled() const {return mSmartGuides;}
+
+    /**Removes all snap lines*/
+    void clearSnapLines();
+
     void setSnapGridResolution( double r );
     double snapGridResolution() const {return mSnapGridResolution;}
+
+    void setSnapGridTolerance( double tolerance );
+    double snapGridTolerance() const {return mSnapGridTolerance;}
 
     void setSnapGridOffsetX( double offset );
     double snapGridOffsetX() const {return mSnapGridOffsetX;}
@@ -119,9 +178,6 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
     void setGridStyle( GridStyle s );
     GridStyle gridStyle() const {return mGridStyle;}
 
-    void setAlignmentSnap( bool s ) { mAlignmentSnap = s; }
-    bool alignmentSnap() const { return mAlignmentSnap; }
-
     void setAlignmentSnapTolerance( double t ) { mAlignmentSnapTolerance = t; }
     double alignmentSnapTolerance() const { return mAlignmentSnapTolerance; }
 
@@ -130,6 +186,11 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
 
     /**Returns the topmost composer item. Ignores mPaperItem*/
     QgsComposerItem* composerItemAt( const QPointF & position );
+
+    /**Returns the highest composer item at a specified position which is below a specified item. Ignores mPaperItem
+      @note Added in QGIS 2.1
+    */
+    QgsComposerItem* composerItemAt( const QPointF & position, const QgsComposerItem* belowItem );
 
     /** Returns the page number (0-bsaed) given a coordinate */
     int pageNumberAt( const QPointF& position ) const;
@@ -182,15 +243,18 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
     bool printAsRaster() const {return mPrintAsRaster;}
     void setPrintAsRaster( bool enabled ) { mPrintAsRaster = enabled; }
 
+    bool generateWorldFile() const { return mGenerateWorldFile; }
+    void setGenerateWorldFile( bool enabled ) { mGenerateWorldFile = enabled; }
+
+    QgsComposerMap* worldFileMap() const { return mWorldFileMap; }
+    void setWorldFileMap( QgsComposerMap* map ) { mWorldFileMap = map; }
+
     /**Returns true if a composition should use advanced effects such as blend modes
       @note added in 1.9*/
     bool useAdvancedEffects() const {return mUseAdvancedEffects;}
     /**Used to enable or disable advanced effects such as blend modes in a composition
       @note: added in version 1.9*/
     void setUseAdvancedEffects( bool effectsEnabled );
-
-    double selectionTolerance() const { return mSelectionTolerance; }
-    void setSelectionTolerance( double tol );
 
     /**Returns pointer to map renderer of qgis map canvas*/
     QgsMapRenderer* mapRenderer() {return mMapRenderer;}
@@ -246,6 +310,11 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
     void moveSelectedItemsToBottom();
     void moveItemToBottom( QgsComposerItem* item );
 
+    //functions to find items by their position in the z list
+    void selectNextByZOrder( ZValueDirection direction );
+    QgsComposerItem* getComposerItemBelow( QgsComposerItem* item );
+    QgsComposerItem* getComposerItemAbove( QgsComposerItem* item );
+
     //functions to align selected items
     void alignSelectedItemsLeft();
     void alignSelectedItemsHCenter();
@@ -254,6 +323,12 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
     void alignSelectedItemsVCenter();
     void alignSelectedItemsBottom();
 
+    //functions to lock and unlock items
+    /**Lock the selected items*/
+    void lockSelectedItems();
+    /**Unlock all items*/
+    void unlockAllItems();
+
     /**Sorts the zList. The only time where this function needs to be called is from QgsComposer
      after reading all the items from xml file*/
     void sortZList();
@@ -261,22 +336,13 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
     /**Snaps a scene coordinate point to grid*/
     QPointF snapPointToGrid( const QPointF& scenePoint ) const;
 
-    /**Snaps item position to align with other items (left / middle / right or top / middle / bottom
-    @param item current item
-    @param alignX x-coordinate of align or -1 if not aligned to x
-    @param alignY y-coordinate of align or -1 if not aligned to y
-    @param dx item shift in x direction
-    @param dy item shift in y direction
-    @return new upper left point after the align*/
-    QPointF alignItem( const QgsComposerItem* item, double& alignX, double& alignY, double dx = 0, double dy = 0 );
+    /**Returns pointer to snap lines collection*/
+    QList< QGraphicsLineItem* >* snapLines() {return &mSnapLines;}
 
-    /**Snaps position to align with the boundaries of other items
-    @param pos position to snap
-    @param excludeItem item to exclude
-    @param alignX snapped x coordinate or -1 if not snapped
-    @param alignY snapped y coordinate or -1 if not snapped
-    @return snapped position or original position if no snap*/
-    QPointF alignPos( const QPointF& pos, const QgsComposerItem* excludeItem, double& alignX, double& alignY );
+    /**Returns pointer to selection handles
+     * @note not available in python bindings
+     */
+    QgsComposerMouseHandles* selectionHandles() {return mSelectionHandles;}
 
     /**Add a custom snap line (can be horizontal or vertical)*/
     QGraphicsLineItem* addSnapLine();
@@ -286,8 +352,6 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
      * @note not available in python bindings
      */
     QGraphicsLineItem* nearestSnapLine( bool horizontal, double x, double y, double tolerance, QList< QPair< QgsComposerItem*, QgsComposerItem::ItemPositionMode > >& snappedItems );
-    /**Hides / shows custom snap lines*/
-    void setSnapLinesVisible( bool visible );
 
     /**Allocates new item command and saves initial state in it
       @param item target item
@@ -333,6 +397,10 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
     /**Convenience function to create a QgsAddRemoveItemCommand, connect its signals and push it to the undo stack*/
     void pushAddRemoveCommand( QgsComposerItem* item, const QString& text, QgsAddRemoveItemCommand::State state = QgsAddRemoveItemCommand::Added );
 
+    /**If true, prevents any mouse cursor changes by the composition or by any composer items
+      Used by QgsComposer and QgsComposerView to prevent unwanted cursor changes*/
+    void setPreventCursorChange( bool preventChange ) { mPreventCursorChange = preventChange; }
+    bool preventCursorChange() { return mPreventCursorChange; }
 
     //printing
 
@@ -357,7 +425,20 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
         @note added in version 1.9*/
     void renderPage( QPainter* p, int page );
 
+    /** Compute world file parameters */
+    void computeWorldFileParameters( double& a, double& b, double& c, double& d, double& e, double& f ) const;
+
     QgsAtlasComposition& atlasComposition() { return mAtlasComposition; }
+
+    /**Resizes a QRectF relative to the change from boundsBefore to boundsAfter*/
+    static void relativeResizeRect( QRectF& rectToResize, const QRectF& boundsBefore, const QRectF& boundsAfter );
+    /**Returns a scaled position given a before and after range*/
+    static double relativePosition( double position, double beforeMin, double beforeMax, double afterMin, double afterMax );
+
+    /** Returns the current atlas mode of the composition */
+    QgsComposition::AtlasMode atlasMode() const { return mAtlasMode; }
+    /** Sets the current atlas mode of the composition. Returns false if the mode could not be changed. */
+    bool setAtlasMode( QgsComposition::AtlasMode mode );
 
   public slots:
     /**Casts object to the proper subclass type and calls corresponding itemAdded signal*/
@@ -372,6 +453,10 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
     QList< QgsPaperItem* > mPages;
     double mSpaceBetweenPages; //space in preview between pages
 
+    /**Drawing style for page*/
+    QgsFillSymbolV2* mPageStyleSymbol;
+    void createDefaultPageStyleSymbol();
+
     /**Maintains z-Order of items. Starts with item at position 1 (position 0 is always paper item)*/
     QLinkedList<QgsComposerItem*> mItemZList;
 
@@ -384,15 +469,19 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
     /**Flag if map should be printed as a raster (via QImage). False by default*/
     bool mPrintAsRaster;
 
+    /**Flag if a world file should be generated on raster export */
+    bool mGenerateWorldFile;
+    /** Composer map to use for the world file generation */
+    QgsComposerMap* mWorldFileMap;
+
     /**Flag if advanced visual effects such as blend modes should be used. True by default*/
     bool mUseAdvancedEffects;
 
-    /**Distance tolerance for item selection (in mm)*/
-    double mSelectionTolerance;
-
     /**Parameters for snap to grid function*/
     bool mSnapToGrid;
+    bool mGridVisible;
     double mSnapGridResolution;
+    double mSnapGridTolerance;
     double mSnapGridOffsetX;
     double mSnapGridOffsetY;
     QPen mGridPen;
@@ -400,10 +489,14 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
 
     /**Parameters for alignment snap*/
     bool mAlignmentSnap;
+    bool mGuidesVisible;
+    bool mSmartGuides;
     double mAlignmentSnapTolerance;
 
     /**Arbitraty snap lines (horizontal and vertical)*/
     QList< QGraphicsLineItem* > mSnapLines;
+
+    QgsComposerMouseHandles* mSelectionHandles;
 
     QUndoStack mUndoStack;
 
@@ -412,6 +505,8 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
 
     /** The atlas composition object. It is held by the QgsComposition */
     QgsAtlasComposition mAtlasComposition;
+
+    QgsComposition::AtlasMode mAtlasMode;
 
     QgsComposition(); //default constructor is forbidden
 
@@ -422,8 +517,11 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
      @return 0 in case of success*/
     int boundingRectOfSelectedItems( QRectF& bRect );
 
+    /**Loads default composer settings*/
+    void loadDefaults();
+
+    /**Loads composer settings which may change, eg grid color*/
     void loadSettings();
-    void saveSettings();
 
     void connectAddRemoveCommandSignals( QgsAddRemoveItemCommand* c );
 
@@ -434,16 +532,7 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
 
     static QString encodeStringForXML( const QString& str );
 
-    //helper functions for item align
-    void collectAlignCoordinates( QMap< double, const QgsComposerItem* >& alignCoordsX,
-                                  QMap< double, const QgsComposerItem* >& alignCoordsY, const QgsComposerItem* excludeItem );
-
-    void checkNearestItem( double checkCoord, const QMap< double, const QgsComposerItem* >& alignCoords, double& smallestDiff,
-                           double itemCoordOffset, double& itemCoord, double& alignCoord ) const;
-
-    /**Find nearest item in coordinate map to a double.
-        @return true if item found, false if coords is empty*/
-    static bool nearestItem( const QMap< double, const QgsComposerItem* >& coords, double value, double& nearestValue );
+    bool mPreventCursorChange;
 
   signals:
     void paperSizeChanged();
@@ -471,6 +560,9 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
     void composerTableAdded( QgsComposerAttributeTable* table );
     /**Is emitted when a composer item has been removed from the scene*/
     void itemRemoved( QgsComposerItem* );
+
+    /**Is emitted when the composition has an updated status bar message for the composer window*/
+    void statusMsgChanged( QString message );
 };
 
 template<class T> void QgsComposition::composerItems( QList<T*>& itemList )

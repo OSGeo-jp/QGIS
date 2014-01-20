@@ -61,6 +61,10 @@ QgsPostgresFeatureIterator::QgsPostgresFeatureIterator( QgsPostgresProvider* p, 
   {
     whereClause = P->whereClause( request.filterFid() );
   }
+  else if ( request.filterType() == QgsFeatureRequest::FilterFids )
+  {
+    whereClause = P->whereClause( request.filterFids() );
+  }
 
   if ( !P->mSqlWhereClause.isEmpty() )
   {
@@ -86,7 +90,7 @@ QgsPostgresFeatureIterator::~QgsPostgresFeatureIterator()
 }
 
 
-bool QgsPostgresFeatureIterator::nextFeature( QgsFeature& feature )
+bool QgsPostgresFeatureIterator::fetchFeature( QgsFeature& feature )
 {
   feature.setValid( false );
 
@@ -145,7 +149,7 @@ bool QgsPostgresFeatureIterator::nextFeature( QgsFeature& feature )
   }
 
   // Now return the next feature from the queue
-  if ( mRequest.flags() & QgsFeatureRequest::NoGeometry )
+  if ( !mFetchGeometry )
   {
     feature.setGeometryAndOwnership( 0, 0 );
   }
@@ -162,9 +166,33 @@ bool QgsPostgresFeatureIterator::nextFeature( QgsFeature& feature )
 
   feature.setValid( true );
   feature.setFields( &P->mAttributeFields ); // allow name-based attribute lookups
+
   return true;
 }
 
+bool QgsPostgresFeatureIterator::prepareSimplification( const QgsSimplifyMethod& simplifyMethod )
+{
+  // setup simplification of geometries to fetch
+  if ( !( mRequest.flags() & QgsFeatureRequest::NoGeometry ) && simplifyMethod.methodType() != QgsSimplifyMethod::NoSimplification && !simplifyMethod.forceLocalOptimization() )
+  {
+    QgsSimplifyMethod::MethodType methodType = simplifyMethod.methodType();
+
+    if ( methodType == QgsSimplifyMethod::OptimizeForRendering || methodType == QgsSimplifyMethod::PreserveTopology )
+    {
+      return true;
+    }
+    else
+    {
+      QgsDebugMsg( QString( "Simplification method type (%1) is not recognised by PostgresFeatureIterator" ).arg( methodType ) );
+    }
+  }
+  return QgsAbstractFeatureIterator::prepareSimplification( simplifyMethod );
+}
+
+bool QgsPostgresFeatureIterator::providerCanSimplify( QgsSimplifyMethod::MethodType methodType ) const
+{
+  return methodType == QgsSimplifyMethod::OptimizeForRendering || methodType == QgsSimplifyMethod::PreserveTopology;
+}
 
 bool QgsPostgresFeatureIterator::rewind()
 {
@@ -173,7 +201,7 @@ bool QgsPostgresFeatureIterator::rewind()
 
   // move cursor to first record
   P->mConnectionRO->PQexecNR( QString( "move absolute 0 in %1" ).arg( mCursorName ) );
-  mFeatureQueue.empty();
+  mFeatureQueue.clear();
   mFetched = 0;
 
   return true;
@@ -205,8 +233,12 @@ QString QgsPostgresFeatureIterator::whereClauseRect()
   if ( P->mSpatialColType == sctGeography )
   {
     rect = QgsRectangle( -180.0, -90.0, 180.0, 90.0 ).intersect( &rect );
-    if ( !rect.isFinite() )
-      return "false";
+  }
+
+  if ( !rect.isFinite() )
+  {
+    QgsMessageLog::logMessage( QObject::tr( "Infinite filter rectangle specified" ), QObject::tr( "PostGIS" ) );
+    return "false";
   }
 
   QString qBox;
@@ -259,22 +291,37 @@ QString QgsPostgresFeatureIterator::whereClauseRect()
 
 bool QgsPostgresFeatureIterator::declareCursor( const QString& whereClause )
 {
-  bool fetchGeometry = !( mRequest.flags() & QgsFeatureRequest::NoGeometry );
-  if ( fetchGeometry && P->mGeometryColumn.isNull() )
-  {
-    QgsMessageLog::logMessage( QObject::tr( "Trying to fetch geometry on a layer without geometry." ), QObject::tr( "PostgreSQL" ) );
-    return false;
-  }
+  mFetchGeometry = !( mRequest.flags() & QgsFeatureRequest::NoGeometry ) && !P->mGeometryColumn.isNull();
 
   try
   {
+    const QgsSimplifyMethod& simplifyMethod = mRequest.simplifyMethod();
+
     QString query = "SELECT ", delim = "";
 
-    if ( fetchGeometry )
+    if ( mFetchGeometry && !simplifyMethod.forceLocalOptimization() && simplifyMethod.methodType() != QgsSimplifyMethod::NoSimplification && QGis::flatType( QGis::singleType( P->geometryType() ) ) != QGis::WKBPoint )
     {
-      query += QString( "%1(%2(%3%4),'%5')" )
+      QString simplifyFunctionName = simplifyMethod.methodType() == QgsSimplifyMethod::OptimizeForRendering
+                                     ? ( P->mConnectionRO->majorVersion() < 2 ? "simplify" : "st_simplify" )
+                                         : ( P->mConnectionRO->majorVersion() < 2 ? "simplifypreservetopology" : "st_simplifypreservetopology" );
+
+      double tolerance = simplifyMethod.methodType() == QgsSimplifyMethod::OptimizeForRendering
+                         ? simplifyMethod.toleranceForDouglasPeuckerAlgorithms()
+                         : simplifyMethod.tolerance();
+
+      query += QString( "%1(%5(%2%3,%6),'%4')" )
                .arg( P->mConnectionRO->majorVersion() < 2 ? "asbinary" : "st_asbinary" )
-               .arg( P->mConnectionRO->majorVersion() < 2 ? "force_2d" : "st_force_2d" )
+               .arg( P->quotedIdentifier( P->mGeometryColumn ) )
+               .arg( P->mSpatialColType == sctGeography ? "::geometry" : "" )
+               .arg( P->endianString() )
+               .arg( simplifyFunctionName )
+               .arg( tolerance );
+      delim = ",";
+    }
+    else if ( mFetchGeometry )
+    {
+      query += QString( "%1(%2%3,'%4')" )
+               .arg( P->mConnectionRO->majorVersion() < 2 ? "asbinary" : "st_asbinary" )
                .arg( P->quotedIdentifier( P->mGeometryColumn ) )
                .arg( P->mSpatialColType == sctGeography ? "::geometry" : "" )
                .arg( P->endianString() );
@@ -352,14 +399,131 @@ bool QgsPostgresFeatureIterator::getFeature( QgsPostgresResult &queryResult, int
 
     int col = 0;
 
-    if ( !( mRequest.flags() & QgsFeatureRequest::NoGeometry ) )
+    if ( mFetchGeometry )
     {
       int returnedLength = ::PQgetlength( queryResult.result(), row, col );
       if ( returnedLength > 0 )
       {
         unsigned char *featureGeom = new unsigned char[returnedLength + 1];
-        memset( featureGeom, 0, returnedLength + 1 );
         memcpy( featureGeom, PQgetvalue( queryResult.result(), row, col ), returnedLength );
+        memset( featureGeom + returnedLength, 0, 1 );
+
+        // modify 2.5D WKB types to make them compliant with OGR
+        unsigned int wkbType;
+        memcpy( &wkbType, featureGeom + 1, sizeof( wkbType ) );
+
+        // convert unsupported types to supported ones
+        switch ( wkbType )
+        {
+          case 15:
+            // 2D polyhedral => multipolygon
+            wkbType = 6;
+            break;
+          case 1015:
+            // 3D polyhedral => multipolygon
+            wkbType = 1006;
+            break;
+          case 17:
+            // 2D triangle => polygon
+            wkbType = 3;
+            break;
+          case 1017:
+            // 3D triangle => polygon
+            wkbType = 1003;
+            break;
+          case 16:
+            // 2D TIN => multipolygon
+            wkbType = 6;
+            break;
+          case 1016:
+            // TIN => multipolygon
+            wkbType = 1006;
+            break;
+        }
+        // convert from postgis types to qgis types
+        if ( wkbType >= 1000 )
+        {
+          wkbType = wkbType - 1000 + QGis::WKBPoint25D - 1;
+        }
+        memcpy( featureGeom + 1, &wkbType, sizeof( wkbType ) );
+
+        // change wkb type of inner geometries
+        if ( wkbType == QGis::WKBMultiPoint25D ||
+             wkbType == QGis::WKBMultiLineString25D ||
+             wkbType == QGis::WKBMultiPolygon25D )
+        {
+          unsigned int numGeoms = *(( int* )( featureGeom + 5 ) );
+          unsigned char* wkb = featureGeom + 9;
+          for ( unsigned int i = 0; i < numGeoms; ++i )
+          {
+            unsigned int localType;
+            memcpy( &localType, wkb + 1, sizeof( localType ) );
+            switch ( localType )
+            {
+              case 15:
+                // 2D polyhedral => multipolygon
+                localType = 6;
+                break;
+              case 1015:
+                // 3D polyhedral => multipolygon
+                localType = 1006;
+                break;
+              case 17:
+                // 2D triangle => polygon
+                localType = 3;
+                break;
+              case 1017:
+                // 3D triangle => polygon
+                localType = 1003;
+                break;
+              case 16:
+                // 2D TIN => multipolygon
+                localType = 6;
+                break;
+              case 1016:
+                // TIN => multipolygon
+                localType = 1006;
+                break;
+            }
+            if ( localType >= 1000 )
+            {
+              localType = localType - 1000 + QGis::WKBPoint25D - 1;
+            }
+            memcpy( wkb + 1, &localType, sizeof( localType ) );
+
+            // skip endian and type info
+            wkb += sizeof( unsigned int ) + 1;
+
+            // skip coordinates
+            switch ( wkbType )
+            {
+              case QGis::WKBMultiPoint25D:
+                wkb += sizeof( double ) * 3;
+                break;
+              case QGis::WKBMultiLineString25D:
+              {
+                unsigned int nPoints = *(( int* ) wkb );
+                wkb += sizeof( nPoints );
+                wkb += sizeof( double ) * 3 * nPoints;
+              }
+              break;
+              default:
+              case QGis::WKBMultiPolygon25D:
+              {
+                unsigned int nRings = *(( int* ) wkb );
+                wkb += sizeof( nRings );
+                for ( unsigned int j = 0; j < nRings; ++j )
+                {
+                  unsigned int nPoints = *(( int* ) wkb );
+                  wkb += sizeof( nPoints );
+                  wkb += sizeof( double ) * 3 * nPoints;
+                }
+              }
+              break;
+            }
+          }
+        }
+
         feature.setGeometryAndOwnership( featureGeom, returnedLength + 1 );
       }
       else

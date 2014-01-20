@@ -181,9 +181,11 @@ class GeometryDialog( QDialog, Ui_Dialog ):
     if self.chkWriteShapefile.isChecked():
       self.lineEdit.setEnabled( True )
       self.toolOut.setEnabled( True )
+      self.addToCanvasCheck.setEnabled( True )
     else:
       self.lineEdit.setEnabled( False )
       self.toolOut.setEnabled( False )
+      self.addToCanvasCheck.setEnabled( False )
 
   def populateLayers( self ):
     self.inShape.clear()
@@ -281,14 +283,13 @@ class GeometryDialog( QDialog, Ui_Dialog ):
       QObject.disconnect( self.cancel_close, SIGNAL( "clicked()" ), self.cancelThread )
       if success:
         if ( self.myFunction == 5 and self.chkWriteShapefile.isChecked() ) or self.myFunction != 5:
-          addToTOC = QMessageBox.question( self, self.tr("Geometry"),
-                       self.tr( "Created output shapefile:\n{0}\n{1}\n\nWould you like to add the new layer to the TOC?" ).format( self.shapefileName, extra ),
-                       QMessageBox.Yes, QMessageBox.No, QMessageBox.NoButton )
-          if addToTOC == QMessageBox.Yes:
-            if not ftools_utils.addShapeToCanvas( unicode( self.shapefileName ) ):
-              QMessageBox.warning( self, self.tr( "Geometry"),
-                                   self.tr( "Error loading output shapefile:\n{0}" ).format( self.shapefileName ) )
+          if self.addToCanvasCheck.isChecked():
+            addCanvasCheck = ftools_utils.addShapeToCanvas(unicode(self.shapefileName))
+            if not addCanvasCheck:
+              QMessageBox.warning( self, self.tr("Geometry"), self.tr( "Error loading output shapefile:\n%s" ) % ( unicode( self.shapefileName ) ))
             self.populateLayers()
+          else:
+            QMessageBox.information(self, self.tr("Geometry"),self.tr("Created output shapefile:\n%s\n%s" ) % ( unicode( self.shapefileName ), extra ))
         else:
           QMessageBox.information( self, self.tr( "Geometry" ),
                                    self.tr( "Layer '{0}' updated" ).format( self.inShape.currentText() ) )
@@ -566,11 +567,11 @@ class geometryThread( QThread ):
       if self.writeShape:
         outFeat.setGeometry( inGeom )
         atMap = inFeat.attributes()
-        maxIndex = index1 if index1>index2 else index2
-        if maxIndex>len(atMap):
-                atMap += [ "" ] * ( index2+1 - len(atMap) )
+        maxIndex = index1 if index1 > index2 else index2
+        if maxIndex >= len(atMap):
+          atMap += [ "" ] * ( index2+1 - len(atMap) )
         atMap[ index1 ] = attr1
-        if index1!=index2:
+        if index1 != index2:
           atMap[ index2 ] = attr2
         outFeat.setAttributes( atMap )
         writer.addFeature( outFeat )

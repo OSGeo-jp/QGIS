@@ -69,6 +69,7 @@
 %Include qgssearchquerybuilder.sip
 %Include qgstextannotationitem.sip
 %Include qgsvertexmarker.sip
+%Include qgsvectorlayertools.sip
 %Include qgssublayersdialog.sip
 %Include qgscharacterselectdialog.sip
 %Include qgscomposerruler.sip
@@ -90,6 +91,7 @@
 %Include attributetable/qgsfeaturelistviewdelegate.sip
 %Include attributetable/qgsfeaturemodel.sip
 %Include attributetable/qgsfeatureselectionmodel.sip
+%Include attributetable/qgsifeatureselectionmanager.sip
 
 %Include raster/qgsmultibandcolorrendererwidget.sip
 %Include raster/qgspalettedrendererwidget.sip
@@ -127,3 +129,8 @@
 %Include symbology-ng/qgsdatadefinedsymboldialog.sip
 %Include symbology-ng/qgsstylev2exportimportdialog.sip
 %Include symbology-ng/qgssvgselectorwidget.sip
+
+%Include editorwidgets/qgseditorconfigwidget.sip
+%Include editorwidgets/qgseditorwidgetfactory.sip
+%Include editorwidgets/qgseditorwidgetregistry.sip
+%Include editorwidgets/qgseditorwidgetwrapper.sip

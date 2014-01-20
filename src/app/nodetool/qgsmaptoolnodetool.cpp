@@ -44,7 +44,7 @@ QgsMapToolNodeTool::QgsMapToolNodeTool( QgsMapCanvas* canvas )
 
 QgsMapToolNodeTool::~QgsMapToolNodeTool()
 {
-  removeRubberBands();
+  cleanTool();
 }
 
 void QgsMapToolNodeTool::createMovingRubberBands()
@@ -187,7 +187,7 @@ void QgsMapToolNodeTool::createTopologyRubberBands( QgsVectorLayer* vlayer, cons
       }
       else
       {
-        trb->addPoint( topolGeometry->vertexAt( tVertex ) );
+        trb->addPoint( toMapCoordinates( vlayer, topolGeometry->vertexAt( tVertex ) ) );
         if ( tVertex == tVertexFirst ) // cycle first vertex need to be added also
         {
           movingPoints->insert( movingPointIndex );
@@ -206,14 +206,14 @@ void QgsMapToolNodeTool::createTopologyRubberBands( QgsVectorLayer* vlayer, cons
         // find first no matching vertex
         if ( dist > ZERO_TOLERANCE || !vertexMap[at]->isSelected() ) // problem with double precision
         {
-          trb->addPoint( topolGeometry->vertexAt( tVertex ) );
+          trb->addPoint( toMapCoordinates( vlayer, topolGeometry->vertexAt( tVertex ) ) );
           break; // found first vertex
         }
         else // add moving point to rubberband
         {
           if ( addedPoints->contains( tVertex ) )
             break; // just preventing to circle
-          trb->addPoint( topolGeometry->vertexAt( tVertex ) );
+          trb->addPoint( toMapCoordinates( vlayer, topolGeometry->vertexAt( tVertex ) ) );
           movingPoints->insert( movingPointIndex );
           movingPointIndex++;
           addedPoints->insert( tVertex );
@@ -311,7 +311,7 @@ void QgsMapToolNodeTool::canvasMoveEvent( QMouseEvent * e )
       offset = posMapCoord - mPosMapCoordBackup;
       for ( int i = 0; i < mTopologyRubberBand.size(); i++ )
       {
-        for ( int pointIndex = 0; pointIndex < mTopologyRubberBand[i]->numberOfVertices() - 1; pointIndex++ )
+        for ( int pointIndex = 0; pointIndex < mTopologyRubberBand[i]->numberOfVertices(); pointIndex++ )
         {
           if ( mTopologyRubberBandVertexes[i]->contains( pointIndex ) )
           {
@@ -321,10 +321,6 @@ void QgsMapToolNodeTool::canvasMoveEvent( QMouseEvent * e )
               break;
             }
             mTopologyRubberBand[i]->movePoint( pointIndex, *point + offset );
-            if ( pointIndex == 0 )
-            {
-              mTopologyRubberBand[i]->movePoint( pointIndex, *point + offset );
-            }
           }
         }
       }
@@ -373,6 +369,7 @@ void QgsMapToolNodeTool::canvasPressEvent( QMouseEvent * e )
     mSelectedFeature = new QgsSelectedFeature( snapResults[0].snappedAtGeometry, vlayer, mCanvas );
     connect( QgisApp::instance()->legend(), SIGNAL( currentLayerChanged( QgsMapLayer* ) ), this, SLOT( currentLayerChanged( QgsMapLayer* ) ) );
     connect( mSelectedFeature, SIGNAL( destroyed() ), this, SLOT( selectedFeatureDestroyed() ) );
+    connect( vlayer, SIGNAL( editingStopped() ), this, SLOT( editingToggled() ) );
     mIsPoint = vlayer->geometryType() == QGis::Point;
   }
   else
@@ -489,18 +486,20 @@ void QgsMapToolNodeTool::canvasPressEvent( QMouseEvent * e )
 void QgsMapToolNodeTool::selectedFeatureDestroyed()
 {
   QgsDebugCall;
-  mSelectedFeature = 0;
+  cleanTool( false );
 }
 
 void QgsMapToolNodeTool::currentLayerChanged( QgsMapLayer *layer )
 {
   if ( mSelectedFeature && layer != mSelectedFeature->vlayer() )
   {
-    delete mSelectedFeature;
-    mSelectedFeature = 0;
-
-    removeRubberBands();
+    cleanTool();
   }
+}
+
+void QgsMapToolNodeTool::editingToggled()
+{
+  cleanTool();
 }
 
 void QgsMapToolNodeTool::canvasReleaseEvent( QMouseEvent * e )
@@ -609,10 +608,7 @@ void QgsMapToolNodeTool::canvasReleaseEvent( QMouseEvent * e )
 
 void QgsMapToolNodeTool::deactivate()
 {
-  removeRubberBands();
-
-  delete mSelectedFeature;
-  mSelectedFeature = 0;
+  cleanTool();
 
   mSelectionRubberBand = 0;
   mSelectAnother = false;
@@ -646,6 +642,23 @@ void QgsMapToolNodeTool::removeRubberBands()
     mSelectedFeature->cleanRubberBandsData();
 }
 
+void QgsMapToolNodeTool::cleanTool( bool deleteSelectedFeature )
+{
+  removeRubberBands();
+
+  if ( mSelectedFeature )
+  {
+    QgsVectorLayer *vlayer = mSelectedFeature->vlayer();
+    Q_ASSERT( vlayer );
+
+    disconnect( QgisApp::instance()->legend(), SIGNAL( currentLayerChanged( QgsMapLayer* ) ), this, SLOT( currentLayerChanged( QgsMapLayer* ) ) );
+    disconnect( mSelectedFeature, SIGNAL( destroyed() ), this, SLOT( selectedFeatureDestroyed() ) );
+    disconnect( vlayer, SIGNAL( editingStopped() ), this, SLOT( editingToggled() ) );
+
+    if ( deleteSelectedFeature ) delete mSelectedFeature;
+    mSelectedFeature = 0;
+  }
+}
 
 void QgsMapToolNodeTool::canvasDoubleClickEvent( QMouseEvent * e )
 {
@@ -704,6 +717,41 @@ void QgsMapToolNodeTool::keyPressEvent( QKeyEvent* e )
   if ( e->key() == Qt::Key_Control )
   {
     mCtrl = true;
+    return;
+  }
+
+  if ( mSelectedFeature && ( e->key() == Qt::Key_Backspace || e->key() == Qt::Key_Delete ) )
+  {
+    int firstSelectedIndex = firstSelectedVertex();
+    if ( firstSelectedIndex == -1 )
+      return;
+
+    mSelectedFeature->deleteSelectedVertexes();
+    safeSelectVertex( firstSelectedIndex );
+    mCanvas->refresh();
+
+    // Override default shortcut management in MapCanvas
+    e->ignore();
+  }
+  else if ( mSelectedFeature && ( e->key() == Qt::Key_Less || e->key() == Qt::Key_Comma ) )
+  {
+    int firstSelectedIndex = firstSelectedVertex();
+    if ( firstSelectedIndex == -1 )
+      return;
+
+    mSelectedFeature->deselectAllVertexes();
+    safeSelectVertex( firstSelectedIndex - 1 );
+    mCanvas->refresh();
+  }
+  else if ( mSelectedFeature && ( e->key() == Qt::Key_Greater || e->key() == Qt::Key_Period ) )
+  {
+    int firstSelectedIndex = firstSelectedVertex();
+    if ( firstSelectedIndex == -1 )
+      return;
+
+    mSelectedFeature->deselectAllVertexes();
+    safeSelectVertex( firstSelectedIndex + 1 );
+    mCanvas->refresh();
   }
 }
 
@@ -714,33 +762,52 @@ void QgsMapToolNodeTool::keyReleaseEvent( QKeyEvent* e )
     mCtrl = false;
     return;
   }
-
-  if ( mSelectedFeature && e->key() == Qt::Key_Delete )
-  {
-    mSelectedFeature->deleteSelectedVertexes();
-    mCanvas->refresh();
-  }
 }
 
 QgsRubberBand* QgsMapToolNodeTool::createRubberBandMarker( QgsPoint center, QgsVectorLayer* vlayer )
 {
+
   // create rubberband marker for moving points
-  QgsRubberBand* marker = new QgsRubberBand( mCanvas, QGis::Polygon );
+  QgsRubberBand* marker = new QgsRubberBand( mCanvas, QGis::Point );
   marker->setColor( Qt::red );
   marker->setWidth( 2 );
-  double movement = 4;
-  double s = QgsTolerance::toleranceInMapUnits( movement, vlayer, mCanvas->mapRenderer(), QgsTolerance::Pixels );
+  marker->setIcon( QgsRubberBand::ICON_FULL_BOX );
+  marker->setIconSize( 8 );
   QgsPoint pom = toMapCoordinates( vlayer, center );
-  pom.setX( pom.x() - s );
-  pom.setY( pom.y() - s );
-  marker->addPoint( pom );
-  pom.setX( pom.x() + 2*s );
-  marker->addPoint( pom );
-  pom.setY( pom.y() + 2*s );
-  marker->addPoint( pom );
-  pom.setX( pom.x() - 2*s );
-  marker->addPoint( pom );
-  pom.setY( pom.y() - 2*s );
   marker->addPoint( pom );
   return marker;
+}
+
+int QgsMapToolNodeTool::firstSelectedVertex( )
+{
+  if ( mSelectedFeature )
+  {
+    QList<QgsVertexEntry*> &vertexMap = mSelectedFeature->vertexMap();
+    int vertexNr = 0;
+
+    foreach ( QgsVertexEntry *entry, vertexMap )
+    {
+      if ( entry->isSelected() )
+      {
+        return vertexNr;
+      }
+      vertexNr++;
+    }
+  }
+  return -1;
+}
+
+int QgsMapToolNodeTool::safeSelectVertex( int vertexNr )
+{
+  if ( mSelectedFeature )
+  {
+    QList<QgsVertexEntry*> &vertexMap = mSelectedFeature->vertexMap();
+
+    if ( vertexNr >= vertexMap.size() ) vertexNr -= vertexMap.size();
+    if ( vertexNr < 0 ) vertexNr = vertexMap.size() - 1 + vertexNr;
+
+    mSelectedFeature->selectVertex( vertexNr );
+    return vertexNr;
+  }
+  return -1;
 }

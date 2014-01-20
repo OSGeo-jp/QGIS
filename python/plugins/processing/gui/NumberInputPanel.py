@@ -20,47 +20,43 @@
 __author__ = 'Victor Olaya'
 __date__ = 'August 2012'
 __copyright__ = '(C) 2012, Victor Olaya'
+
 # This will get replaced with a git SHA1 when you do a git archive
+
 __revision__ = '$Format:%H$'
 
-from PyQt4 import QtGui
+from PyQt4.QtGui import *
 from processing.gui.NumberInputDialog import NumberInputDialog
 
-class NumberInputPanel(QtGui.QWidget):
+from processing.ui.ui_widgetNumberInput import Ui_widgetNumberInput
 
-    def __init__(self, number, isInteger):
-        super(NumberInputPanel, self).__init__(None)
-        self.horizontalLayout = QtGui.QHBoxLayout(self)
-        self.horizontalLayout.setSpacing(2)
-        self.horizontalLayout.setMargin(0)
+class NumberInputPanel(QWidget, Ui_widgetNumberInput):
+
+    def __init__(self, number, minimum, maximum, isInteger):
+        QDialog.__init__(self)
+        self.setupUi(self)
+
         self.isInteger = isInteger
-        if isInteger:
-            self.spin = QtGui.QSpinBox()
-            self.spin.setMaximum(1000000000)
-            self.spin.setMinimum(-1000000000)
-            self.spin.setValue(number)
-            self.horizontalLayout.addWidget(self.spin)
-            self.setLayout(self.horizontalLayout)
-        else:
-            self.text = QtGui.QLineEdit()
-            self.text.setText(str(number))
-            self.text.setSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
-            self.horizontalLayout.addWidget(self.text)
-            self.pushButton = QtGui.QPushButton()
-            self.pushButton.setText("...")
-            self.pushButton.clicked.connect(self.showNumberInputDialog)
-            self.horizontalLayout.addWidget(self.pushButton)
-            self.setLayout(self.horizontalLayout)
+        if self.isInteger:
+            self.spnValue.setDecimals(0)
+            if maximum:
+                self.spnValue.setMaximum(maximum)
+            else:
+                self.spnValue.setMaximum(99999999)
+            if minimum:
+                self.spnValue.setMinimum(minimum)
+            else:
+                self.spnValue.setMinimum(-99999999)
+
+        self.spnValue.setValue(float(number))
+
+        self.btnCalc.clicked.connect(self.showNumberInputDialog)
 
     def showNumberInputDialog(self):
-        pass
-        dlg = NumberInputDialog()
+        dlg = NumberInputDialog(self.isInteger)
         dlg.exec_()
-        if dlg.value != None:
-            self.text.setText(str(dlg.value))
+        if dlg.value is not None:
+            self.spnValue.setValue(dlg.value)
 
     def getValue(self):
-        if self.isInteger:
-            return self.spin.value()
-        else:
-            return self.text.text()
+        return self.spnValue.value()

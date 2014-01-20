@@ -20,12 +20,13 @@
 #include "ui_qgsattributetypeedit.h"
 
 #include "qgsvectorlayer.h"
+#include "qgseditorconfigwidget.h"
 
 class QDialog;
 class QLayout;
 class QgsField;
 
-class QgsAttributeTypeDialog: public QDialog, private Ui::QgsAttributeTypeDialog
+class APP_EXPORT QgsAttributeTypeDialog: public QDialog, private Ui::QgsAttributeTypeDialog
 {
     Q_OBJECT
 
@@ -57,6 +58,14 @@ class QgsAttributeTypeDialog: public QDialog, private Ui::QgsAttributeTypeDialog
      * @return selected edit type
      */
     QgsVectorLayer::EditType editType();
+
+    const QString editorWidgetV2Type();
+
+    const QString editorWidgetV2Text();
+
+    const QMap<QString, QVariant> editorWidgetV2Config();
+
+    void setWidgetV2Config( const QMap<QString, QVariant>& config );
 
     /**
      * Setter to value map variable to display actual value
@@ -208,8 +217,9 @@ class QgsAttributeTypeDialog: public QDialog, private Ui::QgsAttributeTypeDialog
     /**
      * Function to update the value map
      * @param map new map
+     * @param insertNull Add a Null value on top
      */
-    void updateMap( const QMap<QString, QVariant> &map );
+    void updateMap( const QMap<QString, QVariant> &map, bool insertNull = false );
 
     bool mFieldEditable;
     bool mLabelOnTop;
@@ -224,6 +234,10 @@ class QgsAttributeTypeDialog: public QDialog, private Ui::QgsAttributeTypeDialog
     QgsVectorLayer::EditType mEditType;
     QString mDateFormat;
     QSize mWidgetSize;
+
+    QMap<QString, QVariant> mWidgetV2Config;
+
+    QMap< QString, QgsEditorConfigWidget* > mEditorConfigWidgets;
 };
 
 #endif

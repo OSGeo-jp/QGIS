@@ -43,6 +43,9 @@
 #include "qgsstylev2managerdialog.h"
 #include "qgsvectorcolorrampv2.h"
 #include "qgssymbolv2selectordialog.h"
+#include "qgsrelationmanagerdialog.h"
+#include "qgsrelationmanager.h"
+#include "qgisapp.h"
 
 //qt includes
 #include <QColorDialog>
@@ -76,6 +79,7 @@ QgsProjectProperties::QgsProjectProperties( QgsMapCanvas* mapCanvas, QWidget *pa
 
   connect( radMeters, SIGNAL( toggled( bool ) ), btnGrpDegreeDisplay, SLOT( setDisabled( bool ) ) );
   connect( radFeet, SIGNAL( toggled( bool ) ), btnGrpDegreeDisplay, SLOT( setDisabled( bool ) ) );
+  connect( radNMiles, SIGNAL( toggled( bool ) ), btnGrpDegreeDisplay, SLOT( setDisabled( bool ) ) );
   connect( radDegrees, SIGNAL( toggled( bool ) ), btnGrpDegreeDisplay, SLOT( setEnabled( bool ) ) );
 
   connect( radAutomatic, SIGNAL( toggled( bool ) ), mPrecisionFrame, SLOT( setDisabled( bool ) ) );
@@ -220,7 +224,7 @@ QgsProjectProperties::QgsProjectProperties( QgsMapCanvas* mapCanvas, QWidget *pa
   twIdentifyLayers->verticalHeader()->setResizeMode( QHeaderView::ResizeToContents );
 
   int i = 0;
-  for ( QMap<QString, QgsMapLayer*>::const_iterator it = mapLayers.constBegin(); it != mapLayers.constEnd(); it++, i++ )
+  for ( QMap<QString, QgsMapLayer*>::const_iterator it = mapLayers.constBegin(); it != mapLayers.constEnd(); ++it, i++ )
   {
     currentLayer = it.value();
 
@@ -316,7 +320,7 @@ QgsProjectProperties::QgsProjectProperties( QgsMapCanvas* mapCanvas, QWidget *pa
   grpWMSList->setChecked( mWMSList->count() > 0 );
 
   //composer restriction for WMS
-  values = QgsProject::instance()->readListEntry( "WMSComposerList", "/", QStringList(), &ok );
+  values = QgsProject::instance()->readListEntry( "WMSRestrictedComposers", "/", QStringList(), &ok );
   mWMSComposerGroupBox->setChecked( ok );
   if ( ok )
   {
@@ -369,7 +373,7 @@ QgsProjectProperties::QgsProjectProperties( QgsMapCanvas* mapCanvas, QWidget *pa
 
   i = 0;
   int j = 0;
-  for ( QMap<QString, QgsMapLayer*>::const_iterator it = mapLayers.constBegin(); it != mapLayers.constEnd(); it++, i++ )
+  for ( QMap<QString, QgsMapLayer*>::const_iterator it = mapLayers.constBegin(); it != mapLayers.constEnd(); ++it, i++ )
   {
     currentLayer = it.value();
     if ( currentLayer->type() == QgsMapLayer::VectorLayer )
@@ -426,6 +430,45 @@ QgsProjectProperties::QgsProjectProperties( QgsMapCanvas* mapCanvas, QWidget *pa
   twWFSLayers->setRowCount( j );
   twWFSLayers->verticalHeader()->setResizeMode( QHeaderView::ResizeToContents );
 
+  mWCSUrlLineEdit->setText( QgsProject::instance()->readEntry( "WCSUrl", "/", "" ) );
+  QStringList wcsLayerIdList = QgsProject::instance()->readListEntry( "WCSLayers", "/" );
+
+  QSignalMapper *smWcsPublied = new QSignalMapper( this );
+  connect( smWcsPublied, SIGNAL( mapped( int ) ), this, SLOT( cbxWCSPubliedStateChanged( int ) ) );
+
+  twWCSLayers->setColumnCount( 2 );
+  twWCSLayers->horizontalHeader()->setVisible( true );
+  twWCSLayers->setRowCount( mapLayers.size() );
+
+  i = 0;
+  j = 0;
+  for ( QMap<QString, QgsMapLayer*>::const_iterator it = mapLayers.constBegin(); it != mapLayers.constEnd(); it++, i++ )
+  {
+    currentLayer = it.value();
+    if ( currentLayer->type() == QgsMapLayer::RasterLayer )
+    {
+
+      QTableWidgetItem *twi = new QTableWidgetItem( QString::number( j ) );
+      twWCSLayers->setVerticalHeaderItem( j, twi );
+
+      twi = new QTableWidgetItem( currentLayer->name() );
+      twi->setData( Qt::UserRole, it.key() );
+      twi->setFlags( twi->flags() & ~Qt::ItemIsEditable );
+      twWCSLayers->setItem( j, 0, twi );
+
+      QCheckBox* cbp = new QCheckBox();
+      cbp->setChecked( wcsLayerIdList.contains( currentLayer->id() ) );
+      twWCSLayers->setCellWidget( j, 1, cbp );
+
+      smWcsPublied->setMapping( cbp, j );
+      connect( cbp, SIGNAL( stateChanged( int ) ), smWcsPublied, SLOT( map() ) );
+
+      j++;
+    }
+  }
+  twWCSLayers->setRowCount( j );
+  twWCSLayers->verticalHeader()->setResizeMode( QHeaderView::ResizeToContents );
+
   // Default Styles
   mStyle = QgsStyleV2::defaultStyle();
   populateStyles();
@@ -441,6 +484,20 @@ QgsProjectProperties::QgsProjectProperties( QgsMapCanvas* mapCanvas, QWidget *pa
   {
     resetPythonMacros();
   }
+
+  // Initialize relation manager
+  mRelationManagerDlg = new QgsRelationManagerDialog( QgsProject::instance()->relationManager(), mTabRelations );
+  mTabRelations->layout()->addWidget( mRelationManagerDlg );
+
+  QList<QgsVectorLayer*> vectorLayers;
+  foreach ( QgsMapLayer* mapLayer, mapLayers.values() )
+  {
+    if ( QgsMapLayer::VectorLayer == mapLayer->type() )
+    {
+      vectorLayers.append( qobject_cast<QgsVectorLayer*> ( mapLayer ) );
+    }
+  }
+  mRelationManagerDlg->setLayers( vectorLayers );
 
   // Update projection selector (after mLayerSrsId is set)
   bool myProjectionEnabled = myRenderer->hasCrsTransformEnabled();
@@ -478,6 +535,7 @@ void QgsProjectProperties::setMapUnits( QGis::UnitType unit )
 
   radMeters->setChecked( unit == QGis::Meters );
   radFeet->setChecked( unit == QGis::Feet );
+  radNMiles->setChecked( unit == QGis::NauticalMiles );
   radDegrees->setChecked( unit == QGis::Degrees );
 
   mMapCanvas->mapRenderer()->setMapUnits( unit );
@@ -591,6 +649,7 @@ void QgsProjectProperties::apply()
   QgsProject::instance()->writeEntry( "Gui", "/CanvasColorRedPart", myColor.red() );
   QgsProject::instance()->writeEntry( "Gui", "/CanvasColorGreenPart", myColor.green() );
   QgsProject::instance()->writeEntry( "Gui", "/CanvasColorBluePart", myColor.blue() );
+  mMapCanvas->setCanvasColor( myColor );
 
   //save project scales
   QStringList myScales;
@@ -699,11 +758,11 @@ void QgsProjectProperties::apply()
     {
       composerTitles << mComposerListWidget->item( i )->text();
     }
-    QgsProject::instance()->writeEntry( "WMSComposerList", "/", composerTitles );
+    QgsProject::instance()->writeEntry( "WMSRestrictedComposers", "/", composerTitles );
   }
   else
   {
-    QgsProject::instance()->removeEntry( "WMSComposerList", "/" );
+    QgsProject::instance()->removeEntry( "WMSRestrictedComposers", "/" );
   }
 
   //WMS layer restrictions
@@ -777,6 +836,20 @@ void QgsProjectProperties::apply()
   QgsProject::instance()->writeEntry( "WFSTLayers", "Insert", wfstInsertLayerList );
   QgsProject::instance()->writeEntry( "WFSTLayers", "Delete", wfstDeleteLayerList );
 
+  QgsProject::instance()->writeEntry( "WCSUrl", "/", mWCSUrlLineEdit->text() );
+  QStringList wcsLayerList;
+  for ( int i = 0; i < twWCSLayers->rowCount(); i++ )
+  {
+    QString id = twWCSLayers->item( i, 0 )->data( Qt::UserRole ).toString();
+    QCheckBox* cb;
+    cb = qobject_cast<QCheckBox *>( twWCSLayers->cellWidget( i, 1 ) );
+    if ( cb && cb->isChecked() )
+    {
+      wcsLayerList << id;
+    }
+  }
+  QgsProject::instance()->writeEntry( "WCSLayers", "/", wcsLayerList );
+
   // Default Styles
   QgsProject::instance()->writeEntry( "DefaultStyles", "/Marker", cboStyleMarker->currentText() );
   QgsProject::instance()->writeEntry( "DefaultStyles", "/Line", cboStyleLine->currentText() );
@@ -794,7 +867,8 @@ void QgsProjectProperties::apply()
   }
   QgsProject::instance()->writeEntry( "Macros", "/pythonCode", pythonMacros );
 
-  //todo XXX set canvas color
+  QgsProject::instance()->relationManager()->setRelations( mRelationManagerDlg->relations() );
+
   emit refresh();
 }
 
@@ -838,6 +912,7 @@ void QgsProjectProperties::on_cbxProjectionEnabled_toggled( bool onFlyEnabled )
 
     radMeters->setChecked( units == QGis::Meters );
     radFeet->setChecked( units == QGis::Feet );
+    radNMiles->setChecked( units == QGis::NauticalMiles );
     radDegrees->setChecked( units == QGis::Degrees );
 
     // unset ellipsoid
@@ -921,6 +996,17 @@ void QgsProjectProperties::cbxWFSDeleteStateChanged( int aIdx )
   }
 }
 
+void QgsProjectProperties::cbxWCSPubliedStateChanged( int aIdx )
+{
+  QCheckBox* cb = qobject_cast<QCheckBox *>( twWCSLayers->cellWidget( aIdx, 1 ) );
+  if ( cb && !cb->isChecked() )
+  {
+    QCheckBox* cbn = qobject_cast<QCheckBox *>( twWCSLayers->cellWidget( aIdx, 2 ) );
+    if ( cbn )
+      cbn->setChecked( false );
+  }
+}
+
 void QgsProjectProperties::setMapUnitsToCurrentProjection()
 {
   long myCRSID = projectionSelector->selectedCrsId();
@@ -933,6 +1019,7 @@ void QgsProjectProperties::setMapUnitsToCurrentProjection()
 
   radMeters->setChecked( units == QGis::Meters );
   radFeet->setChecked( units == QGis::Feet );
+  radNMiles->setChecked( units == QGis::NauticalMiles );
   radDegrees->setChecked( units == QGis::Degrees );
 
   // attempt to reset the projection ellipsoid according to the srs
@@ -973,7 +1060,11 @@ void QgsProjectProperties::on_pbnWMSAddSRS_clicked()
 {
   QgsGenericProjectionSelector *mySelector = new QgsGenericProjectionSelector( this );
   mySelector->setMessage();
-  if ( mySelector->exec() )
+  if ( mWMSList->count() > 0 )
+  {
+    mySelector->setSelectedAuthId( mWMSList->item( mWMSList->count() - 1 )->text() );
+  }
+  if ( mySelector->exec() && mySelector->selectedCrsId() != 0 )
   {
     QString authid = mySelector->selectedAuthId();
 
@@ -1018,7 +1109,7 @@ void QgsProjectProperties::on_pbnWMSSetUsedSRS_clicked()
   }
 
   const QMap<QString, QgsMapLayer*> &mapLayers = QgsMapLayerRegistry::instance()->mapLayers();
-  for ( QMap<QString, QgsMapLayer*>::const_iterator it = mapLayers.constBegin(); it != mapLayers.constEnd(); it++ )
+  for ( QMap<QString, QgsMapLayer*>::const_iterator it = mapLayers.constBegin(); it != mapLayers.constEnd(); ++it )
   {
     crsList << it.value()->crs().authid();
   }
@@ -1108,6 +1199,24 @@ void QgsProjectProperties::on_pbnWFSLayersUnselectAll_clicked()
   for ( int i = 0; i < twWFSLayers->rowCount(); i++ )
   {
     QCheckBox *cb = qobject_cast<QCheckBox *>( twWFSLayers->cellWidget( i, 1 ) );
+    cb->setChecked( false );
+  }
+}
+
+void QgsProjectProperties::on_pbnWCSLayersSelectAll_clicked()
+{
+  for ( int i = 0; i < twWCSLayers->rowCount(); i++ )
+  {
+    QCheckBox *cb = qobject_cast<QCheckBox *>( twWCSLayers->cellWidget( i, 1 ) );
+    cb->setChecked( true );
+  }
+}
+
+void QgsProjectProperties::on_pbnWCSLayersUnselectAll_clicked()
+{
+  for ( int i = 0; i < twWCSLayers->rowCount(); i++ )
+  {
+    QCheckBox *cb = qobject_cast<QCheckBox *>( twWCSLayers->cellWidget( i, 1 ) );
     cb->setChecked( false );
   }
 }

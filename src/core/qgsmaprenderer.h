@@ -110,7 +110,13 @@ class CORE_EXPORT QgsLabelingEngineInterface
     virtual QgsLabelingEngineInterface* clone() = 0;
 };
 
-
+struct CORE_EXPORT QgsLayerCoordinateTransform
+{
+  QString srcAuthId;
+  QString destAuthId;
+  int srcDatumTransform; //-1 if unknown or not specified
+  int destDatumTransform;
+};
 
 /** \ingroup core
  * A non GUI class for rendering a map layer set onto a QPainter.
@@ -243,7 +249,7 @@ class CORE_EXPORT QgsMapRenderer : public QObject
     bool hasCrsTransformEnabled() const;
 
     //! sets destination coordinate reference system
-    void setDestinationCrs( const QgsCoordinateReferenceSystem& crs );
+    void setDestinationCrs( const QgsCoordinateReferenceSystem& crs, bool refreshCoordinateTransformInfo = true );
 
     //! returns CRS of destination coordinate reference system
     const QgsCoordinateReferenceSystem& destinationCrs() const;
@@ -284,16 +290,33 @@ class CORE_EXPORT QgsMapRenderer : public QObject
 
     //! Returns a QPainter::CompositionMode corresponding to a BlendMode
     //! Added in 1.9
-    static QPainter::CompositionMode getCompositionMode( const QgsMapRenderer::BlendMode blendMode );
+    static QPainter::CompositionMode getCompositionMode( const QgsMapRenderer::BlendMode &blendMode );
     //! Returns a BlendMode corresponding to a QPainter::CompositionMode
     //! Added in 1.9
-    static QgsMapRenderer::BlendMode getBlendModeEnum( const QPainter::CompositionMode blendMode );
+    static QgsMapRenderer::BlendMode getBlendModeEnum( const QPainter::CompositionMode &blendMode );
+
+    void addLayerCoordinateTransform( const QString& layerId, const QString& srcAuthId, const QString& destAuthId, int srcDatumTransform = -1, int destDatumTransform = -1 );
+    void clearLayerCoordinateTransforms();
+
+    const QgsCoordinateTransform* transformation( const QgsMapLayer *layer ) const;
 
   signals:
 
     void drawingProgress( int current, int total );
 
+    /** This signal is emitted when CRS transformation is enabled/disabled.
+     *  @param flag true if transformation is enabled.
+     *  @deprecated Use hasCrsTransformEnabledChanged( bool flag )
+     *              to avoid conflict with method of the same name). */
+#ifndef Q_MOC_RUN
+    Q_DECL_DEPRECATED
+#endif
     void hasCrsTransformEnabled( bool flag );
+
+    /** This signal is emitted when CRS transformation is enabled/disabled.
+     *  @param flag true if transformation is enabled.
+     *  @note Added in 2.1 */
+    void hasCrsTransformEnabledChanged( bool flag );
 
     void destinationSrsChanged();
 
@@ -303,6 +326,9 @@ class CORE_EXPORT QgsMapRenderer : public QObject
 
     //! emitted when layer's draw() returned false
     void drawError( QgsMapLayer* );
+
+    //! Notifies higher level components to show the datum transform dialog and add a QgsLayerCoordinateTransformInfo for that layer
+    void datumTransformInfoRequested( const QgsMapLayer* ml, const QString& srcAuthId, const QString& destAuthId ) const;
 
   public slots:
 
@@ -376,8 +402,8 @@ class CORE_EXPORT QgsMapRenderer : public QObject
     //! Locks rendering loop for concurrent draws
     QMutex mRenderMutex;
 
-  private:
-    const QgsCoordinateTransform* tr( QgsMapLayer *layer );
+    QHash< QString, QgsLayerCoordinateTransform > mLayerCoordinateTransformInfo;
+
 };
 
 #endif

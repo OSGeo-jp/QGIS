@@ -7,6 +7,10 @@
     Date                 : August 2012
     Copyright            : (C) 2012 by Victor Olaya
     Email                : volayaf at gmail dot com
+    ---------------------
+    Date                 : September 2013
+    Copyright            : (C) 2013 by Martin Isenburg
+    Email                : martin near rapidlasso point com
 ***************************************************************************
 *                                                                         *
 *   This program is free software; you can redistribute it and/or modify  *
@@ -20,40 +24,55 @@
 __author__ = 'Victor Olaya'
 __date__ = 'August 2012'
 __copyright__ = '(C) 2012, Victor Olaya'
+
 # This will get replaced with a git SHA1 when you do a git archive
+
 __revision__ = '$Format:%H$'
 
 import os
 from PyQt4 import QtGui
+
+from processing.lidar.lastools.LAStoolsUtils import LAStoolsUtils
+from processing.lidar.lastools.LAStoolsAlgorithm import LAStoolsAlgorithm
+
 from processing.parameters.ParameterString import ParameterString
-from processing.lidar.lastools.LasToolsUtils import LasToolsUtils
 from processing.parameters.ParameterBoolean import ParameterBoolean
-from processing.outputs.OutputRaster import OutputRaster
-from processing.lidar.lastools.LasToolsAlgorithm import LasToolsAlgorithm
-from processing.parameters.ParameterFile import ParameterFile
+from processing.parameters.ParameterSelection import ParameterSelection
 
-class las2dem(LasToolsAlgorithm):
 
-    INPUT = "INPUT"
-    OUTPUT = "OUTPUT"
-    INTENSITY = "INTENSITY"
+class las2dem(LAStoolsAlgorithm):
+
+    ATTRIBUTE = 'ATTRIBUTE'
+    PRODUCT = 'PRODUCT'
+    ATTRIBUTES = ['elevation', 'slope', 'intensity', 'rgb']
+    PRODUCTS = ['actual values', 'hillshade', 'gray', 'false']
 
     def defineCharacteristics(self):
-        self.name = "las2dem"
-        self.group = "Tools"
-        self.addParameter(ParameterFile(las2dem.INPUT, "Input las layer"))
-        self.addParameter(ParameterBoolean(las2dem.INTENSITY, "Use intensity instead of elevation", False))
-        self.addOutput(OutputRaster(las2dem.OUTPUT, "Output dem layer"))
-        self.addCommonParameters()
+        self.name = 'las2dem'
+        self.group = 'LAStools'
+        self.addParametersVerboseGUI()
+        self.addParametersPointInputGUI()
+        self.addParametersFilter1ReturnClassFlagsGUI()
+        self.addParametersStepGUI()
+        self.addParameter(ParameterSelection(las2dem.ATTRIBUTE, 'Attribute',
+                          las2dem.ATTRIBUTES, 0))
+        self.addParameter(ParameterSelection(las2dem.PRODUCT, 'Product',
+                          las2dem.PRODUCTS, 0))
+        self.addParametersRasterOutputGUI()
 
     def processAlgorithm(self, progress):
-        commands = [os.path.join(LasToolsUtils.LasToolsPath(), "bin", "las2dem.exe")]
-        commands.append("-i")
-        commands.append(self.getParameterValue(las2dem.INPUT))
-        commands.append("-o")
-        commands.append(self.getOutputValue(las2dem.OUTPUT))
-        if self.getParameterValue(las2dem.INTENSITY):
-            commands.append("-intensity")
-        self.addCommonParameterValuesToCommand(commands)
+        commands = [os.path.join(LAStoolsUtils.LAStoolsPath(), 'bin',
+                    'las2dem.exe')]
+        self.addParametersVerboseCommands(commands)
+        self.addParametersPointInputCommands(commands)
+        self.addParametersFilter1ReturnClassFlagsCommands(commands)
+        self.addParametersStepCommands(commands)
+        attribute = self.getParameterValue(las2dem.ATTRIBUTE)
+        if attribute != 0:
+            commands.append('-' + las2dem.ATTRIBUTES[attribute])
+        product = self.getParameterValue(las2dem.PRODUCT)
+        if product != 0:
+            commands.append('-' + las2dem.PRODUCTS[product])
+        self.addParametersRasterOutputCommands(commands)
 
-        LasToolsUtils.runLasTools(commands, progress)
+        LAStoolsUtils.runLAStools(commands, progress)

@@ -85,7 +85,7 @@ void QgsApplication::init( QString customConfigPath )
 {
   if ( customConfigPath.isEmpty() )
   {
-    customConfigPath = QDir::homePath() + QString( "/.qgis%1/" ).arg( 2 /* FIXME QGis::QGIS_VERSION_INT / 10000 */ );
+    customConfigPath = QString( "%1/.qgis%2/" ).arg( QDir::homePath() ).arg( QGis::QGIS_VERSION_INT / 10000 );
   }
 
   qRegisterMetaType<QgsGeometry::Error>( "QgsGeometry::Error" );
@@ -139,6 +139,12 @@ void QgsApplication::init( QString customConfigPath )
     {
 #if defined(Q_WS_MACX) || defined(Q_WS_WIN32) || defined(WIN32)
       setPrefixPath( applicationDirPath(), true );
+#elif defined(ANDROID)
+      // this is  "/data/data/org.qgis.qgis" in android
+      QDir myDir( QDir::homePath() );
+      myDir.cdUp();
+      QString myPrefix = myDir.absolutePath();
+      setPrefixPath( myPrefix, true );
 #else
       QDir myDir( applicationDirPath() );
       myDir.cdUp();
@@ -172,25 +178,6 @@ void QgsApplication::init( QString customConfigPath )
   }
   ABISYM( mSystemEnvVars ) = systemEnvVarMap;
 
-  // set a working directory up for gdal to write .aux.xml files into
-  // for cases where the raster dir is read only to the user
-  // if the env var is already set it will be used preferentially
-  QString myPamPath = qgisSettingsDirPath() + QString( "gdal_pam/" );
-  QDir myDir( myPamPath );
-  if ( !myDir.exists() )
-  {
-    myDir.mkpath( myPamPath ); //fail silently
-  }
-
-
-#if defined(Q_WS_WIN32) || defined(WIN32)
-  CPLSetConfigOption( "GDAL_PAM_PROXY_DIR", myPamPath.toUtf8() );
-#else
-  //under other OS's we use an environment var so the user can
-  //override the path if he likes
-  int myChangeFlag = 0; //whether we want to force the env var to change
-  setenv( "GDAL_PAM_PROXY_DIR", myPamPath.toUtf8(), myChangeFlag );
-#endif
 }
 
 QgsApplication::~QgsApplication()
@@ -274,7 +261,7 @@ void QgsApplication::setFileOpenEventReceiver( QObject * receiver )
   }
 }
 
-void QgsApplication::setPrefixPath( const QString thePrefixPath, bool useDefaultPaths )
+void QgsApplication::setPrefixPath( const QString &thePrefixPath, bool useDefaultPaths )
 {
   ABISYM( mPrefixPath ) = thePrefixPath;
 #if defined(_MSC_VER)
@@ -292,12 +279,12 @@ void QgsApplication::setPrefixPath( const QString thePrefixPath, bool useDefault
   ABISYM( mLibexecPath ) = ABISYM( mPrefixPath ) + "/" + QGIS_LIBEXEC_SUBDIR + "/";
 }
 
-void QgsApplication::setPluginPath( const QString thePluginPath )
+void QgsApplication::setPluginPath( const QString &thePluginPath )
 {
   ABISYM( mPluginPath ) = thePluginPath;
 }
 
-void QgsApplication::setPkgDataPath( const QString thePkgDataPath )
+void QgsApplication::setPkgDataPath( const QString &thePkgDataPath )
 {
   ABISYM( mPkgDataPath ) = thePkgDataPath;
   QString mySvgPath = thePkgDataPath + ( ABISYM( mRunningFromBuildDir ) ? "/images/svg/" : "/svg/" );
@@ -349,7 +336,7 @@ QString QgsApplication::iconPath( QString iconFile )
   return defaultThemePath() + iconFile;
 }
 
-QIcon QgsApplication::getThemeIcon( const QString theName )
+QIcon QgsApplication::getThemeIcon( const QString &theName )
 {
   QString myPreferredPath = activeThemePath() + QDir::separator() + theName;
   QString myDefaultPath = defaultThemePath() + QDir::separator() + theName;
@@ -370,7 +357,7 @@ QIcon QgsApplication::getThemeIcon( const QString theName )
 }
 
 // TODO: add some caching mechanism ?
-QPixmap QgsApplication::getThemePixmap( const QString theName )
+QPixmap QgsApplication::getThemePixmap( const QString &theName )
 {
   QString myPreferredPath = activeThemePath() + QDir::separator() + theName;
   QString myDefaultPath = defaultThemePath() + QDir::separator() + theName;
@@ -389,7 +376,7 @@ QPixmap QgsApplication::getThemePixmap( const QString theName )
 /*!
   Set the theme path to the specified theme.
 */
-void QgsApplication::setThemeName( const QString theThemeName )
+void QgsApplication::setThemeName( const QString &theThemeName )
 {
   QString myPath = ":/images/themes/" + theThemeName + "/";
   //check it exists and if not roll back to default theme
@@ -605,7 +592,6 @@ void QgsApplication::initQgis()
 void QgsApplication::exitQgis()
 {
   delete QgsMapLayerRegistry::instance();
-  delete QgsProviderRegistry::instance();
 }
 
 QString QgsApplication::showSettings()
@@ -894,8 +880,27 @@ void QgsApplication::applyGdalSkippedDrivers()
   GDALAllRegister(); //to update driver list and skip missing ones
 }
 
-bool QgsApplication::createDB( QString* errorMessage )
+bool QgsApplication::createDB( QString *errorMessage )
 {
+  // set a working directory up for gdal to write .aux.xml files into
+  // for cases where the raster dir is read only to the user
+  // if the env var is already set it will be used preferentially
+  QString myPamPath = qgisSettingsDirPath() + QString( "gdal_pam/" );
+  QDir myDir( myPamPath );
+  if ( !myDir.exists() )
+  {
+    myDir.mkpath( myPamPath ); //fail silently
+  }
+
+#if defined(Q_WS_WIN32) || defined(WIN32)
+  CPLSetConfigOption( "GDAL_PAM_PROXY_DIR", myPamPath.toUtf8() );
+#else
+  //under other OS's we use an environment var so the user can
+  //override the path if he likes
+  int myChangeFlag = 0; //whether we want to force the env var to change
+  setenv( "GDAL_PAM_PROXY_DIR", myPamPath.toUtf8(), myChangeFlag );
+#endif
+
   // Check qgis.db and make private copy if necessary
   QFile qgisPrivateDbFile( QgsApplication::qgisUserDbFilePath() );
 

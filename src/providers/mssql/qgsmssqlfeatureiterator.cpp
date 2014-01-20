@@ -122,7 +122,7 @@ void QgsMssqlFeatureIterator::BuildStatement( const QgsFeatureRequest& request )
     ++fieldCount;
   }
   // get geometry col
-  if ( request.flags() != QgsFeatureRequest::NoGeometry && !mProvider->mGeometryColName.isEmpty() )
+  if ( !( request.flags() & QgsFeatureRequest::NoGeometry ) && !mProvider->mGeometryColName.isEmpty() )
   {
     if ( fieldCount != 0 )
       mStatement += ",";
@@ -175,7 +175,6 @@ void QgsMssqlFeatureIterator::BuildStatement( const QgsFeatureRequest& request )
       mStatement += " where (" + mProvider->mSqlWhereClause + ")";
     else
       mStatement += " and (" + mProvider->mSqlWhereClause + ")";
-    filterAdded = true;
   }
 
   if ( fieldCount == 0 )
@@ -186,7 +185,7 @@ void QgsMssqlFeatureIterator::BuildStatement( const QgsFeatureRequest& request )
 }
 
 
-bool QgsMssqlFeatureIterator::nextFeature( QgsFeature& feature )
+bool QgsMssqlFeatureIterator::fetchFeature( QgsFeature& feature )
 {
   feature.setValid( false );
 

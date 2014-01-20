@@ -188,6 +188,8 @@ class GUI_EXPORT QgsAttributeTableModel: public QAbstractTableModel
      */
     void prefetchColumnData( int column );
 
+    void setRequest( const QgsFeatureRequest& request );
+
   signals:
     /**
      * Model has been changed
@@ -225,9 +227,8 @@ class GUI_EXPORT QgsAttributeTableModel: public QAbstractTableModel
     /**
      * Launched when a feature has been added
      * @param fid feature id
-     * @param inOperation guard insertion with beginInsertRows() / endInsertRows()
      */
-    virtual void featureAdded( QgsFeatureId fid, bool inOperation = true );
+    virtual void featureAdded( QgsFeatureId fid );
 
     /**
      * Launched when layer has been deleted

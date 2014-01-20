@@ -52,6 +52,7 @@
 #include "qgspoint.h"
 #include "qgsproviderregistry.h"
 #include "qgsrectangle.h"
+#include "qgsrelationmanager.h"
 #include "qgsrendercontext.h"
 #include "qgscoordinatereferencesystem.h"
 #include "qgsvectordataprovider.h"
@@ -73,6 +74,9 @@
 #include "qgsstylev2.h"
 #include "qgssymbologyv2conversion.h"
 #include "qgspallabeling.h"
+#include "qgssimplifymethod.h"
+
+#include "diagram/qgsdiagram.h"
 
 #ifdef TESTPROVIDERLIB
 #include <dlfcn.h>
@@ -108,7 +112,6 @@ typedef QString getStyleById_t(
   QString& errCause
 );
 
-
 QgsVectorLayer::QgsVectorLayer( QString vectorLayerPath,
                                 QString baseName,
                                 QString providerKey,
@@ -125,6 +128,7 @@ QgsVectorLayer::QgsVectorLayer( QString vectorLayerPath,
     , mFeatureBlendMode( QPainter::CompositionMode_SourceOver ) // Default to normal feature blending
     , mLayerTransparency( 0 )
     , mVertexMarkerOnlyForSelection( false )
+    , mFeatureFormSuppress( SuppressDefault )
     , mCache( new QgsGeometryCache( this ) )
     , mEditBuffer( 0 )
     , mJoinBuffer( 0 )
@@ -175,6 +179,15 @@ QgsVectorLayer::QgsVectorLayer( QString vectorLayerPath,
   }
 
   connect( this, SIGNAL( selectionChanged( QgsFeatureIds, QgsFeatureIds, bool ) ), this, SIGNAL( selectionChanged() ) );
+
+  connect( QgsProject::instance()->relationManager(), SIGNAL( relationsLoaded() ), this, SLOT( onRelationsLoaded() ) );
+
+  // Default simplify drawing settings
+  QSettings settings;
+  mSimplifyMethod.setSimplifyHints( settings.value( "/qgis/simplifyDrawingHints", mSimplifyMethod.simplifyHints() ).toInt() );
+  mSimplifyMethod.setThreshold( settings.value( "/qgis/simplifyDrawingTol", mSimplifyMethod.threshold() ).toFloat() );
+  mSimplifyMethod.setForceLocalOptimization( settings.value( "/qgis/simplifyLocal", mSimplifyMethod.forceLocalOptimization() ).toBool() );
+
 } // QgsVectorLayer ctor
 
 
@@ -683,12 +696,53 @@ bool QgsVectorLayer::draw( QgsRenderContext& rendererContext )
   //do startRender before getFeatures to give renderers the possibility of querying features in the startRender method
   mRendererV2->startRender( rendererContext, this );
 
-  QgsFeatureIterator fit = getFeatures( QgsFeatureRequest()
-                                        .setFilterRect( rendererContext.extent() )
-                                        .setSubsetOfAttributes( attributes ) );
+  QgsFeatureRequest& featureRequest = QgsFeatureRequest()
+                                      .setFilterRect( rendererContext.extent() )
+                                      .setSubsetOfAttributes( attributes );
 
-  if (( mRendererV2->capabilities() & QgsFeatureRendererV2::SymbolLevels )
-      && mRendererV2->usingSymbolLevels() )
+  // enable the simplification of the geometries (Using the current map2pixel context) before send it to renderer engine.
+  if ( simplifyDrawingCanbeApplied( QgsVectorLayer::GeometrySimplification ) )
+  {
+    QPainter* p = rendererContext.painter();
+    double dpi = ( p->device()->logicalDpiX() + p->device()->logicalDpiY() ) / 2;
+    double map2pixelTol = mSimplifyMethod.threshold() * 96.0f / dpi;
+
+    const QgsMapToPixel& mtp = rendererContext.mapToPixel();
+    map2pixelTol *= mtp.mapUnitsPerPixel();
+    const QgsCoordinateTransform* ct = rendererContext.coordinateTransform();
+
+    // resize the tolerance using the change of size of an 1-BBOX from the source CoordinateSystem to the target CoordinateSystem
+    if ( ct && !(( QgsCoordinateTransform* )ct )->isShortCircuited() )
+    {
+      QgsPoint center = rendererContext.extent().center();
+      double rectSize = ct->sourceCrs().geographicFlag() ?  0.0008983 /* ~100/(40075014/360=111319.4833) */ : 100;
+
+      QgsRectangle sourceRect = QgsRectangle( center.x(), center.y(), center.x() + rectSize, center.y() + rectSize );
+      QgsRectangle targetRect = ct->transform( sourceRect );
+
+      QgsPoint minimumSrcPoint( sourceRect.xMinimum(), sourceRect.yMinimum() );
+      QgsPoint maximumSrcPoint( sourceRect.xMaximum(), sourceRect.yMaximum() );
+      QgsPoint minimumDstPoint( targetRect.xMinimum(), targetRect.yMinimum() );
+      QgsPoint maximumDstPoint( targetRect.xMaximum(), targetRect.yMaximum() );
+
+      double sourceHypothenuse = sqrt( minimumSrcPoint.sqrDist( maximumSrcPoint ) );
+      double targetHypothenuse = sqrt( minimumDstPoint.sqrDist( maximumDstPoint ) );
+
+      if ( targetHypothenuse != 0 )
+        map2pixelTol *= ( sourceHypothenuse / targetHypothenuse );
+    }
+
+    QgsSimplifyMethod simplifyMethod;
+    simplifyMethod.setMethodType( QgsSimplifyMethod::OptimizeForRendering );
+    simplifyMethod.setTolerance( map2pixelTol );
+    simplifyMethod.setForceLocalOptimization( mSimplifyMethod.forceLocalOptimization() );
+
+    featureRequest.setSimplifyMethod( simplifyMethod );
+  }
+
+  QgsFeatureIterator fit = getFeatures( featureRequest );
+
+  if (( mRendererV2->capabilities() & QgsFeatureRendererV2::SymbolLevels ) && mRendererV2->usingSymbolLevels() )
     drawRendererV2Levels( fit, rendererContext, labeling );
   else
     drawRendererV2( fit, rendererContext, labeling );
@@ -791,27 +845,17 @@ void QgsVectorLayer::modifySelection( QgsFeatureIds selectIds, QgsFeatureIds des
 
 void QgsVectorLayer::invertSelection()
 {
-  // copy the ids of selected features to tmp
-  QgsFeatureIds tmp = mSelectedFeatureIds;
-
-  QgsFeatureIterator fit = getFeatures( QgsFeatureRequest()
-                                        .setFlags( QgsFeatureRequest::NoGeometry )
-                                        .setSubsetOfAttributes( QgsAttributeList() ) );
-
-  QgsFeatureIds ids;
-
-  QgsFeature fet;
-  while ( fit.nextFeature( fet ) )
-  {
-    ids << fet.id();
-  }
-
+  QgsFeatureIds ids = allFeatureIds();
   ids.subtract( mSelectedFeatureIds );
-
   setSelectedFeatures( ids );
 }
 
 void QgsVectorLayer::selectAll()
+{
+  setSelectedFeatures( allFeatureIds() );
+}
+
+QgsFeatureIds QgsVectorLayer::allFeatureIds()
 {
   QgsFeatureIterator fit = getFeatures( QgsFeatureRequest()
                                         .setFlags( QgsFeatureRequest::NoGeometry )
@@ -825,7 +869,7 @@ void QgsVectorLayer::selectAll()
     ids << fet.id();
   }
 
-  setSelectedFeatures( ids );
+  return ids;
 }
 
 void QgsVectorLayer::invertSelectionInRectangle( QgsRectangle & rect )
@@ -1143,10 +1187,13 @@ QgsRectangle QgsVectorLayer::extent()
       rect.combineExtentWith( &r );
     }
 
-    for ( QgsFeatureMap::iterator it = mEditBuffer->mAddedFeatures.begin(); it != mEditBuffer->mAddedFeatures.end(); it++ )
+    for ( QgsFeatureMap::iterator it = mEditBuffer->mAddedFeatures.begin(); it != mEditBuffer->mAddedFeatures.end(); ++it )
     {
-      QgsRectangle r = it->geometry()->boundingBox();
-      rect.combineExtentWith( &r );
+      if ( it->geometry() )
+      {
+        QgsRectangle r = it->geometry()->boundingBox();
+        rect.combineExtentWith( &r );
+      }
     }
   }
   else
@@ -1209,6 +1256,10 @@ bool QgsVectorLayer::setSubsetString( QString subset )
   return res;
 }
 
+bool QgsVectorLayer::simplifyDrawingCanbeApplied( int simplifyHint ) const
+{
+  return mDataProvider && !mEditBuffer && ( hasGeometryType() && geometryType() != QGis::Point ) && ( mSimplifyMethod.simplifyHints() & simplifyHint ) && ( !mCurrentRendererContext || mCurrentRendererContext->useRenderingOptimization() );
+}
 
 QgsFeatureIterator QgsVectorLayer::getFeatures( const QgsFeatureRequest& request )
 {
@@ -1375,6 +1426,15 @@ int QgsVectorLayer::translateFeature( QgsFeatureId featureId, double dx, double 
 
   QgsVectorLayerEditUtils utils( this );
   return utils.translateFeature( featureId, dx, dy );
+}
+
+int QgsVectorLayer::splitParts( const QList<QgsPoint>& splitLine, bool topologicalEditing )
+{
+  if ( !mEditBuffer || !mDataProvider )
+    return -1;
+
+  QgsVectorLayerEditUtils utils( this );
+  return utils.splitParts( splitLine, topologicalEditing );
 }
 
 int QgsVectorLayer::splitFeatures( const QList<QgsPoint>& splitLine, bool topologicalEditing )
@@ -1651,7 +1711,7 @@ bool QgsVectorLayer::setDataProvider( QString const & provider )
           const QMap<QString, QgsMapLayer*> &layers = QgsMapLayerRegistry::instance()->mapLayers();
 
           QMap<QString, QgsMapLayer*>::const_iterator it;
-          for ( it = layers.constBegin(); it != layers.constEnd() && ( *it )->name() != lName; it++ )
+          for ( it = layers.constBegin(); it != layers.constEnd() && ( *it )->name() != lName; ++it )
             ;
 
           if ( it != layers.constEnd() && stuff.size() > 2 )
@@ -1809,6 +1869,11 @@ bool QgsVectorLayer::readSymbology( const QDomNode& node, QString& errorMessage 
     mLabel->setMinScale( e.attribute( "minLabelScale", "1" ).toFloat() );
     mLabel->setMaxScale( e.attribute( "maxLabelScale", "100000000" ).toFloat() );
 
+    // get the simplification drawing settings
+    mSimplifyMethod.setSimplifyHints( e.attribute( "simplifyDrawingHints", "1" ).toInt() );
+    mSimplifyMethod.setThreshold( e.attribute( "simplifyDrawingTol", "1" ).toFloat() );
+    mSimplifyMethod.setForceLocalOptimization( e.attribute( "simplifyLocal", "1" ).toInt() );
+
     //also restore custom properties (for labeling-ng)
     readCustomProperties( node, "labeling" );
 
@@ -1964,6 +2029,7 @@ bool QgsVectorLayer::readSymbology( const QDomNode& node, QString& errorMessage 
         case UniqueValuesEditable:
         case UuidGenerator:
         case Color:
+        case EditorWidgetV2: // Will get a signal and read there
           break;
       }
     }
@@ -1980,6 +2046,17 @@ bool QgsVectorLayer::readSymbology( const QDomNode& node, QString& errorMessage 
   if ( !editFormInitNode.isNull() )
   {
     mEditFormInit = editFormInitNode.toElement().text();
+  }
+
+  QDomNode fFSuppNode = node.namedItem( "featformsuppress" );
+  if ( fFSuppNode.isNull() )
+  {
+    mFeatureFormSuppress = SuppressDefault;
+  }
+  else
+  {
+    QDomElement e = fFSuppNode.toElement();
+    mFeatureFormSuppress = ( QgsVectorLayer::FeatureFormSuppress )e.text().toInt();
   }
 
   QDomNode annotationFormNode = node.namedItem( "annotationform" );
@@ -2075,6 +2152,7 @@ bool QgsVectorLayer::readSymbology( const QDomNode& node, QString& errorMessage 
     QgsAttributeEditorElement *attributeEditorWidget = attributeEditorElementFromDomElement( elem, this );
     mAttributeEditorElements.append( attributeEditorWidget );
   }
+
   return true;
 }
 
@@ -2092,7 +2170,8 @@ QgsAttributeEditorElement* QgsVectorLayer::attributeEditorElementFromDomElement(
     {
       QDomElement childElem = childNodeList.at( i ).toElement();
       QgsAttributeEditorElement* myElem = attributeEditorElementFromDomElement( childElem, container );
-      container->addChildElement( myElem );
+      if ( myElem )
+        container->addChildElement( myElem );
     }
 
     newElement = container;
@@ -2103,7 +2182,13 @@ QgsAttributeEditorElement* QgsVectorLayer::attributeEditorElementFromDomElement(
     int idx = *( dataProvider()->fieldNameMap() ).find( name );
     newElement = new QgsAttributeEditorField( name, idx, parent );
   }
-
+  else if ( elem.tagName() == "attributeEditorRelation" )
+  {
+    // At this time, the relations are not loaded
+    // So we only grab the id and delegate the rest to onRelationsLoaded()
+    QString name = elem.attribute( "name" );
+    newElement = new QgsAttributeEditorRelation( name, elem.attribute( "relation", "[None]" ), parent );
+  }
   return newElement;
 }
 
@@ -2121,6 +2206,11 @@ bool QgsVectorLayer::writeSymbology( QDomNode& node, QDomDocument& doc, QString&
     mapLayerNode.setAttribute( "scaleBasedLabelVisibilityFlag", mLabel->scaleBasedVisibility() ? 1 : 0 );
     mapLayerNode.setAttribute( "minLabelScale", QString::number( mLabel->minScale() ) );
     mapLayerNode.setAttribute( "maxLabelScale", QString::number( mLabel->maxScale() ) );
+
+    // save the simplification drawing settings
+    mapLayerNode.setAttribute( "simplifyDrawingHints", QString::number( mSimplifyMethod.simplifyHints() ) );
+    mapLayerNode.setAttribute( "simplifyDrawingTol", QString::number( mSimplifyMethod.threshold() ) );
+    mapLayerNode.setAttribute( "simplifyLocal", mSimplifyMethod.forceLocalOptimization() ? 1 : 0 );
 
     //save customproperties (for labeling ng)
     writeCustomProperties( node, doc );
@@ -2206,7 +2296,7 @@ bool QgsVectorLayer::writeSymbology( QDomNode& node, QDomDocument& doc, QString&
           {
             const QMap<QString, QVariant> &map = mValueMaps[ it.key()];
 
-            for ( QMap<QString, QVariant>::const_iterator vmit = map.begin(); vmit != map.end(); vmit++ )
+            for ( QMap<QString, QVariant>::const_iterator vmit = map.begin(); vmit != map.end(); ++vmit )
             {
               QDomElement value = doc.createElement( "valuepair" );
               value.setAttribute( "key", vmit.key() );
@@ -2271,6 +2361,7 @@ bool QgsVectorLayer::writeSymbology( QDomNode& node, QDomDocument& doc, QString&
         case Immutable:
         case UuidGenerator:
         case Color:
+        case EditorWidgetV2: // Will get a signal and save there
           break;
       }
 
@@ -2289,6 +2380,11 @@ bool QgsVectorLayer::writeSymbology( QDomNode& node, QDomDocument& doc, QString&
   QDomText efiText = doc.createTextNode( mEditFormInit );
   efiField.appendChild( efiText );
   node.appendChild( efiField );
+
+  QDomElement fFSuppElem  = doc.createElement( "featformsuppress" );
+  QDomText fFSuppText = doc.createTextNode( QString::number( featureFormSuppress() ) );
+  fFSuppElem.appendChild( fFSuppText );
+  node.appendChild( fFSuppElem );
 
   QDomElement afField = doc.createElement( "annotationform" );
   QDomText afText = doc.createTextNode( QgsProject::instance()->writePath( mAnnotationForm ) );
@@ -2364,7 +2460,7 @@ bool QgsVectorLayer::writeSymbology( QDomNode& node, QDomDocument& doc, QString&
   {
     QDomElement tabsElem = doc.createElement( "attributeEditorForm" );
 
-    for ( QList< QgsAttributeEditorElement* >::const_iterator it = mAttributeEditorElements.begin(); it != mAttributeEditorElements.end(); it++ )
+    for ( QList< QgsAttributeEditorElement* >::const_iterator it = mAttributeEditorElements.begin(); it != mAttributeEditorElements.end(); ++it )
     {
       QDomElement attributeEditorWidgetElem = ( *it )->toDomElement( doc );
       tabsElem.appendChild( attributeEditorWidgetElem );
@@ -2432,7 +2528,12 @@ bool QgsVectorLayer::changeGeometry( QgsFeatureId fid, QgsGeometry* geom )
 
 bool QgsVectorLayer::changeAttributeValue( QgsFeatureId fid, int field, QVariant value, bool emitSignal )
 {
-  Q_UNUSED( emitSignal ); // TODO[MD] - see also QgsFieldCalculator and #7071
+  Q_UNUSED( emitSignal );
+  return changeAttributeValue( fid, field, value );
+}
+
+bool QgsVectorLayer::changeAttributeValue( QgsFeatureId fid, int field, QVariant value )
+{
   if ( !mEditBuffer || !mDataProvider )
     return false;
 
@@ -2461,6 +2562,16 @@ void QgsVectorLayer::addAttributeAlias( int attIndex, QString aliasString )
 void QgsVectorLayer::addAttributeEditorWidget( QgsAttributeEditorElement* data )
 {
   mAttributeEditorElements.append( data );
+}
+
+const QString QgsVectorLayer::editorWidgetV2( int fieldIdx )
+{
+  return mEditorWidgetV2Types.value( fieldIdx );
+}
+
+const QgsEditorWidgetConfig QgsVectorLayer::editorWidgetV2Config( int fieldIdx )
+{
+  return mEditorWidgetV2Configs.value( fieldIdx );
 }
 
 QString QgsVectorLayer::attributeAlias( int attributeIndex ) const
@@ -2656,8 +2767,22 @@ bool QgsVectorLayer::rollBack( bool deleteBuffer )
 void QgsVectorLayer::setSelectedFeatures( const QgsFeatureIds& ids )
 {
   QgsFeatureIds deselectedFeatures = mSelectedFeatureIds - ids;
-  // TODO: check whether features with these ID exist
+
   mSelectedFeatureIds = ids;
+
+  QgsFeatureIds allIds = allFeatureIds();
+  QgsFeatureIds::iterator id = mSelectedFeatureIds.begin();
+  while ( id != mSelectedFeatureIds.end() )
+  {
+    if ( !allIds.contains( *id ) )
+    {
+      id = mSelectedFeatureIds.erase( id );
+    }
+    else
+    {
+      ++id;
+    }
+  }
 
   // invalidate cache
   setCacheImage( 0 );
@@ -2915,7 +3040,7 @@ const QString QgsVectorLayer::displayField() const
   return mDisplayField;
 }
 
-void QgsVectorLayer::setDisplayExpression( const QString displayExpression )
+void QgsVectorLayer::setDisplayExpression( const QString &displayExpression )
 {
   mDisplayExpression = displayExpression;
 }
@@ -2974,6 +3099,16 @@ QgsVectorLayer::EditorLayout QgsVectorLayer::editorLayout()
 void QgsVectorLayer::setEditorLayout( EditorLayout editorLayout )
 {
   mEditorLayout = editorLayout;
+}
+
+void QgsVectorLayer::setEditorWidgetV2( int attrIdx, const QString& widgetType )
+{
+  mEditorWidgetV2Types[ attrIdx ] = widgetType;
+}
+
+void QgsVectorLayer::setEditorWidgetV2Config( int attrIdx, const QMap<QString, QVariant>& config )
+{
+  mEditorWidgetV2Configs[ attrIdx ] = config;
 }
 
 QString QgsVectorLayer::editForm()
@@ -3115,6 +3250,8 @@ void QgsVectorLayer::setRendererV2( QgsFeatureRendererV2 *r )
     mRendererV2 = r;
     mSymbolFeatureCounted = false;
     mSymbolFeatureCountMap.clear();
+
+    emit rendererChanged();
   }
 }
 
@@ -3397,9 +3534,10 @@ QVariant QgsVectorLayer::maximumValue( int index )
 }
 
 /** Write blend mode for features */
-void QgsVectorLayer::setFeatureBlendMode( const QPainter::CompositionMode featureBlendMode )
+void QgsVectorLayer::setFeatureBlendMode( const QPainter::CompositionMode &featureBlendMode )
 {
   mFeatureBlendMode = featureBlendMode;
+  emit featureBlendModeChanged( featureBlendMode );
 }
 
 /** Read blend mode for layer */
@@ -3412,6 +3550,7 @@ QPainter::CompositionMode QgsVectorLayer::featureBlendMode() const
 void QgsVectorLayer::setLayerTransparency( int layerTransparency )
 {
   mLayerTransparency = layerTransparency;
+  emit layerTransparencyChanged( layerTransparency );
 }
 
 /** Read transparency for layer */
@@ -3484,15 +3623,49 @@ void QgsVectorLayer::prepareLabelingAndDiagrams( QgsRenderContext& rendererConte
     mDiagramLayerSettings->renderer = mDiagramRenderer;
     rendererContext.labelingEngine()->addDiagramLayer( this, mDiagramLayerSettings );
     //add attributes needed by the diagram renderer
-    QList<int> att = mDiagramRenderer->diagramAttributes();
-    QList<int>::const_iterator attIt = att.constBegin();
+    QList<QString> att = mDiagramRenderer->diagramAttributes();
+    QList<QString>::const_iterator attIt = att.constBegin();
     for ( ; attIt != att.constEnd(); ++attIt )
     {
-      if ( !attributes.contains( *attIt ) )
+      QgsExpression* expression = mDiagramRenderer->diagram()->getExpression( *attIt, &pendingFields() );
+      QStringList columns = expression->referencedColumns();
+      QStringList::const_iterator columnsIterator = columns.constBegin();
+      for ( ; columnsIterator != columns.constEnd(); ++columnsIterator )
       {
-        attributes << *attIt;
+        int index = fieldNameIndex( *columnsIterator );
+        if ( !attributes.contains( index ) )
+        {
+          attributes << index;
+        }
       }
     }
+
+    QgsLinearlyInterpolatedDiagramRenderer* mLinearlyInterpolatedDiagramRenderer = dynamic_cast<QgsLinearlyInterpolatedDiagramRenderer*>( mDiagramRenderer );
+    if ( mLinearlyInterpolatedDiagramRenderer != NULL )
+    {
+      if ( mLinearlyInterpolatedDiagramRenderer->classificationAttributeIsExpression() )
+      {
+        QgsExpression* expression = mDiagramRenderer->diagram()->getExpression( mLinearlyInterpolatedDiagramRenderer->classificationAttributeExpression(), &pendingFields() );
+        QStringList columns = expression->referencedColumns();
+        QStringList::const_iterator columnsIterator = columns.constBegin();
+        for ( ; columnsIterator != columns.constEnd(); ++columnsIterator )
+        {
+          int index = fieldNameIndex( *columnsIterator );
+          if ( !attributes.contains( index ) )
+          {
+            attributes << index;
+          }
+        }
+      }
+      else
+      {
+        if ( !attributes.contains( mLinearlyInterpolatedDiagramRenderer->classificationAttribute() ) )
+        {
+          attributes << mLinearlyInterpolatedDiagramRenderer->classificationAttribute();
+        }
+      }
+    }
+
     //and the ones needed for data defined diagram positions
     if ( mDiagramLayerSettings->xPosColumn >= 0 && !attributes.contains( mDiagramLayerSettings->xPosColumn ) )
     {
@@ -3777,6 +3950,23 @@ void QgsVectorLayer::invalidateSymbolCountedFlag()
   mSymbolFeatureCounted = false;
 }
 
+void QgsVectorLayer::onRelationsLoaded()
+{
+  Q_FOREACH( QgsAttributeEditorElement* elem, mAttributeEditorElements )
+  {
+    if ( elem->type() == QgsAttributeEditorElement::AeTypeContainer )
+    {
+      QgsAttributeEditorContainer* cont = dynamic_cast< QgsAttributeEditorContainer* >( elem );
+      QList<QgsAttributeEditorElement*> relations = cont->findElements( QgsAttributeEditorElement::AeTypeRelation );
+      Q_FOREACH( QgsAttributeEditorElement* relElem, relations )
+      {
+        QgsAttributeEditorRelation* rel = dynamic_cast< QgsAttributeEditorRelation* >( relElem );
+        rel->init( QgsProject::instance()->relationManager() );
+      }
+    }
+  }
+}
+
 QgsVectorLayer::ValueRelationData &QgsVectorLayer::valueRelation( int idx )
 {
   const QgsFields &fields = pendingFields();
@@ -3798,6 +3988,11 @@ QgsVectorLayer::ValueRelationData &QgsVectorLayer::valueRelation( int idx )
   return mValueRelations[fieldName];
 }
 
+QList<QgsRelation> QgsVectorLayer::referencingRelations( int idx )
+{
+  return QgsProject::instance()->relationManager()->referencingRelations( this, idx );
+}
+
 QList<QgsAttributeEditorElement*> &QgsVectorLayer::attributeEditorElements()
 {
   return mAttributeEditorElements;
@@ -3812,17 +4007,38 @@ QDomElement QgsAttributeEditorContainer::toDomElement( QDomDocument& doc ) const
 {
   QDomElement elem = doc.createElement( "attributeEditorContainer" );
   elem.setAttribute( "name", mName );
-  for ( QList< QgsAttributeEditorElement* >::const_iterator it = mChildren.begin(); it != mChildren.end(); ++it )
+
+  Q_FOREACH( QgsAttributeEditorElement* child, mChildren )
   {
-    elem.appendChild(( *it )->toDomElement( doc ) );
+    elem.appendChild( child->toDomElement( doc ) );
   }
   return elem;
 }
 
-
 void QgsAttributeEditorContainer::addChildElement( QgsAttributeEditorElement *widget )
 {
   mChildren.append( widget );
+}
+
+QList<QgsAttributeEditorElement*> QgsAttributeEditorContainer::findElements( QgsAttributeEditorElement::AttributeEditorType type ) const
+{
+  QList<QgsAttributeEditorElement*> results;
+
+  Q_FOREACH( QgsAttributeEditorElement* elem, mChildren )
+  {
+    if ( elem->type() == type )
+    {
+      results.append( elem );
+    }
+
+    if ( elem->type() == AeTypeContainer )
+    {
+      QgsAttributeEditorContainer* cont = dynamic_cast<QgsAttributeEditorContainer*>( elem );
+      results += cont->findElements( type );
+    }
+  }
+
+  return results;
 }
 
 QDomElement QgsAttributeEditorField::toDomElement( QDomDocument& doc ) const
@@ -3918,12 +4134,12 @@ void QgsVectorLayer::saveStyleToDatabase( QString name, QString description,
 
 
 
-QString QgsVectorLayer::loadNamedStyle( const QString theURI, bool &theResultFlag )
+QString QgsVectorLayer::loadNamedStyle( const QString &theURI, bool &theResultFlag )
 {
   return loadNamedStyle( theURI, theResultFlag, false );
 }
 
-QString QgsVectorLayer::loadNamedStyle( const QString theURI, bool &theResultFlag , bool loadFromLocalDB )
+QString QgsVectorLayer::loadNamedStyle( const QString &theURI, bool &theResultFlag, bool loadFromLocalDB )
 {
   QgsDataSourceURI dsUri( theURI );
   if ( !loadFromLocalDB && !dsUri.database().isEmpty() )
@@ -3978,4 +4194,19 @@ bool QgsVectorLayer::applyNamedStyle( QString namedStyle, QString errorMsg )
 #endif
 
   return readSymbology( myRoot, errorMsg );
+}
+
+
+QDomElement QgsAttributeEditorRelation::toDomElement( QDomDocument& doc ) const
+{
+  QDomElement elem = doc.createElement( "attributeEditorRelation" );
+  elem.setAttribute( "name", mName );
+  elem.setAttribute( "relation", mRelation.id() );
+  return elem;
+}
+
+bool QgsAttributeEditorRelation::init( QgsRelationManager* relationManager )
+{
+  mRelation = relationManager->relation( mRelationId );
+  return mRelation.isValid();
 }

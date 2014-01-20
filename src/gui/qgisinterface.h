@@ -34,6 +34,7 @@ class QgsLegendInterface;
 class QgsPluginManagerInterface;
 class QgsFeature;
 class QgsMessageBar;
+class QgsVectorLayerTools;
 
 #include <QObject>
 #include <QFont>
@@ -217,7 +218,7 @@ class GUI_EXPORT QgisInterface : public QObject
     /** Return the message bar of the main app */
     virtual QgsMessageBar * messageBar() = 0;
 
-    /**Return mainwindows / composer views of running composer instances (currently only one)*/
+    /** Return mainwindows / composer views of running composer instances (currently only one) */
     virtual QList<QgsComposerView*> activeComposers() = 0;
 
     /** Create a new composer
@@ -372,7 +373,7 @@ class GUI_EXPORT QgisInterface : public QObject
      * An item can be inserted before any existing action.
      */
 
-    //! Menus
+    // Menus
 #ifndef Q_MOC_RUN
     Q_DECL_DEPRECATED
 #endif
@@ -400,7 +401,7 @@ class GUI_EXPORT QgisInterface : public QObject
     virtual QMenu *windowMenu() = 0;
     virtual QMenu *helpMenu() = 0;
 
-    //! ToolBars
+    // ToolBars
     virtual QToolBar *fileToolBar() = 0;
     virtual QToolBar *layerToolBar() = 0;
     virtual QToolBar *mapNavToolToolBar() = 0;
@@ -422,7 +423,7 @@ class GUI_EXPORT QgisInterface : public QObject
     */
     virtual QToolBar *webToolBar() = 0;
 
-    //! Project menu actions
+    // Project menu actions
     virtual QAction *actionNewProject() = 0;
     virtual QAction *actionOpenProject() = 0;
     virtual QAction *actionSaveProject() = 0;
@@ -433,7 +434,7 @@ class GUI_EXPORT QgisInterface : public QObject
     virtual QAction *actionShowComposerManager() = 0;
     virtual QAction *actionExit() = 0;
 
-    //! Edit menu actions
+    // Edit menu actions
     virtual QAction *actionCutFeatures() = 0;
     virtual QAction *actionCopyFeatures() = 0;
     virtual QAction *actionPasteFeatures() = 0;
@@ -441,6 +442,7 @@ class GUI_EXPORT QgisInterface : public QObject
     virtual QAction *actionDeleteSelected() = 0;
     virtual QAction *actionMoveFeature() = 0;
     virtual QAction *actionSplitFeatures() = 0;
+    virtual QAction *actionSplitParts() = 0;
     virtual QAction *actionAddRing() = 0;
     virtual QAction *actionAddPart() = 0;
     virtual QAction *actionSimplifyFeature() = 0;
@@ -448,31 +450,57 @@ class GUI_EXPORT QgisInterface : public QObject
     virtual QAction *actionDeletePart() = 0;
     virtual QAction *actionNodeTool() = 0;
 
-    //! View menu actions
+    // View menu actions
+    //! Get access to the native pan action. Call trigger() on it to set the default pan map tool.
     virtual QAction *actionPan() = 0;
+    //! Get access to the native touch action.
     virtual QAction *actionTouch() = 0;
+    //! Get access to the native pan to selected action. Call trigger() on it to pan the map canvas to the selection.
     virtual QAction *actionPanToSelected() = 0;
+    //! Get access to the native zoom in action. Call trigger() on it to set the default zoom in map tool.
     virtual QAction *actionZoomIn() = 0;
+    //! Get access to the native zoom out action. Call trigger() on it to set the default zoom out map tool.
     virtual QAction *actionZoomOut() = 0;
+    //! Get access to the native select action. Call trigger() on it to set the default select map tool.
     virtual QAction *actionSelect() = 0;
+    //! Get access to the native select rectangle action. Call trigger() on it to set the default select rectangle map tool.
     virtual QAction *actionSelectRectangle() = 0;
+    //! Get access to the native select polygon action. Call trigger() on it to set the default select polygon map tool.
     virtual QAction *actionSelectPolygon() = 0;
+    //! Get access to the native select freehand action. Call trigger() on it to set the default select freehand map tool.
     virtual QAction *actionSelectFreehand() = 0;
+    //! Get access to the native select radius action. Call trigger() on it to set the default select radius map tool.
     virtual QAction *actionSelectRadius() = 0;
+    //! Get access to the native identify action. Call trigger() on it to set the default identify map tool.
     virtual QAction *actionIdentify() = 0;
+    //! Get access to the native run action feature action. Call trigger() on it to set the default run feature action map tool.
+    virtual QAction *actionFeatureAction() = 0;
+    //! Get access to the native measure action. Call trigger() on it to set the default measure map tool.
     virtual QAction *actionMeasure() = 0;
+    //! Get access to the native measure area action. Call trigger() on it to set the default measure area map tool.
     virtual QAction *actionMeasureArea() = 0;
+    //! Get access to the native zoom full extent action. Call trigger() on it to zoom to the full extent.
     virtual QAction *actionZoomFullExtent() = 0;
+    //! Get access to the native zoom to layer action. Call trigger() on it to zoom to the active layer.
     virtual QAction *actionZoomToLayer() = 0;
+    //! Get access to the native zoom to selected action. Call trigger() on it to zoom to the current selection.
     virtual QAction *actionZoomToSelected() = 0;
+    //! Get access to the native zoom last action. Call trigger() on it to zoom to last.
     virtual QAction *actionZoomLast() = 0;
+    //! Get access to the native zoom next action. Call trigger() on it to zoom to next.
+    virtual QAction *actionZoomNext() = 0;
+    //! Get access to the native zoom actual size action. Call trigger() on it to zoom to actual size.
     virtual QAction *actionZoomActualSize() = 0;
+    //! Get access to the native map tips action. Call trigger() on it to toggle map tips.
     virtual QAction *actionMapTips() = 0;
+    //! Get access to the native new bookmark action. Call trigger() on it to open the new bookmark dialog.
     virtual QAction *actionNewBookmark() = 0;
+    //! Get access to the native show bookmarks action. Call trigger() on it to open the bookmarks dialog.
     virtual QAction *actionShowBookmarks() = 0;
+    //! Get access to the native draw action.
     virtual QAction *actionDraw() = 0;
 
-    //! Layer menu actions
+    // Layer menu actions
     virtual QAction *actionNewVectorLayer() = 0;
     virtual QAction *actionAddOgrLayer() = 0;
     virtual QAction *actionAddRasterLayer() = 0;
@@ -513,28 +541,32 @@ class GUI_EXPORT QgisInterface : public QObject
     virtual QAction *actionHideAllLayers() = 0;
     virtual QAction *actionShowAllLayers() = 0;
 
-    //! Plugin menu actions
+    // Plugin menu actions
     virtual QAction *actionManagePlugins() = 0;
     virtual QAction *actionPluginListSeparator() = 0;
     virtual QAction *actionShowPythonDialog() = 0;
 
-    //! Settings menu actions
+    // Settings menu actions
     virtual QAction *actionToggleFullScreen() = 0;
     virtual QAction *actionOptions() = 0;
     virtual QAction *actionCustomProjection() = 0;
 
-    //! Help menu actions
+    // Help menu actions
     virtual QAction *actionHelpContents() = 0;
     virtual QAction *actionQgisHomePage() = 0;
     virtual QAction *actionCheckQgisVersion() = 0;
     virtual QAction *actionAbout() = 0;
 
-    //! Open feature form
-    // returns true when dialog was accepted
-    // @added in 1.6
+    /**
+     * Open feature form
+     * @return true when dialog was accepted
+     * @note added in 1.6
+     */
     virtual bool openFeatureForm( QgsVectorLayer *l, QgsFeature &f, bool updateFeatureOnly = false ) = 0;
 
     virtual QDialog* getFeatureForm( QgsVectorLayer *l, QgsFeature &f ) = 0;
+
+    virtual QgsVectorLayerTools* vectorLayerTools() = 0;
 
     virtual void preloadForm( QString uifile ) = 0;
 
@@ -554,18 +586,21 @@ class GUI_EXPORT QgisInterface : public QObject
      */
     void currentLayerChanged( QgsMapLayer * layer );
 
-    /**This signal is emitted when a new composer instance has been created
+    /**
+     * This signal is emitted when a new composer instance has been created
      * @note added in 1.4
      */
     void composerAdded( QgsComposerView* v );
 
-    /**This signal is emitted before a new composer instance is going to be removed
+    /**
+     * This signal is emitted before a new composer instance is going to be removed
      * @note added in 1.4
      */
     void composerWillBeRemoved( QgsComposerView* v );
-    /**This signal is emitted when the initialization is complete
-      * @note added in version 1.6
-      */
+    /**
+     * This signal is emitted when the initialization is complete
+     * @note added in 1.6
+     */
     void initializationCompleted();
     /** emitted when a project file is successfully read
         @note
@@ -573,7 +608,7 @@ class GUI_EXPORT QgisInterface : public QObject
         plug-in can connect to this signal.  When it is emitted, the plug-in
         knows to then check the project properties for any relevant state.
 
-        Added in v1.6
+        Added in 1.6
      */
     void projectRead();
     /** emitted when starting an entirely new project
@@ -584,7 +619,7 @@ class GUI_EXPORT QgisInterface : public QObject
         it's probably more semantically correct to have an entirely separate
         signal for when this happens.
 
-        Added in v1.6
+        Added in 1.6
       */
     void newProjectCreated();
 };

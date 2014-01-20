@@ -30,6 +30,7 @@
 #include "qgsfeatureaction.h"
 #include "qgslogger.h"
 #include "qgsnetworkaccessmanager.h"
+#include "qgsproject.h"
 
 #include <QCloseEvent>
 #include <QLabel>
@@ -411,7 +412,7 @@ void QgsIdentifyResultsDialog::addFeature( QgsVectorLayer *vlayer, const QgsFeat
     derivedItem->setData( 0, Qt::UserRole, "derived" );
     featItem->addChild( derivedItem );
 
-    for ( QMap< QString, QString>::const_iterator it = derivedAttributes.begin(); it != derivedAttributes.end(); it++ )
+    for ( QMap< QString, QString>::const_iterator it = derivedAttributes.begin(); it != derivedAttributes.end(); ++it )
     {
       derivedItem->addChild( new QTreeWidgetItem( QStringList() << it.key() << it.value() ) );
     }
@@ -540,7 +541,7 @@ void QgsIdentifyResultsDialog::addFeature( QgsRasterLayer *layer,
   }
   else
   {
-    for ( QMap<QString, QString>::const_iterator it = attributes.begin(); it != attributes.end(); it++ )
+    for ( QMap<QString, QString>::const_iterator it = attributes.begin(); it != attributes.end(); ++it )
     {
       featItem->addChild( new QTreeWidgetItem( QStringList() << it.key() << it.value() ) );
     }
@@ -552,7 +553,7 @@ void QgsIdentifyResultsDialog::addFeature( QgsRasterLayer *layer,
     derivedItem->setData( 0, Qt::UserRole, "derived" );
     featItem->addChild( derivedItem );
 
-    for ( QMap< QString, QString>::const_iterator it = derivedAttributes.begin(); it != derivedAttributes.end(); it++ )
+    for ( QMap< QString, QString>::const_iterator it = derivedAttributes.begin(); it != derivedAttributes.end(); ++it )
     {
       derivedItem->addChild( new QTreeWidgetItem( QStringList() << it.key() << it.value() ) );
     }
@@ -687,6 +688,7 @@ void QgsIdentifyResultsDialog::contextMenuEvent( QContextMenuEvent* event )
   if ( !item )
     return;
 
+  QgsMapLayer *layer = vectorLayer( item );
   QgsVectorLayer *vlayer = vectorLayer( item );
   QgsRasterLayer *rlayer = rasterLayer( item );
   if ( vlayer == 0 && rlayer == 0 )
@@ -745,7 +747,11 @@ void QgsIdentifyResultsDialog::contextMenuEvent( QContextMenuEvent* event )
   mActionPopup->addAction( tr( "Clear highlights" ), this, SLOT( clearHighlights() ) );
   mActionPopup->addAction( tr( "Highlight all" ), this, SLOT( highlightAll() ) );
   mActionPopup->addAction( tr( "Highlight layer" ), this, SLOT( highlightLayer() ) );
-  mActionPopup->addAction( tr( "Layer properties..." ), this, SLOT( layerProperties() ) );
+  if ( layer && QgsProject::instance()->layerIsEmbedded( layer->id() ).isEmpty() )
+  {
+    mActionPopup->addAction( tr( "Activate layer" ), this, SLOT( activateLayer() ) );
+    mActionPopup->addAction( tr( "Layer properties..." ), this, SLOT( layerProperties() ) );
+  }
   mActionPopup->addSeparator();
   mActionPopup->addAction( tr( "Expand all" ), this, SLOT( expandAll() ) );
   mActionPopup->addAction( tr( "Collapse all" ), this, SLOT( collapseAll() ) );
@@ -944,12 +950,19 @@ QTreeWidgetItem *QgsIdentifyResultsDialog::layerItem( QTreeWidgetItem *item )
   return item;
 }
 
+QgsMapLayer *QgsIdentifyResultsDialog::layer( QTreeWidgetItem *item )
+{
+  item = layerItem( item );
+  if ( !item )
+    return 0;
+  return qobject_cast<QgsMapLayer *>( item->data( 0, Qt::UserRole ).value<QObject *>() );
+}
 
 QgsVectorLayer *QgsIdentifyResultsDialog::vectorLayer( QTreeWidgetItem *item )
 {
   item = layerItem( item );
   if ( !item )
-    return NULL;
+    return 0;
   return qobject_cast<QgsVectorLayer *>( item->data( 0, Qt::UserRole ).value<QObject *>() );
 }
 
@@ -957,7 +970,7 @@ QgsRasterLayer *QgsIdentifyResultsDialog::rasterLayer( QTreeWidgetItem *item )
 {
   item = layerItem( item );
   if ( !item )
-    return NULL;
+    return 0;
   return qobject_cast<QgsRasterLayer *>( item->data( 0, Qt::UserRole ).value<QObject *>() );
 }
 
@@ -1140,10 +1153,13 @@ void QgsIdentifyResultsDialog::attributeValueChanged( QgsFeatureId fid, int idx,
 
 void QgsIdentifyResultsDialog::highlightFeature( QTreeWidgetItem *item )
 {
-  QgsVectorLayer *layer = vectorLayer( item );
+  QgsMapLayer *layer;
+  QgsVectorLayer *vlayer = vectorLayer( item );
   QgsRasterLayer *rlayer = rasterLayer( item );
-  if ( !layer && !rlayer )
-    return;
+
+  layer = vlayer ? static_cast<QgsMapLayer *>( vlayer ) : static_cast<QgsMapLayer *>( rlayer );
+
+  if ( !layer ) return;
 
   QgsIdentifyResultsFeatureItem *featItem = dynamic_cast<QgsIdentifyResultsFeatureItem *>( featureItem( item ) );
   if ( !featItem )
@@ -1156,13 +1172,23 @@ void QgsIdentifyResultsDialog::highlightFeature( QTreeWidgetItem *item )
   if ( !featItem->feature().geometry() || featItem->feature().geometry()->wkbType() == QGis::WKBUnknown )
     return;
 
-  QgsHighlight *h = new QgsHighlight( mCanvas, featItem->feature().geometry(), layer );
-  if ( h )
+  if ( vlayer )
   {
-    h->setWidth( 2 );
+    QgsHighlight *h = new QgsHighlight( mCanvas, featItem->feature(), vlayer );
     h->setColor( Qt::red );
     h->show();
     mHighlights.insert( featItem, h );
+  }
+  else
+  {
+    QgsHighlight *h = new QgsHighlight( mCanvas, featItem->feature().geometry(), layer );
+    if ( h )
+    {
+      h->setWidth( 2 );
+      h->setColor( Qt::red );
+      h->show();
+      mHighlights.insert( featItem, h );
+    }
   }
 }
 
@@ -1170,25 +1196,24 @@ void QgsIdentifyResultsDialog::zoomToFeature()
 {
   QTreeWidgetItem *item = lstResults->currentItem();
 
-  QgsMapLayer *layer;
   QgsVectorLayer *vlayer = vectorLayer( item );
   QgsRasterLayer *rlayer = rasterLayer( item );
   if ( !vlayer && !rlayer )
     return;
 
-  layer = vlayer ? ( QgsMapLayer * )vlayer : ( QgsMapLayer * )rlayer;
+  QgsMapLayer *layer;
+  if ( vlayer )
+    layer = vlayer;
+  else
+    layer = rlayer;
 
   QgsIdentifyResultsFeatureItem *featItem = dynamic_cast<QgsIdentifyResultsFeatureItem *>( featureItem( item ) );
   if ( !featItem )
-  {
     return;
-  }
 
   QgsFeature feat = featItem->feature();
   if ( !feat.geometry() )
-  {
     return;
-  }
 
   // TODO: verify CRS for raster WMS features
   QgsRectangle rect = mCanvas->mapRenderer()->layerExtentToOutputExtent( layer, feat.geometry()->boundingBox() );
@@ -1274,6 +1299,13 @@ void QgsIdentifyResultsDialog::layerProperties()
   layerProperties( lstResults->currentItem() );
 }
 
+void QgsIdentifyResultsDialog::activateLayer()
+{
+  connect( this, SIGNAL( activateLayer( QgsMapLayer * ) ), QgisApp::instance(), SLOT( setActiveLayer( QgsMapLayer * ) ) );
+  emit activateLayer( layer( lstResults->currentItem() ) );
+  disconnect( this, SIGNAL( activateLayer( QgsMapLayer * ) ), QgisApp::instance(), SLOT( setActiveLayer( QgsMapLayer * ) ) );
+}
+
 void QgsIdentifyResultsDialog::layerProperties( QTreeWidgetItem *item )
 {
   QgsVectorLayer *vlayer = vectorLayer( item );
@@ -1309,10 +1341,11 @@ void QgsIdentifyResultsDialog::copyFeatureAttributes()
 
   QgsVectorLayer *vlayer = vectorLayer( lstResults->currentItem() );
   QgsRasterLayer *rlayer = rasterLayer( lstResults->currentItem() );
-  if ( !vlayer & !rlayer )
+  if ( !vlayer && !rlayer )
   {
     return;
   }
+
   if ( vlayer )
   {
     int idx;
@@ -1321,7 +1354,7 @@ void QgsIdentifyResultsDialog::copyFeatureAttributes()
 
     const QgsFields &fields = vlayer->pendingFields();
 
-    for ( QgsAttributeMap::const_iterator it = attributes.begin(); it != attributes.end(); it++ )
+    for ( QgsAttributeMap::const_iterator it = attributes.begin(); it != attributes.end(); ++it )
     {
       int attrIdx = it.key();
       if ( attrIdx < 0 || attrIdx >= fields.count() )

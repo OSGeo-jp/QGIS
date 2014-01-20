@@ -20,52 +20,59 @@
 __author__ = 'Victor Olaya'
 __date__ = 'August 2012'
 __copyright__ = '(C) 2012, Victor Olaya'
+
 # This will get replaced with a git SHA1 when you do a git archive
+
 __revision__ = '$Format:%H$'
 
-import os
 from PyQt4 import QtGui, QtCore
-
 from processing.core.GeoAlgorithm import GeoAlgorithm
-from processing.core.ProcessingUtils import ProcessingUtils
-
 from processing.parameters.ParameterRaster import ParameterRaster
 from processing.parameters.ParameterString import ParameterString
 from processing.outputs.OutputVector import OutputVector
+from processing.tools.system import *
 
 from processing.gdal.GdalUtils import GdalUtils
 
+
 class polygonize(GeoAlgorithm):
 
-    INPUT = "INPUT"
-    OUTPUT = "OUTPUT"
-    FIELD = "FIELD"
+    INPUT = 'INPUT'
+    OUTPUT = 'OUTPUT'
+    FIELD = 'FIELD'
 
     def getIcon(self):
-        filepath = os.path.dirname(__file__) + "/icons/polygonize.png"
+        filepath = os.path.dirname(__file__) + '/icons/polygonize.png'
         return QtGui.QIcon(filepath)
 
+    def commandLineName(self):
+        return "gdalogr:polygonize"
+
     def defineCharacteristics(self):
-        self.name = "Polygonize"
-        self.group = "[GDAL] Conversion"
-        self.addParameter(ParameterRaster(polygonize.INPUT, "Input layer", False))
-        self.addParameter(ParameterString(polygonize.FIELD, "Output field name", "DN"))
-        self.addOutput(OutputVector(polygonize.OUTPUT, "Output layer"))
+        self.name = 'Polygonize (raster to vector)'
+        self.group = '[GDAL] Conversion'
+        self.addParameter(ParameterRaster(polygonize.INPUT, 'Input layer',
+                          False))
+        self.addParameter(ParameterString(polygonize.FIELD, 'Output field name'
+                          , 'DN'))
+        self.addOutput(OutputVector(polygonize.OUTPUT, 'Output layer'))
 
     def processAlgorithm(self, progress):
         arguments = []
         arguments.append(self.getParameterValue(polygonize.INPUT))
         arguments.append('-f')
-        arguments.append('"ESRI Shapefile"')
+        arguments.append('ESRI Shapefile')
         output = self.getOutputValue(polygonize.OUTPUT)
         arguments.append(output)
         arguments.append(QtCore.QFileInfo(output).baseName())
         arguments.append(self.getParameterValue(polygonize.FIELD))
 
         commands = []
-        if ProcessingUtils.isWindows():
-            commands = ["cmd.exe", "/C ", "gdal_polygonize.bat", GdalUtils.escapeAndJoin(arguments)]
+        if isWindows():
+            commands = ['cmd.exe', '/C ', 'gdal_polygonize.bat',
+                        GdalUtils.escapeAndJoin(arguments)]
         else:
-            commands = ["gdal_polygonize.py", GdalUtils.escapeAndJoin(arguments)]
+            commands = ['gdal_polygonize.py',
+                        GdalUtils.escapeAndJoin(arguments)]
 
         GdalUtils.runGdal(commands, progress)

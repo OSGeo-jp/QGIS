@@ -63,6 +63,10 @@ class QgsSymbolLayerV2
     // not necessarily supported by all symbol layers...
     virtual void setColor( const QColor& color );
     virtual QColor color() const;
+    virtual void setOutlineColor( const QColor& color );
+    virtual QColor outlineColor() const;
+    virtual void setFillColor( const QColor& color );
+    virtual QColor fillColor() const;
 
     virtual ~QgsSymbolLayerV2();
 
@@ -157,7 +161,7 @@ class QgsMarkerSymbolLayerV2 : QgsSymbolLayerV2
 
   protected:
     QgsMarkerSymbolLayerV2( bool locked = false );
-    void markerOffset( QgsSymbolV2RenderContext& context, double& offsetX, double& offsetY );
+    void markerOffset( const QgsSymbolV2RenderContext& context, double& offsetX, double& offsetY ) const;
     static QPointF _rotatedOffset( const QPointF& offset, double angle );
 };
 
@@ -202,5 +206,5 @@ class QgsFillSymbolLayerV2 : QgsSymbolLayerV2
   protected:
     QgsFillSymbolLayerV2( bool locked = false );
     /**Default method to render polygon*/
-    void _renderPolygon( QPainter* p, const QPolygonF& points, const QList<QPolygonF>* rings );
+    void _renderPolygon( QPainter* p, const QPolygonF& points, const QList<QPolygonF>* rings, QgsSymbolV2RenderContext& context );
 };

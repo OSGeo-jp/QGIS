@@ -62,8 +62,8 @@ extern "C"
 #endif
 
 
-std::vector<GLAYER> QgsGrassProvider::mLayers;
-std::vector<GMAP> QgsGrassProvider::mMaps;
+QVector<GLAYER> QgsGrassProvider::mLayers;
+QVector<GMAP> QgsGrassProvider::mMaps;
 
 
 static QString GRASS_KEY = "grass"; // XXX verify this
@@ -118,6 +118,21 @@ QgsGrassProvider::QgsGrassProvider( QString uri )
     mLayerType = CENTROID;
     mGrassType = GV_CENTROID;
   }
+  else if ( mLayer == "topo_point" )
+  {
+    mLayerType = TOPO_POINT;
+    mGrassType = GV_POINTS;
+  }
+  else if ( mLayer == "topo_line" )
+  {
+    mLayerType = TOPO_LINE;
+    mGrassType = GV_LINES;
+  }
+  else if ( mLayer == "topo_node" )
+  {
+    mLayerType = TOPO_NODE;
+    mGrassType = 0;
+  }
   else
   {
     mLayerField = grassLayer( mLayer );
@@ -166,10 +181,13 @@ QgsGrassProvider::QgsGrassProvider( QString uri )
   {
     case POINT:
     case CENTROID:
+    case TOPO_POINT:
+    case TOPO_NODE:
       mQgisType = QGis::WKBPoint;
       break;
     case LINE:
     case BOUNDARY:
+    case TOPO_LINE:
       mQgisType = QGis::WKBLineString;
       break;
     case POLYGON:
@@ -188,33 +206,53 @@ QgsGrassProvider::QgsGrassProvider( QString uri )
 
   mMap = layerMap( mLayerId );
 
-  // Getting the total number of features in the layer
-  mNumberFeatures = 0;
-  mCidxFieldIndex = -1;
-  if ( mLayerField >= 0 )
-  {
-    mCidxFieldIndex = Vect_cidx_get_field_index( mMap, mLayerField );
-    if ( mCidxFieldIndex >= 0 )
-    {
-      mNumberFeatures = Vect_cidx_get_type_count( mMap, mLayerField, mGrassType );
-      mCidxFieldNumCats = Vect_cidx_get_num_cats_by_index( mMap, mCidxFieldIndex );
-    }
-  }
-  else
-  {
-    // TODO nofield layers
-    mNumberFeatures = 0;
-    mCidxFieldNumCats = 0;
-  }
-
-  QgsDebugMsg( QString( "mNumberFeatures = %1 mCidxFieldIndex = %2 mCidxFieldNumCats = %3" ).arg( mNumberFeatures ).arg( mCidxFieldIndex ).arg( mCidxFieldNumCats ) );
-
+  loadMapInfo();
+  setTopoFields();
 
   mMapVersion = mMaps[mLayers[mLayerId].mapId].version;
 
   mValid = true;
 
   QgsDebugMsg( QString( "New GRASS layer opened, time (ms): %1" ).arg( time.elapsed() ) );
+}
+
+void QgsGrassProvider::loadMapInfo()
+{
+  // Getting the total number of features in the layer
+  mNumberFeatures = 0;
+  mCidxFieldIndex = -1;
+  if ( mLayerType == TOPO_POINT )
+  {
+    mNumberFeatures = Vect_get_num_primitives( mMap, GV_POINTS );
+  }
+  else if ( mLayerType == TOPO_LINE )
+  {
+    mNumberFeatures = Vect_get_num_primitives( mMap, GV_LINES );
+  }
+  else if ( mLayerType == TOPO_NODE )
+  {
+    mNumberFeatures = Vect_get_num_nodes( mMap );
+  }
+  else
+  {
+    if ( mLayerField >= 0 )
+    {
+      mCidxFieldIndex = Vect_cidx_get_field_index( mMap, mLayerField );
+      if ( mCidxFieldIndex >= 0 )
+      {
+        mNumberFeatures = Vect_cidx_get_type_count( mMap, mLayerField, mGrassType );
+        mCidxFieldNumCats = Vect_cidx_get_num_cats_by_index( mMap, mCidxFieldIndex );
+      }
+    }
+    else
+    {
+      // TODO nofield layers
+      mNumberFeatures = 0;
+      mCidxFieldNumCats = 0;
+    }
+  }
+  QgsDebugMsg( QString( "mNumberFeatures = %1 mCidxFieldIndex = %2 mCidxFieldNumCats = %3" ).arg( mNumberFeatures ).arg( mCidxFieldIndex ).arg( mCidxFieldNumCats ) );
+
 }
 
 void QgsGrassProvider::update( void )
@@ -228,25 +266,7 @@ void QgsGrassProvider::update( void )
 
   // Getting the total number of features in the layer
   // It may happen that the field disappeares from the map (deleted features, new map without that field)
-  mNumberFeatures = 0;
-  mCidxFieldIndex = -1;
-  if ( mLayerField >= 0 )
-  {
-    mCidxFieldIndex = Vect_cidx_get_field_index( mMap, mLayerField );
-    if ( mCidxFieldIndex >= 0 )
-    {
-      mNumberFeatures = Vect_cidx_get_type_count( mMap, mLayerField, mGrassType );
-      mCidxFieldNumCats = Vect_cidx_get_num_cats_by_index( mMap, mCidxFieldIndex );
-    }
-  }
-  else
-  {
-    // TODO nofield layers
-    mNumberFeatures = 0;
-    mCidxFieldNumCats = 0;
-  }
-
-  QgsDebugMsg( QString( "mNumberFeatures = %1 mCidxFieldIndex = %2 mCidxFieldNumCats = %3" ).arg( mNumberFeatures ).arg( mCidxFieldIndex ).arg( mCidxFieldNumCats ) );
+  loadMapInfo();
 
   mMapVersion = mMaps[mLayers[mLayerId].mapId].version;
 
@@ -314,7 +334,11 @@ long QgsGrassProvider::featureCount() const
 */
 const QgsFields & QgsGrassProvider::fields() const
 {
-  return mLayers[mLayerId].fields;
+  if ( !isTopoType() )
+  {
+    return mLayers[mLayerId].fields;
+  }
+  return mTopoFields;
 }
 
 int QgsGrassProvider::keyField()
@@ -370,7 +394,7 @@ int QgsGrassProvider::openLayer( QString gisdbase, QString location, QString map
 
   // Check if this layer is already opened
 
-  for ( unsigned int i = 0; i <  mLayers.size(); i++ )
+  for ( int i = 0; i <  mLayers.size(); i++ )
   {
     if ( !( mLayers[i].valid ) )
       continue;
@@ -458,6 +482,8 @@ void QgsGrassProvider::loadAttributes( GLAYER &layer )
 
   if ( !layer.map )
     return;
+
+  // Attributes are not loaded for topo layers in which case field == 0
 
   // Get field info
   layer.fieldInfo = Vect_get_field( layer.map, layer.field ); // should work also with field = 0
@@ -719,7 +745,7 @@ int QgsGrassProvider::openMap( QString gisdbase, QString location, QString mapse
   QString tmpPath = gisdbase + "/" + location + "/" + mapset + "/" + mapName;
 
   // Check if this map is already opened
-  for ( unsigned int i = 0; i <  mMaps.size(); i++ )
+  for ( int i = 0; i <  mMaps.size(); i++ )
   {
     if ( mMaps[i].valid && mMaps[i].path == tmpPath )
     {
@@ -869,7 +895,7 @@ void QgsGrassProvider::updateMap( int mapId )
     QgsDebugMsg( QString( "Cannot reopen GRASS vector: %1" ).arg( e.what() ) );
 
     // if reopen fails, mLayers should be also updated
-    for ( unsigned int i = 0; i <  mLayers.size(); i++ )
+    for ( int i = 0; i <  mLayers.size(); i++ )
     {
       if ( mLayers[i].mapId == mapId )
       {
@@ -881,7 +907,7 @@ void QgsGrassProvider::updateMap( int mapId )
 
   QgsDebugMsg( "GRASS map successfully reopened for reading." );
 
-  for ( unsigned int i = 0; i <  mLayers.size(); i++ )
+  for ( int i = 0; i <  mLayers.size(); i++ )
   {
     // if ( !(mLayers[i].valid) )
     //   continue; // ?
@@ -1365,7 +1391,7 @@ bool QgsGrassProvider::reopenMap()
   QgsDebugMsg( "GRASS map successfully reopened for reading." );
 
   // Reload sources to layers
-  for ( unsigned int i = 0; i <  mLayers.size(); i++ )
+  for ( int i = 0; i <  mLayers.size(); i++ )
   {
     // if ( !(mLayers[i].valid) )
     //   continue; // ?
@@ -1609,11 +1635,11 @@ QString *QgsGrassProvider::key( int field )
   return key;
 }
 
-std::vector<QgsField> *QgsGrassProvider::columns( int field )
+QVector<QgsField> *QgsGrassProvider::columns( int field )
 {
   QgsDebugMsg( QString( "field = %1" ).arg( field ) );
 
-  std::vector<QgsField> *col = new std::vector<QgsField>;
+  QVector<QgsField> *col = new QVector<QgsField>;
 
   struct  field_info *fi = Vect_get_field( mMap, field ); // should work also with field = 0
 
@@ -1621,7 +1647,7 @@ std::vector<QgsField> *QgsGrassProvider::columns( int field )
   if ( !fi )
   {
     QgsDebugMsg( "No field info -> no attributes" );
-    return ( col );
+    return col;
   }
 
   QgsDebugMsg( "Field info found -> open database" );
@@ -1631,7 +1657,7 @@ std::vector<QgsField> *QgsGrassProvider::columns( int field )
   if ( !driver )
   {
     QgsDebugMsg( QString( "Cannot open database %1 by driver %2" ).arg( fi->database ).arg( fi->driver ) );
-    return ( col );
+    return col;
   }
 
   QgsDebugMsg( "Database opened -> describe table" );
@@ -1644,7 +1670,7 @@ std::vector<QgsField> *QgsGrassProvider::columns( int field )
   if ( db_describe_table( driver, &tableName, &table ) != DB_OK )
   {
     QgsDebugMsg( "Cannot describe table" );
-    return ( col );
+    return col;
   }
 
   int nCols = db_get_table_number_of_columns( table );
@@ -2118,6 +2144,48 @@ QString *QgsGrassProvider::isOrphan( int field, int cat, int *orphan )
   return error;
 }
 
+bool QgsGrassProvider::isTopoType() const
+{
+  return mLayerType == TOPO_POINT || mLayerType == TOPO_LINE || mLayerType == TOPO_NODE;
+}
+
+void QgsGrassProvider::setTopoFields()
+{
+  mTopoFields.append( QgsField( "id", QVariant::Int ) );
+
+  if ( mLayerType == TOPO_POINT )
+  {
+    mTopoFields.append( QgsField( "type", QVariant::String ) );
+    mTopoFields.append( QgsField( "node", QVariant::Int ) );
+  }
+  else if ( mLayerType == TOPO_LINE )
+  {
+    mTopoFields.append( QgsField( "type", QVariant::String ) );
+    mTopoFields.append( QgsField( "node1", QVariant::Int ) );
+    mTopoFields.append( QgsField( "node2", QVariant::Int ) );
+    mTopoFields.append( QgsField( "left", QVariant::Int ) );
+    mTopoFields.append( QgsField( "right", QVariant::Int ) );
+  }
+  else if ( mLayerType == TOPO_NODE )
+  {
+    mTopoFields.append( QgsField( "lines", QVariant::String ) );
+  }
+}
+
+QString QgsGrassProvider::primitiveTypeName( int type )
+{
+  switch ( type )
+  {
+    case GV_POINT: return "point";
+    case GV_CENTROID: return "centroid";
+    case GV_LINE: return "line";
+    case GV_BOUNDARY: return "boundary";
+    case GV_FACE: return "face";
+    case GV_KERNEL: return "kernel";
+
+  }
+  return "unknown";
+}
 
 // -------------------------------------------------------------------------------
 

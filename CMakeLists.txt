@@ -1,5 +1,5 @@
-SET(CPACK_PACKAGE_VERSION_MAJOR "1")
-SET(CPACK_PACKAGE_VERSION_MINOR "9")
+SET(CPACK_PACKAGE_VERSION_MAJOR "2")
+SET(CPACK_PACKAGE_VERSION_MINOR "1")
 SET(CPACK_PACKAGE_VERSION_PATCH "0")
 SET(COMPLETE_VERSION ${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH})
 SET(RELEASE_NAME "Master")
@@ -102,9 +102,6 @@ ELSE (ANDROID)
     SET (DEFAULT_WITH_QTMOBILITY FALSE)
 ENDIF (ANDROID)
 SET (WITH_QTMOBILITY ${DEFAULT_WITH_QTMOBILITY} CACHE BOOL "Determines if QtMobility related code should be build (for example internal GPS)")
-IF (WITH_QTMOBILITY)
-    FIND_PACKAGE(QtMobility 1.1.0)
-ENDIF (WITH_QTMOBILITY)
 
 SET (WITH_GLOBE FALSE CACHE BOOL "Determines whether Globe plugin should be built")
 IF (WITH_GLOBE)
@@ -222,8 +219,9 @@ SET (HAVE_MSSQL TRUE)
 
 #############################################################
 # search for Qt4
-SET(QT_MIN_VERSION 4.5.0)
+SET(QT_MIN_VERSION 4.7.0)
 FIND_PACKAGE(Qt4 ${QT_MIN_VERSION} REQUIRED)
+MESSAGE(STATUS "Found Qt version: ${QTVERSION}")
 SET(QT_USE_QTXML 1)
 SET(QT_USE_QTNETWORK 1)
 SET(QT_USE_QTSVG 1)
@@ -234,18 +232,18 @@ IF (NOT QT_QTXML_FOUND OR NOT QT_QTNETWORK_FOUND OR NOT QT_QTSVG_FOUND OR NOT QT
   MESSAGE(SEND_ERROR "Some Qt4 modules haven't been found!")
 ENDIF (NOT QT_QTXML_FOUND OR NOT QT_QTNETWORK_FOUND OR NOT QT_QTSVG_FOUND OR NOT QT_QTSQL_FOUND OR NOT QT_QTWEBKIT_FOUND)
 
+IF (WITH_QTMOBILITY)
+    FIND_PACKAGE(QtMobility 1.1.0)
+ENDIF (WITH_QTMOBILITY)
+
 IF (ANDROID)
   SET (DEFAULT_WITH_TOUCH TRUE)
 ELSE (ANDROID)
   SET (DEFAULT_WITH_TOUCH FALSE)
 ENDIF (ANDROID)
 
-#Add a touch mode if Qt has Qt Gestures (starting from 4.6)
-IF ( (QT_VERSION_MAJOR EQUAL 4 AND QT_VERSION_MINOR GREATER 5) OR QT_VERSION_MAJOR GREATER 4 )
-  SET (WITH_TOUCH ${DEFAULT_WITH_TOUCH} CACHE BOOL "Determines if touch interface related code should be build")
-ELSE ( (QT_VERSION_MAJOR EQUAL 4 AND QT_VERSION_MINOR GREATER 5) OR QT_VERSION_MAJOR GREATER 4 )
-  SET (WITH_TOUCH FALSE)
-ENDIF ( (QT_VERSION_MAJOR EQUAL 4 AND QT_VERSION_MINOR GREATER 5) OR QT_VERSION_MAJOR GREATER 4 )
+#Add a touch mode if Qt has Qt Gestures
+SET (WITH_TOUCH ${DEFAULT_WITH_TOUCH} CACHE BOOL "Determines if touch interface related code should be build")
 
 IF (WITH_TOUCH)
   # following variable is used in qgsconfig.h
@@ -326,6 +324,18 @@ IF (PEDANTIC)
     IF ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
       SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-return-type-c-linkage -Wno-overloaded-virtual")
     ENDIF ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+
+    # add any extra CXXFLAGS flags set by user. can be -D CXX_EXTRA_FLAGS or environment variable
+    # command line -D option overrides environment variable
+    # e.g. useful for suppressing transient upstream warnings in dependencies, like Qt
+    SET(CXX_EXTRA_FLAGS "" CACHE STRING "Additional appended CXXFLAGS")
+    IF ("${CXX_EXTRA_FLAGS}" STREQUAL "" AND DEFINED $ENV{CXX_EXTRA_FLAGS})
+      SET(CXX_EXTRA_FLAGS "$ENV{CXX_EXTRA_FLAGS}")
+    ENDIF ("${CXX_EXTRA_FLAGS}" STREQUAL "" AND DEFINED $ENV{CXX_EXTRA_FLAGS})
+    IF (NOT "${CXX_EXTRA_FLAGS}" STREQUAL "")
+      MESSAGE (STATUS "Appending CXX_EXTRA_FLAGS")
+      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_EXTRA_FLAGS}")
+    ENDIF (NOT "${CXX_EXTRA_FLAGS}" STREQUAL "")
   ENDIF (MSVC)
 
 ENDIF (PEDANTIC)
@@ -439,7 +449,11 @@ ELSE (WIN32)
     # changed later to reference in-app resources upon install
     SET (CMAKE_INSTALL_NAME_DIR ${CMAKE_BINARY_DIR}/output/lib)
     IF (WITH_GLOBE)
-        SET (OSG_PLUGINS_PATH "" CACHE PATH "Path to OSG plugins for bundling")
+      SET (OSG_PLUGINS_PATH "" CACHE PATH "Path to OSG plugins for bundling")
+      IF (QGIS_MACAPP_BUNDLE GREATER 0)
+        # ensure OSG plugins bundled path will be used by globe plugin
+        SET (HAVE_MACAPP_BUNDLED_OSG 1)
+      ENDIF (QGIS_MACAPP_BUNDLE GREATER 0)
     ENDIF (WITH_GLOBE)
     # recent cmakes force SDKs, recent SDKs don't have user symlinks
     # need to find non-system frameworks
@@ -494,6 +508,7 @@ ADD_DEFINITIONS("-DCORE_EXPORT=${DLLIMPORT}")
 ADD_DEFINITIONS("-DGUI_EXPORT=${DLLIMPORT}")
 ADD_DEFINITIONS("-DPYTHON_EXPORT=${DLLIMPORT}")
 ADD_DEFINITIONS("-DANALYSIS_EXPORT=${DLLIMPORT}")
+ADD_DEFINITIONS("-DAPP_EXPORT=${DLLIMPORT}")
 
 #############################################################
 # user-changeable settings which can be used to customize
@@ -604,12 +619,12 @@ IF (GIT_MARKER)
       # Get GIT remote and branch
       EXECUTE_PROCESS(
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        COMMAND ${GITCOMMAND} name-rev --name-only HEAD OUTPUT_VARIABLE GIT_LOCAL_BRANCH 
+        COMMAND ${GITCOMMAND} name-rev --name-only HEAD OUTPUT_VARIABLE GIT_LOCAL_BRANCH
       )
       STRING(STRIP "${GIT_LOCAL_BRANCH}" GIT_LOCAL_BRANCH)
       EXECUTE_PROCESS(
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        COMMAND ${GITCOMMAND} config branch.${GIT_LOCAL_BRANCH}.remote OUTPUT_VARIABLE GIT_REMOTE 
+        COMMAND ${GITCOMMAND} config branch.${GIT_LOCAL_BRANCH}.remote OUTPUT_VARIABLE GIT_REMOTE
       )
       STRING(STRIP "${GIT_REMOTE}" GIT_REMOTE)
       EXECUTE_PROCESS(
@@ -680,7 +695,7 @@ ENDIF (APPLE)
 
 # manual page - makes sense only on unix systems
 IF (UNIX AND NOT APPLE)
-  INSTALL (FILES qgis.1 DESTINATION ${QGIS_MANUAL_DIR}/man1)
+  INSTALL (FILES qgis.1 qbrowser.1 DESTINATION ${QGIS_MANUAL_DIR}/man1)
 ENDIF (UNIX AND NOT APPLE)
 
 INSTALL(FILES cmake/FindQGIS.cmake DESTINATION ${QGIS_DATA_DIR})

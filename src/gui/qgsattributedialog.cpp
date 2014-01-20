@@ -15,12 +15,14 @@
  *                                                                         *
  ***************************************************************************/
 #include "qgsattributedialog.h"
+#include "qgseditorwidgetwrapper.h"
 #include "qgsfield.h"
 #include "qgslogger.h"
 #include "qgsmapcanvas.h"
 #include "qgsproject.h"
-#include "qgsvectorlayer.h"
+#include "qgsrelationeditor.h"
 #include "qgsvectordataprovider.h"
+#include "qgsvectorlayer.h"
 #include "qgsattributeeditor.h"
 #include "qgshighlight.h"
 #include "qgsexpression.h"
@@ -42,51 +44,73 @@
 #include <QWebView>
 #include <QPushButton>
 
-int QgsAttributeDialog::smFormCounter = 0;
+int QgsAttributeDialog::sFormCounter = 0;
+QString QgsAttributeDialog::sSettingsPath = "/Windows/AttributeDialog/";
 
-QgsAttributeDialog::QgsAttributeDialog( QgsVectorLayer *vl, QgsFeature *thepFeature, bool featureOwner, QgsDistanceArea myDa, QWidget* parent, bool showDialogButtons )
-    : mDialog( 0 )
-    , mSettingsPath( "/Windows/AttributeDialog/" )
+QgsAttributeDialog::QgsAttributeDialog( QgsVectorLayer* vl, QgsFeature* thepFeature, bool featureOwner, QWidget* parent, bool showDialogButtons, QgsAttributeEditorContext context )
+    : QObject( parent )
+    , mDialog( 0 )
+    , mContext( context )
     , mLayer( vl )
     , mFeature( thepFeature )
     , mFeatureOwner( featureOwner )
     , mHighlight( 0 )
-    , mFormNr( -1 )
+    , mFormNr( sFormCounter++ )
     , mShowDialogButtons( showDialogButtons )
 {
-  if ( !mFeature || !vl->dataProvider() )
+  mContext.adjustForLayer( mLayer );
+  init();
+}
+
+QgsAttributeDialog::QgsAttributeDialog( QgsVectorLayer* vl, QgsFeature* thepFeature, bool featureOwner, QgsDistanceArea myDa, QWidget* parent, bool showDialogButtons )
+    : QObject( parent )
+    , mDialog( 0 )
+    , mContext( )
+    , mLayer( vl )
+    , mFeature( thepFeature )
+    , mFeatureOwner( featureOwner )
+    , mHighlight( 0 )
+    , mFormNr( sFormCounter++ )
+    , mShowDialogButtons( showDialogButtons )
+{
+  mContext.setDistanceArea( myDa );
+  mContext.adjustForLayer( mLayer );
+  init();
+}
+
+void QgsAttributeDialog::init()
+{
+  if ( !mFeature || !mLayer->dataProvider() )
     return;
 
-  const QgsFields &theFields = vl->pendingFields();
+  const QgsFields &theFields = mLayer->pendingFields();
   if ( theFields.isEmpty() )
     return;
 
-  QgsAttributes myAttributes = mFeature->attributes();
-
   QDialogButtonBox *buttonBox = NULL;
 
-  if ( vl->editorLayout() == QgsVectorLayer::UiFileLayout && !vl->editForm().isEmpty() )
+  if ( mLayer->editorLayout() == QgsVectorLayer::UiFileLayout && !mLayer->editForm().isEmpty() )
   {
     // UI-File defined layout
-    QFile file( vl->editForm() );
+    QFile file( mLayer->editForm() );
 
     if ( file.open( QFile::ReadOnly ) )
     {
       QUiLoader loader;
 
-      QFileInfo fi( vl->editForm() );
+      QFileInfo fi( mLayer->editForm() );
       loader.setWorkingDirectory( fi.dir() );
-      QWidget *myWidget = loader.load( &file, parent );
+      QWidget *myWidget = loader.load( &file, qobject_cast<QWidget*>( parent() ) );
       file.close();
 
       mDialog = qobject_cast<QDialog*>( myWidget );
       buttonBox = myWidget->findChild<QDialogButtonBox*>();
     }
   }
-  else if ( vl->editorLayout() == QgsVectorLayer::TabLayout )
+  else if ( mLayer->editorLayout() == QgsVectorLayer::TabLayout )
   {
     // Tab display
-    mDialog = new QDialog( parent );
+    mDialog = new QDialog( qobject_cast<QWidget*>( parent() ) );
 
     QGridLayout *gridLayout;
     QTabWidget *tabWidget;
@@ -98,7 +122,7 @@ QgsAttributeDialog::QgsAttributeDialog( QgsVectorLayer *vl, QgsFeature *thepFeat
     tabWidget = new QTabWidget( mDialog );
     gridLayout->addWidget( tabWidget );
 
-    foreach ( const QgsAttributeEditorElement *widgDef, vl->attributeEditorElements() )
+    foreach ( const QgsAttributeEditorElement *widgDef, mLayer->attributeEditorElements() )
     {
       QWidget* tabPage = new QWidget( tabWidget );
 
@@ -107,7 +131,9 @@ QgsAttributeDialog::QgsAttributeDialog( QgsVectorLayer *vl, QgsFeature *thepFeat
 
       if ( widgDef->type() == QgsAttributeEditorElement::AeTypeContainer )
       {
-        tabPageLayout->addWidget( QgsAttributeEditor::createWidgetFromDef( widgDef, tabPage, vl, myAttributes, mProxyWidgets, false ) );
+        QString dummy1;
+        bool dummy2;
+        tabPageLayout->addWidget( QgsAttributeEditor::createWidgetFromDef( widgDef, tabPage, mLayer, *mFeature, mContext, dummy1, dummy2 ) );
       }
       else
       {
@@ -120,9 +146,10 @@ QgsAttributeDialog::QgsAttributeDialog( QgsVectorLayer *vl, QgsFeature *thepFeat
     gridLayout->addWidget( buttonBox );
   }
 
+  // Still no dialog: create the default generated dialog
   if ( !mDialog )
   {
-    mDialog = new QDialog( parent );
+    mDialog = new QDialog( qobject_cast<QWidget*>( parent() ) );
 
     QGridLayout *gridLayout;
     QFrame *mFrame;
@@ -173,35 +200,35 @@ QgsAttributeDialog::QgsAttributeDialog( QgsVectorLayer *vl, QgsFeature *thepFeat
     for ( int fldIdx = 0; fldIdx < theFields.count(); ++fldIdx )
     {
       //show attribute alias if available
-      QString myFieldName = vl->attributeDisplayName( fldIdx );
+      QString myFieldName = mLayer->attributeDisplayName( fldIdx );
       // by default (until user defined alias) append date format
       // (validator does not allow to enter a value in wrong format)
       const QgsField &myField = theFields[fldIdx];
-      if ( myField.type() == QVariant::Date && vl->attributeAlias( fldIdx ).isEmpty() )
+      if ( myField.type() == QVariant::Date && mLayer->attributeAlias( fldIdx ).isEmpty() )
       {
-        myFieldName += " (" + vl->dateFormat( fldIdx ) + ")";
+        myFieldName += " (" + mLayer->dateFormat( fldIdx ) + ")";
       }
 
-      QWidget *myWidget = QgsAttributeEditor::createAttributeEditor( 0, 0, vl, fldIdx, myAttributes[fldIdx], mProxyWidgets );
+      QWidget *myWidget = QgsAttributeEditor::createAttributeEditor( mDialog, 0, mLayer, fldIdx, mFeature->attribute( fldIdx ), mContext );
       if ( !myWidget )
         continue;
 
       QLabel *mypLabel = new QLabel( myFieldName, mypInnerFrame );
 
-      if ( vl->editType( fldIdx ) != QgsVectorLayer::Immutable )
+      if ( mLayer->editType( fldIdx ) != QgsVectorLayer::Immutable )
       {
-        if ( vl->isEditable() && vl->fieldEditable( fldIdx ) )
+        if ( mLayer->isEditable() && mLayer->fieldEditable( fldIdx ) )
         {
           myWidget->setEnabled( true );
         }
-        else if ( vl->editType( fldIdx ) == QgsVectorLayer::Photo )
+        else if ( mLayer->editType( fldIdx ) == QgsVectorLayer::Photo )
         {
           foreach ( QWidget *w, myWidget->findChildren<QWidget *>() )
           {
             w->setEnabled( qobject_cast<QLabel *>( w ) ? true : false );
           }
         }
-        else if ( vl->editType( fldIdx ) == QgsVectorLayer::WebView )
+        else if ( mLayer->editType( fldIdx ) == QgsVectorLayer::WebView )
         {
           foreach ( QWidget *w, myWidget->findChildren<QWidget *>() )
           {
@@ -213,13 +240,21 @@ QgsAttributeDialog::QgsAttributeDialog( QgsVectorLayer *vl, QgsFeature *thepFeat
               w->setEnabled( false );
           }
         }
+        else if ( mLayer->editType( fldIdx ) == QgsVectorLayer::EditorWidgetV2 )
+        {
+          QgsEditorWidgetWrapper* ww = QgsEditorWidgetWrapper::fromWidget( myWidget );
+          if ( ww )
+          {
+            ww->setEnabled( false );
+          }
+        }
         else
         {
           myWidget->setEnabled( false );
         }
       }
 
-      if ( vl->labelOnTop( fldIdx ) )
+      if ( mLayer->labelOnTop( fldIdx ) )
       {
         mypInnerLayout->addWidget( mypLabel, index++, 0, 1, 2 );
         mypInnerLayout->addWidget( myWidget, index++, 0, 1, 2 );
@@ -232,6 +267,21 @@ QgsAttributeDialog::QgsAttributeDialog( QgsVectorLayer *vl, QgsFeature *thepFeat
       }
     }
 
+    QList<QgsRelation> relations = QgsProject::instance()->relationManager()->referencedRelations( mLayer );
+
+    foreach ( const QgsRelation& relation, relations )
+    {
+      QgsRelationEditorWidget *myWidget = QgsRelationEditorWidget::createRelationEditor( relation, *mFeature, mContext, mDialog );
+      if ( !myWidget )
+        continue;
+
+      myWidget->setProperty( "qgisRelation", relation.id() );
+      myWidget->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
+      mypInnerLayout->addWidget( myWidget, index, 0, 1, 2 );
+      mypInnerLayout->setRowStretch( index, 2 );
+      ++index;
+    }
+
     // Set focus to first widget in list, to help entering data without moving the mouse.
     if ( mypInnerLayout->rowCount() > 0 )
     {
@@ -240,7 +290,7 @@ QgsAttributeDialog::QgsAttributeDialog( QgsVectorLayer *vl, QgsFeature *thepFeat
         widget->setFocus( Qt::OtherFocusReason );
     }
 
-    QSpacerItem *mypSpacer = new QSpacerItem( 10, 10, QSizePolicy::Fixed, QSizePolicy::Expanding );
+    QSpacerItem *mypSpacer = new QSpacerItem( 0, 0, QSizePolicy::Fixed, QSizePolicy::MinimumExpanding );
     mypInnerLayout->addItem( mypSpacer, mypInnerLayout->rowCount() + 1, 0 );
   }
   else
@@ -252,39 +302,70 @@ QgsAttributeDialog::QgsAttributeDialog( QgsVectorLayer *vl, QgsFeature *thepFeat
     myDa.setEllipsoidalMode( QgisApp::instance()->mapCanvas()->mapRenderer()->hasCrsTransformEnabled() );
     myDa.setEllipsoid( QgsProject::instance()->readEntry( "Measure", "/Ellipsoid", GEO_NONE ) );
 #endif
-    for ( int fldIdx = 0; fldIdx < theFields.count(); ++fldIdx )
+
+    // Get all widgets on the dialog
+    QList<QWidget *> myWidgets = mDialog->findChildren<QWidget*>();
+    Q_FOREACH( QWidget* myWidget, myWidgets )
     {
-      QList<QWidget *> myWidgets = mDialog->findChildren<QWidget*>( theFields[fldIdx].name() );
-      if ( myWidgets.isEmpty() )
-        continue;
-
-      foreach ( QWidget *myWidget, myWidgets )
+      // Check the widget's properties for a relation definition
+      QVariant vRel = myWidget->property( "qgisRelation" );
+      if ( vRel.isValid() )
       {
-        QgsAttributeEditor::createAttributeEditor( mDialog, myWidget, vl, fldIdx, myAttributes[fldIdx], mProxyWidgets );
-
-        if ( vl->editType( fldIdx ) != QgsVectorLayer::Immutable )
+        QgsRelationManager* relMgr = QgsProject::instance()->relationManager();
+        QgsRelation relation = relMgr->relation( vRel.toString() );
+        if ( relation.isValid() )
         {
-          if ( vl->isEditable() && vl->fieldEditable( fldIdx ) )
+          QgsRelationEditorWidget *relWdg = QgsRelationEditorWidget::createRelationEditor( relation, *mFeature, mContext, myWidget );
+          if ( !myWidget->layout() )
           {
-            myWidget->setEnabled( true );
+            myWidget->setLayout( new QHBoxLayout() );
           }
-          else if ( vl->editType( fldIdx ) == QgsVectorLayer::Photo )
+          myWidget->layout()->addWidget( relWdg );
+        }
+      }
+      else
+      {
+        // No widget definition properties defined, check if the widget's
+        // objectName matches a field name
+        for ( int fldIdx = 0; fldIdx < theFields.count(); ++fldIdx )
+        {
+          if ( myWidget->objectName() == theFields[fldIdx].name() )
           {
-            foreach ( QWidget *w, myWidget->findChildren<QWidget *>() )
+            QgsAttributeEditor::createAttributeEditor( mDialog, myWidget, mLayer, fldIdx, mFeature->attribute( fldIdx ), mContext );
+
+            if ( mLayer->editType( fldIdx ) != QgsVectorLayer::Immutable )
             {
-              w->setEnabled( qobject_cast<QLabel *>( w ) ? true : false );
+              if ( mLayer->isEditable() && mLayer->fieldEditable( fldIdx ) )
+              {
+                myWidget->setEnabled( true );
+              }
+              else if ( mLayer->editType( fldIdx ) == QgsVectorLayer::Photo )
+              {
+                foreach ( QWidget *w, myWidget->findChildren<QWidget *>() )
+                {
+                  w->setEnabled( qobject_cast<QLabel *>( w ) ? true : false );
+                }
+              }
+              else if ( mLayer->editType( fldIdx ) == QgsVectorLayer::WebView )
+              {
+                foreach ( QWidget *w, myWidget->findChildren<QWidget *>() )
+                {
+                  w->setEnabled( qobject_cast<QWebView *>( w ) ? true : false );
+                }
+              }
+              else if ( mLayer->editType( fldIdx ) == QgsVectorLayer::EditorWidgetV2 )
+              {
+                QgsEditorWidgetWrapper* ww = QgsEditorWidgetWrapper::fromWidget( myWidget );
+                if ( ww )
+                {
+                  ww->setEnabled( false );
+                }
+              }
+              else
+              {
+                myWidget->setEnabled( false );
+              }
             }
-          }
-          else if ( vl->editType( fldIdx ) == QgsVectorLayer::WebView )
-          {
-            foreach ( QWidget *w, myWidget->findChildren<QWidget *>() )
-            {
-              w->setEnabled( qobject_cast<QWebView *>( w ) ? true : false );
-            }
-          }
-          else
-          {
-            myWidget->setEnabled( false );
           }
         }
       }
@@ -307,15 +388,15 @@ QgsAttributeDialog::QgsAttributeDialog( QgsVectorLayer *vl, QgsFeature *thepFeat
       if ( !mFeature->geometry() && exp.needsGeometry() )
       {
         QgsFeature f;
-        if ( vl->getFeatures( QgsFeatureRequest().setFilterFid( mFeature->id() ).setSubsetOfAttributes( QgsAttributeList() ) ).nextFeature( f ) && f.geometry() )
+        if ( mLayer->getFeatures( QgsFeatureRequest().setFilterFid( mFeature->id() ).setSubsetOfAttributes( QgsAttributeList() ) ).nextFeature( f ) && f.geometry() )
         {
           mFeature->setGeometry( *f.geometry() );
         }
       }
 
-      exp.setGeomCalculator( myDa );
+      exp.setGeomCalculator( mContext.distanceArea() );
 
-      QVariant value = exp.evaluate( mFeature, vl->pendingFields() );
+      QVariant value = exp.evaluate( mFeature, mLayer->pendingFields() );
 
       if ( !exp.hasEvalError() )
       {
@@ -337,13 +418,15 @@ QgsAttributeDialog::QgsAttributeDialog( QgsVectorLayer *vl, QgsFeature *thepFeat
     }
   }
 
+  mEditable = mLayer->isEditable();
+
   if ( mDialog )
   {
     if ( mDialog->objectName().isEmpty() )
       mDialog->setObjectName( "QgsAttributeDialogBase" );
 
     if ( mDialog->windowTitle().isEmpty() )
-      mDialog->setWindowTitle( tr( "Attributes - %1" ).arg( vl->name() ) );
+      mDialog->setWindowTitle( tr( "Attributes - %1" ).arg( mLayer->name() ) );
   }
 
   if ( mShowDialogButtons )
@@ -352,7 +435,7 @@ QgsAttributeDialog::QgsAttributeDialog( QgsVectorLayer *vl, QgsFeature *thepFeat
     {
       buttonBox->clear();
 
-      if ( vl->isEditable() )
+      if ( mLayer->isEditable() )
       {
         buttonBox->setStandardButtons( QDialogButtonBox::Ok | QDialogButtonBox::Cancel );
         connect( buttonBox, SIGNAL( accepted() ), mDialog, SLOT( accept() ) );
@@ -370,6 +453,16 @@ QgsAttributeDialog::QgsAttributeDialog( QgsVectorLayer *vl, QgsFeature *thepFeat
   {
     if ( buttonBox )
     {
+      // Add dummy buttons
+      if ( mLayer->isEditable() )
+      {
+        buttonBox->clear();
+
+        buttonBox->setStandardButtons( QDialogButtonBox::Ok | QDialogButtonBox::Cancel );
+        connect( buttonBox, SIGNAL( accepted() ), mDialog, SLOT( accept() ) );
+        connect( buttonBox, SIGNAL( accepted() ), this, SLOT( accept() ) );
+      }
+
       buttonBox->setVisible( false );
     }
   }
@@ -378,7 +471,7 @@ QgsAttributeDialog::QgsAttributeDialog( QgsVectorLayer *vl, QgsFeature *thepFeat
 
   connect( mDialog, SIGNAL( destroyed() ), this, SLOT( dialogDestroyed() ) );
 
-  if ( !vl->editFormInit().isEmpty() )
+  if ( !mLayer->editFormInit().isEmpty() )
   {
 #if 0
     // would be nice if only PyQt's QVariant.toPyObject() wouldn't take ownership
@@ -386,7 +479,7 @@ QgsAttributeDialog::QgsAttributeDialog( QgsVectorLayer *vl, QgsFeature *thepFeat
     vl->setProperty( "featureForm.id", QVariant( mpFeature->id() ) );
 #endif
 
-    QString module = vl->editFormInit();
+    QString module = mLayer->editFormInit();
     int pos = module.lastIndexOf( "." );
     if ( pos >= 0 )
     {
@@ -401,15 +494,13 @@ QgsAttributeDialog::QgsAttributeDialog( QgsVectorLayer *vl, QgsFeature *thepFeat
 
     QgsPythonRunner::run( reload );
 
-    mFormNr = smFormCounter++;
-
     QString form =  QString( "_qgis_featureform_%1 = sip.wrapinstance( %2, QtGui.QDialog )" )
                     .arg( mFormNr )
                     .arg(( unsigned long ) mDialog );
 
     QString layer = QString( "_qgis_layer_%1 = sip.wrapinstance( %2, qgis.core.QgsVectorLayer )" )
-                    .arg( vl->id() )
-                    .arg(( unsigned long ) vl );
+                    .arg( mLayer->id() )
+                    .arg(( unsigned long ) mLayer );
 
     // Generate the unique ID of this feature.  We used to use feature ID but some providers
     // return a ID that is an invalid python variable when we have new unsaved features.
@@ -425,9 +516,9 @@ QgsAttributeDialog::QgsAttributeDialog( QgsVectorLayer *vl, QgsFeature *thepFeat
 
     mReturnvarname = QString( "_qgis_feature_form_%1" ).arg( dt.toString( "yyyyMMddhhmmsszzz" ) );
     QString expr = QString( "%5 = %1(_qgis_featureform_%2, _qgis_layer_%3, %4)" )
-                   .arg( vl->editFormInit() )
+                   .arg( mLayer->editFormInit() )
                    .arg( mFormNr )
-                   .arg( vl->id() )
+                   .arg( mLayer->id() )
                    .arg( featurevarname )
                    .arg( mReturnvarname );
 
@@ -436,7 +527,7 @@ QgsAttributeDialog::QgsAttributeDialog( QgsVectorLayer *vl, QgsFeature *thepFeat
   }
 
   // Only restore the geometry of the dialog if it's not a custom one.
-  if ( vl->editorLayout() != QgsVectorLayer::UiFileLayout )
+  if ( mLayer->editorLayout() != QgsVectorLayer::UiFileLayout )
   {
     restoreGeometry();
   }
@@ -479,7 +570,7 @@ void QgsAttributeDialog::accept()
   {
     QVariant value;
 
-    if ( QgsAttributeEditor::retrieveValue( mProxyWidgets.value( idx ), mLayer, idx, value ) )
+    if ( QgsAttributeEditor::retrieveValue( mContext.proxyWidget( mLayer, idx ), mLayer, idx, value ) )
       mFeature->setAttribute( idx, value );
   }
 }

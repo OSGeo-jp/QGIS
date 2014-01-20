@@ -29,6 +29,7 @@ class QgsComposerLayerItem;
 class QgsComposerLegendItem;
 class QgsComposition;
 class QgsConfigParser;
+class QgsFeature;
 class QgsFeatureRendererV2;
 class QgsMapLayer;
 class QgsMapRenderer;
@@ -71,6 +72,8 @@ class QgsWMSServer
     QImage* getMap();
     /**Returns an SLD file with the style of the requested layer. Exception is raised in case of troubles :-)*/
     QDomDocument getStyle();
+    /**Returns an SLD file with the styles of the requested layers. Exception is raised in case of troubles :-)*/
+    QDomDocument getStyles();
 
     /**Returns printed page as binary
       @param formatString out: format of the print output (e.g. pdf, svg, png, ...)
@@ -122,10 +125,23 @@ class QgsWMSServer
     /**Appends feature info xml for the layer to the layer element of the feature info dom document
     @param featureBBox the bounding box of the selected features in output CRS
     @return 0 in case of success*/
-    int featureInfoFromVectorLayer( QgsVectorLayer* layer, const QgsPoint* infoPoint, int nFeatures, QDomDocument& infoDocument, QDomElement& layerElement, QgsMapRenderer* mapRender,
-                                    QgsRenderContext& renderContext, QString version, QgsRectangle* featureBBox = 0 ) const;
+    int featureInfoFromVectorLayer( QgsVectorLayer* layer,
+                                    const QgsPoint* infoPoint,
+                                    int nFeatures,
+                                    QDomDocument& infoDocument,
+                                    QDomElement& layerElement,
+                                    QgsMapRenderer* mapRender,
+                                    QgsRenderContext& renderContext,
+                                    QString version,
+                                    QString infoFormat,
+                                    QgsRectangle* featureBBox = 0 ) const;
     /**Appends feature info xml for the layer to the layer element of the dom document*/
-    int featureInfoFromRasterLayer( QgsRasterLayer* layer, const QgsPoint* infoPoint, QDomDocument& infoDocument, QDomElement& layerElement, QString version ) const;
+    int featureInfoFromRasterLayer( QgsRasterLayer* layer,
+                                    const QgsPoint* infoPoint,
+                                    QDomDocument& infoDocument,
+                                    QDomElement& layerElement,
+                                    QString version,
+                                    QString infoFormat ) const;
 
     /**Creates a layer set and returns a stringlist with layer ids that can be passed to a QgsMapRenderer. Usually used in conjunction with readLayersAndStyles
        @param scaleDenominator Filter out layer if scale based visibility does not match (or use -1 if no scale restriction)*/
@@ -135,7 +151,7 @@ class QgsWMSServer
     double drawLegendGraphics( QPainter* p, double fontOversamplingFactor, QStandardItem* rootItem, double boxSpace, double layerSpace, double layerTitleSpace,
                                double symbolSpace, double iconLabelSpace, double symbolWidth, double symbolHeight,
                                const QFont& layerFont, const QFont& itemFont, const QColor& layerFontColor, const QColor& itemFontColor,
-                               double& maxTextWidth, double& maxSymbolWidth, double dpi );
+                               double& maxTextWidth, double& maxSymbolWidth );
 
     //helper functions for GetLegendGraphics
     /**Draws layer item and subitems
@@ -145,16 +161,18 @@ class QgsWMSServer
       */
     void drawLegendLayerItem( QgsComposerLayerItem* item, QPainter* p, double& maxTextWidth, double& maxSymbolWidth, double& currentY, const QFont& layerFont,
                               const QColor& layerFontColor, const QFont& itemFont, const QColor&  itemFontColor, double boxSpace, double layerSpace,
-                              double layerTitleSpace, double symbolSpace, double iconLabelSpace, double symbolWidth, double symbolHeight, double fontOversamplingFactor, double dpi ) const;
+                              double layerTitleSpace, double symbolSpace, double iconLabelSpace, double symbolWidth, double symbolHeight, double fontOversamplingFactor ) const;
     /**Draws a symbol. Optionally, maxHeight is adapted (e.g. for large point markers) */
-    void drawLegendSymbolV2( QgsComposerLegendItem* item, QPainter* p, double boxSpace, double currentY, double& symbolWidth, double& symbolHeight, double dpi, double yDownShift ) const;
+    void drawLegendSymbolV2( QgsComposerLegendItem* item, QPainter* p, double boxSpace, double currentY, double& symbolWidth, double& symbolHeight, double yDownShift ) const;
     void drawRasterSymbol( QgsComposerLegendItem* item, QPainter* p, double boxSpace, double currentY, double symbolWidth, double symbolHeight, double yDownShift ) const;
 
     /**Read legend parameter from the request or from the first print composer in the project*/
     void legendParameters( double mmToPixelFactor, double fontOversamplingFactor, double& boxSpace, double& layerSpace, double& layerTitleSpace,
                            double& symbolSpace, double& iconLabelSpace, double& symbolWidth, double& symbolHeight, QFont& layerFont, QFont& itemFont, QColor& layerFontColor, QColor& itemFontColor );
 
+#if 0
     QImage* printCompositionToImage( QgsComposition* c ) const;
+#endif
 
     /**Apply filter (subset) strings from the request to the layers. Example: '&FILTER=<layer1>:"AND property > 100",<layer2>:"AND bla = 'hallo!'" '
        @return a map with the original filters ( layer id / filter string )*/
@@ -205,6 +223,14 @@ class QgsWMSServer
     QMap<QString, QString> mParameterMap;
     QgsConfigParser* mConfigParser;
     QgsMapRenderer* mMapRenderer;
+
+    QDomElement createFeatureGML(
+      QgsFeature* feat,
+      QDomDocument& doc,
+      QgsCoordinateReferenceSystem& crs,
+      QString typeName,
+      bool withGeom,
+      int version ) const;
 };
 
 #endif

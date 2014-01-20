@@ -83,6 +83,7 @@ QgsLegend::QgsLegend( QgsMapCanvas *canvas, QWidget * parent, const char *name )
     , mMinimumIconSize( 20, 20 )
     , mChanging( false )
     , mUpdateDrawingOrder( true )
+    , mGetLegendGraphicPopup( 0 )
 {
   setObjectName( name );
 
@@ -113,6 +114,11 @@ QgsLegend::QgsLegend( QgsMapCanvas *canvas, QWidget * parent, const char *name )
 
   connect( mMapCanvas, SIGNAL( layersChanged() ),
            this, SLOT( refreshCheckStates() ) );
+#if 0
+  // too much
+  connect( mMapCanvas, SIGNAL( extentsChanged() ),
+           this, SLOT( updateLegendItemSymbologies() ) );
+#endif
 
   // Initialise the line indicator widget.
   mInsertionLine = new QWidget( viewport() );
@@ -141,6 +147,7 @@ QgsLegend::QgsLegend( QgsMapCanvas *canvas, QWidget * parent, const char *name )
 QgsLegend::~QgsLegend()
 {
   delete mInsertionLine;
+  delete mGetLegendGraphicPopup;
 }
 
 #ifdef QGISDEBUG
@@ -288,6 +295,9 @@ void QgsLegend::removeAll()
   updateMapCanvasLayerSet();
   setIconSize( mMinimumIconSize );
   mDropTarget = 0;
+  mUpdateDrawingOrder = true;
+  emit updateDrawingOrderChecked( true );
+  emit updateDrawingOrderUnchecked( false );
 }
 
 void QgsLegend::setLayersVisible( bool visible )
@@ -395,6 +405,24 @@ void QgsLegend::mousePressEvent( QMouseEvent * e )
 {
   if ( e->button() == Qt::LeftButton )
   {
+    // show WMS legend in case itemAt( e->pos() ) is a wms legend
+    // if it's not a legend later it return a null pixmap
+    QImage legend = getWmsLegendPixmap( itemAt( e->pos() ) );
+    if ( !legend.isNull() )
+    {
+      mGetLegendGraphicPopup = new QFrame();
+      mGetLegendGraphicPopup->setFrameStyle( QFrame::Box | QFrame::Raised );
+      mGetLegendGraphicPopup->setLineWidth( 2 );
+      mGetLegendGraphicPopup->setAutoFillBackground( true );
+      QVBoxLayout *layout = new QVBoxLayout;
+      QLabel *label = new QLabel( mGetLegendGraphicPopup );
+      label->setPixmap( QPixmap::fromImage( legend ) );
+      layout->addWidget( label );
+      mGetLegendGraphicPopup->setLayout( layout );
+      mGetLegendGraphicPopup->move( e->globalX(), e->globalY() );
+      mGetLegendGraphicPopup->show();
+    }
+
     mMousePressedFlag = true;
     mDropTarget = itemAt( e->pos() );
     if ( !mDropTarget )
@@ -624,6 +652,12 @@ void QgsLegend::updateGroupCheckStates( QTreeWidgetItem *item )
 
 void QgsLegend::mouseReleaseEvent( QMouseEvent * e )
 {
+  if ( mGetLegendGraphicPopup )
+  {
+    delete mGetLegendGraphicPopup;
+    mGetLegendGraphicPopup = 0;
+  }
+
   QStringList layersPriorToEvent = layerIDs();
   QTreeWidget::mouseReleaseEvent( e );
   mMousePressedFlag = false;
@@ -830,7 +864,8 @@ void QgsLegend::handleRightClickEvent( QTreeWidgetItem* item, const QPoint& posi
 
       // properties goes on bottom of menu for consistency with normal ui standards
       // e.g. kde stuff
-      theMenu.addAction( tr( "&Properties" ), QgisApp::instance(), SLOT( layerProperties() ) );
+      if ( lyr->layer() && QgsProject::instance()->layerIsEmbedded( lyr->layer()->id() ).isEmpty() )
+        theMenu.addAction( tr( "&Properties" ), QgisApp::instance(), SLOT( layerProperties() ) );
 
       if ( li->parent() && !parentGroupEmbedded( li ) )
       {
@@ -1383,6 +1418,14 @@ QList<QgsMapLayer *> QgsLegend::layers()
   return ls;
 }
 
+static bool inReverseDrawingOrder( QgsLegendLayer *a, QgsLegendLayer *b )
+{
+  if ( !a || !b )
+    return false;
+
+  return a->drawingOrder() > b->drawingOrder();
+}
+
 QList<QgsMapCanvasLayer> QgsLegend::canvasLayers()
 {
   QMap<int, QgsMapCanvasLayer> layers;
@@ -1412,6 +1455,10 @@ QList<QgsMapCanvasLayer> QgsLegend::canvasLayers()
       {
         int groupDrawingOrder = lgroup->drawingOrder();
         QList<QgsLegendLayer*> groupLayers = lgroup->legendLayers();
+        if ( !mUpdateDrawingOrder )
+        {
+          qSort( groupLayers.begin(), groupLayers.end(), inReverseDrawingOrder );
+        }
         for ( int i = groupLayers.size() - 1; i >= 0; --i )
         {
           QgsLegendLayer* ll = groupLayers.at( i );
@@ -1471,6 +1518,10 @@ void QgsLegend::setDrawingOrder( const QList<DrawingOrderInfo> &order )
       {
         group->setDrawingOrder( i );
         QList<QgsLegendLayer*> groupLayers = group->legendLayers();
+        if ( !mUpdateDrawingOrder )
+        {
+          qSort( groupLayers.begin(), groupLayers.end(), inReverseDrawingOrder );
+        }
         QList<QgsLegendLayer*>::iterator groupIt = groupLayers.begin();
         for ( ; groupIt != groupLayers.end(); ++groupIt )
         {
@@ -2108,7 +2159,7 @@ QgsLegendGroup* QgsLegend::findLegendGroup( const QString& name, const QString& 
 
 void QgsLegend::adjustIconSize()
 {
-  if ( mPixmapWidthValues.size() > 0 && mPixmapHeightValues.size() > 0 )
+  if ( !mPixmapWidthValues.empty() && !mPixmapHeightValues.empty() )
   {
     std::multiset<int>::const_reverse_iterator width_it = mPixmapWidthValues.rbegin();
     std::multiset<int>::const_reverse_iterator height_it = mPixmapHeightValues.rbegin();
@@ -3191,3 +3242,43 @@ void QgsLegend::updateLegendItemSymbologies()
     ll->refreshSymbology( ll->layer()->id() );
   }
 }
+
+QImage QgsLegend::getWmsLegendPixmap( QTreeWidgetItem *item )
+{
+  if ( !item )
+  {
+    return QImage();
+  }
+
+  QTreeWidgetItem *parent = item->parent();
+  if ( !parent )
+  {
+    return QImage();
+  }
+
+  QgsLegendItem* li = dynamic_cast<QgsLegendItem *>( parent );
+  if ( !li )
+  {
+    return QImage();
+  }
+
+  if ( li->type() != QgsLegendItem::LEGEND_LAYER )
+  {
+    return QImage();
+  }
+
+  QgsLegendLayer *lyr = qobject_cast<QgsLegendLayer*>( li );
+  QgsRasterLayer *rasterLayer = dynamic_cast<QgsRasterLayer*>( lyr->layer() );
+  if ( !rasterLayer )
+  {
+    return QImage();
+  }
+
+  if ( rasterLayer->providerType() != "wms" )
+  {
+    return QImage();
+  }
+
+  return rasterLayer->dataProvider()->getLegendGraphic( canvas()->scale() );
+}
+

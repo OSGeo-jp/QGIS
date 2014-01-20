@@ -34,16 +34,6 @@ from qgsplugininstallerfetchingdialog import QgsPluginInstallerFetchingDialog
 from qgsplugininstallerrepositorydialog import QgsPluginInstallerRepositoryDialog
 
 
-################################################################################
-################################################################################
-### TEMPORARY WORKAROUND UNTIL VERSION NUMBER IS GLOBALY SWITCHED TO 2.0 #######
-################################################################################
-class QGis:                                   ##################################
-    QGIS_VERSION_INT = 20000                  ##################################
-    QGIS_VERSION = '2.0.0-Master'             ##################################
-################################################################################
-################################################################################
-
 
 # public instances:
 pluginInstaller = None
@@ -153,12 +143,12 @@ class QgsPluginInstaller(QObject):
     for key in plugins.all():
       if plugins.all()[key]["status"] == "new":
         status = self.tr("There is a new plugin available")
-        tabIndex = 3 # tab 3 contains new plugins
+        tabIndex = 4 # PLUGMAN_TAB_NEW
     # then check for updates (and eventually overwrite status)
     for key in plugins.all():
       if plugins.all()[key]["status"] == "upgradeable":
         status = self.tr("There is a plugin update available")
-        tabIndex = 2 # tab 2 contains upgradeable plugins
+        tabIndex = 3 # PLUGMAN_TAB_UPGRADEABLE
     # finally set the notify label
     if status:
       self.statusLabel.setText(u' <a href="%d">%s</a>  ' % (tabIndex,status) )
@@ -218,6 +208,7 @@ class QgsPluginInstaller(QObject):
         "error" : plugin["error"],
         "error_details" : plugin["error_details"],
         "experimental" : plugin["experimental"] and "true" or "false",
+        "deprecated" : plugin["deprecated"] and "true" or "false",
         "version_available" : plugin["version_available"],
         "zip_repository" : plugin["zip_repository"],
         "download_url" : plugin["download_url"],
@@ -296,7 +287,7 @@ class QgsPluginInstaller(QObject):
 
     if dlg.result():
       infoString = (self.tr("Plugin installation failed"), dlg.result())
-    elif not QDir(QDir.cleanPath(QgsApplication.qgisSettingsDirPath() + "/python/plugins/" + key)).exists():
+    elif not QDir( qgis.utils.home_plugin_path + "/" + key ).exists():
       infoString = (self.tr("Plugin has disappeared"), self.tr("The plugin seems to have been installed but I don't know where. Probably the plugin package contained a wrong named directory.\nPlease search the list of installed plugins. I'm nearly sure you'll find the plugin there, but I just can't determine which of them it is. It also means that I won't be able to determine if this plugin is installed and inform you about available updates. However the plugin may work. Please contact the plugin author and submit this issue."))
       QApplication.setOverrideCursor(Qt.WaitCursor)
       plugins.getAllInstalled()
@@ -345,7 +336,7 @@ class QgsPluginInstaller(QObject):
         dlg.exec_()
         if dlg.result():
           # revert installation
-          pluginDir = QFileInfo(QgsApplication.qgisUserDbFilePath()).path() + "/python/plugins/" + plugin["id"]
+          pluginDir = qgis.utils.home_plugin_path + "/" + plugin["id"]
           removeDir(pluginDir)
           if QDir(pluginDir).exists():
             infoString = (self.tr("Plugin uninstall failed"), result)
@@ -389,7 +380,7 @@ class QgsPluginInstaller(QObject):
       unloadPlugin(key)
     except:
       pass
-    pluginDir = QFileInfo(QgsApplication.qgisUserDbFilePath()).path() + "/python/plugins/" + plugin["id"]
+    pluginDir = qgis.utils.home_plugin_path + "/" + plugin["id"]
     result = removeDir(pluginDir)
     if result:
       QMessageBox.warning(iface.mainWindow(), self.tr("Plugin uninstall failed"), result)

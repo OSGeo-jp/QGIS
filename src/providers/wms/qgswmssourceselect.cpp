@@ -164,21 +164,6 @@ void QgsWMSSourceSelect::populateConnectionList()
   cmbConnections->addItems( QgsWMSConnection::connectionList() );
 
   setConnectionListPosition();
-
-  if ( cmbConnections->count() == 0 )
-  {
-    // No connections - disable various buttons
-    btnConnect->setEnabled( false );
-    btnEdit->setEnabled( false );
-    btnDelete->setEnabled( false );
-  }
-  else
-  {
-    // Connections - enable various buttons
-    btnConnect->setEnabled( true );
-    btnEdit->setEnabled( true );
-    btnDelete->setEnabled( true );
-  }
 }
 void QgsWMSSourceSelect::on_btnNew_clicked()
 {
@@ -214,7 +199,7 @@ void QgsWMSSourceSelect::on_btnDelete_clicked()
   if ( result == QMessageBox::Ok )
   {
     QgsWMSConnection::deleteConnection( cmbConnections->currentText() );
-    cmbConnections->removeItem( cmbConnections->currentIndex() );  // populateConnectionList();
+    cmbConnections->removeItem( cmbConnections->currentIndex() );
     setConnectionListPosition();
     emit connectionsChanged();
   }
@@ -324,7 +309,7 @@ bool QgsWMSSourceSelect::populateLayerList( QgsWmsProvider *wmsProvider )
 
   for ( QVector<QgsWmsLayerProperty>::iterator layer = layers.begin();
         layer != layers.end();
-        layer++ )
+        ++layer )
   {
     QgsNumericSortTreeWidgetItem *lItem = createItem( layer->orderId, QStringList() << layer->name << layer->title << layer->abstract, items, layerAndStyleCount, layerParents, layerParentNames );
 
@@ -387,6 +372,7 @@ bool QgsWMSSourceSelect::populateLayerList( QgsWmsProvider *wmsProvider )
             item->setData( Qt::UserRole + 2, style.identifier );
             item->setData( Qt::UserRole + 3, setLink.tileMatrixSet );
             item->setData( Qt::UserRole + 4, tileMatrixSets[ setLink.tileMatrixSet ].crs );
+            item->setData( Qt::UserRole + 5, l.title );
 
             lstTilesets->setItem( row, 0, item );
             lstTilesets->setItem( row, 1, new QTableWidgetItem( format ) );
@@ -571,7 +557,6 @@ void QgsWMSSourceSelect::addClicked()
   emit addRasterLayer( uri.encodedUri(),
                        leLayerName->text().isEmpty() ? layers.join( "/" ) : leLayerName->text(),
                        "wms" );
-
 }
 
 void QgsWMSSourceSelect::enableLayersForCrs( QTreeWidgetItem *item )
@@ -821,7 +806,7 @@ void QgsWMSSourceSelect::on_lstLayers_itemSelectionChanged()
     // if not, use one of the available CRS
     QString defaultCRS;
     QSet<QString>::const_iterator it = mCRSs.begin();
-    for ( ; it != mCRSs.end(); it++ )
+    for ( ; it != mCRSs.end(); ++it )
     {
       if ( it->compare( mCRS, Qt::CaseInsensitive ) == 0 )
         break;
@@ -950,10 +935,21 @@ void QgsWMSSourceSelect::updateButtons()
   {
     if ( mAddButton->isEnabled() )
     {
-      QStringList layers, styles;
-      collectSelectedLayers( layers, styles );
-      mLastLayerName = layers.join( "/" );
-      leLayerName->setText( mLastLayerName );
+      if ( !lstTilesets->selectedItems().isEmpty() )
+      {
+        QTableWidgetItem *item = lstTilesets->selectedItems().first();
+        mLastLayerName = item->data( Qt::UserRole + 5 ).toString();
+        if ( mLastLayerName.isEmpty() )
+          mLastLayerName = item->data( Qt::UserRole + 0 ).toString();
+        leLayerName->setText( mLastLayerName );
+      }
+      else
+      {
+        QStringList layers, styles;
+        collectSelectedLayers( layers, styles );
+        mLastLayerName = layers.join( "/" );
+        leLayerName->setText( mLastLayerName );
+      }
     }
     else
     {
@@ -1012,6 +1008,23 @@ void QgsWMSSourceSelect::setConnectionListPosition()
       cmbConnections->setCurrentIndex( 0 );
     else
       cmbConnections->setCurrentIndex( cmbConnections->count() - 1 );
+  }
+
+  if ( cmbConnections->count() == 0 )
+  {
+    // No connections - disable various buttons
+    btnConnect->setEnabled( false );
+    btnEdit->setEnabled( false );
+    btnDelete->setEnabled( false );
+    btnSave->setEnabled( false );
+  }
+  else
+  {
+    // Connections - enable various buttons
+    btnConnect->setEnabled( true );
+    btnEdit->setEnabled( true );
+    btnDelete->setEnabled( true );
+    btnSave->setEnabled( true );
   }
 }
 

@@ -108,7 +108,7 @@ class CORE_EXPORT QgsComposerItem: public QObject, public QGraphicsRectItem
     virtual void setSelected( bool s );
 
     /** \brief Is selected */
-    virtual bool selected() {return QGraphicsRectItem::isSelected();}
+    virtual bool selected() const {return QGraphicsRectItem::isSelected();};
 
     /** stores state in project */
     virtual bool writeSettings();
@@ -281,17 +281,21 @@ class CORE_EXPORT QgsComposerItem: public QObject, public QGraphicsRectItem
 
     /**Locks / unlocks the item position for mouse drags
     @note this method was added in version 1.2*/
-    void setPositionLock( bool lock ) {mItemPositionLocked = lock;}
+    void setPositionLock( bool lock );
 
     /**Returns position lock for mouse drags (true means locked)
     @note this method was added in version 1.2*/
     bool positionLock() const {return mItemPositionLocked;}
 
-    /**Update mouse cursor at (item) position
-    @note this method was added in version 1.2*/
-    void updateCursor( const QPointF& itemPos );
+    /**Returns the rotation for the composer item
+    @note this method was added in version 2.1*/
+    double itemRotation() const {return mItemRotation;}
 
-    double rotation() const {return mRotation;}
+    /**Returns the rotation for the composer item
+     * @deprecated Use itemRotation()
+     *             instead
+     */
+    double rotation() const {return mItemRotation;}
 
     /**Updates item, with the possibility to do custom update for subclasses*/
     virtual void updateItem() { QGraphicsRectItem::update(); }
@@ -310,7 +314,19 @@ class CORE_EXPORT QgsComposerItem: public QObject, public QGraphicsRectItem
     QString uuid() const { return mUuid; }
 
   public slots:
+    /**Sets the item rotation
+     * @deprecated Use setItemRotation( double rotation ) instead
+     */
     virtual void setRotation( double r );
+
+    /**Sets the item rotation
+      @param r item rotation in degrees
+      @param adjustPosition set to true if item should be shifted so that rotation occurs
+       around item center. If false, rotation occurs around item origin
+      @note this method was added in version 2.1
+    */
+    virtual void setItemRotation( double r, bool adjustPosition = false );
+
     void repaint();
 
   protected:
@@ -343,7 +359,7 @@ class CORE_EXPORT QgsComposerItem: public QObject, public QGraphicsRectItem
     mutable double mLastValidViewScaleFactor;
 
     /**Item rotation in degrees, clockwise*/
-    double mRotation;
+    double mItemRotation;
 
     /**Composition blend mode for item*/
     QPainter::CompositionMode mBlendMode;
@@ -356,29 +372,6 @@ class CORE_EXPORT QgsComposerItem: public QObject, public QGraphicsRectItem
     /**The item's position mode
     @note: this member was added in version 2.0*/
     ItemPositionMode mLastUsedPositionMode;
-
-    //event handlers
-    virtual void mouseMoveEvent( QGraphicsSceneMouseEvent * event );
-    virtual void mousePressEvent( QGraphicsSceneMouseEvent * event );
-    virtual void mouseReleaseEvent( QGraphicsSceneMouseEvent * event );
-
-    virtual void hoverMoveEvent( QGraphicsSceneHoverEvent * event );
-
-    /**Finds out the appropriate cursor for the current mouse position in the widget (e.g. move in the middle, resize at border)*/
-    Qt::CursorShape cursorForPosition( const QPointF& itemCoordPos );
-
-    /**Finds out which mouse move action to choose depending on the cursor position inside the widget*/
-    QgsComposerItem::MouseMoveAction mouseMoveActionForPosition( const QPointF& itemCoordPos );
-
-    /**Changes the rectangle of an item depending on current mouse action (resize or move)
-     @param currentPosition current position of mouse cursor
-     @param mouseMoveStartPos cursor position at the start of the current mouse action
-     @param originalItem Item position at the start of the mouse action
-     @param dx x-Change of mouse cursor
-     @param dy y-Change of mouse cursor
-     @param changeItem Item to change size (can be the same as originalItem or a differen one)
-    */
-    void changeItemRectangle( const QPointF& currentPosition, const QPointF& mouseMoveStartPos, const QGraphicsRectItem* originalItem, double dx, double dy, QGraphicsRectItem* changeItem );
 
     /**Draw selection boxes around item*/
     virtual void drawSelectionBoxes( QPainter* p );
@@ -411,12 +404,37 @@ class CORE_EXPORT QgsComposerItem: public QObject, public QGraphicsRectItem
     //some utility functions
 
     /**Calculates width and hight of the picture (in mm) such that it fits into the item frame with the given rotation*/
+    bool imageSizeConsideringRotation( double& width, double& height, double rotation ) const;
+    /**Calculates width and hight of the picture (in mm) such that it fits into the item frame with the given rotation
+     * @deprecated Use bool imageSizeConsideringRotation( double& width, double& height, double rotation )
+     * instead
+     */
     bool imageSizeConsideringRotation( double& width, double& height ) const;
+
+    /**Calculates the largest scaled version of originalRect which fits within boundsRect, when it is rotated by
+     * a specified amount
+        @param originalRect QRectF to be rotated and scaled
+        @param boundsRect QRectF specifying the bounds which the rotated and scaled rectangle must fit within
+        @param rotation the rotation in degrees to be applied to the rectangle
+    */
+    QRectF largestRotatedRectWithinBounds( QRectF originalRect, QRectF boundsRect, double rotation ) const;
+
     /**Calculates corner point after rotation and scaling*/
+    bool cornerPointOnRotatedAndScaledRect( double& x, double& y, double width, double height, double rotation ) const;
+    /**Calculates corner point after rotation and scaling
+     * @deprecated Use bool cornerPointOnRotatedAndScaledRect( double& x, double& y, double width, double height, double rotation )
+     * instead
+     */
     bool cornerPointOnRotatedAndScaledRect( double& x, double& y, double width, double height ) const;
 
-    /**Calculates width / height of the bounding box of a rotated rectangle (mRotation)*/
+    /**Calculates width / height of the bounding box of a rotated rectangle*/
+    void sizeChangedByRotation( double& width, double& height, double rotation );
+    /**Calculates width / height of the bounding box of a rotated rectangle
+    * @deprecated Use void sizeChangedByRotation( double& width, double& height, double rotation )
+    * instead
+    */
     void sizeChangedByRotation( double& width, double& height );
+
     /**Rotates a point / vector
         @param angle rotation angle in degrees, counterclockwise
         @param x in/out: x coordinate before / after the rotation
@@ -432,8 +450,8 @@ class CORE_EXPORT QgsComposerItem: public QObject, public QGraphicsRectItem
     void deleteAlignItems();
 
   signals:
-    /**Is emitted on rotation change to notify north arrow pictures*/
-    void rotationChanged( double newRotation );
+    /**Is emitted on item rotation change*/
+    void itemRotationChanged( double newRotation );
     /**Used e.g. by the item widgets to update the gui elements*/
     void itemChanged();
     /**Emitted if the rectangle changes*/

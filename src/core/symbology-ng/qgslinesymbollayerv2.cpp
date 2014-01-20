@@ -14,11 +14,13 @@
  ***************************************************************************/
 
 #include "qgslinesymbollayerv2.h"
+#include "qgsdxfexport.h"
 #include "qgssymbollayerv2utils.h"
 #include "qgsexpression.h"
 #include "qgsrendercontext.h"
 #include "qgslogger.h"
 #include "qgsvectorlayer.h"
+#include "qgsgeometrysimplifier.h"
 
 #include <QPainter>
 #include <QDomDocument>
@@ -159,7 +161,7 @@ void QgsSimpleLineSymbolLayerV2::startRender( QgsSymbolV2RenderContext& context 
   mSelPen.setColor( selColor );
 
   //prepare expressions for data defined properties
-  prepareExpressions( context.layer() );
+  prepareExpressions( context.layer(), context.renderContext().rendererScale() );
 }
 
 void QgsSimpleLineSymbolLayerV2::stopRender( QgsSymbolV2RenderContext& context )
@@ -179,6 +181,15 @@ void QgsSimpleLineSymbolLayerV2::renderPolyline( const QPolygonF& points, QgsSym
   applyDataDefinedSymbology( context, mPen, mSelPen, offset );
 
   p->setPen( context.selected() ? mSelPen : mPen );
+
+  // Disable 'Antialiasing' if the geometry was generalized in the current RenderContext (We known that it must have least #2 points).
+  if ( points.size() <= 2 && context.layer() && context.layer()->simplifyDrawingCanbeApplied( QgsVectorLayer::AntialiasingSimplification ) && QgsAbstractGeometrySimplifier::canbeGeneralizedByDeviceBoundingBox( points, context.layer()->simplifyMethod().threshold() ) && ( p->renderHints() & QPainter::Antialiasing ) )
+  {
+    p->setRenderHint( QPainter::Antialiasing, false );
+    p->drawPolyline( points );
+    p->setRenderHint( QPainter::Antialiasing, true );
+    return;
+  }
 
   if ( offset == 0 )
   {
@@ -374,7 +385,42 @@ void QgsSimpleLineSymbolLayerV2::applyDataDefinedSymbology( QgsSymbolV2RenderCon
   }
 }
 
+double QgsSimpleLineSymbolLayerV2::estimateMaxBleed() const
+{
+  return ( mWidth / 2.0 ) + mOffset;
+}
 
+QVector<qreal> QgsSimpleLineSymbolLayerV2::dxfCustomDashPattern( QgsSymbolV2::OutputUnit& unit ) const
+{
+  unit = mCustomDashPatternUnit;
+  return mUseCustomDashPattern ? mCustomDashVector : QVector<qreal>() ;
+}
+
+double QgsSimpleLineSymbolLayerV2::dxfWidth( const QgsDxfExport& e, const QgsSymbolV2RenderContext& context ) const
+{
+  double width = mWidth;
+  QgsExpression* strokeWidthExpression = expression( "width" );
+  if ( strokeWidthExpression )
+  {
+    width = strokeWidthExpression->evaluate( const_cast<QgsFeature*>( context.feature() ) ).toDouble() * e.mapUnitScaleFactor( e.symbologyScaleDenominator(), widthUnit(), e.mapUnits() );
+  }
+  else if ( context.renderHints() & QgsSymbolV2::DataDefinedSizeScale )
+  {
+    width = mWidth * QgsSymbolLayerV2Utils::lineWidthScaleFactor( context.renderContext(), mWidthUnit );
+  }
+
+  return width * e.mapUnitScaleFactor( e.symbologyScaleDenominator(), widthUnit(), e.mapUnits() );
+}
+
+QColor QgsSimpleLineSymbolLayerV2::dxfColor( const QgsSymbolV2RenderContext& context ) const
+{
+  QgsExpression* strokeColorExpression = expression( "color" );
+  if ( strokeColorExpression )
+  {
+    return ( QgsSymbolLayerV2Utils::decodeColor( strokeColorExpression->evaluate( const_cast<QgsFeature*>( context.feature() ) ).toString() ) );
+  }
+  return mColor;
+}
 
 /////////
 
@@ -538,7 +584,7 @@ void QgsMarkerLineSymbolLayerV2::startRender( QgsSymbolV2RenderContext& context 
   mMarker->startRender( context.renderContext(), context.layer() );
 
   //prepare expressions for data defined properties
-  prepareExpressions( context.layer() );
+  prepareExpressions( context.layer(), context.renderContext().rendererScale() );
 }
 
 void QgsMarkerLineSymbolLayerV2::stopRender( QgsSymbolV2RenderContext& context )
@@ -1086,3 +1132,9 @@ QgsSymbolV2::OutputUnit QgsMarkerLineSymbolLayerV2::outputUnit() const
   }
   return unit;
 }
+
+double QgsMarkerLineSymbolLayerV2::estimateMaxBleed() const
+{
+  return ( mMarker->size() / 2.0 ) + mOffset;
+}
+

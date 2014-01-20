@@ -464,15 +464,17 @@ QString QgsOracleProvider::whereClause( QgsFeatureId featureId ) const
       break;
   }
 
-  if ( !mSqlWhereClause.isEmpty() )
-  {
-    if ( !whereClause.isEmpty() )
-      whereClause += " AND ";
-
-    whereClause += "(" + mSqlWhereClause + ")";
-  }
-
   return whereClause;
+}
+
+QString QgsOracleProvider::whereClause( QgsFeatureIds featureIds ) const
+{
+  QStringList whereClauses;
+  foreach ( const QgsFeatureId featureId, featureIds )
+  {
+    whereClauses << whereClause( featureId );
+  }
+  return whereClauses.join( " AND " );
 }
 
 void QgsOracleProvider::setExtent( QgsRectangle& newExtent )
@@ -1286,7 +1288,7 @@ bool QgsOracleProvider::addFeatures( QgsFeatureList &flist )
       throw OracleException( tr( "Could not prepare insert statement" ), qry );
     }
 
-    for ( QgsFeatureList::iterator features = flist.begin(); features != flist.end(); features++ )
+    for ( QgsFeatureList::iterator features = flist.begin(); features != flist.end(); ++features )
     {
       const QgsAttributes &attributevec = features->attributes();
 
@@ -1343,7 +1345,7 @@ bool QgsOracleProvider::addFeatures( QgsFeatureList &flist )
     // update feature ids
     if ( mPrimaryKeyType == pktInt || mPrimaryKeyType == pktFidMap )
     {
-      for ( QgsFeatureList::iterator features = flist.begin(); features != flist.end(); features++ )
+      for ( QgsFeatureList::iterator features = flist.begin(); features != flist.end(); ++features )
       {
         const QgsAttributes &attributevec = features->attributes();
 
@@ -1802,7 +1804,6 @@ void QgsOracleProvider::appendGeomParam( const QgsGeometry *geom, QSqlQuery &qry
           g.ordinates << *ptr.dPtr++;
           if ( dim == 3 )
             g.ordinates << *ptr.dPtr++;
-          iOrdinate  += dim;
         }
       }
       break;
@@ -1990,6 +1991,28 @@ QgsRectangle QgsOracleProvider::extent()
   {
     QString sql;
     QSqlQuery qry( *mConnection );
+
+    if ( mUseEstimatedMetadata )
+    {
+      if ( exec( qry, QString( "SELECT sdo_lb,sdo_ub FROM mdsys.all_sdo_geom_metadata m, table(m.diminfo) WHERE owner=%1 AND table_name=%2 AND column_name=%3 AND sdo_dimname='X'" )
+                 .arg( quotedValue( mOwnerName ) )
+                 .arg( quotedValue( mTableName ) )
+                 .arg( quotedValue( mGeometryColumn ) ) ) && qry.next() )
+      {
+        mLayerExtent.setXMinimum( qry.value( 0 ).toDouble() );
+        mLayerExtent.setXMaximum( qry.value( 1 ).toDouble() );
+
+        if ( exec( qry, QString( "SELECT sdo_lb,sdo_ub FROM mdsys.all_sdo_geom_metadata m, table(m.diminfo) WHERE owner=%1 AND table_name=%2 AND column_name=%3 AND sdo_dimname='Y'" )
+                   .arg( quotedValue( mOwnerName ) )
+                   .arg( quotedValue( mTableName ) )
+                   .arg( quotedValue( mGeometryColumn ) ) )  && qry.next() )
+        {
+          mLayerExtent.setYMinimum( qry.value( 0 ).toDouble() );
+          mLayerExtent.setYMaximum( qry.value( 1 ).toDouble() );
+          return mLayerExtent;
+        }
+      }
+    }
 
     bool ok = false;
 

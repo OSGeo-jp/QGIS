@@ -29,6 +29,7 @@ class QgsFeature;
 class QgsGeometry;
 class QgsOgcUtils;
 class QgsVectorLayer;
+class QgsVectorDataProvider;
 
 class QDomElement;
 
@@ -150,9 +151,12 @@ class CORE_EXPORT QgsExpression
 
     int scale() {return mScale; }
 
-    const QString& expression() const { return mExpression; }
+    //! Return the expression string that was given when created.
+    const QString expression() const { return mExp; }
 
-    //! Return the parsed expression as a string - useful for debugging
+    //! Return the a debugging string of the expression.
+    //! This can be used for debugging. Use {@link expression()}
+    //! if you need the full expression string.
     QString dump() const;
 
     //! Return calculator used for distance and area calculations
@@ -161,7 +165,7 @@ class CORE_EXPORT QgsExpression
 
     //! Sets the geometry calculator used in evaluation of expressions,
     // instead of the default.
-    void setGeomCalculator( QgsDistanceArea &calc );
+    void setGeomCalculator( const QgsDistanceArea &calc );
 
     /** This function currently replaces each expression between [% and %]
        in the string with the result of its evaluation on the feature
@@ -170,13 +174,8 @@ class CORE_EXPORT QgsExpression
        Additional substitutions can be passed through the substitutionMap
        parameter
     */
-    static QString replaceExpressionText( QString action, QgsFeature* feat,
-                                          QgsVectorLayer* layer,
-                                          const QMap<QString, QVariant> *substitutionMap = 0 );
-
-
-    static QString replaceExpressionText( QString action, QgsFeature& feat,
-                                          QgsVectorLayer* layer,
+    static QString replaceExpressionText( const QString &action, const QgsFeature *feat,
+                                          QgsVectorLayer *layer,
                                           const QMap<QString, QVariant> *substitutionMap = 0 );
     enum UnaryOperator
     {
@@ -535,6 +534,7 @@ class CORE_EXPORT QgsExpression
 
         virtual QStringList referencedColumns() const { return QStringList( mName ); }
         virtual bool needsGeometry() const { return false; }
+
         virtual void accept( Visitor& v ) const { v.visit( *this ); }
 
       protected:
@@ -603,7 +603,6 @@ class CORE_EXPORT QgsExpression
 
     void initGeomCalculator();
 
-    QString mExpression;
     Node* mRootNode;
 
     QString mParserErrorString;
@@ -611,6 +610,7 @@ class CORE_EXPORT QgsExpression
 
     int mRowNumber;
     double mScale;
+    QString mExp;
 
     static QMap<QString, QVariant> gmSpecialColumns;
     QgsDistanceArea *mCalc;

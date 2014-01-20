@@ -482,6 +482,7 @@ QAction *QgisAppInterface::actionAddFeature() { return qgis->actionAddFeature();
 QAction *QgisAppInterface::actionDeleteSelected() { return qgis->actionDeleteSelected(); }
 QAction *QgisAppInterface::actionMoveFeature() { return qgis->actionMoveFeature(); }
 QAction *QgisAppInterface::actionSplitFeatures() { return qgis->actionSplitFeatures(); }
+QAction *QgisAppInterface::actionSplitParts() { return qgis->actionSplitParts(); }
 QAction *QgisAppInterface::actionAddRing() { return qgis->actionAddRing(); }
 QAction *QgisAppInterface::actionAddPart() { return qgis->actionAddPart(); }
 QAction *QgisAppInterface::actionSimplifyFeature() { return qgis->actionSimplifyFeature(); }
@@ -608,7 +609,7 @@ void QgisAppInterface::cacheloadForm( QString uifile )
   }
 }
 
-QDialog* QgisAppInterface::getFeatureForm( QgsVectorLayer *l, QgsFeature &f )
+QDialog* QgisAppInterface::getFeatureForm( QgsVectorLayer *l, QgsFeature &feature )
 {
   QgsDistanceArea myDa;
 
@@ -616,8 +617,13 @@ QDialog* QgisAppInterface::getFeatureForm( QgsVectorLayer *l, QgsFeature &f )
   myDa.setEllipsoidalMode( QgisApp::instance()->mapCanvas()->mapRenderer()->hasCrsTransformEnabled() );
   myDa.setEllipsoid( QgsProject::instance()->readEntry( "Measure", "/Ellipsoid", GEO_NONE ) );
 
-  QgsAttributeDialog *dialog = new QgsAttributeDialog( l, &f, false, myDa );
+  QgsAttributeDialog *dialog = new QgsAttributeDialog( l, &feature, false, NULL, true );
   return dialog->dialog();
+}
+
+QgsVectorLayerTools* QgisAppInterface::vectorLayerTools()
+{
+  return qgis->vectorLayerTools();
 }
 
 QList<QgsMapLayer *> QgisAppInterface::editableLayers( bool modified ) const

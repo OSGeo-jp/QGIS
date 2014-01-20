@@ -20,44 +20,44 @@
 __author__ = 'Victor Olaya'
 __date__ = 'August 2012'
 __copyright__ = '(C) 2012, Victor Olaya'
+
 # This will get replaced with a git SHA1 when you do a git archive
+
 __revision__ = '$Format:%H$'
 
-from processing.core.GeoAlgorithm import GeoAlgorithm
 from PyQt4.QtCore import *
 from qgis.core import *
+from processing.core.GeoAlgorithm import GeoAlgorithm
 from processing.parameters.ParameterVector import ParameterVector
-from processing.core.QGisLayers import QGisLayers
 from processing.outputs.OutputVector import OutputVector
+from processing.tools import dataobjects, vector
+
 
 class AutoincrementalField(GeoAlgorithm):
 
-    INPUT = "INPUT"
-    OUTPUT = "OUTPUT"
-
-    #===========================================================================
-    # def getIcon(self):
-    #    return QtGui.QIcon(os.path.dirname(__file__) + "/../images/toolbox.png")
-    #===========================================================================
+    INPUT = 'INPUT'
+    OUTPUT = 'OUTPUT'
 
     def processAlgorithm(self, progress):
         output = self.getOutputFromName(self.OUTPUT)
-        vlayer = QGisLayers.getObjectFromUri(self.getParameterValue(self.INPUT))
+        vlayer = \
+            dataobjects.getObjectFromUri(self.getParameterValue(self.INPUT))
         vprovider = vlayer.dataProvider()
         fields = vprovider.fields()
-        fields.append(QgsField("AUTO", QVariant.Int))
-        writer = output.getVectorWriter(fields, vprovider.geometryType(), vlayer.crs() )
+        fields.append(QgsField('AUTO', QVariant.Int))
+        writer = output.getVectorWriter(fields, vprovider.geometryType(),
+                vlayer.crs())
         inFeat = QgsFeature()
         outFeat = QgsFeature()
         inGeom = QgsGeometry()
         nElement = 0
-        features = QGisLayers.features(vlayer)
+        features = vector.features(vlayer)
         nFeat = len(features)
         for inFeat in features:
-            progress.setPercentage(int((100 * nElement)/nFeat))
+            progress.setPercentage(int(100 * nElement / nFeat))
             nElement += 1
             inGeom = inFeat.geometry()
-            outFeat.setGeometry( inGeom )
+            outFeat.setGeometry(inGeom)
             attrs = inFeat.attributes()
             attrs.append(nElement)
             outFeat.setAttributes(attrs)
@@ -65,10 +65,8 @@ class AutoincrementalField(GeoAlgorithm):
         del writer
 
     def defineCharacteristics(self):
-        self.name = "Add autoincremental field"
-        self.group = "Vector table tools"
-        self.addParameter(ParameterVector(self.INPUT, "Input layer", [ParameterVector.VECTOR_TYPE_ANY]))
-        self.addOutput(OutputVector(self.OUTPUT, "Output layer"))
-
-
-
+        self.name = 'Add autoincremental field'
+        self.group = 'Vector table tools'
+        self.addParameter(ParameterVector(self.INPUT, 'Input layer',
+                          [ParameterVector.VECTOR_TYPE_ANY]))
+        self.addOutput(OutputVector(self.OUTPUT, 'Output layer'))

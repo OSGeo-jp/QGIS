@@ -102,6 +102,9 @@ class CORE_EXPORT QgsSymbolLayerV2Utils
     static QPixmap symbolPreviewPixmap( QgsSymbolV2* symbol, QSize size );
     static QPixmap colorRampPreviewPixmap( QgsVectorColorRampV2* ramp, QSize size );
 
+    /**Returns the maximum estimated bleed for the symbol */
+    static double estimateMaxSymbolBleed( QgsSymbolV2* symbol );
+
     static QgsSymbolV2* loadSymbol( QDomElement& element );
     static QgsSymbolLayerV2* loadSymbolLayer( QDomElement& element );
     static QDomElement saveSymbol( QString symbolName, QgsSymbolV2* symbol, QDomDocument& doc );
@@ -146,11 +149,19 @@ class CORE_EXPORT QgsSymbolLayerV2Utils
                                         QString &path, QString &mime,
                                         QColor &color, double &size );
 
+    /** @deprecated Use wellKnownMarkerToSld( QDomDocument &doc, QDomElement &element, QString name, QColor color, QColor borderColor, Qt::PenStyle borderStyle, double borderWidth, double size ) instead */
+    Q_DECL_DEPRECATED static void wellKnownMarkerToSld( QDomDocument &doc, QDomElement &element,
+        QString name, QColor color, QColor borderColor = QColor(),
+        double borderWidth = -1, double size = -1 );
     static void wellKnownMarkerToSld( QDomDocument &doc, QDomElement &element,
-                                      QString name, QColor color, QColor borderColor = QColor(),
+                                      QString name, QColor color, QColor borderColor, Qt::PenStyle borderStyle,
                                       double borderWidth = -1, double size = -1 );
+    /** @deprecated Use wellKnownMarkerFromSld( QDomElement &element, QString &name, QColor &color, QColor &borderColor, Qt::PenStyle &borderStyle, double &borderWidth, double &size ) instead */
+    Q_DECL_DEPRECATED static bool wellKnownMarkerFromSld( QDomElement &element,
+        QString &name, QColor &color, QColor &borderColor,
+        double &borderWidth, double &size );
     static bool wellKnownMarkerFromSld( QDomElement &element,
-                                        QString &name, QColor &color, QColor &borderColor,
+                                        QString &name, QColor &color, QColor &borderColor, Qt::PenStyle &borderStyle,
                                         double &borderWidth, double &size );
 
     static void externalMarkerToSld( QDomDocument &doc, QDomElement &element,
@@ -243,6 +254,9 @@ class CORE_EXPORT QgsSymbolLayerV2Utils
 
     //! Get symbols's name from its path
     static QString symbolPathToName( QString path );
+
+    //! Calculate the centroid point of a QPolygonF
+    static QPointF polygonCentroid( const QPolygonF& points );
 };
 
 class QPolygonF;

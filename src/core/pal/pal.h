@@ -35,7 +35,7 @@
 #define _PAL_H
 
 
-#include <list>
+#include <QList>
 #include <iostream>
 #include <ctime>
 
@@ -127,7 +127,7 @@ namespace pal
       friend class FeaturePart;
       friend class Layer;
     private:
-      std::list<Layer*> * layers;
+      QList<Layer*> *layers;
 
       SimpleMutex *lyrsMutex;
 
@@ -166,6 +166,11 @@ namespace pal
       int ejChainDeg;
       int tenure;
       double candListSize;
+
+      /**
+       * \brief show partial labels (cut-off by the map canvas) or not
+       */
+      bool showPartial;
 
       /**
        * \brief Problem factory
@@ -287,7 +292,7 @@ namespace pal
        *
        * @return a list of all layers
        */
-      std::list<Layer*> *getLayers();
+      QList<Layer*> *getLayers();
 
       /**
        * \brief remove a layer
@@ -353,7 +358,19 @@ namespace pal
        */
       int getDpi();
 
+      /**
+       *\brief Set flag show partial label
+       *
+       * @param show flag value
+       */
+      void setShowPartial( bool show );
 
+      /**
+       * \brief Get flag show partial label
+       *
+       * @return value of flag
+       */
+      bool getShowPartial();
 
       /**
        * \brief set # candidates to generate for points features

@@ -71,7 +71,7 @@ bool QgsGPXFeatureIterator::close()
   return true;
 }
 
-bool QgsGPXFeatureIterator::nextFeature( QgsFeature& feature )
+bool QgsGPXFeatureIterator::fetchFeature( QgsFeature& feature )
 {
   feature.setValid( false );
 
@@ -409,7 +409,7 @@ QgsGeometry* QgsGPXFeatureIterator::readRouteGeometry( const QgsRoute& rte )
   geo[0] = QgsApplication::endian();
   geo[geo[0] == QgsApplication::NDR ? 1 : 4] = QGis::WKBLineString;
   std::memcpy( geo + 5, &nPoints, 4 );
-  for ( uint i = 0; i < rte.points.size(); ++i )
+  for ( int i = 0; i < rte.points.size(); ++i )
   {
     std::memcpy( geo + 9 + 16 * i, &rte.points[i].lon, sizeof( double ) );
     std::memcpy( geo + 9 + 16 * i + 8, &rte.points[i].lat, sizeof( double ) );
@@ -431,7 +431,7 @@ QgsGeometry* QgsGPXFeatureIterator::readTrackGeometry( const QgsTrack& trk )
 
   // A track consists of several segments. Add all those segments into one.
   int totalPoints = 0;;
-  for ( std::vector<QgsTrackSegment>::size_type i = 0; i < trk.segments.size(); i ++ )
+  for ( int i = 0; i < trk.segments.size(); i ++ )
   {
     totalPoints += trk.segments[i].points.size();
   }
@@ -452,7 +452,7 @@ QgsGeometry* QgsGPXFeatureIterator::readTrackGeometry( const QgsTrack& trk )
   std::memcpy( geo + 5, &totalPoints, 4 );
 
   int thisPoint = 0;
-  for ( std::vector<QgsTrackSegment>::size_type k = 0; k < trk.segments.size(); k++ )
+  for ( int k = 0; k < trk.segments.size(); k++ )
   {
     int nPoints = trk.segments[k].points.size();
     for ( int i = 0; i < nPoints; ++i )

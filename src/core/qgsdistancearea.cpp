@@ -98,6 +98,11 @@ void QgsDistanceArea::setSourceCrs( long srsid )
   mCoordTransform->setSourceCrs( srcCRS );
 }
 
+void QgsDistanceArea::setSourceCrs( const QgsCoordinateReferenceSystem& srcCRS )
+{
+  mCoordTransform->setSourceCrs( srcCRS );
+}
+
 void QgsDistanceArea::setSourceAuthId( QString authId )
 {
   QgsCoordinateReferenceSystem srcCRS;
@@ -949,6 +954,16 @@ QString QgsDistanceArea::textUnit( double value, int decimals, QGis::UnitType u,
         }
       }
       break;
+    case QGis::NauticalMiles:
+      if ( isArea )
+      {
+        unitLabel = QObject::tr( " sq. NM" );
+      }
+      else
+      {
+        unitLabel = QObject::tr( " NM" );
+      }
+      break;
     case QGis::Degrees:
       if ( isArea )
       {
@@ -974,10 +989,10 @@ QString QgsDistanceArea::textUnit( double value, int decimals, QGis::UnitType u,
 
 void QgsDistanceArea::convertMeasurement( double &measure, QGis::UnitType &measureUnits, QGis::UnitType displayUnits, bool isArea )
 {
-  // Helper for converting between meters and feet
+  // Helper for converting between meters and feet and degrees and NauticalMiles...
   // The parameters measure and measureUnits are in/out
 
-  if (( measureUnits == QGis::Degrees || measureUnits == QGis::Feet ) &&
+  if (( measureUnits == QGis::Degrees || measureUnits == QGis::Feet || measureUnits == QGis::NauticalMiles ) &&
       mEllipsoid != GEO_NONE &&
       mEllipsoidalMode )
   {
@@ -986,27 +1001,12 @@ void QgsDistanceArea::convertMeasurement( double &measure, QGis::UnitType &measu
     QgsDebugMsg( "We're measuring on an ellipsoid or using projections, the system is returning meters" );
   }
 
-  // Only convert between meters and feet
-  if ( measureUnits == QGis::Meters && displayUnits == QGis::Feet )
-  {
-    QgsDebugMsg( QString( "Converting %1 meters" ).arg( QString::number( measure ) ) );
-    measure /= 0.3048;
-    if ( isArea )
-    {
-      measure /= 0.3048;
-    }
-    QgsDebugMsg( QString( "to %1 feet" ).arg( QString::number( measure ) ) );
-    measureUnits = QGis::Feet;
-  }
-  if ( measureUnits == QGis::Feet && displayUnits == QGis::Meters )
-  {
-    QgsDebugMsg( QString( "Converting %1 feet" ).arg( QString::number( measure ) ) );
-    measure *= 0.3048;
-    if ( isArea )
-    {
-      measure *= 0.3048;
-    }
-    QgsDebugMsg( QString( "to %1 meters" ).arg( QString::number( measure ) ) );
-    measureUnits = QGis::Meters;
-  }
+  // Gets the conversion factor between the specified units
+  double factorUnits = QGis::fromUnitToUnitFactor( measureUnits, displayUnits );
+  if ( isArea ) factorUnits *= factorUnits;
+
+  QgsDebugMsg( QString( "Converting %1 %2" ).arg( QString::number( measure ), QGis::toLiteral( measureUnits ) ) );
+  measure *= factorUnits;
+  QgsDebugMsg( QString( "to %1 %2" ).arg( QString::number( measure ), QGis::toLiteral( displayUnits ) ) );
+  measureUnits = displayUnits;
 }

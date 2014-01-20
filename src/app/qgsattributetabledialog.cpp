@@ -64,6 +64,9 @@ QgsAttributeTableDialog::QgsAttributeTableDialog( QgsVectorLayer *theLayer, QWid
 {
   setupUi( this );
 
+  // Fix selection color on loosing focus (Windows)
+  setStyleSheet( QgisApp::instance()->styleSheet() );
+
   setAttribute( Qt::WA_DeleteOnClose );
 
   QSettings settings;
@@ -71,15 +74,19 @@ QgsAttributeTableDialog::QgsAttributeTableDialog( QgsVectorLayer *theLayer, QWid
   // Initialize the window geometry
   restoreGeometry( settings.value( "/Windows/BetterAttributeTable/geometry" ).toByteArray() );
 
+  QgsAttributeEditorContext context;
 
   QgsDistanceArea myDa;
 
-  myDa.setSourceCrs( mLayer->crs().srsid() );
+  myDa.setSourceCrs( mLayer->crs() );
   myDa.setEllipsoidalMode( QgisApp::instance()->mapCanvas()->mapRenderer()->hasCrsTransformEnabled() );
   myDa.setEllipsoid( QgsProject::instance()->readEntry( "Measure", "/Ellipsoid", GEO_NONE ) );
 
+  context.setDistanceArea( myDa );
+  context.setVectorLayerTools( QgisApp::instance()->vectorLayerTools() );
+
   // Initialize dual view
-  mMainView->init( mLayer, QgisApp::instance()->mapCanvas(), myDa );
+  mMainView->init( mLayer, QgisApp::instance()->mapCanvas(), QgsFeatureRequest(), context );
 
   // Initialize filter gui elements
   mFilterActionMapper = new QSignalMapper( this );
@@ -215,6 +222,16 @@ void QgsAttributeTableDialog::closeEvent( QCloseEvent* event )
   {
     QSettings settings;
     settings.setValue( "/Windows/BetterAttributeTable/geometry", saveGeometry() );
+  }
+}
+
+void QgsAttributeTableDialog::keyPressEvent( QKeyEvent* event )
+{
+  QDialog::keyPressEvent( event );
+
+  if (( event->key() == Qt::Key_Backspace || event->key() == Qt::Key_Delete ) && mDeleteSelectedButton->isEnabled() )
+  {
+    QgisApp::instance()->deleteSelected( mLayer, this );
   }
 }
 

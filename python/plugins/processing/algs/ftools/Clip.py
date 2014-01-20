@@ -20,58 +20,53 @@
 __author__ = 'Victor Olaya'
 __date__ = 'August 2012'
 __copyright__ = '(C) 2012, Victor Olaya'
+
 # This will get replaced with a git SHA1 when you do a git archive
+
 __revision__ = '$Format:%H$'
 
 from PyQt4.QtCore import *
-
 from qgis.core import *
-
 from processing.core.GeoAlgorithm import GeoAlgorithm
-from processing.core.QGisLayers import QGisLayers
 from processing.core.ProcessingLog import ProcessingLog
-
 from processing.parameters.ParameterVector import ParameterVector
-
 from processing.outputs.OutputVector import OutputVector
+from processing.tools import dataobjects, vector
 
-from processing.algs.ftools import FToolsUtils as utils
 
 class Clip(GeoAlgorithm):
 
-    INPUT = "INPUT"
-    OVERLAY = "OVERLAY"
-    OUTPUT = "OUTPUT"
-
-    #===========================================================================
-    # def getIcon(self):
-    #    return QtGui.QIcon(os.path.dirname(__file__) + "/icons/clip.png")
-    #===========================================================================
+    INPUT = 'INPUT'
+    OVERLAY = 'OVERLAY'
+    OUTPUT = 'OUTPUT'
 
     def defineCharacteristics(self):
-        self.name = "Clip"
-        self.group = "Vector overlay tools"
-        self.addParameter(ParameterVector(Clip.INPUT, "Input layer", [ParameterVector.VECTOR_TYPE_ANY]))
-        self.addParameter(ParameterVector(Clip.OVERLAY, "Clip layer", [ParameterVector.VECTOR_TYPE_ANY]))
-        self.addOutput(OutputVector(Clip.OUTPUT, "Clipped"))
+        self.name = 'Clip'
+        self.group = 'Vector overlay tools'
+        self.addParameter(ParameterVector(Clip.INPUT, 'Input layer',
+                          [ParameterVector.VECTOR_TYPE_ANY]))
+        self.addParameter(ParameterVector(Clip.OVERLAY, 'Clip layer',
+                          [ParameterVector.VECTOR_TYPE_ANY]))
+        self.addOutput(OutputVector(Clip.OUTPUT, 'Clipped'))
 
     def processAlgorithm(self, progress):
-        layerA = QGisLayers.getObjectFromUri(self.getParameterValue(Clip.INPUT))
-        layerB = QGisLayers.getObjectFromUri(self.getParameterValue(Clip.OVERLAY))
+        layerA = dataobjects.getObjectFromUri(
+                self.getParameterValue(Clip.INPUT))
+        layerB = dataobjects.getObjectFromUri(
+                self.getParameterValue(Clip.OVERLAY))
 
-        GEOS_EXCEPT = True
-        FEATURE_EXCEPT = True
-
-        writer = self.getOutputFromName(self.OUTPUT).getVectorWriter(layerA.pendingFields(),
-                     layerA.dataProvider().geometryType(), layerA.dataProvider().crs())
+        writer = self.getOutputFromName(self.OUTPUT).getVectorWriter(
+                layerA.pendingFields(),
+                layerA.dataProvider().geometryType(),
+                layerA.dataProvider().crs())
 
         inFeatA = QgsFeature()
         inFeatB = QgsFeature()
         outFeat = QgsFeature()
 
-        index = utils.createSpatialIndex(layerB)
+        index = vector.spatialindex(layerB)
 
-        selectionA = QGisLayers.features(layerA)
+        selectionA = vector.features(layerA)
 
         current = 0
         total = 100.0 / float(len(selectionA))
@@ -79,13 +74,14 @@ class Clip(GeoAlgorithm):
         for inFeatA in selectionA:
             geom = QgsGeometry(inFeatA.geometry())
             attrs = inFeatA.attributes()
-            intersections = index.intersects(geom.boundingBox())
+            intersects = index.intersects(geom.boundingBox())
             first = True
             found = False
-            if len(intersections) > 0:
-                for i in intersections:
-                    request = QgsFeatureRequest().setFilterFid(i)
-                    inFeatB = layerB.getFeatures(request).next()
+            if len(intersects) > 0:
+                for i in intersects:
+                    layerB.getFeatures(
+                            QgsFeatureRequest().setFilterFid(i)).nextFeature(
+                                    inFeatB)
                     tmpGeom = QgsGeometry(inFeatB.geometry())
                     if tmpGeom.intersects(geom):
                         found = True
@@ -95,16 +91,21 @@ class Clip(GeoAlgorithm):
                         else:
                             try:
                                 cur_geom = QgsGeometry(outFeat.geometry())
-                                new_geom = QgsGeometry(cur_geom.combine(tmpGeom))
+                                new_geom = QgsGeometry(
+                                        cur_geom.combine(tmpGeom))
                                 outFeat.setGeometry(QgsGeometry(new_geom))
                             except:
-                                GEOS_EXCEPT = False
+                                ProcessingLog.addToLog(ProcessingLog.LOG_ERROR,
+                                        'GEOS geoprocessing error: One or \
+                                        more input features have invalid \
+                                        geometry.'
+                                        )
                                 break
                 if found:
                     try:
                         cur_geom = QgsGeometry(outFeat.geometry())
                         new_geom = QgsGeometry(geom.intersection(cur_geom))
-                        if new_geom.wkbType() == QGis.WKBNoGeometry :
+                        if new_geom.wkbType() == 0:
                             int_com = QgsGeometry(geom.combine(cur_geom))
                             int_sym = QgsGeometry(geom.symDifference(cur_geom))
                             new_geom = QgsGeometry(int_com.difference(int_sym))
@@ -113,18 +114,20 @@ class Clip(GeoAlgorithm):
                             outFeat.setAttributes(attrs)
                             writer.addFeature(outFeat)
                         except:
-                            FEAT_EXCEPT = False
+                            ProcessingLog.addToLog(ProcessingLog.LOG_ERROR,
+                                    'Feature geometry error: One or more \
+                                     output features ignored due to invalid \
+                                     geometry.'
+                                    )
                             continue
                     except:
-                        GEOS_EXCEPT = False
+                        ProcessingLog.addToLog(ProcessingLog.LOG_ERROR,
+                                'GEOS geoprocessing error: One or more input \
+                                features have invalid geometry.'
+                                )
                         continue
 
             current += 1
             progress.setPercentage(int(current * total))
 
         del writer
-
-        if not GEOS_EXCEPT:
-            ProcessingLog.addToLog(ProcessingLog.LOG_WARNING, "Geometry exception while computing clip")
-        if not FEATURE_EXCEPT:
-            ProcessingLog.addToLog(ProcessingLog.LOG_WARNING, "Feature exception while computing clip")

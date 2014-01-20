@@ -30,6 +30,7 @@ import sys
 import os
 import code
 import codecs
+import re
 
 from qgis.core import QgsApplication
 from ui_console_history_dlg import Ui_HistoryDialogPythonConsole
@@ -81,7 +82,7 @@ class ShellScintilla(QsciScintilla, code.InteractiveInterpreter):
         # Current line visible with special background color
         self.setCaretWidth(2)
 
-        self.settingsShell()
+        self.refreshSettingsShell()
 
         # Don't want to see the horizontal scrollbar at all
         # Use raw message to Scintilla here (all messages are documented
@@ -90,7 +91,6 @@ class ShellScintilla(QsciScintilla, code.InteractiveInterpreter):
 
         # not too small
         #self.setMinimumSize(500, 300)
-        self.setMinimumHeight(20)
 
         self.setWrapMode(QsciScintilla.WrapCharacter)
         self.SendScintilla(QsciScintilla.SCI_EMPTYUNDOBUFFER)
@@ -112,7 +112,14 @@ class ShellScintilla(QsciScintilla, code.InteractiveInterpreter):
         self.newShortcutCAS.activated.connect(self.autoCompleteKeyBinding)
         self.newShortcutCSS.activated.connect(self.showHistory)
 
-    def settingsShell(self):
+    def _setMinimumHeight(self):
+        fnt = self.settings.value("pythonConsole/fontfamilytext", "Monospace")
+        fntSize = self.settings.value("pythonConsole/fontsize", 10, type=int)
+        fm = QFontMetrics(QFont(fnt, fntSize))
+
+        self.setMinimumHeight(fm.height() + 10)
+
+    def refreshSettingsShell(self):
         # Set Python lexer
         self.setLexers()
         threshold = self.settings.value("pythonConsole/autoCompThreshold", 2, type=int)
@@ -128,6 +135,12 @@ class ShellScintilla(QsciScintilla, code.InteractiveInterpreter):
                 self.setAutoCompletionSource(self.AcsAll)
         else:
             self.setAutoCompletionSource(self.AcsNone)
+
+        cursorColor = self.settings.value("pythonConsole/cursorColor", QColor(Qt.black))
+        self.setCaretForegroundColor(cursorColor)
+
+        # Sets minimum height for input area based of font metric
+        self._setMinimumHeight()
 
     def showHistory(self):
         if not self.historyDlg.isVisible():
@@ -181,12 +194,24 @@ class ShellScintilla(QsciScintilla, code.InteractiveInterpreter):
         font.setBold(False)
 
         self.lexer.setDefaultFont(font)
-        self.lexer.setColor(Qt.red, 1)
-        self.lexer.setColor(Qt.darkGreen, 5)
-        self.lexer.setColor(Qt.darkBlue, 15)
+        self.lexer.setDefaultColor(QColor(self.settings.value("pythonConsole/defaultFontColor", QColor(Qt.black))))
+        self.lexer.setColor(QColor(self.settings.value("pythonConsole/commentFontColor", QColor(Qt.gray))), 1)
+        self.lexer.setColor(QColor(self.settings.value("pythonConsole/keywordFontColor", QColor(Qt.darkGreen))), 5)
+        self.lexer.setColor(QColor(self.settings.value("pythonConsole/classFontColor", QColor(Qt.blue))), 8)
+        self.lexer.setColor(QColor(self.settings.value("pythonConsole/methodFontColor", QColor(Qt.darkGray))), 9)
+        self.lexer.setColor(QColor(self.settings.value("pythonConsole/decorFontColor", QColor(Qt.darkBlue))), 15)
+        self.lexer.setColor(QColor(self.settings.value("pythonConsole/commentBlockFontColor", QColor(Qt.gray))), 12)
+        self.lexer.setColor(QColor(self.settings.value("pythonConsole/singleQuoteFontColor", QColor(Qt.blue))), 4)
+        self.lexer.setColor(QColor(self.settings.value("pythonConsole/doubleQuoteFontColor", QColor(Qt.blue))), 3)
+        self.lexer.setColor(QColor(self.settings.value("pythonConsole/tripleSingleQuoteFontColor", QColor(Qt.blue))), 6)
+        self.lexer.setColor(QColor(self.settings.value("pythonConsole/tripleDoubleQuoteFontColor", QColor(Qt.blue))), 7)
         self.lexer.setFont(font, 1)
         self.lexer.setFont(font, 3)
         self.lexer.setFont(font, 4)
+
+        for style in range(0, 33):
+            paperColor = QColor(self.settings.value("pythonConsole/paperBackgroundColor", QColor(Qt.white)))
+            self.lexer.setPaper(paperColor, style)
 
         self.api = QsciAPIs(self.lexer)
         chekBoxAPI = self.settings.value("pythonConsole/preloadAPI", True, type=bool)
@@ -411,30 +436,39 @@ class ShellScintilla(QsciScintilla, code.InteractiveInterpreter):
             self.showNext()
         ## TODO: press event for auto-completion file directory
         else:
-            if self.settings.value("pythonConsole/autoCloseBracket", False, type=bool):
-                t = unicode(e.text())
-                ## Close bracket automatically
-                if t in self.opening:
-                    i = self.opening.index(t)
-                    if self.hasSelectedText() and startPos != 0:
-                        selText = self.selectedText()
-                        self.removeSelectedText()
-                        self.insert(self.opening[i] + selText + self.closing[i])
-                        self.setCursorPosition(endLine, endPos+2)
-                        return
-                    else:
-                        self.insert(self.closing[i])
-                ## FIXES #8392 (automatically removes the redundant char
-                ## when autoclosing brackets option is enabled)
-                if t in [')', ']', '}']:
-                    l, pos = self.getCursorPosition()
-                    txt = self.text(l)
-                    try:
-                        if txt[pos-1] in self.opening:
-                            self.setCursorPosition(l, pos+1)
-                            self.SendScintilla(QsciScintilla.SCI_DELETEBACK)
-                    except IndexError:
-                        pass
+            t = unicode(e.text())
+            self.autoCloseBracket = self.settings.value("pythonConsole/autoCloseBracket", False, type=bool)
+            self.autoImport = self.settings.value("pythonConsole/autoInsertionImport", True, type=bool)
+            txt = cmd[:index].replace('>>> ', '').replace('... ', '')
+            ## Close bracket automatically
+            if t in self.opening and self.autoCloseBracket:
+                i = self.opening.index(t)
+                if self.hasSelectedText() and startPos != 0:
+                    selText = self.selectedText()
+                    self.removeSelectedText()
+                    self.insert(self.opening[i] + selText + self.closing[i])
+                    self.setCursorPosition(endLine, endPos+2)
+                    return
+                elif t == '(' and (re.match(r'^[ \t]*def \w+$', txt) \
+                                   or re.match(r'^[ \t]*class \w+$', txt)):
+                        self.insert('):')
+                else:
+                    self.insert(self.closing[i])
+            ## FIXES #8392 (automatically removes the redundant char
+            ## when autoclosing brackets option is enabled)
+            elif t in [')', ']', '}'] and self.autoCloseBracket:
+                txt = self.text(line)
+                try:
+                    if txt[index-1] in self.opening and t == txt[index]:
+                        self.setCursorPosition(line, index+1)
+                        self.SendScintilla(QsciScintilla.SCI_DELETEBACK)
+                except IndexError:
+                    pass
+            elif t == ' ' and self.autoImport:
+                ptrn = r'^[ \t]*from [\w.]+$'
+                if re.match(ptrn, txt):
+                    self.insert(' import')
+                    self.setCursorPosition(line, index + 7)
             QsciScintilla.keyPressEvent(self, e)
 
     def contextMenuEvent(self, e):
@@ -442,28 +476,28 @@ class ShellScintilla(QsciScintilla, code.InteractiveInterpreter):
         subMenu = QMenu(menu)
         titleHistoryMenu = QCoreApplication.translate("PythonConsole", "Command History")
         subMenu.setTitle(titleHistoryMenu)
-        showHistoryAction = subMenu.addAction(QCoreApplication.translate("PythonConsole",
-                                                                         "Show"),
-                                    self.showHistory, 'Ctrl+Shift+SPACE')
+        showHistoryAction = subMenu.addAction(
+                            QCoreApplication.translate("PythonConsole", "Show"),
+                            self.showHistory, 'Ctrl+Shift+SPACE')
         subMenu.addSeparator()
-        saveHistoryAction = subMenu.addAction(QCoreApplication.translate("PythonConsole",
-                                                                          "Save"),
-                                              self.writeHistoryFile)
+        saveHistoryAction = subMenu.addAction(
+                            QCoreApplication.translate("PythonConsole", "Save"),
+                            self.writeHistoryFile)
         subMenu.addSeparator()
-        clearHistoryAction = subMenu.addAction(QCoreApplication.translate("PythonConsole",
-                                                                          "Clear File"),
-                                               self.clearHistory)
-        clearSessHistoryAction = subMenu.addAction(QCoreApplication.translate("PythonConsole",
-                                                                              "Clear Session"),
-                                                  self.clearHistorySession)
+        clearHistoryAction = subMenu.addAction(
+                             QCoreApplication.translate("PythonConsole", "Clear File"),
+                             self.clearHistory)
+        clearSessHistoryAction = subMenu.addAction(
+                                 QCoreApplication.translate("PythonConsole", "Clear Session"),
+                                 self.clearHistorySession)
         menu.addMenu(subMenu)
         menu.addSeparator()
-        copyAction = menu.addAction(QCoreApplication.translate("PythonConsole",
-                                                               "Copy"),
-                                    self.copy, QKeySequence.Copy)
-        pasteAction = menu.addAction(QCoreApplication.translate("PythonConsole",
-                                                                "Paste"),
-                                     self.paste, QKeySequence.Paste)
+        copyAction = menu.addAction(
+                     QCoreApplication.translate("PythonConsole", "Copy"),
+                     self.copy, QKeySequence.Copy)
+        pasteAction = menu.addAction(
+                      QCoreApplication.translate("PythonConsole", "Paste"),
+                      self.paste, QKeySequence.Paste)
         copyAction.setEnabled(False)
         pasteAction.setEnabled(False)
         if self.hasSelectedText():
@@ -595,12 +629,18 @@ class HistoryDialog(QDialog, Ui_HistoryDialogPythonConsole):
 
         self._reloadHistory()
 
+        self.deleteScut = QShortcut(QKeySequence(Qt.Key_Delete), self)
+        self.deleteScut.activated.connect(self._deleteItem)
         self.listView.doubleClicked.connect(self._runHistory)
         self.reloadHistory.clicked.connect(self._reloadHistory)
+        self.saveHistory.clicked.connect(self._saveHistory)
 
     def _runHistory(self, item):
         cmd = item.data(Qt.DisplayRole)
         self.parent.runCommand(unicode(cmd))
+
+    def _saveHistory(self):
+        self.parent.writeHistoryFile(True)
 
     def _reloadHistory(self):
         self.model.clear()
@@ -612,3 +652,13 @@ class HistoryDialog(QDialog, Ui_HistoryDialogPythonConsole):
 
         self.listView.setModel(self.model)
         self.listView.scrollToBottom()
+
+    def _deleteItem(self):
+        itemsSelected = self.listView.selectionModel().selectedIndexes()
+        if itemsSelected:
+            item = itemsSelected[0].row()
+            ## Remove item from the command history (just for the current session)
+            self.parent.history.pop(item)
+            self.parent.historyIndex -= 1
+            ## Remove row from the command history dialog
+            self.model.removeRow(item)

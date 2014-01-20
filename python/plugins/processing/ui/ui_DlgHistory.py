@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'DlgHistory.ui'
 #
-# Created: Tue Aug 20 11:01:50 2013
+# Created: Fri Sep 13 14:15:41 2013
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,7 +17,7 @@ except AttributeError:
 class Ui_DlgHistory(object):
     def setupUi(self, DlgHistory):
         DlgHistory.setObjectName(_fromUtf8("DlgHistory"))
-        DlgHistory.resize(532, 377)
+        DlgHistory.resize(800, 500)
         self.verticalLayout = QtGui.QVBoxLayout(DlgHistory)
         self.verticalLayout.setSpacing(2)
         self.verticalLayout.setMargin(0)

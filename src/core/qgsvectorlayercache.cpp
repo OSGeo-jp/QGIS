@@ -22,11 +22,12 @@
 QgsVectorLayerCache::QgsVectorLayerCache( QgsVectorLayer* layer, int cacheSize, QObject* parent )
     : QObject( parent )
     , mLayer( layer )
+    , mFullCache( false )
 {
   mCache.setMaxCost( cacheSize );
 
   connect( mLayer, SIGNAL( featureDeleted( QgsFeatureId ) ), SLOT( featureDeleted( QgsFeatureId ) ) );
-  connect( mLayer, SIGNAL( featureAdded( QgsFeatureId ) ), SLOT( featureAdded( QgsFeatureId ) ) );
+  connect( mLayer, SIGNAL( featureAdded( QgsFeatureId ) ), SLOT( onFeatureAdded( QgsFeatureId ) ) );
   connect( mLayer, SIGNAL( layerDeleted() ), SLOT( layerDeleted() ) );
 
   setCacheGeometry( true );
@@ -76,9 +77,9 @@ void QgsVectorLayerCache::setFullCache( bool fullCache )
     setCacheSize( mLayer->featureCount() + 100 );
 
     // Initialize the cache...
-    QgsFeatureIterator it = getFeatures( QgsFeatureRequest()
-                                         .setSubsetOfAttributes( mCachedAttributes )
-                                         .setFlags( !mCacheGeometry ? QgsFeatureRequest::NoGeometry : QgsFeatureRequest::Flags( 0 ) ) );
+    QgsFeatureIterator it( new QgsCachedFeatureWriterIterator( this, QgsFeatureRequest()
+                           .setSubsetOfAttributes( mCachedAttributes )
+                           .setFlags( !mCacheGeometry ? QgsFeatureRequest::NoGeometry : QgsFeatureRequest::Flags( 0 ) ) ) );
 
     int i = 0;
 
@@ -200,7 +201,7 @@ void QgsVectorLayerCache::featureDeleted( QgsFeatureId fid )
   mCache.remove( fid );
 }
 
-void QgsVectorLayerCache::featureAdded( QgsFeatureId fid )
+void QgsVectorLayerCache::onFeatureAdded( QgsFeatureId fid )
 {
   if ( mFullCache )
   {
@@ -212,6 +213,7 @@ void QgsVectorLayerCache::featureAdded( QgsFeatureId fid )
     QgsFeature feat;
     featureAtId( fid, feat );
   }
+  emit( featureAdded( fid ) );
 }
 
 void QgsVectorLayerCache::attributeAdded( int field )
@@ -257,13 +259,22 @@ QgsFeatureIterator QgsVectorLayerCache::getFeatures( const QgsFeatureRequest &fe
 
   if ( checkInformationCovered( featureRequest ) )
   {
-    // Check if an index is able to deliver the requested features
-    foreach ( QgsAbstractCacheIndex *idx, mCacheIndices )
+    // If we have a full cache available, run on this
+    if ( mFullCache )
     {
-      if ( idx->getCacheIterator( it, featureRequest ) )
+      it = QgsFeatureIterator( new QgsCachedFeatureIterator( this, featureRequest ) );
+      requiresWriterIt = false;
+    }
+    else
+    {
+      // Check if an index is able to deliver the requested features
+      foreach ( QgsAbstractCacheIndex *idx, mCacheIndices )
       {
-        requiresWriterIt = false;
-        break;
+        if ( idx->getCacheIterator( it, featureRequest ) )
+        {
+          requiresWriterIt = false;
+          break;
+        }
       }
     }
   }

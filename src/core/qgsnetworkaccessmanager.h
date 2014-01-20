@@ -24,6 +24,8 @@
 #include <QNetworkProxy>
 #include <QNetworkRequest>
 
+class QTimer;
+
 /*
  * \class QgsNetworkAccessManager
  * \brief network access manager for QGIS
@@ -53,7 +55,6 @@ class CORE_EXPORT QgsNetworkAccessManager : public QNetworkAccessManager
     //! destructor
     ~QgsNetworkAccessManager();
 
-#if QT_VERSION >= 0x40500
     //! insert a factory into the proxy factories list
     void insertProxyFactory( QNetworkProxyFactory *factory );
 
@@ -62,7 +63,6 @@ class CORE_EXPORT QgsNetworkAccessManager : public QNetworkAccessManager
 
     //! retrieve proxy factory list
     const QList<QNetworkProxyFactory *> proxyFactories() const;
-#endif
 
     //! retrieve fall back proxy (for urls that no factory returned proxies for)
     const QNetworkProxy &fallbackProxy() const;
@@ -84,6 +84,8 @@ class CORE_EXPORT QgsNetworkAccessManager : public QNetworkAccessManager
     void requestCreated( QNetworkReply * );
 
   private slots:
+    void connectionProgress();
+    void connectionDestroyed( QObject* );
     void abortRequest();
 
   protected:
@@ -91,13 +93,11 @@ class CORE_EXPORT QgsNetworkAccessManager : public QNetworkAccessManager
 
   private:
     QgsNetworkAccessManager( QObject *parent = 0 );
-#if QT_VERSION >= 0x40500
     QList<QNetworkProxyFactory*> mProxyFactories;
-#endif
     QNetworkProxy mFallbackProxy;
     QStringList mExcludedURLs;
 
-    static QgsNetworkAccessManager *smNAM;
+    QMap<QNetworkReply*, QTimer*> mActiveRequests;
 };
 
 #endif // QGSNETWORKACCESSMANAGER_H

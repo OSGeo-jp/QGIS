@@ -57,14 +57,15 @@ static const QString pluginIcon = ":/images/themes/default/grass/grass_tools.png
  * @param theQGisApp Pointer to the QGIS main window
  * @param theQgisInterFace Pointer to the QGIS interface object
  */
-QgsGrassPlugin::QgsGrassPlugin( QgisInterface * theQgisInterFace ):
-    qGisInterface( theQgisInterFace ), mTools( NULL ), mEdit( NULL )
+QgsGrassPlugin::QgsGrassPlugin( QgisInterface * theQgisInterFace )
+    : pluginNameQString( tr( "GrassVector" ) )
+    , pluginVersionQString( tr( "0.1" ) )
+    , pluginDescriptionQString( tr( "GRASS layer" ) )
+    , pluginCategoryQString( tr( "Plugins" ) )
+    , qGisInterface( theQgisInterFace )
+    , mTools( 0 )
+    , mEdit( 0 )
 {
-  /** Initialize the plugin and set the required attributes */
-  pluginNameQString = tr( "GrassVector" );
-  pluginVersionQString = tr( "0.1" );
-  pluginDescriptionQString = tr( "GRASS layer" );
-  pluginCategoryQString = tr( "Plugins" );
 }
 
 QgsGrassPlugin::~QgsGrassPlugin()
@@ -321,11 +322,14 @@ void QgsGrassPlugin::addVector()
     QString field;
     QString type;
 
-    QRegExp rx( "(\\d+)_(.+)" );
-    if ( rx.indexIn( sel->layer ) != -1 )
+    if ( !sel->layer.startsWith( "topo_" ) )
     {
-      field = rx.cap( 1 );
-      type = rx.cap( 2 );
+      QRegExp rx( "(\\d+)_(.+)" );
+      if ( rx.indexIn( sel->layer ) != -1 )
+      {
+        field = rx.cap( 1 );
+        type = rx.cap( 2 );
+      }
     }
 
     // Set location
@@ -355,26 +359,33 @@ void QgsGrassPlugin::addVector()
 
       if ( level >= 2 )
       {
-        // Count layers
-        int cnt = 0;
-        int ncidx = Vect_cidx_get_num_fields( &map );
-
-        for ( int i = 0; i < ncidx; i++ )
+        if ( !sel->layer.startsWith( "topo_" ) )
         {
-          int field = Vect_cidx_get_field_number( &map, i );
+          // Count layers
+          int cnt = 0;
+          int ncidx = Vect_cidx_get_num_fields( &map );
 
-          if ( Vect_cidx_get_type_count( &map, field, GV_POINT | GV_LINE | GV_AREA ) > 0 ||
-               ( field > 1 && Vect_cidx_get_type_count( &map, field, GV_BOUNDARY ) ) )
+          for ( int i = 0; i < ncidx; i++ )
           {
-            cnt++;
+            int field = Vect_cidx_get_field_number( &map, i );
+
+            if ( Vect_cidx_get_type_count( &map, field, GV_POINT | GV_LINE | GV_AREA ) > 0 ||
+                 ( field > 1 && Vect_cidx_get_type_count( &map, field, GV_BOUNDARY ) ) )
+            {
+              cnt++;
+            }
+          }
+
+          if ( cnt > 1 )
+          {
+            name.append( " " + field );
+
+            // No need to ad type, the type is obvious from the legend
           }
         }
-
-        if ( cnt > 1 )
+        else
         {
-          name.append( " " + field );
-
-          // No need to ad type, the type is obvious from the legend
+          name.append( " " + sel->layer );
         }
       }
 
@@ -848,7 +859,10 @@ void QgsGrassPlugin::unload()
   delete mNewVectorAction;
 
   if ( toolBarPointer )
+  {
     delete toolBarPointer;
+    toolBarPointer = 0;
+  }
 
   // disconnect slots of QgsGrassPlugin so they're not fired also after unload
   disconnect( mCanvas, SIGNAL( renderComplete( QPainter * ) ), this, SLOT( postRender( QPainter * ) ) );
@@ -864,27 +878,29 @@ void QgsGrassPlugin::unload()
 void QgsGrassPlugin::setCurrentTheme( QString theThemeName )
 {
   Q_UNUSED( theThemeName );
+  if ( toolBarPointer )
+  {
+    mOpenMapsetAction->setIcon( getThemeIcon( "grass_open_mapset.png" ) );
+    mNewMapsetAction->setIcon( getThemeIcon( "grass_new_mapset.png" ) );
+    mCloseMapsetAction->setIcon( getThemeIcon( "grass_close_mapset.png" ) );
 
-  mOpenMapsetAction->setIcon( getThemeIcon( "grass_open_mapset.png" ) );
-  mNewMapsetAction->setIcon( getThemeIcon( "grass_new_mapset.png" ) );
-  mCloseMapsetAction->setIcon( getThemeIcon( "grass_close_mapset.png" ) );
+    mAddVectorAction->setIcon( getThemeIcon( "grass_add_vector.png" ) );
+    mAddRasterAction->setIcon( getThemeIcon( "grass_add_raster.png" ) );
+    mOpenToolsAction->setIcon( getThemeIcon( "grass_tools.png" ) );
 
-  mAddVectorAction->setIcon( getThemeIcon( "grass_add_vector.png" ) );
-  mAddRasterAction->setIcon( getThemeIcon( "grass_add_raster.png" ) );
-  mOpenToolsAction->setIcon( getThemeIcon( "grass_tools.png" ) );
+    mRegionAction->setIcon( getThemeIcon( "grass_region.png" ) );
 
-  mRegionAction->setIcon( getThemeIcon( "grass_region.png" ) );
-
-  mEditRegionAction->setIcon( getThemeIcon( "grass_region_edit.png" ) );
-  mEditAction->setIcon( getThemeIcon( "grass_edit.png" ) );
-  mNewVectorAction->setIcon( getThemeIcon( "grass_new_vector_layer.png" ) );
+    mEditRegionAction->setIcon( getThemeIcon( "grass_region_edit.png" ) );
+    mEditAction->setIcon( getThemeIcon( "grass_edit.png" ) );
+    mNewVectorAction->setIcon( getThemeIcon( "grass_new_vector_layer.png" ) );
+  }
 }
 
 // Note this code is duplicated from qgisapp.cpp because
 // I didnt want to make plugins dependent on qgsapplication
 // and because it needs grass specific path into
 // the GRASS plugin resource bundle [TS]
-QIcon QgsGrassPlugin::getThemeIcon( const QString theName )
+QIcon QgsGrassPlugin::getThemeIcon( const QString &theName )
 {
   QString myCurThemePath = QgsApplication::activeThemePath() + "/grass/" + theName;
   QString myDefThemePath = QgsApplication::defaultThemePath() + "/grass/" + theName;

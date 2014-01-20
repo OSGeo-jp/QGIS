@@ -20,18 +20,19 @@
 #include <deque>
 #include <memory>
 
-#include "qgslogger.h"
-#include "qgsrectangle.h"
-#include "qgsvectorlayer.h"
-#include "qgsrasterlayer.h"
-#include "qgsmaplayerregistry.h"
+#include "qgsdatasourceuri.h"
 #include "qgsexception.h"
-#include "qgsprojectproperty.h"
-#include "qgsprojectfiletransform.h"
-#include "qgsprojectversion.h"
+#include "qgslogger.h"
+#include "qgsmaplayerregistry.h"
 #include "qgspluginlayer.h"
 #include "qgspluginlayerregistry.h"
-#include "qgsdatasourceuri.h"
+#include "qgsprojectfiletransform.h"
+#include "qgsprojectproperty.h"
+#include "qgsprojectversion.h"
+#include "qgsrasterlayer.h"
+#include "qgsrectangle.h"
+#include "qgsrelationmanager.h"
+#include "qgsvectorlayer.h"
 
 #include <QApplication>
 #include <QFileInfo>
@@ -40,7 +41,7 @@
 #include <QTextStream>
 
 // canonical project instance
-QgsProject * QgsProject::theProject_;
+QgsProject *QgsProject::theProject_ = 0;
 
 /**
     Take the given scope and key and convert them to a string list of key
@@ -303,8 +304,8 @@ struct QgsProject::Imp
   bool dirty;
 
   Imp()
-      : title( "" ),
-      dirty( false )
+      : title( "" )
+      , dirty( false )
   {                             // top property node is the root
     // "properties" that contains all plug-in
     // and extra property keys and values
@@ -332,7 +333,9 @@ struct QgsProject::Imp
 
 
 QgsProject::QgsProject()
-    : imp_( new QgsProject::Imp ), mBadLayerHandler( new QgsProjectBadLayerDefaultHandler() )
+    : imp_( new QgsProject::Imp )
+    , mBadLayerHandler( new QgsProjectBadLayerDefaultHandler() )
+    , mRelationManager( new QgsRelationManager( this ) )
 {
   // Set some default project properties
   // XXX THESE SHOULD BE MOVED TO STATUSBAR RELATED SOURCE
@@ -349,24 +352,21 @@ QgsProject::QgsProject()
 QgsProject::~QgsProject()
 {
   delete mBadLayerHandler;
+  delete mRelationManager;
 
   // note that std::auto_ptr automatically deletes imp_ when it's destroyed
 } // QgsProject dtor
 
 
 
-QgsProject * QgsProject::instance()
+QgsProject *QgsProject::instance()
 {
-  if ( !QgsProject::theProject_ )
+  if ( !theProject_ )
   {
-    QgsProject::theProject_ = new QgsProject;
+    theProject_ = new QgsProject;
   }
-
-  return QgsProject::theProject_;
-} // QgsProject * instance()
-
-
-
+  return theProject_;
+} // QgsProject *instance()
 
 void QgsProject::title( QString const &title )
 {
@@ -717,7 +717,6 @@ QPair< bool, QList<QDomNode> > QgsProject::_getMapLayers( QDomDocument const &do
 
 } // _getMapLayers
 
-
 bool QgsProject::addLayer( const QDomElement& layerElem, QList<QDomNode>& brokenNodes, QList< QPair< QgsVectorLayer*, QDomElement > >& vectorLayerList )
 {
   QString type = layerElem.attribute( "type" );
@@ -865,6 +864,7 @@ bool QgsProject::read()
 
   imp_->clear();
   mEmbeddedLayers.clear();
+  mRelationManager->clear();
 
   // now get any properties
   _getProperties( *doc, imp_->properties_ );
@@ -935,6 +935,15 @@ bool QgsProject::write( QFileInfo const &file )
 bool QgsProject::write()
 {
   clearError();
+
+  // Create backup file
+  if ( QFile::exists( fileName() ) )
+  {
+    QString backup = fileName() + "~";
+    if ( QFile::exists( backup ) )
+      QFile::remove( backup );
+    QFile::rename( fileName(), backup );
+  }
 
   // if we have problems creating or otherwise writing to the project file,
   // let's find out up front before we go through all the hand-waving
@@ -1322,8 +1331,7 @@ QStringList QgsProject::entryList( QString const &scope, QString const &key ) co
 } // QgsProject::entryList
 
 
-QStringList
-QgsProject::subkeyList( QString const &scope, QString const &key ) const
+QStringList QgsProject::subkeyList( QString const &scope, QString const &key ) const
 {
   QgsProperty * foundProperty = findKey_( scope, key, imp_->properties_ );
 
@@ -1357,6 +1365,13 @@ QString QgsProject::readPath( QString src ) const
     return src;
   }
 
+  // if this is a VSIFILE, remove the VSI prefix and append to final result
+  QString vsiPrefix = qgsVsiPrefix( src );
+  if ( ! vsiPrefix.isEmpty() )
+  {
+    src.remove( 0, vsiPrefix.size() );
+  }
+
   // relative path should always start with ./ or ../
   if ( !src.startsWith( "./" ) && !src.startsWith( "../" ) )
   {
@@ -1366,13 +1381,13 @@ QString QgsProject::readPath( QString src ) const
          ( src[0].isLetter() && src[1] == ':' ) )
     {
       // UNC or absolute path
-      return src;
+      return vsiPrefix + src;
     }
 #else
     if ( src[0] == '/' )
     {
       // absolute path
-      return src;
+      return vsiPrefix + src;
     }
 #endif
 
@@ -1382,17 +1397,17 @@ QString QgsProject::readPath( QString src ) const
     // from the filename.
     QString home = homePath();
     if ( home.isNull() )
-      return src;
+      return vsiPrefix + src;
 
     QFileInfo fi( home + "/" + src );
 
     if ( !fi.exists() )
     {
-      return src;
+      return vsiPrefix + src;
     }
     else
     {
-      return fi.canonicalFilePath();
+      return vsiPrefix + fi.canonicalFilePath();
     }
   }
 
@@ -1401,7 +1416,7 @@ QString QgsProject::readPath( QString src ) const
 
   if ( projPath.isEmpty() )
   {
-    return src;
+    return vsiPrefix + src;
   }
 
 #if defined(Q_OS_WIN)
@@ -1443,7 +1458,7 @@ QString QgsProject::readPath( QString src ) const
   projElems.prepend( "" );
 #endif
 
-  return projElems.join( "/" );
+  return vsiPrefix + projElems.join( "/" );
 }
 
 // return the absolute or relative path to write it to the project file
@@ -1460,6 +1475,13 @@ QString QgsProject::writePath( QString src ) const
   if ( projPath.isEmpty() )
   {
     return src;
+  }
+
+  // if this is a VSIFILE, remove the VSI prefix and append to final result
+  QString vsiPrefix = qgsVsiPrefix( src );
+  if ( ! vsiPrefix.isEmpty() )
+  {
+    srcPath.remove( 0, vsiPrefix.size() );
   }
 
 #if defined( Q_OS_WIN )
@@ -1524,7 +1546,7 @@ QString QgsProject::writePath( QString src ) const
     srcElems.insert( 0, "." );
   }
 
-  return srcElems.join( "/" );
+  return vsiPrefix + srcElems.join( "/" );
 }
 
 void QgsProject::setError( QString errorMessage )
@@ -1800,4 +1822,9 @@ QString QgsProject::homePath() const
     return QString::null;
 
   return pfi.canonicalPath();
+}
+
+QgsRelationManager* QgsProject::relationManager() const
+{
+  return mRelationManager;
 }

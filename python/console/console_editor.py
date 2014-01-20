@@ -36,6 +36,7 @@ import pyclbr
 from operator import itemgetter
 import traceback
 import codecs
+import re
 
 class KeyFilter(QObject):
     SHORTCUTS = {
@@ -108,7 +109,7 @@ class Editor(QsciScintilla):
         self.setMarginsForegroundColor(QColor("#3E3EE3"))
         self.setMarginsBackgroundColor(QColor("#f9f9f9"))
         self.setCaretLineVisible(True)
-        self.setCaretLineBackgroundColor(QColor("#fcf3ed"))
+        self.setCaretWidth(2)
 
         self.markerDefine(QgsApplication.getThemePixmap("console/iconSyntaxErrorConsole.png"),
                           self.MARKER_NUM)
@@ -198,6 +199,11 @@ class Editor(QsciScintilla):
         else:
             self.setAutoCompletionSource(self.AcsNone)
 
+        caretLineColorEditor = self.settings.value("pythonConsole/caretLineColorEditor", QColor("#fcf3ed"))
+        cursorColorEditor = self.settings.value("pythonConsole/cursorColorEditor", QColor(Qt.black))
+        self.setCaretLineBackgroundColor(caretLineColorEditor)
+        self.setCaretForegroundColor(cursorColorEditor)
+
     def autoCompleteKeyBinding(self):
         radioButtonSource = self.settings.value("pythonConsole/autoCompleteSourceEditor", 'fromAPI')
         autoCompEnabled = self.settings.value("pythonConsole/autoCompleteEnabledEditor", True, type=bool)
@@ -229,18 +235,31 @@ class Editor(QsciScintilla):
         font.setBold(False)
 
         self.lexer.setDefaultFont(font)
-        self.lexer.setColor(Qt.red, 1)
-        self.lexer.setColor(Qt.darkGreen, 5)
-        self.lexer.setColor(Qt.darkBlue, 15)
+        self.lexer.setDefaultColor(QColor(self.settings.value("pythonConsole/defaultFontColorEditor", QColor(Qt.black))))
+        self.lexer.setColor(QColor(self.settings.value("pythonConsole/commentFontColorEditor", QColor(Qt.gray))), 1)
+        self.lexer.setColor(QColor(self.settings.value("pythonConsole/keywordFontColorEditor", QColor(Qt.darkGreen))), 5)
+        self.lexer.setColor(QColor(self.settings.value("pythonConsole/classFontColorEditor", QColor(Qt.blue))), 8)
+        self.lexer.setColor(QColor(self.settings.value("pythonConsole/methodFontColorEditor", QColor(Qt.darkGray))), 9)
+        self.lexer.setColor(QColor(self.settings.value("pythonConsole/decorFontColorEditor", QColor(Qt.darkBlue))), 15)
+        self.lexer.setColor(QColor(self.settings.value("pythonConsole/commentBlockFontColorEditor", QColor(Qt.gray))), 12)
+        self.lexer.setColor(QColor(self.settings.value("pythonConsole/singleQuoteFontColorEditor", QColor(Qt.blue))), 4)
+        self.lexer.setColor(QColor(self.settings.value("pythonConsole/doubleQuoteFontColorEditor", QColor(Qt.blue))), 3)
+        self.lexer.setColor(QColor(self.settings.value("pythonConsole/tripleSingleQuoteFontColorEditor", QColor(Qt.blue))), 6)
+        self.lexer.setColor(QColor(self.settings.value("pythonConsole/tripleDoubleQuoteFontColorEditor", QColor(Qt.blue))), 7)
         self.lexer.setFont(font, 1)
         self.lexer.setFont(font, 3)
         self.lexer.setFont(font, 4)
+
+        for style in range(0, 33):
+            paperColor = QColor(self.settings.value("pythonConsole/paperBackgroundColorEditor", QColor(Qt.white)))
+            self.lexer.setPaper(paperColor, style)
 
         self.api = QsciAPIs(self.lexer)
         chekBoxAPI = self.settings.value("pythonConsole/preloadAPI", True, type=bool)
         chekBoxPreparedAPI = self.settings.value("pythonConsole/usePreparedAPIFile", False, type=bool)
         if chekBoxAPI:
-            self.api.loadPrepared(QgsApplication.pkgDataPath() + "/python/qsci_apis/pyqgis_master.pap")
+            pap = os.path.join(QgsApplication.pkgDataPath(), "python", "qsci_apis", "pyqgis.pap")
+            self.api.loadPrepared(pap)
         elif chekBoxPreparedAPI:
             self.api.loadPrepared(self.settings.value("pythonConsole/preparedAPIFile"))
         else:
@@ -278,79 +297,64 @@ class Editor(QsciScintilla):
         iconCut = QgsApplication.getThemeIcon("console/iconCutEditorConsole.png")
         iconCopy = QgsApplication.getThemeIcon("console/iconCopyEditorConsole.png")
         iconPaste = QgsApplication.getThemeIcon("console/iconPasteEditorConsole.png")
-        hideEditorAction = menu.addAction(QCoreApplication.translate("PythonConsole", "Hide Editor"),
-                                          self.hideEditor)
-        menu.addSeparator()
+        hideEditorAction = menu.addAction(
+                           QCoreApplication.translate("PythonConsole", "Hide Editor"),
+                           self.hideEditor)
+        menu.addSeparator() # ------------------------------
         syntaxCheck = menu.addAction(iconSyntaxCk,
-                                     QCoreApplication.translate("PythonConsole",
-                                                                "Check Syntax"),
-                                     self.syntaxCheck, 'Ctrl+4')
+                      QCoreApplication.translate("PythonConsole", "Check Syntax"),
+                      self.syntaxCheck, 'Ctrl+4')
         menu.addSeparator()
         runSelected = menu.addAction(iconRun,
-                                     QCoreApplication.translate("PythonConsole",
-                                                                "Run selected"),
-                                     self.runSelectedCode, 'Ctrl+E')
+                      QCoreApplication.translate("PythonConsole", "Run selected"),
+                      self.runSelectedCode, 'Ctrl+E')
         runScript = menu.addAction(iconRunScript,
-                                   QCoreApplication.translate("PythonConsole",
-                                                              "Run Script"),
-                                   self.runScriptCode, 'Shift+Ctrl+E')
+                    QCoreApplication.translate("PythonConsole", "Run Script"),
+                    self.runScriptCode, 'Shift+Ctrl+E')
         menu.addSeparator()
-        undoAction = menu.addAction(QCoreApplication.translate("PythonConsole",
-                                                               "Undo"),
-                                    self.undo, QKeySequence.Undo)
-        redoAction = menu.addAction(QCoreApplication.translate("PythonConsole",
-                                                               "Redo"),
-                                    self.redo, 'Ctrl+Shift+Z')
+        undoAction = menu.addAction(
+                     QCoreApplication.translate("PythonConsole", "Undo"),
+                     self.undo, QKeySequence.Undo)
+        redoAction = menu.addAction(
+                     QCoreApplication.translate("PythonConsole", "Redo"),
+                      self.redo, 'Ctrl+Shift+Z')
         menu.addSeparator()
         findAction = menu.addAction(iconFind,
-                                    QCoreApplication.translate("PythonConsole",
-                                                               "Find Text"),
-                                    self.showFindWidget)
+                     QCoreApplication.translate("PythonConsole", "Find Text"),
+                     self.showFindWidget)
         menu.addSeparator()
         cutAction = menu.addAction(iconCut,
-                                   QCoreApplication.translate("PythonConsole",
-                                                              "Cut"),
-                                    self.cut,
-                                    QKeySequence.Cut)
+                    QCoreApplication.translate("PythonConsole", "Cut"),
+                    self.cut, QKeySequence.Cut)
         copyAction = menu.addAction(iconCopy,
-                                    QCoreApplication.translate("PythonConsole",
-                                                               "Copy"),
-                                    self.copy,
-                                    QKeySequence.Copy)
+                     QCoreApplication.translate("PythonConsole", "Copy"),
+                     self.copy, QKeySequence.Copy)
         pasteAction = menu.addAction(iconPaste,
-                                     QCoreApplication.translate("PythonConsole",
-                                                                "Paste"),
-                                     self.paste, QKeySequence.Paste)
+                      QCoreApplication.translate("PythonConsole", "Paste"),
+                      self.paste, QKeySequence.Paste)
         menu.addSeparator()
         commentCodeAction = menu.addAction(iconCommentEditor,
-                                           QCoreApplication.translate("PythonConsole",
-                                                                      "Comment"),
-                                           self.parent.pc.commentCode, 'Ctrl+3')
+                            QCoreApplication.translate("PythonConsole", "Comment"),
+                            self.parent.pc.commentCode, 'Ctrl+3')
         uncommentCodeAction = menu.addAction(iconUncommentEditor,
-                                             QCoreApplication.translate("PythonConsole",
-                                                                        "Uncomment"),
-                                             self.parent.pc.uncommentCode,
-                                             'Shift+Ctrl+3')
+                              QCoreApplication.translate("PythonConsole", "Uncomment"),
+                              self.parent.pc.uncommentCode, 'Shift+Ctrl+3')
         menu.addSeparator()
         codePadAction = menu.addAction(iconCodePad,
-                                       QCoreApplication.translate("PythonConsole",
-                                                                  "Share on codepad"),
-                                       self.codepad)
+                        QCoreApplication.translate("PythonConsole", "Share on codepad"),
+                        self.codepad)
         menu.addSeparator()
         showCodeInspection = menu.addAction(iconObjInsp,
-                                            QCoreApplication.translate("PythonConsole",
-                                                                       "Hide/Show Object Inspector"),
-                                            self.objectListEditor)
+                             QCoreApplication.translate("PythonConsole", "Hide/Show Object Inspector"),
+                             self.objectListEditor)
         menu.addSeparator()
-        selectAllAction = menu.addAction(QCoreApplication.translate("PythonConsole",
-                                                                    "Select All"),
-                                         self.selectAll,
-                                         QKeySequence.SelectAll)
+        selectAllAction = menu.addAction(
+                          QCoreApplication.translate("PythonConsole", "Select All"),
+                          self.selectAll, QKeySequence.SelectAll)
         menu.addSeparator()
         settingsDialog = menu.addAction(iconSettings,
-                                        QCoreApplication.translate("PythonConsole",
-                                                                   "Settings"),
-                                        self.parent.pc.openSettings)
+                         QCoreApplication.translate("PythonConsole", "Settings"),
+                         self.parent.pc.openSettings)
         syntaxCheck.setEnabled(False)
         pasteAction.setEnabled(False)
         codePadAction.setEnabled(False)
@@ -577,7 +581,8 @@ class Editor(QsciScintilla):
                 tmpFile = self.createTempFile()
                 filename = tmpFile
 
-            self.parent.pc.shell.runCommand(u"execfile(r'{0}')".format(filename))
+            self.parent.pc.shell.runCommand(u"execfile(u'{0}'.encode('{1}'))"
+                                            .format(filename.replace("\\", "/"), sys.getfilesystemencoding()))
 
     def runSelectedCode(self):
         cmd = self.selectedText()
@@ -650,42 +655,51 @@ class Editor(QsciScintilla):
             return True
 
     def keyPressEvent(self, e):
-        if self.settings.value("pythonConsole/autoCloseBracketEditor", False, type=bool):
-            startLine, _, endLine, endPos = self.getSelection()
-            t = unicode(e.text())
-            ## Close bracket automatically
-            if t in self.opening:
-                i = self.opening.index(t)
-                if self.hasSelectedText():
-                    self.beginUndoAction()
-                    selText = self.selectedText()
-                    self.removeSelectedText()
-                    if startLine == endLine:
-                        self.insert(self.opening[i] + selText + self.closing[i])
-                        self.setCursorPosition(endLine, endPos+2)
-                        return
-                    elif startLine < endLine and self.opening[i] in ("'", '"'):
-                        self.insert("'''" + selText + "'''")
-                        return
-                    else:
-                        self.insert(self.closing[i])
+        t = unicode(e.text())
+        startLine, _, endLine, endPos = self.getSelection()
+        line, pos = self.getCursorPosition()
+        self.autoCloseBracket = self.settings.value("pythonConsole/autoCloseBracketEditor", False, type=bool)
+        self.autoImport = self.settings.value("pythonConsole/autoInsertionImportEditor", True, type=bool)
+        txt = self.text(line)[:pos]
+        ## Close bracket automatically
+        if t in self.opening and self.autoCloseBracket:
+            self.beginUndoAction()
+            i = self.opening.index(t)
+            if self.hasSelectedText():
+                selText = self.selectedText()
+                self.removeSelectedText()
+                if startLine == endLine:
+                    self.insert(self.opening[i] + selText + self.closing[i])
+                    self.setCursorPosition(endLine, endPos+2)
                     self.endUndoAction()
-                else:
-                    self.insert(self.closing[i])
-            ## FIXES #8392 (automatically removes the redundant char
-            ## when autoclosing brackets option is enabled)
-            if t in [')', ']', '}']:
-                l, pos = self.getCursorPosition()
-                txt = self.text(l)
-                try:
-                    if txt[pos-1] in self.opening:
-                        self.setCursorPosition(l, pos+1)
-                        self.SendScintilla(QsciScintilla.SCI_DELETEBACK)
-                except IndexError:
-                    pass
-            QsciScintilla.keyPressEvent(self, e)
-        else:
-            QsciScintilla.keyPressEvent(self, e)
+                    return
+                elif startLine < endLine and self.opening[i] in ("'", '"'):
+                    self.insert("'''" + selText + "'''")
+                    self.setCursorPosition(endLine, endPos+3)
+                    self.endUndoAction()
+                    return
+            elif t == '(' and (re.match(r'^[ \t]*def \w+$', txt) \
+                               or re.match(r'^[ \t]*class \w+$', txt)):
+                    self.insert('):')
+            else:
+                self.insert(self.closing[i])
+            self.endUndoAction()
+        ## FIXES #8392 (automatically removes the redundant char
+        ## when autoclosing brackets option is enabled)
+        elif t in [')', ']', '}'] and self.autoCloseBracket:
+            txt = self.text(line)
+            try:
+                if txt[pos-1] in self.opening and t == txt[pos]:
+                    self.setCursorPosition(line, pos+1)
+                    self.SendScintilla(QsciScintilla.SCI_DELETEBACK)
+            except IndexError:
+                pass
+        elif t == ' ' and self.autoImport:
+            ptrn = r'^[ \t]*from [\w.]+$'
+            if re.match(ptrn, txt):
+                self.insert(' import')
+                self.setCursorPosition(line, pos + 7)
+        QsciScintilla.keyPressEvent(self, e)
 
     def focusInEvent(self, e):
         pathfile = self.parent.path
@@ -949,20 +963,26 @@ class EditorTabWidget(QTabWidget):
             cW = self.widget(self.idx)
             menu = QMenu(self)
             menu.addSeparator()
-            newTabAction = menu.addAction("New Editor",
-                                          self.newTabEditor)
+            newTabAction = menu.addAction(
+                           QCoreApplication.translate("PythonConsole", "New Editor"),
+                           self.newTabEditor)
             menu.addSeparator()
-            closeTabAction = menu.addAction("Close Tab",
-                                            cW.close)
-            closeAllTabAction = menu.addAction("Close All",
-                                               self.closeAll)
-            closeOthersTabAction = menu.addAction("Close Others",
-                                                  self.closeOthers)
+            closeTabAction = menu.addAction(
+                             QCoreApplication.translate("PythonConsole", "Close Tab"),
+                             cW.close)
+            closeAllTabAction = menu.addAction(
+                                QCoreApplication.translate("PythonConsole", "Close All"),
+                                self.closeAll)
+            closeOthersTabAction = menu.addAction(
+                                   QCoreApplication.translate("PythonConsole", "Close Others"),
+                                   self.closeOthers)
             menu.addSeparator()
-            saveAction = menu.addAction("Save",
-                                        cW.save)
-            saveAsAction = menu.addAction("Save As",
-                                          self.saveAs)
+            saveAction = menu.addAction(
+                         QCoreApplication.translate("PythonConsole", "Save"),
+                         cW.save)
+            saveAsAction = menu.addAction(
+                           QCoreApplication.translate("PythonConsole", "Save As"),
+                           self.saveAs)
             closeTabAction.setEnabled(False)
             closeAllTabAction.setEnabled(False)
             closeOthersTabAction.setEnabled(False)

@@ -38,15 +38,22 @@ INCLUDE_DIRECTORIES(
   ../src/core/pal
   ../src/core/composer
   ../src/core/diagram
+  ../src/core/dxf
   ../src/core/gps
   ../src/core/raster
   ../src/core/symbology-ng
 
   ../src/gui/raster
   ../src/gui/attributetable
+  ../src/gui/editorwidgets
+  ../src/gui/editorwidgets/core
 
   ${CMAKE_BINARY_DIR}  # qgsconfig.h, qgsversion.h
 )
+
+IF(NOT ANDROID)
+  SET(SIP_DISABLE_FEATURES ${SIP_DISABLE_FEATURES} ANDROID)
+ENDIF(NOT ANDROID)
 
 IF(NOT WITH_TOUCH)
   SET(SIP_DISABLE_FEATURES ${SIP_DISABLE_FEATURES} HAVE_TOUCH)
@@ -91,6 +98,12 @@ INCLUDE_DIRECTORIES(
 FILE(GLOB_RECURSE sip_files_gui gui/*.sip)
 SET(SIP_EXTRA_FILES_DEPEND ${sip_files_core} ${sip_files_gui})
 SET(SIP_EXTRA_OPTIONS ${PYQT4_SIP_FLAGS} -o -a ${CMAKE_BINARY_DIR}/python/qgis.gui.api)
+
+IF(UNIX AND NOT SIP_VERSION_NUM LESS 265984)
+  SET(SIP_EXTRA_OPTIONS -P ${SIP_EXTRA_OPTIONS})
+  ADD_DEFINITIONS(-Dprotected=public)
+ENDIF(UNIX AND NOT SIP_VERSION_NUM LESS 265984)
+
 ADD_SIP_PYTHON_MODULE(qgis.gui gui/gui.sip qgis_core qgis_gui)
 
 # additional analysis includes

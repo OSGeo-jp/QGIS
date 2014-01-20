@@ -21,6 +21,7 @@
 #include <ui_qgsvectorlayersaveasdialogbase.h>
 #include <QDialog>
 #include "qgscontexthelp.h"
+#include "qgsvectorfilewriter.h"
 
 /**
  *  Class to select destination file, type and CRS for ogr layrs
@@ -30,7 +31,15 @@ class QgsVectorLayerSaveAsDialog : public QDialog, private Ui::QgsVectorLayerSav
     Q_OBJECT
 
   public:
+    // bitmask of options to be shown
+    enum Options
+    {
+      Symbology = 1,
+      AllOptions = ~0
+    };
+
     QgsVectorLayerSaveAsDialog( long srsid, QWidget* parent = 0,  Qt::WFlags fl = 0 );
+    QgsVectorLayerSaveAsDialog( long srsid, int options = AllOptions, QWidget* parent = 0,  Qt::WFlags fl = 0 );
     ~QgsVectorLayerSaveAsDialog();
 
     QString format() const;
@@ -55,9 +64,13 @@ class QgsVectorLayerSaveAsDialog : public QDialog, private Ui::QgsVectorLayerSav
     void on_browseCRS_clicked();
     void on_buttonBox_helpRequested() { QgsContextHelp::run( metaObject()->className() ); }
     void on_mSymbologyExportComboBox_currentIndexChanged( const QString& text );
+    void on_mOptionsButton_toggled( bool checked );
     void accept();
 
   private:
+    void setup();
+    QList< QPair< QLabel*, QWidget* > > createControls( const QMap<QString, QgsVectorFileWriter::Option*>& options );
+
     long mCRS;
 };
 

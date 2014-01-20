@@ -74,6 +74,8 @@ SET(QGIS_CORE_SRCS
   qgsgeometry.cpp
   qgsgeometrycache.cpp
   qgsgeometryvalidator.cpp
+  qgsgeometrysimplifier.cpp
+  qgssimplifymethod.cpp
   qgsgml.cpp
   qgsgmlschema.cpp
   qgshttptransaction.cpp
@@ -85,6 +87,7 @@ SET(QGIS_CORE_SRCS
   qgsmaplayerregistry.cpp
   qgsmaprenderer.cpp
   qgsmaptopixel.cpp
+  qgsmaptopixelgeometrysimplifier.cpp
   qgsmessageoutput.cpp
   qgsmimedatautils.cpp
   qgsmessagelog.cpp
@@ -106,6 +109,8 @@ SET(QGIS_CORE_SRCS
   qgsprovidermetadata.cpp
   qgsproviderregistry.cpp
   qgspythonrunner.cpp
+  qgsrelation.cpp
+  qgsrelationmanager.cpp
   qgsrendercontext.cpp
   qgsrenderchecker.cpp
   qgsrectangle.cpp
@@ -125,6 +130,7 @@ SET(QGIS_CORE_SRCS
   qgsvectorlayerimport.cpp
   qgsvectorlayerjoinbuffer.cpp
   qgsvectorlayerundocommand.cpp
+  qgsvectorsimplifymethod.cpp
 
   qgsnetworkaccessmanager.cpp
 
@@ -133,6 +139,7 @@ SET(QGIS_CORE_SRCS
   composer/qgscomposermultiframecommand.cpp
   composer/qgscomposerarrow.cpp
   composer/qgscomposerframe.cpp
+  composer/qgscomposermousehandles.cpp
   composer/qgscomposeritem.cpp
   composer/qgscomposeritemcommand.cpp
   composer/qgscomposeritemgroup.cpp
@@ -159,6 +166,11 @@ SET(QGIS_CORE_SRCS
   composer/qgscomposerhtml.cpp
   composer/qgscomposermultiframe.cpp
   composer/qgscomposition.cpp
+  
+  dxf/qgsdxfexport.cpp
+  dxf/qgsdxfpaintdevice.cpp
+  dxf/qgsdxfpaintengine.cpp
+  dxf/qgsdxfpallabeling.cpp
 
   pal/costcalculator.cpp
   pal/feature.cpp
@@ -310,6 +322,7 @@ SET(QGIS_CORE_MOC_HDRS
   qgspluginlayer.h
   qgsproject.h
   qgsrunprocess.h
+  qgsrelationmanager.h
   qgsvectorlayer.h
   qgsvectorlayereditbuffer.h
   qgsnetworkaccessmanager.h
@@ -324,6 +337,7 @@ SET(QGIS_CORE_MOC_HDRS
   composer/qgscomposerscalebar.h
   composer/qgscomposeritem.h
   composer/qgscomposeritemgroup.h
+  composer/qgscomposermousehandles.h  
   composer/qgscomposerlabel.h
   composer/qgscomposershape.h
   composer/qgscomposerattributetable.h
@@ -382,6 +396,7 @@ SET(QGIS_CORE_HDRS
   qgsdataitem.h
   qgsdistancearea.h
   qgscsexception.h
+  qgseditorwidgetconfig.h
   qgserror.h
   qgsexception.h
   qgsexpression.h
@@ -426,6 +441,8 @@ SET(QGIS_CORE_HDRS
   qgsrectangle.h
   qgsrendercontext.h
   qgsrenderchecker.h
+  qgsrelation.h
+  qgsrelationmanager.h
   qgsrunprocess.h
   qgsscalecalculator.h
   qgssnapper.h
@@ -448,6 +465,8 @@ SET(QGIS_CORE_HDRS
   qgsdbfilterproxymodel.h
   qgsvectorlayerjoinbuffer.h
   qgslabelsearchtree.h
+  qgssimplifymethod.h
+  qgsvectorsimplifymethod.h
 
   qgsdiagramrendererv2.h
   diagram/qgsdiagram.h
@@ -548,6 +567,7 @@ ENDIF (QT_MOBILITY_LOCATION_FOUND)
 INCLUDE_DIRECTORIES(
   ${CMAKE_CURRENT_SOURCE_DIR}
   composer
+  dxf
   pal
   raster
   renderer
@@ -567,9 +587,9 @@ ENDIF (NOT WITH_INTERNAL_SPATIALITE)
 
 IF (WIN32)
   IF (MSVC)
-    ADD_DEFINITIONS("-DCORE_EXPORT=__declspec(dllexport)")
+    ADD_DEFINITIONS("-DCORE_EXPORT=${DLLEXPORT}")
   ELSE (MSVC)
-    ADD_DEFINITIONS("-UCORE_EXPORT \"-DCORE_EXPORT=__declspec(dllexport)\"")
+    ADD_DEFINITIONS("-UCORE_EXPORT \"-DCORE_EXPORT=${DLLEXPORT}\"")
   ENDIF (MSVC)
 ENDIF (WIN32)
 

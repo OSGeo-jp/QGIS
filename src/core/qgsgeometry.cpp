@@ -1603,7 +1603,7 @@ bool QgsGeometry::deleteVertex( int atVertex )
       int* nPoints = ( int* )ptr;
       if (( *nPoints ) < 3 || vertexnr > ( *nPoints ) - 1 || vertexnr < 0 ) //line needs at least 2 vertices
       {
-        delete newbuffer;
+        delete [] newbuffer;
         return false;
       }
       int newNPoints = ( *nPoints ) - 1; //new number of points
@@ -1659,7 +1659,7 @@ bool QgsGeometry::deleteVertex( int atVertex )
         {
           if ( *nPoints < 3 ) //line needs at least 2 vertices
           {
-            delete newbuffer;
+            delete [] newbuffer;
             return false;
           }
           newNPoint = ( *nPoints ) - 1;
@@ -1717,7 +1717,7 @@ bool QgsGeometry::deleteVertex( int atVertex )
         {
           if ( *nPoints < 5 ) //a ring has at least 3 points
           {
-            delete newbuffer;
+            delete [] newbuffer;
             return false;
           }
           newNPoints = *nPoints - 1;
@@ -1795,7 +1795,7 @@ bool QgsGeometry::deleteVertex( int atVertex )
           {
             if ( *nPoints < 5 ) //a ring has at least 3 points
             {
-              delete newbuffer;
+              delete [] newbuffer;
               return false;
             }
             newNPoints = *nPoints - 1;
@@ -1917,7 +1917,7 @@ bool QgsGeometry::insertVertex( double x, double y, int beforeVertex )
     case QGis::WKBPoint25D:
     case QGis::WKBPoint://cannot insert a vertex before another one on point types
     {
-      delete newbuffer;
+      delete [] newbuffer;
       return false;
     }
     case QGis::WKBMultiPoint25D:
@@ -2167,7 +2167,7 @@ bool QgsGeometry::insertVertex( double x, double y, int beforeVertex )
   }
   else
   {
-    delete newbuffer;
+    delete [] newbuffer;
     return false;
   }
 }
@@ -2890,9 +2890,12 @@ int QgsGeometry::addRing( const QList<QgsPoint>& ring )
   return 0;
 }
 
-int QgsGeometry::addPart( const QList<QgsPoint> &points )
+int QgsGeometry::addPart( const QList<QgsPoint> &points, QGis::GeometryType geomType )
 {
-  QGis::GeometryType geomType = type();
+  if ( geomType == QGis::UnknownGeometry )
+  {
+    geomType = type();
+  }
 
   switch ( geomType )
   {
@@ -2935,25 +2938,6 @@ int QgsGeometry::addPart( const QList<QgsPoint> &points )
       return 2;
   }
 
-  if ( !isMultipart() && !convertToMultiType() )
-  {
-    QgsDebugMsg( "could not convert to multipart" );
-    return 1;
-  }
-
-  //create geos geometry from wkb if not already there
-  if ( mDirtyGeos )
-  {
-    exportWkbToGeos();
-  }
-
-  if ( !mGeos )
-  {
-    QgsDebugMsg( "GEOS geometry not available!" );
-    return 4;
-  }
-
-  int geosType = GEOSGeomTypeId( mGeos );
   GEOSGeometry *newPart = 0;
 
   switch ( geomType )
@@ -2996,6 +2980,44 @@ int QgsGeometry::addPart( const QList<QgsPoint> &points )
       return 2;
   }
 
+  if ( type() == QGis::UnknownGeometry )
+  {
+    fromGeos( newPart );
+    return 0;
+  }
+  return addPart( newPart );
+}
+
+int QgsGeometry::addPart( QgsGeometry * newPart )
+{
+  const GEOSGeometry * geosPart = newPart->asGeos();
+  return addPart( GEOSGeom_clone( geosPart ) );
+}
+
+int QgsGeometry::addPart( GEOSGeometry * newPart )
+{
+  QGis::GeometryType geomType = type();
+
+  if ( !isMultipart() && !convertToMultiType() )
+  {
+    QgsDebugMsg( "could not convert to multipart" );
+    return 1;
+  }
+
+  //create geos geometry from wkb if not already there
+  if ( mDirtyGeos )
+  {
+    exportWkbToGeos();
+  }
+
+  if ( !mGeos )
+  {
+    QgsDebugMsg( "GEOS geometry not available!" );
+    return 4;
+  }
+
+  int geosType = GEOSGeomTypeId( mGeos );
+
   Q_ASSERT( newPart );
 
   try
@@ -3023,8 +3045,8 @@ int QgsGeometry::addPart( const QList<QgsPoint> &points )
   {
     const GEOSGeometry *partN = GEOSGetGeometryN( mGeos, i );
 
-    if ( geomType == QGis::Polygon && !GEOSDisjoint( partN, newPart ) )
-      //bail out if new polygon is not disjoint with existing ones
+    if ( geomType == QGis::Polygon && GEOSOverlaps( partN, newPart ) )
+      //bail out if new polygon overlaps with existing ones
       break;
 
     parts << GEOSGeom_clone( partN );
@@ -3036,11 +3058,16 @@ int QgsGeometry::addPart( const QList<QgsPoint> &points )
     for ( int i = 0; i < parts.size(); i++ )
       GEOSGeom_destroy( parts[i] );
 
-    QgsDebugMsg( "new polygon part not disjoint" );
+    QgsDebugMsg( "new polygon part overlaps" );
     return 3;
   }
 
-  parts << newPart;
+  int nPartGeoms = GEOSGetNumGeometries( newPart );
+  for ( int i = 0; i < nPartGeoms; ++i )
+  {
+    parts << GEOSGeom_clone( GEOSGetGeometryN( newPart, i ) );
+  }
+  GEOSGeom_destroy( newPart );
 
   GEOSGeom_destroy( mGeos );
 
@@ -4069,10 +4096,6 @@ QString QgsGeometry::exportToWkt() const
       {
         return QString();
       }
-      int *ringStart; // index of first point for each ring
-      int *ringNumPoints; // number of points in each ring
-      ringStart = new int[*numRings];
-      ringNumPoints = new int[*numRings];
       ptr = mGeometry + 1 + 2 * sizeof( int ); // set pointer to the first ring
       for ( idx = 0; idx < *numRings; idx++ )
       {
@@ -4083,7 +4106,6 @@ QString QgsGeometry::exportToWkt() const
         mWkt += "(";
         // get number of points in the ring
         nPoints = ( int * ) ptr;
-        ringNumPoints[idx] = *nPoints;
         ptr += 4;
 
         for ( jdx = 0; jdx < *nPoints; jdx++ )
@@ -4107,8 +4129,6 @@ QString QgsGeometry::exportToWkt() const
         mWkt += ")";
       }
       mWkt += ")";
-      delete [] ringStart;
-      delete [] ringNumPoints;
       return mWkt;
     }
 
@@ -4351,10 +4371,6 @@ QString QgsGeometry::exportToGeoJSON() const
       {
         return QString();
       }
-      int *ringStart; // index of first point for each ring
-      int *ringNumPoints; // number of points in each ring
-      ringStart = new int[*numRings];
-      ringNumPoints = new int[*numRings];
       ptr = mGeometry + 1 + 2 * sizeof( int ); // set pointer to the first ring
       for ( idx = 0; idx < *numRings; idx++ )
       {
@@ -4365,7 +4381,6 @@ QString QgsGeometry::exportToGeoJSON() const
         mWkt += "[ ";
         // get number of points in the ring
         nPoints = ( int * ) ptr;
-        ringNumPoints[idx] = *nPoints;
         ptr += 4;
 
         for ( jdx = 0; jdx < *nPoints; jdx++ )
@@ -4391,8 +4406,6 @@ QString QgsGeometry::exportToGeoJSON() const
         mWkt += " ]";
       }
       mWkt += " ] }";
-      delete [] ringStart;
-      delete [] ringNumPoints;
       return mWkt;
     }
 
@@ -5194,6 +5207,12 @@ bool QgsGeometry::exportGeosToWkb() const
 
 bool QgsGeometry::convertToMultiType()
 {
+  // TODO: implement with GEOS
+  if ( mDirtyWkb )
+  {
+    exportGeosToWkb();
+  }
+
   if ( !mGeometry )
   {
     return false;
@@ -5208,7 +5227,7 @@ bool QgsGeometry::convertToMultiType()
     return false; //no need to convert
   }
 
-  int newGeomSize = mGeometrySize + 1 + 2 * sizeof( int ); //endian: 1, multitype: sizeof(int), number of geometries: sizeof(int)
+  size_t newGeomSize = mGeometrySize + 1 + 2 * sizeof( int ); //endian: 1, multitype: sizeof(int), number of geometries: sizeof(int)
   unsigned char* newGeometry = new unsigned char[newGeomSize];
 
   int currentWkbPosition = 0;
@@ -5241,7 +5260,7 @@ bool QgsGeometry::convertToMultiType()
       newMultiType = QGis::WKBMultiPolygon25D;
       break;
     default:
-      delete newGeometry;
+      delete [] newGeometry;
       return false;
   }
   memcpy( &newGeometry[currentWkbPosition], &newMultiType, sizeof( int ) );

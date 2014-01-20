@@ -41,7 +41,7 @@ class QgsAttributeTableModel;
 class QgsAttributeTableFilterModel;
 class QgsAttributeTableView;
 
-class QgsAttributeTableDialog : public QDialog, private Ui::QgsAttributeTableDialog
+class APP_EXPORT QgsAttributeTableDialog : public QDialog, private Ui::QgsAttributeTableDialog
 {
     Q_OBJECT
 
@@ -171,6 +171,12 @@ class QgsAttributeTableDialog : public QDialog, private Ui::QgsAttributeTableDia
      * @param event unused
      */
     void closeEvent( QCloseEvent* event );
+
+    /*
+     * Handle KeyPress event of the window
+     * @param event
+     */
+    void keyPressEvent( QKeyEvent* event );
 
   private slots:
     /**

@@ -182,3 +182,35 @@ QString QgsDataDefinedSymbolDialog::fileNameHelpText()
 {
   return tr( "'<filename>'" );
 }
+
+QString QgsDataDefinedSymbolDialog::horizontalAnchorHelpText()
+{
+  return tr( "'left'|'center'|'right'" );
+}
+
+QString QgsDataDefinedSymbolDialog::verticalAnchorHelpText()
+{
+  return tr( "'top'|'center'|'bottom'" );
+}
+
+QString QgsDataDefinedSymbolDialog::gradientTypeHelpText()
+{
+  return tr( "'linear'|'radial'|'conical'" );
+}
+
+QString QgsDataDefinedSymbolDialog::gradientCoordModeHelpText()
+{
+  return tr( "'feature'|'viewport'" );
+}
+
+QString QgsDataDefinedSymbolDialog::gradientSpreadHelpText()
+{
+  return tr( "'pad'|'repeat'|'reflect'" );
+}
+
+QString QgsDataDefinedSymbolDialog::boolHelpText()
+{
+  return tr( "0 (false)|1 (true)" );
+}
+
+

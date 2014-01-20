@@ -32,9 +32,6 @@ class CORE_EXPORT QgsVectorLayerFeatureIterator : public QgsAbstractFeatureItera
 
     ~QgsVectorLayerFeatureIterator();
 
-    //! fetch next feature, return true on success
-    virtual bool nextFeature( QgsFeature& feature );
-
     //! reset the iterator to the starting position
     virtual bool rewind();
 
@@ -42,10 +39,22 @@ class CORE_EXPORT QgsVectorLayerFeatureIterator : public QgsAbstractFeatureItera
     virtual bool close();
 
   protected:
+    //! fetch next feature, return true on success
+    virtual bool fetchFeature( QgsFeature& feature );
+
+    //! Overrides default method as we only need to filter features in the edit buffer
+    //! while for others filtering is left to the provider implementation.
+    inline virtual bool nextFeatureFilterExpression( QgsFeature &f ) { return fetchFeature( f ); }
+
+    //! Setup the simplification of geometries to fetch using the specified simplify method
+    virtual bool prepareSimplification( const QgsSimplifyMethod& simplifyMethod );
+
     QgsVectorLayer* L;
 
     QgsFeatureRequest mProviderRequest;
     QgsFeatureIterator mProviderIterator;
+    QgsFeatureRequest mChangedFeaturesRequest;
+    QgsFeatureIterator mChangedFeaturesIterator;
 
 #if 0
     // general stuff
@@ -67,6 +76,7 @@ class CORE_EXPORT QgsVectorLayerFeatureIterator : public QgsAbstractFeatureItera
     void prepareJoins();
     bool fetchNextAddedFeature( QgsFeature& f );
     bool fetchNextChangedGeomFeature( QgsFeature& f );
+    bool fetchNextChangedAttributeFeature( QgsFeature& f );
     void useAddedFeature( const QgsFeature& src, QgsFeature& f );
     void useChangedAttributeFeature( QgsFeatureId fid, const QgsGeometry& geom, QgsFeature& f );
     bool nextFeatureFid( QgsFeature& f );
@@ -107,6 +117,13 @@ class CORE_EXPORT QgsVectorLayerFeatureIterator : public QgsAbstractFeatureItera
     /** Informations about joins used in the current select() statement.
       Allows faster mapping of attribute ids compared to mVectorJoins */
     QMap<QgsVectorLayer*, FetchJoinInfo> mFetchJoinInfo;
+
+  private:
+    //! optional object to locally simplify edited (changed or added) geometries fetched by this feature iterator
+    QgsAbstractGeometrySimplifier* mEditGeometrySimplifier;
+
+    //! returns whether the iterator supports simplify geometries on provider side
+    virtual bool providerCanSimplify( QgsSimplifyMethod::MethodType methodType ) const;
 };
 
 #endif // QGSVECTORLAYERFEATUREITERATOR_H

@@ -28,7 +28,7 @@ class QLayout;
 class QgsField;
 class QgsMapCanvas;
 
-class QgsAttributeTypeLoadDialog: public QDialog, private Ui::QgsAttributeLoadValues
+class APP_EXPORT QgsAttributeTypeLoadDialog: public QDialog, private Ui::QgsAttributeLoadValues
 {
     Q_OBJECT
 
@@ -53,6 +53,13 @@ class QgsAttributeTypeLoadDialog: public QDialog, private Ui::QgsAttributeLoadVa
      * @return value map of vlues selected from layer
      */
     QMap<QString, QVariant> &valueMap();
+
+    /**
+     * Returns true if the "Add NULL value" checkbox has been checked.
+     *
+     * @return true if the "Add NULL value" checkbox has been checked.
+     */
+    bool insertNull();
 
   private slots:
     /**

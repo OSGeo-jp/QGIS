@@ -30,7 +30,6 @@
 class QgsIdentifyResultsDialog;
 class QgsMapLayer;
 class QgsRasterLayer;
-class QgsRubberBand;
 class QgsVectorLayer;
 
 /**
@@ -41,7 +40,7 @@ class QgsVectorLayer;
   - for vector layers shows feature attributes within search radius
     (allows to edit values when vector layer is in editing mode)
 */
-class QgsMapToolIdentifyAction : public QgsMapToolIdentify
+class APP_EXPORT QgsMapToolIdentifyAction : public QgsMapToolIdentify
 {
     Q_OBJECT
 

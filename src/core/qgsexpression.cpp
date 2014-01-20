@@ -21,6 +21,7 @@
 #include <QDate>
 #include <QRegExp>
 #include <QColor>
+#include <QUuid>
 
 #include <math.h>
 #include <limits>
@@ -696,6 +697,11 @@ static QVariant fcnRegexpSubstr( const QVariantList& values, const QgsFeature* ,
   }
 }
 
+static QVariant fcnUuid( const QVariantList&, const QgsFeature* , QgsExpression* )
+{
+  return QUuid::createUuid().toString();
+}
+
 static QVariant fcnSubstr( const QVariantList& values, const QgsFeature* , QgsExpression* parent )
 {
   QString str = getStringValue( values.at( 0 ), parent );
@@ -750,7 +756,7 @@ static QVariant fcnRPad( const QVariantList& values, const QgsFeature* , QgsExpr
   QString string = getStringValue( values.at( 0 ), parent );
   int length = getIntValue( values.at( 1 ), parent );
   QString fill = getStringValue( values.at( 2 ), parent );
-  return string.rightJustified( length, fill.at( 0 ), true );
+  return string.leftJustified( length, fill.at( 0 ), true );
 }
 
 static QVariant fcnLPad( const QVariantList& values, const QgsFeature* , QgsExpression *parent )
@@ -758,7 +764,7 @@ static QVariant fcnLPad( const QVariantList& values, const QgsFeature* , QgsExpr
   QString string = getStringValue( values.at( 0 ), parent );
   int length = getIntValue( values.at( 1 ), parent );
   QString fill = getStringValue( values.at( 2 ), parent );
-  return string.leftJustified( length, fill.at( 0 ), true );
+  return string.rightJustified( length, fill.at( 0 ), true );
 }
 
 static QVariant fcnFormatString( const QVariantList& values, const QgsFeature* , QgsExpression *parent )
@@ -1532,6 +1538,7 @@ const QList<QgsExpression::Function*> &QgsExpression::Functions()
     << new StaticFunction( "$rownum", 0, fcnRowNumber, "Record" )
     << new StaticFunction( "$id", 0, fcnFeatureId, "Record" )
     << new StaticFunction( "$scale", 0, fcnScale, "Record" )
+    << new StaticFunction( "$uuid", 0, fcnUuid, "Record" )
     << new StaticFunction( "_specialcol_", 1, fcnSpecialColumn, "Special" )
     ;
   }
@@ -1609,12 +1616,12 @@ int QgsExpression::functionCount()
 
 
 QgsExpression::QgsExpression( const QString& expr )
-    : mExpression( expr )
-    , mRowNumber( 0 )
+    : mRowNumber( 0 )
     , mScale( 0 )
+    , mExp( expr )
     , mCalc( 0 )
 {
-  mRootNode = ::parseExpression( mExpression, mParserErrorString );
+  mRootNode = ::parseExpression( expr, mParserErrorString );
 
   if ( mParserErrorString.isNull() )
     Q_ASSERT( mRootNode );
@@ -1666,15 +1673,10 @@ void QgsExpression::initGeomCalculator()
   mCalc->setEllipsoidalMode( false );
 }
 
-void QgsExpression::setGeomCalculator( QgsDistanceArea &calc )
+void QgsExpression::setGeomCalculator( const QgsDistanceArea &calc )
 {
-  if ( !mCalc )
-    mCalc = new QgsDistanceArea();
-
-  // Copy from supplied calculator
-  mCalc->setEllipsoid( calc.ellipsoid() );
-  mCalc->setEllipsoidalMode( calc.ellipsoidalEnabled() );
-  mCalc->setSourceCrs( calc.sourceCrs() );
+  delete mCalc;
+  mCalc = new QgsDistanceArea( calc );
 }
 
 bool QgsExpression::prepare( const QgsFields& fields )
@@ -1726,8 +1728,8 @@ void QgsExpression::acceptVisitor( QgsExpression::Visitor& v ) const
     mRootNode->accept( v );
 }
 
-QString QgsExpression::replaceExpressionText( QString action, QgsFeature* feat,
-    QgsVectorLayer* layer,
+QString QgsExpression::replaceExpressionText( const QString &action, const QgsFeature *feat,
+    QgsVectorLayer *layer,
     const QMap<QString, QVariant> *substitutionMap )
 {
   QString expr_action;
@@ -1798,14 +1800,6 @@ QString QgsExpression::replaceExpressionText( QString action, QgsFeature* feat,
   }
 
   return expr_action;
-}
-
-
-QString QgsExpression::replaceExpressionText( QString action, QgsFeature& feat,
-    QgsVectorLayer* layer,
-    const QMap<QString, QVariant> *substitutionMap )
-{
-  return replaceExpressionText( action, &feat, layer, substitutionMap );
 }
 
 

@@ -7,6 +7,10 @@
     Date                 : August 2012
     Copyright            : (C) 2012 by Victor Olaya
     Email                : volayaf at gmail dot com
+    ---------------------
+    Date                 : September 2013
+    Copyright            : (C) 2013 by Martin Isenburg
+    Email                : martin near rapidlasso point com
 ***************************************************************************
 *                                                                         *
 *   This program is free software; you can redistribute it and/or modify  *
@@ -20,50 +24,54 @@
 __author__ = 'Victor Olaya'
 __date__ = 'August 2012'
 __copyright__ = '(C) 2012, Victor Olaya'
+
 # This will get replaced with a git SHA1 when you do a git archive
+
 __revision__ = '$Format:%H$'
 
 import os
 from PyQt4 import QtGui
-from processing.core.GeoAlgorithm import GeoAlgorithm
-from processing.parameters.ParameterString import ParameterString
-from processing.outputs.OutputVector import OutputVector
-from processing.lidar.lastools.LasToolsUtils import LasToolsUtils
+from processing.lidar.lastools.LAStoolsUtils import LAStoolsUtils
+from processing.lidar.lastools.LAStoolsAlgorithm import LAStoolsAlgorithm
+
 from processing.parameters.ParameterBoolean import ParameterBoolean
 from processing.parameters.ParameterNumber import ParameterNumber
-from processing.lidar.lastools.LasToolsAlgorithm import LasToolsAlgorithm
-from processing.parameters.ParameterFile import ParameterFile
+from processing.parameters.ParameterString import ParameterString
 
-class lasboundary(LasToolsAlgorithm):
 
-    INPUT = "INPUT"
-    OUTPUT = "OUTPUT"
-    CONCAVITY = "CONCAVITY"
-    DISJOINT = "DISJOINT"
-    HOLES = "HOLES"
+class lasboundary(LAStoolsAlgorithm):
+
+    CONCAVITY = 'CONCAVITY'
+    DISJOINT = 'DISJOINT'
+    HOLES = 'HOLES'
 
     def defineCharacteristics(self):
-        self.name = "lasboundary"
-        self.group = "Tools"
-        self.addParameter(ParameterFile(lasboundary.INPUT, "Input las layer"))
-        self.addParameter(ParameterNumber(lasboundary.CONCAVITY, "Concavity threshold", 0, None, 50.0))
-        self.addParameter(ParameterBoolean(lasboundary.HOLES, "Compute also interior holes", False))
-        self.addParameter(ParameterBoolean(lasboundary.DISJOINT, "Compute disjoint hull", False))
-        self.addOutput(OutputVector(lasboundary.OUTPUT, "Output boundary layer"))
-        self.addCommonParameters()
+        self.name = 'lasboundary'
+        self.group = 'LAStools'
+        self.addParametersVerboseGUI()
+        self.addParametersPointInputGUI()
+        self.addParametersFilter1ReturnClassFlagsGUI()
+        self.addParameter(ParameterNumber(lasboundary.CONCAVITY, 'concavity',
+                          0, None, 50.0))
+        self.addParameter(ParameterBoolean(lasboundary.HOLES, 'interior holes'
+                          , False))
+        self.addParameter(ParameterBoolean(lasboundary.DISJOINT,
+                          'disjoint polygon', False))
+        self.addParametersVectorOutputGUI()
 
     def processAlgorithm(self, progress):
-        commands = [os.path.join(LasToolsUtils.LasToolsPath(), "bin", "lasboundary.exe")]
-        commands.append("-i")
-        commands.append(self.getParameterValue(lasboundary.INPUT))
-        commands.append("-o")
-        commands.append(self.getOutputValue(lasboundary.OUTPUT))
-        commands.append("-concavity")
-        commands.append(str(self.getParameterValue(lasboundary.CONCAVITY)))
+        commands = [os.path.join(LAStoolsUtils.LAStoolsPath(), 'bin',
+                    'lasboundary.exe')]
+        self.addParametersVerboseCommands(commands)
+        self.addParametersPointInputCommands(commands)
+        self.addParametersFilter1ReturnClassFlagsCommands(commands)
+        concavity = self.getParameterValue(lasboundary.CONCAVITY)
+        commands.append('-concavity')
+        commands.append(str(concavity))
         if self.getParameterValue(lasboundary.HOLES):
-            commands.append("-holes")
+            commands.append('-holes')
         if self.getParameterValue(lasboundary.DISJOINT):
-            commands.append("-disjoint")
-        self.addCommonParameterValuesToCommand(commands)
+            commands.append('-disjoint')
+        self.addParametersVectorOutputCommands(commands)
 
-        LasToolsUtils.runLasTools(commands, progress)
+        LAStoolsUtils.runLAStools(commands, progress)

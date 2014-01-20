@@ -20,51 +20,53 @@
 __author__ = 'Victor Olaya'
 __date__ = 'August 2012'
 __copyright__ = '(C) 2012, Victor Olaya'
+
 # This will get replaced with a git SHA1 when you do a git archive
+
 __revision__ = '$Format:%H$'
 
 from PyQt4.QtCore import *
-
 from qgis.core import *
-
 from processing.core.GeoAlgorithm import GeoAlgorithm
-from processing.core.GeoAlgorithmExecutionException import GeoAlgorithmExecutionException
-from processing.core.QGisLayers import QGisLayers
-
+from processing.core.GeoAlgorithmExecutionException import \
+        GeoAlgorithmExecutionException
 from processing.parameters.ParameterVector import ParameterVector
-
 from processing.outputs.OutputVector import OutputVector
+from processing.tools import dataobjects, vector
+
 
 class MultipartToSingleparts(GeoAlgorithm):
 
-    INPUT = "INPUT"
-    OUTPUT = "OUTPUT"
+    INPUT = 'INPUT'
+    OUTPUT = 'OUTPUT'
 
-    #===========================================================================
+    # =========================================================================
     # def getIcon(self):
-    #    return QtGui.QIcon(os.path.dirname(__file__) + "/icons/multi_to_single.png")
-    #===========================================================================
+    #    return QIcon(os.path.dirname(__file__) + "/icons/multi_to_single.png")
+    # =========================================================================
 
     def defineCharacteristics(self):
-        self.name = "Multipart to singleparts"
-        self.group = "Vector geometry tools"
+        self.name = 'Multipart to singleparts'
+        self.group = 'Vector geometry tools'
 
-        self.addParameter(ParameterVector(self.INPUT, "Input layer"))
-        self.addOutput(OutputVector(self.OUTPUT, "Output layer"))
+        self.addParameter(ParameterVector(self.INPUT, 'Input layer'))
+        self.addOutput(OutputVector(self.OUTPUT, 'Output layer'))
 
     def processAlgorithm(self, progress):
-        layer = QGisLayers.getObjectFromUri(self.getParameterValue(self.INPUT))
+        layer = dataobjects.getObjectFromUri(
+                self.getParameterValue(self.INPUT))
 
         geomType = self.multiToSingleGeom(layer.dataProvider().geometryType())
 
-        writer = self.getOutputFromName(self.OUTPUT).getVectorWriter(layer.pendingFields().toList(),
-                     geomType, layer.crs())
+        writer = self.getOutputFromName(
+                self.OUTPUT).getVectorWriter(layer.pendingFields().toList(),
+                                             geomType, layer.crs())
 
         outFeat = QgsFeature()
         inGeom = QgsGeometry()
 
         current = 0
-        features = QGisLayers.features(layer)
+        features = vector.features(layer)
         total = 100.0 / float(len(features))
         for f in features:
             inGeom = f.geometry()
@@ -88,10 +90,13 @@ class MultipartToSingleparts(GeoAlgorithm):
                            QGis.WKBPoint25D, QGis.WKBMultiPoint25D):
                 return QGis.WKBPoint
             elif wkbType in (QGis.WKBLineString, QGis.WKBMultiLineString,
-                             QGis.WKBMultiLineString25D, QGis.WKBLineString25D):
+                             QGis.WKBMultiLineString25D,
+                             QGis.WKBLineString25D):
+
                 return QGis.WKBLineString
             elif wkbType in (QGis.WKBPolygon, QGis.WKBMultiPolygon,
                              QGis.WKBMultiPolygon25D, QGis.WKBPolygon25D):
+
                 return QGis.WKBPolygon
             else:
                 return QGis.WKBUnknown

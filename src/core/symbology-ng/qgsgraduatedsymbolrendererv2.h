@@ -17,6 +17,7 @@
 
 #include "qgssymbolv2.h"
 #include "qgsrendererv2.h"
+#include "qgsexpression.h"
 
 class CORE_EXPORT QgsRendererRangeV2
 {
@@ -94,6 +95,7 @@ class CORE_EXPORT QgsGraduatedSymbolRendererV2 : public QgsFeatureRendererV2
     bool updateRangeLowerValue( int rangeIndex, double value );
 
     void addClass( QgsSymbolV2* symbol );
+    void addClass( QgsRendererRangeV2 range );
     void deleteClass( int idx );
     void deleteAllClasses();
 
@@ -122,7 +124,8 @@ class CORE_EXPORT QgsGraduatedSymbolRendererV2 : public QgsFeatureRendererV2
       int classes,
       Mode mode,
       QgsSymbolV2* symbol,
-      QgsVectorColorRampV2* ramp );
+      QgsVectorColorRampV2* ramp,
+      bool inverted = false );
 
     //! create renderer from XML element
     static QgsFeatureRendererV2* create( QDomElement& element );
@@ -136,18 +139,21 @@ class CORE_EXPORT QgsGraduatedSymbolRendererV2 : public QgsFeatureRendererV2
     //! return a list of item text / symbol
     //! @note: this method was added in version 1.5
     //! @note not available in python bindings
-    virtual QgsLegendSymbolList legendSymbolItems();
+    virtual QgsLegendSymbolList legendSymbolItems( double scaleDenominator = -1, QString rule = "" );
 
     QgsSymbolV2* sourceSymbol();
     void setSourceSymbol( QgsSymbolV2* sym );
 
     QgsVectorColorRampV2* sourceColorRamp();
     void setSourceColorRamp( QgsVectorColorRampV2* ramp );
+    //! @note added in 2.1
+    bool invertedColorRamp() { return mInvertedColorRamp; }
+    void setInvertedColorRamp( bool inverted ) { mInvertedColorRamp = inverted; }
 
     /** Update the color ramp used. Also updates all symbols colors.
       * Doesn't alter current breaks.
       */
-    void updateColorRamp( QgsVectorColorRampV2* ramp );
+    void updateColorRamp( QgsVectorColorRampV2* ramp, bool inverted = false );
 
     /** Update the all symbols but leave breaks and colors. */
     void updateSymbols( QgsSymbolV2* sym );
@@ -174,20 +180,17 @@ class CORE_EXPORT QgsGraduatedSymbolRendererV2 : public QgsFeatureRendererV2
     Mode mMode;
     QgsSymbolV2* mSourceSymbol;
     QgsVectorColorRampV2* mSourceColorRamp;
+    bool mInvertedColorRamp;
     QString mRotationField;
     QString mSizeScaleField;
     QgsSymbolV2::ScaleMethod mScaleMethod;
-
+    QgsExpression* mExpression;
     //! attribute index (derived from attribute name in startRender)
     int mAttrNum;
     int mRotationFieldIdx, mSizeScaleFieldIdx;
 
     //! temporary symbols, used for data-defined rotation and scaling
-#if QT_VERSION < 0x40600
-    QMap<QgsSymbolV2*, QgsSymbolV2*> mTempSymbols;
-#else
     QHash<QgsSymbolV2*, QgsSymbolV2*> mTempSymbols;
-#endif
 
     QgsSymbolV2* symbolForValue( double value );
 };

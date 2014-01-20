@@ -40,10 +40,7 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QNetworkProxy>
-
-#if QT_VERSION >= 0x40500
 #include <QNetworkDiskCache>
-#endif
 
 #include <QUrl>
 #include <QRegExp>
@@ -306,6 +303,7 @@ QgsWcsProvider::QgsWcsProvider( QString const &uri )
     if ( isValid )
     {
       QgsDebugMsg( QString( "GDALGetRasterNoDataValue = %1" ).arg( myNoDataValue ) ) ;
+      myNoDataValue = QgsRaster::representableValue( myNoDataValue, dataTypeFromGdal( myGdalDataType ) );
       mSrcNoDataValue.append( myNoDataValue );
       mSrcHasNoDataValue.append( true );
       mUseSrcNoDataValue.append( true );
@@ -1516,12 +1514,10 @@ QString QgsWcsProvider::metadata()
   metadata += "</a>";
 
 #if 0
-#if QT_VERSION >= 0x40500
   // TODO
   metadata += "<a href=\"#cachestats\">";
   metadata += tr( "Cache Stats" );
   metadata += "</a> ";
-#endif
 #endif
 
   metadata += "</td></tr>";
@@ -1628,16 +1624,44 @@ QgsRasterIdentifyResult QgsWcsProvider::identify( const QgsPoint & thePoint, Qgs
   if ( myExtent.isEmpty() || theWidth == 0 || theHeight == 0 ||
        theWidth > maxSize || theHeight > maxSize )
   {
-    // context missing, use an area around the point and highest resolution if known
+    // context missing, use a small area around the point and highest resolution if known
 
-    // 1000 is bad in any case, either not precise or too much data requests
-    if ( theWidth == 0 ) theWidth = mHasSize ? mWidth : 1000;
-    if ( theHeight == 0 ) theHeight = mHasSize ? mHeight : 1000;
+    double xRes, yRes;
+    //if ( mHasSize )
+    if ( false )
+    {
+      xRes = mCoverageExtent.width()  / mWidth;
+      yRes = mCoverageExtent.height()  / mHeight;
+    }
+    else
+    {
+      // set resolution approximately to 1mm
+      switch ( mCrs.mapUnits() )
+      {
+        case QGis::Meters:
+          xRes = 0.001;
+          break;
+        case QGis::Feet:
+          xRes = 0.003;
+          break;
+        case QGis::Degrees:
+          // max length of degree of latitude on pole is 111694 m
+          xRes = 1e-8;
+          break;
+        default:
+          xRes = 0.001; // expecting meters
+      }
+      yRes = xRes;
+    }
 
-    if ( myExtent.isEmpty() )  myExtent = extent();
+    // 1000x1000 to cache data around
+    theWidth = 1000;
+    theHeight = 1000;
 
-    double xRes = myExtent.width() / theWidth;
-    double yRes = myExtent.height() / theHeight;
+    myExtent = QgsRectangle( thePoint.x() - xRes * theWidth / 2,
+                             thePoint.y() - yRes * theHeight / 2,
+                             thePoint.x() + xRes * theWidth / 2,
+                             thePoint.y() + yRes * theHeight / 2 );
 
     if ( !mCachedGdalDataset ||
          !mCachedViewExtent.contains( thePoint ) ||
@@ -1645,11 +1669,7 @@ QgsRasterIdentifyResult QgsWcsProvider::identify( const QgsPoint & thePoint, Qgs
          mCachedViewExtent.width() / mCachedViewWidth - xRes > TINY_VALUE ||
          mCachedViewExtent.height() / mCachedViewHeight - yRes > TINY_VALUE )
     {
-      int half = 50;
-      QgsRectangle extent( thePoint.x() - xRes * half, thePoint.y() - yRes * half,
-                           thePoint.x() + xRes * half, thePoint.y() + yRes * half );
-      getCache( 1, extent, 2*half, 2*half );
-
+      getCache( 1, myExtent, theWidth, theHeight );
     }
   }
   else

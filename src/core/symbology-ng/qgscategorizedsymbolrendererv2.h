@@ -17,6 +17,7 @@
 
 #include "qgssymbolv2.h"
 #include "qgsrendererv2.h"
+#include "qgsexpression.h"
 
 #include <QHash>
 
@@ -124,13 +125,16 @@ class CORE_EXPORT QgsCategorizedSymbolRendererV2 : public QgsFeatureRendererV2
     //! return a list of item text / symbol
     //! @note: this method was added in version 1.5
     //! @note not available in python bindings
-    virtual QgsLegendSymbolList legendSymbolItems();
+    virtual QgsLegendSymbolList legendSymbolItems( double scaleDenominator = -1, QString rule = "" );
 
     QgsSymbolV2* sourceSymbol();
     void setSourceSymbol( QgsSymbolV2* sym );
 
     QgsVectorColorRampV2* sourceColorRamp();
     void setSourceColorRamp( QgsVectorColorRampV2* ramp );
+    //! @note added in 2.1
+    bool invertedColorRamp() { return mInvertedColorRamp; }
+    void setInvertedColorRamp( bool inverted ) { mInvertedColorRamp = inverted; }
 
     //! @note added in 1.6
     void setRotationField( QString fieldName ) { mRotationField = fieldName; }
@@ -152,9 +156,11 @@ class CORE_EXPORT QgsCategorizedSymbolRendererV2 : public QgsFeatureRendererV2
     QgsCategoryList mCategories;
     QgsSymbolV2* mSourceSymbol;
     QgsVectorColorRampV2* mSourceColorRamp;
+    bool mInvertedColorRamp;
     QString mRotationField;
     QString mSizeScaleField;
     QgsSymbolV2::ScaleMethod mScaleMethod;
+    QgsExpression* mExpression;
 
     //! attribute index (derived from attribute name in startRender)
     int mAttrNum;

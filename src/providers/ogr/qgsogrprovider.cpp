@@ -124,6 +124,62 @@ bool QgsOgrProvider::convertField( QgsField &field, const QTextCodec &encoding )
   return true;
 }
 
+void QgsOgrProvider::repack()
+{
+  if ( ogrDriverName != "ESRI Shapefile" )
+    return;
+
+  QByteArray layerName = OGR_FD_GetName( OGR_L_GetLayerDefn( ogrOrigLayer ) );
+
+  // run REPACK on shape files
+  if ( mDeletedFeatures )
+  {
+    QByteArray sql = QByteArray( "REPACK " ) + layerName;   // don't quote the layer name as it works with spaces in the name and won't work if the name is quoted
+    QgsDebugMsg( QString( "SQL: %1" ).arg( FROM8( sql ) ) );
+    OGR_DS_ExecuteSQL( ogrDataSource, sql.constData(), NULL, NULL );
+
+    if ( mFilePath.endsWith( ".shp", Qt::CaseInsensitive ) || mFilePath.endsWith( ".dbf", Qt::CaseInsensitive ) )
+    {
+      QString packedDbf( mFilePath.left( mFilePath.size() - 4 ) + "_packed.dbf" );
+      if ( QFile::exists( packedDbf ) )
+      {
+        QgsMessageLog::logMessage( tr( "Possible corruption after REPACK detected. %1 still exists. This may point to a permission or locking problem of the original DBF." ).arg( packedDbf ), tr( "OGR" ), QgsMessageLog::CRITICAL );
+
+        OGR_DS_Destroy( ogrDataSource );
+        ogrLayer = ogrOrigLayer = 0;
+
+        ogrDataSource = OGROpen( TO8F( mFilePath ), true, NULL );
+        if ( ogrDataSource )
+        {
+          if ( mLayerName.isNull() )
+          {
+            ogrOrigLayer = OGR_DS_GetLayer( ogrDataSource, mLayerIndex );
+          }
+          else
+          {
+            ogrOrigLayer = OGR_DS_GetLayerByName( ogrDataSource, TO8( mLayerName ) );
+          }
+
+          if ( !ogrOrigLayer )
+          {
+            QgsMessageLog::logMessage( tr( "Original layer could not be reopened." ), tr( "OGR" ), QgsMessageLog::CRITICAL );
+            valid = false;
+          }
+
+          ogrLayer = ogrOrigLayer;
+        }
+        else
+        {
+          QgsMessageLog::logMessage( tr( "Original datasource could not be reopened." ), tr( "OGR" ), QgsMessageLog::CRITICAL );
+          valid = false;
+        }
+      }
+    }
+
+    mDeletedFeatures = false;
+  }
+}
+
 
 QgsVectorLayerImport::ImportError QgsOgrProvider::createEmptyLayer(
   const QString& uri,
@@ -232,6 +288,7 @@ QgsOgrProvider::QgsOgrProvider( QString const & uri )
   // If there is no & in the uri, then the uri is just the filename. The loaded
   // layer will be layer 0.
   //this is not true for geojson
+
   if ( !uri.contains( '|', Qt::CaseSensitive ) )
   {
     mFilePath = uri;
@@ -380,6 +437,8 @@ QgsOgrProvider::~QgsOgrProvider()
   {
     OGR_DS_ReleaseResultSet( ogrDataSource, ogrLayer );
   }
+
+  repack();
 
   OGR_DS_Destroy( ogrDataSource );
   ogrDataSource = 0;
@@ -554,7 +613,7 @@ QStringList QgsOgrProvider::subLayers() const
       // Count features for geometry types
       QMap<OGRwkbGeometryType, int> fCount;
       // TODO: avoid reading attributes, setRelevantFields cannot be called here because it is not constant
-      //setRelevantFields( true, QgsAttributeList() );
+      //setRelevantFields( ogrLayer, true, QgsAttributeList() );
       OGR_L_ResetReading( layer );
       OGRFeatureH fet;
       while (( fet = OGR_L_GetNextFeature( layer ) ) )
@@ -713,7 +772,7 @@ QString QgsOgrProvider::storageType() const
   return ogrDriverName;
 }
 
-void QgsOgrProvider::setRelevantFields( bool fetchGeometry, const QgsAttributeList &fetchAttributes )
+void QgsOgrProvider::setRelevantFields( OGRLayerH ogrLayer, bool fetchGeometry, const QgsAttributeList &fetchAttributes )
 {
 #if defined(GDAL_VERSION_NUM) && GDAL_VERSION_NUM >= 1800
   if ( OGR_L_TestCapability( ogrLayer, OLCIgnoreFields ) )
@@ -741,6 +800,7 @@ void QgsOgrProvider::setRelevantFields( bool fetchGeometry, const QgsAttributeLi
   mRelevantFieldsForNextFeature = false;
 
 #else
+  Q_UNUSED( ogrLayer );
   Q_UNUSED( fetchGeometry );
   Q_UNUSED( fetchAttributes );
 #endif
@@ -971,7 +1031,7 @@ bool QgsOgrProvider::addFeature( QgsFeature& f )
 
 bool QgsOgrProvider::addFeatures( QgsFeatureList & flist )
 {
-  setRelevantFields( true, attributeIndexes() );
+  setRelevantFields( ogrLayer, true, attributeIndexes() );
 
   bool returnvalue = true;
   for ( QgsFeatureList::iterator it = flist.begin(); it != flist.end(); ++it )
@@ -1073,7 +1133,7 @@ bool QgsOgrProvider::changeAttributeValues( const QgsChangedAttributesMap & attr
 
   clearMinMaxCache();
 
-  setRelevantFields( true, attributeIndexes() );
+  setRelevantFields( ogrLayer, true, attributeIndexes() );
 
   for ( QgsChangedAttributesMap::const_iterator it = attr_map.begin(); it != attr_map.end(); ++it )
   {
@@ -1169,7 +1229,7 @@ bool QgsOgrProvider::changeGeometryValues( QgsGeometryMap & geometry_map )
   OGRFeatureH theOGRFeature = 0;
   OGRGeometryH theNewGeometry = 0;
 
-  setRelevantFields( true, attributeIndexes() );
+  setRelevantFields( ogrLayer, true, attributeIndexes() );
 
   for ( QgsGeometryMap::iterator it = geometry_map.begin(); it != geometry_map.end(); ++it )
   {
@@ -1232,57 +1292,7 @@ bool QgsOgrProvider::createSpatialIndex()
   if ( ogrDriverName != "ESRI Shapefile" )
     return false;
 
-  QgsCPLErrorHandler handler;
-
   QByteArray layerName = OGR_FD_GetName( OGR_L_GetLayerDefn( ogrOrigLayer ) );
-
-  // run REPACK on shape files
-  if ( mDeletedFeatures )
-  {
-    QByteArray sql = QByteArray( "REPACK " ) + layerName;   // don't quote the layer name as it works with spaces in the name and won't work if the name is quoted
-    QgsDebugMsg( QString( "SQL: %1" ).arg( FROM8( sql ) ) );
-    OGR_DS_ExecuteSQL( ogrDataSource, sql.constData(), NULL, NULL );
-
-    if ( mFilePath.endsWith( ".shp", Qt::CaseInsensitive ) || mFilePath.endsWith( ".dbf", Qt::CaseInsensitive ) )
-    {
-      QString packedDbf( mFilePath.left( mFilePath.size() - 4 ) + "_packed.dbf" );
-      if ( QFile::exists( packedDbf ) )
-      {
-        QgsMessageLog::logMessage( tr( "Possible corruption after REPACK detected. %1 still exists. This may point to a permission or locking problem of the original DBF." ).arg( packedDbf ), tr( "OGR" ), QgsMessageLog::CRITICAL );
-
-        OGR_DS_Destroy( ogrDataSource );
-        ogrLayer = ogrOrigLayer = 0;
-
-        ogrDataSource = OGROpen( TO8F( mFilePath ), true, NULL );
-        if ( ogrDataSource )
-        {
-          if ( mLayerName.isNull() )
-          {
-            ogrOrigLayer = OGR_DS_GetLayer( ogrDataSource, mLayerIndex );
-          }
-          else
-          {
-            ogrOrigLayer = OGR_DS_GetLayerByName( ogrDataSource, TO8( mLayerName ) );
-          }
-
-          if ( !ogrOrigLayer )
-          {
-            QgsMessageLog::logMessage( tr( "Original layer could not be reopened." ), tr( "OGR" ), QgsMessageLog::CRITICAL );
-            valid = false;
-          }
-
-          ogrLayer = ogrOrigLayer;
-        }
-        else
-        {
-          QgsMessageLog::logMessage( tr( "Original datasource could not be reopened." ), tr( "OGR" ), QgsMessageLog::CRITICAL );
-          valid = false;
-        }
-      }
-    }
-
-    mDeletedFeatures = false;
-  }
 
   if ( ogrDataSource )
   {
@@ -1483,6 +1493,9 @@ int QgsOgrProvider::capabilities() const
         ability &= ~( AddAttributes | DeleteFeatures );
       }
     }
+
+    // supports geometry simplification on provider side
+    ability |= ( QgsVectorDataProvider::SimplifyGeometries | QgsVectorDataProvider::SimplifyGeometriesWithTopologicalValidation );
   }
 
   return ability;
@@ -2011,7 +2024,6 @@ QGISEXTERN bool createEmptyDataSource( const QString &uri,
     {
       QgsMessageLog::logMessage( QObject::tr( "Unknown vector type of %1" ).arg(( int )( vectortype ) ), QObject::tr( "OGR" ) );
       return false;
-      break;
     }
   }
 
@@ -2381,7 +2393,7 @@ void QgsOgrProvider::recalculateFeatureCount()
   {
     featuresCounted = 0;
     OGR_L_ResetReading( ogrLayer );
-    setRelevantFields( true, QgsAttributeList() );
+    setRelevantFields( ogrLayer, true, QgsAttributeList() );
     OGR_L_ResetReading( ogrLayer );
     OGRFeatureH fet;
     while (( fet = OGR_L_GetNextFeature( ogrLayer ) ) )
@@ -2455,3 +2467,7 @@ QGISEXTERN QgsVectorLayerImport::ImportError createEmptyLayer(
          );
 }
 
+QGISEXTERN void cleanupProvider()
+{
+  OGRCleanupAll();
+}

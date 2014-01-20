@@ -685,6 +685,9 @@ class CORE_EXPORT QgsPalLabeling : public QgsLabelingEngineInterface
     bool isShowingAllLabels() const { return mShowingAllLabels; }
     void setShowingAllLabels( bool showing ) { mShowingAllLabels = showing; }
 
+    bool isShowingPartialsLabels() const { return mShowingPartialsLabels; }
+    void setShowingPartialsLabels( bool showing ) { mShowingPartialsLabels = showing; }
+
     // implemented methods from labeling engine interface
 
     //! called when we're going to start with rendering
@@ -720,7 +723,7 @@ class CORE_EXPORT QgsPalLabeling : public QgsLabelingEngineInterface
     void drawLabelCandidateRect( pal::LabelPosition* lp, QPainter* painter, const QgsMapToPixel* xform );
     //!drawLabel
     //! @note not available in python bindings
-    void drawLabel( pal::LabelPosition* label, QgsRenderContext& context, QgsPalLayerSettings& tmpLyr, DrawLabelType drawType );
+    virtual void drawLabel( pal::LabelPosition* label, QgsRenderContext& context, QgsPalLayerSettings& tmpLyr, DrawLabelType drawType, double dpiRatio = 1.0 );
 
     static void drawLabelBuffer( QgsRenderContext& context,
                                  QgsLabelComponent component,
@@ -781,6 +784,7 @@ class CORE_EXPORT QgsPalLabeling : public QgsLabelingEngineInterface
     bool mShowingAllLabels; // whether to avoid collisions or not
     bool mSavedWithProject; // whether engine settings have been read from project file
     bool mShowingShadowRects; // whether to show debugging rectangles for drop shadows
+    bool mShowingPartialsLabels; // whether to avoid partials labels or not
 
     QgsLabelSearchTree* mLabelSearchTree;
 };

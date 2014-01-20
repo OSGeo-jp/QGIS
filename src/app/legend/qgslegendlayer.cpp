@@ -22,6 +22,7 @@
 #include "qgsfield.h"
 #include "qgsmapcanvasmap.h"
 #include "qgsmaplayerregistry.h"
+#include "qgspluginlayer.h"
 #include "qgsrasterlayer.h"
 #include "qgsvectorlayer.h"
 #include "qgsvectordataprovider.h"
@@ -142,6 +143,15 @@ void QgsLegendLayer::refreshSymbology( const QString& key )
     QgsRasterLayer* rlayer = qobject_cast<QgsRasterLayer *>( theMapLayer );
     rasterLayerSymbology( rlayer ); // get and change symbology
   }
+  else if ( theMapLayer->type() == QgsMapLayer::PluginLayer )
+  {
+    QgsPluginLayer* player = qobject_cast<QgsPluginLayer *>( theMapLayer );
+
+    QSize iconSize( 16, 16 );
+    SymbologyList itemList = player->legendSymbologyItems( iconSize );
+
+    changeSymbologySettings( theMapLayer, itemList );
+  }
 
   updateIcon();
 }
@@ -205,9 +215,26 @@ void QgsLegendLayer::rasterLayerSymbology( QgsRasterLayer* layer )
   SymbologyList itemList;
   QList< QPair< QString, QColor > > rasterItemList = layer->legendSymbologyItems();
   QList< QPair< QString, QColor > >::const_iterator itemIt = rasterItemList.constBegin();
-#if QT_VERSION >= 0x40700
   itemList.reserve( rasterItemList.size() );
-#endif
+
+  // GetLegendGraphics in case of WMS service... pixmap can return null if GetLegendGraphics
+  // is not supported by the server
+  QgsDebugMsg( QString( "layer providertype:: %1" ).arg( layer->providerType() ) );
+  if ( layer->providerType() == "wms" )
+  {
+    double currentScale = legend()->canvas()->scale();
+
+    QImage legendGraphic = layer->dataProvider()->getLegendGraphic( currentScale );
+    if ( !legendGraphic.isNull() )
+    {
+      QgsDebugMsg( QString( "downloaded legend with dimension width:" ) + QString::number( legendGraphic.width() ) + QString( " and Height:" ) + QString::number( legendGraphic.height() ) );
+
+      if ( rasterItemList.size() == 0 )
+        itemList.reserve( 1 );
+      itemList.append( qMakePair( QString( "" ), QPixmap::fromImage( legendGraphic ) ) );
+    }
+  }
+
   // Paletted raster may have many colors, for example UInt16 may have 65536 colors
   // and it is very slow, so we limit max count
   QSize iconSize = treeWidget()->iconSize();
@@ -567,7 +594,6 @@ void QgsLegendLayer::updateItemListCountV2( SymbologyList& itemList, QgsVectorLa
 
   QgsLegendSymbolList symbolList = renderer->legendSymbolItems();
   QgsLegendSymbolList::const_iterator symbolIt = symbolList.constBegin();
-  symbolIt = symbolList.constBegin();
   for ( ; symbolIt != symbolList.constEnd(); ++symbolIt )
   {
     itemList.push_back( qMakePair( symbolIt->first + " [" + QString::number( layer->featureCount( symbolIt->second ) ) + "]", itemMap[symbolIt->first] ) );

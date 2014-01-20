@@ -25,6 +25,7 @@
 #include "qgslogger.h"
 #include "qstring.h"
 
+#include <QKeyEvent>
 #include <QMenu>
 #include <QProgressDialog>
 #include <QSettings>
@@ -66,6 +67,13 @@ QgsRuleBasedRendererV2Widget::QgsRuleBasedRendererV2Widget( QgsVectorLayer* laye
   //new ModelTest( mModel, this ); // for model validity checking
   viewRules->setModel( mModel );
 
+  mDeleteAction = new QAction( tr( "Remove Rule" ), this );
+  mDeleteAction->setShortcut( QKeySequence( QKeySequence::Delete ) );
+
+  viewRules->addAction( mDeleteAction );
+  viewRules->addAction( mCopyAction );
+  viewRules->addAction( mPasteAction );
+
   mRefineMenu = new QMenu( tr( "Refine current rule" ), btnRefineRule );
   mRefineMenu->addAction( tr( "Add scales to rule" ), this, SLOT( refineRuleScales() ) );
   mRefineMenu->addAction( tr( "Add categories to rule" ), this, SLOT( refineRuleCategories() ) );
@@ -87,6 +95,7 @@ QgsRuleBasedRendererV2Widget::QgsRuleBasedRendererV2Widget( QgsVectorLayer* laye
   connect( btnAddRule, SIGNAL( clicked() ), this, SLOT( addRule() ) );
   connect( btnEditRule, SIGNAL( clicked() ), this, SLOT( editRule() ) );
   connect( btnRemoveRule, SIGNAL( clicked() ), this, SLOT( removeRule() ) );
+  connect( mDeleteAction, SIGNAL( triggered() ), this, SLOT( removeRule() ) );
   connect( btnCountFeatures, SIGNAL( clicked() ), this, SLOT( countFeatures() ) );
 
   connect( btnRenderingOrder, SIGNAL( clicked() ), this, SLOT( setRenderingOrder() ) );
@@ -102,6 +111,7 @@ QgsRuleBasedRendererV2Widget::QgsRuleBasedRendererV2Widget( QgsVectorLayer* laye
 
 QgsRuleBasedRendererV2Widget::~QgsRuleBasedRendererV2Widget()
 {
+  qDeleteAll( mCopyBuffer );
   delete mRenderer;
 }
 
@@ -197,6 +207,8 @@ void QgsRuleBasedRendererV2Widget::currentRuleChanged( const QModelIndex& curren
 #include "qgsexpressionbuilderdialog.h"
 #include <QDialogButtonBox>
 #include <QInputDialog>
+#include <QKeyEvent>
+#include <QClipboard>
 
 void QgsRuleBasedRendererV2Widget::refineRule( int type )
 {
@@ -356,6 +368,23 @@ QList<QgsSymbolV2*> QgsRuleBasedRendererV2Widget::selectedSymbols()
   return symbolList;
 }
 
+QgsRuleBasedRendererV2::RuleList QgsRuleBasedRendererV2Widget::selectedRules()
+{
+  QgsRuleBasedRendererV2::RuleList rl;
+  QItemSelection sel = viewRules->selectionModel()->selection();
+  foreach ( QItemSelectionRange range, sel )
+  {
+    QModelIndex parent = range.parent();
+    QgsRuleBasedRendererV2::Rule* parentRule = mModel->ruleForIndex( parent );
+    QgsRuleBasedRendererV2::RuleList& children = parentRule->children();
+    for ( int row = range.top(); row <= range.bottom(); row++ )
+    {
+      rl.append( children[row]->clone() );
+    }
+  }
+  return rl;
+}
+
 void QgsRuleBasedRendererV2Widget::refreshSymbolView()
 {
   // TODO: model/view
@@ -365,6 +394,30 @@ void QgsRuleBasedRendererV2Widget::refreshSymbolView()
     treeRules->populateRules();
   }
   */
+}
+
+void QgsRuleBasedRendererV2Widget::keyPressEvent( QKeyEvent* event )
+{
+  if ( !event )
+  {
+    return;
+  }
+
+  if ( event->key() == Qt::Key_C && event->modifiers() == Qt::ControlModifier )
+  {
+    qDeleteAll( mCopyBuffer );
+    mCopyBuffer.clear();
+    mCopyBuffer = selectedRules();
+  }
+  else if ( event->key() == Qt::Key_V && event->modifiers() == Qt::ControlModifier )
+  {
+    QgsRuleBasedRendererV2::RuleList::const_iterator rIt = mCopyBuffer.constBegin();
+    for ( ; rIt != mCopyBuffer.constEnd(); ++rIt )
+    {
+      int rows = mModel->rowCount();
+      mModel->insertRule( QModelIndex(), rows, ( *rIt )->clone() );
+    }
+  }
 }
 
 #include "qgssymbollevelsv2dialog.h"
@@ -402,6 +455,31 @@ void QgsRuleBasedRendererV2Widget::restoreSectionWidths()
   head->resizeSection( 4, settings.value( path + QString::number( 4 ), 50 ).toInt() );
   head->resizeSection( 5, settings.value( path + QString::number( 5 ), 50 ).toInt() );
 }
+
+void QgsRuleBasedRendererV2Widget::copy()
+{
+  QModelIndexList indexlist = viewRules->selectionModel()->selectedRows();
+  QgsDebugMsg( QString( "%1" ).arg( indexlist.count() ) );
+
+  if ( indexlist.isEmpty() )
+    return;
+
+  QMimeData* mime = mModel->mimeData( indexlist );
+  QApplication::clipboard()->setMimeData( mime );
+}
+
+void QgsRuleBasedRendererV2Widget::paste()
+{
+  const QMimeData* mime = QApplication::clipboard()->mimeData();
+  QModelIndexList indexlist = viewRules->selectionModel()->selectedRows();
+  QModelIndex index;
+  if ( indexlist.isEmpty() )
+    index = mModel->index( mModel->rowCount(), 0 );
+  else
+    index = indexlist.first();
+  mModel->dropMimeData( mime, Qt::CopyAction, index.row(), index.column(), index.parent() );
+}
+
 
 void QgsRuleBasedRendererV2Widget::countFeatures()
 {
@@ -636,7 +714,15 @@ QVariant QgsRuleBasedRendererV2Model::data( const QModelIndex &index, int role )
     switch ( index.column() )
     {
       case 0: return rule->label();
-      case 1: return rule->filterExpression().isEmpty() ? tr( "(no filter)" ) : rule->filterExpression();
+      case 1:
+        if ( rule->isElse() )
+        {
+          return "ELSE";
+        }
+        else
+        {
+          return rule->filterExpression().isEmpty() ? tr( "(no filter)" ) : rule->filterExpression();
+        }
       case 2: return rule->dependsOnScale() ? _formatScale( rule->scaleMinDenom() ) : QVariant();
       case 3: return rule->dependsOnScale() ? _formatScale( rule->scaleMaxDenom() ) : QVariant();
       case 4:
@@ -682,6 +768,16 @@ QVariant QgsRuleBasedRendererV2Model::data( const QModelIndex &index, int role )
   else if ( role == Qt::TextAlignmentRole )
   {
     return ( index.column() == 2 || index.column() == 3 ) ? Qt::AlignRight : Qt::AlignLeft;
+  }
+  else if ( role == Qt::FontRole && index.column() == 1 )
+  {
+    if ( rule->isElse() )
+    {
+      QFont italicFont;
+      italicFont.setItalic( true );
+      return italicFont;
+    }
+    return QVariant();
   }
   else if ( role == Qt::EditRole )
   {

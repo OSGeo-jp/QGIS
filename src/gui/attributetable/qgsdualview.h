@@ -18,13 +18,15 @@
 
 #include <QStackedWidget>
 
-#include "qgsdistancearea.h"
-#include "qgsattributetablefiltermodel.h"
-#include "qgscachedfeatureiterator.h"
 #include "ui_qgsdualviewbase.h"
 
-class QgsFeatureRequest;
+#include "qgsattributeeditorcontext.h"
+#include "qgsattributetablefiltermodel.h"
+#include "qgscachedfeatureiterator.h"
+#include "qgsdistancearea.h"
+
 class QgsAttributeDialog;
+class QgsFeatureRequest;
 class QSignalMapper;
 
 /**
@@ -74,9 +76,10 @@ class GUI_EXPORT QgsDualView : public QStackedWidget, private Ui::QgsDualViewBas
      * @param layer      The layer which should be used to fetch features
      * @param mapCanvas  The mapCanvas (used for the FilterMode
      *                   {@link QgsAttributeTableFilterModel::ShowVisible}
-     * @param myDa       Used for attribute dialog creation
+     * @param request    Use a modified request to limit the shown features
+     * @param context    The context in which this view is shown
      */
-    void init( QgsVectorLayer* layer, QgsMapCanvas* mapCanvas, QgsDistanceArea myDa );
+    void init( QgsVectorLayer* layer, QgsMapCanvas* mapCanvas, const QgsFeatureRequest& request = QgsFeatureRequest(), QgsAttributeEditorContext context = QgsAttributeEditorContext() );
 
     /**
      * Change the current view mode.
@@ -130,6 +133,10 @@ class GUI_EXPORT QgsDualView : public QStackedWidget, private Ui::QgsDualViewBas
      */
     QgsAttributeTableModel* masterModel() const { return mMasterModel; }
 
+    void setRequest( const QgsFeatureRequest& request );
+
+    void setFeatureSelectionManager( QgsIFeatureSelectionManager* featureSelectionManager );
+
   protected:
     /**
      * Initializes widgets which depend on the attributes of this layer
@@ -149,8 +156,11 @@ class GUI_EXPORT QgsDualView : public QStackedWidget, private Ui::QgsDualViewBas
 
     /**
      * @brief saveEditChanges
+     *
+     * @return true if the saving was ok. false is possible due to connected
+     *         validation logic.
      */
-    void saveEditChanges();
+    bool saveEditChanges();
 
     /**
      * Update the shown feature if an attribute changed
@@ -207,6 +217,14 @@ class GUI_EXPORT QgsDualView : public QStackedWidget, private Ui::QgsDualViewBas
     void attributeAdded( int attribute );
 
     /**
+     * Gets called when a feature is deleted.
+     * So it can be removed from the feature form if required.
+     *
+     * @param fid The feature being deleted
+     */
+    void featureDeleted( QgsFeatureId fid );
+
+    /**
      * Will be called periodically, when loading layers from slow data providers.
      *
      * @param i       The number of features already loaded
@@ -222,8 +240,9 @@ class GUI_EXPORT QgsDualView : public QStackedWidget, private Ui::QgsDualViewBas
 
   private:
     void initLayerCache( QgsVectorLayer *layer );
-    void initModels( QgsMapCanvas* mapCanvas );
+    void initModels( QgsMapCanvas* mapCanvas, const QgsFeatureRequest& request );
 
+    QgsAttributeEditorContext mEditorContext;
     QgsAttributeTableModel* mMasterModel;
     QgsAttributeTableFilterModel* mFilterModel;
     QgsFeatureListModel* mFeatureListModel;
@@ -233,7 +252,7 @@ class GUI_EXPORT QgsDualView : public QStackedWidget, private Ui::QgsDualViewBas
     QMenu* mPreviewColumnsMenu;
     QgsVectorLayerCache* mLayerCache;
     QProgressDialog* mProgressDlg;
-
+    QgsIFeatureSelectionManager* mFeatureSelectionManager;
     QgsDistanceArea mDistanceArea;
 
     friend class TestQgsDualView;

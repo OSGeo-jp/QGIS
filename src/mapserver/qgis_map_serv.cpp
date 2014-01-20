@@ -27,6 +27,7 @@ map service syntax for SOAP/HTTP POST
 #include "qgslogger.h"
 #include "qgswmsserver.h"
 #include "qgswfsserver.h"
+#include "qgswcsserver.h"
 #include "qgsmaprenderer.h"
 #include "qgsmapserviceexception.h"
 #include "qgspallabeling.h"
@@ -136,6 +137,11 @@ QFileInfo defaultProjectFile()
   QStringList nameFilterList;
   nameFilterList << "*.qgs";
   QFileInfoList projectFiles = currentDir.entryInfoList( nameFilterList, QDir::Files, QDir::Name );
+  QgsDebugMsg( "Project files found:" );
+  for ( int x = 0; x < projectFiles.size(); x++ )
+  {
+    QgsDebugMsg( projectFiles.at( x ).absoluteFilePath() );
+  }
   if ( projectFiles.size() < 1 )
   {
     return QFileInfo();
@@ -223,6 +229,7 @@ int main( int argc, char * argv[] )
   if ( projectFileInfo.exists() )
   {
     defaultConfigFilePath = projectFileInfo.absoluteFilePath();
+    QgsDebugMsg( "Using default project file: " + defaultConfigFilePath );
   }
   else
   {
@@ -240,6 +247,7 @@ int main( int argc, char * argv[] )
   QgsMapRenderer* theMapRenderer = new QgsMapRenderer();
   theMapRenderer->setLabelingEngine( new QgsPalLabeling() );
 
+#ifdef QGSMSDEBUG
   // load standard test font from testdata.qrc (for unit tests)
   bool testFontLoaded = false;
   QFile testFont( ":/testdata/font/FreeSansQGIS.ttf" );
@@ -248,12 +256,13 @@ int main( int argc, char * argv[] )
     int fontID = QFontDatabase::addApplicationFontFromData( testFont.readAll() );
     testFontLoaded = ( fontID != -1 );
   } // else app wasn't built with ENABLE_TESTS or not GUI app
+#endif
 
   while ( fcgi_accept() >= 0 )
   {
     printRequestInfos(); //print request infos if in debug mode
 #ifdef QGSMSDEBUG
-    QgsDebugMsg( QString( "Test font %1loaded from testdata.qrc" ).arg( testFontLoaded ? "" : "NOT " ) );
+    QgsDebugMsg( QString( "Test font %1 loaded from testdata.qrc" ).arg( testFontLoaded ? "" : "NOT " ) );
 #endif
 
     //use QgsGetRequestHandler in case of HTTP GET and QgsSOAPRequestHandler in case of HTTP POST
@@ -297,14 +306,22 @@ int main( int argc, char * argv[] )
     //set admin config file to wms server object
     QString configFilePath( defaultConfigFilePath );
 
-    paramIt = parameterMap.find( "MAP" );
-    if ( paramIt == parameterMap.constEnd() )
+    QString projectFile = getenv( "QGIS_PROJECT_FILE" );
+    if ( !projectFile.isEmpty() )
     {
-      QgsDebugMsg( QString( "Using default configuration file path: %1" ).arg( defaultConfigFilePath ) );
+      configFilePath = projectFile;
     }
     else
     {
-      configFilePath = paramIt.value();
+      paramIt = parameterMap.find( "MAP" );
+      if ( paramIt == parameterMap.constEnd() )
+      {
+        QgsDebugMsg( QString( "Using default configuration file path: %1" ).arg( defaultConfigFilePath ) );
+      }
+      else
+      {
+        configFilePath = paramIt.value();
+      }
     }
 
     QgsConfigParser* adminConfigParser = QgsConfigCache::instance()->searchConfiguration( configFilePath );
@@ -338,7 +355,99 @@ int main( int argc, char * argv[] )
     }
 
     QgsWMSServer* theServer = 0;
-    if ( serviceString == "WFS" )
+    if ( serviceString == "WCS" )
+    {
+      delete theServer;
+      QgsWCSServer* theServer = 0;
+      try
+      {
+        theServer = new QgsWCSServer( parameterMap );
+      }
+      catch ( const QgsMapServiceException &e ) //admin.sld may be invalid
+      {
+        theRequestHandler->sendServiceException( e );
+        continue;
+      }
+
+      theServer->setAdminConfigParser( adminConfigParser );
+
+
+      //request type
+      QString request = parameterMap.value( "REQUEST" );
+      if ( request.isEmpty() )
+      {
+        //do some error handling
+        QgsDebugMsg( "unable to find 'REQUEST' parameter, exiting..." );
+        theRequestHandler->sendServiceException( QgsMapServiceException( "OperationNotSupported", "Please check the value of the REQUEST parameter" ) );
+        delete theRequestHandler;
+        delete theServer;
+        continue;
+      }
+
+      if ( request.compare( "GetCapabilities", Qt::CaseInsensitive ) == 0 )
+      {
+        QDomDocument capabilitiesDocument;
+        try
+        {
+          capabilitiesDocument = theServer->getCapabilities();
+        }
+        catch ( QgsMapServiceException& ex )
+        {
+          theRequestHandler->sendServiceException( ex );
+          delete theRequestHandler;
+          delete theServer;
+          continue;
+        }
+        QgsDebugMsg( "sending GetCapabilities response" );
+        theRequestHandler->sendGetCapabilitiesResponse( capabilitiesDocument );
+        delete theRequestHandler;
+        delete theServer;
+        continue;
+      }
+      else if ( request.compare( "DescribeCoverage", Qt::CaseInsensitive ) == 0 )
+      {
+        QDomDocument describeDocument;
+        try
+        {
+          describeDocument = theServer->describeCoverage();
+        }
+        catch ( QgsMapServiceException& ex )
+        {
+          theRequestHandler->sendServiceException( ex );
+          delete theRequestHandler;
+          delete theServer;
+          continue;
+        }
+        QgsDebugMsg( "sending GetCapabilities response" );
+        theRequestHandler->sendGetCapabilitiesResponse( describeDocument );
+        delete theRequestHandler;
+        delete theServer;
+        continue;
+      }
+      else if ( request.compare( "GetCoverage", Qt::CaseInsensitive ) == 0 )
+      {
+        QByteArray* coverageOutput;
+        try
+        {
+          coverageOutput = theServer->getCoverage();
+        }
+        catch ( QgsMapServiceException& ex )
+        {
+          theRequestHandler->sendServiceException( ex );
+          delete theRequestHandler;
+          delete theServer;
+          continue;
+        }
+        if ( coverageOutput )
+        {
+          theRequestHandler->sendGetCoverageResponse( coverageOutput );
+        }
+        delete theRequestHandler;
+        delete theServer;
+        continue;
+      }
+    }
+    else if ( serviceString == "WFS" )
     {
       delete theServer;
       QgsWFSServer* theServer = 0;
@@ -346,7 +455,7 @@ int main( int argc, char * argv[] )
       {
         theServer = new QgsWFSServer( parameterMap );
       }
-      catch ( QgsMapServiceException e ) //admin.sld may be invalid
+      catch ( const QgsMapServiceException &e ) //admin.sld may be invalid
       {
         theRequestHandler->sendServiceException( e );
         continue;
@@ -413,26 +522,16 @@ int main( int argc, char * argv[] )
         QString outputFormat = parameterMap.value( "OUTPUTFORMAT" );
         try
         {
-          if ( theServer->getFeature( *theRequestHandler, outputFormat ) != 0 )
-          {
-            delete theRequestHandler;
-            delete theServer;
-            continue;
-          }
-          else
-          {
-            delete theRequestHandler;
-            delete theServer;
-            continue;
-          }
+          theServer->getFeature( *theRequestHandler, outputFormat );
         }
         catch ( QgsMapServiceException& ex )
         {
           theRequestHandler->sendServiceException( ex );
-          delete theRequestHandler;
-          delete theServer;
-          continue;
         }
+
+        delete theRequestHandler;
+        delete theServer;
+        continue;
       }
       else if ( request.compare( "Transaction", Qt::CaseInsensitive ) == 0 )
       {
@@ -462,7 +561,7 @@ int main( int argc, char * argv[] )
     {
       theServer = new QgsWMSServer( parameterMap, theMapRenderer );
     }
-    catch ( QgsMapServiceException e ) //admin.sld may be invalid
+    catch ( const QgsMapServiceException &e ) //admin.sld may be invalid
     {
       theRequestHandler->sendServiceException( e );
       continue;
@@ -599,7 +698,7 @@ int main( int argc, char * argv[] )
       delete theServer;
       continue;
     }
-    else if ( request.compare( "GetStyles", Qt::CaseInsensitive ) == 0 || request.compare( "GetStyle", Qt::CaseInsensitive ) == 0 ) // GetStyle for compatibility with earlier QGIS versions
+    else if ( request.compare( "GetStyle", Qt::CaseInsensitive ) == 0 ) // GetStyle for compatibility with earlier QGIS versions
     {
       try
       {
@@ -609,6 +708,30 @@ int main( int argc, char * argv[] )
       catch ( QgsMapServiceException& ex )
       {
         theRequestHandler->sendServiceException( ex );
+      }
+
+      delete theRequestHandler;
+      delete theServer;
+      continue;
+    }
+    else if ( request.compare( "GetStyles", Qt::CaseInsensitive ) == 0 )
+    {
+      // GetStyles is only defined for WMS1.1.1/SLD1.0
+      if ( version != "1.1.1" )
+      {
+        theRequestHandler->sendServiceException( QgsMapServiceException( "OperationNotSupported", "GetStyles method is only available in WMS version 1.1.1" ) );
+      }
+      else
+      {
+        try
+        {
+          QDomDocument doc = theServer->getStyles();
+          theRequestHandler->sendGetStyleResponse( doc );
+        }
+        catch ( QgsMapServiceException& ex )
+        {
+          theRequestHandler->sendServiceException( ex );
+        }
       }
 
       delete theRequestHandler;
@@ -681,3 +804,4 @@ int main( int argc, char * argv[] )
   QgsDebugMsg( "************* all done ***************" );
   return 0;
 }
+

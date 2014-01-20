@@ -20,58 +20,62 @@
 __author__ = 'Victor Olaya'
 __date__ = 'August 2012'
 __copyright__ = '(C) 2012, Victor Olaya'
+
 # This will get replaced with a git SHA1 when you do a git archive
+
 __revision__ = '$Format:%H$'
 
 from PyQt4.QtCore import *
-
 from qgis.core import *
-
 from processing.core.GeoAlgorithm import GeoAlgorithm
-from processing.core.QGisLayers import QGisLayers
-from processing.core.ProcessingLog import ProcessingLog
-
 from processing.parameters.ParameterVector import ParameterVector
 from processing.parameters.ParameterString import ParameterString
-
 from processing.outputs.OutputVector import OutputVector
+from processing.tools import dataobjects, vector
 
-from processing.algs.ftools import FToolsUtils as utils
 
 class PointsInPolygon(GeoAlgorithm):
 
-    POLYGONS = "POLYGONS"
-    POINTS = "POINTS"
-    OUTPUT = "OUTPUT"
-    FIELD = "FIELD"
+    POLYGONS = 'POLYGONS'
+    POINTS = 'POINTS'
+    OUTPUT = 'OUTPUT'
+    FIELD = 'FIELD'
 
-    #===========================================================================
+    # =========================================================================
     # def getIcon(self):
-    #    return QtGui.QIcon(os.path.dirname(__file__) + "/icons/sum_points.png")
-    #===========================================================================
+    #    return QIcon(os.path.dirname(__file__) + "/icons/sum_points.png")
+    # =========================================================================
 
     def defineCharacteristics(self):
-        self.name = "Count points in polygon"
-        self.group = "Vector analysis tools"
-        self.addParameter(ParameterVector(self.POLYGONS, "Polygons", [ParameterVector.VECTOR_TYPE_POLYGON]))
-        self.addParameter(ParameterVector(self.POINTS, "Points", [ParameterVector.VECTOR_TYPE_POINT]))
-        self.addParameter(ParameterString(self.FIELD, "Count field name", "NUMPOINTS"))
+        self.name = 'Count points in polygon'
+        self.group = 'Vector analysis tools'
+        self.addParameter(ParameterVector(self.POLYGONS, 'Polygons',
+                          [ParameterVector.VECTOR_TYPE_POLYGON]))
+        self.addParameter(ParameterVector(self.POINTS, 'Points',
+                          [ParameterVector.VECTOR_TYPE_POINT]))
+        self.addParameter(ParameterString(self.FIELD, 'Count field name',
+                          'NUMPOINTS'))
 
-        self.addOutput(OutputVector(self.OUTPUT, "Result"))
+        self.addOutput(OutputVector(self.OUTPUT, 'Result'))
 
     def processAlgorithm(self, progress):
-        polyLayer = QGisLayers.getObjectFromUri(self.getParameterValue(self.POLYGONS))
-        pointLayer = QGisLayers.getObjectFromUri(self.getParameterValue(self.POINTS))
+        polyLayer = dataobjects.getObjectFromUri(
+                self.getParameterValue(self.POLYGONS))
+        pointLayer = dataobjects.getObjectFromUri(
+                self.getParameterValue(self.POINTS))
         fieldName = self.getParameterValue(self.FIELD)
 
         polyProvider = polyLayer.dataProvider()
 
-        idxCount, fieldList = utils.findOrCreateField(polyLayer, polyLayer.pendingFields(), fieldName)
+        (idxCount, fieldList) = vector.findOrCreateField(polyLayer,
+                polyLayer.pendingFields(), fieldName)
 
-        writer = self.getOutputFromName(self.OUTPUT).getVectorWriter(fieldList.toList(),
-                     polyProvider.geometryType(), polyProvider.crs())
+        writer = self.getOutputFromName(
+                self.OUTPUT).getVectorWriter(fieldList.toList(),
+                                             polyProvider.geometryType(),
+                                             polyProvider.crs())
 
-        spatialIndex = utils.createSpatialIndex(pointLayer)
+        spatialIndex = vector.spatialindex(pointLayer)
 
         ftPoly = QgsFeature()
         ftPoint = QgsFeature()
@@ -81,7 +85,7 @@ class PointsInPolygon(GeoAlgorithm):
         current = 0
         hasIntersections = False
 
-        features = QGisLayers.features(polyLayer)
+        features = vector.features(polyLayer)
         total = 100.0 / float(len(features))
         for ftPoly in features:
             geom = ftPoly.geometry()

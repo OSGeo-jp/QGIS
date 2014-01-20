@@ -32,9 +32,6 @@ class QgsSpatiaLiteFeatureIterator : public QgsAbstractFeatureIterator
 
     ~QgsSpatiaLiteFeatureIterator();
 
-    //! fetch next feature, return true on success
-    virtual bool nextFeature( QgsFeature& feature );
-
     //! reset the iterator to the starting position
     virtual bool rewind();
 
@@ -42,6 +39,10 @@ class QgsSpatiaLiteFeatureIterator : public QgsAbstractFeatureIterator
     virtual bool close();
 
   protected:
+
+    //! fetch next feature, return true on success
+    virtual bool fetchFeature( QgsFeature& feature );
+
     QgsSpatiaLiteProvider* P;
 
     QString whereClauseRect();
@@ -62,6 +63,8 @@ class QgsSpatiaLiteFeatureIterator : public QgsAbstractFeatureIterator
     /** geometry column index used when fetching geometry */
     int mGeomColIdx;
 
+    //! Set to true, if geometry is in the requested columns
+    bool mFetchGeometry;
 };
 
 #endif // QGSSPATIALITEFEATUREITERATOR_H

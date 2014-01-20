@@ -1,3 +1,12 @@
+qgis (2.1.0) UNRELEASED; urgency=low
+
+  * new development version 2.1 after branch of 2.0
+  * drop qgis_icon.xpm and use "upstream" version
+  * Update Qt dependency to 4.7
+  * drop support for Debian squeeze and Ubuntu lucid, maverick, natty and oneiric
+
+ -- Jürgen E. Fischer <jef@norbit.de>  Sat, 18 Jan 2014 23:05:48 +0100
+
 qgis (1.9.0) UNRELEASED; urgency=low
 
   * new development version 1.9 after branch of 1.8

@@ -17,38 +17,9 @@
      <x>0</x>
      <y>0</y>
      <width>1050</width>
-     <height>31</height>
+     <height>25</height>
     </rect>
    </property>
-   <widget class="QMenu" name="mEditMenu">
-    <property name="title">
-     <string>&amp;Edit</string>
-    </property>
-    <addaction name="mActionUndo"/>
-    <addaction name="mActionRedo"/>
-    <addaction name="separator"/>
-    <addaction name="mActionCutFeatures"/>
-    <addaction name="mActionCopyFeatures"/>
-    <addaction name="mActionPasteFeatures"/>
-    <addaction name="separator"/>
-    <addaction name="mActionAddFeature"/>
-    <addaction name="mActionMoveFeature"/>
-    <addaction name="mActionDeleteSelected"/>
-    <addaction name="separator"/>
-    <addaction name="mActionRotateFeature"/>
-    <addaction name="mActionSimplifyFeature"/>
-    <addaction name="mActionAddRing"/>
-    <addaction name="mActionAddPart"/>
-    <addaction name="mActionDeleteRing"/>
-    <addaction name="mActionDeletePart"/>
-    <addaction name="mActionReshapeFeatures"/>
-    <addaction name="mActionOffsetCurve"/>
-    <addaction name="mActionSplitFeatures"/>
-    <addaction name="mActionMergeFeatures"/>
-    <addaction name="mActionMergeFeatureAttributes"/>
-    <addaction name="mActionNodeTool"/>
-    <addaction name="mActionRotatePointSymbols"/>
-   </widget>
    <widget class="QMenu" name="mProjectMenu">
     <property name="title">
      <string>P&amp;roject</string>
@@ -76,6 +47,7 @@
     <addaction name="mActionSaveProject"/>
     <addaction name="mActionSaveProjectAs"/>
     <addaction name="mActionSaveMapAsImage"/>
+    <addaction name="mActionDxfExport"/>
     <addaction name="separator"/>
     <addaction name="mActionNewPrintComposer"/>
     <addaction name="mActionShowComposerManager"/>
@@ -242,6 +214,45 @@
     </widget>
     <addaction name="menuOpenStreetMap"/>
    </widget>
+   <widget class="QMenu" name="mEditMenu">
+    <property name="title">
+     <string>&amp;Edit</string>
+    </property>
+    <widget class="QMenu" name="mMenuPasteAs">
+     <property name="title">
+      <string>Paste Features as</string>
+     </property>
+     <addaction name="mActionPasteAsNewVector"/>
+     <addaction name="mActionPasteAsNewMemoryVector"/>
+    </widget>
+    <addaction name="mActionUndo"/>
+    <addaction name="mActionRedo"/>
+    <addaction name="separator"/>
+    <addaction name="mActionCutFeatures"/>
+    <addaction name="mActionCopyFeatures"/>
+    <addaction name="mActionPasteFeatures"/>
+    <addaction name="mMenuPasteAs"/>
+    <addaction name="separator"/>
+    <addaction name="mActionAddFeature"/>
+    <addaction name="mActionMoveFeature"/>
+    <addaction name="mActionDeleteSelected"/>
+    <addaction name="separator"/>
+    <addaction name="mActionRotateFeature"/>
+    <addaction name="mActionSimplifyFeature"/>
+    <addaction name="mActionAddRing"/>
+    <addaction name="mActionAddPart"/>
+    <addaction name="mActionFillRing"/>
+    <addaction name="mActionDeleteRing"/>
+    <addaction name="mActionDeletePart"/>
+    <addaction name="mActionReshapeFeatures"/>
+    <addaction name="mActionOffsetCurve"/>
+    <addaction name="mActionSplitFeatures"/>
+    <addaction name="mActionSplitParts"/>
+    <addaction name="mActionMergeFeatures"/>
+    <addaction name="mActionMergeFeatureAttributes"/>
+    <addaction name="mActionNodeTool"/>
+    <addaction name="mActionRotatePointSymbols"/>
+   </widget>
    <addaction name="mProjectMenu"/>
    <addaction name="mEditMenu"/>
    <addaction name="mViewMenu"/>
@@ -329,11 +340,13 @@
    <addaction name="mActionSimplifyFeature"/>
    <addaction name="mActionAddRing"/>
    <addaction name="mActionAddPart"/>
+   <addaction name="mActionFillRing"/>
    <addaction name="mActionDeleteRing"/>
    <addaction name="mActionDeletePart"/>
    <addaction name="mActionReshapeFeatures"/>
    <addaction name="mActionOffsetCurve"/>
    <addaction name="mActionSplitFeatures"/>
+   <addaction name="mActionSplitParts"/>
    <addaction name="mActionMergeFeatures"/>
    <addaction name="mActionMergeFeatureAttributes"/>
    <addaction name="mActionRotatePointSymbols"/>
@@ -671,10 +684,22 @@
    </property>
    <property name="icon">
     <iconset resource="../../images/images.qrc">
-     <normaloff>:/images/themes/default/mActionSplitFeatures.png</normaloff>:/images/themes/default/mActionSplitFeatures.png</iconset>
+     <normaloff>:/images/themes/default/mActionSplitFeatures.svg</normaloff>:/images/themes/default/mActionSplitFeatures.svg</iconset>
    </property>
    <property name="text">
     <string>Split Features</string>
+   </property>
+  </action>
+  <action name="mActionSplitParts">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../images/images.qrc">
+     <normaloff>:/images/themes/default/mActionSplitFeatures.svg</normaloff>:/images/themes/default/mActionSplitFeatures.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Split Parts</string>
    </property>
   </action>
   <action name="mActionDeleteSelected">
@@ -1072,7 +1097,7 @@
     <string>Refresh</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+R</string>
+    <string>F5</string>
    </property>
   </action>
   <action name="mActionTextAnnotation">
@@ -1320,6 +1345,9 @@
    <property name="text">
     <string>Query...</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
   </action>
   <action name="mActionAddToOverview">
    <property name="icon">
@@ -1386,7 +1414,7 @@
     <string>Toggle Full Screen Mode</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+F</string>
+    <string>F11</string>
    </property>
   </action>
   <action name="mActionProjectProperties">
@@ -1699,7 +1727,7 @@ Ctl (Cmd) increments by 15 deg.</string>
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="../../images/images.qrc">
+    <iconset>
      <normaloff>:/images/themes/default/mActionTouch.png</normaloff>:/images/themes/default/mActionTouch.png</iconset>
    </property>
    <property name="text">
@@ -2071,7 +2099,7 @@ Acts on currently active editable layer</string>
   </action>
   <action name="mActionNeedSupport">
    <property name="text">
-    <string>Need Support?</string>
+    <string>Need commercial support?</string>
    </property>
   </action>
   <action name="mActionOpenFieldCalc">
@@ -2096,6 +2124,42 @@ Acts on currently active editable layer</string>
    </property>
    <property name="toolTip">
     <string>Add Delimited Text Layer</string>
+   </property>
+  </action>
+  <action name="mActionPasteAsNewVector">
+   <property name="text">
+    <string>New Vector Layer</string>
+   </property>
+   <property name="toolTip">
+    <string>Paste features in clipboard into a new OGR vector layer.</string>
+   </property>
+  </action>
+  <action name="mActionPasteAsNewMemoryVector">
+   <property name="text">
+    <string>New Memory Vector Layer</string>
+   </property>
+   <property name="toolTip">
+    <string>Paste features in clipboard into a new memory vector layer.</string>
+   </property>
+  </action>
+  <action name="mActionDxfExport">
+   <property name="text">
+    <string>DXF Export...</string>
+   </property>
+  </action>
+  <action name="mActionFillRing">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../images/images.qrc">
+     <normaloff>:/images/themes/default/mActionFillRing.png</normaloff>:/images/themes/default/mActionFillRing.png</iconset>
+   </property>
+   <property name="text">
+    <string>Fill Ring</string>
+   </property>
+   <property name="toolTip">
+    <string>Fill Ring</string>
    </property>
   </action>
  </widget>

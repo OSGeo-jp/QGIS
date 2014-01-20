@@ -46,9 +46,9 @@ static const QString icon_ = ":/spit.png";
 * @parma _qI Pointer to the QGIS interface object
 */
 QgsSpitPlugin::QgsSpitPlugin( QgisInterface * _qI )
-    : QgisPlugin( name_, description_, category_, version_, type_ ),
-    qgisMainWindow( _qI->mainWindow() ),
-    qI( _qI )
+    : QgisPlugin( name_, description_, category_, version_, type_ )
+    , qgisMainWindow( _qI->mainWindow() )
+    , qI( _qI )
 {
 }
 
@@ -93,6 +93,7 @@ void QgsSpitPlugin::unload()
   qI->removeDatabaseToolBarIcon( spitAction );
   qI->removePluginDatabaseMenu( tr( "&Spit" ), spitAction );
   delete spitAction;
+  spitAction = 0;
 }
 
 //! Set icons to the current theme
@@ -102,21 +103,24 @@ void QgsSpitPlugin::setCurrentTheme( QString theThemeName )
   QString myCurThemePath = QgsApplication::activeThemePath() + "/plugins/spit.png";
   QString myDefThemePath = QgsApplication::defaultThemePath() + "/plugins/spit.png";
   QString myQrcPath = ":/spit.png";
-  if ( QFile::exists( myCurThemePath ) )
+  if ( spitAction )
   {
-    spitAction->setIcon( QIcon( myCurThemePath ) );
-  }
-  else if ( QFile::exists( myDefThemePath ) )
-  {
-    spitAction->setIcon( QIcon( myDefThemePath ) );
-  }
-  else if ( QFile::exists( myQrcPath ) )
-  {
-    spitAction->setIcon( QIcon( myQrcPath ) );
-  }
-  else
-  {
-    spitAction->setIcon( QIcon() );
+    if ( QFile::exists( myCurThemePath ) )
+    {
+      spitAction->setIcon( QIcon( myCurThemePath ) );
+    }
+    else if ( QFile::exists( myDefThemePath ) )
+    {
+      spitAction->setIcon( QIcon( myDefThemePath ) );
+    }
+    else if ( QFile::exists( myQrcPath ) )
+    {
+      spitAction->setIcon( QIcon( myQrcPath ) );
+    }
+    else
+    {
+      spitAction->setIcon( QIcon() );
+    }
   }
 }
 
