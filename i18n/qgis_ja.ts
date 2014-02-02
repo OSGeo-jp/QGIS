@@ -20226,12 +20226,12 @@ and current file is [%3]</source>
     <message>
         <location filename="../src/gui/qgsdatumtransformdialog.cpp" line="33"/>
         <source>Select datum transformations for layer</source>
-        <translation type="unfinished"></translation>
+        <translation>レイヤのdatum変換を選択して下さい</translation>
     </message>
     <message>
         <location filename="../src/gui/qgsdatumtransformdialog.cpp" line="189"/>
         <source>File &apos;%1&apos; not found in directory &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>ディレクトリ &apos;%2&apos; にファイル &apos;%1&apos; がありません</translation>
     </message>
 </context>
 <context>
@@ -20239,27 +20239,27 @@ and current file is [%3]</source>
     <message>
         <location filename="../src/ui/qgsdatumtransformdialogbase.ui" line="14"/>
         <source>Select datum transformations</source>
-        <translation type="unfinished"></translation>
+        <translation>datum変換を選択して下さい</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsdatumtransformdialogbase.ui" line="21"/>
         <source>src transform</source>
-        <translation type="unfinished"></translation>
+        <translation>変換元</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsdatumtransformdialogbase.ui" line="26"/>
         <source>dst transform</source>
-        <translation type="unfinished"></translation>
+        <translation>変換先</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsdatumtransformdialogbase.ui" line="41"/>
         <source>Remember selection</source>
-        <translation type="unfinished"></translation>
+        <translation>選択を記憶する</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsdatumtransformdialogbase.ui" line="61"/>
         <source>Hide deprecated</source>
-        <translation type="unfinished"></translation>
+        <translation>非推奨のものを隠す</translation>
     </message>
 </context>
 <context>
@@ -21735,7 +21735,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/app/qgsdiagramproperties.cpp" line="698"/>
         <location filename="../src/app/qgsdiagramproperties.cpp" line="728"/>
         <source>Expression based attribute</source>
-        <translation type="unfinished"></translation>
+        <translation>式に基づく属性</translation>
     </message>
     <message>
         <location filename="../src/app/qgsdiagramproperties.cpp" line="55"/>
@@ -21880,7 +21880,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ui/qgsdiagrampropertiesbase.ui" line="427"/>
         <source>Edit expression</source>
-        <translation type="unfinished">式の編集</translation>
+        <translation>式の編集</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsdiagrampropertiesbase.ui" line="444"/>
@@ -22001,7 +22001,7 @@ Leave empty to automatically apply the maximum value.</source>
     <message>
         <location filename="../src/ui/qgsdiagrampropertiesbase.ui" line="866"/>
         <source>Add expression</source>
-        <translation type="unfinished"></translation>
+        <translation>式の追加</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsdiagrampropertiesbase.ui" line="934"/>
@@ -22186,12 +22186,12 @@ Parser error:
     <message>
         <location filename="../src/app/qgsdxfexportdialog.cpp" line="123"/>
         <source>Export as DXF</source>
-        <translation type="unfinished"></translation>
+        <translation>DXFでエクスポートする</translation>
     </message>
     <message>
         <location filename="../src/app/qgsdxfexportdialog.cpp" line="123"/>
         <source>DXF files *.dxf *.DXF</source>
-        <translation type="unfinished"></translation>
+        <translation>DXFファイル *.dxf *.DXF</translation>
     </message>
 </context>
 <context>
@@ -22199,57 +22199,57 @@ Parser error:
     <message>
         <location filename="../src/ui/qgsdxfexportdialogbase.ui" line="14"/>
         <source>DXF export</source>
-        <translation type="unfinished"></translation>
+        <translation>DXFエキスポート</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsdxfexportdialogbase.ui" line="35"/>
         <source>Symbology mode</source>
-        <translation type="unfinished"></translation>
+        <translation>シンボロジーモード</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsdxfexportdialogbase.ui" line="42"/>
         <source>Symbology scale</source>
-        <translation type="unfinished"></translation>
+        <translation>シンボロジースケール</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsdxfexportdialogbase.ui" line="49"/>
         <source>Save as</source>
-        <translation type="unfinished">名前をつけて保存</translation>
+        <translation>名前をつけて保存</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsdxfexportdialogbase.ui" line="56"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsdxfexportdialogbase.ui" line="64"/>
         <source>No symbology</source>
-        <translation type="unfinished">シンボロジ無し</translation>
+        <translation>シンボロジ無し</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsdxfexportdialogbase.ui" line="69"/>
         <source>Feature symbology</source>
-        <translation type="unfinished">地物シンボロジ</translation>
+        <translation>地物シンボロジ</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsdxfexportdialogbase.ui" line="74"/>
         <source>Symbol layer symbology</source>
-        <translation type="unfinished">シンボルレイヤシンボロジ</translation>
+        <translation>シンボルレイヤシンボロジ</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsdxfexportdialogbase.ui" line="92"/>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>全てを選択</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsdxfexportdialogbase.ui" line="99"/>
         <source>Unselect all</source>
-        <translation type="unfinished">全選択解除</translation>
+        <translation>全選択解除</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsdxfexportdialogbase.ui" line="121"/>
         <source>Export features intersecting the current map extent</source>
-        <translation type="unfinished"></translation>
+        <translation>現在の地図領域にインターセクトする地物をエキスポート</translation>
     </message>
 </context>
 <context>
@@ -22258,12 +22258,12 @@ Parser error:
         <location filename="../src/gui/editorwidgets/core/qgseditorwidgetregistry.cpp" line="150"/>
         <location filename="../src/gui/editorwidgets/core/qgseditorwidgetregistry.cpp" line="212"/>
         <source>Unknown attribute editor widget &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>不明の属性編集ウィジェットです &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="../src/gui/editorwidgets/core/qgseditorwidgetregistry.cpp" line="179"/>
         <source>Could not save unknown editor widget type &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>不明な編集ウィジェットタイプを保存できませんでした &apos;%1&apos;</translation>
     </message>
 </context>
 <context>
@@ -22311,12 +22311,12 @@ Parser error:
     <message>
         <location filename="../src/gui/symbology-ng/qgsellipsesymbollayerv2widget.cpp" line="265"/>
         <source>Horizontal anchor point</source>
-        <translation type="unfinished"></translation>
+        <translation>水平アンカーポイント</translation>
     </message>
     <message>
         <location filename="../src/gui/symbology-ng/qgsellipsesymbollayerv2widget.cpp" line="267"/>
         <source>Vertical anchor point</source>
-        <translation type="unfinished"></translation>
+        <translation>垂直アンカーポイント</translation>
     </message>
 </context>
 <context>
@@ -22406,7 +22406,7 @@ Parser error:
     <message>
         <location filename="../src/ui/qgsengineconfigdialog.ui" line="303"/>
         <source>Show partials labels</source>
-        <translation type="unfinished"></translation>
+        <translation>部分的なラベル表示</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsengineconfigdialog.ui" line="253"/>
@@ -22416,7 +22416,7 @@ Parser error:
     <message>
         <location filename="../src/ui/qgsengineconfigdialog.ui" line="20"/>
         <source>Automated Placement Engine</source>
-        <translation type="unfinished"></translation>
+        <translation>自動配置エンジン</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsengineconfigdialog.ui" line="276"/>
@@ -22633,32 +22633,32 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ui/qgsexpressionbuilder.ui" line="34"/>
         <source>Function list</source>
-        <translation type="unfinished"></translation>
+        <translation>関数リスト</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsexpressionbuilder.ui" line="106"/>
         <source>Selected function help</source>
-        <translation type="unfinished"></translation>
+        <translation>選択されている関数ヘルプ</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsexpressionbuilder.ui" line="137"/>
         <source>Field values</source>
-        <translation type="unfinished"></translation>
+        <translation>フィールドの値</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsexpressionbuilder.ui" line="211"/>
         <source>Load values</source>
-        <translation type="unfinished"></translation>
+        <translation>値のロード</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsexpressionbuilder.ui" line="218"/>
         <source>all unique</source>
-        <translation type="unfinished"></translation>
+        <translation>すべてユニーク</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsexpressionbuilder.ui" line="225"/>
         <source>10 samples</source>
-        <translation type="unfinished"></translation>
+        <translation>10個のサンプル</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsexpressionbuilder.ui" line="276"/>
@@ -22823,7 +22823,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ui/qgsfeatureselectiondlg.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">ダイアログ</translation>
+        <translation>ダイアログ</translation>
     </message>
 </context>
 <context>
@@ -22979,12 +22979,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/app/qgsfieldsproperties.cpp" line="108"/>
         <source>Layer</source>
-        <translation type="unfinished">レイヤ</translation>
+        <translation>レイヤ</translation>
     </message>
     <message>
         <location filename="../src/app/qgsfieldsproperties.cpp" line="109"/>
         <source>Field</source>
-        <translation type="unfinished">フィールド</translation>
+        <translation>フィールド</translation>
     </message>
     <message>
         <location filename="../src/app/qgsfieldsproperties.cpp" line="536"/>
@@ -23111,7 +23111,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/app/qgsfieldsproperties.cpp" line="717"/>
         <source>Editor Widget</source>
-        <translation type="unfinished"></translation>
+        <translation>エディタウィジェット</translation>
     </message>
     <message>
         <location filename="../src/app/qgsfieldsproperties.cpp" line="777"/>
@@ -23160,7 +23160,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ui/qgsfieldspropertiesbase.ui" line="141"/>
         <source>Fields</source>
-        <translation type="unfinished">フィールド</translation>
+        <translation>フィールド</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsfieldspropertiesbase.ui" line="159"/>
@@ -23170,7 +23170,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ui/qgsfieldspropertiesbase.ui" line="240"/>
         <source>Relations</source>
-        <translation type="unfinished"></translation>
+        <translation>リレーション</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsfieldspropertiesbase.ui" line="268"/>
@@ -23210,22 +23210,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ui/qgsfieldspropertiesbase.ui" line="446"/>
         <source>Suppress attribute form pop-up after feature creation</source>
-        <translation type="unfinished"></translation>
+        <translation>地物作成後のポップアップ属性入力を行わない</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsfieldspropertiesbase.ui" line="466"/>
         <source>Default</source>
-        <translation type="unfinished">既定</translation>
+        <translation>既定</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsfieldspropertiesbase.ui" line="471"/>
         <source>On</source>
-        <translation type="unfinished"></translation>
+        <translation>オン</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsfieldspropertiesbase.ui" line="476"/>
         <source>Off</source>
-        <translation type="unfinished">オフ</translation>
+        <translation>オフ</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsfieldspropertiesbase.ui" line="33"/>
