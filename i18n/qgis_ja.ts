@@ -47357,12 +47357,12 @@ There was a problem with your symbol database.</source>
     <message>
         <location filename="../src/gui/symbology-ng/qgssymbollayerv2widget.cpp" line="1553"/>
         <source>Horizontal anchor point</source>
-        <translation type="unfinished"></translation>
+        <translation>水平アンカーポイント</translation>
     </message>
     <message>
         <location filename="../src/gui/symbology-ng/qgssymbollayerv2widget.cpp" line="1555"/>
         <source>Vertical anchor point</source>
-        <translation type="unfinished"></translation>
+        <translation>垂直アンカーポイント</translation>
     </message>
 </context>
 <context>
