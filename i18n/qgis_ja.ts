@@ -58072,17 +58072,17 @@ b &amp;rarr; geometry
 &lt;pre&gt; centroid($geometry) &amp;rarr; returns a point geometry&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;centroid 関数&lt;/h3&gt;
-Returns the geometric center of a geometry.
+        <translation>&lt;h3&gt;centroid 関数&lt;/h3&gt;
+ジオメトリの重心を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
 &lt;pre&gt;centroid(a)&lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
-b &amp;rarr; geometry
+b &amp;rarr; ジオメトリ
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
-&lt;pre&gt; centroid($geometry) &amp;rarr; returns a point geometry&lt;/pre&gt;
+&lt;pre&gt; centroid($geometry) &amp;rarr; ポイントジオメトリを返します&lt;/pre&gt;
 
 </translation>
     </message>
@@ -58102,19 +58102,19 @@ geometry &amp;rarr; geometry
 &lt;pre&gt; within( geomFromWKT( &apos;POINT( 0.5 0.5 )&apos;) , geomFromWKT(&apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) )    &amp;rarr; returns 1&lt;/pre&gt;
 &lt;pre&gt; within( geomFromWKT( &apos;POINT( 5 5 )&apos;) , geomFromWKT(&apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) )        &amp;rarr; returns 0&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;within 関数&lt;/h3&gt;
-Returns 1 if the geometry a is completely inside geometry b
+        <translation>&lt;h3&gt;within 関数&lt;/h3&gt;
+ジオメトリaが完全にジオメトリbの内側にある場合に1を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
 &lt;pre&gt;within( geometry a , geometry b)&lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
-geometry &amp;rarr; geometry
-geometry &amp;rarr; geometry
+geometry &amp;rarr; ジオメトリ
+geometry &amp;rarr; ジオメトリ
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
-&lt;pre&gt; within( geomFromWKT( &apos;POINT( 0.5 0.5 )&apos;) , geomFromWKT(&apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) )    &amp;rarr; returns 1&lt;/pre&gt;
-&lt;pre&gt; within( geomFromWKT( &apos;POINT( 5 5 )&apos;) , geomFromWKT(&apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) )        &amp;rarr; returns 0&lt;/pre&gt;
+&lt;pre&gt; within( geomFromWKT( &apos;POINT( 0.5 0.5 )&apos;) , geomFromWKT(&apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) )    &amp;rarr; 1を返す&lt;/pre&gt;
+&lt;pre&gt; within( geomFromWKT( &apos;POINT( 5 5 )&apos;) , geomFromWKT(&apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) )        &amp;rarr; 0を返す&lt;/pre&gt;
 </translation>
     </message>
     <message>
@@ -58136,9 +58136,8 @@ $map &amp;rarr; &quot;canvas&quot; (within the main QGIS main canvas)&lt;/pre&gt
 
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;$map 関数&lt;/h3&gt;
-Returns the id of the current map item if the map is being drawn in a composition, or &quot;canvas&quot; if the map is being
-drawn within the main QGIS window.
+        <translation>&lt;h3&gt;$map 関数&lt;/h3&gt;
+地図がコンポジションに描かれる場合は現在の地図アイテムのIDを返します. 地図がQGISメインウィンドウに描かれる場合には&quot;canvas&quot;を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
 &lt;pre&gt;$map&lt;/pre&gt;
@@ -58148,9 +58147,8 @@ drawn within the main QGIS window.
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
 &lt;!-- Show example of function.--&gt;
-&lt;pre&gt;$map &amp;rarr; &quot;overview_map&quot; (within a composer item)&lt;br /&gt;
-$map &amp;rarr; &quot;canvas&quot; (within the main QGIS main canvas)&lt;/pre&gt;
-
+&lt;pre&gt;$map &amp;rarr; &quot;overview_map&quot; (コンポーザアイテム)&lt;br /&gt;
+$map &amp;rarr; &quot;canvas&quot; (QGISのメインキャンバス)&lt;/pre&gt;
 
 </translation>
     </message>
@@ -58169,18 +58167,18 @@ b &amp;rarr; geometry
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;pre&gt; distance( geomFromWKT( &apos;POINT(4 4)&apos; ) , geomFromWKT( &apos;POINT(4 8)&apos; ))    &amp;rarr; returns 4&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;distance 関数&lt;/h3&gt;
- Returns the minimum distance (based on spatial ref) between two geometries in projected units.
+        <translation>&lt;h3&gt;distance 関数&lt;/h3&gt;
+2つのジオメトリの間の(空間参照に基づく)最小の距離を投影された単位で返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
 &lt;pre&gt;distance( a, b )&lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
-a &amp;rarr; geometry
-b &amp;rarr; geometry
+a &amp;rarr; ジオメトリ
+b &amp;rarr; ジオメトリ
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
-&lt;pre&gt; distance( geomFromWKT( &apos;POINT(4 4)&apos; ) , geomFromWKT( &apos;POINT(4 8)&apos; ))    &amp;rarr; returns 4&lt;/pre&gt;
+&lt;pre&gt; distance( geomFromWKT( &apos;POINT(4 4)&apos; ) , geomFromWKT( &apos;POINT(4 8)&apos; ))    &amp;rarr; 4を返す&lt;/pre&gt;
 </translation>
     </message>
     <message>
@@ -58198,18 +58196,18 @@ geometry &amp;rarr; geometry
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;pre&gt; geomToWKT( difference( geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4)&apos; ))  )   &amp;rarr; returns LINESTRING(4 4, 5 5)&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;difference 関数&lt;/h3&gt;
-Returns a geometry that represents that part of geometry a that does not intersect with geometry b.
+        <translation>&lt;h3&gt;difference 関数&lt;/h3&gt;
+ジオメトリbと交差しないジオメトリaの部分を表すジオメトリを返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
 &lt;pre&gt;difference( a, b )&lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
-geometry &amp;rarr; geometry
-geometry &amp;rarr; geometry
+geometry &amp;rarr; ジオメトリ
+geometry &amp;rarr; ジオメトリ
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
-&lt;pre&gt; geomToWKT( difference( geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4)&apos; ))  )   &amp;rarr; returns LINESTRING(4 4, 5 5)&lt;/pre&gt;
+&lt;pre&gt; geomToWKT( difference( geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4)&apos; ))  )   &amp;rarr; LINESTRING(4 4, 5 5) を返す&lt;/pre&gt;
 </translation>
     </message>
     <message>
@@ -58229,8 +58227,8 @@ None
 &lt;pre&gt; 4 IS NOT 2+2    &amp;rarr; returns 0 &lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;NOT&lt;/h3&gt;
-Returns 1 if a is not the same as b.
+        <translation>&lt;h3&gt;NOT&lt;/h3&gt;
+aがbと等しくない場合に1を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
 &lt;pre&gt; a NOT b &lt;/pre&gt;
@@ -58239,10 +58237,9 @@ Returns 1 if a is not the same as b.
 なし
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
-&lt;pre&gt; &apos;a&apos; IS NOT &apos;b&apos;  &amp;rarr; returns 1 &lt;/pre&gt;
-&lt;pre&gt; &apos;a&apos; IS NOT &apos;a&apos;  &amp;rarr; returns 0 &lt;/pre&gt;
-&lt;pre&gt; 4 IS NOT 2+2    &amp;rarr; returns 0 &lt;/pre&gt;
-
+&lt;pre&gt; &apos;a&apos; IS NOT &apos;b&apos;  &amp;rarr; 1を返す &lt;/pre&gt;
+&lt;pre&gt; &apos;a&apos; IS NOT &apos;a&apos;  &amp;rarr; 0を返す &lt;/pre&gt;
+&lt;pre&gt; 4 IS NOT 2+2    &amp;rarr; 0を返す &lt;/pre&gt;
 </translation>
     </message>
     <message>
@@ -58260,18 +58257,18 @@ geometry &amp;rarr; geometry
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;pre&gt; geomToWKT( symDifference(  geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 8 8)&apos; ))   )   &amp;rarr; returns LINESTRING(5 5, 8 8)&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;symDifference 関数&lt;/h3&gt;
-Returns a geometry that represents the portions of a and b that do not intersect.
+        <translation>&lt;h3&gt;symDifference 関数&lt;/h3&gt;
+aとbの交差しない部分を表すジオメトリを返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
 &lt;pre&gt;symDifference( geometry a, geometry b)&lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
-geometry &amp;rarr; geometry
-geometry &amp;rarr; geometry
+geometry &amp;rarr; ジオメトリ
+geometry &amp;rarr; ジオメトリ
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
-&lt;pre&gt; geomToWKT( symDifference(  geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 8 8)&apos; ))   )   &amp;rarr; returns LINESTRING(5 5, 8 8)&lt;/pre&gt;
+&lt;pre&gt; geomToWKT( symDifference(  geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 8 8)&apos; ))   )   &amp;rarr; LINESTRING(5 5, 8 8) を返す&lt;/pre&gt;
 </translation>
     </message>
     <message>
@@ -58290,19 +58287,19 @@ geometry &amp;rarr; geometry
 &lt;pre&gt; contains( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;POINT( 0.5 0.5 )&apos; ))    &amp;rarr; returns 1&lt;/pre&gt;
 &lt;pre&gt; contains( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))          &amp;rarr; returns 0&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;contains 関数&lt;/h3&gt;
- Returns true if and only if no points of b lie in the exterior of a, and at least one point of the interior of b lies in the interior of a. 
+        <translation>&lt;h3&gt;contains 関数&lt;/h3&gt;
+aの外側にはbのポイントがなく、少なくとも1つのb内部の点がaの内側にある場合にtrueを返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
 &lt;pre&gt;contains( geometry a , geometry a)&lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
-geometry &amp;rarr; geometry
-geometry &amp;rarr; geometry
+geometry &amp;rarr; ジオメトリ
+geometry &amp;rarr; ジオメトリ
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
-&lt;pre&gt; contains( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;POINT( 0.5 0.5 )&apos; ))    &amp;rarr; returns 1&lt;/pre&gt;
-&lt;pre&gt; contains( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))          &amp;rarr; returns 0&lt;/pre&gt;
+&lt;pre&gt; contains( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;POINT( 0.5 0.5 )&apos; ))    &amp;rarr; 1を返す&lt;/pre&gt;
+&lt;pre&gt; contains( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))          &amp;rarr; 0を返す&lt;/pre&gt;
 </translation>
     </message>
     <message>
@@ -58561,18 +58558,18 @@ Returns -1 if the expression isn&apos;t found.
      strpos(&apos;HELLO WORLD&apos;,&apos;WORLD&apos;) &amp;rarr; 6&lt;br&gt;
      strpos(&apos;HELLO WORLD&apos;,&apos;GOODBYE&apos;) &amp;rarr; -1&lt;br&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;strpos() 関数&lt;/h3&gt;
-Return the index of a regular expression in a string.
+        <translation>&lt;h3&gt;strpos() 関数&lt;/h3&gt;
+文字列中の正規表現にマッチする文字列の位置を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
      strpos(&lt;i&gt;haystack&lt;/i&gt;, &lt;i&gt;needle&lt;/i&gt;)
 &lt;br&gt;&lt;br&gt;
-Returns -1 if the expression isn&apos;t found.
+正規表現がマッチしない場合には-1を返します.
 
 &lt;p&gt;&lt;h4&gt;引数&lt;/h4&gt;
 &lt;!-- List args for functions here--&gt;
-&lt;i&gt;  haystack&lt;/i&gt; &amp;rarr; is string.  The string that is to be searched.&lt;br&gt;
-&lt;i&gt;  needle&lt;/i&gt; &amp;rarr; is string.  The regular expression to look for.&lt;br&gt;
+&lt;i&gt;  haystack&lt;/i&gt; &amp;rarr; 文字列.  検索される文字列.&lt;br&gt;
+&lt;i&gt;  needle&lt;/i&gt; &amp;rarr; 文字列.  検索に用いる正規表現.&lt;br&gt;
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
 &lt;!-- Show example of function.--&gt;
@@ -58640,19 +58637,19 @@ None
 &lt;pre&gt; 4 = 2+2 OR 1 = 2  &amp;rarr; returns 1 &lt;/pre&gt;
 &lt;pre&gt; 4 = 2   OR 1 = 2  &amp;rarr; returns 0 &lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;OR logical operator&lt;/h3&gt;
-Returns 1 when condition a or b is true.
+        <translation>&lt;h3&gt;OR 論理演算子&lt;/h3&gt;
+条件aがtrueか、または条件bがtrueのときに1を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
-&lt;pre&gt; condition a OR condition b &lt;/pre&gt;
+&lt;pre&gt; 条件 a OR 条件 b &lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
 なし
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
-&lt;pre&gt; 4 = 2+2 OR 1 = 1  &amp;rarr; returns 1 &lt;/pre&gt;
-&lt;pre&gt; 4 = 2+2 OR 1 = 2  &amp;rarr; returns 1 &lt;/pre&gt;
-&lt;pre&gt; 4 = 2   OR 1 = 2  &amp;rarr; returns 0 &lt;/pre&gt;
+&lt;pre&gt; 4 = 2+2 OR 1 = 1  &amp;rarr; 1を返す &lt;/pre&gt;
+&lt;pre&gt; 4 = 2+2 OR 1 = 2  &amp;rarr; 1を返す &lt;/pre&gt;
+&lt;pre&gt; 4 = 2   OR 1 = 2  &amp;rarr; 0を返す &lt;/pre&gt;
 </translation>
     </message>
     <message>
@@ -61491,18 +61488,18 @@ a &amp;rarr; geometry
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;pre&gt;  geomToWKT( convexHull( geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 4 10)&apos; )) )   &amp;rarr; returns POLYGON((3 3,4 10,4 4,3 3)) &lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;convexHull 関数&lt;/h3&gt;
-Returns the convex hull of a geometry. It represents the minimum convex geometry that encloses all geometries within the set.
+        <translation>&lt;h3&gt;convexHull 関数&lt;/h3&gt;
+ジオメトリの凸包を返します. それは集合のすべてのジオメトリを含む最小の凸ジオメトリを表します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
 &lt;pre&gt;convexHull( a, b )&lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
-a &amp;rarr; geometry
-a &amp;rarr; geometry
+a &amp;rarr; ジオメトリ
+a &amp;rarr; ジオメトリ
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
-&lt;pre&gt;  geomToWKT( convexHull( geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 4 10)&apos; )) )   &amp;rarr; returns POLYGON((3 3,4 10,4 4,3 3)) &lt;/pre&gt;
+&lt;pre&gt;  geomToWKT( convexHull( geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 4 10)&apos; )) )   &amp;rarr; POLYGON((3 3,4 10,4 4,3 3)) を返す&lt;/pre&gt;
 </translation>
     </message>
     <message>
@@ -61520,18 +61517,18 @@ b &amp;rarr; geometry
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;pre&gt; geomToWKT( union( geomFromWKT( &apos;POINT(4 4)&apos; ) , geomFromWKT( &apos;POINT(5 5)&apos; ))  )   &amp;rarr; returns MULTIPOINT(4 4, 5 5)&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;union 関数&lt;/h3&gt;
-Returns a geometry that represents the point set union of the geometries.
+        <translation>&lt;h3&gt;union 関数&lt;/h3&gt;
+ジオメトリの点セットの和集合を表すジオメトリを返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
 &lt;pre&gt;union( a, b )&lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
-a &amp;rarr; geometry
-b &amp;rarr; geometry
+a &amp;rarr; ジオメトリ
+b &amp;rarr; ジオメトリ
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
-&lt;pre&gt; geomToWKT( union( geomFromWKT( &apos;POINT(4 4)&apos; ) , geomFromWKT( &apos;POINT(5 5)&apos; ))  )   &amp;rarr; returns MULTIPOINT(4 4, 5 5)&lt;/pre&gt;
+&lt;pre&gt; geomToWKT( union( geomFromWKT( &apos;POINT(4 4)&apos; ) , geomFromWKT( &apos;POINT(5 5)&apos; ))  )   &amp;rarr; MULTIPOINT(4 4, 5 5) を返す&lt;/pre&gt;
 </translation>
     </message>
     <message>
@@ -61549,18 +61546,18 @@ geometry &amp;rarr; geometry
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;pre&gt; geomToWKT( intersection( geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 )&apos; ))  )   &amp;rarr; returns LINESTRING(3 3, 4 4)&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;intersection 関数&lt;/h3&gt;
-Returns a geometry that represents the shared portion of geometry a and geometry b.
+        <translation>&lt;h3&gt;intersection 関数&lt;/h3&gt;
+ジオメトリaとジオメトリbの共有部分を表すジオメトリを返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
 &lt;pre&gt;intersection( geometry a , geometry b)&lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
-geometry &amp;rarr; geometry
-geometry &amp;rarr; geometry
+geometry &amp;rarr; ジオメトリ
+geometry &amp;rarr; ジオメトリ
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
-&lt;pre&gt; geomToWKT( intersection( geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 )&apos; ))  )   &amp;rarr; returns LINESTRING(3 3, 4 4)&lt;/pre&gt;
+&lt;pre&gt; geomToWKT( intersection( geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 )&apos; ))  )   &amp;rarr; LINESTRING(3 3, 4 4) を返す&lt;/pre&gt;
 </translation>
     </message>
     <message>
@@ -61579,19 +61576,19 @@ None
 &lt;pre&gt; &apos;A&apos; ILIKE &apos;a&apos;  &amp;rarr; returns 1 &lt;/pre&gt;
 &lt;pre&gt; &apos;A&apos; ILIKE &apos;B&apos;  &amp;rarr; returns 0 &lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;ILIKE 式&lt;/h3&gt;
-Returns 1 if the first parameter matches case-insensitive the supplied pattern. LIKE can be used instead of ILIKE to make the match case-sensitive. Works with numbers also.
+        <translation>&lt;h3&gt;ILIKE 式&lt;/h3&gt;
+最初の引数が指定されたパターンと一致する場合(大文字と小文字を区別しない)に1を返します. 大文字と小文字を区別する場合はILIKEではなくLIKEを使用します. 数値にも対応しています.
 
 &lt;h4&gt;構文&lt;/h4&gt;
-&lt;pre&gt;string/number ILIKE pattern&lt;/pre&gt;
+&lt;pre&gt;文字列/数値 ILIKE パターン&lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
 なし
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
-&lt;pre&gt; &apos;A&apos; ILIKE &apos;A&apos;  &amp;rarr; returns 1 &lt;/pre&gt;
-&lt;pre&gt; &apos;A&apos; ILIKE &apos;a&apos;  &amp;rarr; returns 1 &lt;/pre&gt;
-&lt;pre&gt; &apos;A&apos; ILIKE &apos;B&apos;  &amp;rarr; returns 0 &lt;/pre&gt;
+&lt;pre&gt; &apos;A&apos; ILIKE &apos;A&apos;  &amp;rarr; 1を返す &lt;/pre&gt;
+&lt;pre&gt; &apos;A&apos; ILIKE &apos;a&apos;  &amp;rarr; 1を返す &lt;/pre&gt;
+&lt;pre&gt; &apos;A&apos; ILIKE &apos;B&apos;  &amp;rarr; 0を返す &lt;/pre&gt;
 </translation>
     </message>
     <message>
@@ -61610,19 +61607,19 @@ None
 &lt;pre&gt; &apos;A&apos; LIKE &apos;a&apos;  &amp;rarr; returns 0 &lt;/pre&gt;
 &lt;pre&gt; &apos;A&apos; LIKE &apos;B&apos;  &amp;rarr; returns 0 &lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;LIKE 式&lt;/h3&gt;
-Returns 1 if the first parameter matches the supplied pattern. Works with numbers also.
+        <translation>&lt;h3&gt;LIKE 式&lt;/h3&gt;
+最初の引数が指定されたパターンと一致する場合に1を返します. 数値にも対応しています.
 
 &lt;h4&gt;構文&lt;/h4&gt;
-&lt;pre&gt;string/number LIKE pattern&lt;/pre&gt;
+&lt;pre&gt;文字列/数値 LIKE パターン&lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
 なし
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
-&lt;pre&gt; &apos;A&apos; LIKE &apos;A&apos;  &amp;rarr; returns 1 &lt;/pre&gt;
-&lt;pre&gt; &apos;A&apos; LIKE &apos;a&apos;  &amp;rarr; returns 0 &lt;/pre&gt;
-&lt;pre&gt; &apos;A&apos; LIKE &apos;B&apos;  &amp;rarr; returns 0 &lt;/pre&gt;
+&lt;pre&gt; &apos;A&apos; LIKE &apos;A&apos;  &amp;rarr; 1を返す&lt;/pre&gt;
+&lt;pre&gt; &apos;A&apos; LIKE &apos;a&apos;  &amp;rarr; 0を返す&lt;/pre&gt;
+&lt;pre&gt; &apos;A&apos; LIKE &apos;B&apos;  &amp;rarr; 0を返す&lt;/pre&gt;
 </translation>
     </message>
     <message>
@@ -61640,17 +61637,17 @@ text &amp;rarr; GML representation of a geometry
 &lt;pre&gt; geomFromGML( &apos;&lt;gml:LineString srsName=&quot;EPSG:4326&quot;&gt;&lt;gml:coordinates&gt;4,4 5,5 6,6&lt;/gml:coordinates&gt;&lt;/gml:LineString&gt;&apos;) &amp;rarr; returns a geometry&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;geomFromGML 関数&lt;/h3&gt;
-Returns a geometry from a GML representation of geometry
+        <translation>&lt;h3&gt;geomFromGML 関数&lt;/h3&gt;
+ジオメトリのGML表現からジオメトリを返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
 &lt;pre&gt;geomFromGML(text)&lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
-text &amp;rarr; GML representation of a geometry
+text &amp;rarr; ジオメトリのGML表現
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
-&lt;pre&gt; geomFromGML( &apos;&lt;gml:LineString srsName=&quot;EPSG:4326&quot;&gt;&lt;gml:coordinates&gt;4,4 5,5 6,6&lt;/gml:coordinates&gt;&lt;/gml:LineString&gt;&apos;) &amp;rarr; returns a geometry&lt;/pre&gt;
+&lt;pre&gt; geomFromGML( &apos;&lt;gml:LineString srsName=&quot;EPSG:4326&quot;&gt;&lt;gml:coordinates&gt;4,4 5,5 6,6&lt;/gml:coordinates&gt;&lt;/gml:LineString&gt;&apos;) &amp;rarr; ジオメトリを返す&lt;/pre&gt;
 
 </translation>
     </message>
@@ -61670,19 +61667,19 @@ geometry &amp;rarr; geometry
 &lt;pre&gt; geomToWKT( combine( geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5 )&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4,  2 1 )&apos; ))  )    &amp;rarr; returns MULTILINESTRING((4 4, 2 1), (3 3, 4 4), (4 4, 5 5)) &lt;/pre&gt;
 &lt;pre&gt; geomToWKT( combine( geomFromWKT( &apos;LINESTRING(3 3 , 4 4  )&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 6 6,  2 1 )&apos; ))  )  &amp;rarr; returns LINESTRING(3 3, 4 4, 6 6, 2 1) &lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;combine 関数&lt;/h3&gt;
-Returns the combination of geometry a and geometry b.
+        <translation>&lt;h3&gt;combine 関数&lt;/h3&gt;
+ジオメトリaとジオメトリbの組み合わせを返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
 &lt;pre&gt;combine( geometry a , geometry b)&lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
-geometry &amp;rarr; geometry
-geometry &amp;rarr; geometry
+geometry &amp;rarr; ジオメトリ
+geometry &amp;rarr; ジオメトリ
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
-&lt;pre&gt; geomToWKT( combine( geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5 )&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4,  2 1 )&apos; ))  )    &amp;rarr; returns MULTILINESTRING((4 4, 2 1), (3 3, 4 4), (4 4, 5 5)) &lt;/pre&gt;
-&lt;pre&gt; geomToWKT( combine( geomFromWKT( &apos;LINESTRING(3 3 , 4 4  )&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 6 6,  2 1 )&apos; ))  )  &amp;rarr; returns LINESTRING(3 3, 4 4, 6 6, 2 1) &lt;/pre&gt;
+&lt;pre&gt; geomToWKT( combine( geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5 )&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4,  2 1 )&apos; ))  )    &amp;rarr; MULTILINESTRING((4 4, 2 1), (3 3, 4 4), (4 4, 5 5)) を返す&lt;/pre&gt;
+&lt;pre&gt; geomToWKT( combine( geomFromWKT( &apos;LINESTRING(3 3 , 4 4  )&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 6 6,  2 1 )&apos; ))  )  &amp;rarr; LINESTRING(3 3, 4 4, 6 6, 2 1) を返す&lt;/pre&gt;
 </translation>
     </message>
     <message>
@@ -61701,19 +61698,19 @@ b &amp;rarr; geometry
 &lt;pre&gt; intersects( geomFromWKT( &apos;POINT(4 4)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))    &amp;rarr; returns 1&lt;/pre&gt;
 &lt;pre&gt; intersects( geomFromWKT( &apos;POINT(4 5)&apos; ) , geomFromWKT( &apos;POINT(5 5)&apos; ))             &amp;rarr; returns 0&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;intersects 関数&lt;/h3&gt;
-Returns 1 if the geometries spatially intersect (share any portion of space) and 0 if they don&apos;t.
+        <translation>&lt;h3&gt;intersects 関数&lt;/h3&gt;
+ジオメトリが空間的に交差 (いずれかの部分を共有)している場合に1を返します. そうでない場合は0を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
 &lt;pre&gt;intersects( a, b )&lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
-a &amp;rarr; geometry
-b &amp;rarr; geometry
+a &amp;rarr; ジオメトリ
+b &amp;rarr; ジオメトリ
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
-&lt;pre&gt; intersects( geomFromWKT( &apos;POINT(4 4)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))    &amp;rarr; returns 1&lt;/pre&gt;
-&lt;pre&gt; intersects( geomFromWKT( &apos;POINT(4 5)&apos; ) , geomFromWKT( &apos;POINT(5 5)&apos; ))             &amp;rarr; returns 0&lt;/pre&gt;
+&lt;pre&gt; intersects( geomFromWKT( &apos;POINT(4 4)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))    &amp;rarr; 1を返す&lt;/pre&gt;
+&lt;pre&gt; intersects( geomFromWKT( &apos;POINT(4 5)&apos; ) , geomFromWKT( &apos;POINT(5 5)&apos; ))             &amp;rarr; 0を返す&lt;/pre&gt;
 </translation>
     </message>
     <message>
@@ -61738,7 +61735,7 @@ Restricts an input value to a specified range.
      
      
 </source>
-        <translation type="unfinished">&lt;h3&gt;clamp() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;clamp() 関数&lt;/h3&gt;
 入力値を指定された範囲に制限します.
 
 &lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
@@ -61746,18 +61743,16 @@ Restricts an input value to a specified range.
 
 &lt;p&gt;&lt;h4&gt;引数&lt;/h4&gt;
 &lt;!-- List args for functions here--&gt;
-&lt;i&gt;  minimum&lt;/i&gt; &amp;rarr; &lt;i&gt;input&lt;/i&gt;がとり得る最小値.&lt;br&gt;
-&lt;i&gt;  input&lt;/i&gt; &amp;rarr; &lt;i&gt;minimum&lt;/i&gt; と &lt;i&gt;maximum&lt;/i&gt;によって指定された範囲に制限される値.&lt;br&gt;
-&lt;i&gt;  maximum&lt;/i&gt; &amp;rarr; &lt;i&gt;input&lt;/i&gt;がとり得る最大値.&lt;br&gt;
+&lt;i&gt;  minimum&lt;/i&gt; &amp;rarr; 下限値.&lt;br&gt;
+&lt;i&gt;  input&lt;/i&gt; &amp;rarr; &lt;i&gt;minimum&lt;/i&gt; と &lt;i&gt;maximum&lt;/i&gt;によって指定される範囲に制限される値.&lt;br&gt;
+&lt;i&gt;  maximum&lt;/i&gt; &amp;rarr; 上限値.&lt;br&gt;
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
 &lt;!-- Show example of function.--&gt;
      clamp(1,5,10) &amp;rarr; 5 (&lt;i&gt;input&lt;/i&gt; は1と10の間なのでそのままの値が返されます)&lt;br&gt;
-     clamp(1,0,10) &amp;rarr; 1 (&lt;i&gt;input&lt;/i&gt; は最小値の1より小さいので関数は1を返します)&lt;br&gt;
-     clamp(1,11,10) &amp;rarr; 10 (&lt;i&gt;input&lt;/i&gt; は最大値の10より大きいので関数は10を返します.)&lt;br&gt;
-     
-     
- {3&gt;?} {3&gt;?} {4&gt;?} {4&gt;?} {4&gt;?} {4&gt;?} {4&gt;?} {4&gt;?} {1,5,10)?} {5 ?} {1 ?} {10 ?} {1,0,10)?} {1 ?} {1,?} {1)?} {1,11,10)?} {10 ?} {10,?} {10)?}</translation>
+     clamp(1,0,10) &amp;rarr; 1 (&lt;i&gt;input&lt;/i&gt; は下限値の1より小さいので関数は1を返します)&lt;br&gt;
+     clamp(1,11,10) &amp;rarr; 10 (&lt;i&gt;input&lt;/i&gt; は上限値の10より大きいので関数は10を返します.)&lt;br&gt;
+</translation>
     </message>
     <message>
         <location filename="../src/core/qgsexpression_texts.cpp" line="574"/>
@@ -61815,23 +61810,23 @@ None
 &lt;pre&gt; $geometry IS NULL  &amp;rarr; returns 0, if your geometry is not NULL&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;IS 式&lt;/h3&gt;
-Returns 1 if a is the same as b.
+        <translation>&lt;h3&gt;IS 式&lt;/h3&gt;
+aがbと同じ場合に1を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
-&lt;pre&gt;a is b&lt;/pre&gt;
+&lt;pre&gt;a IS b&lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
 なし
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
-&lt;pre&gt; &apos;A&apos; IS &apos;A&apos;  &amp;rarr; returns 1 &lt;/pre&gt;
-&lt;pre&gt; &apos;A&apos; IS &apos;a&apos;  &amp;rarr; returns 0 &lt;/pre&gt;
-&lt;pre&gt; 4 IS 4      &amp;rarr; returns 1 &lt;/pre&gt;
-&lt;pre&gt; 4 IS 2+2    &amp;rarr; returns 1 &lt;/pre&gt;
-&lt;pre&gt; 4 IS 2      &amp;rarr; returns 0 &lt;/pre&gt;
-&lt;pre&gt; 4 IS 2      &amp;rarr; returns 0 &lt;/pre&gt;
-&lt;pre&gt; $geometry IS NULL  &amp;rarr; returns 0, if your geometry is not NULL&lt;/pre&gt;
+&lt;pre&gt; &apos;A&apos; IS &apos;A&apos;  &amp;rarr; 1を返す&lt;/pre&gt;
+&lt;pre&gt; &apos;A&apos; IS &apos;a&apos;  &amp;rarr; 0を返す&lt;/pre&gt;
+&lt;pre&gt; 4 IS 4      &amp;rarr; 1を返す&lt;/pre&gt;
+&lt;pre&gt; 4 IS 2+2    &amp;rarr; 1を返す&lt;/pre&gt;
+&lt;pre&gt; 4 IS 2      &amp;rarr; 0を返す&lt;/pre&gt;
+&lt;pre&gt; 4 IS 2      &amp;rarr; 0を返す&lt;/pre&gt;
+&lt;pre&gt; $geometry IS NULL  &amp;rarr; ジオメトリがNULLの場合に1を返す&lt;/pre&gt;
 
 </translation>
     </message>
@@ -61851,19 +61846,19 @@ b &amp;rarr; geometry
 &lt;pre&gt; disjoint( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; )) &amp;rarr; returns 1&lt;/pre&gt;
 &lt;pre&gt; disjoint( geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ) , geomFromWKT( &apos;POINT(4 4)&apos; ))                              &amp;rarr; returns 0&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;disjoint 関数&lt;/h3&gt;
-Returns 1 if the geometries do not &quot;spatially intersect&quot; - if they do not share any space together. 
+        <translation>&lt;h3&gt;disjoint 関数&lt;/h3&gt;
+ジオメトリが空間的に交差しない(共有部分を持たない)場合に1を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
 &lt;pre&gt;disjoint( a, b )&lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
-a &amp;rarr; geometry
-b &amp;rarr; geometry
+a &amp;rarr; ジオメトリ
+b &amp;rarr; ジオメトリ
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
-&lt;pre&gt; disjoint( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; )) &amp;rarr; returns 1&lt;/pre&gt;
-&lt;pre&gt; disjoint( geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ) , geomFromWKT( &apos;POINT(4 4)&apos; ))                              &amp;rarr; returns 0&lt;/pre&gt;
+&lt;pre&gt; disjoint( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; )) &amp;rarr; 1を返す&lt;/pre&gt;
+&lt;pre&gt; disjoint( geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ) , geomFromWKT( &apos;POINT(4 4)&apos; ))                              &amp;rarr; 0を返す&lt;/pre&gt;
 </translation>
     </message>
     <message>
@@ -61881,17 +61876,17 @@ text &amp;rarr; Well-Known Text (WKT) representation of a geometry
 &lt;pre&gt; geomFromWKT( &apos;POINT(4 5)&apos; ) &amp;rarr; returns a geometry&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;geomFromWKT 関数&lt;/h3&gt;
-Returns a geometry created from a Well-Known Text (WKT) representation.
+        <translation>&lt;h3&gt;geomFromWKT 関数&lt;/h3&gt;
+Well-Knownテキスト（WKT）表現から作成されたジオメトリを返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
 &lt;pre&gt;geomFromWKT(text)&lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
-text &amp;rarr; Well-Known Text (WKT) representation of a geometry
+text &amp;rarr; ジオメトリのWell-Knownテキスト（WKT）表現
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
-&lt;pre&gt; geomFromWKT( &apos;POINT(4 5)&apos; ) &amp;rarr; returns a geometry&lt;/pre&gt;
+&lt;pre&gt; geomFromWKT( &apos;POINT(4 5)&apos; ) &amp;rarr; ジオメトリを返す&lt;/pre&gt;
 
 </translation>
     </message>
@@ -61911,18 +61906,18 @@ b &amp;rarr; distance for the buffer
 &lt;pre&gt; buffer($geometry, 10.5 ) &amp;rarr; returns a polygon&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;buffer 関数&lt;/h3&gt;
-Returns a geometry that represents all points whose distance from this geometry is less than or equal to distance. Calculations are in the Spatial Reference System of this Geometry. 
+        <translation>&lt;h3&gt;buffer 関数&lt;/h3&gt;
+ジオメトリからの距離が一定以下であるすべての点を表すジオメトリを返します. 距離の単位はジオメトリの空間参照系の単位です.
 
 &lt;h4&gt;構文&lt;/h4&gt;
 &lt;pre&gt;buffer(a, b)&lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
-a &amp;rarr; geometry
-b &amp;rarr; distance for the buffer
+a &amp;rarr; ジオメトリ
+b &amp;rarr; バッファの距離
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
-&lt;pre&gt; buffer($geometry, 10.5 ) &amp;rarr; returns a polygon&lt;/pre&gt;
+&lt;pre&gt; buffer($geometry, 10.5 ) &amp;rarr; ポリゴンを返す&lt;/pre&gt;
 
 </translation>
     </message>
@@ -61942,19 +61937,19 @@ geometry &amp;rarr; geometry
 &lt;pre&gt; crosses( geomFromWKT( &apos;LINESTRING(3 5 , 4 4 , 5 3)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))    &amp;rarr; returns 1&lt;/pre&gt;
 &lt;pre&gt; crosses( geomFromWKT( &apos;POINT(4 5)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))             &amp;rarr; returns 0&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;crosses 関数&lt;/h3&gt;
-Returns 1 if the supplied geometries have some, but not all, interior points in common.
+        <translation>&lt;h3&gt;crosses 関数&lt;/h3&gt;
+ジオメトリが一部に共通する点を持っている場合は1を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
 &lt;pre&gt;crosses( $geometry , $geometry)&lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
-geometry &amp;rarr; geometry
-geometry &amp;rarr; geometry
+geometry &amp;rarr; ジオメトリ
+geometry &amp;rarr; ジオメトリ
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
-&lt;pre&gt; crosses( geomFromWKT( &apos;LINESTRING(3 5 , 4 4 , 5 3)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))    &amp;rarr; returns 1&lt;/pre&gt;
-&lt;pre&gt; crosses( geomFromWKT( &apos;POINT(4 5)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))             &amp;rarr; returns 0&lt;/pre&gt;
+&lt;pre&gt; crosses( geomFromWKT( &apos;LINESTRING(3 5 , 4 4 , 5 3)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))    &amp;rarr; 1を返す&lt;/pre&gt;
+&lt;pre&gt; crosses( geomFromWKT( &apos;POINT(4 5)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))             &amp;rarr; 0を返す&lt;/pre&gt;
 </translation>
     </message>
     <message>
@@ -61971,14 +61966,14 @@ a &amp;rarr; geometry
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;pre&gt; geomToWKT( $geometry ) &amp;rarr; POINT(6 50)&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;geomToWKT 関数&lt;/h3&gt;
-Returns the Well-Known Text (WKT) representation of the geometry without SRID metadata.
+        <translation>&lt;h3&gt;geomToWKT 関数&lt;/h3&gt;
+ジオメトリのWell-Knownテキスト（WKT）表現をSRIDメタデータなしで返します. 
 
 &lt;h4&gt;構文&lt;/h4&gt;
 &lt;pre&gt;geomToWKT(a)&lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
-a &amp;rarr; geometry
+a &amp;rarr; ジオメトリ
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
 &lt;pre&gt; geomToWKT( $geometry ) &amp;rarr; POINT(6 50)&lt;/pre&gt;
@@ -62000,19 +61995,19 @@ b &amp;rarr; geometry
 &lt;pre&gt; touches( geomFromWKT( &apos;LINESTRING(5 3 , 4 4)&apos;  ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))    &amp;rarr; returns 1&lt;/pre&gt;
 &lt;pre&gt; touches( geomFromWKT( &apos;POINT(4 4)&apos; ) , geomFromWKT( &apos;POINT(5 5)&apos; ))                     &amp;rarr; returns 0&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;touches 関数&lt;/h3&gt;
-Returns 1 if the geometries have at least one point in common, but their interiors do not intersect.
+        <translation>&lt;h3&gt;touches 関数&lt;/h3&gt;
+ジオメトリが少なくとも1つの共通点を持つけれど、その内部が交差していない場合に1を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
 &lt;pre&gt;touches( a, b )&lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
-a &amp;rarr; geometry
-b &amp;rarr; geometry
+a &amp;rarr; ジオメトリ
+b &amp;rarr; ジオメトリ
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
-&lt;pre&gt; touches( geomFromWKT( &apos;LINESTRING(5 3 , 4 4)&apos;  ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))    &amp;rarr; returns 1&lt;/pre&gt;
-&lt;pre&gt; touches( geomFromWKT( &apos;POINT(4 4)&apos; ) , geomFromWKT( &apos;POINT(5 5)&apos; ))                     &amp;rarr; returns 0&lt;/pre&gt;
+&lt;pre&gt; touches( geomFromWKT( &apos;LINESTRING(5 3 , 4 4)&apos;  ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))    &amp;rarr; 1を返す&lt;/pre&gt;
+&lt;pre&gt; touches( geomFromWKT( &apos;POINT(4 4)&apos; ) , geomFromWKT( &apos;POINT(5 5)&apos; ))                     &amp;rarr; 0を返す&lt;/pre&gt;
 </translation>
     </message>
     <message>
@@ -62031,19 +62026,19 @@ b &amp;rarr; geometry
 &lt;pre&gt; overlaps( geomFromWKT( &apos;LINESTRING(3 5 , 4 4 , 5 5 , 5 3)&apos;  ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))   &amp;rarr; returns 1&lt;/pre&gt;
 &lt;pre&gt; overlaps( geomFromWKT( &apos;LINESTRING(0 0 , 1 1)&apos;  ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))    &amp;rarr; returns 0&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;overlaps 関数&lt;/h3&gt;
-Returns 1 if the geometries share space, are of the same dimension, but are not completely contained by each other.
+        <translation>&lt;h3&gt;overlaps 関数&lt;/h3&gt;
+ジオメトリが共有部分を持ち、同じ次元であり、完全にお互いに含まれていない場合に1を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
 &lt;pre&gt;overlaps( a, b )&lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
-a &amp;rarr; geometry
-b &amp;rarr; geometry
+a &amp;rarr; ジオメトリ
+b &amp;rarr; ジオメトリ
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
-&lt;pre&gt; overlaps( geomFromWKT( &apos;LINESTRING(3 5 , 4 4 , 5 5 , 5 3)&apos;  ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))   &amp;rarr; returns 1&lt;/pre&gt;
-&lt;pre&gt; overlaps( geomFromWKT( &apos;LINESTRING(0 0 , 1 1)&apos;  ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))    &amp;rarr; returns 0&lt;/pre&gt;
+&lt;pre&gt; overlaps( geomFromWKT( &apos;LINESTRING(3 5 , 4 4 , 5 5 , 5 3)&apos;  ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))   &amp;rarr; 1を返す&lt;/pre&gt;
+&lt;pre&gt; overlaps( geomFromWKT( &apos;LINESTRING(0 0 , 1 1)&apos;  ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))    &amp;rarr; 0を返す&lt;/pre&gt;
 </translation>
     </message>
     <message>
@@ -62133,18 +62128,18 @@ None
 &lt;pre&gt; 4 = 2+2 AND 1 = 2  &amp;rarr; returns 0 &lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;AND logical operator&lt;/h3&gt;
-Returns 1 when condition a and b are true.
+        <translation>&lt;h3&gt;AND 論理演算子&lt;/h3&gt;
+条件aと条件bが真(true)である場合に1を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
-&lt;pre&gt; condition a AND condition b &lt;/pre&gt;
+&lt;pre&gt; 条件 a AND 条件 b &lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
 なし
 
 &lt;h4&gt;サンプル&lt;/h4&gt;
-&lt;pre&gt; 4 = 2+2 AND 1 = 1  &amp;rarr; returns 1 &lt;/pre&gt;
-&lt;pre&gt; 4 = 2+2 AND 1 = 2  &amp;rarr; returns 0 &lt;/pre&gt;
+&lt;pre&gt; 4 = 2+2 AND 1 = 1  &amp;rarr; 1を返す&lt;/pre&gt;
+&lt;pre&gt; 4 = 2+2 AND 1 = 2  &amp;rarr; 0を返す&lt;/pre&gt;
 
 </translation>
     </message>
@@ -62163,8 +62158,8 @@ None
 &lt;pre&gt; geomToWKT( $geometry ) &amp;rarr; POINT(6 50)&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;$geometry 関数&lt;/h3&gt;
-Returns the geometry of the current feature. Can be used for processing with other functions.
+        <translation>&lt;h3&gt;$geometry 関数&lt;/h3&gt;
+現在の地物のジオメトリを返します. 他の関数を用いた処理に使用することができます.
 
 &lt;h4&gt;構文&lt;/h4&gt;
 &lt;pre&gt;$geometry&lt;/pre&gt;
