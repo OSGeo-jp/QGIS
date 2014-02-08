@@ -9129,17 +9129,17 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="767"/>
         <source>If defined to YES, extension fields  will be written. If the field name not found in the base schema matches the foo_bar pattern, foo will be considered as the namespace of the element, and a &lt;foo:bar&gt; element will be written. Otherwise, elements will be written in the &lt;ogr:&gt; namespace.</source>
-        <translation type="unfinished"></translation>
+        <translation>YESが指定されている場合エクステンションフィールドが書き込まれます.foo_barパターンで基本スキーマにフィールド名が見つからない場合fooはエレメントのネームスペースであると思われます,そして&lt;foobar&gt;エレメントが書き込まれます.そうでなければエレメントは&lt;ogr:&gt;ネームスペースに書き込まれます.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="776"/>
         <source>If defined to NO, only &lt;entry&gt; or &lt;item&gt; elements will be written. The user will have to provide the appropriate header and footer of the document.</source>
-        <translation type="unfinished"></translation>
+        <translation>NOが指定されている場合&lt;entry&gt;または&lt;item&gt;エレメントのみ書き込まれます.ユーザはドキュメントのヘッダとフッタを提供しなければいけません.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="782"/>
         <source>XML content that will be put between the &lt;channel&gt; element and the first &lt;item&gt; element for a RSS document, or between the xml tag and the first &lt;entry&gt; element for an Atom document. </source>
-        <translation type="unfinished"></translation>
+        <translation>RSSドキュメントで&lt;channel&gt;エレメントと最初の&lt;item&gt;エレメントの間,またはAtomドキュメントでxmlタグと最初の&lt;entry&gt;エレメントの間に挿入するXMLコンテント</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="789"/>
@@ -9181,27 +9181,27 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="841"/>
         <source>If provided, this URI will be inserted as the schema location. Note that the schema file isn&apos;t actually accessed by OGR, so it is up to the user to ensure it will match the schema of the OGR produced GML data file.</source>
-        <translation type="unfinished"></translation>
+        <translation>指定されているとこのURIがスキーマロケーションとして挿入されます.注 そのスキーマファイルがOGRで実際にアクセスできない場合OGRが作成するGMLデータファイルがスキーマに合致するかどうかはユーザにまかされています.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="849"/>
         <source>This writes a GML application schema file to a corresponding .xsd file (with the same basename). If INTERNAL is used the schema is written within the GML file, but this is experimental and almost certainly not valid XML. OFF disables schema generation (and is implicit if XSISCHEMAURI is used).</source>
-        <translation type="unfinished"></translation>
+        <translation>これはｘｓｄファイル（同じベース名の)にしたがってGMLアプリケーションスキーマファイルを書き出します.GMLファイルでIスキーマ書き出しにNTERNALが使われている場合これは実験的で正しくないXMLになります.OFFはスキーマ作成を行いません(XSISCHEMAURI が使われている場合は暗黙の指定です).</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="862"/>
         <source>This is the prefix for the application target namespace.</source>
-        <translation type="unfinished"></translation>
+        <translation>アプリケーションターゲットネームスペースのプレフィックスです.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="867"/>
         <source>Can be set to TRUE to avoid writing the prefix of the application target namespace in the GML file.</source>
-        <translation type="unfinished"></translation>
+        <translation>GMLファイルでアプリケーションターゲットネームスペースのプレフィックスを書き込まない場合TRUEをセットできます</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="873"/>
         <source>Defaults to &apos;http://ogr.maptools.org/&apos;. This is the application target namespace.</source>
-        <translation type="unfinished"></translation>
+        <translation>デフォルトは &apos;http://ogr.maptools.org/&apos;.です.これはアプリケーションターゲットネームスペースです.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="879"/>
@@ -9221,7 +9221,7 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="908"/>
         <source>Default to YES. If YES, the output will be indented with spaces for more readability, but at the expense of file size.</source>
-        <translation type="unfinished"></translation>
+        <translation>デフォルトをYESにします.もしYESが設定されている場合出力はスペースでインデントされて読みやすくなります.しかしファイルサイズが大きくなります.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="917"/>
@@ -9240,32 +9240,32 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="945"/>
         <source>By default when writing a layer whose features are of type wkbLineString, the GPX driver chooses to write them as routes. If FORCE_GPX_TRACK=YES is specified, they will be written as tracks.</source>
-        <translation type="unfinished"></translation>
+        <translation>デフォルトで地物タイプがwkbLineStringのレイヤを書き込む場合GPXドライバーはそれらをルートとして書き込みます.もしFORCE_GPX_TRACK=YESが指定されている場合それらはトラックとして書き込まれます.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="953"/>
         <source>By default when writing a layer whose features are of type wkbMultiLineString, the GPX driver chooses to write them as tracks. If FORCE_GPX_ROUTE=YES is specified, they will be written as routes, provided that the multilines are composed of only one single line.</source>
-        <translation type="unfinished"></translation>
+        <translation>デフォルトで地物タイプがwkbMultiLineStringのレイヤを書き込む場合GPXドライバーはそれらをトラックとして書き込みます.もしFORCE_GPX_TRACK=YESが指定されている場合それらはルートとして書き込まれマルチラインは単一のラインとして扱われます.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="962"/>
         <source>If GPX_USE_EXTENSIONS=YES is specified, extra fields will be written inside the &lt;extensions&gt; tag.</source>
-        <translation type="unfinished"></translation>
+        <translation> GPX_USE_EXTENSIONS=YESが指定されていると&lt;,extensions&gt;タグの内部に別フィールドが書き込まれます.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="968"/>
         <source>Only used if GPX_USE_EXTENSIONS=YES and GPX_EXTENSIONS_NS_URL is set. The namespace value used for extension tags. By default, &apos;ogr&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>GPX_USE_EXTENSIONS=YES と GPX_EXTENSIONS_NS_URL が設定されている場合のみ利用されます.ネームスペースの値が拡張タグに使われます.デフォルトは &apos;ogr&apos;です.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="974"/>
         <source>Only used if GPX_USE_EXTENSIONS=YES and GPX_EXTENSIONS_NS is set. The namespace URI. By default, &apos;http://osgeo.org/gdal&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>GPX_USE_EXTENSIONS=YES と GPX_EXTENSIONS_NS が設定されている場合のみ利用されます.ネームスペースのURI.デフォルトは &apos;http://osgeo.org/gdal&apos;.です.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="980"/>
         <source>By default files are created with the line termination conventions of the local platform (CR/LF on win32 or LF on all other systems). This may be overridden through use of the LINEFORMAT layer creation option which may have a value of CRLF (DOS format) or LF (Unix format).</source>
-        <translation type="unfinished"></translation>
+        <translation>デフォルトでファイルはローカルプラットフォームの行末コード(win32の場合CR/LFまたは他のシステムの場合LF) に変換されて作成されます.これはLINEFORMATレイヤ作成オプションで CRLF (DOS 形式) または LF (Unix 形式)に上書き指定できます.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="995"/>
@@ -9326,42 +9326,42 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1121"/>
         <source>Indicate whether the whole seed file should be copied. If not, only the first three elements will be copied.</source>
-        <translation type="unfinished"></translation>
+        <translation>すべてのシードファイルをどこにコピーすべきかを示します.最初の3個のエレメントのみでなくコピーされます.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1127"/>
         <source>Indicates whether the color table should be copied from the seed file.</source>
-        <translation type="unfinished"></translation>
+        <translation>シードファイルからカラーテーブルをコピーするかどうかを示します.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1132"/>
         <source>Override the master unit name from the seed file with the provided one or two character unit name.</source>
-        <translation type="unfinished"></translation>
+        <translation>シードファイルが提供する1文字または2文字の単位名を使ってマスター単位名を上書きします.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1138"/>
         <source>Override the sub unit name from the seed file with the provided one or two character unit name.</source>
-        <translation type="unfinished"></translation>
+        <translation>シードファイルが提供する1文字または2文字の単位名を使ってサブ単位名を上書きします.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1144"/>
         <source>Override the number of subunits per master unit. By default the seed file value is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>マスタ単位ごとのサブ単位の数をオーバーライドします.デフォルトではシードファイルの値が使われます.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1150"/>
         <source>Override the number of UORs (Units of Resolution) per sub unit. By default the seed file value is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>サブ単位ごとのUOR(Unit of Resolution)の数上書きします.デフォルトではシードファイルの値が使われます.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1156"/>
         <source>ORIGIN=x,y,z: Override the origin of the design plane. By default the origin from the seed file is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>ORIGIN=x,y,z: デザイン平面の原点を上書きします.デフォルトではシードファイルで使われている原点が使われます.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1192"/>
         <source>Should update files be incorporated into the base data on the fly. </source>
-        <translation type="unfinished"></translation>
+        <translation>ファイルをアップデートしてその場でベースデータに統合します.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1200"/>
@@ -9371,12 +9371,12 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1208"/>
         <source>Should a DEPTH attribute be added on SOUNDG features and assign the depth of the sounding. This should only be enabled with SPLIT_MULTIPOINT is also enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>SOUNDG地物にはDEPTH属性が追加されるべきで探査の深さが割り当てられます.この場合SPLIT_MULTIPOINTも有効になっている必要があります.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1215"/>
         <source>Should all the low level geometry primitives be returned as special IsolatedNode, ConnectedNode, Edge and Face layers.</source>
-        <translation type="unfinished"></translation>
+        <translation>すべての低レベルジオメトリプリミティブは特別なアイソレーテッドモード、コネクテッドノード、エッジとフェースレイヤで返されるべきです.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1221"/>
@@ -9386,7 +9386,7 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1228"/>
         <source>Should LNAM and LNAM_REFS fields be attached to features capturing the feature to feature relationships in the FFPT group of the S-57 file.</source>
-        <translation type="unfinished"></translation>
+        <translation>LNAMとLNAM_REFSというフィールドが地物に追加されます,これはS-57ファイルのFFPTグループで地物と地物の関係を取得するために使われます</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1234"/>
@@ -9396,7 +9396,7 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1241"/>
         <source>Should attribute values be recoded to UTF-8 from the character encoding specified in the S57 DSSI record.</source>
-        <translation type="unfinished"></translation>
+        <translation>属性値がS57 DSSIレコードで指定されているエンコーディングからUTF-8で記録されるべきです.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1266"/>
