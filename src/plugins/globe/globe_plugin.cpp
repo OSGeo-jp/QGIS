@@ -86,16 +86,17 @@ static const QString sExperimental = QString( "true" );
 GlobePlugin::GlobePlugin( QgisInterface* theQgisInterface )
     : QgisPlugin( sName, sDescription, sCategory, sPluginVersion, sPluginType )
     , mQGisIface( theQgisInterface )
-    , mQActionPointer( NULL )
-    , mQActionSettingsPointer( NULL )
+    , mQActionPointer( 0 )
+    , mQActionSettingsPointer( 0 )
+    , mQActionUnload( 0 )
     , mOsgViewer( 0 )
     , mViewerWidget( 0 )
     , mMapNode( 0 )
     , mBaseLayer( 0 )
     , mQgisMapLayer( 0 )
     , mTileSource( 0 )
-    , mElevationManager( NULL )
-    , mObjectPlacer( NULL )
+    , mElevationManager( 0 )
+    , mObjectPlacer( 0 )
 {
   mIsGlobeRunning = false;
   //needed to be "seen" by other plugins by doing
@@ -213,10 +214,17 @@ private:
 
 void GlobePlugin::initGui()
 {
+  delete mQActionPointer;
+  delete mQActionSettingsPointer;
+  delete mQActionUnload;
+
   // Create the action for tool
   mQActionPointer = new QAction( QIcon( ":/globe/globe.png" ), tr( "Launch Globe" ), this );
+  mQActionPointer->setObjectName( "mQActionPointer" );
   mQActionSettingsPointer = new QAction( QIcon( ":/globe/globe.png" ), tr( "Globe Settings" ), this );
+  mQActionSettingsPointer->setObjectName( "mQActionSettingsPointer" );
   mQActionUnload = new QAction( tr( "Unload Globe" ), this );
+  mQActionUnload->setObjectName( "mQActionUnload" );
 
   // Set the what's this text
   mQActionPointer->setWhatsThis( tr( "Overlay data on a 3D globe" ) );

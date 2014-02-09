@@ -976,7 +976,7 @@ static QVariant fcnYat( const QVariantList& values, const QgsFeature* f, QgsExpr
 }
 static QVariant fcnGeometry( const QVariantList& , const QgsFeature* f, QgsExpression* )
 {
-  QgsGeometry* geom = f->geometry();
+  QgsGeometry* geom = f ? f->geometry() : 0;
   if ( geom )
     return  QVariant::fromValue( *geom );
   else
@@ -2266,7 +2266,7 @@ bool QgsExpression::NodeColumnRef::prepare( QgsExpression* parent, const QgsFiel
 
 QString QgsExpression::NodeColumnRef::dump() const
 {
-  return mName;
+  return QRegExp( "^[A-Za-z_\x80-\xff][A-Za-z0-9_\x80-\xff]*$" ).exactMatch( mName ) ? mName : quotedColumnRef( mName );
 }
 
 //
@@ -2315,13 +2315,14 @@ bool QgsExpression::NodeCondition::prepare( QgsExpression* parent, const QgsFiel
 
 QString QgsExpression::NodeCondition::dump() const
 {
-  QString msg = "CONDITION:\n";
+  QString msg = QString( "CASE " );
   foreach ( WhenThen* cond, mConditions )
   {
-    msg += QString( "- WHEN %1 THEN %2\n" ).arg( cond->mWhenExp->dump() ).arg( cond->mThenExp->dump() );
+    msg += QString( "WHEN %1 THEN %2" ).arg( cond->mWhenExp->dump() ).arg( cond->mThenExp->dump() );
   }
   if ( mElseExp )
-    msg += QString( "- ELSE %1" ).arg( mElseExp->dump() );
+    msg += QString( "ELSE %1" ).arg( mElseExp->dump() );
+  msg += QString( " END" );
   return msg;
 }
 

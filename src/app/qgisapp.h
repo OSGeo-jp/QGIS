@@ -448,6 +448,9 @@ class APP_EXPORT QgisApp : public QMainWindow, private Ui::MainWindow
     QList<QgsDecorationItem*> decorationItems() { return mDecorationItems; }
     void addDecorationItem( QgsDecorationItem* item ) { mDecorationItems.append( item ); }
 
+    /** @note added in 2.1 */
+    static QString normalizedMenuName( const QString & name ) { return name.normalized( QString::NormalizationForm_KD ).remove( QRegExp( "[^a-zA-Z]" ) ); }
+
 #ifdef Q_OS_WIN
     //! ugly hack
     void skipNextContextMenuEvent();
@@ -621,6 +624,10 @@ class APP_EXPORT QgisApp : public QMainWindow, private Ui::MainWindow
 
     //! Opens the options dialog
     void showOptionsDialog( QWidget *parent = 0, QString currentPage = QString() );
+
+    /** Refreshes the state of the layer actions toolbar action
+      * @note added in 2.1 */
+    void refreshActionFeatureAction();
 
   protected:
 

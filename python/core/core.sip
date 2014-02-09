@@ -27,7 +27,6 @@
 %Include qgsdatasourceuri.sip
 %Include qgsdbfilterproxymodel.sip
 %Include qgsdistancearea.sip
-%Include qgsdxfexport.sip
 %Include qgseditorwidgetconfig.sip
 %Include qgserror.sip
 %Include qgsexpression.sip
@@ -71,6 +70,7 @@
 %Include qgspythonrunner.sip
 %Include qgsrectangle.sip
 %Include qgsrelation.sip
+%Include qgsrelationmanager.sip
 %Include qgsrenderchecker.sip
 %Include qgsrendercontext.sip
 %Include qgsrunprocess.sip
@@ -211,3 +211,5 @@
 %Include symbology-ng/qgssymbollayerv2registry.sip
 
 %Include symbology-ng/qgssymbologyv2conversion.sip
+
+%Include dxf/qgsdxfexport.sip

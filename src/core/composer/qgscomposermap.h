@@ -261,7 +261,7 @@ class CORE_EXPORT QgsComposerMap : public QgsComposerItem
     QFont gridAnnotationFont() const { return mGridAnnotationFont; }
 
     /**Sets font color for grid annotations
-        @note: this function was added in version 2.0*/
+        @note this function was added in version 2.0*/
     void setAnnotationFontColor( const QColor& c ) {mGridAnnotationFontColor = c;}
     /**Get font color for grid annotations
         @note: this function was added in version 2.0*/
@@ -333,6 +333,9 @@ class CORE_EXPORT QgsComposerMap : public QgsComposerItem
     /**Updates the bounding rect of this item. Call this function before doing any changes related to annotation out of the map rectangle
     @note this function was added in version 1.4*/
     void updateBoundingRect();
+
+    /* reimplement setFrameOutlineWidth, so that updateBoundingRect() is called after setting the frame width */
+    virtual void setFrameOutlineWidth( double outlineWidth );
 
     /**Sets length of the cros segments (if grid style is cross)
     @note this function was added in version 1.4*/

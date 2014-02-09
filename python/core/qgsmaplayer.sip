@@ -84,7 +84,7 @@ class QgsMapLayer : QObject
     void setAbstract( const QString& abstract );
     const QString& abstract() const;
 
-    void setKeywordList( const QString& kwdList );
+    void setKeywordList( const QString& keywords );
     const QString& keywordList() const;
 
     /* Layer dataUrl information */
@@ -108,7 +108,7 @@ class QgsMapLayer : QObject
     const QString& metadataUrlFormat() const;
 
     /* Set the blending mode used for rendering a layer */
-    void setBlendMode( const QPainter::CompositionMode blendMode );
+    void setBlendMode( const QPainter::CompositionMode &blendMode );
     /* Returns the current blending mode for a layer */
     QPainter::CompositionMode blendMode() const;
 
@@ -366,15 +366,15 @@ class QgsMapLayer : QObject
 
     /** Accessor and mutator for the minimum scale denominator member */
     void setMinimumScale( float theMinScale );
-    float minimumScale();
+    float minimumScale() const;
 
     /** Accessor and mutator for the maximum scale denominator member */
     void setMaximumScale( float theMaxScale );
-    float maximumScale();
+    float maximumScale() const;
 
     /** Accessor and mutator for the scale based visilibility flag */
     void toggleScaleBasedVisibility( bool theVisibilityFlag );
-    bool hasScaleBasedVisibility();
+    bool hasScaleBasedVisibility() const;
 
     /** Clear cached image
      * added in 1.5 */

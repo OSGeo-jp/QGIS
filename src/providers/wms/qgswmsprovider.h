@@ -778,6 +778,17 @@ class QgsWmsProvider : public QgsRasterDataProvider
   private:
     void showMessageBox( const QString& title, const QString& text );
 
+    /**
+     * Try to get best extent for the layer in given CRS. Returns true on success, false otherwise (layer not found, invalid CRS, transform failed)
+     */
+    bool extentForNonTiledLayer( const QString& layerName, const QString& crs, QgsRectangle& extent );
+
+    /**
+     * In case no bounding box is present in WMTS capabilities, try to estimate it from tile matrix sets.
+     * Returns true if the detection went fine.
+     */
+    bool detectTileLayerBoundingBox( QgsWmtsTileLayer& l );
+
     // case insensitive attribute value lookup
     static QString nodeAttribute( const QDomElement &e, QString name, QString defValue = QString::null );
 
@@ -995,11 +1006,6 @@ class QgsWmsProvider : public QgsRasterDataProvider
      * themes hosted by the WMTS
      */
     QList<QgsWmtsTheme> mTileThemes;
-
-    /**
-     * extents per layer (in WMS CRS:84 datum)
-     */
-    QMap<QString, QgsRectangle> mExtentForLayer;
 
     /**
      * available CRSs per layer

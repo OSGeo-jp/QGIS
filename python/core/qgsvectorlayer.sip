@@ -38,6 +38,7 @@ class QgsAttributeEditorContainer : QgsAttributeEditorElement
 
   public:
     QgsAttributeEditorContainer( QString name, QObject *parent );
+
     ~QgsAttributeEditorContainer();
 
     virtual QDomElement toDomElement( QDomDocument& doc ) const;
@@ -52,13 +53,35 @@ class QgsAttributeEditorField : QgsAttributeEditorElement
 %TypeHeaderCode
 #include "qgsvectorlayer.h"
 %End
-
   public:
     QgsAttributeEditorField( QString name , int idx, QObject *parent );
+
     ~QgsAttributeEditorField();
 
     virtual QDomElement toDomElement( QDomDocument& doc ) const;
     int idx() const;
+};
+
+/** @note Added in 2.1 */
+class QgsAttributeEditorRelation : QgsAttributeEditorElement
+{
+  public:
+    QgsAttributeEditorRelation( QString name, const QString &relationId, QObject *parent );
+
+    QgsAttributeEditorRelation( QString name, const QgsRelation& relation, QObject *parent );
+
+    ~QgsAttributeEditorRelation();
+
+    virtual QDomElement toDomElement( QDomDocument& doc ) const;
+    const QgsRelation& relation() const;
+
+    /**
+     * Initializes the relation from the id
+     *
+     * @param relManager The relation manager to use for the initialization
+     * @return true if the relation was found in the relationmanager
+     */
+    bool init( QgsRelationManager *relManager );
 };
 
 /** @note added in 1.7 */
@@ -216,7 +239,7 @@ class QgsVectorLayer : QgsMapLayer
      *                           for this layer
      *  @note added in 2.0
      */
-    void setDisplayExpression( const QString displayExpression );
+    void setDisplayExpression( const QString &displayExpression );
 
     /**
      *  Get the preview expression, used to create a human readable preview string.
@@ -234,7 +257,7 @@ class QgsVectorLayer : QgsMapLayer
     /** Returns the data provider in a const-correct manner
         @note not available in python bindings
       */
-    //const QgsVectorDataProvider* dataProvider() const;
+    // const QgsVectorDataProvider* dataProvider() const;
 
     /** Sets the textencoding of the data provider */
     void setProviderEncoding( const QString& encoding );
@@ -589,8 +612,10 @@ class QgsVectorLayer : QgsMapLayer
      *  @param geom geometry to modify
      *  @param ignoreFeatures list of feature ids where intersections should be ignored
      *  @return 0 in case of success
+     *
+     *  @deprecated since 2.2 - not being used for "avoid intersections" functionality anymore
      */
-    int removePolygonIntersections( QgsGeometry* geom, QgsFeatureIds ignoreFeatures = QgsFeatureIds() );
+    int removePolygonIntersections( QgsGeometry* geom, QgsFeatureIds ignoreFeatures = QgsFeatureIds() ) /Deprecated/;
 
     /** Adds topological points for every vertex of the geometry.
      * @param geom the geometry where each vertex is added to segments of other features
@@ -707,11 +732,12 @@ class QgsVectorLayer : QgsMapLayer
      *
      * @param fid   The feature id of the feature to be changed
      * @param field The index of the field to be updated
-     * @param value The value which will be assigned to the field
+     * @param newValue The value which will be assigned to the field
+     * @param oldValue The previous value to restore on undo (will otherwise be retrieved)
      *
      * @return true in case of success
      */
-    bool changeAttributeValue( QgsFeatureId fid, int field, QVariant value );
+    bool changeAttributeValue( QgsFeatureId fid, int field, const QVariant &newValue, const QVariant &oldValue = QVariant() );
 
     /** add an attribute field (but does not commit it)
         returns true if the field was added
@@ -1013,7 +1039,7 @@ class QgsVectorLayer : QgsMapLayer
     const QgsVectorSimplifyMethod& simplifyMethod() const;
 
     /** Returns whether the VectorLayer can apply the specified simplification hint */
-    bool simplifyDrawingCanbeApplied( int simplifyHint ) const;
+    bool simplifyDrawingCanbeApplied( const QgsRenderContext& renderContext, int simplifyHint ) const;
 
   public slots:
     /**
@@ -1075,6 +1101,9 @@ class QgsVectorLayer : QgsMapLayer
      * @note added in 2.0
      */
     virtual void onCacheImageDelete();
+
+  protected slots:
+    void invalidateSymbolCountedFlag();
 
   signals:
 
@@ -1170,7 +1199,6 @@ class QgsVectorLayer : QgsMapLayer
 
     /** vector layers are not copyable */
     QgsVectorLayer( const QgsVectorLayer & rhs );
-
 
 
 };

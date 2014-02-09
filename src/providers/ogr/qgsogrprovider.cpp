@@ -1495,7 +1495,14 @@ int QgsOgrProvider::capabilities() const
     }
 
     // supports geometry simplification on provider side
-    ability |= ( QgsVectorDataProvider::SimplifyGeometries | QgsVectorDataProvider::SimplifyGeometriesWithTopologicalValidation );
+#if defined(GDAL_VERSION_NUM) && defined(GDAL_COMPUTE_VERSION)
+#if GDAL_VERSION_NUM >= GDAL_COMPUTE_VERSION(1,11,0)
+    ability |= QgsVectorDataProvider::SimplifyGeometries;
+#endif
+#endif
+#if defined(GDAL_VERSION_NUM) && GDAL_VERSION_NUM >= 1900
+    ability |= QgsVectorDataProvider::SimplifyGeometriesWithTopologicalValidation;
+#endif
   }
 
   return ability;

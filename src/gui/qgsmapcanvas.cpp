@@ -116,6 +116,9 @@ QgsMapCanvas::QgsMapCanvas( QWidget * parent, const char *name )
   connect( mMapRenderer, SIGNAL( datumTransformInfoRequested( const QgsMapLayer*, const QString&, const QString& ) ),
            this, SLOT( getDatumTransformInfo( const QgsMapLayer*, const QString& , const QString& ) ) );
 
+  mResizeTimer = new QTimer( this );
+  connect( mResizeTimer, SIGNAL( timeout() ), this, SLOT( refresh() ) );
+
   // create map canvas item which will show the map
   mMap = new QgsMapCanvasMap( this );
   mScene->addItem( mMap );
@@ -377,6 +380,8 @@ QgsMapLayer* QgsMapCanvas::currentLayer()
 
 void QgsMapCanvas::refresh()
 {
+  mResizeTimer->stop();
+
   // we can't draw again if already drawing...
   if ( mDrawing )
     return;
@@ -1033,13 +1038,14 @@ void QgsMapCanvas::mouseReleaseEvent( QMouseEvent * e )
 void QgsMapCanvas::resizeEvent( QResizeEvent * e )
 {
   mNewSize = e->size();
+  mResizeTimer->start( 500 );
 }
 
 void QgsMapCanvas::paintEvent( QPaintEvent *e )
 {
   if ( mNewSize.isValid() )
   {
-    if ( mPainting || mDrawing )
+    if ( mPainting || mDrawing || mResizeTimer->isActive() )
     {
       //cancel current render progress
       if ( mMapRenderer )
@@ -1574,6 +1580,13 @@ void QgsMapCanvas::getDatumTransformInfo( const QgsMapLayer* ml, const QString& 
 
   const QgsCoordinateReferenceSystem& srcCRS = QgsCRSCache::instance()->crsByAuthId( srcAuthId );
   const QgsCoordinateReferenceSystem& destCRS = QgsCRSCache::instance()->crsByAuthId( destAuthId );
+
+  if ( !s.value( "/Projections/showDatumTransformDialog", false ).toBool() )
+  {
+    // just use the default transform
+    mMapRenderer->addLayerCoordinateTransform( ml->id(), srcAuthId, destAuthId, -1, -1 );
+    return;
+  }
 
   //get list of datum transforms
   QList< QList< int > > dt = QgsCoordinateTransform::datumTransformations( srcCRS, destCRS );

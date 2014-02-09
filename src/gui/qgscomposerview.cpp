@@ -75,26 +75,51 @@ void QgsComposerView::setCurrentTool( QgsComposerView::Tool t )
   {
     return;
   }
-  if ( t == QgsComposerView::Pan )
+  switch ( t )
   {
-    //lock cursor to prevent composer items changing it
-    composition()->setPreventCursorChange( true );
-    viewport()->setCursor( Qt::OpenHandCursor );
-  }
-  else if ( t == QgsComposerView::Zoom )
-  {
-    //lock cursor to prevent composer items changing it
-    composition()->setPreventCursorChange( true );
-    //set the cursor to zoom in
-    QPixmap myZoomQPixmap = QPixmap(( const char ** )( zoom_in ) );
-    QCursor zoomCursor = QCursor( myZoomQPixmap, 7, 7 );
-    viewport()->setCursor( zoomCursor );
-  }
-  else
-  {
-    //not using pan tool, composer items can change cursor
-    composition()->setPreventCursorChange( false );
-    viewport()->setCursor( Qt::ArrowCursor );
+    case QgsComposerView::Pan:
+    {
+      //lock cursor to prevent composer items changing it
+      composition()->setPreventCursorChange( true );
+      viewport()->setCursor( Qt::OpenHandCursor );
+      break;
+    }
+    case QgsComposerView::Zoom:
+    {
+      //lock cursor to prevent composer items changing it
+      composition()->setPreventCursorChange( true );
+      //set the cursor to zoom in
+      QPixmap myZoomQPixmap = QPixmap(( const char ** )( zoom_in ) );
+      QCursor zoomCursor = QCursor( myZoomQPixmap, 7, 7 );
+      viewport()->setCursor( zoomCursor );
+      break;
+    }
+    case QgsComposerView::AddArrow:
+    case QgsComposerView::AddHtml:
+    case QgsComposerView::AddMap:
+    case QgsComposerView::AddLegend:
+    case QgsComposerView::AddLabel:
+    case QgsComposerView::AddScalebar:
+    case QgsComposerView::AddPicture:
+    case QgsComposerView::AddRectangle:
+    case QgsComposerView::AddEllipse:
+    case QgsComposerView::AddTriangle:
+    case QgsComposerView::AddTable:
+    {
+      //using a drawing tool
+      //lock cursor to prevent composer items changing it
+      composition()->setPreventCursorChange( true );
+      QPixmap myCrosshairQPixmap = QPixmap(( const char ** )( cross_hair_cursor ) );
+      QCursor crosshairCursor = QCursor( myCrosshairQPixmap, 8, 8 );
+      viewport()->setCursor( crosshairCursor );
+      break;
+    }
+    default:
+    {
+      //not using pan tool, composer items can change cursor
+      composition()->setPreventCursorChange( false );
+      viewport()->setCursor( Qt::ArrowCursor );
+    }
   }
 }
 
@@ -321,6 +346,11 @@ void QgsComposerView::mousePressEvent( QMouseEvent* e )
         newLabelItem->adjustSizeToText();
         newLabelItem->setSceneRect( QRectF( snappedScenePoint.x(), snappedScenePoint.y(), newLabelItem->rect().width(), newLabelItem->rect().height() ) );
         composition()->addComposerLabel( newLabelItem );
+
+        composition()->clearSelection();
+        newLabelItem->setSelected( true );
+        emit selectedItemChanged( newLabelItem );
+
         emit actionFinished();
         composition()->pushAddRemoveCommand( newLabelItem, tr( "Label added" ) );
       }
@@ -338,6 +368,11 @@ void QgsComposerView::mousePressEvent( QMouseEvent* e )
           newScaleBar->setComposerMap( mapItemList.at( 0 ) );
         }
         newScaleBar->applyDefaultSize(); //4 segments, 1/5 of composer map width
+
+        composition()->clearSelection();
+        newScaleBar->setSelected( true );
+        emit selectedItemChanged( newScaleBar );
+
         emit actionFinished();
         composition()->pushAddRemoveCommand( newScaleBar, tr( "Scale bar added" ) );
       }
@@ -351,6 +386,11 @@ void QgsComposerView::mousePressEvent( QMouseEvent* e )
         newLegend->setSceneRect( QRectF( snappedScenePoint.x(), snappedScenePoint.y(), newLegend->rect().width(), newLegend->rect().height() ) );
         composition()->addComposerLegend( newLegend );
         newLegend->updateLegend();
+
+        composition()->clearSelection();
+        newLegend->setSelected( true );
+        emit selectedItemChanged( newLegend );
+
         emit actionFinished();
         composition()->pushAddRemoveCommand( newLegend, tr( "Legend added" ) );
       }
@@ -362,6 +402,11 @@ void QgsComposerView::mousePressEvent( QMouseEvent* e )
         QgsComposerPicture* newPicture = new QgsComposerPicture( composition() );
         newPicture->setSceneRect( QRectF( snappedScenePoint.x(), snappedScenePoint.y(), 30, 30 ) );
         composition()->addComposerPicture( newPicture );
+
+        composition()->clearSelection();
+        newPicture->setSelected( true );
+        emit selectedItemChanged( newPicture );
+
         emit actionFinished();
         composition()->pushAddRemoveCommand( newPicture, tr( "Picture added" ) );
       }
@@ -372,6 +417,11 @@ void QgsComposerView::mousePressEvent( QMouseEvent* e )
         QgsComposerAttributeTable* newTable = new QgsComposerAttributeTable( composition() );
         newTable->setSceneRect( QRectF( snappedScenePoint.x(), snappedScenePoint.y(), 50, 50 ) );
         composition()->addComposerTable( newTable );
+
+        composition()->clearSelection();
+        newTable->setSelected( true );
+        emit selectedItemChanged( newTable );
+
         emit actionFinished();
         composition()->pushAddRemoveCommand( newTable, tr( "Table added" ) );
       }
@@ -403,6 +453,11 @@ void QgsComposerView::addShape( Tool currentTool )
     composerShape->setUseSymbolV2( true );
     composition()->addComposerShape( composerShape );
     removeRubberBand();
+
+    composition()->clearSelection();
+    composerShape->setSelected( true );
+    emit selectedItemChanged( composerShape );
+
     emit actionFinished();
     composition()->pushAddRemoveCommand( composerShape, tr( "Shape added" ) );
   }
@@ -678,6 +733,11 @@ void QgsComposerView::mouseReleaseEvent( QMouseEvent* e )
         QPointF snappedScenePoint = composition()->snapPointToGrid( scenePoint );
         QgsComposerArrow* composerArrow = new QgsComposerArrow( mRubberBandStartPos, QPointF( snappedScenePoint.x(), snappedScenePoint.y() ), composition() );
         composition()->addComposerArrow( composerArrow );
+
+        composition()->clearSelection();
+        composerArrow->setSelected( true );
+        emit selectedItemChanged( composerArrow );
+
         scene()->removeItem( mRubberBandLineItem );
         delete mRubberBandLineItem;
         mRubberBandLineItem = 0;
@@ -702,6 +762,11 @@ void QgsComposerView::mouseReleaseEvent( QMouseEvent* e )
       {
         QgsComposerMap* composerMap = new QgsComposerMap( composition(), mRubberBandItem->transform().dx(), mRubberBandItem->transform().dy(), mRubberBandItem->rect().width(), mRubberBandItem->rect().height() );
         composition()->addComposerMap( composerMap );
+
+        composition()->clearSelection();
+        composerMap->setSelected( true );
+        emit selectedItemChanged( composerMap );
+
         removeRubberBand();
         emit actionFinished();
         composition()->pushAddRemoveCommand( composerMap, tr( "Map added" ) );
@@ -721,6 +786,11 @@ void QgsComposerView::mouseReleaseEvent( QMouseEvent* e )
         composition()->beginMultiFrameCommand( composerHtml, tr( "Html frame added" ) );
         composerHtml->addFrame( frame );
         composition()->endMultiFrameCommand();
+
+        composition()->clearSelection();
+        frame->setSelected( true );
+        emit selectedItemChanged( frame );
+
         removeRubberBand();
         emit actionFinished();
       }
@@ -935,7 +1005,7 @@ void QgsComposerView::pasteItems( PasteMode mode )
       if ( composition() )
       {
         QPointF pt;
-        if ( mode == PasteModeCursor )
+        if ( mode == QgsComposerView::PasteModeCursor || mode == QgsComposerView::PasteModeInPlace )
         {
           // place items at cursor position
           pt = mapToScene( mapFromGlobal( QCursor::pos() ) );
@@ -950,6 +1020,9 @@ void QgsComposerView::pasteItems( PasteMode mode )
       }
     }
   }
+
+  //switch back to select tool so that pasted items can be moved/resized (#8958)
+  setCurrentTool( QgsComposerView::Select );
 }
 
 void QgsComposerView::deleteSelectedItems()

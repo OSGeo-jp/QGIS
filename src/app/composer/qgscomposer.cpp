@@ -54,6 +54,8 @@
 #include "qgsmessageviewer.h"
 #include "qgscontexthelp.h"
 #include "qgscursors.h"
+#include "qgsmaplayeractionregistry.h"
+#include "qgsgeometry.h"
 
 #include <QCloseEvent>
 #include <QCheckBox>
@@ -94,6 +96,7 @@ QgsComposer::QgsComposer( QgisApp *qgis, const QString& title )
     , mTitle( title )
     , mQgis( qgis )
     , mUndoView( 0 )
+    , mAtlasFeatureAction( 0 )
 {
   setupUi( this );
   setWindowTitle( mTitle );
@@ -451,7 +454,7 @@ QgsComposer::QgsComposer( QgisApp *qgis, const QString& title )
   mGeneralDock->setObjectName( "CompositionDock" );
   mGeneralDock->setMinimumWidth( minDockWidth );
   mPanelMenu->addAction( mGeneralDock->toggleViewAction() );
-  mItemDock = new QDockWidget( tr( "Item Properties" ), this );
+  mItemDock = new QDockWidget( tr( "Item properties" ), this );
   mItemDock->setObjectName( "ItemDock" );
   mItemDock->setMinimumWidth( minDockWidth );
   mPanelMenu->addAction( mItemDock->toggleViewAction() );
@@ -470,6 +473,7 @@ QgsComposer::QgsComposer( QgisApp *qgis, const QString& title )
   QgsCompositionWidget* compositionWidget = new QgsCompositionWidget( mGeneralDock, mComposition );
   connect( mComposition, SIGNAL( paperSizeChanged() ), compositionWidget, SLOT( displayCompositionWidthHeight() ) );
   connect( this, SIGNAL( printAsRasterChanged( bool ) ), compositionWidget, SLOT( setPrintAsRasterCheckBox( bool ) ) );
+  connect( compositionWidget, SIGNAL( pageOrientationChanged( QString ) ), this, SLOT( setPrinterPageOrientation( QString ) ) );
   mGeneralDock->setWidget( compositionWidget );
 
   //undo widget
@@ -509,6 +513,10 @@ QgsComposer::QgsComposer( QgisApp *qgis, const QString& title )
   mActionExportAtlasAsPDF->setEnabled( false );
   QgsAtlasComposition* atlasMap = &mComposition->atlasComposition();
   connect( atlasMap, SIGNAL( toggled( bool ) ), this, SLOT( toggleAtlasControls( bool ) ) );
+  connect( atlasMap, SIGNAL( coverageLayerChanged( QgsVectorLayer* ) ), this, SLOT( updateAtlasMapLayerAction( QgsVectorLayer * ) ) );
+
+  //default printer page setup
+  setPrinterPageDefaults();
 
   // Create size grip (needed by Mac OS X for QMainWindow if QStatusBar is not visible)
   //should not be needed now that composer has a status bar?
@@ -704,6 +712,12 @@ void QgsComposer::setTitle( const QString& title )
   {
     mWindowAction->setText( title );
   }
+
+  //update atlas map layer action name if required
+  if ( mAtlasFeatureAction )
+  {
+    mAtlasFeatureAction->setText( QString( tr( "Set as atlas feature for %1" ) ).arg( mTitle ) );
+  }
 }
 
 void QgsComposer::updateStatusCursorPos( QPointF cursorPosition )
@@ -820,6 +834,8 @@ void QgsComposer::toggleAtlasControls( bool atlasEnabled )
   mActionExportAtlasAsImage->setEnabled( atlasEnabled );
   mActionExportAtlasAsSVG->setEnabled( atlasEnabled );
   mActionExportAtlasAsPDF->setEnabled( atlasEnabled );
+
+  updateAtlasMapLayerAction( atlasEnabled );
 }
 
 void QgsComposer::on_mActionAtlasPreview_triggered( bool checked )
@@ -2587,6 +2603,7 @@ void QgsComposer::readXML( const QDomElement& composerElem, const QDomDocument& 
   QgsCompositionWidget* compositionWidget = new QgsCompositionWidget( mGeneralDock, mComposition );
   QObject::connect( mComposition, SIGNAL( paperSizeChanged() ), compositionWidget, SLOT( displayCompositionWidthHeight() ) );
   QObject::connect( this, SIGNAL( printAsRasterChanged( bool ) ), compositionWidget, SLOT( setPrintAsRasterCheckBox( bool ) ) );
+  QObject::connect( compositionWidget, SIGNAL( pageOrientationChanged( QString ) ), this, SLOT( setPrinterPageOrientation( QString ) ) );
   mGeneralDock->setWidget( compositionWidget );
 
   //read and restore all the items
@@ -2616,7 +2633,9 @@ void QgsComposer::readXML( const QDomElement& composerElem, const QDomDocument& 
     mComposition->setWorldFileMap( worldFileMap );
   }
 
-  mComposition->sortZList();
+  //make sure z values are consistent
+  mComposition->refreshZList();
+
   mView->setComposition( mComposition );
 
   if ( mUndoView )
@@ -2655,6 +2674,11 @@ void QgsComposer::readXML( const QDomElement& composerElem, const QDomDocument& 
   mActionExportAtlasAsSVG->setEnabled( atlasMap->enabled() );
   mActionExportAtlasAsPDF->setEnabled( atlasMap->enabled() );
   connect( atlasMap, SIGNAL( toggled( bool ) ), this, SLOT( toggleAtlasControls( bool ) ) );
+  connect( atlasMap, SIGNAL( coverageLayerChanged( QgsVectorLayer* ) ), this, SLOT( updateAtlasMapLayerAction( QgsVectorLayer * ) ) );
+  updateAtlasMapLayerAction( atlasMap->enabled() );
+
+  //default printer page setup
+  setPrinterPageDefaults();
 
   setSelectionTool();
 }
@@ -3082,4 +3106,86 @@ void QgsComposer::writeWorldFile( QString worldFileName, double a, double b, dou
   fout << QString::number( e, 'f' ) << "\r\n";
   fout << QString::number( c, 'f' ) << "\r\n";
   fout << QString::number( f, 'f' ) << "\r\n";
+}
+
+
+void QgsComposer::setAtlasFeature( QgsMapLayer* layer, QgsFeature * feat )
+{
+  //update expression variables
+  QgsExpression::setSpecialColumn( "$atlasfeatureid", feat->id() );
+  QgsExpression::setSpecialColumn( "$atlasgeometry", QVariant::fromValue( *( feat->geometry() ) ) );
+
+  emit atlasPreviewFeatureChanged();
+
+  //check if composition has atlas preview
+  QgsAtlasComposition& atlas = mComposition->atlasComposition();
+  if ( ! atlas.enabled() || ! mComposition->atlasMode() == QgsComposition::PreviewAtlas || atlas.coverageLayer() != layer )
+  {
+    //either atlas preview isn't enabled, or layer doesn't match
+    return;
+  }
+
+  //set current preview feature id
+  atlas.prepareForFeature( feat );
+}
+
+void QgsComposer::updateAtlasMapLayerAction( QgsVectorLayer *coverageLayer )
+{
+  if ( mAtlasFeatureAction )
+  {
+    delete mAtlasFeatureAction;
+    mAtlasFeatureAction = 0;
+  }
+
+  if ( coverageLayer )
+  {
+    mAtlasFeatureAction = new QgsMapLayerAction( QString( tr( "Set as atlas feature for %1" ) ).arg( mTitle ), this, coverageLayer );
+    QgsMapLayerActionRegistry::instance()->addMapLayerAction( mAtlasFeatureAction );
+    connect( mAtlasFeatureAction, SIGNAL( triggeredForFeature( QgsMapLayer*, QgsFeature* ) ), this, SLOT( setAtlasFeature( QgsMapLayer*, QgsFeature* ) ) );
+  }
+}
+
+void QgsComposer::setPrinterPageOrientation( QString orientation )
+{
+  if ( orientation == tr( "Landscape" ) )
+  {
+    mPrinter.setOrientation( QPrinter::Landscape );
+  }
+  else
+  {
+    mPrinter.setOrientation( QPrinter::Portrait );
+  }
+}
+
+void QgsComposer::setPrinterPageDefaults()
+{
+  double paperWidth = mComposition->paperWidth();
+  double paperHeight = mComposition->paperHeight();
+
+  //set printer page orientation
+  if ( paperWidth > paperHeight )
+  {
+    mPrinter.setOrientation( QPrinter::Landscape );
+  }
+  else
+  {
+    mPrinter.setOrientation( QPrinter::Portrait );
+  }
+}
+
+void QgsComposer::updateAtlasMapLayerAction( bool atlasEnabled )
+{
+  if ( mAtlasFeatureAction )
+  {
+    delete mAtlasFeatureAction;
+    mAtlasFeatureAction = 0;
+  }
+
+  if ( atlasEnabled )
+  {
+    QgsAtlasComposition& atlas = mComposition->atlasComposition();
+    mAtlasFeatureAction = new QgsMapLayerAction( QString( tr( "Set as atlas feature for %1" ) ).arg( mTitle ), this, atlas.coverageLayer() );
+    QgsMapLayerActionRegistry::instance()->addMapLayerAction( mAtlasFeatureAction );
+    connect( mAtlasFeatureAction, SIGNAL( triggeredForFeature( QgsMapLayer*, QgsFeature* ) ), this, SLOT( setAtlasFeature( QgsMapLayer*, QgsFeature* ) ) );
+  }
 }

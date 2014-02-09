@@ -55,9 +55,12 @@ class QgsGeometry
     static QgsGeometry* fromMultiPolygon( const QgsMultiPolygon& multipoly ) /Factory/;
     /** construct geometry from a rectangle */
     static QgsGeometry* fromRect( const QgsRectangle& rect ) /Factory/;
-
-
-
+    /**
+      Set the geometry, feeding in a geometry in GEOS format.
+      This class will take ownership of the buffer.
+      @note not available in python bindings
+     */
+    // void fromGeos( GEOSGeometry* geos );
     /**
       Set the geometry, feeding in the buffer containing OGC Well-Known Binary and the buffer's length.
       This class will take ownership of the buffer.
@@ -132,7 +135,6 @@ class QgsGeometry
     */
     QgsPoint closestVertex( const QgsPoint& point, int& atVertex /Out/, int& beforeVertex /Out/, int& afterVertex /Out/, double& sqrDist /Out/ );
 
-
     /**
        Returns the indexes of the vertices before and after the given vertex index.
 
@@ -146,7 +148,6 @@ class QgsGeometry
           skip equal vertex positions).
     */
     void adjacentVertices( int atVertex, int& beforeVertex /Out/, int& afterVertex /Out/ );
-
 
     /** Insert a new vertex before the given vertex index,
      *  ring and item (first number is index 0)
@@ -213,7 +214,7 @@ class QgsGeometry
      * @param epsilon epsilon for segment snapping (added in 1.8)
      * @return The squared cartesian distance is also returned in sqrDist, negative number on error
      */
-    double closestSegmentWithContext( const QgsPoint& point, QgsPoint& minDistPoint /Out/, int& beforeVertex /Out/ );
+    double closestSegmentWithContext( const QgsPoint& point, QgsPoint& minDistPoint /Out/, int& afterVertex /Out/ );
 
     /**Adds a new ring to this geometry. This makes only sense for polygon and multipolygons.
      @return 0 in case of success (ring added), 1 problem with geometry type, 2 ring not closed,
@@ -224,6 +225,20 @@ class QgsGeometry
      @return 0 in case of success, 1 if not a multipolygon, 2 if ring is not a valid geometry, 3 if new polygon ring
      not disjoint with existing polygons of the feature*/
     int addPart( const QList<QgsPoint> &points, QGis::GeometryType geomType = QGis::UnknownGeometry );
+
+    /**Adds a new island polygon to a multipolygon feature
+     @return 0 in case of success, 1 if not a multipolygon, 2 if ring is not a valid geometry, 3 if new polygon ring
+     not disjoint with existing polygons of the feature
+     @note not available in python bindings
+     */
+    // int addPart( GEOSGeometry *newPart );
+
+    /**Adds a new island polygon to a multipolygon feature
+     @return 0 in case of success, 1 if not a multipolygon, 2 if ring is not a valid geometry, 3 if new polygon ring
+     not disjoint with existing polygons of the feature
+     @note available in python bindings as addPartGeometry (added in 2.1)
+     */
+    int addPart( QgsGeometry *newPart /Transfer/ ) /PyName=addPartGeometry/;
 
     /**Translate this geometry by dx, dy
      @return 0 in case of success*/
@@ -400,6 +415,7 @@ class QgsGeometry
     class Error
     {
       public:
+        Error();
         Error( QString m );
         Error( QString m, QgsPoint p );
 

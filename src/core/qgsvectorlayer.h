@@ -151,7 +151,7 @@ class CORE_EXPORT QgsAttributeEditorRelation : public QgsAttributeEditorElement
      * @param relManager The relation manager to use for the initialization
      * @return true if the relation was found in the relationmanager
      */
-    bool init( QgsRelationManager* relManager );
+    bool init( QgsRelationManager *relManager );
 
   private:
     QString mRelationId;
@@ -963,8 +963,10 @@ class CORE_EXPORT QgsVectorLayer : public QgsMapLayer
      *  @param geom geometry to modify
      *  @param ignoreFeatures list of feature ids where intersections should be ignored
      *  @return 0 in case of success
+     *
+     *  @deprecated since 2.2 - not being used for "avoid intersections" functionality anymore
      */
-    int removePolygonIntersections( QgsGeometry* geom, QgsFeatureIds ignoreFeatures = QgsFeatureIds() );
+    Q_DECL_DEPRECATED int removePolygonIntersections( QgsGeometry* geom, QgsFeatureIds ignoreFeatures = QgsFeatureIds() );
 
     /** Adds topological points for every vertex of the geometry.
      * @param geom the geometry where each vertex is added to segments of other features
@@ -1081,11 +1083,12 @@ class CORE_EXPORT QgsVectorLayer : public QgsMapLayer
      *
      * @param fid   The feature id of the feature to be changed
      * @param field The index of the field to be updated
-     * @param value The value which will be assigned to the field
+     * @param newValue The value which will be assigned to the field
+     * @param oldValue The previous value to restore on undo (will otherwise be retrieved)
      *
      * @return true in case of success
      */
-    bool changeAttributeValue( QgsFeatureId fid, int field, QVariant value );
+    bool changeAttributeValue( QgsFeatureId fid, int field, const QVariant &newValue, const QVariant &oldValue = QVariant() );
 
     /** add an attribute field (but does not commit it)
         returns true if the field was added
@@ -1387,7 +1390,7 @@ class CORE_EXPORT QgsVectorLayer : public QgsMapLayer
     inline const QgsVectorSimplifyMethod& simplifyMethod() const { return mSimplifyMethod; }
 
     /** Returns whether the VectorLayer can apply the specified simplification hint */
-    bool simplifyDrawingCanbeApplied( int simplifyHint ) const;
+    bool simplifyDrawingCanbeApplied( const QgsRenderContext& renderContext, int simplifyHint ) const;
 
   public slots:
     /**
@@ -1539,6 +1542,27 @@ class CORE_EXPORT QgsVectorLayer : public QgsMapLayer
     /** Signal emitted when setLayerTransparency() is called */
     void layerTransparencyChanged( int layerTransparency );
 
+    /**
+     * Signal emitted when a new edit command has been started
+     *
+     * @param text Description for this edit command
+     */
+    void editCommandStarted( const QString& text );
+
+    /**
+     * Signal emitted, when an edit command successfully ended
+     * @note This does not mean it is also committed, only that it is written
+     * to the edit buffer. See {@link beforeCommitChanges()}
+     */
+    void editCommandEnded();
+
+    /**
+     * Signal emitted, whan an edit command is destroyed
+     * @note This is not a rollback, it is only related to the current edit command.
+     * See {@link beforeRollBack()}
+     */
+    void editCommandDestroyed();
+
   private slots:
     void onRelationsLoaded();
 
@@ -1595,6 +1619,9 @@ class CORE_EXPORT QgsVectorLayer : public QgsMapLayer
       @param attributes attributes needed for labeling and diagrams will be added to the list
       @param labeling out: true if there will be labeling (ng) for this layer*/
     void prepareLabelingAndDiagrams( QgsRenderContext& rendererContext, QgsAttributeList& attributes, bool& labeling );
+
+    /** Read labeling from SLD */
+    void readSldLabeling( const QDomNode& node );
 
   private:                       // Private attributes
 

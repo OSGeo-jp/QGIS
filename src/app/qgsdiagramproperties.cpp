@@ -442,38 +442,33 @@ void QgsDiagramProperties::on_mRemoveCategoryPushButton_clicked()
 
 void QgsDiagramProperties::on_mFindMaximumValueButton_clicked()
 {
-  //get maximum value from provider (ignoring not-commited edits)
-  if ( mLayer )
+  if ( !mLayer )
+    return;
+
+  float maxValue = 0.0;
+  if ( mSizeAttributeComboBox->currentIndex() >= mAvailableAttributes )
   {
-    QgsVectorDataProvider* provider = mLayer->dataProvider();
-    if ( provider )
+    QgsExpression exp( mSizeAttributeComboBox->currentText() );
+    exp.prepare( mLayer->pendingFields() );
+    if ( !exp.hasEvalError() )
     {
-      float maxValue = 0;
-      if ( mSizeAttributeComboBox->currentIndex() >= mAvailableAttributes )
+      QgsFeature feature;
+      QgsFeatureIterator features = mLayer->getFeatures();
+      while ( features.nextFeature( *&feature ) )
       {
-        QgsExpression exp( mSizeAttributeComboBox->currentText() );
-        exp.prepare( mLayer->pendingFields() );
-        if ( exp.hasEvalError() )
-        {
-          QgsDebugMsgLevel( "Prepare error:" + exp.evalErrorString(), 4 );
-        }
-        else
-        {
-          QgsFeature feature;
-          QgsFeatureIterator features = mLayer->getFeatures();
-          while ( features.nextFeature( *&feature ) )
-          {
-            maxValue = qMax( maxValue, exp.evaluate( &feature ).toFloat() );
-          }
-        }
+        maxValue = qMax( maxValue, exp.evaluate( &feature ).toFloat() );
       }
-      else
-      {
-        maxValue = provider->maximumValue( mSizeAttributeComboBox->itemData( mSizeAttributeComboBox->currentIndex() ).toInt() ).toFloat();
-      }
-      mValueLineEdit->setText( QString( "%1" ).arg( maxValue ) );
+    }
+    else
+    {
+      QgsDebugMsgLevel( "Prepare error:" + exp.evalErrorString(), 4 );
     }
   }
+  else
+  {
+    maxValue = mLayer->maximumValue( mSizeAttributeComboBox->itemData( mSizeAttributeComboBox->currentIndex() ).toInt() ).toFloat();
+  }
+  mValueLineEdit->setText( QString( "%1" ).arg( maxValue ) );
 }
 
 void QgsDiagramProperties::on_mDisplayDiagramsGroupBox_toggled( bool checked )
@@ -550,7 +545,17 @@ void QgsDiagramProperties::apply()
           // Find maximum value
           for ( int i = 0; i < mDiagramAttributesTreeWidget->topLevelItemCount(); ++i )
           {
-            maxVal = qMax( maxVal, provider->maximumValue( mDiagramAttributesTreeWidget->topLevelItem( i )->data( 0, Qt::UserRole ).toInt() ).toDouble() );
+            QString fldName = mDiagramAttributesTreeWidget->topLevelItem( i )->data( 0, Qt::UserRole ).toString();
+            if ( fldName.count() >= 2 && fldName.at( 0 ) == '"' && fldName.at( fldName.count() - 1 ) == '"' )
+              fldName = fldName.mid( 1, fldName.count() - 2 ); // remove enclosing double quotes
+            int fld = provider->fieldNameIndex( fldName );
+            if ( fld != -1 )
+            {
+              bool ok = false;
+              double val = provider->maximumValue( fld ).toDouble( &ok );
+              if ( ok )
+                maxVal = qMax( maxVal, val );
+            }
           }
         }
         else

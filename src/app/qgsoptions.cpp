@@ -404,6 +404,9 @@ QgsOptions::QgsOptions( QWidget *parent, Qt::WFlags fl ) :
 
   //default datum transformations
   settings.beginGroup( "/Projections" );
+
+  chkShowDatumTransformDialog->setChecked( settings.value( "showDatumTransformDialog", false ).toBool() );
+
   QStringList projectionKeys = settings.allKeys();
 
   //collect src and dest entries that belong together
@@ -569,6 +572,11 @@ QgsOptions::QgsOptions( QWidget *parent, Qt::WFlags fl ) :
   mSimplifyDrawingGroupBox->setChecked( settings.value( "/qgis/simplifyDrawingHints", ( int )QgsVectorLayer::GeometrySimplification ).toInt() != QgsVectorLayer::NoSimplification );
   mSimplifyDrawingSpinBox->setValue( settings.value( "/qgis/simplifyDrawingTol", QGis::DEFAULT_MAPTOPIXEL_THRESHOLD ).toFloat() );
   mSimplifyDrawingAtProvider->setChecked( !settings.value( "/qgis/simplifyLocal", true ).toBool() );
+
+  QStringList myScalesList = PROJECT_SCALES.split( "," );
+  myScalesList.append( "1:1" );
+  mSimplifyMaximumScaleComboBox->updateScales( myScalesList );
+  mSimplifyMaximumScaleComboBox->setScale( 1.0 / settings.value( "/qgis/simplifyMaxScale", 1 ).toFloat() );
 
   // Slightly awkard here at the settings value is true to use QImage,
   // but the checkbox is true to use QPixmap
@@ -1111,6 +1119,7 @@ void QgsOptions::saveOptions()
   settings.setValue( "/qgis/simplifyDrawingHints", simplifyHints );
   settings.setValue( "/qgis/simplifyDrawingTol", mSimplifyDrawingSpinBox->value() );
   settings.setValue( "/qgis/simplifyLocal", !mSimplifyDrawingAtProvider->isChecked() );
+  settings.setValue( "/qgis/simplifyMaxScale", 1.0 / mSimplifyMaximumScaleComboBox->scale() );
 
   // project
   settings.setValue( "/qgis/projOpenAtLaunch", mProjectOnLaunchCmbBx->currentIndex() );
@@ -1190,6 +1199,8 @@ void QgsOptions::saveOptions()
   settings.setValue( "/Projections/otfTransformAutoEnable", radOtfAuto->isChecked() );
   settings.setValue( "/Projections/otfTransformEnabled", radOtfTransform->isChecked() );
   settings.setValue( "/Projections/projectDefaultCrs", mDefaultCrs.authid() );
+
+  settings.setValue( "/Projections/showDatumTransformDialog", chkShowDatumTransformDialog->isChecked() );
 
   if ( radFeet->isChecked() )
   {

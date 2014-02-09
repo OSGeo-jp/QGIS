@@ -18,6 +18,8 @@
 #include "qgis.h"
 #include "qgsrendererv2.h"
 #include "qgssymbolv2.h"
+#include "qgsexpression.h"
+#include <QScopedPointer>
 
 class CORE_EXPORT QgsSingleSymbolRendererV2 : public QgsFeatureRendererV2
 {
@@ -39,14 +41,22 @@ class CORE_EXPORT QgsSingleSymbolRendererV2 : public QgsFeatureRendererV2
     void setSymbol( QgsSymbolV2* s );
 
     //! @note added in 1.5
-    void setRotationField( QString fieldName ) { mRotationField = fieldName; }
+    void setRotationField( QString expression )
+    {
+      mRotation.reset( expression.isEmpty() ? NULL : new QgsExpression( expression ) );
+      Q_ASSERT( !mRotation.data() || !mRotation->hasParserError() );
+    }
     //! @note added in 1.5
-    QString rotationField() const { return mRotationField; }
+    QString rotationField() const { return mRotation.data() ? mRotation->expression() : QString(); }
 
     //! @note added in 1.5
-    void setSizeScaleField( QString fieldName ) { mSizeScaleField = fieldName; }
+    void setSizeScaleField( QString expression )
+    {
+      mSizeScale.reset( expression.isEmpty() ? NULL : new QgsExpression( expression ) );
+      Q_ASSERT( !mSizeScale.data() || !mSizeScale->hasParserError() );
+    }
     //! @note added in 1.5
-    QString sizeScaleField() const { return mSizeScaleField; }
+    QString sizeScaleField() const { return mSizeScale.data() ? mSizeScale->expression() : QString(); }
 
     //! @note added in 2.0
     void setScaleMethod( QgsSymbolV2::ScaleMethod scaleMethod );
@@ -78,17 +88,16 @@ class CORE_EXPORT QgsSingleSymbolRendererV2 : public QgsFeatureRendererV2
     //! return a list of item text / symbol
     //! @note: this method was added in version 1.5
     //! @note not available in python bindings
-    virtual QgsLegendSymbolList legendSymbolItems( double scaleDenominator = -1, QString rule = "" );
+    virtual QgsLegendSymbolList legendSymbolItems( double scaleDenominator = -1, QString rule = QString() );
 
   protected:
-    QgsSymbolV2* mSymbol;
-    QString mRotationField;
-    QString mSizeScaleField;
+    QScopedPointer<QgsSymbolV2> mSymbol;
+    QScopedPointer<QgsExpression> mRotation;
+    QScopedPointer<QgsExpression> mSizeScale;
     QgsSymbolV2::ScaleMethod mScaleMethod;
 
     // temporary stuff for rendering
-    int mRotationFieldIdx, mSizeScaleFieldIdx;
-    QgsSymbolV2* mTempSymbol;
+    QScopedPointer<QgsSymbolV2> mTempSymbol;
     double mOrigSize;
 };
 

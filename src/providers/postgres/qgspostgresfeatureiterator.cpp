@@ -14,6 +14,7 @@
  ***************************************************************************/
 #include "qgspostgresfeatureiterator.h"
 #include "qgspostgresprovider.h"
+#include "qgsgeometry.h"
 
 #include "qgslogger.h"
 #include "qgsmessagelog.h"
@@ -49,8 +50,6 @@ QgsPostgresFeatureIterator::QgsPostgresFeatureIterator( QgsPostgresProvider* p, 
 {
   mCursorName = QString( "qgisf%1_%2" ).arg( P->mProviderId ).arg( P->mIteratorCounter++ );
 
-  P->mActiveIterators << this;
-
   QString whereClause;
 
   if ( request.filterType() == QgsFeatureRequest::FilterRect && !P->mGeometryColumn.isNull() )
@@ -79,6 +78,8 @@ QgsPostgresFeatureIterator::QgsPostgresFeatureIterator( QgsPostgresProvider* p, 
     mClosed = true;
     return;
   }
+
+  P->mActiveIterators << this;
 
   mFetched = 0;
 }
@@ -302,12 +303,10 @@ bool QgsPostgresFeatureIterator::declareCursor( const QString& whereClause )
     if ( mFetchGeometry && !simplifyMethod.forceLocalOptimization() && simplifyMethod.methodType() != QgsSimplifyMethod::NoSimplification && QGis::flatType( QGis::singleType( P->geometryType() ) ) != QGis::WKBPoint )
     {
       QString simplifyFunctionName = simplifyMethod.methodType() == QgsSimplifyMethod::OptimizeForRendering
-                                     ? ( P->mConnectionRO->majorVersion() < 2 ? "simplify" : "st_simplify" )
+                                     ? ( P->mConnectionRO->majorVersion() < 2 ? "snaptogrid" : "st_snaptogrid" )
                                          : ( P->mConnectionRO->majorVersion() < 2 ? "simplifypreservetopology" : "st_simplifypreservetopology" );
 
-      double tolerance = simplifyMethod.methodType() == QgsSimplifyMethod::OptimizeForRendering
-                         ? simplifyMethod.toleranceForDouglasPeuckerAlgorithms()
-                         : simplifyMethod.tolerance();
+      double tolerance = simplifyMethod.tolerance() * 0.8; //-> Default factor for the maximum displacement distance for simplification, similar as GeoServer does
 
       query += QString( "%1(%5(%2%3,%6),'%4')" )
                .arg( P->mConnectionRO->majorVersion() < 2 ? "asbinary" : "st_asbinary" )
