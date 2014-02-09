@@ -9042,7 +9042,7 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="546"/>
         <source>The BNA writer will try to recognize ellipses and circles when writing a polygon. This will only work if the feature has previously been read from a BNA file. As some software packages do not support ellipses/circles in BNA data file, it may be useful to tell the writer by specifying ELLIPSES_AS_ELLIPSES=NO not to export them as such, but keep them as polygons.</source>
-        <translation type="unfinished"></translation>
+        <translation>BNAライターはポリゴンを書き込むときに楕円や円を認識することを試みます.これは地物が以前BNAファイルから読まれた場合のみ行われます.いくつかのソフトウェアパッケージではBNAデータにおける楕円/円をサポートしません, ELLIPSES_AS_ELLIPSES=NO を指定するとそれらをポリゴンとして保持して出力するので便利かもしれません.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="555"/>
@@ -9062,7 +9062,7 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="592"/>
         <source>By default, the geometry of a feature written to a .csv file is discarded. It is possible to export the geometry in its WKT representation by specifying GEOMETRY=AS_WKT. It is also possible to export point geometries into their X,Y,Z components by specifying GEOMETRY=AS_XYZ, GEOMETRY=AS_XY or GEOMETRY=AS_YX.</source>
-        <translation type="unfinished"></translation>
+        <translation>デフォルトで地物のジオメトリをcsvに書き出す機能は廃止されました. GEOMETRY=AS_WKT.を指定するとジオメトリをWKTに出力することは可能です.GEOMETRY=AS_XYZ, GEOMETRY=AS_XY またはGEOMETRY=AS_YXを指定するとポイントジオメトリのXYZを出力することができます.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="607"/>
@@ -9082,7 +9082,7 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="642"/>
         <source>Override the type of shapefile created. Can be one of NULL for a simple .dbf file with no .shp file, POINT, ARC, POLYGON or MULTIPOINT for 2D, or POINTZ, ARCZ, POLYGONZ or MULTIPOINTZ for 3D. Shapefiles with measure values are not supported, nor are MULTIPATCH files.</source>
-        <translation type="unfinished"></translation>
+        <translation>作成されたshapefileの型を上書きします.NULLを指定すると.shpファイル無しの単純な.dbfファイルを指定できます. POINT, ARC, POLYGON または MULTIPOINT は2次元r POINTZ, ARCZ, POLYGONZ または MULTIPOINTZ は3次元の指定です.測定値つきのShapefileはサポートされていません.またMULTIPATCHファイルもサポートしていません</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="661"/>
@@ -9211,12 +9211,12 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="889"/>
         <source>only valid when FORMAT=GML3/GML3Degree/GML3.2) Default to YES. If YES, SRS with EPSG authority will be written with the &apos;urn:ogc:def:crs:EPSG::&apos; prefix. In the case, if the SRS is a geographic SRS without explicit AXIS order, but that the same SRS authority code imported with ImportFromEPSGA() should be treated as lat/long, then the function will take care of coordinate order swapping. If set to NO, SRS with EPSG authority will be written with the &apos;EPSG:&apos; prefix, even if they are in lat/long order.</source>
-        <translation type="unfinished"></translation>
+        <translation>FORMAT=GML3/GML3Degree/GML3.2)の場合のみ正しい.デフォルトはYES.YESの場合EPSG出典つきのSRSが &apos;urn:ogc:def:crs:EPSG::&apos;というプレフィックス付で書き込まれます.この場合SRSが明確な楕円体情報を持たないジオグラフィックSRSで ImportFromEPSGA()によって同じSRSの出典コードがインポートされた場合緯度/経度として扱われます.それゆえ関数は座標の順番の入れ替えに気をつけなければいけません.EPSGの出典コードがあるSRSが設定できない場合でも緯度/経度の順番の場合’EPSG&apos;プリフェックスを一緒に書き込みます.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="901"/>
         <source>only valid when FORMAT=GML3/GML3Degree/GML3.2) Default to YES. If set to NO, the &lt;gml:boundedBy&gt; element will not be written for each feature.</source>
-        <translation type="unfinished"></translation>
+        <translation>FORMAT=GML3/GML3Degree/GML3.2　の場合のみ正しい)　デフォルトはYES. NOが設定された場合それぞれの地物に &lt;gml:boundedBy&gt;エレメントが書き込まれません.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="908"/>
@@ -9366,7 +9366,7 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1200"/>
         <source>Should multipoint soundings be split into many single point sounding features. Multipoint geometries are not well handle by many formats, so it can be convenient to split single sounding features with many points into many single point features.</source>
-        <translation type="unfinished"></translation>
+        <translation>マルチポイントサウンディングは多くの単一点のサウンディング地物に分割されるべきです.マルチポイントジオメトリは多くの形式でうまく利用できません,ですから多くの点を単一点地物に変換して単一サウンディング地物に分割すると便利です.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1208"/>
@@ -9381,7 +9381,7 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1221"/>
         <source>If enabled, numeric attributes assigned an empty string as a value will be preserved as a special numeric value. This option should not generally be needed, but may be useful when translated S-57 to S-57 losslessly.</source>
-        <translation type="unfinished"></translation>
+        <translation>有効な場合数値の属性の指定された特別な数値の値にエンプティストリングが割り当てられます.このオプションは一般的には必要ありませんがS-57をS-57にロス無しに変換する場合便利です.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1228"/>
@@ -9391,7 +9391,7 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1234"/>
         <source>Should additional attributes relating features to their underlying geometric primitives be attached. These are the values of the FSPT group, and are primarily needed when doing S-57 to S-57 translations.</source>
-        <translation type="unfinished"></translation>
+        <translation>地物の根本的なジオメトリプリミティブに関連する追加の属性が付加されるべきです.FSTPグループの値がありS-57をS-57に変換する場合最初に必要になります.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1241"/>
@@ -9426,7 +9426,7 @@ Error(%2): %3</source>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1326"/>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1407"/>
         <source>column_name1[,column_name2, ...] A list of (String) columns that must be compressed with ZLib DEFLATE algorithm. This might be beneficial for databases that have big string blobs. However, use with care, since the value of such columns will be seen as compressed binary content with other SQLite utilities (or previous OGR versions). With OGR, when inserting, modifying or queryings compressed columns, compression/decompression is done transparently. However, such columns cannot be (easily) queried with an attribute filter or WHERE clause. Note: in table definition, such columns have the &apos;VARCHAR_deflate&apos; declaration type.</source>
-        <translation type="unfinished"></translation>
+        <translation>column_name1[,column_name2, ...]カラム（文字列)のリストはZlib DEFLATEアルゴリズムで圧縮されるべきです.このことは巨大な文字列blobを持つデータベースに利益をもたらします.慎重に扱ったとしてもそのようなカラムの値は他のSQLユーティリティ(または以前のバージョンのOGR)でバイナリコンテンツとして圧縮され,挿入,修正,クエリを圧縮されたカラムとして実行され,圧縮/展開は透過的に行われます,.そのようなカラムは（簡単には)属性フィルタやWHERE句を使ってクエリをかけることはできません. 注 テーブル内ではそのようなカラムは &apos;VARCHAR_deflate&apos; というタイプで宣言されています.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1365"/>
@@ -9446,7 +9446,7 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1396"/>
         <source>Used to force the SRID number of the SRS associated with the layer. When this option isn&apos;t specified and that a SRS is associated with the layer, a search is made in the spatial_ref_sys to find a match for the SRS, and, if there is no match, a new entry is inserted for the SRS in the spatial_ref_sys table. When the SRID option is specified, this search (and the eventual insertion of a new entry) will not be done: the specified SRID is used as such.</source>
-        <translation type="unfinished"></translation>
+        <translation>レイヤに設定されているSRSのSRIDを強制的に利用します.このオプションは設定されていなくてあるSRSがレイヤに設定されている場合spatial_ref_sysに対して合致するSRSの検索が行われ,そこで合致しない場合新しいエントリのSRSがspatial_ref_sysテーブルに挿入されます.SRIDオプションが指定されている場合この検索(そして新しいエントリの挿入）は実行されません.指定されたSRIDがそのまま使われます.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1422"/>
@@ -35039,7 +35039,7 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/app/qgsoptions.cpp" line="109"/>
         <source>Layer selection</source>
-        <translation type="unfinished"></translation>
+        <translation>レイヤ選択</translation>
     </message>
     <message>
         <location filename="../src/app/qgsoptions.cpp" line="306"/>
@@ -35104,25 +35104,25 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/app/qgsoptions.cpp" line="709"/>
         <source>Select grid color</source>
-        <translation type="unfinished">グリッドカラー選択</translation>
+        <translation>グリッドカラー選択</translation>
     </message>
     <message>
         <location filename="../src/app/qgsoptions.cpp" line="715"/>
         <location filename="../src/app/qgsoptions.cpp" line="1312"/>
         <source>Solid</source>
-        <translation type="unfinished"></translation>
+        <translation>ソリッド</translation>
     </message>
     <message>
         <location filename="../src/app/qgsoptions.cpp" line="716"/>
         <location filename="../src/app/qgsoptions.cpp" line="1316"/>
         <source>Dots</source>
-        <translation type="unfinished">点</translation>
+        <translation>点</translation>
     </message>
     <message>
         <location filename="../src/app/qgsoptions.cpp" line="717"/>
         <location filename="../src/app/qgsoptions.cpp" line="1320"/>
         <source>Crosses</source>
-        <translation type="unfinished">十字</translation>
+        <translation>十字</translation>
     </message>
     <message>
         <location filename="../src/app/qgsoptions.cpp" line="946"/>
@@ -35897,7 +35897,7 @@ Always network: always load from network and do not check if the cache has a val
         <location filename="../src/ui/qgsoptionsbase.ui" line="157"/>
         <location filename="../src/ui/qgsoptionsbase.ui" line="160"/>
         <source>Composer</source>
-        <translation type="unfinished">コンポーザ</translation>
+        <translation>コンポーザ</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="490"/>
@@ -35922,7 +35922,7 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="613"/>
         <source>Custom side bar style</source>
-        <translation type="unfinished"></translation>
+        <translation>カスタムサイドバースタイル</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="624"/>
@@ -36099,27 +36099,27 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="1638"/>
         <source>Enable feature simplication by default for newly added layers</source>
-        <translation type="unfinished"></translation>
+        <translation>地物の簡素化はデフォルトで新規に追加されたレイヤに対して有効です</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="1647"/>
         <source>&lt;b&gt;Note:&lt;/b&gt; Feature simplification may speed up rendering but can result in rendering inconsistencies</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;注記:&lt;/b&gt; 地物の簡素化はレンダリングスピードを向上させますが、レンダリングに不整合が生じる場合があります</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="1654"/>
         <source>Simplification threshold (higher values result in more simplification): </source>
-        <translation type="unfinished"></translation>
+        <translation>簡素化の閾値 (高い値はより簡素化を進めます): </translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="1664"/>
         <source>Higher values result in more simplification</source>
-        <translation type="unfinished"></translation>
+        <translation>高い値はより簡素化を進めます</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="1709"/>
         <source>Simplify on provider side if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>可能であればプロバイダ側で簡素化</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2072"/>
@@ -36183,12 +36183,12 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2407"/>
         <source>WMS getLegendGraphic Resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>WMS getLegendGraphics 解像度</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2593"/>
         <source>Nautical Miles</source>
-        <translation type="unfinished"></translation>
+        <translation>海里</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2767"/>
@@ -36218,70 +36218,70 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2900"/>
         <source>Composition defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>コンポジションデフォルト</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2908"/>
         <source>Default font</source>
-        <translation type="unfinished"></translation>
+        <translation>デフォルトフォント</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2923"/>
         <source>Grid appearance</source>
-        <translation type="unfinished"></translation>
+        <translation>グリッドの外見</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2931"/>
         <source>Grid style</source>
-        <translation type="unfinished">グリッドスタイル</translation>
+        <translation>グリッドスタイル</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2941"/>
         <source>Color...</source>
-        <translation type="unfinished">色...</translation>
+        <translation>色...</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2953"/>
         <source>Grid defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>グリッドデフォルト</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2959"/>
         <source>Spacing</source>
-        <translation type="unfinished"></translation>
+        <translation>間隔</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2966"/>
         <location filename="../src/ui/qgsoptionsbase.ui" line="3023"/>
         <location filename="../src/ui/qgsoptionsbase.ui" line="3054"/>
         <source> mm</source>
-        <translation type="unfinished"> mm</translation>
+        <translation> mm</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2979"/>
         <source>Grid offset</source>
-        <translation type="unfinished">グリッドオフセット</translation>
+        <translation>グリッドオフセット</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2991"/>
         <source>x: </source>
-        <translation type="unfinished">x:</translation>
+        <translation>x:</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="3001"/>
         <source>y: </source>
-        <translation type="unfinished">y:</translation>
+        <translation>y:</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="3013"/>
         <location filename="../src/ui/qgsoptionsbase.ui" line="3044"/>
         <source>Snap tolerance</source>
-        <translation type="unfinished">スナップ許容量</translation>
+        <translation>スナップ許容量</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="3036"/>
         <source>Guide defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>ガイドデフォルト</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="3111"/>
@@ -36291,7 +36291,7 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="3134"/>
         <source>Suppress attribute form pop-up after feature creation</source>
-        <translation type="unfinished"></translation>
+        <translation>地物作成後のポップアップ属性入力を行わない</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="3383"/>
@@ -36461,32 +36461,32 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="3848"/>
         <source>Don&apos;t enable &apos;on the fly&apos; reprojection</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;オンザフライ&apos;再投影を有効にしないで下さい</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="3875"/>
         <source>Default datum transformations</source>
-        <translation type="unfinished"></translation>
+        <translation>デフォルトdatum変換</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="3921"/>
         <source>Source CRS</source>
-        <translation type="unfinished"></translation>
+        <translation>変換前CRS</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="3926"/>
         <source>Destination CRS</source>
-        <translation type="unfinished"></translation>
+        <translation>変換先CRS</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="3931"/>
         <source>Source datum transform</source>
-        <translation type="unfinished"></translation>
+        <translation>ソースdatum変換</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="3936"/>
         <source>Destination datum transform</source>
-        <translation type="unfinished"></translation>
+        <translation>変換先datum変換</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="3995"/>
@@ -36496,17 +36496,17 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="4124"/>
         <source>Max retry in case of tile request errors</source>
-        <translation type="unfinished"></translation>
+        <translation>タイルリクエストの場合の最大再試行数</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="4142"/>
         <source>User-Agent</source>
-        <translation type="unfinished"></translation>
+        <translation>User-Agent</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="4180"/>
         <source>Size [KiB]</source>
-        <translation type="unfinished"></translation>
+        <translation>サイズ[KiB]</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="4200"/>
