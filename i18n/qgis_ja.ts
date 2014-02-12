@@ -48219,7 +48219,8 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/plugins/georeferencer/qgstransformsettingsdialog.cpp" line="339"/>
         <source>_modified</source>
         <comment>Georeferencer:QgsOpenRasterDialog.cpp - used to modify a user given file name</comment>
-        <translation>変更されたもの</translation>
+        <translatorcomment>非ASCII文字をパスに含むファイルを扱えないプラグインがあるので原文のままが好ましい</translatorcomment>
+        <translation>_modified</translation>
     </message>
     <message>
         <location filename="../src/plugins/georeferencer/qgstransformsettingsdialogbase.ui" line="14"/>
