@@ -123,7 +123,7 @@
     </message>
     <message>
         <source>Select the table you want export to file.</source>
-        <translation>ファイルにエキスポートしたいテーブルを選択して下さい.</translation>
+        <translation>ファイルにエクスポートしたいテーブルを選択して下さい.</translation>
     </message>
     <message>
         <source>DB Manager</source>
@@ -171,7 +171,7 @@
     </message>
     <message>
         <source>&amp;Export to file</source>
-        <translation>ファイルにエキスポートする(&amp;E)</translation>
+        <translation>ファイルにエクスポートする(&amp;E)</translation>
     </message>
 </context>
 <context>
@@ -2628,7 +2628,7 @@ Are you sure you want to proceed?</source>
     </message>
     <message>
         <source>Export finished.</source>
-        <translation>エキスポートが終了しました.</translation>
+        <translation>エクスポートが終了しました.</translation>
     </message>
 </context>
 <context>
@@ -5950,7 +5950,7 @@ GEOS空間演算エラー:1個またはそれ以上の数の地物のジオメ�
     <message>
         <location filename="../src/ui/qgisapp.ui" line="2147"/>
         <source>DXF Export...</source>
-        <translation>DXFエキスポート</translation>
+        <translation>DXFエクスポート</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="2159"/>
@@ -9467,7 +9467,7 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1459"/>
         <source>Indicates the GeoConcept export file extension. TXT was used by earlier releases of GeoConcept. GXT is currently used.</source>
-        <translation>GeoConceptエキスポートファイル拡張子を指定します.初期のGeoConceptではTXTが利用されていましたが現在はGXTが利用されています.</translation>
+        <translation>GeoConceptエクスポートファイル拡張子を指定します.初期のGeoConceptではTXTが利用されていましたが現在はGXTが利用されています.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1490"/>
@@ -12210,12 +12210,12 @@ Always ignore these errors?</source>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3883"/>
         <source>DXF export completed</source>
-        <translation>DXFエキスポートが完了しました</translation>
+        <translation>DXFエクスポートが完了しました</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3887"/>
         <source>DXF export failed</source>
-        <translation>DXFエキスポートが失敗しました</translation>
+        <translation>DXFエクスポートが失敗しました</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="4422"/>
@@ -22272,7 +22272,7 @@ Parser error:
     <message>
         <location filename="../src/ui/qgsdxfexportdialogbase.ui" line="14"/>
         <source>DXF export</source>
-        <translation>DXFエキスポート</translation>
+        <translation>DXFエクスポート</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsdxfexportdialogbase.ui" line="35"/>
@@ -22322,7 +22322,7 @@ Parser error:
     <message>
         <location filename="../src/ui/qgsdxfexportdialogbase.ui" line="121"/>
         <source>Export features intersecting the current map extent</source>
-        <translation>現在の地図領域にインターセクトする地物をエキスポート</translation>
+        <translation>現在の地図領域にインターセクトする地物をエクスポート</translation>
     </message>
 </context>
 <context>
