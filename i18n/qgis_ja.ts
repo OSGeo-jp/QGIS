@@ -54018,7 +54018,7 @@ The Coordinate Reference System (CRS) tab allows you to set the projection for t
 &lt;/a&gt;
 On this tab you can choose on which layers the identify tool will work.
 </source>
-        <translation type="unfinished">&lt;h3&gt;プロジェクトプロパティ&lt;/h3&gt;
+        <translation>&lt;h3&gt;プロジェクトプロパティ&lt;/h3&gt;
 このダイアログでは&lt;label&gt;プロジェクト&lt;/label&gt;に関する様々なプロパティを設定できます. プロジェクトとはレイヤのセットとそれらの設定、さらにプロジェクトが必要とする情報を保存してディスクから呼び出せます.&lt;p&gt;
 
 
@@ -54068,7 +54068,7 @@ QGIS supports vector data in a number of formats, including those supported by t
 QGIS supports PostGIS layers in a PostgreSQL database and SpatiaLite layers. Support for additional data types (eg. delimited text) is provided by additional data provider plugins. A list of OGR supported vector formats can be found in Appendix A.1 of the User Guide.&lt;/p&gt;
 Detailed description how to proceed with vector data is described in chapter 5 &apos;Working with Vector Data&apos;.
 </source>
-        <translation type="unfinished">&lt;h3&gt;ベクタレイヤの追加ダイアログ&lt;/h3&gt;
+        <translation>&lt;h3&gt;ベクタレイヤの追加ダイアログ&lt;/h3&gt;
 
 ベクタレイヤの追加ダイアログはQGISのマップビューにベクタデータを追加するために利用します. ベクタデータとは点、または線、ポリゴン（閉じたエリア）といったジオメトリを用いて記述された空間データです.&lt;/p&gt;
 QGISは多くのベクタデータ形式をサポートします. OGRデータプロバイダによってESRI ShapefileやMapInfo MIF(ネイティブ形式)といった形式がサポートされています.&lt;/p&gt;
@@ -54132,7 +54132,7 @@ which are described and illustrated on &lt;a href=&quot;http://en.wikipedia.org/
 &lt;p&gt;Contact the author through aruntheguy at gmail dot com&lt;/p&gt;
 
 </source>
-        <translation type="unfinished">&lt;h1&gt;ヒートマッププラグインヘルプ&lt;/h1&gt;
+        <translation>&lt;h1&gt;ヒートマッププラグインヘルプ&lt;/h1&gt;
 &lt;p&gt;ヒートマッププラグインはラスタの密度（ヒートマップ）作成に入力ポイントベクタレイヤのカーネル密度推定を利用しています.  密度は場所の点の数をベースにして計算され多数のポイントの集積は大きな値を算出します. ヒートマップは&quot;ホットスポット&quot;や点の集まりを判別しやすくする手法です.&lt;/p&gt;
 
 &lt;h2&gt;ダイアログパラメータ&lt;/h2&gt;
@@ -54217,7 +54217,7 @@ To filter a layer before adding it to the map, double click on its name or use &
 &lt;/a&gt;
 Ticking &lt;label&gt;Search options&lt;/label&gt; enables additional options for searching in different column types and using 2 search modes: &lt;label&gt;Wildcard&lt;/label&gt; or &lt;label&gt;RegExp&lt;/label&gt;.
 </source>
-        <translation type="unfinished">&lt;h3&gt;PostGISテーブルの追加&lt;/h3&gt;
+        <translation>&lt;h3&gt;PostGISテーブルの追加&lt;/h3&gt;
 このダイアログではPostGISレイヤ(ジオメトリカラムを含んだテーブル)をQGISのマップキャンバスに追加することができます.
 &lt;p&gt;
 &lt;a href=&quot;#connect&quot;&gt;接続&lt;/a&gt;&lt;br/&gt;
@@ -54344,7 +54344,7 @@ Note: Experimental plugins are generally unsuitable for production use. These pl
 &lt;/p&gt;
 </source>
         <translatorcomment>変更ないか後でチェック</translatorcomment>
-        <translation type="unfinished">&lt;h3&gt;プラグインの管理とインストール&lt;/h3&gt;
+        <translation>&lt;h3&gt;プラグインの管理とインストール&lt;/h3&gt;
 
 &lt;p&gt;
 プラグインの管理とインストール.
@@ -54461,7 +54461,7 @@ This dialog allows you to define the settings for a connection to a PostgreSQL d
 
 &lt;/ul&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;PostgreSQL(PostGIS)の新しい接続を作成します&lt;/h3&gt;
+        <translation>&lt;h3&gt;PostgreSQL(PostGIS)の新しい接続を作成します&lt;/h3&gt;
 このダイアログではPostgreSQL(PostGIS)データベースへの接続の設定を定義できます.
 &lt;p&gt;
 &lt;ul&gt;
@@ -54501,7 +54501,7 @@ This dialog allows you to define the settings for a connection to a PostgreSQL d
         <source>&lt;h3&gt;GPS Plugin&lt;/h3&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;GPSプラグイン&lt;/h3&gt;
+        <translation>&lt;h3&gt;GPSプラグイン&lt;/h3&gt;
 
 </translation>
     </message>
@@ -54519,7 +54519,7 @@ You can also define the width and precision of the new attribute column.
 &lt;h4&gt;Attributes list&lt;/h4&gt;
 In this section you can see the list of attributes. To delete one of them, click on it and choose &lt;label&gt;Remove selected attribute&lt;/label&gt; button.
 </source>
-        <translation type="unfinished">&lt;h3&gt;新しくベクタレイヤを作る&lt;/h3&gt;
+        <translation>&lt;h3&gt;新しくベクタレイヤを作る&lt;/h3&gt;
 新しいベクタレイヤを作成して編集するためには&lt;label&gt;レイヤ&lt;/label&gt;メニューの&lt;label&gt;新規ベクタレイヤ&lt;/label&gt;を選択して下さい. &lt;br/&gt;
 このダイアログではシェープファイルのレイヤを作成できます.
 &lt;h4&gt;タイプ&lt;/h4&gt;
@@ -54557,7 +54557,7 @@ In this section you can see the list of attributes. To delete one of them, click
 &lt;p&gt;
 Click on &lt;label&gt;OK&lt;/label&gt; to create the layer and close the dialog.  Clicking &lt;label&gt;Apply&lt;/label&gt; also creates the layer, but keeps the dialog open, thereby allowing you to create more similar layers. &lt;label&gt;Cancel&lt;/label&gt; will close the layer without further changes.
 </source>
-        <translation type="unfinished">&lt;h3&gt;新しい Spatialite レイヤを作成する&lt;/h3&gt;
+        <translation>&lt;h3&gt;新しい Spatialite レイヤを作成する&lt;/h3&gt;
 このダイアログを利用して新規のSpatialiteデータベースか編集用の新規のデータが無いSpatiliteレイヤを作成することができます. 以下のダイアログ入力の説明を御覧下さい
 &lt;h4&gt;データベース&lt;/h4&gt;
 ドロップダウンリストからデータベースを選択して下さい.このリストはあなたが保存したSpatialiteコネクションから作成されます. もし保存されたコネクションが無い場合か新しいコネクションを作成したい場合はドロップダウンの右側にある(&lt;label&gt;...&lt;/label&gt;) ボタンをクリックして下さい.
@@ -54635,7 +54635,7 @@ The &lt;label&gt;Field Calculator&lt;/label&gt; button in the attribute table al
 The results can be written to a new attribute column or it can be used to update values in an already existing column.&lt;br&gt;
 The vector layer needs to be in editing mode, before you can click on the &lt;label&gt;Field calculator&lt;/label&gt; icon to open the dialog.
 </source>
-        <translation type="unfinished">&lt;h3&gt;属性テーブル&lt;/h3&gt;
+        <translation>&lt;h3&gt;属性テーブル&lt;/h3&gt;
 属性テーブルは選択されたレイヤの地物の属性を表示します. テーブルの各行はいくつかのカラムに示される属性を持つ1つの地物を表しています. テーブル内の地物は検索や選択、移動あるいは編集することができます. 
 デフォルトでは属性テーブルは独立したウィンドウです. あなたがそれを開いてもダイアログが見えない場合は、多分QGISのメインウィンドウの下に隠されているでしょう.
 あなたはそれをドックウィンドウにすることもできます. ドックウィンドウにするには&lt;label&gt;設定 &gt; オプション&lt;/label&gt;ダイアログのデータソースタブで&lt;label&gt;ドックウィンドウで属性テーブルを開く&lt;/label&gt;にチェックします.&lt;p&gt;
@@ -54863,7 +54863,7 @@ that will be automatically deleted after running.&lt;/li&gt;
 	from the close button. This allows you to save the geometry to be restored to the next start.
 &lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;style&gt;
+        <translation>&lt;style&gt;
 	#toolbarConsole td{
 		background: #f6f6f6;
 	}
@@ -55064,7 +55064,7 @@ On this tab you can search for WMS servers. It is possible to enter a search-str
 To visualize the results, select an table entry, press the &lt;label&gt;Add selected row to WMS list&lt;/label&gt; button and change back to the &lt;label&gt;Servers&lt;/label&gt; tab.&lt;p&gt;
 You only need to request the list of layers by clicking the &lt;label&gt;Connect&lt;/label&gt; button.
 </source>
-        <translation type="unfinished">&lt;h3&gt;WMSの新しい接続を作る&lt;/h3&gt;
+        <translation>&lt;h3&gt;WMSの新しい接続を作る&lt;/h3&gt;
 WMSレイヤは簡単に追加できます, URLさえ知っていればWMSサーバへのアクセスは可能です.あなたは便利なサーバへの接続を作れます,サーバはデータ送信の方法としてHTTPを利用します.&lt;p&gt;
 QGISは現在 WMS 1.1, 1.1.1, 1.3サーバのWMSクライアントとして機能できます.
 &lt;p&gt;
@@ -55107,7 +55107,7 @@ WMSサーバからデータをダウンロードしている間WMSプラグイ�
         <location filename="../src/core/qgscontexthelp_texts.cpp" line="68"/>
         <source>&lt;h3&gt;Database connection&lt;/h3&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;データベースコネクション&lt;/h3&gt;
+        <translation>&lt;h3&gt;データベースコネクション&lt;/h3&gt;
 </translation>
     </message>
     <message>
@@ -55150,7 +55150,7 @@ To filter a layer before adding it to the map, either double click on its name o
 &lt;/a&gt;
 Ticking &lt;label&gt;Search options&lt;/label&gt; enables additional options for searching in different column types and using 2 search modes: &lt;label&gt;Wildcard&lt;/label&gt; or &lt;label&gt;RegExp&lt;/label&gt;.
 </source>
-        <translation type="unfinished">&lt;h3&gt;SQL Anywhereテーブルの追加&lt;/h3&gt;
+        <translation>&lt;h3&gt;SQL Anywhereテーブルの追加&lt;/h3&gt;
 このダイアログではSQL Anywhereレイヤ(ジオメトリカラムを含んだテーブル)をQGISマップキャンバスに追加することができます.
 &lt;p&gt;
 &lt;a href=&quot;#connect&quot;&gt;接続&lt;/a&gt;&lt;br/&gt;
@@ -55194,7 +55194,7 @@ Ticking &lt;label&gt;Search options&lt;/label&gt; enables additional options for
 To define a new connection, click on &lt;label&gt;New&lt;/label&gt; button and use the file browser to point to your SpatiaLite database, which is a file with a &lt;i&gt;.sqlite&lt;/i&gt; extension.&lt;p&gt;
 The connections you define will be remembered for further use and available to choose from the drop down menu.
 </source>
-        <translation type="unfinished">&lt;h3&gt;SpatiaLiteテーブルの追加&lt;/h3&gt;
+        <translation>&lt;h3&gt;SpatiaLiteテーブルの追加&lt;/h3&gt;
 新しい接続を定義するためには &lt;label&gt;新規&lt;/label&gt;ボタンをクリックしてファイルブラウザで&lt;i&gt;.sqlite&lt;/i&gt;という拡張子を持つファイルのSpatiaLiteデータベースを指定して下さい.&lt;p&gt;
 あなたが定義した接続は以後ドロップダウンメニューで選択することができるようにするために記憶されます.
 </translation>
@@ -55241,7 +55241,7 @@ To delete a bookmark from the Bookmarks dialog, click on it then click the &lt;l
 To update the extent of a bookmark, click on it then click the &lt;label&gt;Update&lt;/label&gt; button. Confirm your choice by clicking &lt;label&gt;OK&lt;/label&gt; or cancel the update by clicking &lt;label&gt;Cancel&lt;/label&gt;.
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;空間ブックマーク&lt;/h3&gt;
+        <translation>&lt;h3&gt;空間ブックマーク&lt;/h3&gt;
 空間ブックマークを使うと特定の位置を&quot;ブックマーク&quot;として後から利用できます.
 &lt;p&gt;
 &lt;a href=&quot;#creating&quot;&gt;ブックマークの作成&lt;/a&gt;&lt;br/&gt;
@@ -55311,7 +55311,7 @@ This plugin supports basic HTML markup tags for formatting text. For example:
 &lt;/li&gt;
 &lt;/ul&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;著作権ラベルプラグイン&lt;/h3&gt;
+        <translation>&lt;h3&gt;著作権ラベルプラグイン&lt;/h3&gt;
 著作権ラベルを情報とともに描画します.&lt;br/&gt;
 著作権ラベル以外にも任意のテキストを地図に追加することができます.
 &lt;p&gt;
@@ -55406,7 +55406,7 @@ The field calculator allows you to update fields with expressions.
 &lt;tr&gt;&lt;td&gt;-&lt;tt&gt;a&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;negative value of &lt;tt&gt;a&lt;/tt&gt;&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;フィールド計算機&lt;/h3&gt;
+        <translation>&lt;h3&gt;フィールド計算機&lt;/h3&gt;
 フィールド計算機を利用すると式を使ってフィールドの値を更新できます.
 
 &lt;h4&gt;サポートされている操作&lt;/h4&gt;
@@ -55479,7 +55479,7 @@ You may also tick an &lt;label&gt;Open feature form, if a single feature is iden
 Identifiable layers can be set in the Project Properties dialog &lt;label&gt;Settings &gt; Project Properties &gt; Identifiable layers&lt;/label&gt; where all the layers names are listed, their type (vector, raster, etc.) and ability to be identified.
 &lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;地物情報表示&lt;/h3&gt;
+        <translation>&lt;h3&gt;地物情報表示&lt;/h3&gt;
 &lt;p&gt;
 検索結果表示用ダイアログには指定点からの許容範囲内で特定された全ての地物情報を表示します. 
 各地物の左に表示されている&lt;label&gt;+&lt;/label&gt;記号をクリックすると地物情報を展開して見ることができます.
@@ -55512,7 +55512,7 @@ To add a scale bar:
 &lt;li&gt;Click &lt;label&gt;OK&lt;/label&gt;.&lt;/li&gt;
 &lt;/ol&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;スケールバープラグイン&lt;/h3&gt;
+        <translation>&lt;h3&gt;スケールバープラグイン&lt;/h3&gt;
 地図にスケールバーを描画します.
 &lt;p&gt;
 バーのラベルと同じようにスタイルと配置を制御することができます.
@@ -55547,7 +55547,7 @@ Pressing the &lt;label&gt;Calculate&lt;/label&gt; button will run the shortest p
 &lt;h5&gt;Note&lt;/h5&gt;
 &lt;p&gt;In order to bind the start and stop points of the route to the road network Road graph selects the nearest point or arc of the graph. In fact it can bind to any part of the road network. Nevertheless, their route and its characteristics do not take into account the distance from the starting point to the road network and of the road network to the stopping point.&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;最短経路探索&lt;/h3&gt;
+        <translation>&lt;h3&gt;最短経路探索&lt;/h3&gt;
 &lt;p&gt;道路グラフはQGISのためのC++プラグインです. ラインレイヤ上の2つの点の間の最短経路を計算して道路ネットワークの上に最短経路を描画します.
 プラグインを利用する前にメニュー&lt;label&gt;ベクタ &amp;rarr; 道路グラフ &amp;rarr; 設定&lt;/label&gt;で設定を行なって下さい.&lt;/p&gt;
 &lt;p&gt;
@@ -55884,7 +55884,7 @@ The following options can be added
 
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;デリミティッドテキストレイヤ&lt;/h3&gt;
+        <translation>&lt;h3&gt;デリミティッドテキストレイヤ&lt;/h3&gt;
 デリミティッドテキストファイルを読み込んで表示します
 &lt;p&gt;
 &lt;a href=&quot;#re&quot;&gt;概要&lt;/a&gt;&lt;br/&gt;
@@ -56187,7 +56187,7 @@ if layer.isValid():
         <location filename="../src/core/qgscontexthelp_texts.cpp" line="464"/>
         <source>&lt;h3&gt;New OGR Database Connection Dialog&lt;/h3&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;新OGRデータベース接続ダイアログ&lt;/h3&gt;
+        <translation>&lt;h3&gt;新OGRデータベース接続ダイアログ&lt;/h3&gt;
 </translation>
     </message>
     <message>
@@ -56332,7 +56332,7 @@ The current implementation of diagrams provides support for pie- and bar charts 
 of the diagram size according to a classification attribute.
 </source>
         <translatorcomment>確認必要</translatorcomment>
-        <translation type="unfinished">&lt;h3&gt;ベクタレイヤプロパティ&lt;/h3&gt;
+        <translation>&lt;h3&gt;ベクタレイヤプロパティ&lt;/h3&gt;
 このダイアログではベクタレイヤの設定とプロパティを変更できます。ここには7個のタブがあります:
 &lt;p&gt;
 &lt;a href=&quot;#symbology&quot;&gt;シンボロジ&lt;/a&gt;&lt;br/&gt;
@@ -56524,7 +56524,7 @@ are sometimes limited (e.g. for shape files) or behave diffently.
 &lt;/tr&gt;
 &lt;/table&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;クエリビルダー&lt;/h3&gt;
+        <translation>&lt;h3&gt;クエリビルダー&lt;/h3&gt;
 クエリビルダを利用するとプロバイダ特有のフィルタ式を作ることができます.
 
 これらは通常QGISの一般の条件式より早く評価されますが時々制限があったり（例 shapeファイルの場合)または動作が異なったりします..
@@ -56579,7 +56579,7 @@ To measure lengths, select the tool and click along the path you want to measure
 &lt;h4&gt;Measuring Areas&lt;/h4&gt;
 To measure areas, select the tool and click to create the area. The total area is dynamically displayed as you click.
 </source>
-        <translation type="unfinished">&lt;h3&gt;計測ツール&lt;/h3&gt;
+        <translation>&lt;h3&gt;計測ツール&lt;/h3&gt;
 長さと面積を測る2種類の計測ツールがあります. これらを使うと地図キャンバス上で距離と面積を計測できます. 現状でこのツールは結果をメートル単位のみで提供します.マウス右ボタンのシングルクリックで計測を終了します.マウス右ボタンの2回クリックで改めて計測を開始します.
 &lt;h4&gt;距離計測&lt;/h4&gt;
 距離を計測するためにはツールを選択した後で計測したい経路にそってクリックしてください. それぞれのセグメントの長さが表示され、さらに経路の長さの合計値が表示されます.
@@ -56620,7 +56620,7 @@ To measure areas, select the tool and click to create the area. The total area i
 &lt;h5&gt;Default settings&lt;/h5&gt;
 &lt;p&gt;If the attribute table of your linear layer does not contain the required fields or fields contain unexpected values, the plugin will use default values. You can set them in the default tab &lt;label&gt;Default settings&lt;/label&gt;.&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;道路グラフプラグイン設定&lt;/h3&gt;
+        <translation>&lt;h3&gt;道路グラフプラグイン設定&lt;/h3&gt;
 &lt;p&gt;道路グラフはQGISのためのC++プラグインです. ラインレイヤ上の2つの点の間の最短経路を計算して道路ネットワークの上に最短経路を描画します.&lt;/p&gt;
 &lt;p&gt;
 &lt;a href=&quot;#creating&quot;&gt;プラグインの単位&lt;/a&gt;&lt;br/&gt;
@@ -56668,7 +56668,7 @@ To measure areas, select the tool and click to create the area. The total area i
 Displays a north arrow overlayed onto the map.
 &lt;p&gt;
 At present there is only one style available. You can adjust the angle of the arrow or let QGIS set the direction automatically. If you choose to let QGIS determine the direction, it makes its best guess as to how the arrow should be oriented. For placement of the arrow you have four options, corresponding to the four corners of the map canvas.</source>
-        <translation type="unfinished">&lt;h3&gt; 北向き矢印プラグイン&lt;/h3&gt;
+        <translation>&lt;h3&gt; 北向き矢印プラグイン&lt;/h3&gt;
 地図上に北向き矢印を表示します.
 &lt;p&gt;
 現時点では１種類のスタイルだけが利用可能です. 矢印の角度を調整したりQGISに自動的に方向を決定させたりすることが可能です. もしQGISに方向を決定させるように選択した場合は矢印がどの方向を向くべきか推測されます. 矢印を配置する場所については地図キャンバスの4隅に対応する4個の選択肢があります.</translation>
@@ -56689,7 +56689,7 @@ At present there is only one style available. You can adjust the angle of the ar
 
 See &lt;a href=&quot;http://gdal.org/ogr/ogr_formats.html&quot;&gt;OGR Vector formats&lt;/a&gt; for a list of supported formats and the available options.
 </source>
-        <translation type="unfinished">&lt;h3&gt;ベクタレイヤに名前をつけて保存する...&lt;/h3&gt;
+        <translation>&lt;h3&gt;ベクタレイヤに名前をつけて保存する...&lt;/h3&gt;
 
 &lt;p&gt;このダイアログではGDAL/OGRを用いてベクタデータを様々な形式で保存することができます.
 
@@ -56722,7 +56722,7 @@ Click on one of the icons along the top of the composer window to select what ty
 &lt;/p&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;プリントコンポーザ&lt;/h3&gt;
+        <translation>&lt;h3&gt;プリントコンポーザ&lt;/h3&gt;
 
 &lt;p&gt;
 プリントコンポーザを利用するとページの上にアイテムをアレンジして印刷することができます.アイテムにはマップキャンバスやスケールバー, 凡例, 任意の画像等が利用可能です.
@@ -56738,7 +56738,7 @@ Click on one of the icons along the top of the composer window to select what ty
         <location filename="../src/core/qgscontexthelp_texts.cpp" line="340"/>
         <source>&lt;h3&gt;Style Manager&lt;/h3&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;スタイルマネージャ&lt;/h3&gt;
+        <translation>&lt;h3&gt;スタイルマネージャ&lt;/h3&gt;
 </translation>
     </message>
     <message>
@@ -56760,7 +56760,7 @@ system.
 &lt;p&gt;
 Defining a custom CRS in QGIS requires a good understanding of the Proj.4 projection library. To begin, refer to the &lt;a href=&quot;ftp://ftp.remotesensing.org/proj/OF90-284.pdf&quot;&gt;Cartographic Projection Procedures for the UNIX Environment&lt;/a&gt; - A User&apos;s Manual by Gerald I. Evenden, U.S. Geological Survey Open-File Report 90-284, 1990. This manual describes the use of the &lt;i&gt;proj.4&lt;/i&gt; and related command line utilities. The cartographic parameters used with &lt;i&gt;proj.4&lt;/i&gt; are described in the user manual, and are the same as those used by QGIS.
 </source>
-        <translation type="unfinished">&lt;h3&gt;カスタム座標参照システムの定義&lt;/h3&gt;
+        <translation>&lt;h3&gt;カスタム座標参照システムの定義&lt;/h3&gt;
 あなたが利用したい座標参照システムがQGISで提供されていない場合はカスタムCRS(座標参照システム)を定義することができます. &lt;p&gt;
 CRSを定義するためには &lt;label&gt;編集&lt;/label&gt; (Gnome, OSX)または &lt;label&gt;設定&lt;/label&gt; (KDE, Windows) メニューの&lt;label&gt;カスタムCRS&lt;/label&gt;を選択して下さい .カスタムCRSはあなたのQGISユーザーデータベースに格納されます. さらにカスタムCRSに加えてこのデータベースには空間ブックマークと他のカスタムデータが格納されます.
 
@@ -56853,7 +56853,7 @@ Informs you about active system locale. To change it tick &lt;label&gt;Override 
 &lt;/a&gt;
 Tick &lt;label&gt;Use proxy for web access&lt;/label&gt; to define host, port, user, and password.
 </source>
-        <translation type="unfinished">&lt;h3&gt;オプション&lt;/h3&gt;
+        <translation>&lt;h3&gt;オプション&lt;/h3&gt;
 このダイアログではQGISの基本的オプションを設定できます.このダイアログには8個のタブがあります:
 &lt;p&gt;
 
@@ -56963,7 +56963,7 @@ SQL Anywhere database.
 
 &lt;/ul&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;新しいSQL Anywhere接続を作成します&lt;/h3&gt;
+        <translation>&lt;h3&gt;新しいSQL Anywhere接続を作成します&lt;/h3&gt;
 このダイアログではSQL Anywhereデータベースへの接続の設定を定義できます.
 
 &lt;p&gt;
@@ -57037,7 +57037,7 @@ geometry types and don&apos;t offer to add others.
 
 &lt;/ul&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;新しいOracle接続を作成します&lt;/h3&gt;
+        <translation>&lt;h3&gt;新しいOracle接続を作成します&lt;/h3&gt;
 このダイアログではOracleデータベースへの接続の設定を定義できます.
 &lt;p&gt;
 &lt;ul&gt;
@@ -58149,7 +58149,7 @@ None
 &lt;pre&gt;$rownum &amp;rarr; 4711&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;$rownum 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;$rownum 関数&lt;/h3&gt;
 現在の行番号を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -58183,7 +58183,7 @@ Returns a string representation of a color based on its red, green, blue, and al
 &lt;!-- Show example of function.--&gt;
      color_rgba(255,127,0,200) &amp;rarr; &apos;255,127,0,200&apos;&lt;/p&gt;
 </source>
-        <translation type="unfinished">
+        <translation>
 &lt;h3&gt;color_rgba() 関数&lt;/h3&gt;
 赤、緑、青、アルファ(透過度)の要素に基づいて色を表す文字列を返します
 
@@ -58207,7 +58207,7 @@ Returns a string representation of a color based on its red, green, blue, and al
         <source>&lt;h3&gt;Conditionals Group&lt;/h3&gt;
 This group contains functions to handle conditional checks in expressions.
 </source>
-        <translation type="unfinished">&lt;h3&gt;条件 グループ&lt;/h3&gt;
+        <translation>&lt;h3&gt;条件 グループ&lt;/h3&gt;
 このグループには式の条件チェックを行う関数が含まれます.
 </translation>
     </message>
@@ -58223,7 +58223,7 @@ Loading field values from WFS layers isn&apos;t supported, before the layer is
 actually inserted, ie. when building queries.
 &lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;フィールドと値&lt;/h3&gt;;
+        <translation>&lt;h3&gt;フィールドと値&lt;/h3&gt;;
 レイヤから取得したフィールドのリストを含みます.  右ボタンクリックでサンプル値を利用できます.
 &lt;br&gt;&lt;br&gt;;
 リストからフィールド名を選択して右ボタンをクリックしてコンテキストメニューを表示して下さい.そこで選択フィールドのサンプル値をロードできます.
@@ -58249,7 +58249,7 @@ None
 &lt;pre&gt;$feature &amp;rarr; 2&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;$feature 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;$feature 関数&lt;/h3&gt;
 地図帳生成においてカバレッジレイヤ上でイテレートされる現在の地物番号を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -58275,7 +58275,7 @@ Loading field values from WFS layers isn&apos;t supported, before the layer is
 actually inserted, ie. when building queries.
 &lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;フィールド&lt;/h3&gt;
+        <translation>&lt;h3&gt;フィールド&lt;/h3&gt;
 ダブルクリックするとフィールド名を式に挿入できます.
 &lt;br&gt;&lt;br&gt;
 フィールド名の上で右クリックしてコンテキストメニューを開いてサンプル値ロードオプションを開けます.
@@ -58301,7 +58301,7 @@ None
 &lt;pre&gt;$numpages &amp;rarr; 42&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;$numpages 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;$numpages 関数&lt;/h3&gt;
 コンポジションの総ページ数を返す.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -58330,7 +58330,7 @@ b &amp;rarr; geometry
 &lt;pre&gt; centroid($geometry) &amp;rarr; returns a point geometry&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;centroid 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;centroid 関数&lt;/h3&gt;
 ジオメトリの重心を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -58360,7 +58360,7 @@ geometry &amp;rarr; geometry
 &lt;pre&gt; within( geomFromWKT( &apos;POINT( 0.5 0.5 )&apos;) , geomFromWKT(&apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) )    &amp;rarr; returns 1&lt;/pre&gt;
 &lt;pre&gt; within( geomFromWKT( &apos;POINT( 5 5 )&apos;) , geomFromWKT(&apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) )        &amp;rarr; returns 0&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;within 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;within 関数&lt;/h3&gt;
 ジオメトリaが完全にジオメトリbの内側にある場合に1を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -58394,7 +58394,7 @@ $map &amp;rarr; &quot;canvas&quot; (within the main QGIS main canvas)&lt;/pre&gt
 
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;$map 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;$map 関数&lt;/h3&gt;
 地図がコンポジションに描かれる場合は現在の地図アイテムのIDを返します. 地図がQGISメインウィンドウに描かれる場合には&quot;canvas&quot;を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -58425,7 +58425,7 @@ b &amp;rarr; geometry
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;pre&gt; distance( geomFromWKT( &apos;POINT(4 4)&apos; ) , geomFromWKT( &apos;POINT(4 8)&apos; ))    &amp;rarr; returns 4&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;distance 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;distance 関数&lt;/h3&gt;
 2つのジオメトリの間の(空間参照に基づく)最小の距離を投影された単位で返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -58454,7 +58454,7 @@ geometry &amp;rarr; geometry
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;pre&gt; geomToWKT( difference( geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4)&apos; ))  )   &amp;rarr; returns LINESTRING(4 4, 5 5)&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;difference 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;difference 関数&lt;/h3&gt;
 ジオメトリbと交差しないジオメトリaの部分を表すジオメトリを返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -58485,7 +58485,7 @@ None
 &lt;pre&gt; 4 IS NOT 2+2    &amp;rarr; returns 0 &lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;NOT&lt;/h3&gt;
+        <translation>&lt;h3&gt;NOT&lt;/h3&gt;
 aがbと等しくない場合に1を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -58515,7 +58515,7 @@ geometry &amp;rarr; geometry
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;pre&gt; geomToWKT( symDifference(  geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 8 8)&apos; ))   )   &amp;rarr; returns LINESTRING(5 5, 8 8)&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;symDifference 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;symDifference 関数&lt;/h3&gt;
 aとbの交差しない部分を表すジオメトリを返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -58545,7 +58545,7 @@ geometry &amp;rarr; geometry
 &lt;pre&gt; contains( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;POINT( 0.5 0.5 )&apos; ))    &amp;rarr; returns 1&lt;/pre&gt;
 &lt;pre&gt; contains( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))          &amp;rarr; returns 0&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;contains 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;contains 関数&lt;/h3&gt;
 aの外側にはbのポイントがなく、少なくとも1つのb内部の点がaの内側にある場合にtrueを返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -58575,7 +58575,7 @@ None
 &lt;pre&gt;$perimeter &amp;rarr; 42&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;$perimeter 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;$perimeter 関数&lt;/h3&gt;
 現在の地物の周長を返す.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -58594,7 +58594,7 @@ None
         <source>&lt;h3&gt;Geometry Group&lt;/h3&gt;
 This group contains functions that operate on geometry objects e.g length, area.
 </source>
-        <translation type="unfinished">&lt;h3&gt;ジオメトリ グループ&lt;/h3&gt;
+        <translation>&lt;h3&gt;ジオメトリ グループ&lt;/h3&gt;
 このグループにはジオメトリオブジェクトを操作する関数が含まれます.例 length, area.
 </translation>
     </message>
@@ -58614,7 +58614,7 @@ Concatenates several strings to one.
 &lt;!-- Show example of function.--&gt;
      concat(&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;,&apos;e&apos;) &amp;rarr; &apos;abcde&apos;
 </source>
-        <translation type="unfinished">&lt;h3&gt;concat() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;concat() 関数&lt;/h3&gt;
 複数の文字列を1つに結合する.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -58644,7 +58644,7 @@ Note: This function is only available in some contexts and will be 0 otherwise.
 
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;$scale 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;$scale 関数&lt;/h3&gt;
 マップキャンバスの現在の縮尺を返します.
 &lt;br&gt;
 注: この関数はいくつかの場面でのみ利用可能です,利用できない場合は0を返します. 
@@ -58693,7 +58693,7 @@ use &lt;code&gt;day&lt;/code&gt; to extract number of days&lt;br&gt;
 &lt;code&gt;day(age(&apos;2012-05-12&apos;,&apos;2012-05-2&apos;)) &amp;rarr; 10&lt;/code&gt;&lt;br&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;age() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;age() 関数&lt;/h3&gt;
 2つの日時の差を返します.
 &lt;br&gt;&lt;br&gt;
 差は&lt;code&gt;Interval&lt;/code&gt;として返されます. 
@@ -58748,7 +58748,7 @@ from a &lt;code&gt;Interval&lt;/code&gt;
 &lt;code&gt;year(age(&apos;2012-01-01&apos;,&apos;2010-01-01&apos;)) &amp;rarr; 1.9986..&lt;/code&gt;&lt;br&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;year() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;year() 関数&lt;/h3&gt;
 日付からは年を取得し、&lt;code&gt;Interval&lt;/code&gt;からは年数を取得します
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -58783,7 +58783,7 @@ Returns arcustanget of a value in radians.
 &lt;p&gt;&lt;h4&gt;Example&lt;/h4&gt;
      atan(0.5) &amp;rarr; 0.463647609000806&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;atan() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;atan() 関数&lt;/h3&gt;
 逆正接の値をラジアンで返します.
 
 &lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
@@ -58816,7 +58816,7 @@ Returns -1 if the expression isn&apos;t found.
      strpos(&apos;HELLO WORLD&apos;,&apos;WORLD&apos;) &amp;rarr; 6&lt;br&gt;
      strpos(&apos;HELLO WORLD&apos;,&apos;GOODBYE&apos;) &amp;rarr; -1&lt;br&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;strpos() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;strpos() 関数&lt;/h3&gt;
 文字列中の正規表現にマッチする文字列の位置を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -58858,7 +58858,7 @@ from a &lt;code&gt;Interval&lt;/code&gt;
 &lt;code&gt;minute(age(&apos;2012-01-01&apos;,&apos;2010-01-01&apos;)) &amp;rarr; 1051200&lt;/code&gt;&lt;br&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;minute() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;minute() 関数&lt;/h3&gt;
 日時または時刻からは分を取得し、&lt;code&gt;Interval&lt;/code&gt;からは分の数を取得します
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -58895,7 +58895,7 @@ None
 &lt;pre&gt; 4 = 2+2 OR 1 = 2  &amp;rarr; returns 1 &lt;/pre&gt;
 &lt;pre&gt; 4 = 2   OR 1 = 2  &amp;rarr; returns 0 &lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;OR 論理演算子&lt;/h3&gt;
+        <translation>&lt;h3&gt;OR 論理演算子&lt;/h3&gt;
 条件aがtrueか、または条件bがtrueのときに1を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -58924,7 +58924,7 @@ None
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;pre&gt;$length &amp;rarr; 42.4711&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;$length 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;$length 関数&lt;/h3&gt;
 現在の地物の長さを返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -58943,7 +58943,7 @@ None
 &lt;h3&gt;Color Group&lt;/h3&gt;
 This group contains functions for manipulating colors
 </source>
-        <translation type="unfinished">
+        <translation>
 &lt;h3&gt;色 グループ&lt;/h3&gt;
 このグループには色を操作する関数があります
 </translation>
@@ -58984,7 +58984,7 @@ This function takes one argument.
 &lt;code&gt;log10(1) &amp;rarr; 0&lt;/code&gt;&lt;br&gt;
 &lt;code&gt;log10(100) &amp;rarr; 2&lt;/code&gt;&lt;br&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;log10() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;log10() 関数&lt;/h3&gt;
 10を底とする対数の値を返します.
 &lt;br&gt;
 この関数は1つの引数をとります.
@@ -59019,7 +59019,7 @@ Returns a substring that contains the &lt;i&gt;n&lt;/i&gt; leftmost characters o
 &lt;code&gt;left(&apos;Hello World&apos;,5) &amp;rarr; &apos;Hello&apos;&lt;/code&gt;&lt;br&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;left() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;left() 関数&lt;/h3&gt;
 文字列の左端から文字&lt;i&gt;n&lt;/i&gt;個分の文字列を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -59051,7 +59051,7 @@ Returns tangent of an angle.
 &lt;p&gt;&lt;h4&gt;Example&lt;/h4&gt;
      tan(1.0) &amp;rarr; 1.5574077246549&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;tan() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;tan() 関数&lt;/h3&gt;
 角度の正接を返します.
 
 &lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
@@ -59078,7 +59078,7 @@ Converts a string to lower case letters.
 &lt;p&gt;&lt;h4&gt;  Example&lt;/h4&gt;
      lower(&apos;HELLO World&apos;) &amp;rarr; &apos;hello world&apos;&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;lower() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;lower() 関数&lt;/h3&gt;
 文字列を小文字に変換します.
 
 &lt;p&gt;&lt;h4&gt;  Syntax&lt;/h4&gt;
@@ -59108,7 +59108,7 @@ Rounds a number upwards.
 &lt;code&gt;ceil(4.9) &amp;rarr; 5&lt;/code&gt;&lt;br&gt;
 &lt;code&gt;ceil(-4.9) &amp;rarr; -4&lt;/code&gt;&lt;br&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;ceil() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;ceil() 関数&lt;/h3&gt;
 数値を切り上げます.
 
 &lt;h4&gt;文法&lt;/h4&gt;
@@ -59139,7 +59139,7 @@ Converts a string to real number. Nothing changed if a value cannot be converted
 &lt;!-- Show example of function.--&gt;
      toreal(&apos;123.45&apos;) &amp;rarr; 123.45&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;toreal() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;toreal() 関数&lt;/h3&gt;
 文字列を実数に変換します. 値を実数に変換できない場合は何も変換しません (例 &apos;123.56asd&apos; は不正です). 精度が変換結果の精度より小さい場合数値は保存後丸められます.
 
 &lt;p&gt;&lt;h4&gt;文法&lt;/h4&gt;
@@ -59167,7 +59167,7 @@ Retrieves a x coordinate of the current feature
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;pre&gt;xat(1) &amp;rarr; 5&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;xat() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;xat() 関数&lt;/h3&gt;
 カレント地物のx座標を取得します
 
 &lt;h4&gt;文法&lt;/h4&gt;
@@ -59198,7 +59198,7 @@ to.
 &lt;code&gt;format_number(10000000.332,2) &amp;rarr; 10,000,000.33&lt;/code&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;format_number() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;format_number() 関数&lt;/h3&gt;
 3桁毎にロケール桁区切り文字で区切られた数を返します.
 さらに小数点以下桁数を指定された桁数になるように揃えます.
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -59221,7 +59221,7 @@ to.
         <source>&lt;h3&gt;String Group&lt;/h3&gt;
 This group contains functions that operate on strings e.g replace, convert to upper case.
 </source>
-        <translation type="unfinished">&lt;h3&gt;文字列 グループ&lt;/h3&gt;
+        <translation>&lt;h3&gt;文字列 グループ&lt;/h3&gt;
 このグループには文字列を操作する関数があります. 例. 文字列置換. 大文字への変換.
 </translation>
     </message>
@@ -59242,7 +59242,7 @@ Rounds a number downwards.
 &lt;code&gt;floor(4.9) &amp;rarr; 4&lt;/code&gt;&lt;br&gt;
 &lt;code&gt;floor(-4.9) &amp;rarr; -5&lt;/code&gt;&lt;br&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;floor() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;floor() 関数&lt;/h3&gt;
 数値を切り捨て.
 
 &lt;h4&gt;文法&lt;/h4&gt;
@@ -59273,7 +59273,7 @@ Converts a string to integer number. Nothing changed if a value cannot be conver
 &lt;!-- Show example of function.--&gt;
      toint(&apos;123&apos;) &amp;rarr; 123&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;toint() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;toint() 関数&lt;/h3&gt;
 文字列を整数値に変換します.値を整数値に変換できない場合は何も変換しません (例 &apos;123asd&apos; は不正です).
 
 &lt;p&gt;&lt;h4&gt;文法&lt;/h4&gt;
@@ -59301,7 +59301,7 @@ Retrieves a y coordinate of the current feature
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;pre&gt;yat(1) &amp;rarr; 5&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;yat() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;yat() 関数&lt;/h3&gt;
 カレント地物のy座標を取得します
 
 &lt;h4&gt;文法&lt;/h4&gt;
@@ -59329,7 +59329,7 @@ abs(&lt;i&gt;value&lt;/i&gt;)&lt;br&gt;
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;code&gt;abs(-2) &amp;rarr; 2&lt;/code&gt;&lt;br&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;abs() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;abs() 関数&lt;/h3&gt;
 数値の絶対値を返します.&lt;br&gt;
 
 
@@ -59359,7 +59359,7 @@ Converts a number to string.
 &lt;!-- Show example of function.--&gt;
      tostring(123) &amp;rarr; &apos;123&apos;&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;tostring() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;tostring() 関数&lt;/h3&gt;
 数値を文字列に変換します.
 
 &lt;p&gt;&lt;h4&gt;文法&lt;/h4&gt;
@@ -59389,7 +59389,7 @@ Format a string using supplied arguments.
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;!-- Show example of function.--&gt;
 &lt;code&gt;format(&apos;This %1 a %2&apos;,&apos;is&apos;, &apos;test&apos;) &amp;rarr; This is a test&lt;/code&gt;&lt;br&gt;</source>
-        <translation type="unfinished">&lt;h3&gt;format() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;format() 関数&lt;/h3&gt;
 与えられた引数を使用して文字列をフォーマットします.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -59425,7 +59425,7 @@ Returns a string representation of a color based on its cyan, magenta, yellow, b
 &lt;!-- Show example of function.--&gt;
      color_cmyka(100,50,0,10,200) &amp;rarr; &apos;0,115,230,200&apos;&lt;/p&gt;
 </source>
-        <translation type="unfinished">
+        <translation>
 &lt;h3&gt;color_cmyka() 関数&lt;/h3&gt;
 シアン、マゼンタ、イエロー、ブラック、アルファ(透過度)の要素に基づいて色を表す文字列を返します
 
@@ -59467,7 +59467,7 @@ from a &lt;code&gt;Interval&lt;/code&gt;
 &lt;code&gt;month(age(&apos;2012-01-01&apos;,&apos;2010-01-01&apos;)) &amp;rarr; 4.033...&lt;/code&gt;&lt;br&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;month() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;month() 関数&lt;/h3&gt;
 日付からは月を取得し、&lt;code&gt;Interval&lt;/code&gt;からは月数を取得します
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -59492,8 +59492,8 @@ from a &lt;code&gt;Interval&lt;/code&gt;
         <source>&lt;h3&gt;Math Group&lt;/h3&gt;
 This group contains math functions e.g square root, sin and cos
 </source>
-        <translation type="unfinished">&lt;h3&gt;計算 グループ&lt;/h3&gt;
-このグループには数学の関数があります. 例. 平方根. 正弦. 余弦.
+        <translation>&lt;h3&gt;計算 グループ&lt;/h3&gt;
+このグループには数学の関数があります. 例. 平方根. 正弦. 余弦
 </translation>
     </message>
     <message>
@@ -59527,7 +59527,7 @@ accelerating as the input values approach the domain maximum. Smaller exponents 
      
      
 </source>
-        <translation type="unfinished">&lt;h3&gt;scale_exp() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;scale_exp() 関数&lt;/h3&gt;
 指数曲線を用いて入力範囲から出力範囲に与えられた値を変換します.
 この関数は入力値から指定された出力範囲の内外の対応する値を得るために使用することができます.
 
@@ -59581,7 +59581,7 @@ This function can take any number of arguments.
  else the value of &quot;fallbackField&quot; or the string &apos;ERROR&apos; if both are NULL&lt;/code&gt;&lt;br&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;coalesce() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;coalesce() 関数&lt;/h3&gt;
 引数リストの中ではじめに現れたNULLではない値を返します.
 &lt;br&gt;
 この関数は任意の数の引数をとります.
@@ -59624,7 +59624,7 @@ Transforms a given value from an input domain to an output range using linear in
      
      
 </source>
-        <translation type="unfinished">&lt;h3&gt;scale_linear() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;scale_linear() 関数&lt;/h3&gt;
 線形補間を用いて与えられた値を入力範囲から出力範囲に変換する.
 
 &lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
@@ -59660,7 +59660,7 @@ None
 &lt;pre&gt;$area &amp;rarr; 42&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;$area 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;$area 関数&lt;/h3&gt;
 現在の地物の面積を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -59690,7 +59690,7 @@ Removes all leading and trailing whitespace (spaces, tabs, etc) from a string.
 &lt;!-- Show example of function.--&gt;
      trim(&apos;   hello world    &apos;) &amp;rarr; &apos;hello world&apos;&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;trim() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;trim() 関数&lt;/h3&gt;
 文字列から先頭と末尾の空白(スペースやタブなど)を削除します.
 
 &lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
@@ -59723,7 +59723,7 @@ Returns a string representation of a color based on its hue, saturation, and val
 &lt;!-- Show example of function.--&gt;
      color_hsv(40,100,100) &amp;rarr; &apos;#ffaa00&apos;&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;color_hsv() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;color_hsv() 関数&lt;/h3&gt;
 色相、彩度、明度に基づいて色を表す文字列を返します
 
 &lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
@@ -59755,7 +59755,7 @@ Convert a string into Qt data time type.
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;!-- Show example of function.--&gt;
 &lt;code&gt;todatetime(&apos;2012-05-04 12:50:00&apos;) &amp;rarr; 2012-05-04T12:50:00&lt;/code&gt;&lt;br&gt;</source>
-        <translation type="unfinished">&lt;h3&gt;todatetime() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;todatetime() 関数&lt;/h3&gt;
 文字列をQt 日時型に変換します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -59791,7 +59791,7 @@ from a &lt;code&gt;Interval&lt;/code&gt;
 &lt;code&gt;week(age(&apos;2012-01-01&apos;,&apos;2010-01-01&apos;)) &amp;rarr; 104.285...&lt;/code&gt;&lt;br&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;week() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;week() 関数&lt;/h3&gt;
 日付からは週を取得し、&lt;code&gt;Interval&lt;/code&gt;からは週の数を取得します
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -59842,7 +59842,7 @@ return a result.
     END
 &lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;CASE 式&lt;/h3&gt;
+        <translation>&lt;h3&gt;CASE 式&lt;/h3&gt;
 複数の式を評価し結果を返すのに使える条件式です.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -59886,7 +59886,7 @@ None
 &lt;pre&gt;$id &amp;rarr; 42&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;$id 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;$id 関数&lt;/h3&gt;
 現在の行の地物IDを返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -59918,7 +59918,7 @@ This function takes one argument.
 &lt;code&gt;ln(1) &amp;rarr; 0&lt;/code&gt;&lt;br&gt;
 &lt;code&gt;ln(2.7182818284590452354) &amp;rarr; 1&lt;/code&gt;&lt;br&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;ln() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;ln() 関数&lt;/h3&gt;
 渡された式の自然対数の値を返します.
 &lt;br&gt;
 この関数は1個の引数が必要です.
@@ -59939,7 +59939,7 @@ This function takes one argument.
         <source>&lt;h3&gt;Date and Time Group&lt;/h3&gt;
 This group contains functions for handling date and time data.
 </source>
-        <translation type="unfinished">&lt;h3&gt;日付と時刻 グループ&lt;/h3&gt;
+        <translation>&lt;h3&gt;日付と時刻 グループ&lt;/h3&gt;
 このグループには日付と時刻データを扱う関数があります.
 </translation>
     </message>
@@ -59958,7 +59958,7 @@ None
 &lt;pre&gt;$numfeatures &amp;rarr; 42&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;$numfeatures 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;$numfeatures 関数&lt;/h3&gt;
 地図帳生成においてカバレッジレイヤの総地物数を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -59992,7 +59992,7 @@ Returns a string representation of a color based on its cyan, magenta, yellow an
 &lt;!-- Show example of function.--&gt;
      color_cmyk(100,50,0,10) &amp;rarr; &apos;#0073e6&apos;&lt;/p&gt;
 </source>
-        <translation type="unfinished">
+        <translation>
 &lt;h3&gt;color_cmyk() 関数&lt;/h3&gt;
 シアン、マゼンタ、イエロー、ブラックの要素に基づいて色を表す文字列を返します
 
@@ -60032,7 +60032,7 @@ using the fill character.
 &lt;code&gt;rpad(&apos;Hello&apos;, 10, &apos;x&apos;) &amp;rarr; &apos;xxxxxHello&apos;&lt;/code&gt;&lt;br&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;rpad() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;rpad() 関数&lt;/h3&gt;
 埋め込み文字を用いて指定された幅に右寄せで揃えられた文字列を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -60071,7 +60071,7 @@ using the fill character.
 &lt;!-- Show example of function.--&gt;
 &lt;code&gt;lpad(&apos;Hello&apos;, 10, &apos;x&apos;) &amp;rarr; &apos;Helloxxxxx&apos;&lt;/code&gt;&lt;br&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;lpad() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;lpad() 関数&lt;/h3&gt;
 埋め込み文字を用いて指定された幅に左寄せで揃えられた文字列を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -60105,7 +60105,7 @@ Converts a string to upper case letters.
 &lt;!-- Show example of function.--&gt;
      upper(&apos;hello WOrld&apos;) &amp;rarr; &apos;HELLO WORLD&apos;&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;upper() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;upper() 関数&lt;/h3&gt;
 文字列を大文字に変換します.
 
 &lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
@@ -60125,7 +60125,7 @@ Converts a string to upper case letters.
         <source>&lt;h3&gt;Record Group&lt;/h3&gt;
 This group contains functions that operate on record identifiers.
 </source>
-        <translation type="unfinished">&lt;h3&gt;レコード グループ&lt;/h3&gt;
+        <translation>&lt;h3&gt;レコード グループ&lt;/h3&gt;
 このグループにはレコード識別子を操作する関数があります.
 </translation>
     </message>
@@ -60147,7 +60147,7 @@ Returns a substring that contains the &lt;i&gt;n&lt;/i&gt; rightmost characters 
 &lt;code&gt;right(&apos;Hello World&apos;,5) &amp;rarr; &apos;World&apos;&lt;/code&gt;&lt;br&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;right() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;right() 関数&lt;/h3&gt;
 文字列の右端から文字&lt;i&gt;n&lt;/i&gt;個分の文字列を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -60180,7 +60180,7 @@ Returns the length of a string.
 &lt;!-- Show example of function.--&gt;
      length(&apos;HELLO&apos;) &amp;rarr; 5&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;length() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;length() 関数&lt;/h3&gt;
 文字列の長さ(文字数)を返します.
 
 &lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
@@ -60211,7 +60211,7 @@ Returns the smallest value in a set of values.
 &lt;!-- Show example of function.--&gt;
      min(20.5,10,6.2) &amp;rarr; 6.2
 </source>
-        <translation type="unfinished">&lt;h3&gt;min() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;min() 関数&lt;/h3&gt;
 一連の値の中で最小の値を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -60245,7 +60245,7 @@ Returns a string representation of a color based on its hue, saturation, lightne
 &lt;!-- Show example of function.--&gt;
      color_hsla(100,50,70,200) &amp;rarr; &apos;166,217,140,200&apos;&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;color_hsla() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;color_hsla() 関数&lt;/h3&gt;
 色相、彩度、輝度、アルファ(透過度)に基づいて色を表す文字列を返します
 
 &lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
@@ -60278,7 +60278,7 @@ Returns arcussinus of a value in radians.
 &lt;p&gt;&lt;h4&gt;Example&lt;/h4&gt;
      asin(1.0) &amp;rarr; 1.5707963267949&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;asin() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;asin() 関数&lt;/h3&gt;
 逆正弦の値をラジアンで返します.
 
 &lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
@@ -60348,7 +60348,7 @@ Returns square root of a value
 &lt;p&gt;&lt;h4&gt;Example&lt;/h4&gt;
      sqrt(9) &amp;rarr; 3&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;sqrt() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;sqrt() 関数&lt;/h3&gt;
 値の平方根を返します
 
 &lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
@@ -60376,7 +60376,7 @@ None
 &lt;pre&gt;$x &amp;rarr; 42&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;$x 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;$x 関数&lt;/h3&gt;
 現在の地物のx座標を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -60413,7 +60413,7 @@ use &lt;code&gt;round(decimal)&lt;/code&gt; to round to the nearest integer&lt;b
 
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;round() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;round() 関数&lt;/h3&gt;
 指定した桁数になるように数値を四捨五入します.
 &lt;br&gt;
 この関数は必要に応じて1個または2個の引数を利用します.
@@ -60612,7 +60612,7 @@ Format a date type or string into a custom string format. Uses Qt data time form
 &lt;!-- Show example of function.--&gt;
 &lt;code&gt;format_date(&apos;2012-05-15&apos;,&apos;dd.mm.yyyy&apos;) &amp;rarr; 15.05.2012&lt;/code&gt;&lt;br&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;format_date() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;format_date() 関数&lt;/h3&gt;
 日付型または文字列をカスタム文字列フォーマットに書式化します. Qtの日付時刻フォーマット文字列を使用しています. &lt;a href=&apos;http://qt-project.org/doc/qt-4.8/qdatetime.html#toString&apos;&gt;QDateTime::toString&lt;/a&gt;を参照して下さい.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -60804,7 +60804,7 @@ None
 &lt;pre&gt;$now &amp;rarr; 2012-07-22T13:24:57&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;$now 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;$now 関数&lt;/h3&gt;
 現在の日時を返します
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -60848,7 +60848,7 @@ return a result.
     END
 &lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;CASE 式&lt;/h3&gt;
+        <translation>&lt;h3&gt;CASE 式&lt;/h3&gt;
 複数の式を評価し結果を返すのに使える条件式です.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -60881,7 +60881,7 @@ return a result.
         <source>&lt;h3&gt;Conditions Group&lt;/h3&gt;
 This group contains functions that operate on condition.
 </source>
-        <translation type="unfinished">&lt;h3&gt;Conditions グループ&lt;/h3&gt;
+        <translation>&lt;h3&gt;Conditions グループ&lt;/h3&gt;
 このグループには条件演算子があります.
 </translation>
     </message>
@@ -60907,7 +60907,7 @@ from a &lt;code&gt;Interval&lt;/code&gt;
 &lt;code&gt;day(age(&apos;2012-01-01&apos;,&apos;2010-01-01&apos;)) &amp;rarr; 730&lt;/code&gt;&lt;br&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;day() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;day() 関数&lt;/h3&gt;
 日付からは日を取得し、&lt;code&gt;Interval&lt;/code&gt;からは日数を取得します
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -60942,7 +60942,7 @@ Returns exponential of an value.
 &lt;p&gt;&lt;h4&gt;Example&lt;/h4&gt;
      exp(1.0) &amp;rarr; 2.71828182845905&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;exp() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;exp() 関数&lt;/h3&gt;
 自然対数のべき乗を返します.
 
 &lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
@@ -60970,7 +60970,7 @@ Converts a string to a interval type.  Can be used to take days, hours, month, e
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;!-- Show example of function.--&gt;
 &lt;code&gt;todatetime(&apos;2012-05-05 12:00:00&apos;) - tointerval(&apos;1 day 2 hours&apos;) &amp;rarr; 2012-05-04T10:00:00&lt;/code&gt;&lt;br&gt;</source>
-        <translation type="unfinished">&lt;h3&gt;tointerval() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;tointerval() 関数&lt;/h3&gt;
 文字列をインターバル型に変換します. 日数や時間数, 月数などを日付から取得するのに使用できます.
 &lt;h4&gt;構文&lt;/h4&gt;
 &lt;code&gt;tointerval(&apos;string&apos;)&lt;/code&gt;&lt;br&gt;
@@ -61002,7 +61002,7 @@ Returns a string representation of a color based on its hue, saturation, value a
 &lt;!-- Show example of function.--&gt;
      color_hsva(40,100,100,200) &amp;rarr; &apos;255,170,0,200&apos;&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;color_hsva() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;color_hsva() 関数&lt;/h3&gt;
 色相、彩度、明度、アルファ(透過度)に基づいて色を表す文字列を返します
 
 &lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
@@ -61073,7 +61073,7 @@ Convert a string into Qt time type.
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;!-- Show example of function.--&gt;
 &lt;code&gt;totime(&apos;12:30:01&apos;) &amp;rarr; 12:30:01&lt;/code&gt;&lt;br&gt;</source>
-        <translation type="unfinished">&lt;h3&gt;totime() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;totime() 関数&lt;/h3&gt;
 文字列をQt 時刻型に変換する.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -61103,7 +61103,7 @@ Returns the largest value in a set of values.
 &lt;!-- Show example of function.--&gt;
      max(2,10.2,5.5) &amp;rarr; 10.2
 </source>
-        <translation type="unfinished">&lt;h3&gt;max() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;max() 関数&lt;/h3&gt;
 一連の値の中で最小の値を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -61135,7 +61135,7 @@ Returns the portion of a string which matches a supplied regular expression.
 &lt;!-- Show example of function.--&gt;
      regexp_substr(&apos;abc123&apos;,&apos;(&amp;#92;&amp;#92;d+)&apos;) &amp;rarr; &apos;123&apos;&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;regexp_substr() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;regexp_substr() 関数&lt;/h3&gt;
 指定された正規表現に合致する文字列の一部を返します.
 
 &lt;p&gt;&lt;h4&gt;文法&lt;/h4&gt;
@@ -61166,7 +61166,7 @@ Returns arcuscosinus of a value in radians.
 &lt;p&gt;&lt;h4&gt;Example&lt;/h4&gt;
      acos(0.5) &amp;rarr; 1.0471975511966&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;acos() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;acos() 関数&lt;/h3&gt;
 逆余弦の値をラジアンで返します.
 
 &lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
@@ -61196,7 +61196,7 @@ Returns true if any part of a string matches the supplied regular expression.
 &lt;!-- Show example of function.--&gt;
      regexp_match(&apos;QGIS ROCKS&apos;,&apos;&amp;#92;&amp;#92;sROCKS&apos;) &amp;rarr; 1&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;regexp_match() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;regexp_match() 関数&lt;/h3&gt;
 文字列の任意の部分が指定された正規表現に合致する場合 true が返されます.
 
 &lt;p&gt;&lt;h4&gt;文法&lt;/h4&gt;
@@ -61230,7 +61230,7 @@ Returns a string with the supplied regular expression replaced.
 &lt;!-- Show example of function.--&gt;
      regexp_replace(&apos;QGIS SHOULD ROCK&apos;,&apos;&amp;#92;&amp;#92;sSHOULD&amp;#92;&amp;#92;s&apos;,&apos; DOES &apos;) &amp;rarr; &apos;QGIS DOES ROCK&apos;&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;regexp_replace() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;regexp_replace() 関数&lt;/h3&gt;
 指定された正規表現で置き換えを行われた文字列を返します.
 
 &lt;p&gt;&lt;h4&gt;文法&lt;/h4&gt;
@@ -61264,7 +61264,7 @@ capital letter).
 &lt;!-- Show example of function.--&gt;
      upper(&apos;hello WOrld&apos;) &amp;rarr; &apos;Hello World&apos;&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;title() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;title() 関数&lt;/h3&gt;
 文字列に含まれる全ての単語をタイトルケース(先頭が大文字で後に小文字が続く)に変換する.
 
 &lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
@@ -61297,7 +61297,7 @@ arguments to determine the quadrant of the result
 &lt;p&gt;&lt;h4&gt;Example&lt;/h4&gt;
      atan2(1.0, 1.732) &amp;rarr; 0.523611477769969&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;atan2() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;atan2() 関数&lt;/h3&gt;
 2つの引数の符号を考慮して結果の象限を限定したy/xの逆正接を返します.
 
 
@@ -61331,7 +61331,7 @@ This function takes two arguments.
 &lt;!-- Show example of function.--&gt;
 &lt;code&gt;rand(1, 10) &amp;rarr; 8&lt;/code&gt;&lt;br&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;rand() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;rand() 関数&lt;/h3&gt;
 最小値と最大値の引数で指定された範囲内(境界値を含む)でランダムな整数を返します.
 &lt;br&gt;
 この関数は2つの引数をとります.
@@ -61371,7 +61371,7 @@ The color ramps available vary between QGIS installations.  This function
 may not give the expected results if you move your Quantum project.
 &lt;/p&gt;
 </source>
-        <translation type="unfinished">
+        <translation>
 &lt;h3&gt;ramp_color() 関数&lt;/h3&gt;
 色階調から色を表す文字列を返します.
 
@@ -61398,7 +61398,7 @@ may not give the expected results if you move your Quantum project.
         <source>&lt;h3&gt;Conversions Group&lt;/h3&gt;
 This group contains functions to convert on data type to another e.g string to integer, integer to string.
 </source>
-        <translation type="unfinished">&lt;h3&gt;変換 グループ&lt;/h3&gt;
+        <translation>&lt;h3&gt;変換 グループ&lt;/h3&gt;
 このグループにはデータ型を他のデータ型に変換する関数があります. 例. 文字列を整数に, 整数を文字列に.
 </translation>
     </message>
@@ -61407,7 +61407,7 @@ This group contains functions to convert on data type to another e.g string to i
         <source>&lt;h3&gt;Operators Group&lt;/h3&gt;
 This group contains operators e.g + - * 
 </source>
-        <translation type="unfinished">&lt;h3&gt;演算子 グループ&lt;/h3&gt;
+        <translation>&lt;h3&gt;演算子 グループ&lt;/h3&gt;
 このグループには演算子があります 例えば + - * 
 </translation>
     </message>
@@ -61426,7 +61426,7 @@ None
 &lt;pre&gt;$page &amp;rarr; 2&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;$page 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;$page 関数&lt;/h3&gt;
 コンポジションの中でのカレントページ番号を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -61463,7 +61463,7 @@ from a &lt;code&gt;Interval&lt;/code&gt;
 &lt;code&gt;second(age(&apos;2012-01-01&apos;,&apos;2010-01-01&apos;)) &amp;rarr; 63072000&lt;/code&gt;&lt;br&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;second() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;second() 関数&lt;/h3&gt;
 日時または時刻からは秒を取得し、&lt;code&gt;Interval&lt;/code&gt;からは秒数を取得します
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -61499,7 +61499,7 @@ None
 &lt;pre&gt;$y &amp;rarr; 42&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;$y 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;$y 関数&lt;/h3&gt;
 現在の地物のy座標を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -61528,7 +61528,7 @@ Returns cosinus of an angle.
 &lt;p&gt;&lt;h4&gt;Example&lt;/h4&gt;
      cos(1.571) &amp;rarr; 0.000796326710733263&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;cos() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;cos() 関数&lt;/h3&gt;
 角度の余弦を返します.
 
 &lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
@@ -61560,7 +61560,7 @@ This function takes two arguments.
 &lt;code&gt;log(2, 32) &amp;rarr; 5&lt;/code&gt;&lt;br&gt;
 &lt;code&gt;log(0.5, 32) &amp;rarr; -5&lt;/code&gt;&lt;br&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;log() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;log() 関数&lt;/h3&gt;
 渡された値と底の対数の値を返します.
 &lt;br&gt;
 この関数は2つの引数をとります.
@@ -61593,7 +61593,7 @@ Returns sinus of an angle.
 &lt;p&gt;&lt;h4&gt;Example&lt;/h4&gt;
      sin(1.571) &amp;rarr; 0.999999682931835&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;sin() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;sin() 関数&lt;/h3&gt;
 角度の正弦を返します.
 
 &lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
@@ -61624,7 +61624,7 @@ Return a part of a string
 &lt;!-- Show example of function.--&gt;
      substr(&apos;HELLO WORLD&apos;,3,5) &amp;rarr; &apos;LLO W&apos;&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;substr() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;substr() 関数&lt;/h3&gt;
 文字列の一部を返します
 
 &lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
@@ -61659,7 +61659,7 @@ Returns a string representation of a color based on its hue, saturation, and lig
 &lt;!-- Show example of function.--&gt;
      color_hsl(100,50,70) &amp;rarr; &apos;#a6d98c&apos;&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;color_hsl() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;color_hsl() 関数&lt;/h3&gt;
 色相、彩度、輝度に基づいて色を表す文字列を返します
 
 &lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
@@ -61695,7 +61695,7 @@ Returns a string representation of a color based on its red, green, and blue com
 &lt;!-- Show example of function.--&gt;
      color_rgb(255,127,0) &amp;rarr; &apos;#ff7f00&apos;&lt;/p&gt;
 </source>
-        <translation type="unfinished">
+        <translation>
 &lt;h3&gt;color_rgb() 関数&lt;/h3&gt;
 赤、緑、青の要素に基づいて色を表す文字列を返します
 
@@ -61732,7 +61732,7 @@ This function takes two arguments.
 &lt;!-- Show example of function.--&gt;
 &lt;code&gt;randf(1, 10) &amp;rarr; 4.59258286403147&lt;/code&gt;&lt;br&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;randf() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;randf() 関数&lt;/h3&gt;
 最小値と最大値の引数で指定された範囲内(境界値を含む)でランダムな浮動小数点数を返します.
 &lt;br&gt;
 この関数は2つの引数をとります.
@@ -61764,7 +61764,7 @@ a &amp;rarr; geometry
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;pre&gt;  geomToWKT( convexHull( geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 4 10)&apos; )) )   &amp;rarr; returns POLYGON((3 3,4 10,4 4,3 3)) &lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;convexHull 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;convexHull 関数&lt;/h3&gt;
 ジオメトリの凸包を返します. それは集合のすべてのジオメトリを含む最小の凸ジオメトリを表します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -61793,7 +61793,7 @@ b &amp;rarr; geometry
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;pre&gt; geomToWKT( union( geomFromWKT( &apos;POINT(4 4)&apos; ) , geomFromWKT( &apos;POINT(5 5)&apos; ))  )   &amp;rarr; returns MULTIPOINT(4 4, 5 5)&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;union 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;union 関数&lt;/h3&gt;
 ジオメトリの点セットの和集合を表すジオメトリを返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -61822,7 +61822,7 @@ geometry &amp;rarr; geometry
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;pre&gt; geomToWKT( intersection( geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 )&apos; ))  )   &amp;rarr; returns LINESTRING(3 3, 4 4)&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;intersection 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;intersection 関数&lt;/h3&gt;
 ジオメトリaとジオメトリbの共有部分を表すジオメトリを返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -61852,7 +61852,7 @@ None
 &lt;pre&gt; &apos;A&apos; ILIKE &apos;a&apos;  &amp;rarr; returns 1 &lt;/pre&gt;
 &lt;pre&gt; &apos;A&apos; ILIKE &apos;B&apos;  &amp;rarr; returns 0 &lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;ILIKE 式&lt;/h3&gt;
+        <translation>&lt;h3&gt;ILIKE 式&lt;/h3&gt;
 最初の引数が指定されたパターンと一致する場合(大文字と小文字を区別しない)に1を返します. 大文字と小文字を区別する場合はILIKEではなくLIKEを使用します. 数値にも対応しています.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -61883,7 +61883,7 @@ None
 &lt;pre&gt; &apos;A&apos; LIKE &apos;a&apos;  &amp;rarr; returns 0 &lt;/pre&gt;
 &lt;pre&gt; &apos;A&apos; LIKE &apos;B&apos;  &amp;rarr; returns 0 &lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;LIKE 式&lt;/h3&gt;
+        <translation>&lt;h3&gt;LIKE 式&lt;/h3&gt;
 最初の引数が指定されたパターンと一致する場合に1を返します. 数値にも対応しています.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -61913,7 +61913,7 @@ text &amp;rarr; GML representation of a geometry
 &lt;pre&gt; geomFromGML( &apos;&lt;gml:LineString srsName=&quot;EPSG:4326&quot;&gt;&lt;gml:coordinates&gt;4,4 5,5 6,6&lt;/gml:coordinates&gt;&lt;/gml:LineString&gt;&apos;) &amp;rarr; returns a geometry&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;geomFromGML 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;geomFromGML 関数&lt;/h3&gt;
 ジオメトリのGML表現からジオメトリを返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -61943,7 +61943,7 @@ geometry &amp;rarr; geometry
 &lt;pre&gt; geomToWKT( combine( geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5 )&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4,  2 1 )&apos; ))  )    &amp;rarr; returns MULTILINESTRING((4 4, 2 1), (3 3, 4 4), (4 4, 5 5)) &lt;/pre&gt;
 &lt;pre&gt; geomToWKT( combine( geomFromWKT( &apos;LINESTRING(3 3 , 4 4  )&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 6 6,  2 1 )&apos; ))  )  &amp;rarr; returns LINESTRING(3 3, 4 4, 6 6, 2 1) &lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;combine 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;combine 関数&lt;/h3&gt;
 ジオメトリaとジオメトリbの組み合わせを返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -61974,7 +61974,7 @@ b &amp;rarr; geometry
 &lt;pre&gt; intersects( geomFromWKT( &apos;POINT(4 4)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))    &amp;rarr; returns 1&lt;/pre&gt;
 &lt;pre&gt; intersects( geomFromWKT( &apos;POINT(4 5)&apos; ) , geomFromWKT( &apos;POINT(5 5)&apos; ))             &amp;rarr; returns 0&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;intersects 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;intersects 関数&lt;/h3&gt;
 ジオメトリが空間的に交差 (いずれかの部分を共有)している場合に1を返します. そうでない場合は0を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -62011,7 +62011,7 @@ Restricts an input value to a specified range.
      
      
 </source>
-        <translation type="unfinished">&lt;h3&gt;clamp() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;clamp() 関数&lt;/h3&gt;
 入力値を指定された範囲に制限します.
 
 &lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
@@ -62048,7 +62048,7 @@ Returns a string with the the supplied string replaced.
 &lt;!-- Show example of function.--&gt;
      replace(&apos;QGIS SHOULD ROCK&apos;,&apos;SHOULD&apos;,&apos;DOES&apos;) &amp;rarr; &apos;QGIS DOES ROCK&apos;&lt;/p&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;replace() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;replace() 関数&lt;/h3&gt;
 与えられた文字列を置き換えた文字列を返します.
 
 &lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
@@ -62086,7 +62086,7 @@ None
 &lt;pre&gt; $geometry IS NULL  &amp;rarr; returns 0, if your geometry is not NULL&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;IS 式&lt;/h3&gt;
+        <translation>&lt;h3&gt;IS 式&lt;/h3&gt;
 aがbと同じ場合に1を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -62122,7 +62122,7 @@ b &amp;rarr; geometry
 &lt;pre&gt; disjoint( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; )) &amp;rarr; returns 1&lt;/pre&gt;
 &lt;pre&gt; disjoint( geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ) , geomFromWKT( &apos;POINT(4 4)&apos; ))                              &amp;rarr; returns 0&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;disjoint 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;disjoint 関数&lt;/h3&gt;
 ジオメトリが空間的に交差しない(共有部分を持たない)場合に1を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -62152,7 +62152,7 @@ text &amp;rarr; Well-Known Text (WKT) representation of a geometry
 &lt;pre&gt; geomFromWKT( &apos;POINT(4 5)&apos; ) &amp;rarr; returns a geometry&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;geomFromWKT 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;geomFromWKT 関数&lt;/h3&gt;
 Well-Knownテキスト（WKT）表現から作成されたジオメトリを返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -62182,7 +62182,7 @@ b &amp;rarr; distance for the buffer
 &lt;pre&gt; buffer($geometry, 10.5 ) &amp;rarr; returns a polygon&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;buffer 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;buffer 関数&lt;/h3&gt;
 ジオメトリからの距離が一定以下であるすべての点を表すジオメトリを返します. 距離の単位はジオメトリの空間参照系の単位です.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -62213,7 +62213,7 @@ geometry &amp;rarr; geometry
 &lt;pre&gt; crosses( geomFromWKT( &apos;LINESTRING(3 5 , 4 4 , 5 3)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))    &amp;rarr; returns 1&lt;/pre&gt;
 &lt;pre&gt; crosses( geomFromWKT( &apos;POINT(4 5)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))             &amp;rarr; returns 0&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;crosses 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;crosses 関数&lt;/h3&gt;
 ジオメトリが一部に共通する点を持っている場合は1を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -62242,7 +62242,7 @@ a &amp;rarr; geometry
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;pre&gt; geomToWKT( $geometry ) &amp;rarr; POINT(6 50)&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;geomToWKT 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;geomToWKT 関数&lt;/h3&gt;
 ジオメトリのWell-Knownテキスト（WKT）表現をSRIDメタデータなしで返します. 
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -62271,7 +62271,7 @@ b &amp;rarr; geometry
 &lt;pre&gt; touches( geomFromWKT( &apos;LINESTRING(5 3 , 4 4)&apos;  ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))    &amp;rarr; returns 1&lt;/pre&gt;
 &lt;pre&gt; touches( geomFromWKT( &apos;POINT(4 4)&apos; ) , geomFromWKT( &apos;POINT(5 5)&apos; ))                     &amp;rarr; returns 0&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;touches 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;touches 関数&lt;/h3&gt;
 ジオメトリが少なくとも1つの共通点を持つけれど、その内部が交差していない場合に1を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -62302,7 +62302,7 @@ b &amp;rarr; geometry
 &lt;pre&gt; overlaps( geomFromWKT( &apos;LINESTRING(3 5 , 4 4 , 5 5 , 5 3)&apos;  ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))   &amp;rarr; returns 1&lt;/pre&gt;
 &lt;pre&gt; overlaps( geomFromWKT( &apos;LINESTRING(0 0 , 1 1)&apos;  ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))    &amp;rarr; returns 0&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;overlaps 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;overlaps 関数&lt;/h3&gt;
 ジオメトリが共有部分を持ち、同じ次元であり、完全にお互いに含まれていない場合に1を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -62340,7 +62340,7 @@ from a &lt;code&gt;Interval&lt;/code&gt;
 &lt;code&gt;hour(age(&apos;2012-01-01&apos;,&apos;2010-01-01&apos;)) &amp;rarr; 17520&lt;/code&gt;&lt;br&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;hour() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;hour() 関数&lt;/h3&gt;
 日時または時刻からは時を取得し、&lt;code&gt;Interval&lt;/code&gt;からは時間数を取得します
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -62375,7 +62375,7 @@ None
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;pre&gt;$pi &amp;rarr; 3.14159265358979&lt;/pre&gt;
 </source>
-        <translation type="unfinished">&lt;h3&gt;$pi 定数&lt;/h3&gt;
+        <translation>&lt;h3&gt;$pi 定数&lt;/h3&gt;
 円周率の値を返します
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -62404,7 +62404,7 @@ None
 &lt;pre&gt; 4 = 2+2 AND 1 = 2  &amp;rarr; returns 0 &lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;AND 論理演算子&lt;/h3&gt;
+        <translation>&lt;h3&gt;AND 論理演算子&lt;/h3&gt;
 条件aと条件bが真(true)である場合に1を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -62434,7 +62434,7 @@ None
 &lt;pre&gt; geomToWKT( $geometry ) &amp;rarr; POINT(6 50)&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished">&lt;h3&gt;$geometry 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;$geometry 関数&lt;/h3&gt;
 現在の地物のジオメトリを返します. 他の関数を用いた処理に使用することができます.
 
 &lt;h4&gt;構文&lt;/h4&gt;
@@ -62463,7 +62463,7 @@ Convert a string into Qt data type.
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;!-- Show example of function.--&gt;
 &lt;code&gt;todate(&apos;2012-05-04&apos;) &amp;rarr; 2012-05-04&lt;/code&gt;&lt;br&gt;</source>
-        <translation type="unfinished">&lt;h3&gt;todate() 関数&lt;/h3&gt;
+        <translation>&lt;h3&gt;todate() 関数&lt;/h3&gt;
 文字列をQt 日付型に変換します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
