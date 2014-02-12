@@ -8849,40 +8849,40 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsgeometryvalidator.cpp" line="67"/>
         <source>segment %1 of ring %2 of polygon %3 intersects segment %4 of ring %5 of polygon %6 at %7</source>
-        <translation>ポリゴン%3のリング%2のセグメント%1はポリゴン%6のリング%5のセグメント%4と点%7で交差します</translation>
+        <translation>ポリゴン%3のリング%2の線分%1はポリゴン%6のリング%5の線分%4と点%7で交差します</translation>
     </message>
     <message>
         <location filename="../src/core/qgsgeometryvalidator.cpp" line="87"/>
         <source>ring %1 with less than four points</source>
-        <translation>%1のリングは4個未満の点で構成されています</translation>
+        <translation>リング%1は4個未満の点で構成されています</translation>
     </message>
     <message>
         <location filename="../src/core/qgsgeometryvalidator.cpp" line="96"/>
         <source>ring %1 not closed</source>
-        <translation>%1のリングは閉じていません</translation>
+        <translation>リング%1は閉じていません</translation>
     </message>
     <message>
         <location filename="../src/core/qgsgeometryvalidator.cpp" line="105"/>
         <source>line %1 with less than two points</source>
-        <translation>%1のラインは2点未満の点で構成されています</translation>
+        <translation>ライン%1は2点未満の点で構成されています</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/core/qgsgeometryvalidator.cpp" line="124"/>
         <source>line %1 contains %n duplicate node(s) at %2</source>
         <comment>number of duplicate nodes</comment>
         <translation>
-            <numerusform>%1のラインは%2に重複したノードを持っています%n</numerusform>
+            <numerusform>ライン%1は点%2に%n個の重複したノードを持ちます</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../src/core/qgsgeometryvalidator.cpp" line="156"/>
         <source>segments %1 and %2 of line %3 intersect at %4</source>
-        <translation>%1のセグメントと%2のラインが%3だけ%4で交差しています</translation>
+        <translation>ライン%3の線分%1と%2が点%4で交差しています</translation>
     </message>
     <message>
         <location filename="../src/core/qgsgeometryvalidator.cpp" line="171"/>
         <source>ring %1 of polygon %2 not in exterior ring</source>
-        <translation>リング%1 リングに関係無いポリゴン%2</translation>
+        <translation>ポリゴン%2のリング%1はポリゴンの内部にありません</translation>
     </message>
     <message>
         <location filename="../src/core/qgsgeometryvalidator.cpp" line="206"/>
@@ -8904,7 +8904,7 @@ Error(%2): %3</source>
         <location filename="../src/core/qgsgeometryvalidator.cpp" line="299"/>
         <location filename="../src/core/qgsgeometryvalidator.cpp" line="304"/>
         <source>polygon %1 inside polygon %2</source>
-        <translation>ポリゴン%1 内部ポリゴン%2</translation>
+        <translation>ポリゴン%1はポリゴン%2の内側にあります</translation>
     </message>
     <message>
         <location filename="../src/core/qgsgeometryvalidator.cpp" line="318"/>
@@ -8944,12 +8944,12 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="225"/>
         <source>creation of data source failed (OGR error:%1)</source>
-        <translation>データソース作成に失敗しました(OGRエラー%1)</translation>
+        <translation>データソース作成に失敗しました(OGRエラー:%1)</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="314"/>
         <source>creation of layer failed (OGR error:%1)</source>
-        <translation>レイヤ作成に失敗しました(OGRエラー%1)</translation>
+        <translation>レイヤ作成に失敗しました(OGRエラー:%1)</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="371"/>
@@ -8970,7 +8970,7 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="424"/>
         <source>creation of field %1 failed (OGR error: %2)</source>
-        <translation>フィールド%1作成に失敗しました(OGRエラー%2)</translation>
+        <translation>フィールド%1作成に失敗しました(OGRエラー:%2)</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="459"/>
@@ -29586,7 +29586,7 @@ This may be a problem in your network connection or at the WMS server.</source>
     <message>
         <location filename="../src/ui/qgslabeldialogbase.ui" line="501"/>
         <source>Data defined placement</source>
-        <translation>データで定義され配置</translation>
+        <translation>データで定義された配置</translation>
     </message>
     <message>
         <location filename="../src/ui/qgslabeldialogbase.ui" line="548"/>
@@ -58900,7 +58900,7 @@ None
 条件aがtrueか、または条件bがtrueのときに1を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
-&lt;pre&gt; 条件 a OR 条件 b &lt;/pre&gt;
+&lt;pre&gt; 条件a OR 条件b &lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
 なし
@@ -62422,7 +62422,7 @@ None
 条件aと条件bが真(true)である場合に1を返します.
 
 &lt;h4&gt;構文&lt;/h4&gt;
-&lt;pre&gt; 条件 a AND 条件 b &lt;/pre&gt;
+&lt;pre&gt; 条件a AND 条件b &lt;/pre&gt;
 
 &lt;h4&gt;引数&lt;/h4&gt;
 なし
