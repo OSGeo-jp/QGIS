@@ -9085,7 +9085,7 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="622"/>
         <source>Write a UTF-8 Byte Order Mark (BOM) at the start of the file.</source>
-        <translation>ファイルの最後にUTF-8バイトオーダーマスク(BOM)を書き込む.</translation>
+        <translation>ファイルの最初にUTF-8バイトオーダーマーク(BOM)を書き込む.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="642"/>
@@ -9100,7 +9100,7 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="670"/>
         <source>Set to YES to resize fields to their optimal size.</source>
-        <translation>フィールドを適切な大きさに変更することにYESを設定する.</translation>
+        <translation>フィールドを適切な大きさに変更するにはYESを設定する.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="692"/>
@@ -9110,7 +9110,7 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="720"/>
         <source>Set to YES to write a bbox property with the bounding box of the geometries at the feature and feature collection level.</source>
-        <translation>YESに設定するとbboxプロパティを地物、またが地物のコレクションレベルのバウンディングボックスと一緒に書きます</translation>
+        <translation>YESに設定するとbboxプロパティを地物、または地物のコレクションレベルのバウンディングボックスと一緒に書きます</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="726"/>
@@ -9334,7 +9334,7 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1121"/>
         <source>Indicate whether the whole seed file should be copied. If not, only the first three elements will be copied.</source>
-        <translation>すべてのシードファイルをどこにコピーすべきかを示します.最初の3個のエレメントのみでなくコピーされます.</translation>
+        <translation>シードファイル全体をコピーするかどうかを示します.NOの場合は最初の3個のエレメントのみがコピーされます.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1127"/>
@@ -11046,7 +11046,7 @@ SQL: %1</translation>
     <message>
         <location filename="../src/core/symbology-ng/qgsfillsymbollayerv2.cpp" line="535"/>
         <source>reflect</source>
-        <translation>repeat</translation>
+        <translation>reflect</translation>
     </message>
 </context>
 <context>
@@ -25848,8 +25848,8 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="538"/>
         <source>Natural break classification (Jenks) is O(n2) complexity, your classification may take a long time.
 Press cancel to abort breaks calculation or OK to continue.</source>
-        <translation>Natural break 分類 (Jenks) は複雑なのであなたの分類処理は時間がかかります.
-キャンｓルをクリックすると中断しOKを押すと計算を継続します.</translation>
+        <translation>Natural break 分類 (Jenks) は複雑なので分類処理には時間がかかります.
+キャンセルをクリックすると中断しOKを押すと計算を継続します.</translation>
     </message>
     <message>
         <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="548"/>
