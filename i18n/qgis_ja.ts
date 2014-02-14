@@ -7265,11 +7265,11 @@ Wrong line: %1</source>
     </message>
     <message>
         <source>%s due an error when calling its classFactory() method</source>
-        <translation>%sは内部でclassFactory()メソッドを呼び出し中にエラーが発生しました</translation>
+        <translation>%s 内部でclassFactory()メソッドを呼び出し中にエラーが発生しました</translation>
     </message>
     <message>
         <source>%s due an error when calling its initGui() method</source>
-        <translation>%sは内部でinitGui()メソッドを呼び出し中にエラーが発生しました</translation>
+        <translation>%s 内部でinitGui()メソッドを呼び出し中にエラーが発生しました</translation>
     </message>
     <message>
         <source>Error while unloading plugin %s</source>
