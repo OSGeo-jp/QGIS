@@ -7261,7 +7261,7 @@ Wrong line: %1</source>
     </message>
     <message>
         <source>Couldn&apos;t load plugin %s</source>
-        <translation>%sプラグインをロードできませｎでした</translation>
+        <translation>%sプラグインをロードできませんでした</translation>
     </message>
     <message>
         <source>%s due an error when calling its classFactory() method</source>
