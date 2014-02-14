@@ -6126,7 +6126,7 @@ Shift+クリックで非表示
     <message>
         <location filename="../src/ui/qgisapp.ui" line="223"/>
         <source>Paste Features as</source>
-        <translation>形式指定地物を貼り付け</translation>
+        <translation>新規レイヤへの地物貼り付け</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="588"/>
@@ -9167,7 +9167,7 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="807"/>
         <source>Value put inside the &lt;updated&gt; element in the header. Should be formatted as a XML datetime. If not provided, a dummy value will be used as that element is compulsory.</source>
-        <translation>ヘッダの&lt;updated&gt;エレメントに値が設定されます.XML datetime形式でなｋればいけません..このエレメントは必須なのでもし指定がない場合はダミーの値が指定されます.</translation>
+        <translation>ヘッダの&lt;updated&gt;エレメントに値が設定されます.XML datetime形式でなければいけません.このエレメントは必須なのでもし指定がない場合はダミーの値が指定されます.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="814"/>
@@ -13864,12 +13864,12 @@ SVG検索パス	%8
     <message>
         <location filename="../src/ui/qgsattributetabledialog.ui" line="589"/>
         <source>Show Edited and New Features</source>
-        <translation>編集及び新しい地物の表示</translation>
+        <translation>編集された地物と新しい地物を表示</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsattributetabledialog.ui" line="575"/>
         <source>Show Features Visible On Map</source>
-        <translation>地図に見える地物を表示</translation>
+        <translation>地図上に表示されている地物を表示</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsattributetabledialog.ui" line="443"/>
@@ -34575,7 +34575,7 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/plugins/offline_editing/offline_editing_plugin.cpp" line="57"/>
         <source>Convert to offline project</source>
-        <translation>オフラインプロジェクトに変換しています</translation>
+        <translation>オフラインプロジェクトに変換</translation>
     </message>
     <message>
         <location filename="../src/plugins/offline_editing/offline_editing_plugin.cpp" line="60"/>
@@ -35360,7 +35360,7 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/app/qgsoptions.cpp" line="308"/>
         <source>Show features visible on map</source>
-        <translation>地図上に地物を表示</translation>
+        <translation>地図上に表示されている地物を表示</translation>
     </message>
     <message>
         <location filename="../src/app/qgsoptions.cpp" line="617"/>
@@ -35668,7 +35668,7 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="829"/>
         <source>Warn when opening a project file saved with an older version of QGIS</source>
-        <translation>古いバージョンの QGIS で保存されたプロジェクトファイルを開く時に警告します</translation>
+        <translation>古いバージョンのQGISで保存されたプロジェクトファイルを開く時に警告する</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2240"/>
@@ -35693,7 +35693,7 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2289"/>
         <source>Double click action in legend</source>
-        <translation>凡例の中でダブルクリックするアクション</translation>
+        <translation>凡例でのダブルクリックアクション</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2310"/>
@@ -35784,12 +35784,12 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2418"/>
         <source>Add new layers to selected or current group</source>
-        <translation>選択されているまたはカレントグループに新規レイヤを追加する</translation>
+        <translation>新規レイヤをカレントグループに追加する</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="1274"/>
         <source>Copy geometry in WKT representation from attribute table</source>
-        <translation>属性テーブルのWKTで表現されたジオメトリをコピーする</translation>
+        <translation>属性テーブルからWKTで表現されたジオメトリをコピーする</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="1328"/>
@@ -35815,7 +35815,7 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="3684"/>
         <source>In some cases more than one GDAL driver can be used to load the same raster format. Use the list below to specify which to use.</source>
-        <translation>いくつかの場合１つ以上のGDALドライバが同一のラスタ形式をロードするのに利用可能です.以下に表示されるリストを使ってどれを使うか指定して下さい.</translation>
+        <translation>複数のGDALドライバが同じラスタ形式をロードできる場合があります. 以下に表示されるリストを使ってどれを使うか指定して下さい.</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="1594"/>
@@ -36080,7 +36080,7 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="656"/>
         <source>Most recent</source>
-        <translation>最新</translation>
+        <translation>最近</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="661"/>
@@ -36125,7 +36125,7 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="822"/>
         <source>Prompt to save project and data source changes when required</source>
-        <translation>必要な場合プロジェクト保存のプロンプトを表示してデータソースを変更する</translation>
+        <translation>必要なときにプロジェクトおよびデータソースの変更を保存するか尋ねる</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="838"/>
@@ -36609,7 +36609,7 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="3875"/>
         <source>Don&apos;t enable &apos;on the fly&apos; reprojection</source>
-        <translation>&apos;オンザフライ&apos;再投影を有効にしないで下さい</translation>
+        <translation>&apos;オンザフライ&apos;再投影を有効にしない</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="3902"/>
@@ -54669,9 +54669,9 @@ The vector layer needs to be in editing mode, before you can click on the &lt;la
 レイヤの全ての地物を表示する.
 &lt;h5&gt;選択した地物を表示する&lt;/h5&gt;
 現在選択されている全ての地物を表示する.
-&lt;h5&gt;地図に見える地物を表示&lt;/h5&gt;
+&lt;h5&gt;地図上に表示されている地物を表示&lt;/h5&gt;
 現在の可視領域とスケールベースの可視性を考慮に入れて、現在マップキャンバスに表示されている全ての地物を表示する. 
-&lt;h5&gt;編集及び新しい地物の表示&lt;/h5&gt;
+&lt;h5&gt;編集された地物と新しい地物を表示&lt;/h5&gt;
 編集された地物と新規作成された地物のみ表示します.
 このモードではコミット(保存)されていない変更を有する地物が表示されます.したがってこれはコミット(保存)する前に変更を見直すのによいフィルタです. 削除された地物はこのモードで表示されないことに注意して下さい.
 &lt;h5&gt;カラムフィルタ&lt;/h5&gt;
