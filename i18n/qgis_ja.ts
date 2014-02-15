@@ -9142,42 +9142,42 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="776"/>
         <source>If defined to NO, only &lt;entry&gt; or &lt;item&gt; elements will be written. The user will have to provide the appropriate header and footer of the document.</source>
-        <translation>NOが指定されている場合&lt;entry&gt;または&lt;item&gt;エレメントのみ書き込まれます.ユーザはドキュメントのヘッダとフッタを提供しなければいけません.</translation>
+        <translation>NOが指定されている場合 &lt;entry&gt; または &lt;item&gt; エレメントのみ書き込まれます.ユーザはドキュメントのヘッダとフッタを提供しなければいけません.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="782"/>
         <source>XML content that will be put between the &lt;channel&gt; element and the first &lt;item&gt; element for a RSS document, or between the xml tag and the first &lt;entry&gt; element for an Atom document. </source>
-        <translation>RSSドキュメントで&lt;channel&gt;エレメントと最初の&lt;item&gt;エレメントの間,またはAtomドキュメントでxmlタグと最初の&lt;entry&gt;エレメントの間に挿入するXMLコンテント</translation>
+        <translation>RSSドキュメントで &lt;channel&gt; エレメントと最初の &lt;item&gt; エレメントの間,またはAtomドキュメントでxmlタグと最初の &lt;entry&gt; エレメントの間に挿入するXMLコンテント</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="789"/>
         <source>Value put inside the &lt;title&gt; element in the header. If not provided, a dummy value will be used as that element is compulsory.</source>
-        <translation>ヘッダの&lt;title&gt;エレメントに値が設定されます.このエレメントは必須なのでもし指定がない場合はダミーの値が指定されます.</translation>
+        <translation>ヘッダの &lt;title&gt; エレメントに値が設定されます.このエレメントは必須なのでもし指定がない場合はダミーの値が指定されます.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="795"/>
         <source>Value put inside the &lt;description&gt; element in the header. If not provided, a dummy value will be used as that element is compulsory.</source>
-        <translation>ヘッダの&lt;description&gt;エレメントに値が設定されます.このエレメントは必須なのでもし指定がない場合はダミーの値が指定されます.</translation>
+        <translation>ヘッダの &lt;description&gt; エレメントに値が設定されます.このエレメントは必須なのでもし指定がない場合はダミーの値が指定されます.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="801"/>
         <source>Value put inside the &lt;link&gt; element in the header. If not provided, a dummy value will be used as that element is compulsory.</source>
-        <translation>ヘッダの&lt;link&gt;エレメントに値が設定されます.このエレメントは必須なのでもし指定がない場合はダミーの値が指定されます.</translation>
+        <translation>ヘッダの &lt;link&gt; エレメントに値が設定されます.このエレメントは必須なのでもし指定がない場合はダミーの値が指定されます.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="807"/>
         <source>Value put inside the &lt;updated&gt; element in the header. Should be formatted as a XML datetime. If not provided, a dummy value will be used as that element is compulsory.</source>
-        <translation>ヘッダの&lt;updated&gt;エレメントに値が設定されます.XML datetime形式でなければいけません.このエレメントは必須なのでもし指定がない場合はダミーの値が指定されます.</translation>
+        <translation>ヘッダの &lt;updated&gt; エレメントに値が設定されます.XML datetime形式でなければいけません.このエレメントは必須なのでもし指定がない場合はダミーの値が指定されます.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="814"/>
         <source>Value put inside the &lt;author&gt;&lt;name&gt; element in the header. If not provided, a dummy value will be used as that element is compulsory.</source>
-        <translation>ヘッダの&lt;author&gt;&lt;name&gt;エレメントに値が設定されます.このエレメントは必須なのでもし指定がない場合はダミーの値が指定されます.</translation>
+        <translation>ヘッダの &lt;author&gt;&lt;name&gt; エレメントに値が設定されます.このエレメントは必須なのでもし指定がない場合はダミーの値が指定されます.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="820"/>
         <source>Value put inside the &lt;id&gt; element in the header. If not provided, a dummy value will be used as that element is compulsory.</source>
-        <translation>ヘッダの&lt;id&gt;エレメントに値が設定されます.このエレメントは必須なのでもし指定がない場合はダミーの値が指定されます.</translation>
+        <translation>ヘッダの &lt;id&gt; エレメントに値が設定されます.このエレメントは必須なのでもし指定がない場合はダミーの値が指定されます.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="828"/>
@@ -9194,7 +9194,7 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="849"/>
         <source>This writes a GML application schema file to a corresponding .xsd file (with the same basename). If INTERNAL is used the schema is written within the GML file, but this is experimental and almost certainly not valid XML. OFF disables schema generation (and is implicit if XSISCHEMAURI is used).</source>
-        <translation>これはｘｓｄファイル（同じベース名の)にしたがってGMLアプリケーションスキーマファイルを書き出します.GMLファイルでIスキーマ書き出しにNTERNALが使われている場合これは実験的で正しくないXMLになります.OFFはスキーマ作成を行いません(XSISCHEMAURI が使われている場合は暗黙の指定です).</translation>
+        <translation>この処理はｘｓｄファイル（同じベース名の)にしたがってGMLアプリケーションスキーマファイルを書き出します.GMLファイルでスキーマ書き出しにINTERNALが使われている場合これは実験的で正しくないXMLになります.OFFの場合スキーマ作成を行いません(XSISCHEMAURI が使われている場合は暗黙の指定です).</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="862"/>
