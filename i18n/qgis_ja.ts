@@ -5746,7 +5746,7 @@ GEOS空間演算エラー:1個またはそれ以上の数の地物のジオメ�
     <message>
         <location filename="../src/ui/qgisapp.ui" line="552"/>
         <source>&amp;New Print Composer</source>
-        <translation>新コンポーザマネージャ(&amp;N)</translation>
+        <translation>新規プリントコンポーザ(&amp;N)</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="555"/>
@@ -5776,7 +5776,7 @@ GEOS空間演算エラー:1個またはそれ以上の数の地物のジオメ�
     <message>
         <location filename="../src/ui/qgisapp.ui" line="789"/>
         <source>Merge Attributes of Selected Features</source>
-        <translation>選択された地物の属性を結合する</translation>
+        <translation>選択地物の属性結合</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="872"/>
@@ -5971,12 +5971,12 @@ GEOS空間演算エラー:1個またはそれ以上の数の地物のジオメ�
     <message>
         <location filename="../src/ui/qgisapp.ui" line="2123"/>
         <source>Add Delimited Text Layer...</source>
-        <translation>デリミティッドテキストレイヤを追加する...</translation>
+        <translation>デリミティッドテキストレイヤを追加...</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="2126"/>
         <source>Add Delimited Text Layer</source>
-        <translation>デリミティッドテキストレイヤを追加する</translation>
+        <translation>デリミティッドテキストレイヤを追加</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="1306"/>
@@ -6241,7 +6241,7 @@ Shift+クリックで非表示
     <message>
         <location filename="../src/ui/qgisapp.ui" line="813"/>
         <source>Rotate Point Symbols</source>
-        <translation>ポイントシンボルを回転する</translation>
+        <translation>ポイントシンボルの回転</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="818"/>
@@ -6347,7 +6347,7 @@ Shift+クリックで非表示
     <message>
         <location filename="../src/ui/qgisapp.ui" line="1046"/>
         <source>Zoom Actual Size</source>
-        <translation>実際のサイズにズームする</translation>
+        <translation>実際のサイズにズーム</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="1049"/>
@@ -6608,7 +6608,7 @@ Shift+クリックで非表示
         <location filename="../src/ui/qgisapp.ui" line="1719"/>
         <location filename="../src/ui/qgisapp.ui" line="1722"/>
         <source>Pan Map to Selection</source>
-        <translation>選択部分に地図をパンする</translation>
+        <translation>選択部分に地図をパン</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="2102"/>
@@ -13804,7 +13804,7 @@ SVG検索パス	%8
     <message>
         <location filename="../src/ui/qgsattributetabledialog.ui" line="342"/>
         <source>New column (Ctrl+W)</source>
-        <translation>新規カラム(Ctrl+W)</translation>
+        <translation>新規カラムを作る(Ctrl+W)</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsattributetabledialog.ui" line="358"/>
@@ -13864,12 +13864,12 @@ SVG検索パス	%8
     <message>
         <location filename="../src/ui/qgsattributetabledialog.ui" line="589"/>
         <source>Show Edited and New Features</source>
-        <translation>編集された地物と新しい地物を表示</translation>
+        <translation>編集された地物と新しい地物を表示する</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsattributetabledialog.ui" line="575"/>
         <source>Show Features Visible On Map</source>
-        <translation>地図上に表示されている地物を表示</translation>
+        <translation>地図上に表示されている地物を表示する</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsattributetabledialog.ui" line="443"/>
@@ -13894,7 +13894,7 @@ SVG検索パス	%8
     <message>
         <location filename="../src/ui/qgsattributetabledialog.ui" line="319"/>
         <source>Delete column (Ctrl+L)</source>
-        <translation>カラムの削除(Ctrl+L)</translation>
+        <translation>カラムを削除する(Ctrl+L)</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsattributetabledialog.ui" line="335"/>
@@ -13934,7 +13934,7 @@ SVG検索パス	%8
     <message>
         <location filename="../src/ui/qgsattributetabledialog.ui" line="286"/>
         <source>Copy selected rows to clipboard (Ctrl+C)</source>
-        <translation>選択している行をクリップボードへコピー(Ctrl+C)</translation>
+        <translation>選択している行をクリップボードへコピーする(Ctrl+C)</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsattributetabledialog.ui" line="305"/>
@@ -16094,12 +16094,12 @@ Please try a lower resolution or a smaller papersize</source>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="681"/>
         <source>&amp;New Composer</source>
-        <translation>新コンポーザ(&amp;N)</translation>
+        <translation>新規コンポーザ(&amp;N)</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="684"/>
         <source>New composer</source>
-        <translation>新コンポーザ</translation>
+        <translation>新規コンポーザ</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="687"/>
@@ -30559,7 +30559,7 @@ This may be a problem in your network connection or at the WMS server.</source>
     <message>
         <location filename="../src/ui/qgslabelingguibase.ui" line="110"/>
         <source>Automated placement settings (apply to all layers)</source>
-        <translation>自動配置の設定(全レイヤの適用)</translation>
+        <translation>自動配置の設定(全レイヤへの適用)</translation>
     </message>
     <message>
         <location filename="../src/ui/qgslabelingguibase.ui" line="167"/>
@@ -35519,12 +35519,12 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="1751"/>
         <source>Make lines appear less jagged at the expense of some drawing performance</source>
-        <translation>線のジャギーを目立たなくします(描画パフォーマンスが若干低下します)</translation>
+        <translation>線のジャギーを目立たなくする(描画パフォーマンスが若干低下する)</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="1587"/>
         <source>By default new la&amp;yers added to the map should be displayed</source>
-        <translation>地図に新しくレイヤを追加した際にそのレイヤが表示されることをデフォルトにします(&amp;y)</translation>
+        <translation>地図に新しくレイヤを追加した際にそのレイヤが表示されることをデフォルトにする(&amp;y)</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2579"/>
@@ -35534,7 +35534,7 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="1758"/>
         <source>Fix problems with incorrectly filled polygons</source>
-        <translation>ポリゴンの不正な塗りつぶしを修正します</translation>
+        <translation>ポリゴンの不正な塗りつぶしを修正する</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2024"/>
@@ -35713,7 +35713,7 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2519"/>
         <source>Open identify results in a dock window (QGIS restart required)</source>
-        <translation>地物検索結果を連結されたウィンドウに表示します（QGISの再起動が必要）</translation>
+        <translation>地物検索結果を連結されたウィンドウに表示する（QGISの再起動が必要）</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="1267"/>
@@ -35764,7 +35764,7 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="290"/>
         <source>Style &lt;i&gt;(QGIS restart required)&lt;/i&gt;</source>
-        <translation>スタイル &lt;i&gt;(QGIS 再起動が必要です)&lt;/i&gt;</translation>
+        <translation>スタイル &lt;i&gt;(QGIS 再起動が必要)&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="389"/>
@@ -36237,12 +36237,12 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="1631"/>
         <source>&lt;b&gt;Note:&lt;/b&gt; Set below 1000 to prevent display updates until all features have been rendered</source>
-        <translation>&lt;b&gt;注記:&lt;/b&gt; 全地物が描画されるまで表示更新を止める値を1000以下で設定して下さい</translation>
+        <translation>&lt;b&gt;注:&lt;/b&gt; 全地物が描画されるまで表示更新を止める値を1000以下で設定して下さい</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="1638"/>
         <source>Enable feature simplication by default for newly added layers</source>
-        <translation>地物の簡素化はデフォルトで新規に追加されたレイヤに対して有効です</translation>
+        <translation>地物の簡素化はデフォルトで新規に追加されたレイヤに対して有効</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="1647"/>
@@ -36252,12 +36252,12 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="1654"/>
         <source>Simplification threshold (higher values result in more simplification): </source>
-        <translation>簡素化の閾値 (高い値はより簡素化を進めます): </translation>
+        <translation>簡素化の閾値 (高い値はより簡素化を進める): </translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="1664"/>
         <source>Higher values result in more simplification</source>
-        <translation>高い値はより簡素化を進めます</translation>
+        <translation>高い値はより簡素化を進める</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="1709"/>
@@ -36291,7 +36291,7 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2177"/>
         <source>Default map appearance (overridden by project properties)</source>
-        <translation>デフォルトの地図外観(プロジェクトプロパティを上書きします)</translation>
+        <translation>デフォルトの地図外観(プロジェクトプロパティを上書きする)</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2281"/>
@@ -36544,7 +36544,7 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2533"/>
         <source>&lt;b&gt;Note:&lt;/b&gt; Specify the search radius as a percentage of the map width</source>
-        <translation>&lt;b&gt;注記:&lt;/b&gt; 検索半径を、地図の幅に対する割合で指定します</translation>
+        <translation>&lt;b&gt;注記:&lt;/b&gt; 検索半径を、地図の幅に対する割合で指定する</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2546"/>
@@ -36559,7 +36559,7 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2526"/>
         <source>Open feature form, if a single feature is identified</source>
-        <translation>単一の地物が確認された場合地物フォームを開きます</translation>
+        <translation>単一の地物が確認された場合地物フォームを開く</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="2783"/>
@@ -36584,7 +36584,7 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="3489"/>
         <source>Show markers only for selected features</source>
-        <translation>選択された地物のみマーカーを表示します</translation>
+        <translation>選択された地物のみマーカーを表示する</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="3426"/>
@@ -36604,7 +36604,7 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="4010"/>
         <source>Override system locale</source>
-        <translation>システムロケールを上書きします</translation>
+        <translation>システムロケールを上書きする</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="3875"/>
@@ -36644,7 +36644,7 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="4029"/>
         <source>&lt;b&gt;Note:&lt;/b&gt; Enabling / changing overide on local requires an application restart</source>
-        <translation>&lt;b&gt;注記:&lt;/b&gt; ロケールを有効化/変更するには、アプリケーションの再起動が必要です</translation>
+        <translation>&lt;b&gt;注記:&lt;/b&gt; ロケールを有効化/変更するにはアプリケーションの再起動が必要</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="4158"/>
@@ -36664,7 +36664,7 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="4234"/>
         <source>Use proxy for web access</source>
-        <translation>Web接続にプロキシを使用します</translation>
+        <translation>Web接続にプロキシを使用する</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="4252"/>
