@@ -3350,7 +3350,7 @@ Install it and try again.</source>
     </message>
     <message>
         <source>Fill nodata</source>
-        <translation>nodataで塗りつぶす</translation>
+        <translation>欠損値の補完</translation>
     </message>
     <message>
         <source>Fill raster regions by interpolation from edges</source>
@@ -4660,7 +4660,7 @@ JPEG,JPEG2000,MrSID,ECW,のようなカラー索引をサポートしないデ�
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetFillNodata.ui" line="20"/>
         <source>Fill Nodata</source>
-        <translation>Nodataで塗りつぶす</translation>
+        <translation>欠損値の補完</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetFillNodata.ui" line="33"/>
@@ -5950,7 +5950,7 @@ GEOS空間演算エラー:1個またはそれ以上の数の地物のジオメ�
     <message>
         <location filename="../src/ui/qgisapp.ui" line="2147"/>
         <source>DXF Export...</source>
-        <translation>DXFエクスポート</translation>
+        <translation>DXFエクスポート...</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="2159"/>
@@ -26057,7 +26057,7 @@ Press cancel to abort breaks calculation or OK to continue.</source>
     <message>
         <location filename="../src/plugins/grass/qgsgrassbrowser.cpp" line="85"/>
         <source>Set current region to selected map</source>
-        <translation>現在の領域を選択地図に設定する</translation>
+        <translation>現在の領域を選択した地図に合わせる</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassbrowser.cpp" line="93"/>
@@ -64151,12 +64151,12 @@ Convert a string into Qt data type.
     <message>
         <location filename="../src/plugins/grass/grasslabels-i18n.cpp" line="332"/>
         <source>Rebuild topology of a vector in mapset</source>
-        <translation>mapset中のベクタでトポロジを再構築する</translation>
+        <translation>マップセットのベクタのトポロジを再構築する</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/grasslabels-i18n.cpp" line="333"/>
         <source>Rebuild topology of all vectors in mapset</source>
-        <translation>マップセットの全ベクタのトポロジを再構築します</translation>
+        <translation>マップセットの全ベクタのトポロジを再構築する</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/grasslabels-i18n.cpp" line="334"/>
