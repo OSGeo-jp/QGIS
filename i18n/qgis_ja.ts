@@ -41293,7 +41293,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ui/qgsquerybuilderbase.ui" line="281"/>
         <source>Provider specific filter expression</source>
-        <translation>プロバイダ特定フィルタ式</translation>
+        <translation>プロバイダ特有フィルタ式</translation>
     </message>
 </context>
 <context>
@@ -42586,7 +42586,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ui/qgsrasterlayerpropertiesbase.ui" line="1803"/>
         <source>Description</source>
-        <translation>記述</translation>
+        <translation>説明</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsrasterlayerpropertiesbase.ui" line="1845"/>
