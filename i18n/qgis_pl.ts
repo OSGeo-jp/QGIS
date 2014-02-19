@@ -10750,7 +10750,7 @@ Błąd (%2): %3</translation>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="515"/>
         <source>New BNA files are created by the systems default line termination conventions. This may be overridden here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nowe pliki BNA posiadają znaczniki końca wiersza zgodne z systemem operacyjnym. Tutaj można je zmienić.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="534"/>
@@ -10775,17 +10775,17 @@ Błąd (%2): %3</translation>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="580"/>
         <source>By default when creating new .csv files they are created with the line termination conventions of the local platform (CR/LF on win32 or LF on all other systems). This may be overridden through use of the LINEFORMAT option.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nowe pliki CSV posiadają znaczniki końca wiersza zgodne z systemem operacyjnym (CR/LF dla Win32; LF dla innych). Można je zmienić opcją LINEFORMAT.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="592"/>
         <source>By default, the geometry of a feature written to a .csv file is discarded. It is possible to export the geometry in its WKT representation by specifying GEOMETRY=AS_WKT. It is also possible to export point geometries into their X,Y,Z components by specifying GEOMETRY=AS_XYZ, GEOMETRY=AS_XY or GEOMETRY=AS_YX.</source>
-        <translation type="unfinished"></translation>
+        <translation>Domyślnie pliki CSV nie zapisują geometrii obiektów. Można jednak eksportować geometrię w formacie WKT podając GEOMETRY=AS_WKT. Geometrie punktowe można eksportować jako składowe (x, y, z) podając GEOMETRY=AS_XYZ, GEOMETRY=AS_XY lub GEOMETRY=AS_YX.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="607"/>
         <source>Create the associated .csvt file to describe the type of each column of the layer and its optional width and precision.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stwórz powiązany plik .csvt do opisu typu kolumn warstwy (opcjonalnie ich rozmiarów i dokładności).</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="613"/>
@@ -10806,7 +10806,7 @@ Błąd (%2): %3</translation>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="661"/>
         <source>set the encoding value in the DBF file. The default value is LDID/87. It is not clear what other values may be appropriate.</source>
-        <translation type="unfinished"></translation>
+        <translation>ustaw kodowanie pliku DBF. Domyślne to LDID/87.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="670"/>
@@ -10826,7 +10826,7 @@ Błąd (%2): %3</translation>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="726"/>
         <source>Maximum number of figures after decimal separator to write in coordinates. Default to 15. Truncation will occur to remove trailing zeros.</source>
-        <translation type="unfinished"></translation>
+        <translation>Maksymalna liczba cyfr dziesiętnych do zapisu współrzędnych (domyślnie 15). Końcowe (nieznaczące) zera zostaną usunięte.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="747"/>
@@ -10836,7 +10836,7 @@ Błąd (%2): %3</translation>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="756"/>
         <source>The encoding of location information. Default value : SIMPLE. W3C_GEO only supports point geometries. SIMPLE or W3C_GEO only support geometries in geographic WGS84 coordinates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kodowanie informacji o lokalizacji (domyślnie SIMPLE). W3C_GEO obsługuje jedynie geometrie punktowe. SIMPLE lub W3C_GEO są obsługiwane jedynie w przypadku układu współrzędnych WGS84.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="767"/>
@@ -10846,12 +10846,12 @@ Błąd (%2): %3</translation>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="776"/>
         <source>If defined to NO, only &lt;entry&gt; or &lt;item&gt; elements will be written. The user will have to provide the appropriate header and footer of the document.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gdy wybrano NO, zostaną zapisane tylko elementy &lt;entry&gt; oraz &lt;item&gt;. Użytkownik będzie musiał określić odpowiedni nagłówek i stopkę dokumentu.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="782"/>
         <source>XML content that will be put between the &lt;channel&gt; element and the first &lt;item&gt; element for a RSS document, or between the xml tag and the first &lt;entry&gt; element for an Atom document. </source>
-        <translation type="unfinished"></translation>
+        <translation>Zawartość XML zostanie zapisana pomiędzy elementem &lt;channel&gt; a pierwszym elementem &lt;item&gt; dokumentu RSS, lub pomiędzy tagiem xml a pierwszym elementem &lt;entry&gt; dokumentu Atom.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="789"/>
@@ -10886,12 +10886,12 @@ Błąd (%2): %3</translation>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="841"/>
         <source>If provided, this URI will be inserted as the schema location. Note that the schema file isn&apos;t actually accessed by OGR, so it is up to the user to ensure it will match the schema of the OGR produced GML data file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jeśli zdefiniowany, ten URI zostanie ustawiony jako lokalizacja schematu. Pamiętaj, że plik schematu nie jest czytany przez OGR, więc rolą użytkownika jest zapewnienie jego zgodności ze schematem pliku GML utworzonego przez OGR.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="849"/>
         <source>This writes a GML application schema file to a corresponding .xsd file (with the same basename). If INTERNAL is used the schema is written within the GML file, but this is experimental and almost certainly not valid XML. OFF disables schema generation (and is implicit if XSISCHEMAURI is used).</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisuje plik schematu aplikacyjnego GML do odpowiedniego pliku .xsd (o tej samej nazwie). Jeśli używane jest INTERNAL, schemat jest zapisywany w pliku GML, lecz jest to wersja eksperymentalna (nie do końca poprawny XML). OFF wyłącza generowanie schematu (i jest domniemany, jeśli używany jest XSISCHEMAURI).</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="862"/>
@@ -10921,42 +10921,42 @@ Błąd (%2): %3</translation>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="901"/>
         <source>only valid when FORMAT=GML3/GML3Degree/GML3.2) Default to YES. If set to NO, the &lt;gml:boundedBy&gt; element will not be written for each feature.</source>
-        <translation type="unfinished"></translation>
+        <translation>znaczące tylko kiedy FORMAT=GML3/GML3Degree/GML3.2) Domyślna wartość to YES. Jeśli wybrano NO,element &lt;gml:boundedBy&gt; nie będzi zapisywany dla każdego obiektu.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="908"/>
         <source>Default to YES. If YES, the output will be indented with spaces for more readability, but at the expense of file size.</source>
-        <translation type="unfinished"></translation>
+        <translation>Domyślnie YES. W takim przy przypadku, dla poprawy czytelności, wiersze będą poprzedzane spacjami (kosztem większych rozmiarów plików).</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="945"/>
         <source>By default when writing a layer whose features are of type wkbLineString, the GPX driver chooses to write them as routes. If FORCE_GPX_TRACK=YES is specified, they will be written as tracks.</source>
-        <translation type="unfinished"></translation>
+        <translation>Domyślnie warstwy z obiektami typu wkbLineString, zostaną zapisane przez GPX jako trasy. Przy wyborze FORCE_GPX_TRACK=YES, zostaną one zapisane jako ścieżki.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="953"/>
         <source>By default when writing a layer whose features are of type wkbMultiLineString, the GPX driver chooses to write them as tracks. If FORCE_GPX_ROUTE=YES is specified, they will be written as routes, provided that the multilines are composed of only one single line.</source>
-        <translation type="unfinished"></translation>
+        <translation>Domyślnie warstwy z obiektami typu wkbMultiLineString, zostaną zapisane przez GPX jako ścieżki. Przy wyborze FORCE_GPX_ROUTE=YES, zostaną one zapisane jako trasy. Wielolinie będą składały się tylko z jednej pojedynczej linii.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="962"/>
         <source>If GPX_USE_EXTENSIONS=YES is specified, extra fields will be written inside the &lt;extensions&gt; tag.</source>
-        <translation type="unfinished"></translation>
+        <translation>Opcja GPX_USE_EXTENSIONS=YES spowoduje dodanie nowego pola wewnątrz tagu &lt;extensions&gt;.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="968"/>
         <source>Only used if GPX_USE_EXTENSIONS=YES and GPX_EXTENSIONS_NS_URL is set. The namespace value used for extension tags. By default, &apos;ogr&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Użyte tylko jeśli zostaną ustawione GPX_USE_EXTENSIONS=YES i GPX_EXTENSIONS_NS_URL. Wartość przestrzeni nazw użyta do tagu rozszerzeń (domyślnie &apos;ogr&apos;).</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="974"/>
         <source>Only used if GPX_USE_EXTENSIONS=YES and GPX_EXTENSIONS_NS is set. The namespace URI. By default, &apos;http://osgeo.org/gdal&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Użyte tylko jeśli zostaną ustawione GPX_USE_EXTENSIONS=YES i GPX_EXTENSIONS_NS. URI przestrzeni nazw (domyślnie &apos;http://osgeo.org/gdal&apos;).</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="980"/>
         <source>By default files are created with the line termination conventions of the local platform (CR/LF on win32 or LF on all other systems). This may be overridden through use of the LINEFORMAT layer creation option which may have a value of CRLF (DOS format) or LF (Unix format).</source>
-        <translation type="unfinished"></translation>
+        <translation>Domyślnie pliki posiadają znaczniki końca wiersza zgodne z systemem operacyjnym (CR/LF dla Win32; LF dla innych). Można to zmienić opcją LINEFORMAT stosując wartości CRLF (format DOS) lub LF (format Unix).</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1038"/>
@@ -10971,62 +10971,62 @@ Błąd (%2): %3</translation>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1048"/>
         <source>Allows you to specify the AltitudeMode to use for KML geometries. This will only affect 3D geometries and must be one of the valid KML options.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pozwala określić AltitudeMode dla geometrii KML. Działa tylko w kontekście geometrii 3D i musi być jedną ze stosowanych geometrii KML.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1073"/>
         <source>Use this to turn on &apos;quick spatial index mode&apos;. In this mode writing files can be about 5 times faster, but spatial queries can be up to 30 times slower.</source>
-        <translation type="unfinished"></translation>
+        <translation>Włączenie trybu &apos;szybki indeks przestrzenny&apos;. W tym trybie zapis danych do pliku może być 5 razy szybszy, lecz zapytania przestrzenne do 30 razy wolniejsze.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1110"/>
         <source>Determine whether 2D (seed_2d.dgn) or 3D (seed_3d.dgn) seed file should be used. This option is ignored if the SEED option is provided.</source>
-        <translation type="unfinished"></translation>
+        <translation>Warunkuje użycie pliku szablonu 2D (seed_2d.dgn) lub 3D (seed_3d.dgn). Opcja jest igonrowana, gdy podano parametr SEED.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1116"/>
         <source>Override the seed file to use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nadpisz plik szablonu.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1121"/>
         <source>Indicate whether the whole seed file should be copied. If not, only the first three elements will be copied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Określa czy kopiowany jest cały pliku szablonu. Jeśli nie, kopiowane są tylko trzy pierwsze elementy.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1127"/>
         <source>Indicates whether the color table should be copied from the seed file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Określa czy z pliku szablony ma być kopiowana tabela koloru.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1132"/>
         <source>Override the master unit name from the seed file with the provided one or two character unit name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nadpisz nazwę jednostki bazowej z pliku szablonu podaną nazwą lub dwuliterowym skrótem.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1138"/>
         <source>Override the sub unit name from the seed file with the provided one or two character unit name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nadpisz nazwę jednostki podrzędnej z pliku szablonu podaną nazwą lub dwuliterowym skrótem.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1144"/>
         <source>Override the number of subunits per master unit. By default the seed file value is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nadpisz przelicznik jednostki podstawowej na jednostkę podrzędną. Domyślnie użyta będzie wartość z pliku szablonu.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1150"/>
         <source>Override the number of UORs (Units of Resolution) per sub unit. By default the seed file value is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nadpisz wartość rozdzielczości (Units of Resolution) na jednostkę podrzędną. Domyślnie użyta będzie wartość z pliku szablonu.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1156"/>
         <source>ORIGIN=x,y,z: Override the origin of the design plane. By default the origin from the seed file is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>ORIGIN=x,y,z: Nadpisz punkt zaczepienia przestrzeni projektu. Domyślnie użyta będzie wartość z pliku szablonu.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1192"/>
         <source>Should update files be incorporated into the base data on the fly. </source>
-        <translation type="unfinished"></translation>
+        <translation>Czy zaktualizowane dane powinny być dodane do źródłowych w locie. </translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1200"/>
@@ -11041,7 +11041,7 @@ Błąd (%2): %3</translation>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1215"/>
         <source>Should all the low level geometry primitives be returned as special IsolatedNode, ConnectedNode, Edge and Face layers.</source>
-        <translation type="unfinished"></translation>
+        <translation>Czy geometrie najniższego poziomu należy zwracać jako warstwy specjalne IsolatedNode, ConnectedNode, Edge oraz Face.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1221"/>
@@ -11067,18 +11067,18 @@ Błąd (%2): %3</translation>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1280"/>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1354"/>
         <source>Can be used to avoid creating the geometry_columns and spatial_ref_sys tables in a new database. By default these metadata tables are created when a new database is created.</source>
-        <translation type="unfinished"></translation>
+        <translation>Może zostać użyte, aby nie tworzyć tabel geometry_columns oraz spatial_ref_sys w nowej bazie danych. Domyślnie te tabele metadanych są tworzone wraz z nową bazą.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1297"/>
         <source>Controls the format used for the geometry column. Defaults to WKB.This is generally more space and processing efficient, but harder to inspect or use in simple applications than WKT (Well Known Text).</source>
-        <translation type="unfinished"></translation>
+        <translation>Określa format kolumny geometrii (domyślnie WKB). WKB zajmuje mniej miejsca i jest przetwarzane szybciej, lecz jest trudniejsze do przeglądania i użycia w prostych zastosowaniach niż WKT (Well Known Text).</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1307"/>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1375"/>
         <source>Controls whether layer and field names will be laundered for easier use in SQLite. Laundered names will be convered to lower case and some special characters(&apos; - #) will be changed to underscores.</source>
-        <translation type="unfinished"></translation>
+        <translation>Określa czy nazwy warstw i kolumn będą dostosowane do wykorzystania przez SQLite. Zamiana obejmuje konwersję na małe litery oraz podmianę niektórych znaków specjalnych (&apos; - #) na podkreślenia.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1326"/>
@@ -11089,17 +11089,17 @@ Błąd (%2): %3</translation>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1365"/>
         <source>Insert the content of the EPSG CSV files into the spatial_ref_sys table. Set to NO for regular SQLite databases.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wstaw zawartość pliku EPSG CSV do tabeli spatial_ref_sys. Dla zwykłych baz SQLite ustaw na NO.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1382"/>
         <source>If the database is of the SpatiaLite flavour, and if OGR is linked against libspatialite, this option can be used to control if a spatial index must be created.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jeśli baza danych jest typu SpatiaLite i jeśli OGR jest linkowane poprzez libspatialite, ta opcja umożliwia kontrolę tworzenia indeksu przestrzennego.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1389"/>
         <source>If the format of the geometry BLOB is of the SpatiaLite flavour, this option can be used to control if the compressed format for geometries (LINESTRINGs, POLYGONs) must be used</source>
-        <translation type="unfinished"></translation>
+        <translation>Jeśli geometria jest w formacie BLOB SpatiaLite, ta opcja umożliwia kontrolę kompresji geometrii (LINESTRING, POLYGON).</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1396"/>
@@ -11109,12 +11109,12 @@ Błąd (%2): %3</translation>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1459"/>
         <source>Indicates the GeoConcept export file extension. TXT was used by earlier releases of GeoConcept. GXT is currently used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozszerzenie nazwy eksportowanego pliku (format GeoConcept). Pierwotnie używano TXT; aktualnie używa się GXT.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1490"/>
         <source>When this option is set, the new layer will be created inside the named FeatureDataset folder. If the folder does not already exist, it will be created.</source>
-        <translation type="unfinished"></translation>
+        <translation>Przy włączonej opcji, nowa warstwa zostanie utworzona w katalogu FeatureDataset. Jeśli katalog nie istnieje, zostanie utworzony.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1496"/>
@@ -11185,7 +11185,7 @@ Błąd (%2): %3</translation>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="526"/>
         <source>By default, BNA files are created in multi-line format. For each record, the first line contains the identifiers and the type/number of coordinates to follow. Each following line contains a pair of coordinates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Domyślnie pliki BNA są tworzone w formacie wielowierszowym. Dla każdego rekordu, pierwszy wiersz zawiera identyfikatory oraz typy/liczbę współrzędnych. Każdy kolejny wiersz zawiera parę współrzędnych.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="734"/>
@@ -12339,7 +12339,7 @@ Widzisz ten komunikat, bo prawdopodobnie nie ustawiłaś(eś) zmiennej środowis
     <message>
         <location filename="../src/providers/postgres/qgspostgresprovider.cpp" line="3311"/>
         <source>Unable to save layer style. It&apos;s not possible to create the destination table on the database. Maybe this is due to table permissions (user=%1). Please contact your database admin</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie można zapisać stylu warstwy. Nie powiodło się stworzenie docelowej tabeli w bazie danych. Może to być spowodowane brakiem uprawnień (user=%1). Skontaktuj się z administratorem bazy danych.</translation>
     </message>
     <message>
         <location filename="../src/providers/postgres/qgspostgresprovider.cpp" line="3359"/>
@@ -12359,7 +12359,7 @@ Widzisz ten komunikat, bo prawdopodobnie nie ustawiłaś(eś) zmiennej środowis
     <message>
         <location filename="../src/providers/postgres/qgspostgresprovider.cpp" line="3411"/>
         <source>Unable to save layer style. It&apos;s not possible to insert a new record into the style table. Maybe this is due to table permissions (user=%1). Please contact your database administrator.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie można zapisać stylu warstwy. Nie powiodło się dodanie nowego rekordu do tabeli stylów. Może to być spowodowane brakiem uprawnień (user=%1). Skontaktuj się z administratorem bazy danych.</translation>
     </message>
     <message>
         <location filename="../src/providers/postgres/qgspostgresprovider.cpp" line="3458"/>
@@ -12377,12 +12377,12 @@ Widzisz ten komunikat, bo prawdopodobnie nie ustawiłaś(eś) zmiennej środowis
     <message>
         <location filename="../src/providers/postgres/qgspostgresprovider.cpp" line="3477"/>
         <source>Error executing the select query for related styles. The query was logged</source>
-        <translation type="unfinished"></translation>
+        <translation>Błąd uruchomienia zapytania wybierającego dla powiązanych stylów. Zapisano w logu</translation>
     </message>
     <message>
         <location filename="../src/providers/postgres/qgspostgresprovider.cpp" line="3503"/>
         <source>Error executing the select query for unrelated styles. The query was logged</source>
-        <translation type="unfinished"></translation>
+        <translation>Błąd uruchomienia zapytania wybierającego dla niepowiązanych stylów. Zapisano w logu</translation>
     </message>
     <message>
         <location filename="../src/providers/postgres/qgspostgresprovider.cpp" line="3544"/>
@@ -12808,7 +12808,7 @@ Błąd bazy danych: %2</translation>
     <message>
         <location filename="../src/providers/postgres/qgspostgresfeatureiterator.cpp" line="241"/>
         <source>Infinite filter rectangle specified</source>
-        <translation type="unfinished"></translation>
+        <translation>Podano nieograniczony prostokąt jako filtr</translation>
     </message>
     <message>
         <source>Trying to fetch geometry on a layer without geometry.</source>
@@ -12930,7 +12930,7 @@ SQL: %1</translation>
     <message>
         <location filename="../src/core/symbology-ng/qgsfillsymbollayerv2.cpp" line="527"/>
         <source>pad</source>
-        <translation type="unfinished">blok</translation>
+        <translation>blok</translation>
     </message>
     <message>
         <location filename="../src/core/symbology-ng/qgsfillsymbollayerv2.cpp" line="531"/>
@@ -19674,7 +19674,7 @@ Czy aktualne klasy powinny zostać usunięte przed klasyfikacją?</translation>
         <location filename="../src/app/composer/qgscomposer.cpp" line="3135"/>
         <location filename="../src/app/composer/qgscomposer.cpp" line="3180"/>
         <source>Set as atlas feature for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustaw jako obiekt atlasu dla %1</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposer.cpp" line="734"/>
@@ -25390,32 +25390,32 @@ a aktualną wersją pliku jest [%3]</translation>
     <message>
         <location filename="../src/gui/symbology-ng/qgsdatadefinedsymboldialog.cpp" line="173"/>
         <source>&apos;&lt;red&gt;,&lt;green&gt;,&lt;blue&gt;,&lt;alpha&gt;&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;&lt;czerwony&gt;,&lt;zielony&gt;,&lt;niebieski&gt;,&lt;alfa&gt;&apos;</translation>
     </message>
     <message>
         <location filename="../src/gui/symbology-ng/qgsdatadefinedsymboldialog.cpp" line="183"/>
         <source>&apos;&lt;filename&gt;&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;nazwa_pliku&gt;</translation>
     </message>
     <message>
         <location filename="../src/gui/symbology-ng/qgsdatadefinedsymboldialog.cpp" line="188"/>
         <source>&apos;left&apos;|&apos;center&apos;|&apos;right&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;lewa&apos;|&apos;środek&apos;|&apos;prawa&apos;</translation>
     </message>
     <message>
         <location filename="../src/gui/symbology-ng/qgsdatadefinedsymboldialog.cpp" line="193"/>
         <source>&apos;top&apos;|&apos;center&apos;|&apos;bottom&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;góra&apos;|&apos;środek&apos;|&apos;dół&apos;</translation>
     </message>
     <message>
         <location filename="../src/gui/symbology-ng/qgsdatadefinedsymboldialog.cpp" line="198"/>
         <source>&apos;linear&apos;|&apos;radial&apos;|&apos;conical&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;liniowy&apos;|&apos;radialny&apos;|&apos;stożkowyl&apos;</translation>
     </message>
     <message>
         <location filename="../src/gui/symbology-ng/qgsdatadefinedsymboldialog.cpp" line="203"/>
         <source>&apos;feature&apos;|&apos;viewport&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;obiekt&apos;|&apos;widokt&apos;</translation>
     </message>
     <message>
         <location filename="../src/gui/symbology-ng/qgsdatadefinedsymboldialog.cpp" line="208"/>
@@ -27834,7 +27834,7 @@ Błąd:
     <message>
         <location filename="../src/gui/attributetable/qgsdualview.cpp" line="434"/>
         <source>Run layer action</source>
-        <translation type="unfinished"></translation>
+        <translation>Uruchom akcję warstwy</translation>
     </message>
     <message>
         <location filename="../src/gui/attributetable/qgsdualview.cpp" line="465"/>
@@ -28609,7 +28609,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ui/qgsfeatureselectiondlg.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Formularz</translation>
     </message>
 </context>
 <context>
@@ -29178,7 +29178,17 @@ An example is (in module MyForms.py):
 Reference in Python Init Function like so: MyForms.open
 
 MyForms.py must live on PYTHONPATH, .qgis/python, or inside the project folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Formularze QGIS mogą zawierać funkcje Pythona wywoływane przy otwieraniu formularza.
+
+Przykładowo w module MyForms.py:
+
+          def open(dialog, layer, feature):
+	geom = feature.geometry()
+	control = dialog.findChild(QWidget,&quot;MyLineEdit&quot;)
+
+Dodaj wywołanie w funkcji Init Pythona: MyForms.open
+
+MyForms.py musi znajdować się w PYTHONPATH, .qgis/python, lub w katalogu projektu.</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsfieldspropertiesbase.ui" line="81"/>
@@ -31583,7 +31593,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="91"/>
         <source>Sky</source>
-        <translation type="unfinished">Niebo</translation>
+        <translation>Niebo</translation>
     </message>
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="100"/>
@@ -31598,7 +31608,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="114"/>
         <source>Auto ambient</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto otoczenie</translation>
     </message>
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="134"/>
@@ -31795,12 +31805,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/gui/symbology-ng/qgssymbollayerv2widget.cpp" line="981"/>
         <source>Coordinate mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Tryb współrzędnych</translation>
     </message>
     <message>
         <location filename="../src/gui/symbology-ng/qgssymbollayerv2widget.cpp" line="982"/>
         <source>Spread</source>
-        <translation type="unfinished">Wypełnienie</translation>
+        <translation>Rozpiętość</translation>
     </message>
     <message>
         <location filename="../src/gui/symbology-ng/qgssymbollayerv2widget.cpp" line="984"/>
@@ -31934,7 +31944,8 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="538"/>
         <source>Natural break classification (Jenks) is O(n2) complexity, your classification may take a long time.
 Press cancel to abort breaks calculation or OK to continue.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta metoda klasyfikacji (Jenks) jest klasy O(n2) złożoności - może potrwać długo.
+Możesz ją przerwać albo kontynuować.</translation>
     </message>
     <message>
         <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="548"/>
@@ -39586,27 +39597,27 @@ http://my.host.com/cgi-bin/mapserv.exe</translation>
     <message>
         <location filename="../src/app/qgsmeasuredialog.cpp" line="224"/>
         <source>Ellipsoidal calculation is not possible, as project CRS is undefined.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomiar po elipsoidzie jest niemożliwy, ponieważ nie zdefiniwano układu współrzędnych.</translation>
     </message>
     <message>
         <location filename="../src/app/qgsmeasuredialog.cpp" line="225"/>
         <source>Measure (OTF off)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomiar ( reprojekcja w locie wyłączona)</translation>
     </message>
     <message>
         <location filename="../src/app/qgsmeasuredialog.cpp" line="231"/>
         <source>Project CRS transformation is turned on and ellipsoidal calculation is selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Transformacja układu współrzędnych jest aktywna i wybrano pomiar po elipsoidzie.</translation>
     </message>
     <message>
         <location filename="../src/app/qgsmeasuredialog.cpp" line="232"/>
         <source>The coordinates are transformed to the chosen ellipsoid (%1), and the result is in meters</source>
-        <translation type="unfinished"></translation>
+        <translation>Współrzędne są odnoszone do wybranej elipsoidy (%1) a wyniki podawane są w metrach</translation>
     </message>
     <message>
         <location filename="../src/app/qgsmeasuredialog.cpp" line="236"/>
         <source>Project CRS transformation is turned on but ellipsoidal calculation is not selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Transformacja układu współrzędnych jest aktywna lecz nie wybrano pomiaru po elipsoidzie.</translation>
     </message>
     <message>
         <location filename="../src/app/qgsmeasuredialog.cpp" line="237"/>
@@ -39616,7 +39627,7 @@ http://my.host.com/cgi-bin/mapserv.exe</translation>
     <message>
         <location filename="../src/app/qgsmeasuredialog.cpp" line="239"/>
         <source>Measure (OTF on)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomiar ( reprojekcja w locie włączona)</translation>
     </message>
     <message>
         <location filename="../src/app/qgsmeasuredialog.cpp" line="244"/>
@@ -40591,7 +40602,8 @@ enhancement</source>
         <location filename="../src/gui/qgsnewhttpconnection.cpp" line="174"/>
         <source>WARNING: You have entered a password. It will be stored in plain text in your project files and in your home directory on Unix-like systems, or in your user profile on Windows. If you do not want this to happen, please press the Cancel button.
 Note: giving the password is optional. It will be requested interactivly, when needed.</source>
-        <translation type="unfinished"></translation>
+        <translation>OSTRZEŻENIE: Wpisano hasło. Będzie ona zapisane bez szyfrowania w plikach projektu oraz katalogu domowym (w systemach Unix), lub profilu użytkownika (w Windows). Jeśli nie chcesz go zapisywać, wybierz Anuluj.
+Uwaga: zapisywanie hasła nie jest obowiązkowe. Zostaniesz o nie poproszony w razie potrzeby.</translation>
     </message>
 </context>
 <context>
@@ -41113,7 +41125,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/gui/qgsnewvectorlayerdialog.cpp" line="54"/>
         <source>Comma Separated Value</source>
-        <translation type="unfinished">Comma Separated Value [CSV]</translation>
+        <translation>Comma Separated Value [CSV]</translation>
     </message>
     <message>
         <location filename="../src/gui/qgsnewvectorlayerdialog.cpp" line="55"/>
@@ -44728,7 +44740,7 @@ Błąd: %2</translation>
         <location filename="../src/providers/oracle/qgsoraclenewconnection.cpp" line="90"/>
         <source>WARNING: You have opted to save your password. It will be stored in plain text in your project files and in your home directory on Unix-like systems, or in your user profile on Windows. If you do not want this to happen, please press the Cancel button.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>OSTRZEŻENIE: Wybrano zapisanie hasła. Zostanie ono zapisane jako zwykły tekst w pliku projektu. Masz jeszcze szansę anulować tę operację.</translation>
     </message>
     <message>
         <location filename="../src/providers/oracle/qgsoraclenewconnection.cpp" line="101"/>
@@ -44804,7 +44816,7 @@ Błąd: %2</translation>
     <message>
         <location filename="../src/ui/qgsoraclenewconnectionbase.ui" line="128"/>
         <source>Restrict the displayed tables to those that are in the all_sdo_geom_metadata table</source>
-        <translation type="unfinished"></translation>
+        <translation>Ogranicz wyświetlane tabele do tych zapisanych w tabeli all_sdo_geom_metadata.</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoraclenewconnectionbase.ui" line="141"/>
@@ -44814,7 +44826,7 @@ Błąd: %2</translation>
     <message>
         <location filename="../src/ui/qgsoraclenewconnectionbase.ui" line="144"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When searching for spatial tables restrict the search to tables that are owned by the user.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Przy przeszukiwaniu tabel przestrzennych ogranicz tę operacje do tabel będących własnością użytkownika.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoraclenewconnectionbase.ui" line="211"/>

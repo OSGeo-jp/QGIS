@@ -1378,12 +1378,12 @@ stulpelius</translation>
     <message>
         <location filename="../python/plugins/fTools/tools/frmGeoprocessing.ui" line="162"/>
         <source>Dissolve field</source>
-        <translation type="unfinished"></translation>
+        <translation>Tirpinimo laukas</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmGeoprocessing.ui" line="210"/>
         <source>Dissolve buffer results</source>
-        <translation type="unfinished"></translation>
+        <translation>Tirpinti buferio rezultatus</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmGeoprocessing.ui" line="234"/>
@@ -1396,7 +1396,7 @@ stulpelius</translation>
     <message>
         <location filename="../python/plugins/fTools/tools/frmGeoprocessing.ui" line="92"/>
         <source>Segments to approximate</source>
-        <translation type="unfinished"></translation>
+        <translation>Aproksimuoti segmentų</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmIntersectLines.ui" line="17"/>
@@ -1651,11 +1651,11 @@ Ar norite pridėti naują sluoksnį prie turinio?</translation>
     </message>
     <message>
         <source>unstratified</source>
-        <translation type="unfinished"></translation>
+        <translation>nesluoksniuotas</translation>
     </message>
     <message>
         <source>stratified</source>
-        <translation type="unfinished"></translation>
+        <translation>sluoksniuotas</translation>
     </message>
     <message>
         <source>density</source>
@@ -1803,15 +1803,15 @@ Ar norite pridėti naują sluoksnį prie turinio?</translation>
     </message>
     <message>
         <source>Output spatial reference system is not valid</source>
-        <translation type="unfinished"></translation>
+        <translation>Netinkama išvedimo erdvinė atskaitos sistema</translation>
     </message>
     <message>
         <source>Please specify target vector layer</source>
-        <translation type="unfinished"></translation>
+        <translation>Prašome nurodyti paskirties vektorinį sluoksnį</translation>
     </message>
     <message>
         <source>Please specify join vector layer</source>
-        <translation type="unfinished"></translation>
+        <translation>Prašome nurodyti jungimo vektorinį sluoksnį</translation>
     </message>
     <message>
         <source>Mean coordinates</source>
@@ -1819,11 +1819,11 @@ Ar norite pridėti naują sluoksnį prie turinio?</translation>
     </message>
     <message>
         <source>Standard distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Standartinis atstumas</translation>
     </message>
     <message>
         <source>(Optional) Weight field</source>
-        <translation type="unfinished"></translation>
+        <translation>(Neprivalomas) svorio laukas</translation>
     </message>
     <message>
         <source>(Optional) Unique ID field</source>
@@ -1831,84 +1831,89 @@ Ar norite pridėti naują sluoksnį prie turinio?</translation>
     </message>
     <message>
         <source>Coordinate statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Koordinačių statistika</translation>
     </message>
     <message>
         <source>No input vector layer specified</source>
-        <translation type="unfinished"></translation>
+        <translation>Nenurodytas įvesties vektorinis sluoksnis</translation>
     </message>
     <message>
         <source>Eliminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Pašalinti</translation>
     </message>
     <message>
         <source>No selection in input layer</source>
-        <translation type="unfinished"></translation>
+        <translation>Įvedimo sluoksnyje nėra pažymėjimo</translation>
     </message>
     <message>
         <source>Error creating output file</source>
-        <translation type="unfinished"></translation>
+        <translation>Klaida kuriant išvesties failą</translation>
     </message>
     <message>
         <source>Could not delete features</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyko ištrinti geoobjektų</translation>
     </message>
     <message>
         <source>Could not add features</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyko pridėti geoobjektų</translation>
     </message>
     <message>
         <source>Join attributes by location</source>
-        <translation type="unfinished">Apjungti atributus pagal poziciją</translation>
+        <translation>Sujungti atributus pagal poziciją</translation>
     </message>
     <message>
         <source>Please specify at least one summary statistic</source>
-        <translation type="unfinished"></translation>
+        <translation>Prašome nurodyti bent vieną suminę statistiką</translation>
     </message>
     <message>
         <source>CRS warning!</source>
-        <translation type="unfinished"></translation>
+        <translation>CRS įspėjimas!</translation>
     </message>
     <message>
         <source>Warning: Input layers have non-matching CRS.
 This may cause unexpected results.</source>
-        <translation type="unfinished"></translation>
+        <translation>Įspėjimas: įvesties sluoksniai turi nevienodas CRS.
+Galite sulaukti netikėtų rezultatų.</translation>
     </message>
     <message>
         <source>Selected features: %s</source>
-        <translation type="unfinished"></translation>
+        <translation>Pažymėti geoobjektai: %s</translation>
     </message>
     <message>
         <source>Commit error:
 %s</source>
-        <translation type="unfinished"></translation>
+        <translation>Patvirtinimo klaida:
+%s</translation>
     </message>
     <message>
         <source>Could not replace geometry of feature with id %s</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyko pakeisti geometrijos geoobjektus su id %s</translation>
     </message>
     <message>
         <source>Could not eliminate features with these ids:
 %s</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyko pašalinti geoobjektų su id:
+%s</translation>
     </message>
     <message>
         <source>Created output shapefile:
 %s</source>
-        <translation type="unfinished"></translation>
+        <translation>Sukurtas išeities shape failas:
+%s</translation>
     </message>
     <message>
         <source>There were %d vertices in original dataset which
 were reduced to %d vertices after simplification</source>
-        <translation type="unfinished"></translation>
+        <translation>Pradiniame rinkinyje buvo %d viršūnių, kurios buvo
+supaprastintos iki %d viršūnių po supaprastinimo</translation>
     </message>
     <message>
         <source>Processing of the following layers/files ended with error:&lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Šiuo sluoksnių/failų apdorojimas baigėsi klaida:&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <source>Summary field</source>
-        <translation type="unfinished"></translation>
+        <translation>Suvestinis laukas</translation>
     </message>
     <message>
         <source>Can&apos;t delete existing shapefile
@@ -1918,93 +1923,95 @@ were reduced to %d vertices after simplification</source>
     </message>
     <message>
         <source>Vector grid</source>
-        <translation type="unfinished">Vektorių tinklelis</translation>
+        <translation>Vektorių tinklelis</translation>
     </message>
     <message>
         <source>Please specify valid extent coordinates</source>
-        <translation type="unfinished"></translation>
+        <translation>Prašome nurodyti tinkamas apimties koordinates</translation>
     </message>
     <message>
         <source>Invalid extent coordinates entered</source>
-        <translation type="unfinished"></translation>
+        <translation>Įvestos neteisingos apimties koordinatės</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmVectorGrid.ui" line="17"/>
         <source>Generate Vector Grid</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurti vektorinį tinklelį</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmPointsInPolygon.ui" line="14"/>
         <source>Count Points In Polygons</source>
-        <translation type="unfinished"></translation>
+        <translation>Skaičiuoti taškus poligonuose</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmPointsInPolygon.ui" line="22"/>
         <location filename="../python/plugins/fTools/tools/frmSumLines.ui" line="28"/>
         <source>Input polygon vector layer</source>
-        <translation type="unfinished">Įvesties poligonų vektorinis sluoksnis</translation>
+        <translation>Įvesties poligonų vektorinis sluoksnis</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmPointsInPolygon.ui" line="36"/>
         <source>Input point vector layer</source>
-        <translation type="unfinished">Įvesties taškų vektorinis sluoksnis</translation>
+        <translation>Įvesties taškų vektorinis sluoksnis</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmPointsInPolygon.ui" line="50"/>
         <source>Output count field name</source>
-        <translation type="unfinished"></translation>
+        <translation>Išvesties skaičiaus lauko pavadinimas</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmPointsInPolygon.ui" line="57"/>
         <source>PNTCNT</source>
-        <translation type="unfinished"></translation>
+        <translation>PNTCNT</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRandPoints.ui" line="17"/>
         <source>Generate Random Points</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurti atsitiktinius taškus</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRandPoints.ui" line="32"/>
         <location filename="../python/plugins/fTools/tools/frmRegPoints.ui" line="32"/>
         <source>Input Boundary Layer</source>
-        <translation type="unfinished"></translation>
+        <translation>Įvesties ribų sluoksnis</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRandPoints.ui" line="42"/>
         <source>Sample Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Pavyzdžio dydis</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRandPoints.ui" line="55"/>
         <source>Unstratified Sampling Design (Entire layer)</source>
-        <translation type="unfinished"></translation>
+        <translation>Taškų parinkimas visame sluoksnyje
+(visuose plotų įrašuose bendrai)</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRandPoints.ui" line="64"/>
         <location filename="../python/plugins/fTools/tools/frmRandPoints.ui" line="105"/>
         <location filename="../python/plugins/fTools/tools/frmRegPoints.ui" line="149"/>
         <source>Use this number of points</source>
-        <translation type="unfinished"></translation>
+        <translation>Taškų skaičius</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRandPoints.ui" line="96"/>
         <source>Stratified Sampling Design (Individual polygons)</source>
-        <translation type="unfinished"></translation>
+        <translation>Taškų parinkimas kiekvienam įrašui atskirai
+(individualiai kiekvienam ploto įrašui)</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRandPoints.ui" line="129"/>
         <source>Use this density of points</source>
-        <translation type="unfinished"></translation>
+        <translation>Taškų tankis</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRandPoints.ui" line="162"/>
         <source>Use value from input field</source>
-        <translation type="unfinished"></translation>
+        <translation>Naudoti reikšmę iš įvesties lauko</translation>
     </message>
     <message>
         <source>No input shapefile specified</source>
-        <translation type="unfinished"></translation>
+        <translation>Nenurodytas įvesties shape failas</translation>
     </message>
     <message>
         <source>Cannot define projection for PostGIS data...yet!</source>
@@ -2014,60 +2021,62 @@ were reduced to %d vertices after simplification</source>
         <source>Identical output spatial reference system chosen
 
 Are you sure you want to proceed?</source>
-        <translation type="unfinished"></translation>
+        <translation>Parinkta identiška galutinė erdvinė atskaitos sistema
+
+Ar tikrai norite tęsti?</translation>
     </message>
     <message>
         <source>Please select the projection system that defines the current layer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prašome parinkti projekcijos sistemą, apibrėžiančią dabartinį sluoksnį.</translation>
     </message>
     <message>
         <source>Layer CRS information will be updated to the selected CRS.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sluoksnio CRS informacija bus pakeista į parinktą CRS.</translation>
     </message>
     <message>
         <source>Split vector layer</source>
-        <translation type="unfinished">Dalinti vektoriaus sluoksnį</translation>
+        <translation>Dalinti vektoriaus sluoksnį</translation>
     </message>
     <message>
         <source>Random selection</source>
-        <translation type="unfinished">Atsitiktinė parinktis</translation>
+        <translation>Atsitiktinė parinktis</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRandom.ui" line="14"/>
         <source>Random Selection Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Atsitiktinio parinkimo įrankis</translation>
     </message>
     <message>
         <source>Count Points in Polygon</source>
-        <translation type="unfinished"></translation>
+        <translation>Skaičiuoti taškus poligone</translation>
     </message>
     <message>
         <source>Count Points In Polygon</source>
-        <translation type="unfinished"></translation>
+        <translation>Skaičiuoti taškus poligone</translation>
     </message>
     <message>
         <source>Please specify input point vector layer</source>
-        <translation type="unfinished"></translation>
+        <translation>Prašome nurodyti įvesties taškų vektorinį sluoksnį</translation>
     </message>
     <message>
         <source>Please specify output count field</source>
-        <translation type="unfinished"></translation>
+        <translation>Prašome nurodyti išvesties skaičiaus lauką</translation>
     </message>
     <message>
         <source>Please select a raster layer</source>
-        <translation type="unfinished">Prašome parinkti rastrinį sluoksnį</translation>
+        <translation>Prašome parinkti rastrinį sluoksnį</translation>
     </message>
     <message>
         <source>Unable to compute extents aligned on selected raster layer</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyksta paskaičiuoti apimčių, priderintų prie dabartinio rastrinio sluoksnio</translation>
     </message>
     <message>
         <source>Densify geometries</source>
-        <translation type="unfinished">Tankinti geometrijas</translation>
+        <translation>Tankinti geometrijas</translation>
     </message>
     <message>
         <source>Vertices to add</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridėti viršūnes</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -2075,19 +2084,19 @@ Are you sure you want to proceed?</source>
     </message>
     <message>
         <source>Please specify an input layer</source>
-        <translation type="unfinished">Prašome nurodyti pradinį sluoksnį</translation>
+        <translation>Prašome nurodyti pradinį sluoksnį</translation>
     </message>
     <message>
         <source>Currently QGIS doesn&apos;t allow simultaneous access from 
                                  different threads to the same datasource. Make sure your layer&apos;s 
                                  attribute tables are closed. Continue?</source>
-        <translation type="unfinished">Šiuo metu QGIS neleidžia vienu metu prieiti prie duombazės 
+        <translation>Šiuo metu QGIS neleidžia vienu metu prieiti prie duombazės 
                                  iš skirtingų gijų. Įsitikinkite, kad jūsų sluoksnių atributų 
                                  lentelės yra uždarytos. Tęsti?</translation>
     </message>
     <message>
         <source>Simplify results</source>
-        <translation type="unfinished"></translation>
+        <translation>Supaprastinti rezultatus</translation>
     </message>
     <message>
         <source>Error</source>
@@ -2095,57 +2104,57 @@ Are you sure you want to proceed?</source>
     </message>
     <message>
         <source>Distance matrix</source>
-        <translation type="unfinished">Atstumų matrica</translation>
+        <translation>Atstumų matrica</translation>
     </message>
     <message>
         <source>Create Point Distance Matrix</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurti taškų atstumų matricą</translation>
     </message>
     <message>
         <source>Please specify input point layer</source>
-        <translation type="unfinished"></translation>
+        <translation>Prašome nurodyti įvesties taškų sluoksnį</translation>
     </message>
     <message>
         <source>Please specify output file</source>
-        <translation type="unfinished"></translation>
+        <translation>Prašome nurodyti išvesties failą</translation>
     </message>
     <message>
         <source>Please specify target point layer</source>
-        <translation type="unfinished"></translation>
+        <translation>Prašome nurodyti paskirties taškų sluoksnį</translation>
     </message>
     <message>
         <source>Please specify target unique ID field</source>
-        <translation type="unfinished"></translation>
+        <translation>Prašome nurodyti paskirties unikalų ID lauką</translation>
     </message>
     <message>
         <source>Created output matrix:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Sukurta išvesties matrica:</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRandom.ui" line="23"/>
         <location filename="../python/plugins/fTools/tools/frmSubsetSelect.ui" line="25"/>
         <location filename="../python/plugins/fTools/tools/frmVisual.ui" line="28"/>
         <source>Input Vector Layer</source>
-        <translation type="unfinished"></translation>
+        <translation>Įvesties vektorinis sluoksnis</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRandom.ui" line="33"/>
         <location filename="../python/plugins/fTools/tools/frmSubsetSelect.ui" line="55"/>
         <source>Randomly Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Parinkti atsitiktinai</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRandom.ui" line="42"/>
         <location filename="../python/plugins/fTools/tools/frmSubsetSelect.ui" line="64"/>
         <source>Number of Features</source>
-        <translation type="unfinished"></translation>
+        <translation>Geoobjektų skaičius</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRandom.ui" line="76"/>
         <location filename="../python/plugins/fTools/tools/frmSubsetSelect.ui" line="100"/>
         <source>Percentage of Features</source>
-        <translation type="unfinished"></translation>
+        <translation>Geoobjektų procentas</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRandom.ui" line="96"/>
@@ -2156,22 +2165,22 @@ Are you sure you want to proceed?</source>
     <message>
         <location filename="../python/plugins/fTools/tools/frmReProject.ui" line="17"/>
         <source>Projection Management Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Projekcijų valdymo įrankis</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmReProject.ui" line="42"/>
         <source>Input spatial reference system</source>
-        <translation type="unfinished"></translation>
+        <translation>Įvesties erdvinė atskaitos sistema</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmReProject.ui" line="58"/>
         <source>Output spatial reference system</source>
-        <translation type="unfinished"></translation>
+        <translation>Išvesties erdvinė atskaitos sistema</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmReProject.ui" line="64"/>
         <source>Use predefined spatial reference system</source>
-        <translation type="unfinished"></translation>
+        <translation>Naudoti nustatytą erdvinę atskaitos sistemą</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmReProject.ui" line="83"/>
@@ -2181,131 +2190,131 @@ Are you sure you want to proceed?</source>
     <message>
         <location filename="../python/plugins/fTools/tools/frmReProject.ui" line="92"/>
         <source>Import spatial reference system from existing layer</source>
-        <translation type="unfinished"></translation>
+        <translation>Importuoti erdvinę atskaitos sistemą iš esamo sluoksnio</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmReProject.ui" line="109"/>
         <source>Import spatial reference system</source>
-        <translation type="unfinished"></translation>
+        <translation>Importuoti erdvinę atskaitos sistemą</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRegPoints.ui" line="17"/>
         <source>Generate Regular Points</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurti dėsningus taškus</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRegPoints.ui" line="26"/>
         <source>Area</source>
-        <translation type="unfinished">Plotas</translation>
+        <translation>Plotas</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRegPoints.ui" line="45"/>
         <source>Input Coordinates</source>
-        <translation type="unfinished"></translation>
+        <translation>Įvesties koordinatės</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRegPoints.ui" line="52"/>
         <location filename="../python/plugins/fTools/tools/frmVectorGrid.ui" line="66"/>
         <source>X Min</source>
-        <translation type="unfinished"></translation>
+        <translation>X Min</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRegPoints.ui" line="66"/>
         <location filename="../python/plugins/fTools/tools/frmVectorGrid.ui" line="93"/>
         <source>Y Min</source>
-        <translation type="unfinished"></translation>
+        <translation>Y Min</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRegPoints.ui" line="80"/>
         <location filename="../python/plugins/fTools/tools/frmVectorGrid.ui" line="120"/>
         <source>X Max</source>
-        <translation type="unfinished"></translation>
+        <translation>X Maks</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRegPoints.ui" line="94"/>
         <location filename="../python/plugins/fTools/tools/frmVectorGrid.ui" line="147"/>
         <source>Y Max</source>
-        <translation type="unfinished"></translation>
+        <translation>Y Maks</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRegPoints.ui" line="111"/>
         <source>Grid Spacing</source>
-        <translation type="unfinished"></translation>
+        <translation>Tinklelio tarpai</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRegPoints.ui" line="119"/>
         <source>Use this point spacing</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarpas tarp taškų</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRegPoints.ui" line="171"/>
         <source>Apply random offset to point spacing</source>
-        <translation type="unfinished"></translation>
+        <translation>Atsitiktinio dydžio tarpas tarp taškų</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmRegPoints.ui" line="191"/>
         <source>Initial inset from corner (LH side)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pradinis įsiuvas iš kampo (KV pusė)</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSpatialJoin.ui" line="17"/>
         <source>Spatial Join</source>
-        <translation type="unfinished"></translation>
+        <translation>Erdvinis sujungimas</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSpatialJoin.ui" line="54"/>
         <source>Attribute Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>Atributų suvestinė</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSpatialJoin.ui" line="146"/>
         <source>Take attributes of first located feature</source>
-        <translation type="unfinished"></translation>
+        <translation>Imti atributus iš pirmo rasto geoobjekto</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSpatialJoin.ui" line="99"/>
         <source>Take summary of intersecting features</source>
-        <translation type="unfinished"></translation>
+        <translation>Imti suvestinę iš persidengiančių geoobjektų</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSpatialJoin.ui" line="89"/>
         <source>Mean</source>
-        <translation type="unfinished"></translation>
+        <translation>Vidutinis</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSpatialJoin.ui" line="109"/>
         <source>Min</source>
-        <translation type="unfinished">Min</translation>
+        <translation>Min</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSpatialJoin.ui" line="139"/>
         <source>Max</source>
-        <translation type="unfinished">Maks</translation>
+        <translation>Maks</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSpatialJoin.ui" line="119"/>
         <source>Sum</source>
-        <translation type="unfinished"></translation>
+        <translation>Suma</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSpatialJoin.ui" line="129"/>
         <source>Median</source>
-        <translation type="unfinished"></translation>
+        <translation>Mediana</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSubsetSelect.ui" line="14"/>
         <source>Random Selection From Within Subsets</source>
-        <translation type="unfinished"></translation>
+        <translation>Atsitiktinė parinktis iš poaibio</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSubsetSelect.ui" line="39"/>
         <source>Input subset field (unique ID field)</source>
-        <translation type="unfinished"></translation>
+        <translation>Įvesties poaibio laukas (unikalaus ID laukas)</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSumLines.ui" line="17"/>
         <source>Sum Line Length In Polygons</source>
-        <translation type="unfinished"></translation>
+        <translation>Sumuoti linijų ilgį poligonuose</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSumLines.ui" line="56"/>
@@ -2315,117 +2324,117 @@ Are you sure you want to proceed?</source>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSumLines.ui" line="63"/>
         <source>LENGTH</source>
-        <translation type="unfinished"></translation>
+        <translation>ILGIS</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSumLines.ui" line="42"/>
         <source>Input line vector layer</source>
-        <translation type="unfinished">Įvesties linijų vektorinis sluoksnis</translation>
+        <translation>Įvesties linijų vektorinis sluoksnis</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmVectorGrid.ui" line="26"/>
         <source>Grid extent</source>
-        <translation type="unfinished"></translation>
+        <translation>Tinklelio apimtis</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmVectorGrid.ui" line="41"/>
         <source>Update extents from layer</source>
-        <translation type="unfinished"></translation>
+        <translation>Atnaujinti apimtį pagal sluoksnį</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmVectorGrid.ui" line="54"/>
         <source>Update extents from canvas</source>
-        <translation type="unfinished"></translation>
+        <translation>Atnaujinti apimtį pagal drobę</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmVectorGrid.ui" line="169"/>
         <source>Align extents and resolution to selected raster layer</source>
-        <translation type="unfinished"></translation>
+        <translation>Priderinti apimtis ir rezoliucija prie parinkto rastro sluoksnio</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmVectorGrid.ui" line="179"/>
         <source>Parameters</source>
-        <translation type="unfinished">Parametrai</translation>
+        <translation>Parametrai</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmVectorGrid.ui" line="198"/>
         <source>X</source>
-        <translation type="unfinished">X</translation>
+        <translation>X</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmVectorGrid.ui" line="221"/>
         <source>Lock 1:1 ratio</source>
-        <translation type="unfinished"></translation>
+        <translation>Fiksuoti 1:1 santykį</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmVectorGrid.ui" line="260"/>
         <source>Y</source>
-        <translation type="unfinished">Y</translation>
+        <translation>Y</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmVectorGrid.ui" line="286"/>
         <source>Output grid as polygons</source>
-        <translation type="unfinished"></translation>
+        <translation>Išvesties tinklelis kaip poligonai</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmVectorGrid.ui" line="296"/>
         <source>Output grid as lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Išvesties tinklelis kaip linijos</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmVectorSplit.ui" line="17"/>
         <source>Vector Split</source>
-        <translation type="unfinished"></translation>
+        <translation>Vektorių dalinimas</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmVectorSplit.ui" line="57"/>
         <source>Output folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Išvesties aplankas</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmVisual.ui" line="17"/>
         <source>List Unique Values</source>
-        <translation type="unfinished"></translation>
+        <translation>Rodyti unikalias reikšmes</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmVisual.ui" line="53"/>
         <source>Target field</source>
-        <translation type="unfinished">Paskirties laukas</translation>
+        <translation>Paskirties laukas</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmVisual.ui" line="67"/>
         <source>Unique values list</source>
-        <translation type="unfinished"></translation>
+        <translation>Unikalių reikšmių sąrašas</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmVisual.ui" line="115"/>
         <source>Unique value count</source>
-        <translation type="unfinished"></translation>
+        <translation>Unikalių reikšmių skaičius</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmVisual.ui" line="145"/>
         <source>Save errors location</source>
-        <translation type="unfinished"></translation>
+        <translation>Įrašyti klaidų vietas</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmVisual.ui" line="131"/>
         <source>Press Ctrl+C to copy results to the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+C rezultatų kopijavimas į iškarpinę</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmMergeShapes.ui" line="14"/>
         <source>Merge shapefiles</source>
-        <translation type="unfinished"></translation>
+        <translation>Sulieti shape failus</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmMergeShapes.ui" line="20"/>
         <source>Select by layers in the folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Parinkti pagal sluoksnius aplanke</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmMergeShapes.ui" line="29"/>
         <source>Shapefile type</source>
-        <translation type="unfinished"></translation>
+        <translation>Shape failo tipas</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmMergeShapes.ui" line="37"/>
@@ -2445,32 +2454,32 @@ Are you sure you want to proceed?</source>
     <message>
         <location filename="../python/plugins/fTools/tools/frmMergeShapes.ui" line="57"/>
         <source>Input directory</source>
-        <translation type="unfinished">Įvesties aplankas</translation>
+        <translation>Įvesties aplankas</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmMergeShapes.ui" line="99"/>
         <source>Add result to map canvas</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridėti rezultatą prie drobės</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSimplify.ui" line="14"/>
         <source>Simplify geometries</source>
-        <translation type="unfinished">Paprastinti geometrijas</translation>
+        <translation>Paprastinti geometrijas</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSimplify.ui" line="20"/>
         <source>Input line or polygon layer</source>
-        <translation type="unfinished"></translation>
+        <translation>Įvesties linijų ar poligonų sluoksnis</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSimplify.ui" line="46"/>
         <source>Simplify tolerance</source>
-        <translation type="unfinished"></translation>
+        <translation>Paprastinimo tolerancija</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSimplify.ui" line="73"/>
         <source>Save to new file</source>
-        <translation type="unfinished"></translation>
+        <translation>Įrašyti į naują failą</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmEliminate.ui" line="93"/>
@@ -2486,7 +2495,7 @@ Are you sure you want to proceed?</source>
         <location filename="../python/plugins/fTools/tools/frmVectorGrid.ui" line="353"/>
         <location filename="../python/plugins/fTools/tools/frmVisual.ui" line="177"/>
         <source>Add result to canvas</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridėti rezultatą į drobę</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSpatialIndex.ui" line="14"/>
@@ -2496,22 +2505,22 @@ Are you sure you want to proceed?</source>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSpatialIndex.ui" line="22"/>
         <source>Select files from disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Parinkti failus diske</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSpatialIndex.ui" line="29"/>
         <source>Select files...</source>
-        <translation type="unfinished"></translation>
+        <translation>Parinkti failus...</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSpatialIndex.ui" line="53"/>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>Parinkti viską</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSpatialIndex.ui" line="60"/>
         <source>Select none</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieko neparinkti</translation>
     </message>
     <message>
         <location filename="../python/plugins/fTools/tools/frmSpatialIndex.ui" line="67"/>
@@ -3018,37 +3027,37 @@ Are you sure you want to proceed?</source>
     </message>
     <message>
         <source>Choose the file to import</source>
-        <translation type="unfinished"></translation>
+        <translation>Parinkite failą importavimui</translation>
     </message>
     <message>
         <source>Import to database</source>
-        <translation type="unfinished"></translation>
+        <translation>Importuoti į duombazę</translation>
     </message>
     <message>
         <source>Input layer missing or not valid</source>
-        <translation type="unfinished"></translation>
+        <translation>Nėra įvesties sluoksnio arba jis netinkamas</translation>
     </message>
     <message>
         <source>Output table name is required</source>
-        <translation type="unfinished">Trūksta išvesties lentelės pavadinimo</translation>
+        <translation>Trūksta išvesties lentelės pavadinimo</translation>
     </message>
     <message>
         <source>Invalid source srid: must be an integer</source>
-        <translation type="unfinished">Netinkama šaltinio SRID: turi būti sveikas skaičius</translation>
+        <translation>Netinkama šaltinio srid: turi būti sveikas skaičius</translation>
     </message>
     <message>
         <source>Invalid target srid: must be an integer</source>
-        <translation type="unfinished">Netinkama paskirties SRID: turi būti sveikas skaičius</translation>
+        <translation>Netinkama paskirties srid: turi būti sveikas skaičius</translation>
     </message>
     <message>
         <source>Error %d
 %s</source>
-        <translation type="unfinished">Klaida %d
+        <translation>Klaida %d
 %s</translation>
     </message>
     <message>
         <source>Import was successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>Importas sėkmingas.</translation>
     </message>
 </context>
 <context>
@@ -3137,17 +3146,17 @@ Are you sure you want to proceed?</source>
     <message>
         <location filename="../python/plugins/processing/ui/DlgNumberInput.ui" line="14"/>
         <source>Enter number or expression</source>
-        <translation type="unfinished"></translation>
+        <translation>Įveskite skaičių arba išraišką</translation>
     </message>
     <message>
         <location filename="../python/plugins/processing/ui/DlgNumberInput.ui" line="26"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter expression in the text field. Double click on elements in the tree to add their values to the expression.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Teksto lauke įveskite išraišką. Du kartus spauskite elementus medyje, kad pridėtumėte jų reikšmes į išraišką.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../python/plugins/processing/ui/DlgNumberInput.ui" line="36"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Warning&lt;/span&gt;: if expression result is float value, but integer required, result will be rounded to integer.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Įspėjimas&lt;/span&gt;: jei išraiškos rezultatas yra ne sveikas skaičius, o reikia sveiko, rezultatas bus suapvalintas.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -3927,7 +3936,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>No input files to process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nėra apdorotinamų įvesties failų.</translation>
     </message>
     <message>
         <source>The following files were not created: 
@@ -4617,7 +4626,7 @@ kai naudotojas paspaudžia įrankių dialogų pagalbos mygtuką.</translation>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetGrid.ui" line="71"/>
         <source>Moving average</source>
-        <translation type="unfinished"></translation>
+        <translation>Slenkantis vidurkis</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetGrid.ui" line="76"/>
@@ -4627,12 +4636,12 @@ kai naudotojas paspaudžia įrankių dialogų pagalbos mygtuką.</translation>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetGrid.ui" line="81"/>
         <source>Data metrics</source>
-        <translation type="unfinished"></translation>
+        <translation>Duomenų metrikos</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetGrid.ui" line="107"/>
         <source>Power</source>
-        <translation type="unfinished"></translation>
+        <translation>Laipsnis</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetGrid.ui" line="127"/>
@@ -4706,7 +4715,7 @@ kai naudotojas paspaudžia įrankių dialogų pagalbos mygtuką.</translation>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetGrid.ui" line="573"/>
         <source>Metrics</source>
-        <translation type="unfinished"></translation>
+        <translation>Metrikos</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetGrid.ui" line="587"/>
@@ -4867,7 +4876,7 @@ kai naudotojas paspaudžia įrankių dialogų pagalbos mygtuką.</translation>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetDEM.ui" line="338"/>
         <source>Color configuration file</source>
-        <translation type="unfinished"></translation>
+        <translation>Spalvų konfigūracijos failas</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetDEM.ui" line="345"/>
@@ -4877,39 +4886,39 @@ kai naudotojas paspaudžia įrankių dialogų pagalbos mygtuką.</translation>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetDEM.ui" line="357"/>
         <source>Exact color (otherwise &quot;0,0,0,0&quot; RGBA)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiksli spalva (arba &quot;0,0,0,0&quot; RGBA)</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetDEM.ui" line="370"/>
         <source>Nearest color</source>
-        <translation type="unfinished"></translation>
+        <translation>Artimiausia spalva</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetDEM.ui" line="380"/>
         <source>Add alpha channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridėti alfa kanalą</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetDEM.ui" line="418"/>
         <location filename="../python/plugins/GdalTools/tools/widgetMerge.ui" line="111"/>
         <location filename="../python/plugins/GdalTools/tools/widgetTranslate.ui" line="255"/>
         <source>&amp;Creation Options</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kūrimo parinktys</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetNearBlack.ui" line="20"/>
         <source>Near Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Beveik juoda</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetNearBlack.ui" line="48"/>
         <source>How &amp;far from black (or white)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaip &amp;toli nuo juodos (ar baltos)</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetNearBlack.ui" line="70"/>
         <source>Search for nearly &amp;white (255) pixels instead of black ones</source>
-        <translation type="unfinished"></translation>
+        <translation>Ieškoti beveik &amp;baltų (255), o ne juodų taškų</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetOverview.ui" line="20"/>
@@ -4934,22 +4943,22 @@ kai naudotojas paspaudžia įrankių dialogų pagalbos mygtuką.</translation>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetPolygonize.ui" line="39"/>
         <source>&amp;Output file for polygons (shapefile)</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Poligonų išvesties failas (shape)</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetPolygonize.ui" line="52"/>
         <source>&amp;Field name</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Lauko pavadinimas</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetPolygonize.ui" line="59"/>
         <source>DN</source>
-        <translation type="unfinished"></translation>
+        <translation>DN</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetPolygonize.ui" line="66"/>
         <source>Use mask</source>
-        <translation type="unfinished"></translation>
+        <translation>Naudoti šabloną</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetProjection.ui" line="20"/>
@@ -4959,19 +4968,21 @@ kai naudotojas paspaudžia įrankių dialogų pagalbos mygtuką.</translation>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetProjection.ui" line="33"/>
         <source>WARNING: current projection definition will be cleared</source>
-        <translation type="unfinished"></translation>
+        <translation>ĮSPĖJIMAS: dabartinė projekcijos nuostata bus panaikinta</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetProjection.ui" line="59"/>
         <source>Desired SRS</source>
-        <translation type="unfinished"></translation>
+        <translation>Norima SRS</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetProjection.ui" line="66"/>
         <source>Output will be:
 - new GeoTiff if input file is not GeoTiff
 - overwritten if input is GeoTiff</source>
-        <translation type="unfinished"></translation>
+        <translation>Išvestis bus:
+- naujas GeoTiff, jei įvestis nėra GeoTiff
+- perrašyta, jei įvestis yra GeoTiff</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetBuildVRT.ui" line="55"/>
@@ -4989,7 +5000,7 @@ kai naudotojas paspaudžia įrankių dialogų pagalbos mygtuką.</translation>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetProximity.ui" line="48"/>
         <source>&amp;Values</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Reikšmės</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetProximity.ui" line="55"/>
@@ -4999,27 +5010,27 @@ kai naudotojas paspaudžia įrankių dialogų pagalbos mygtuką.</translation>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetProximity.ui" line="66"/>
         <source>GEO</source>
-        <translation type="unfinished"></translation>
+        <translation>GEO</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetProximity.ui" line="71"/>
         <source>PIXEL</source>
-        <translation type="unfinished"></translation>
+        <translation>TAŠKAS</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetProximity.ui" line="79"/>
         <source>&amp;Max dist</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Maks atstumas</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetProximity.ui" line="93"/>
         <source>&amp;No data</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nėra duomenų</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetProximity.ui" line="110"/>
         <source>&amp;Fixed buf val</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Fiks. buf. reikšmė</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetProximity.ui" line="124"/>
@@ -5035,42 +5046,42 @@ kai naudotojas paspaudžia įrankių dialogų pagalbos mygtuką.</translation>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetRasterize.ui" line="28"/>
         <source>&amp;Input file (shapefile)</source>
-        <translation type="unfinished"></translation>
+        <translation>Į&amp;vesties failas (shape)</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetRasterize.ui" line="38"/>
         <source>&amp;Attribute field</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Atributų laukas</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetRasterize.ui" line="58"/>
         <source>&amp;Output file for rasterized vectors (raster)</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Išvesties failas rasterizuotiems vektoriams (rastras)</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetRasterize.ui" line="76"/>
         <source>Keep existing raster size and resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>Palikti dabartinį rastro dydį ir rezoliuciją</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetRasterize.ui" line="86"/>
         <source>Raster size in pixels</source>
-        <translation type="unfinished"></translation>
+        <translation>Rastro dydis taškais</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetRasterize.ui" line="157"/>
         <source>Raster resolution in map units per pixel</source>
-        <translation type="unfinished"></translation>
+        <translation>Rastro rezoliucija žemėlapio vienetais per tašką</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetRasterize.ui" line="185"/>
         <source>Horizontal</source>
-        <translation type="unfinished"></translation>
+        <translation>Horizontaliai</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetRasterize.ui" line="211"/>
         <source>Vertical</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertikaliai</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetSieve.ui" line="20"/>
@@ -5080,12 +5091,12 @@ kai naudotojas paspaudžia įrankių dialogų pagalbos mygtuką.</translation>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetSieve.ui" line="48"/>
         <source>&amp;Threshold</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Slenkstis</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetSieve.ui" line="62"/>
         <source>&amp;Pixel connections</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Taškų jungtys</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetSieve.ui" line="70"/>
@@ -5101,7 +5112,7 @@ kai naudotojas paspaudžia įrankių dialogų pagalbos mygtuką.</translation>
         <location filename="../python/plugins/GdalTools/tools/widgetTranslate.ui" line="106"/>
         <location filename="../python/plugins/GdalTools/tools/widgetTranslate.ui" line="122"/>
         <source>Percentage to resize image. This will change pixel size/image resolution accordingly: 25% will create an image with pixels 4x larger.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dydžio keitimo procentai. Tai atitinkamai pakeis taškų dydį/piešinio rezoliuciją: 25% reiškia piešinį su 4 kartus didesniais taškais.</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetTranslate.ui" line="125"/>
@@ -5112,7 +5123,7 @@ kai naudotojas paspaudžia įrankių dialogų pagalbos mygtuką.</translation>
         <location filename="../python/plugins/GdalTools/tools/widgetTranslate.ui" line="138"/>
         <location filename="../python/plugins/GdalTools/tools/widgetTranslate.ui" line="234"/>
         <source>Assign a specified nodata value to output bands.</source>
-        <translation type="unfinished"></translation>
+        <translation>Priskirti nurodytą „nėra duomenų“ reikšmė išvesties juostoms.</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetTranslate.ui" line="148"/>
@@ -5125,18 +5136,18 @@ The &apos;gray&apos; value (from GDAL 1.7.0) enables to expand a dataset with a 
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetFillNodata.ui" line="20"/>
         <source>Fill Nodata</source>
-        <translation type="unfinished"></translation>
+        <translation>Pildyti „nėra duomenų“</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetFillNodata.ui" line="33"/>
         <location filename="../python/plugins/GdalTools/tools/widgetTranslate.ui" line="35"/>
         <source>&amp;Input Layer</source>
-        <translation type="unfinished"></translation>
+        <translation>Į&amp;vesties sluoksnis</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetFillNodata.ui" line="79"/>
         <source>Search distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Paieškos atstumas</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetFillNodata.ui" line="99"/>
@@ -5167,7 +5178,7 @@ The &apos;gray&apos; value (from GDAL 1.7.0) enables to expand a dataset with a 
         <location filename="../python/plugins/GdalTools/tools/widgetTranslate.ui" line="72"/>
         <location filename="../python/plugins/GdalTools/tools/widgetWarp.ui" line="83"/>
         <source>&amp;Target SRS</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Galutinis SRS</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetTranslate.ui" line="109"/>
@@ -5224,7 +5235,7 @@ The &apos;gray&apos; value (from GDAL 1.7.0) enables to expand a dataset with a 
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetTranslate.ui" line="221"/>
         <source>Sds</source>
-        <translation type="unfinished"></translation>
+        <translation>Sds</translation>
     </message>
     <message>
         <location filename="../python/plugins/GdalTools/tools/widgetFillNodata.ui" line="62"/>
@@ -5422,11 +5433,11 @@ The &apos;gray&apos; value (from GDAL 1.7.0) enables to expand a dataset with a 
     </message>
     <message>
         <source>Voronoi polygon</source>
-        <translation type="unfinished"></translation>
+        <translation>Voronoi poligonas</translation>
     </message>
     <message>
         <source>Buffer region</source>
-        <translation type="unfinished"></translation>
+        <translation>Buferio regionas</translation>
     </message>
     <message>
         <source>Lines to polygons</source>
@@ -5826,12 +5837,12 @@ GEOS geoapdorojimo klaida: Vienas ar daugiau įvesties geoobjektų turi netinkam
     <message>
         <location filename="../src/plugins/heatmap/heatmapguibase.ui" line="29"/>
         <source>Input point layer</source>
-        <translation type="unfinished">įvesties taškų sluoksnis</translation>
+        <translation>įvesties taškų sluoksnis</translation>
     </message>
     <message>
         <location filename="../src/plugins/heatmap/heatmapguibase.ui" line="39"/>
         <source>Output raster</source>
-        <translation type="unfinished"></translation>
+        <translation>Išvesties rastras</translation>
     </message>
     <message>
         <location filename="../src/plugins/heatmap/heatmapguibase.ui" line="62"/>
@@ -5841,7 +5852,7 @@ GEOS geoapdorojimo klaida: Vienas ar daugiau įvesties geoobjektų turi netinkam
     <message>
         <location filename="../src/plugins/heatmap/heatmapguibase.ui" line="79"/>
         <source>Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Spindulys</translation>
     </message>
     <message>
         <location filename="../src/plugins/heatmap/heatmapguibase.ui" line="86"/>
@@ -5868,7 +5879,7 @@ GEOS geoapdorojimo klaida: Vienas ar daugiau įvesties geoobjektų turi netinkam
     <message>
         <location filename="../src/plugins/heatmap/heatmapguibase.ui" line="140"/>
         <source>Cell size X</source>
-        <translation type="unfinished"></translation>
+        <translation>Celės dydis X</translation>
     </message>
     <message>
         <location filename="../src/plugins/heatmap/heatmapguibase.ui" line="150"/>
@@ -5878,17 +5889,17 @@ GEOS geoapdorojimo klaida: Vienas ar daugiau įvesties geoobjektų turi netinkam
     <message>
         <location filename="../src/plugins/heatmap/heatmapguibase.ui" line="160"/>
         <source>Cell size Y</source>
-        <translation type="unfinished"></translation>
+        <translation>Celės dydis Y</translation>
     </message>
     <message>
         <location filename="../src/plugins/heatmap/heatmapguibase.ui" line="206"/>
         <source>Use radius from field</source>
-        <translation type="unfinished"></translation>
+        <translation>Naudoti spindulį iš lauko</translation>
     </message>
     <message>
         <location filename="../src/plugins/heatmap/heatmapguibase.ui" line="237"/>
         <source>Use weight from field</source>
-        <translation type="unfinished"></translation>
+        <translation>Naudoti svorį iš lauko</translation>
     </message>
     <message>
         <location filename="../src/plugins/heatmap/heatmapguibase.ui" line="254"/>
@@ -5898,7 +5909,7 @@ GEOS geoapdorojimo klaida: Vienas ar daugiau įvesties geoobjektų turi netinkam
     <message>
         <location filename="../src/plugins/heatmap/heatmapguibase.ui" line="261"/>
         <source>Decay ratio</source>
-        <translation type="unfinished"></translation>
+        <translation>Irimo spindulys</translation>
     </message>
     <message>
         <location filename="../src/plugins/heatmap/heatmapguibase.ui" line="269"/>
@@ -6932,7 +6943,7 @@ Shift+spauskite ant etiketės, kad ją paslėptumėte
     <message>
         <location filename="../src/ui/qgisapp.ui" line="2134"/>
         <source>Paste features in clipboard into a new OGR vector layer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Įkelti geoobjektus iš iškarpinės į naują OGR vektorinį sluoksnį.</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="2139"/>
@@ -6957,7 +6968,7 @@ Shift+spauskite ant etiketės, kad ją paslėptumėte
     <message>
         <location filename="../src/ui/qgisapp.ui" line="1605"/>
         <source>Stretch Histogram to Full Dataset</source>
-        <translation type="unfinished"></translation>
+        <translation>Ištempti histogramą iki pilno duomenų rinkinio</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="1628"/>
@@ -6967,7 +6978,7 @@ Shift+spauskite ant etiketės, kad ją paslėptumėte
     <message>
         <location filename="../src/ui/qgisapp.ui" line="1636"/>
         <source>This is here just to avoid shortcut conflicts, the shortcut is caught in QgsCustomization</source>
-        <translation type="unfinished"></translation>
+        <translation>Tai čia yra tik tam, kad būtų išvengta kombinacijų konfliktų, klavišų kombinacijos gaudomos QgsCustomization</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="1639"/>
@@ -6977,7 +6988,7 @@ Shift+spauskite ant etiketės, kad ją paslėptumėte
     <message>
         <location filename="../src/ui/qgisapp.ui" line="1647"/>
         <source>Embed layers and groups from other project files</source>
-        <translation type="unfinished"></translation>
+        <translation>Prijungti sluoksnius ir grupes iš kitų projektų failų</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="1656"/>
@@ -7023,7 +7034,7 @@ Shift+spauskite ant etiketės, kad ją paslėptumėte
     <message>
         <location filename="../src/ui/qgisapp.ui" line="1707"/>
         <source>Feature Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Geoobjekto veiksmas</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="1719"/>
@@ -7109,7 +7120,7 @@ Shift+spauskite ant etiketės, kad ją paslėptumėte
     <message>
         <location filename="../src/ui/qgisapp.ui" line="1124"/>
         <source>Form Annotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Formos anotacija</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="1214"/>
@@ -7228,12 +7239,12 @@ Shift+spauskite ant etiketės, kad ją paslėptumėte
     <message>
         <location filename="../src/ui/qgisapp.ui" line="1471"/>
         <source>Local Histogram Stretch</source>
-        <translation type="unfinished"></translation>
+        <translation>Vietinės histogramos ištempimas</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="1474"/>
         <source>Stretch histogram of active raster to view extents</source>
-        <translation type="unfinished"></translation>
+        <translation>Ištempti aktyvaus rastro histogramą iki rodinio apimčių</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="1483"/>
@@ -7295,7 +7306,8 @@ Shift+spauskite ant etiketės, kad ją paslėptumėte
         <location filename="../src/ui/qgisapp.ui" line="1566"/>
         <source>Rotate Label
 Ctl (Cmd) increments by 15 deg.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasukti etiketę
+Ctl (Cmd) didina 15 laipsnių žingsniu.</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="1579"/>
@@ -7329,24 +7341,25 @@ Ctl (Cmd) increments by 15 deg.</source>
     </message>
     <message>
         <source>There are unsaved changes in model. Close modeler without saving?</source>
-        <translation type="unfinished"></translation>
+        <translation>Modelyje yra neįrašytų pakeitimų. Uždaryti modeliuotoja neįrašius?</translation>
     </message>
     <message>
         <source>Empty model</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuščias modelis</translation>
     </message>
     <message>
         <source>Model doesn&apos;t contains any algorithms and/or 
                              parameters and can&apos;t be executed</source>
-        <translation type="unfinished"></translation>
+        <translation>Modelyje nėra nei algoritmų, nei parametrų,
+                           todėl jis negali būti vykdomas</translation>
     </message>
     <message>
         <source>Save Model As Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Įrašyti modelį kaip piešinį</translation>
     </message>
     <message>
         <source>PNG files (*.png *.PNG)</source>
-        <translation type="unfinished"></translation>
+        <translation>PNG failai (*.png *.PNG)</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -7354,7 +7367,7 @@ Ctl (Cmd) increments by 15 deg.</source>
     </message>
     <message>
         <source>Please enter group and model names before saving</source>
-        <translation type="unfinished"></translation>
+        <translation>Prieš įrašant prašome nurodyti grupės ir modelio pavadinimus</translation>
     </message>
     <message>
         <source>Save Model</source>
@@ -7362,7 +7375,7 @@ Ctl (Cmd) increments by 15 deg.</source>
     </message>
     <message>
         <source>Processing models (*.model)</source>
-        <translation type="unfinished"></translation>
+        <translation>Apdorojimo modeliai (*.model)</translation>
     </message>
     <message>
         <source>I/O error</source>
@@ -7371,7 +7384,7 @@ Ctl (Cmd) increments by 15 deg.</source>
     <message>
         <source>Unable to save edits. Reason:
  %s</source>
-        <translation type="unfinished">Nepavyksta įrašyti pakeitimų. Priežastis:
+        <translation>Nepavyksta įrašyti pakeitimų. Priežastis:
  %s</translation>
     </message>
     <message>
@@ -7379,13 +7392,17 @@ Ctl (Cmd) increments by 15 deg.</source>
                                      original location (probably you do not 
                                      have permission to do it). Please, use 
                                      the &apos;Save as...&apos; option.</source>
-        <translation type="unfinished"></translation>
+        <translation>Šio modelio negalima įrašyti į pradinę vietą
+                                    (tikriausiai neturite teisių tai padaryti).
+                                    Prašome naudoti parinktį „Įrašyti kaip“.</translation>
     </message>
     <message>
         <source>The selected model could not be loaded.
 
                                  Wrong line: %s</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyko įkelti parinkto modelio.
+
+                                 Klaidinga eilutė: %s</translation>
     </message>
     <message>
         <source>Unable to save edits. Reason:
@@ -7395,23 +7412,23 @@ Ctl (Cmd) increments by 15 deg.</source>
     </message>
     <message>
         <source>Can&apos;t save model</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyko įrašyti modelio</translation>
     </message>
     <message>
         <source>Model saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Modelis įrašytas</translation>
     </message>
     <message>
         <source>Model was correctly saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Modelis buvo teisingai įrašytas.</translation>
     </message>
     <message>
         <source>Open Model</source>
-        <translation type="unfinished"></translation>
+        <translation>Atverti modelį</translation>
     </message>
     <message>
         <source>Could not open model</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyko atverti modelio</translation>
     </message>
     <message>
         <source>Parameters</source>
@@ -7444,55 +7461,55 @@ Ctl (Cmd) increments by 15 deg.</source>
     <name>NumberInputDialog</name>
     <message>
         <source>[Enter your formula here]</source>
-        <translation type="unfinished"></translation>
+        <translation>[Čia įveskite savo formulę]</translation>
     </message>
     <message>
         <source>Values from data layers extents</source>
-        <translation type="unfinished"></translation>
+        <translation>Reikšmės iš duomenų sluoksnių apimčių</translation>
     </message>
     <message>
         <source>Min X</source>
-        <translation type="unfinished"></translation>
+        <translation>Min X</translation>
     </message>
     <message>
         <source>Max X</source>
-        <translation type="unfinished"></translation>
+        <translation>Maks X</translation>
     </message>
     <message>
         <source>Min Y</source>
-        <translation type="unfinished"></translation>
+        <translation>Min Y</translation>
     </message>
     <message>
         <source>Max Y</source>
-        <translation type="unfinished"></translation>
+        <translation>Maks Y</translation>
     </message>
     <message>
         <source>Cellsize</source>
-        <translation type="unfinished"></translation>
+        <translation>Celės dydis</translation>
     </message>
     <message>
         <source>Values from raster layers statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Reikšmės ir rastro sluoksnių statistikos</translation>
     </message>
     <message>
         <source>Mean</source>
-        <translation type="unfinished"></translation>
+        <translation>Vidutinė</translation>
     </message>
     <message>
         <source>Std. deviation</source>
-        <translation type="unfinished"></translation>
+        <translation>Std. nuokrypis</translation>
     </message>
     <message>
         <source>Max value</source>
-        <translation type="unfinished"></translation>
+        <translation>Maks. reikšmė</translation>
     </message>
     <message>
         <source>Min value</source>
-        <translation type="unfinished"></translation>
+        <translation>Min. reikšmė</translation>
     </message>
     <message>
         <source>Values from QGIS map canvas</source>
-        <translation type="unfinished"></translation>
+        <translation>Reikšmės iš QGIS žemėlapio drobės</translation>
     </message>
     <message>
         <source>Current extent</source>
@@ -7500,15 +7517,15 @@ Ctl (Cmd) increments by 15 deg.</source>
     </message>
     <message>
         <source>Full extent of all layers in map canvas</source>
-        <translation type="unfinished"></translation>
+        <translation>Pilna visų žemėlapio drobės sluoksnių apimtis</translation>
     </message>
     <message>
         <source>Wrong expression</source>
-        <translation type="unfinished"></translation>
+        <translation>Netinkama išraiška</translation>
     </message>
     <message>
         <source>The expression entered is not correct</source>
-        <translation type="unfinished"></translation>
+        <translation>Įvesta išraiška yra neteisinga</translation>
     </message>
 </context>
 <context>
@@ -8370,15 +8387,15 @@ Please change this situation first, because OSM Plugin doesn&apos;t know what la
     </message>
     <message>
         <source>Compile APIs</source>
-        <translation type="unfinished"></translation>
+        <translation>Kompiliuoti API</translation>
     </message>
     <message>
         <source>Saving prepared file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Įrašomas paruoštas failas...</translation>
     </message>
     <message>
         <source>Saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Įrašyta</translation>
     </message>
     <message>
         <source>Done</source>
@@ -8386,23 +8403,23 @@ Please change this situation first, because OSM Plugin doesn&apos;t know what la
     </message>
     <message>
         <source>Error preparing file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Klaida ruošiant failą...</translation>
     </message>
     <message>
         <source>Hide Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Slėpti redaktorių</translation>
     </message>
     <message>
         <source>Check Syntax</source>
-        <translation type="unfinished"></translation>
+        <translation>Tikrinti sintaksę</translation>
     </message>
     <message>
         <source>Run selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Vykdyti pažymėtus</translation>
     </message>
     <message>
         <source>Run Script</source>
-        <translation type="unfinished"></translation>
+        <translation>Vykdyti scenarijų</translation>
     </message>
     <message>
         <source>Undo</source>
@@ -8414,7 +8431,7 @@ Please change this situation first, because OSM Plugin doesn&apos;t know what la
     </message>
     <message>
         <source>Find Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Rasti tekstą</translation>
     </message>
     <message>
         <source>Cut</source>
@@ -8434,15 +8451,15 @@ Please change this situation first, because OSM Plugin doesn&apos;t know what la
     </message>
     <message>
         <source>Uncomment</source>
-        <translation type="unfinished"></translation>
+        <translation>Atkomentuoti</translation>
     </message>
     <message>
         <source>Share on codepad</source>
-        <translation type="unfinished"></translation>
+        <translation>Dalintis naudojant „codepad“</translation>
     </message>
     <message>
         <source>Hide/Show Object Inspector</source>
-        <translation type="unfinished"></translation>
+        <translation>Slėpti/Rodyti objektų inspektorių</translation>
     </message>
     <message>
         <source>Select All</source>
@@ -8450,68 +8467,69 @@ Please change this situation first, because OSM Plugin doesn&apos;t know what la
     </message>
     <message>
         <source>&lt;b&gt;&quot;{0}&quot;&lt;/b&gt; was not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;&quot;{0}&quot;&lt;/b&gt; nerastas.</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>URL nukopijuotas į iškarpinę.</translation>
     </message>
     <message>
         <source>Connection error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Jungties klaida: </translation>
     </message>
     <message>
         <source> [Temporary file saved in {0}]</source>
-        <translation type="unfinished"></translation>
+        <translation> [Laikinas failas įrašytas į {0}]</translation>
     </message>
     <message>
         <source>## Script error: {0}</source>
-        <translation type="unfinished"></translation>
+        <translation>## Scenarijaus klaida: {0}</translation>
     </message>
     <message>
         <source>## Script executed successfully: {0}</source>
-        <translation type="unfinished"></translation>
+        <translation>## Scenarijus sėkmingai įvykdytas: {0}</translation>
     </message>
     <message>
         <source>Cannot execute file {0}. Error: {1}
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyko vykdyti failo {0}. Klaida: {1}
+</translation>
     </message>
     <message>
         <source>Hey, type something to run!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ei, įveskitą ką nors vykdymui!</translation>
     </message>
     <message>
         <source>You have to save the file before running it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Turite įrašyti failą prieš jį paleisdami.</translation>
     </message>
     <message>
         <source>The file &lt;b&gt;&quot;{0}&quot;&lt;/b&gt; has been deleted or is not accessible</source>
-        <translation type="unfinished"></translation>
+        <translation>Failas &lt;b&gt;&quot;{0}&quot;&lt;/b&gt; buvo ištrintas arba yra neprieinamas</translation>
     </message>
     <message>
         <source>The file &lt;b&gt;&quot;{0}&quot;&lt;/b&gt; has been changed and reloaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Failas &lt;b&gt;&quot;{0}&quot;&lt;/b&gt; buvo pakeistas arba įkeltas iš naujo</translation>
     </message>
     <message>
         <source>The file &lt;b&gt;&quot;{0}&quot;&lt;/b&gt; is read only, please save to different file first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Failas &lt;b&gt;&quot;{0}&quot;&lt;/b&gt; skirtas tik skaitymui, prašome įrašyti į kitą failą.</translation>
     </message>
     <message>
         <source>Python Console: Save file</source>
-        <translation type="unfinished"></translation>
+        <translation>Python konsolė: Įrašyti failą</translation>
     </message>
     <message>
         <source>Script was correctly saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Scenarijus buvo teisingai įrašytas.</translation>
     </message>
     <message>
         <source>Click on button to restore all tabs from last session.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spauskite mygtuką, kad atstatytumėte korteles iš paskutinės sesijos.</translation>
     </message>
     <message>
         <source>Restore tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Atstatyti korteles</translation>
     </message>
     <message>
         <source>Close</source>
@@ -8519,23 +8537,23 @@ Please change this situation first, because OSM Plugin doesn&apos;t know what la
     </message>
     <message>
         <source>List all tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Rodyti visas korteles</translation>
     </message>
     <message>
         <source>New Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Naujas redaktorius</translation>
     </message>
     <message>
         <source>Close Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Uždaryti kortelę</translation>
     </message>
     <message>
         <source>Close All</source>
-        <translation type="unfinished"></translation>
+        <translation>Uždaryti visas</translation>
     </message>
     <message>
         <source>Close Others</source>
-        <translation type="unfinished"></translation>
+        <translation>Uždaryti kitas</translation>
     </message>
     <message>
         <source>Save As</source>
@@ -8544,47 +8562,52 @@ Please change this situation first, because OSM Plugin doesn&apos;t know what la
     <message>
         <source>The file {0} could not be opened. Error: {1}
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Failas {0} negali būti atvertas. Klaida: {1}
+</translation>
     </message>
     <message>
         <source>Untitled-{0}</source>
-        <translation type="unfinished"></translation>
+        <translation>Bevardis-{0}</translation>
     </message>
     <message>
         <source>Python Console: Save File</source>
-        <translation type="unfinished"></translation>
+        <translation>Python konsolė: Įrašyti failą</translation>
     </message>
     <message>
         <source>The file &lt;b&gt;&apos;{0}&apos;&lt;/b&gt; has been modified, save changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Failas &lt;b&gt;&apos;{0}&apos;&lt;/b&gt; buvo pakeistas, įrašyti pakeitimus?</translation>
     </message>
     <message>
         <source>Unable to restore the file: 
 {0}
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyko atstatyti failo: 
+{0}
+</translation>
     </message>
     <message>
         <source>Python {0} on {1}
 ## Type help(iface) for more info and list of methods.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Python {0} {1}
+## Rašykite help(iface), norėdami gauti daugiau informacijos ir metodų sąrašą.
+</translation>
     </message>
     <message>
         <source>Hide/Show Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Slėpti/rodyti įrankinę</translation>
     </message>
     <message>
         <source>Show Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Rodyti redaktorių</translation>
     </message>
     <message>
         <source>Enter Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Įvesti parinktus</translation>
     </message>
     <message>
         <source>Object Inspector</source>
-        <translation type="unfinished"></translation>
+        <translation>Objektų inspektorius</translation>
     </message>
     <message>
         <source>Open file</source>
@@ -8600,11 +8623,11 @@ Please change this situation first, because OSM Plugin doesn&apos;t know what la
     </message>
     <message>
         <source>Run script</source>
-        <translation type="unfinished"></translation>
+        <translation>Vykdyti scenarijų</translation>
     </message>
     <message>
         <source>Show editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Rodyti redaktorių</translation>
     </message>
     <message>
         <source>Import Class</source>
@@ -8612,31 +8635,31 @@ Please change this situation first, because OSM Plugin doesn&apos;t know what la
     </message>
     <message>
         <source>Import Processing class</source>
-        <translation type="unfinished"></translation>
+        <translation>Importuoti apdorojimo klasę</translation>
     </message>
     <message>
         <source>Enter text to find...</source>
-        <translation type="unfinished"></translation>
+        <translation>Įveskite ieškomą tekstą...</translation>
     </message>
     <message>
         <source>Find Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Rasti kitą</translation>
     </message>
     <message>
         <source>Find Previous</source>
-        <translation type="unfinished"></translation>
+        <translation>Rasti ankstesnį</translation>
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>Skirti raidžių dydį</translation>
     </message>
     <message>
         <source>Whole Word</source>
-        <translation type="unfinished"></translation>
+        <translation>Pilnas žodis</translation>
     </message>
     <message>
         <source>Wrap Around</source>
-        <translation type="unfinished"></translation>
+        <translation>Apgaubti</translation>
     </message>
     <message>
         <source>Open File</source>
@@ -8644,59 +8667,59 @@ Please change this situation first, because OSM Plugin doesn&apos;t know what la
     </message>
     <message>
         <source>Save Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Įrašymo klaida</translation>
     </message>
     <message>
         <source>The file &lt;b&gt;{0}&lt;/b&gt; could not be saved. Error: {1}</source>
-        <translation type="unfinished"></translation>
+        <translation>Failas &lt;b&gt;{0}&lt;/b&gt; negali būti įrašytas. Klaida: {1}</translation>
     </message>
     <message>
         <source>Save File As</source>
-        <translation type="unfinished"></translation>
+        <translation>Įrašyti failą kaip</translation>
     </message>
     <message>
         <source>History saved successfully.</source>
-        <translation type="unfinished"></translation>
+        <translation>Istorija sėkmingai įrašyta.</translation>
     </message>
     <message>
         <source>Session and file history cleared successfully.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sesijos ir failo istorija sėkmingai išvalyta.</translation>
     </message>
     <message>
         <source>History cleared successfully.</source>
-        <translation type="unfinished"></translation>
+        <translation>Istorija sėkmingai išvalyta.</translation>
     </message>
     <message>
         <source>Command History</source>
-        <translation type="unfinished"></translation>
+        <translation>Komandų istorija</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Rodyti</translation>
     </message>
     <message>
         <source>Clear File</source>
-        <translation type="unfinished"></translation>
+        <translation>Valyti failą</translation>
     </message>
     <message>
         <source>Clear Session</source>
-        <translation type="unfinished"></translation>
+        <translation>Valyti sesiją</translation>
     </message>
     <message>
         <source>Python Console - Command History</source>
-        <translation type="unfinished"></translation>
+        <translation>Python konsolė - komandų istorija</translation>
     </message>
     <message>
         <source>Double click on item to execute</source>
-        <translation type="unfinished"></translation>
+        <translation>Du kartus spauskite elementą vykdymui</translation>
     </message>
     <message>
         <source>Add API path</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridėti API kelią</translation>
     </message>
     <message>
         <source>Remove API path</source>
-        <translation type="unfinished"></translation>
+        <translation>Pašalinti API kelią</translation>
     </message>
     <message>
         <source>Manage Script</source>
@@ -8704,11 +8727,11 @@ Please change this situation first, because OSM Plugin doesn&apos;t know what la
     </message>
     <message>
         <source>Import PyQt.QtCore class</source>
-        <translation type="unfinished"></translation>
+        <translation>Importuoti PyQt.QtCore klasę</translation>
     </message>
     <message>
         <source>Import PyQt.QtGui class</source>
-        <translation type="unfinished"></translation>
+        <translation>Importuoti PyQt.QtGui klasę</translation>
     </message>
     <message>
         <source>Import sextante class</source>
@@ -8864,7 +8887,7 @@ Please change this situation first, because OSM Plugin doesn&apos;t know what la
     <message>
         <location filename="../src/core/qgsproviderregistry.cpp" line="364"/>
         <source>Unable to instantiate the data provider plugin %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyko įjungti duomenų tiekėjo priedo %1</translation>
     </message>
     <message>
         <location filename="../src/core/qgsproviderregistry.cpp" line="350"/>
@@ -9237,12 +9260,12 @@ Ar norėtumėte nurodyti kelią (GISBASE) iki jūsų GRASS diegimo vietos?</tran
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodel.cpp" line="269"/>
         <source>Areas</source>
-        <translation type="unfinished"></translation>
+        <translation>Plotai</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodel.cpp" line="270"/>
         <source>Islands</source>
-        <translation type="unfinished"></translation>
+        <translation>Salos</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodel.cpp" line="294"/>
@@ -9613,12 +9636,12 @@ Jis bus išjungtas.</translation>
     <message>
         <location filename="../src/app/qgspluginregistry.cpp" line="346"/>
         <source>Loaded %1 (Path: %2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Įkeltas %1 (Kelias: %2)</translation>
     </message>
     <message>
         <location filename="../src/app/qgspluginregistry.cpp" line="376"/>
         <source>Error Loading Plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Klaida įkeliant priedą</translation>
     </message>
     <message>
         <location filename="../src/app/qgspluginregistry.cpp" line="377"/>
@@ -9656,7 +9679,7 @@ Jis bus išjungtas.</translation>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodel.cpp" line="116"/>
         <source>Location: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Vieta: %1</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodel.cpp" line="119"/>
@@ -9697,7 +9720,7 @@ Jis bus išjungtas.</translation>
     <message>
         <location filename="../src/providers/grass/qgsgrass.cpp" line="534"/>
         <source>Cannot create %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyko sukurti %1</translation>
     </message>
     <message>
         <location filename="../src/providers/grass/qgsgrass.cpp" line="616"/>
@@ -9737,7 +9760,7 @@ Jis bus išjungtas.</translation>
     <message>
         <location filename="../src/providers/grass/qgsgrass.cpp" line="1262"/>
         <source>command: %1 %2&lt;br&gt;%3&lt;br&gt;%4</source>
-        <translation type="unfinished"></translation>
+        <translation>komanda: %1 %2&lt;br&gt;%3&lt;br&gt;%4</translation>
     </message>
     <message>
         <location filename="../src/providers/grass/qgsgrass.cpp" line="1332"/>
@@ -9964,8 +9987,6 @@ Error(%2): %3</source>
         <source>line %1 contains %n duplicate node(s) at %2</source>
         <comment>number of duplicate nodes</comment>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -12157,37 +12178,37 @@ SQL: %1</translation>
         <location filename="../src/providers/spatialite/qspatialite/qsql_spatialite.cpp" line="292"/>
         <location filename="../src/providers/spatialite/qspatialite/qsql_spatialite.cpp" line="300"/>
         <source>Unable to fetch row</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyksta gauti eilutės</translation>
     </message>
     <message>
         <location filename="../src/providers/spatialite/qspatialite/qsql_spatialite.cpp" line="230"/>
         <source>No query</source>
-        <translation type="unfinished"></translation>
+        <translation>Nėra užklausos</translation>
     </message>
     <message>
         <location filename="../src/providers/spatialite/qspatialite/qsql_spatialite.cpp" line="365"/>
         <source>Unable to execute statement</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyksta vykdyti sakinio</translation>
     </message>
     <message>
         <location filename="../src/providers/spatialite/qspatialite/qsql_spatialite.cpp" line="370"/>
         <source>Unable to execute multiple statements at a time</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyksta vykdyti kelis sakinius iš karto</translation>
     </message>
     <message>
         <location filename="../src/providers/spatialite/qspatialite/qsql_spatialite.cpp" line="390"/>
         <source>Unable to reset statement</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyksta atstatyti sakinio</translation>
     </message>
     <message>
         <location filename="../src/providers/spatialite/qspatialite/qsql_spatialite.cpp" line="435"/>
         <source>Unable to bind parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyksta susieti parametrus</translation>
     </message>
     <message>
         <location filename="../src/providers/spatialite/qspatialite/qsql_spatialite.cpp" line="442"/>
         <source>Parameter count mismatch</source>
-        <translation type="unfinished"></translation>
+        <translation>Parametrų skaičiaus nesutapimas</translation>
     </message>
 </context>
 <context>
@@ -12195,82 +12216,82 @@ SQL: %1</translation>
     <message>
         <location filename="../src/core/gps/qextserialport/qextserialport.cpp" line="224"/>
         <source>No Error has occurred</source>
-        <translation type="unfinished"></translation>
+        <translation>Neįvyko jokia klaida</translation>
     </message>
     <message>
         <location filename="../src/core/gps/qextserialport/qextserialport.cpp" line="225"/>
         <source>Invalid file descriptor (port was not opened correctly)</source>
-        <translation type="unfinished"></translation>
+        <translation>Netinkamas failo aprašas (prievadas nebuvo teisaingai atvertas)</translation>
     </message>
     <message>
         <location filename="../src/core/gps/qextserialport/qextserialport.cpp" line="226"/>
         <source>Unable to allocate memory tables (POSIX)</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyko išdėstyti atminties lentelių (POSIX)</translation>
     </message>
     <message>
         <location filename="../src/core/gps/qextserialport/qextserialport.cpp" line="227"/>
         <source>Caught a non-blocked signal (POSIX)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagautas neblokuotas signalas (POSIX)</translation>
     </message>
     <message>
         <location filename="../src/core/gps/qextserialport/qextserialport.cpp" line="228"/>
         <source>Operation timed out (POSIX)</source>
-        <translation type="unfinished"></translation>
+        <translation>Baigėsi veiksmo laikas (POSIX)</translation>
     </message>
     <message>
         <location filename="../src/core/gps/qextserialport/qextserialport.cpp" line="229"/>
         <source>The file opened by the port is not a valid device</source>
-        <translation type="unfinished"></translation>
+        <translation>Prievado atidarytas failas nėra tinkamas įrenginys</translation>
     </message>
     <message>
         <location filename="../src/core/gps/qextserialport/qextserialport.cpp" line="230"/>
         <source>The port detected a break condition</source>
-        <translation type="unfinished"></translation>
+        <translation>Prievadas aptiko nutraukimo sąlygą</translation>
     </message>
     <message>
         <location filename="../src/core/gps/qextserialport/qextserialport.cpp" line="231"/>
         <source>The port detected a framing error (usually caused by incorrect baud rate settings)</source>
-        <translation type="unfinished"></translation>
+        <translation>Prievadas aptiko remo klaidą (paprastai šito priežastis yra neteisingi duomenų perdavimo greičio nustatymai)</translation>
     </message>
     <message>
         <location filename="../src/core/gps/qextserialport/qextserialport.cpp" line="232"/>
         <source>There was an I/O error while communicating with the port</source>
-        <translation type="unfinished"></translation>
+        <translation>Įvyko IO klaida bendraujant su prievadu</translation>
     </message>
     <message>
         <location filename="../src/core/gps/qextserialport/qextserialport.cpp" line="233"/>
         <source>Character buffer overrun</source>
-        <translation type="unfinished"></translation>
+        <translation>Perpildytas simbolinis buferis</translation>
     </message>
     <message>
         <location filename="../src/core/gps/qextserialport/qextserialport.cpp" line="234"/>
         <source>Receive buffer overflow</source>
-        <translation type="unfinished"></translation>
+        <translation>Perpildytas gavimo buferis</translation>
     </message>
     <message>
         <location filename="../src/core/gps/qextserialport/qextserialport.cpp" line="235"/>
         <source>The port detected a parity error in the received data</source>
-        <translation type="unfinished"></translation>
+        <translation>Prievadas gautuose duomenyse aptiko pariteto klaidą</translation>
     </message>
     <message>
         <location filename="../src/core/gps/qextserialport/qextserialport.cpp" line="236"/>
         <source>Transmit buffer overflow</source>
-        <translation type="unfinished"></translation>
+        <translation>Perpildytas perdavimo buferis</translation>
     </message>
     <message>
         <location filename="../src/core/gps/qextserialport/qextserialport.cpp" line="237"/>
         <source>General read operation failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Bendra skaitymo veiksmo nesėkmė</translation>
     </message>
     <message>
         <location filename="../src/core/gps/qextserialport/qextserialport.cpp" line="238"/>
         <source>General write operation failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Bendra rašymo veiksmo nesėkmė</translation>
     </message>
     <message>
         <location filename="../src/core/gps/qextserialport/qextserialport.cpp" line="239"/>
         <source>Unknown error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nežinoma klaida: %1</translation>
     </message>
 </context>
 <context>
@@ -12358,12 +12379,12 @@ SQL: %1</translation>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="2178"/>
         <source>Map legend that displays all the layers currently on the map canvas. Click on the check box to turn a layer on or off. Double click on a layer in the legend to customize its appearance and set other properties.</source>
-        <translation type="unfinished"></translation>
+        <translation>Žemėlapio legenda, kuri rodo visus drobėje esančius sluoksnius. Spauskite varnelę, kad įjungtumėte arba išjungtumėte sluoksnį. Du kartus spauskite sluoksnį, norėdami derinti išvaizdą ir keisti kitas savybes.</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="2084"/>
         <source>Map overview canvas. This canvas can be used to display a locator map that shows the current extent of the map canvas. The current extent is shown as a red rectangle. Any layer on the map can be added to the overview canvas.</source>
-        <translation type="unfinished"></translation>
+        <translation>Žemėlapio peržiūros drobė. Ši drobė gali būti naudojama vietos žemėlapyje, kuris rodo dabartinio žemėlaio apimtis. Dabartinė apimtis apibrėžiama raudonu stačiakampiu. Į peržiūros drobę galima įdėti bet kokį sluoksnį.</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="1565"/>
@@ -12682,7 +12703,7 @@ Klaida: %1</translation>
         <location filename="../src/app/qgisapp.cpp" line="7122"/>
         <location filename="../src/app/qgisapp.cpp" line="7131"/>
         <source>To perform a full histogram stretch, you need to have a raster layer selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Norėdami atlikti pilną histogramos išplėtimą, turite pažymėti rastrinį sluoksnį.</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="7338"/>
@@ -12786,7 +12807,7 @@ Klaida: %1</translation>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="461"/>
         <source>Multiple Instances of QgisApp</source>
-        <translation type="unfinished"></translation>
+        <translation>Kelios QgisApp kopijos</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="1104"/>
@@ -12825,7 +12846,7 @@ Prašome susisiekti su kūrėjais.
     <message>
         <location filename="../src/app/qgisapp.cpp" line="596"/>
         <source>Relation Reference</source>
-        <translation type="unfinished"></translation>
+        <translation>Ryšio nuoroda</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="617"/>
@@ -12856,7 +12877,7 @@ Prašome susisiekti su kūrėjais.
     <message>
         <location filename="../src/app/qgisapp.cpp" line="1110"/>
         <source>Toggles between a predefined size and the window size set by the user</source>
-        <translation type="unfinished"></translation>
+        <translation>Perjungia tarp iš anksto numatyto ir naudotojo nurodyto dydžio</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="1113"/>
@@ -12913,7 +12934,7 @@ Prašome susisiekti su kūrėjais.
     <message>
         <location filename="../src/app/qgisapp.cpp" line="1687"/>
         <source>This icon shows whether on the fly coordinate reference system transformation is enabled or not. Click the icon to bring up the project properties dialog to alter this behaviour.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ši piktograma rodo, ar įjungtas automatinis koordinačių atskaitos sistemos transformavimas. Spauskite piktogramą, norėdami peržiūrėti projekto nustatymus ir pakeisti šią elgseną.</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="1691"/>
@@ -12928,7 +12949,7 @@ Prašome susisiekti su kūrėjais.
     <message>
         <location filename="../src/app/qgisapp.cpp" line="2200"/>
         <source>Map layer list that displays all layers in drawing order.</source>
-        <translation type="unfinished"></translation>
+        <translation>Žemėlapio sluoksnių sąrašas, rodantis visus sluoksnius paišymo tvarka.</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="2201"/>
@@ -13194,12 +13215,12 @@ Prašome susisiekti su kūrėjais.
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3886"/>
         <source>DXF export completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Baigtas DXF eksportas</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3890"/>
         <source>DXF export failed</source>
-        <translation type="unfinished"></translation>
+        <translation>DXF eksportas nepavyko</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="4485"/>
@@ -13229,21 +13250,21 @@ Prašome susisiekti su kūrėjais.
     <message>
         <location filename="../src/app/qgisapp.cpp" line="4909"/>
         <source>No Features Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Nėra parinktų geoobjektų</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="4910"/>
         <source>The current layer has not selected features</source>
-        <translation type="unfinished"></translation>
+        <translation>Dabartiniame sluoksnyje nėra parinktų geoobjektų</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/app/qgisapp.cpp" line="4929"/>
         <source>%n feature(s) deleted.</source>
         <comment>number of features deleted</comment>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Panaikintas %n geoobjektas.</numerusform>
+            <numerusform>Panaikinti %n geoobjektai.</numerusform>
+            <numerusform>Panaikinti %n geoobjektai.</numerusform>
         </translation>
     </message>
     <message>
@@ -13382,36 +13403,36 @@ Klaidos: %3
     <message>
         <location filename="../src/app/qgisapp.cpp" line="6605"/>
         <source>No Object Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Nėra pažymėtų objektų</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="6606"/>
         <source>To remove objects, you must select them in the legend</source>
-        <translation type="unfinished"></translation>
+        <translation>Norėdami panaikinti objektus, turite pažymėti juos legendoje</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="6611"/>
         <source>Remove objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Panaikinti objektus</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/app/qgisapp.cpp" line="6611"/>
         <source>Remove %n object(s)?</source>
         <comment>number of objects to remove</comment>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Panaikinti %n objektą?</numerusform>
+            <numerusform>Panaikinti %n objektų?</numerusform>
+            <numerusform>Panaikinti %n objektų?</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../src/app/qgisapp.cpp" line="6618"/>
         <source>%n object(s) removed.</source>
         <comment>number of objects removed</comment>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>panaikintas %n objektas.</numerusform>
+            <numerusform>panaikinti %n objektai.</numerusform>
+            <numerusform>panaikinti %n objektai.</numerusform>
         </translation>
     </message>
     <message>
@@ -13463,13 +13484,13 @@ Klaidos: %3
     <message>
         <location filename="../src/app/qgisapp.cpp" line="7011"/>
         <source>Unknown network socket error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nežinoma tinklo jungties klaida: %1</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="7174"/>
         <location filename="../src/app/qgisapp.cpp" line="7183"/>
         <source>To change brightness or contrast, you need to have a raster layer selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Norėdami pakeisti ryškumą ar kontrastą, turite pažymėti rastro sluoksnį.</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="7209"/>
@@ -13614,7 +13635,7 @@ Visada ignoruoti tokias klaidas?</translation>
         <location filename="../src/app/qgisapp.cpp" line="5372"/>
         <location filename="../src/app/qgisapp.cpp" line="5432"/>
         <source>The merge features tool only works on vector layers. Please select a vector layer from the layer list</source>
-        <translation type="unfinished"></translation>
+        <translation>Suliejimo įrankis veikia tik su vektoriniais sluoksniais. Prašome sąraše parinkti vektorinį sluoksnį</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="5378"/>
@@ -13627,7 +13648,7 @@ Visada ignoruoti tokias klaidas?</translation>
         <location filename="../src/app/qgisapp.cpp" line="5452"/>
         <location filename="../src/app/qgisapp.cpp" line="5489"/>
         <source>The merge tool requires at least two selected features</source>
-        <translation type="unfinished"></translation>
+        <translation>Suliejimo įrankiui reikia ne mažiau dviejų pažymėtų geoobjektų</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="5400"/>
@@ -13650,7 +13671,7 @@ Visada ignoruoti tokias klaidas?</translation>
         <location filename="../src/app/qgisapp.cpp" line="5472"/>
         <location filename="../src/app/qgisapp.cpp" line="5511"/>
         <source>The union operation would result in a geometry type that is not compatible with the current layer and therefore is canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>Sujungimo veiksmo rezultatas būtų geometrijos tipas, kuris yra nesuderinamas su dabartiniu sluoksniu, todėl veiksmas nutrauktas</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="5517"/>
@@ -13710,7 +13731,7 @@ Visada ignoruoti tokias klaidas?</translation>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="8316"/>
         <source>Maptips require an active layer</source>
-        <translation type="unfinished"></translation>
+        <translation>Žemėlapio patarimams reikia aktyvaus sluoksnio</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="5906"/>
@@ -13723,7 +13744,7 @@ Visada ignoruoti tokias klaidas?</translation>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="9441"/>
         <source>This layer doesn&apos;t have a properties dialog.</source>
-        <translation type="unfinished"></translation>
+        <translation>Šis sluoksnis neturi savybių dialogo.</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="9473"/>
@@ -16530,7 +16551,7 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
     <message>
         <location filename="../src/app/composer/qgscomposer.cpp" line="3143"/>
         <source>Landscape</source>
-        <translation type="unfinished">Gulščias</translation>
+        <translation>Gulščias</translation>
     </message>
     <message>
         <source>The given output directory is not writeable. Cancelling.</source>
@@ -17384,12 +17405,12 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="798"/>
         <source>Select Next Item &amp;Below</source>
-        <translation type="unfinished"></translation>
+        <translation>Parinkti &amp;kitą elementą žemiau</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="801"/>
         <source>Select next item below</source>
-        <translation type="unfinished"></translation>
+        <translation>Parinkti kitą elementą žemiau</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="804"/>
@@ -17399,12 +17420,12 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="809"/>
         <source>Select Next Item &amp;Above</source>
-        <translation type="unfinished"></translation>
+        <translation>Parinkti kitą elementą &amp;aukščiau</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="812"/>
         <source>Select next item above</source>
-        <translation type="unfinished"></translation>
+        <translation>Parinkti kitą elementą aukščiau</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="815"/>
@@ -17414,22 +17435,22 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="824"/>
         <source>Pan Composer</source>
-        <translation type="unfinished"></translation>
+        <translation>Pastumti kūrėją</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="833"/>
         <source>Composer Options...</source>
-        <translation type="unfinished"></translation>
+        <translation>Kūrėjo parinktys...</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="841"/>
         <source>Show Rulers</source>
-        <translation type="unfinished"></translation>
+        <translation>Rodyti liniuostes</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="844"/>
         <source>Show rulers</source>
-        <translation type="unfinished"></translation>
+        <translation>Rodyti liniuotes</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="847"/>
@@ -17439,52 +17460,52 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="856"/>
         <source>First Feature</source>
-        <translation type="unfinished"></translation>
+        <translation>Pirmas geoobjektas</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="865"/>
         <source>Previous Feature</source>
-        <translation type="unfinished"></translation>
+        <translation>Ankstesnis geoobjektas</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="874"/>
         <source>Next Feature</source>
-        <translation type="unfinished"></translation>
+        <translation>Kitas geoobjektas</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="883"/>
         <source>Last Feature</source>
-        <translation type="unfinished"></translation>
+        <translation>Paskutinis geoobjektas</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="892"/>
         <source>Preview Atlas</source>
-        <translation type="unfinished"></translation>
+        <translation>Peržiūrėti atlasą</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="901"/>
         <source>Print Atlas...</source>
-        <translation type="unfinished"></translation>
+        <translation>Spausdinti atlasą...</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="910"/>
         <source>Export Atlas as Images...</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksportuoti atlasą kaip piešinius...</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="919"/>
         <source>Export Atlas as SVG...</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksportuoti atlasą kaip SVG...</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="928"/>
         <source>Export Atlas As PDF...</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksportuoti atlasą kaip PDF...</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="937"/>
         <source>Atlas Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Atlaso nustatymai</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerbase.ui" line="501"/>
@@ -18074,57 +18095,57 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
     <message>
         <location filename="../src/app/composer/qgscomposerlegendwidget.cpp" line="241"/>
         <source>Legend split layers</source>
-        <translation type="unfinished"></translation>
+        <translation>Sutartinių ženklų sluoksnių padalinimas</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposerlegendwidget.cpp" line="253"/>
         <source>Legend equal column width</source>
-        <translation type="unfinished"></translation>
+        <translation>Lygus stulpelių plotis sutartiniuose ženkluose</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposerlegendwidget.cpp" line="265"/>
         <source>Legend symbol width</source>
-        <translation type="unfinished"></translation>
+        <translation>Sutartinių ženklų simbolio plotis</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposerlegendwidget.cpp" line="277"/>
         <source>Legend symbol height</source>
-        <translation type="unfinished"></translation>
+        <translation>Sutartinių ženklų simbolio aukštis</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposerlegendwidget.cpp" line="289"/>
         <source>Wms Legend width</source>
-        <translation type="unfinished"></translation>
+        <translation>Wms sutartinių ženklų plotis</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposerlegendwidget.cpp" line="301"/>
         <source>Wms Legend height</source>
-        <translation type="unfinished"></translation>
+        <translation>Wms sutartinių ženklų aukštis</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposerlegendwidget.cpp" line="313"/>
         <source>Legend title space bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Sutartinių ženklų antraštės apačios tarpas</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposerlegendwidget.cpp" line="325"/>
         <source>Legend group space</source>
-        <translation type="unfinished"></translation>
+        <translation>Sutartinių ženklų grupės vieta</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposerlegendwidget.cpp" line="337"/>
         <source>Legend layer space</source>
-        <translation type="unfinished"></translation>
+        <translation>Sutartinių ženklų sluoksnio vieta</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposerlegendwidget.cpp" line="349"/>
         <source>Legend symbol space</source>
-        <translation type="unfinished"></translation>
+        <translation>Sutartinių ženklų simbolio vieta</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposerlegendwidget.cpp" line="363"/>
         <source>Legend icon label space</source>
-        <translation type="unfinished"></translation>
+        <translation>Sutartinių ženklų piktogramų etikečių vieta</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposerlegendwidget.cpp" line="384"/>
@@ -18155,17 +18176,17 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
         <location filename="../src/app/composer/qgscomposerlegendwidget.cpp" line="484"/>
         <location filename="../src/app/composer/qgscomposerlegendwidget.cpp" line="496"/>
         <source>Legend box space</source>
-        <translation type="unfinished"></translation>
+        <translation>Sutartinių ženklų vieta</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposerlegendwidget.cpp" line="659"/>
         <source>Legend map changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakeistas sutartinių ženklų žemėlapis</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposerlegendwidget.cpp" line="773"/>
         <source>Legend item edited</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakeistas sutartinių ženklų elementas</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposerlegendwidget.cpp" line="806"/>
@@ -18230,7 +18251,7 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
     <message>
         <location filename="../src/ui/qgscomposerlegendwidgetbase.ui" line="355"/>
         <source>Auto update</source>
-        <translation type="unfinished"></translation>
+        <translation>Atnaujinti automatiškai</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerlegendwidgetbase.ui" line="368"/>
@@ -18252,22 +18273,22 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
     <message>
         <location filename="../src/ui/qgscomposerlegendwidgetbase.ui" line="386"/>
         <source>Title font...</source>
-        <translation type="unfinished"></translation>
+        <translation>Antraštės šriftas...</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerlegendwidgetbase.ui" line="393"/>
         <source>Subgroup font...</source>
-        <translation type="unfinished"></translation>
+        <translation>Subgrupės šriftas...</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerlegendwidgetbase.ui" line="400"/>
         <source>Group font...</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupės šriftas...</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerlegendwidgetbase.ui" line="407"/>
         <source>Item font...</source>
-        <translation type="unfinished"></translation>
+        <translation>Elemento šriftas...</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerlegendwidgetbase.ui" line="414"/>
@@ -18317,17 +18338,17 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
     <message>
         <location filename="../src/ui/qgscomposerlegendwidgetbase.ui" line="543"/>
         <source>WMS LegendGraphic</source>
-        <translation type="unfinished"></translation>
+        <translation>WMS LegendGraphic</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerlegendwidgetbase.ui" line="561"/>
         <source>Legend width</source>
-        <translation type="unfinished"></translation>
+        <translation>Legendos plotis</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerlegendwidgetbase.ui" line="584"/>
         <source>Legend height</source>
-        <translation type="unfinished"></translation>
+        <translation>Legendos aukštis</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerlegendwidgetbase.ui" line="610"/>
@@ -18662,17 +18683,17 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="60"/>
         <source>Decimal</source>
-        <translation type="unfinished"></translation>
+        <translation>Dešimtainis</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="61"/>
         <source>DegreeMinute</source>
-        <translation type="unfinished"></translation>
+        <translation>LaipsniaiMinutės</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="62"/>
         <source>DegreeMinuteSecond</source>
-        <translation type="unfinished"></translation>
+        <translation>LaipsniaiMinutėsSekundės</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="77"/>
@@ -18703,47 +18724,47 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1218"/>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1266"/>
         <source>Inside frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Vidinis rėmas</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1200"/>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1270"/>
         <source>Outside frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Išorinis rėmas</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1206"/>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1244"/>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1291"/>
         <source>Horizontal</source>
-        <translation type="unfinished"></translation>
+        <translation>Horizontaliai</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1207"/>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1287"/>
         <source>Vertical</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertikaliai</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="276"/>
         <source>Map scale changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakeistas žemėlapio mastelis</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="80"/>
         <source>Select grid frame color</source>
-        <translation type="unfinished"></translation>
+        <translation>Parinkite tinklelio rėmo spalvą</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="82"/>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="84"/>
         <source>Select grid frame fill color</source>
-        <translation type="unfinished"></translation>
+        <translation>Parinkite tinklelio rėmo pildymo spalvą</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="288"/>
         <source>Map rotation changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakeistas žemėlapio pasukimas</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="333"/>
@@ -18754,19 +18775,19 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="717"/>
         <source>Canvas items toggled</source>
-        <translation type="unfinished"></translation>
+        <translation>Perjungti žemėlapio elementai</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="734"/>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1326"/>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1350"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Jokio</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="812"/>
         <source>Overview centering mode changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakeistas peržiūros centravimo režimas</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="825"/>
@@ -18798,59 +18819,59 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="967"/>
         <source>Annotation font changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakeistas anotacijos šriftas</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="993"/>
         <source>Annotation distance changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakeistas anotacijos atstumas</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1007"/>
         <source>Annotation format changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakeistas anotacijos formatas</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1110"/>
         <source>Changed grid frame style</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakeistas tinklelio rėmo stilius</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1128"/>
         <source>Changed grid frame width</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakeistas tinklelio rėmo plotis</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1140"/>
         <source>Changed grid frame line thickness</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakeistas tinklelio rėmo linijos plotis</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1154"/>
         <source>Grid frame color changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakeita tinklelio rėmo spalva</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1166"/>
         <source>Grid frame first fill color changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakeista tinklelio rėmo pildymo spalva</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1178"/>
         <source>Grid frame second fill color changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakeistas tinklelio rėmo antra pildymo spalva</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1201"/>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1222"/>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1274"/>
         <source>Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Išjungta</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1217"/>
         <source>Annotation position changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakeita anotacijos vieta</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1339"/>
@@ -18860,17 +18881,17 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1041"/>
         <source>Annotation toggled</source>
-        <translation type="unfinished"></translation>
+        <translation>Perjungta anotacija</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1243"/>
         <source>Changed annotation direction</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakeista anotacijos kryptis</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="1081"/>
         <source>Changed annotation precision</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakeistas anotacijos tikslumas</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposermapwidget.cpp" line="54"/>
@@ -18933,7 +18954,7 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
     <message>
         <location filename="../src/ui/qgscomposermapwidgetbase.ui" line="257"/>
         <source>Controlled by atlas</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontroliuojamas atlaso</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposermapwidgetbase.ui" line="275"/>
@@ -18979,17 +19000,17 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
     <message>
         <location filename="../src/ui/qgscomposermapwidgetbase.ui" line="500"/>
         <source>Grid frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Tinklelio rėmas</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposermapwidgetbase.ui" line="528"/>
         <source>Frame size</source>
-        <translation type="unfinished"></translation>
+        <translation>Rėmo dydis</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposermapwidgetbase.ui" line="541"/>
         <source>Frame line thickness</source>
-        <translation type="unfinished"></translation>
+        <translation>Rėmo linijos storis</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposermapwidgetbase.ui" line="551"/>
@@ -18999,7 +19020,7 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
     <message>
         <location filename="../src/ui/qgscomposermapwidgetbase.ui" line="558"/>
         <source>Frame fill colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Rėmo pildymo spalva</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposermapwidgetbase.ui" line="585"/>
@@ -19119,7 +19140,7 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
     <message>
         <location filename="../src/ui/qgscomposermapwidgetbase.ui" line="128"/>
         <source>Map rotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Žemėlapio pasukimas</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposermapwidgetbase.ui" line="212"/>
@@ -19285,7 +19306,7 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
     <message>
         <location filename="../src/ui/qgscomposerpicturewidgetbase.ui" line="216"/>
         <source>Image rotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaizdo pasukimas</translation>
     </message>
     <message>
         <source>Image Rotation</source>
@@ -19457,7 +19478,7 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
     <message>
         <location filename="../src/app/composer/qgscomposerscalebarwidget.cpp" line="239"/>
         <source>Scalebar segments left</source>
-        <translation type="unfinished"></translation>
+        <translation>Mastelio juostos segmentai kairėje</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposerscalebarwidget.cpp" line="254"/>
@@ -19497,7 +19518,7 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
     <message>
         <location filename="../src/app/composer/qgscomposerscalebarwidget.cpp" line="396"/>
         <source>Scalebar map units per segment</source>
-        <translation type="unfinished"></translation>
+        <translation>Mastelio žemėlapio vienetai per segmentą</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposerscalebarwidget.cpp" line="411"/>
@@ -19507,37 +19528,37 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
     <message>
         <location filename="../src/app/composer/qgscomposerscalebarwidget.cpp" line="485"/>
         <source>Scalebar label bar space</source>
-        <translation type="unfinished"></translation>
+        <translation>Mastelio etikėtčių juostos vieta</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposerscalebarwidget.cpp" line="500"/>
         <source>Scalebar box content space</source>
-        <translation type="unfinished"></translation>
+        <translation>Mastelio stačiakampio turinio vieta</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposerscalebarwidget.cpp" line="515"/>
         <source>Scalebar alignment</source>
-        <translation type="unfinished"></translation>
+        <translation>Mastelio lygiavimas</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposerscalebarwidget.cpp" line="541"/>
         <source>Scalebar changed to map units</source>
-        <translation type="unfinished"></translation>
+        <translation>Mastelis pakeistas į žemėlapio vienetus</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposerscalebarwidget.cpp" line="547"/>
         <source>Scalebar changed to feet</source>
-        <translation type="unfinished"></translation>
+        <translation>Mastelis pakeistas į pėdas</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposerscalebarwidget.cpp" line="553"/>
         <source>Scalebar changed to nautical miles</source>
-        <translation type="unfinished"></translation>
+        <translation>Mastelis pakeistas į jūrmyles</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposerscalebarwidget.cpp" line="560"/>
         <source>Scalebar changed to meters</source>
-        <translation type="unfinished"></translation>
+        <translation>Mastelis pakeistas į metrus</translation>
     </message>
     <message>
         <source>Scalebar unit changed</source>
@@ -19904,12 +19925,12 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
     <message>
         <location filename="../src/ui/qgscomposertablewidgetbase.ui" line="220"/>
         <source>Header font...</source>
-        <translation type="unfinished"></translation>
+        <translation>Antraštės šriftas...</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposertablewidgetbase.ui" line="227"/>
         <source>Content font...</source>
-        <translation type="unfinished"></translation>
+        <translation>Turinio šriftas...</translation>
     </message>
     <message>
         <source>Header Font...</source>
@@ -19925,7 +19946,7 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
     <message>
         <location filename="../src/ui/qgscomposervectorlegendbase.ui" line="20"/>
         <source>Vector Legend Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Vektorinės legendos parinktys</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposervectorlegendbase.ui" line="102"/>
@@ -20666,12 +20687,12 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
     <message>
         <location filename="../src/core/qgscoordinatetransform.cpp" line="598"/>
         <source>The source spatial reference system (CRS) is not valid. The coordinates can not be reprojected. The CRS is: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Pradinė erdvinė atskaitos sistema (CRS) yra netinkama. Koordinatės negali būti perprojektuotos. CRS yra: %1</translation>
     </message>
     <message>
         <location filename="../src/core/qgscoordinatetransform.cpp" line="605"/>
         <source>The destination spatial reference system (CRS) is not valid. The coordinates can not be reprojected. The CRS is: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Netinkama galutinė erdvinė atskaitos sistema (CRS). Koordinačių negalima perprojektuoti. CRS yra: %1</translation>
     </message>
     <message>
         <location filename="../src/core/qgscoordinatetransform.cpp" line="660"/>
@@ -20688,7 +20709,9 @@ Prašome pabandyti mažesnę raišką arba mažesnį lapą</translation>
         <source>%1 of
 %2PROJ.4: %3 +to %4
 Error: %5</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 iš
+%2PROJ.4: %3 +į %4
+Klaida: %5</translation>
     </message>
 </context>
 <context>
@@ -20867,12 +20890,12 @@ ir dabartinis failas yra [%3]</translation>
         <location filename="../src/ui/qgscredentialdialog.ui" line="57"/>
         <location filename="../src/ui/qgscredentialdialog.ui" line="64"/>
         <source>TextLabel</source>
-        <translation type="unfinished">TextLabel</translation>
+        <translation>TextLabel</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscredentialdialog.ui" line="71"/>
         <source>Realm</source>
-        <translation type="unfinished"></translation>
+        <translation>Sritis</translation>
     </message>
 </context>
 <context>
@@ -22115,12 +22138,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextprovider.cpp" line="241"/>
         <source>File type string in %1 is not correctly formatted</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 failo tipo eilutė netinkamai suformatuota</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextprovider.cpp" line="341"/>
         <source>File cannot be opened or delimiter parameters are not valid</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyksta atverti failo arba netinkami atskyrimo parametrai</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextprovider.cpp" line="356"/>
@@ -22130,75 +22153,75 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextprovider.cpp" line="711"/>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextprovider.cpp" line="715"/>
         <source>%0 field %1 is not defined in delimited text file</source>
-        <translation type="unfinished"></translation>
+        <translation>%0 laukas %1 nėra apibrėžtas atskirtame tekstiniame faile</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextprovider.cpp" line="408"/>
         <source>Invalid record format at line %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Netinkamas įrašo formatas eilutėje %1</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextprovider.cpp" line="485"/>
         <source>Invalid WKT at line %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Netinkamas WKT eilutėje %1</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextprovider.cpp" line="532"/>
         <source>Invalid X or Y fields at line %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Netinkami X arba Y laukai eilutėje %1</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextprovider.cpp" line="642"/>
         <source>%1 records discarded due to invalid format</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 įrašai išmesti dėl netinkamo formato</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextprovider.cpp" line="644"/>
         <source>%1 records discarded due to missing geometry definitions</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 įrašai išmesti dėl trūkstamo geometrijos apibrėžimo</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextprovider.cpp" line="646"/>
         <source>%1 records discarded due to invalid geometry definitions</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 įrašai išmesti dėl netinkamo geometrijos apibrėžimo</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextprovider.cpp" line="648"/>
         <source>%1 records discarded due to incompatible geometry types</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 įrašai išmesti dėl nesuderinamų geometrijos tipų</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextprovider.cpp" line="910"/>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextprovider.cpp" line="929"/>
         <source>Errors in file %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Klaidos faile %1</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextprovider.cpp" line="917"/>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextprovider.cpp" line="936"/>
         <source>The following lines were not loaded into QGIS due to errors:</source>
-        <translation type="unfinished"></translation>
+        <translation>Šios eilutės nebuvo įkeltos į QGIS dėl klaidų:</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextprovider.cpp" line="921"/>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextprovider.cpp" line="940"/>
         <source>There are %1 additional errors in the file</source>
-        <translation type="unfinished"></translation>
+        <translation>Dar faile yra %1 papildomų klaidų</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextprovider.cpp" line="928"/>
         <source>Delimited text file errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Atskirto tekstinio failo klaidos</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextprovider.cpp" line="985"/>
         <source>Invalid subset string %1 for %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Netinkama poaibio eilutė %1 skirta %2</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextprovider.cpp" line="1061"/>
         <source>The file has been updated by another application - reloading</source>
-        <translation type="unfinished"></translation>
+        <translation>Failą pakeitė kita programa - įkeliama iš naujo</translation>
     </message>
 </context>
 <context>
@@ -22206,122 +22229,122 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextsourceselect.cpp" line="121"/>
         <source>No layer name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nėra sluoksnio pavadinimo</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextsourceselect.cpp" line="121"/>
         <source>Please enter a layer name before adding the layer to the map</source>
-        <translation type="unfinished"></translation>
+        <translation>Prieš pridedant sluoksnį į žemėlapį prašome įvesti jo pavadinimą</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextsourceselect.cpp" line="129"/>
         <source>No delimiters set</source>
-        <translation type="unfinished"></translation>
+        <translation>Nenurodyti skirtukai</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextsourceselect.cpp" line="129"/>
         <source>Use one or more characters as the delimiter, or choose a different delimiter type</source>
-        <translation type="unfinished"></translation>
+        <translation>Skirtukui naudokite vieną ar daugiau simbolių, arba pasirinkite kitą skirtukų tipą</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextsourceselect.cpp" line="139"/>
         <source>Invalid regular expression</source>
-        <translation type="unfinished"></translation>
+        <translation>Netinkama reguliarioji išraiška</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextsourceselect.cpp" line="139"/>
         <source>Please enter a valid regular expression as the delimiter, or choose a different delimiter type</source>
-        <translation type="unfinished"></translation>
+        <translation>Prašome kaip skirtuką įvesti tinkamą reguliariąją išraišką arba pasirinkti kitą skirtuko tipą</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextsourceselect.cpp" line="146"/>
         <source>Invalid delimited text file</source>
-        <translation type="unfinished"></translation>
+        <translation>Netinkamas atskirtas tekstinis failas</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextsourceselect.cpp" line="146"/>
         <source>Please enter a valid file and delimiter</source>
-        <translation type="unfinished"></translation>
+        <translation>Prašome įvesti tinkamą failą ir skirtuką</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextsourceselect.cpp" line="629"/>
         <source>Choose a delimited text file to open</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasirinkite atskirtą failą atidarymui</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextsourceselect.cpp" line="631"/>
         <source>Text files</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekstiniai failai</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextsourceselect.cpp" line="671"/>
         <source>Please select an input file</source>
-        <translation type="unfinished"></translation>
+        <translation>Prašome pasirinkti įvesties failą</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextsourceselect.cpp" line="675"/>
         <source>File %1 does not exist</source>
-        <translation type="unfinished"></translation>
+        <translation>Failo %1 nėra</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextsourceselect.cpp" line="679"/>
         <source>Please enter a layer name</source>
-        <translation type="unfinished"></translation>
+        <translation>Prašome įvesti sluoksnio pavadinimą</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextsourceselect.cpp" line="683"/>
         <source>At least one delimiter character must be specified</source>
-        <translation type="unfinished"></translation>
+        <translation>Privaloma nurodyti bent vieną skirtuko simbolį</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextsourceselect.cpp" line="691"/>
         <source>Regular expression is not valid</source>
-        <translation type="unfinished"></translation>
+        <translation>Netinkama reguliarioji išraiška</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextsourceselect.cpp" line="695"/>
         <source>^.. expression needs capture groups</source>
-        <translation type="unfinished"></translation>
+        <translation>^.. išraiškai reikia įvedimo grupių</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextsourceselect.cpp" line="706"/>
         <source>Definition of filename and delimiters is not valid</source>
-        <translation type="unfinished"></translation>
+        <translation>Netinkamas failo ir skirtukų apibrėžimas</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextsourceselect.cpp" line="711"/>
         <source>No data found in file</source>
-        <translation type="unfinished"></translation>
+        <translation>Faile nerasta duomenų</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextsourceselect.cpp" line="714"/>
         <source>%1 badly formatted records discarded</source>
-        <translation type="unfinished"></translation>
+        <translation>Išmesta %1 neteisingai formatuotų įrašų</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextsourceselect.cpp" line="719"/>
         <source>X and Y field names must be selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Būtina parinkti X ir Y laukų pavadinimus</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextsourceselect.cpp" line="723"/>
         <source>X and Y field names cannot be the same</source>
-        <translation type="unfinished"></translation>
+        <translation>X ir Y laukų pavadinimai negali sutapti</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextsourceselect.cpp" line="727"/>
         <source>The WKT field name must be selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Būtina parinkti WKT lauko pavadinimą</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextsourceselect.cpp" line="734"/>
         <source>%1 badly formatted records discarded from sample data</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 nekorektiškų įrašų pašalinti iš pavyzdinių duomenų</translation>
     </message>
     <message>
         <location filename="../src/providers/delimitedtext/qgsdelimitedtextsourceselect.cpp" line="632"/>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Visi failai</translation>
     </message>
 </context>
 <context>
@@ -23566,7 +23589,7 @@ Nagrinėjimo klaida:
     <message>
         <location filename="../src/ui/qgsengineconfigdialog.ui" line="34"/>
         <source>Search method</source>
-        <translation type="unfinished"></translation>
+        <translation>Paieškos metodas</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsengineconfigdialog.ui" line="42"/>
@@ -23862,32 +23885,32 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ui/qgsexpressionbuilder.ui" line="37"/>
         <source>Function list</source>
-        <translation type="unfinished"></translation>
+        <translation>Funkcijų sąrašas</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsexpressionbuilder.ui" line="109"/>
         <source>Selected function help</source>
-        <translation type="unfinished"></translation>
+        <translation>Parinktos funkcijos pagalba</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsexpressionbuilder.ui" line="140"/>
         <source>Field values</source>
-        <translation type="unfinished"></translation>
+        <translation>Laukų reikšmės</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsexpressionbuilder.ui" line="214"/>
         <source>Load values</source>
-        <translation type="unfinished"></translation>
+        <translation>Įkelti reikšmes</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsexpressionbuilder.ui" line="221"/>
         <source>all unique</source>
-        <translation type="unfinished"></translation>
+        <translation>visas unikalias</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsexpressionbuilder.ui" line="228"/>
         <source>10 samples</source>
-        <translation type="unfinished"></translation>
+        <translation>10 pavyzdžių</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsexpressionbuilder.ui" line="279"/>
@@ -26664,22 +26687,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="75"/>
         <source>TextLabel</source>
-        <translation type="unfinished">TextLabel</translation>
+        <translation>TextLabel</translation>
     </message>
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="91"/>
         <source>Sky</source>
-        <translation type="unfinished"></translation>
+        <translation>Dangus</translation>
     </message>
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="100"/>
         <source>Date / Time (UTC)</source>
-        <translation type="unfinished"></translation>
+        <translation>Data / Laikas (UTC)</translation>
     </message>
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="107"/>
         <source>dd.MM.yyyy HH:mm</source>
-        <translation type="unfinished"></translation>
+        <translation>yyyy-MM-dd HH:mm</translation>
     </message>
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="114"/>
@@ -26689,7 +26712,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="125"/>
         <source>Elevation</source>
-        <translation type="unfinished"></translation>
+        <translation>Aukštis</translation>
     </message>
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="322"/>
@@ -26705,12 +26728,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="380"/>
         <source>TMS</source>
-        <translation type="unfinished"></translation>
+        <translation>TMS</translation>
     </message>
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="191"/>
         <source>URL/File</source>
-        <translation type="unfinished"></translation>
+        <translation>URL/Failas</translation>
     </message>
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="242"/>
@@ -26726,7 +26749,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="134"/>
         <source>Vertical Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertikalus mastelis</translation>
     </message>
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="150"/>
@@ -26756,7 +26779,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="389"/>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="401"/>
@@ -26766,52 +26789,52 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="413"/>
         <source>Samples</source>
-        <translation type="unfinished"></translation>
+        <translation>Pavyzdžiai</translation>
     </message>
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="420"/>
         <source>[Leave empty for maximum]</source>
-        <translation type="unfinished"></translation>
+        <translation>[Palikite tuščią maksimumui]</translation>
     </message>
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="430"/>
         <source>&lt;i&gt;Changing video settings requires a restart of the globe plugin&lt;/i&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Pakeitus video nustatymus reikia iš naujo paleisti gaublio priedą&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="438"/>
         <source>Model</source>
-        <translation type="unfinished"></translation>
+        <translation>Modelis</translation>
     </message>
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="444"/>
         <source>Point Layer</source>
-        <translation type="unfinished"></translation>
+        <translation>Taškų sluoksnis</translation>
     </message>
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="454"/>
         <source>3D Model</source>
-        <translation type="unfinished"></translation>
+        <translation>3D modelis</translation>
     </message>
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="510"/>
         <source>Stereo</source>
-        <translation type="unfinished"></translation>
+        <translation>Stereo</translation>
     </message>
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="516"/>
         <source>Stereo Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Stereo režimas</translation>
     </message>
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="523"/>
         <source>Screen distance (m)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekrano atstumas (m)</translation>
     </message>
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="546"/>
         <source>Screen width (m)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekrano plotis (m)</translation>
     </message>
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="566"/>
@@ -26831,17 +26854,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="617"/>
         <source>Screen height (m)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekrano aukštis (m)</translation>
     </message>
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="670"/>
         <source>Eye separation (m)</source>
-        <translation type="unfinished"></translation>
+        <translation>Akių atskyrimas (m)</translation>
     </message>
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="699"/>
         <source>Reset to defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Atstatyti pradinius nustatymus</translation>
     </message>
     <message>
         <location filename="../src/plugins/globe/globe_plugin_dialog_guibase.ui" line="706"/>
@@ -27190,27 +27213,27 @@ Press cancel to abort breaks calculation or OK to continue.</source>
     <message>
         <location filename="../src/plugins/grass/qgsgrassbrowser.cpp" line="49"/>
         <source>Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Įrankiai</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassbrowser.cpp" line="53"/>
         <source>Add selected map to canvas</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridėti parinktą drobę į žemėlapį</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassbrowser.cpp" line="61"/>
         <source>Copy selected map</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopijuoti parinktą žemėlapį</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassbrowser.cpp" line="69"/>
         <source>Rename selected map</source>
-        <translation type="unfinished"></translation>
+        <translation>Pervadinti parinktą žemėlapį</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassbrowser.cpp" line="77"/>
         <source>Delete selected map</source>
-        <translation type="unfinished"></translation>
+        <translation>Naikinti parinktą žemėlapį</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassbrowser.cpp" line="85"/>
@@ -27226,7 +27249,7 @@ Press cancel to abort breaks calculation or OK to continue.</source>
         <location filename="../src/plugins/grass/qgsgrassbrowser.cpp" line="274"/>
         <location filename="../src/plugins/grass/qgsgrassbrowser.cpp" line="349"/>
         <source>New name for layer &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Pavadinimas naujam sluoksniui „%1“</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassbrowser.cpp" line="290"/>
@@ -27244,55 +27267,55 @@ Press cancel to abort breaks calculation or OK to continue.</source>
     <message>
         <location filename="../src/plugins/grass/qgsgrassbrowser.cpp" line="436"/>
         <source>Question</source>
-        <translation type="unfinished"></translation>
+        <translation>Klausimas</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/plugins/grass/qgsgrassbrowser.cpp" line="437"/>
         <source>Are you sure you want to delete %n selected layer(s)?</source>
         <comment>number of layers to delete</comment>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Ar tikrai norite panaikinti %n pažymėtą sluoksnį?</numerusform>
+            <numerusform>Ar tikrai norite panaikinti %n pažymėtus sluoksnius?</numerusform>
+            <numerusform>Ar tikrai norite panaikinti %n pažymėtus sluoksnius?</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassbrowser.cpp" line="517"/>
         <source>Cannot write new region</source>
-        <translation type="unfinished"></translation>
+        <translation>Negalima rašyti naujo regiono</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassbrowser.cpp" line="273"/>
         <location filename="../src/plugins/grass/qgsgrassbrowser.cpp" line="348"/>
         <source>New name</source>
-        <translation type="unfinished"></translation>
+        <translation>Naujas pavadinimas</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassbrowser.cpp" line="291"/>
         <source>Cannot copy map %1@%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyksta kopijuoti žemėlapio %1@%2</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassbrowser.cpp" line="292"/>
         <location filename="../src/plugins/grass/qgsgrassbrowser.cpp" line="367"/>
         <location filename="../src/plugins/grass/qgsgrassbrowser.cpp" line="477"/>
         <source>&lt;br&gt;command: %1 %2&lt;br&gt;%3&lt;br&gt;%4</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;komanda: %1 %2&lt;br&gt;%3&lt;br&gt;%4</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassbrowser.cpp" line="366"/>
         <source>Cannot rename map %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Negalima pervadinti žemėlapio %1</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassbrowser.cpp" line="422"/>
         <source>Remove the selected layer(s) from canvas before continue.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prieš tęsdami išimkite pažymėtus sluoksnius iš drobės.</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassbrowser.cpp" line="475"/>
         <source>Cannot delete map %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Negalima panaikinti žemėlapio %1</translation>
     </message>
 </context>
 <context>
@@ -27310,52 +27333,52 @@ Press cancel to abort breaks calculation or OK to continue.</source>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="292"/>
         <source>Delete vertex</source>
-        <translation type="unfinished">Naikinti viršūnę</translation>
+        <translation>Naikinti viršūnę</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="253"/>
         <source>Edit tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Redagavimo įrankiai</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="262"/>
         <source>New line</source>
-        <translation type="unfinished"></translation>
+        <translation>Nauja linija</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="268"/>
         <source>New boundary</source>
-        <translation type="unfinished"></translation>
+        <translation>Nauja riba</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="280"/>
         <source>Move vertex</source>
-        <translation type="unfinished"></translation>
+        <translation>Perkelti viršūnę</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="286"/>
         <source>Add vertex</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridėti viršūnę</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="298"/>
         <source>Move element</source>
-        <translation type="unfinished"></translation>
+        <translation>Perkelti elementą</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="304"/>
         <source>Split line</source>
-        <translation type="unfinished"></translation>
+        <translation>Dalinti liniją</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="310"/>
         <source>Delete element</source>
-        <translation type="unfinished"></translation>
+        <translation>Naikinti elementą</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="316"/>
         <source>Edit attributes</source>
-        <translation type="unfinished"></translation>
+        <translation>Keisti atributus</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="321"/>
@@ -27385,7 +27408,7 @@ Press cancel to abort breaks calculation or OK to continue.</source>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="241"/>
         <source>Cannot open vector for update.</source>
-        <translation type="unfinished"></translation>
+        <translation>Negalima atverti vektoriaus keitimui.</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="698"/>
@@ -27395,22 +27418,22 @@ Press cancel to abort breaks calculation or OK to continue.</source>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="698"/>
         <source>The table was created</source>
-        <translation type="unfinished"></translation>
+        <translation>Lentelė buvo sukurta</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="1397"/>
         <source>Tool not yet implemented.</source>
-        <translation type="unfinished"></translation>
+        <translation>Įrankis dar nesukurtas.</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="1426"/>
         <source>Orphan record was left in attribute table. &lt;br&gt;Delete the record?</source>
-        <translation type="unfinished"></translation>
+        <translation>Atributų lentelėje buvo paliktas pasimetęs įrašas. &lt;br&gt;Panaikinti įrašą?</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="1437"/>
         <source>Cannot delete orphan record: </source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyko panaikinti pasimetusio įrašo:</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="404"/>
@@ -27420,12 +27443,12 @@ Press cancel to abort breaks calculation or OK to continue.</source>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="405"/>
         <source>Highlight</source>
-        <translation type="unfinished"></translation>
+        <translation>Paryškinti</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="406"/>
         <source>Dynamic</source>
-        <translation type="unfinished"></translation>
+        <translation>Dinaminis</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="407"/>
@@ -27440,82 +27463,82 @@ Press cancel to abort breaks calculation or OK to continue.</source>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="409"/>
         <source>Boundary (no area)</source>
-        <translation type="unfinished"></translation>
+        <translation>Riba (be ploto)</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="410"/>
         <source>Boundary (1 area)</source>
-        <translation type="unfinished"></translation>
+        <translation>Riba (1 plotas)</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="411"/>
         <source>Boundary (2 areas)</source>
-        <translation type="unfinished"></translation>
+        <translation>Riba (2 plotai)</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="412"/>
         <source>Centroid (in area)</source>
-        <translation type="unfinished"></translation>
+        <translation>Centroidas (plote)</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="413"/>
         <source>Centroid (outside area)</source>
-        <translation type="unfinished"></translation>
+        <translation>Centroidas (už ploto ribų)</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="414"/>
         <source>Centroid (duplicate in area)</source>
-        <translation type="unfinished"></translation>
+        <translation>Centroidas (pakartotinas plote)</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="415"/>
         <source>Node (1 line)</source>
-        <translation type="unfinished"></translation>
+        <translation>Taškas (1 linija)</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="416"/>
         <source>Node (2 lines)</source>
-        <translation type="unfinished"></translation>
+        <translation>Taškas (2 linijos)</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="546"/>
         <source>Next not used</source>
-        <translation type="unfinished"></translation>
+        <translation>Kitas nenaudojamas</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="547"/>
         <source>Manual entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Rankinis įvedimas</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="548"/>
         <source>No category</source>
-        <translation type="unfinished"></translation>
+        <translation>Be kategorijos</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="1419"/>
         <source>Cannot check orphan record: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Negalima patikrinti pasimetusio įrašo: %1</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="1471"/>
         <source>Cannot describe table for field %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Negalima aprašyti lentelės laukui %1</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="1904"/>
         <source>Left: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kairė: %1</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="1906"/>
         <source> -- Middle: %1</source>
-        <translation type="unfinished"></translation>
+        <translation> -- Vidurys: %1</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedit.cpp" line="1908"/>
         <source> -- Right: %1</source>
-        <translation type="unfinished"></translation>
+        <translation> -- Dešinė: %1</translation>
     </message>
 </context>
 <context>
@@ -27536,7 +27559,7 @@ Press cancel to abort breaks calculation or OK to continue.</source>
     <message>
         <location filename="../src/plugins/grass/qgsgrassedittools.cpp" line="458"/>
         <source>Release</source>
-        <translation type="unfinished"></translation>
+        <translation>Paleisti</translation>
     </message>
 </context>
 <context>
@@ -27573,7 +27596,7 @@ Press cancel to abort breaks calculation or OK to continue.</source>
     <message>
         <location filename="../src/plugins/grass/qgsgrasseditbase.ui" line="162"/>
         <source>Snapping in screen pixels</source>
-        <translation type="unfinished"></translation>
+        <translation>Pritraukimas ekrano taškais</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrasseditbase.ui" line="213"/>
@@ -27824,27 +27847,27 @@ Press cancel to abort breaks calculation or OK to continue.</source>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmapcalc.cpp" line="84"/>
         <source>Add map</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridėti žemėlapį</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmapcalc.cpp" line="91"/>
         <source>Add constant value</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridėti pastovią reikšmę</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmapcalc.cpp" line="98"/>
         <source>Add operator or function</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridėti veiksmą ar funkciją</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmapcalc.cpp" line="105"/>
         <source>Add connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridėti ryšį</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmapcalc.cpp" line="112"/>
         <source>Select item</source>
-        <translation type="unfinished"></translation>
+        <translation>Parinkti elementą</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmapcalc.cpp" line="119"/>
@@ -27869,77 +27892,77 @@ Press cancel to abort breaks calculation or OK to continue.</source>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmapcalc.cpp" line="148"/>
         <source>Addition</source>
-        <translation type="unfinished"></translation>
+        <translation>Sudėtis</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmapcalc.cpp" line="149"/>
         <source>Subtraction</source>
-        <translation type="unfinished"></translation>
+        <translation>Atimtis</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmapcalc.cpp" line="150"/>
         <source>Multiplication</source>
-        <translation type="unfinished"></translation>
+        <translation>Daugyba</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmapcalc.cpp" line="151"/>
         <source>Division</source>
-        <translation type="unfinished"></translation>
+        <translation>Dalyba</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmapcalc.cpp" line="152"/>
         <source>Modulus</source>
-        <translation type="unfinished"></translation>
+        <translation>Liekana</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmapcalc.cpp" line="153"/>
         <source>Exponentiation</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksponentė</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmapcalc.cpp" line="156"/>
         <source>Equal</source>
-        <translation type="unfinished"></translation>
+        <translation>Lygybė</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmapcalc.cpp" line="157"/>
         <source>Not equal</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelygybė</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmapcalc.cpp" line="158"/>
         <source>Greater than</source>
-        <translation type="unfinished"></translation>
+        <translation>Daugiau už</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmapcalc.cpp" line="159"/>
         <source>Greater than or equal</source>
-        <translation type="unfinished"></translation>
+        <translation>Daugiau už arba lygu</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmapcalc.cpp" line="160"/>
         <source>Less than</source>
-        <translation type="unfinished"></translation>
+        <translation>Mažiau už</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmapcalc.cpp" line="161"/>
         <source>Less than or equal</source>
-        <translation type="unfinished"></translation>
+        <translation>Mažiau už arba lygu</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmapcalc.cpp" line="162"/>
         <source>And</source>
-        <translation type="unfinished"></translation>
+        <translation>Ir</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmapcalc.cpp" line="163"/>
         <source>Or</source>
-        <translation type="unfinished"></translation>
+        <translation>Arba</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmapcalc.cpp" line="166"/>
         <source>Absolute value of x</source>
-        <translation type="unfinished"></translation>
+        <translation>Absoliuti x reikšmė</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmapcalc.cpp" line="167"/>
@@ -28233,7 +28256,7 @@ at line %2 column %3</source>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="1489"/>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="1794"/>
         <source>Run</source>
-        <translation type="unfinished">Vykdyti</translation>
+        <translation>Vykdyti</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="1763"/>
@@ -28264,17 +28287,17 @@ at line %2 column %3</source>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="1776"/>
         <source>&lt;B&gt;Successfully finished&lt;/B&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;B&gt;Sėkmingai baigta&lt;/B&gt;</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="1785"/>
         <source>&lt;B&gt;Finished with error&lt;/B&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;B&gt;Baigta su klaida&lt;/B&gt;</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="1790"/>
         <source>&lt;B&gt;Module crashed or killed&lt;/B&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;B&gt;Modulis sulūžo arba buvo dirbtinai išjungtas&lt;/B&gt;</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="1537"/>
@@ -28284,28 +28307,28 @@ at line %2 column %3</source>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="266"/>
         <source>Please ensure you have the GRASS documentation installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prašome įsitikinti, kad GRASS dokumentacija yra įdiegta.</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="159"/>
         <source>Module: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Modulis: %1</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="173"/>
         <source>The module file (%1) not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Modulio failas (%1) nerastas.</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="178"/>
         <source>Cannot open module file (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyksta atverti modulio failo (%1)</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="186"/>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="1274"/>
         <source>Cannot read module file (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Negalima perskaityti modulio failo (%1)</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="187"/>
@@ -28313,52 +28336,54 @@ at line %2 column %3</source>
         <source>
 %1
 at line %2 column %3</source>
-        <translation type="unfinished"></translation>
+        <translation>
+%1
+eilutėje %2 stulpelyje %3</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="220"/>
         <source>Module %1 not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Modulis %1 nerastas</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="265"/>
         <source>Cannot find man page %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyko rasti „man“ puslapio %1</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="1263"/>
         <source>Not available, description not found (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Neprieinama, aprašymas nerastas (%1)</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="1267"/>
         <source>Not available, cannot open description (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Neprieinama, nepavyksta atverti aprašymo (%1)</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="1279"/>
         <source>Not available, incorrect description (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Neprieinama, netinkamas aprašymas (%1)</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="1532"/>
         <source>Input %1 outside current region!</source>
-        <translation type="unfinished"></translation>
+        <translation>Įvestis %1 yra už dabartinio regiono ribų!</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="1565"/>
         <source>Output %1 exists! Overwrite?</source>
-        <translation type="unfinished"></translation>
+        <translation>Rezultatas %1 jau yra! Perrašyti?</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="1684"/>
         <source>Cannot find module %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyksta rasti modulio %1</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="1758"/>
         <source>Cannot start module: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyksta pradėti modulio: %1</translation>
     </message>
 </context>
 <context>
@@ -28419,7 +28444,7 @@ at line %2 column %3</source>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="3581"/>
         <source>&apos;layer&apos; attribute in field tag with key= %1 is missing.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;layer&apos; atributas lauko žymoje su raktu key= %1 nerastas.</translation>
     </message>
 </context>
 <context>
@@ -28452,12 +28477,12 @@ at line %2 column %3</source>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="3516"/>
         <source>PostGIS driver in OGR does not support schemas!&lt;br&gt;Only the table name will be used.&lt;br&gt;It can result in wrong input if more tables of the same name&lt;br&gt;are present in the database.</source>
-        <translation type="unfinished"></translation>
+        <translation>PostGIS tvarkyklė OGR nepalaiko schemų!&lt;br&gt;Bus naudojamas tik lentelės pavadinimas.&lt;br&gt;Tai gali reikšti neteisingą įvestį, jei yra daugiau nei viena lentelė tuo pačiu pavadinimu&lt;br&gt;toje pačioje duombazėje.</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="3309"/>
         <source>Cannot find layeroption %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyksta rasti sluoksnio parinkties %1</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodule.cpp" line="3289"/>
@@ -29561,12 +29586,12 @@ arba pakeiskite šias reikšmes</translation>
     <message>
         <location filename="../src/plugins/grass/qgsgrassselect.cpp" line="427"/>
         <source>No map</source>
-        <translation type="unfinished"></translation>
+        <translation>Nėra žemėlapio</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassselect.cpp" line="435"/>
         <source>No layer</source>
-        <translation type="unfinished">Nėra sluoksnio</translation>
+        <translation>Nėra sluoksnio</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassselect.cpp" line="436"/>
@@ -29579,12 +29604,12 @@ arba pakeiskite šias reikšmes</translation>
     <message>
         <location filename="../src/plugins/grass/qgsgrassselectbase.ui" line="20"/>
         <source>Gisdbase</source>
-        <translation type="unfinished"></translation>
+        <translation>Gisdbase</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassselectbase.ui" line="40"/>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Vieta</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassselectbase.ui" line="50"/>
@@ -29614,7 +29639,7 @@ arba pakeiskite šias reikšmes</translation>
     <message>
         <location filename="../src/plugins/grass/qgsgrassselectbase.ui" line="14"/>
         <source>Add GRASS Layer</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridėti GRASS sluoksnį</translation>
     </message>
 </context>
 <context>
@@ -30070,8 +30095,6 @@ This may be a problem in your network connection or at the WMS server.</source>
         <comment>inactivity timeout</comment>
         <translation type="unfinished">
             <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
 </context>
@@ -30245,7 +30268,7 @@ This may be a problem in your network connection or at the WMS server.</source>
     <message>
         <location filename="../src/app/qgsidentifyresultsdialog.cpp" line="1332"/>
         <source>Attributes changed</source>
-        <translation type="unfinished">Atributai pakeisti</translation>
+        <translation>Atributai pakeisti</translation>
     </message>
     <message>
         <source>Attribute changes</source>
@@ -32520,35 +32543,37 @@ not displayed</source>
     <message>
         <location filename="../src/gui/qgsmapcanvas.cpp" line="426"/>
         <source>canvas</source>
-        <translation type="unfinished"></translation>
+        <translation>drobė</translation>
     </message>
     <message>
         <location filename="../src/gui/qgsmapcanvas.cpp" line="462"/>
         <source>Canvas refresh: %1 ms</source>
-        <translation type="unfinished"></translation>
+        <translation>Drobės atnaujinimas: %1 ms</translation>
     </message>
     <message>
         <location filename="../src/gui/qgsmapcanvas.cpp" line="466"/>
         <source>, sender &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>, siunt4jas „%1“</translation>
     </message>
     <message>
         <location filename="../src/gui/qgsmapcanvas.cpp" line="468"/>
         <source>Rendering</source>
-        <translation type="unfinished"></translation>
+        <translation>Braižoma</translation>
     </message>
     <message>
         <location filename="../src/gui/qgsmapcanvas.cpp" line="1511"/>
         <source>Could not draw %1 because:
 %2</source>
         <comment>COMMENTED OUT</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyko nupaišyti %1, nes:
+%2</translation>
     </message>
     <message>
         <location filename="../src/gui/qgsmapcanvas.cpp" line="1517"/>
         <source>Could not draw %1 because:
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyko nupaišyti %1, nes:
+%2</translation>
     </message>
 </context>
 <context>
@@ -32564,7 +32589,7 @@ not displayed</source>
     <message>
         <location filename="../src/plugins/georeferencer/qgsmapcoordsdialogbase.ui" line="14"/>
         <source>Enter map coordinates</source>
-        <translation type="unfinished"></translation>
+        <translation>Įveskite žemėlapio koordinates</translation>
     </message>
     <message>
         <location filename="../src/plugins/georeferencer/qgsmapcoordsdialogbase.ui" line="23"/>
@@ -32574,17 +32599,17 @@ not displayed</source>
     <message>
         <location filename="../src/plugins/georeferencer/qgsmapcoordsdialogbase.ui" line="35"/>
         <source>X / East:</source>
-        <translation type="unfinished"></translation>
+        <translation>X / Rytai:</translation>
     </message>
     <message>
         <location filename="../src/plugins/georeferencer/qgsmapcoordsdialogbase.ui" line="49"/>
         <source>Y / North:</source>
-        <translation type="unfinished"></translation>
+        <translation>Y / Šiaurė:</translation>
     </message>
     <message>
         <location filename="../src/plugins/georeferencer/qgsmapcoordsdialogbase.ui" line="61"/>
         <source>Snap to background layers</source>
-        <translation type="unfinished"></translation>
+        <translation>Pritraukti prie fono sluoksnių</translation>
     </message>
 </context>
 <context>
@@ -33281,7 +33306,7 @@ not displayed</source>
     <message>
         <location filename="../src/app/qgsmaptoolrotatepointsymbols.cpp" line="193"/>
         <source>Rotate symbol</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasukti simbolį</translation>
     </message>
 </context>
 <context>
@@ -33605,37 +33630,37 @@ not displayed</source>
     <message>
         <location filename="../src/providers/memory/qgsmemoryprovider.cpp" line="89"/>
         <source>Whole number (smallint - 16bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sveikas skaičius (smallint - 16bit)</translation>
     </message>
     <message>
         <location filename="../src/providers/memory/qgsmemoryprovider.cpp" line="90"/>
         <source>Whole number (integer - 32bit)</source>
-        <translation type="unfinished">Sveikas skai2ius (integer - 32bit)</translation>
+        <translation>Sveikas skaičius (integer - 32bit)</translation>
     </message>
     <message>
         <location filename="../src/providers/memory/qgsmemoryprovider.cpp" line="91"/>
         <source>Whole number (integer - 64bit)</source>
-        <translation type="unfinished">Sveikas skaičius (integer - 64bit)</translation>
+        <translation>Sveikas skaičius (integer - 64bit)</translation>
     </message>
     <message>
         <location filename="../src/providers/memory/qgsmemoryprovider.cpp" line="92"/>
         <source>Decimal number (numeric)</source>
-        <translation type="unfinished">Dešimtainis skaičius (numeric)</translation>
+        <translation>Dešimtainis skaičius (numeric)</translation>
     </message>
     <message>
         <location filename="../src/providers/memory/qgsmemoryprovider.cpp" line="93"/>
         <source>Decimal number (decimal)</source>
-        <translation type="unfinished">Dešimtainis skaičius (decimal)</translation>
+        <translation>Dešimtainis skaičius (decimal)</translation>
     </message>
     <message>
         <location filename="../src/providers/memory/qgsmemoryprovider.cpp" line="97"/>
         <source>Decimal number (double)</source>
-        <translation type="unfinished">Dešimtainis skaičius (double)</translation>
+        <translation>Dešimtainis skaičius (double)</translation>
     </message>
     <message>
         <location filename="../src/providers/memory/qgsmemoryprovider.cpp" line="100"/>
         <source>Text, unlimited length (text)</source>
-        <translation type="unfinished">Tekstas, neribotas ilgis (text)</translation>
+        <translation>Tekstas, neribotas ilgis (text)</translation>
     </message>
 </context>
 <context>
@@ -33716,17 +33741,17 @@ not displayed</source>
     <message>
         <location filename="../src/ui/qgsmergeattributesdialogbase.ui" line="14"/>
         <source>Merge feature attributes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sulieti geoobjektų atributus</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsmergeattributesdialogbase.ui" line="38"/>
         <source>Take attributes from selected feature</source>
-        <translation type="unfinished"></translation>
+        <translation>Imti atributus ir pažymėto geoobjekto</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsmergeattributesdialogbase.ui" line="72"/>
         <source>Remove feature from selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Išimti geoobjektą iš pažymėjimo</translation>
     </message>
 </context>
 <context>
@@ -34046,12 +34071,12 @@ not displayed</source>
     <message>
         <location filename="../src/providers/mssql/qgsmssqlprovider.cpp" line="155"/>
         <source>Text, fixed length unicode (nchar)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekstas, fiksuoto ilgio, unikodas (nchar)</translation>
     </message>
     <message>
         <location filename="../src/providers/mssql/qgsmssqlprovider.cpp" line="156"/>
         <source>Text, limited variable length unicode (nvarchar)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekstas, ribotas kintantis ilgis, unikodas (nvarchar)</translation>
     </message>
     <message>
         <location filename="../src/providers/mssql/qgsmssqlprovider.cpp" line="157"/>
@@ -34061,7 +34086,7 @@ not displayed</source>
     <message>
         <location filename="../src/providers/mssql/qgsmssqlprovider.cpp" line="158"/>
         <source>Text, unlimited length unicode (ntext)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekstas, neribotas ilgis, unikodas (ntext)</translation>
     </message>
 </context>
 <context>
@@ -34090,7 +34115,7 @@ not displayed</source>
     <message>
         <location filename="../src/providers/mssql/qgsmssqlsourceselect.cpp" line="128"/>
         <source>Add MSSQL Table(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridėti MSSQL lentelę(es)</translation>
     </message>
     <message>
         <location filename="../src/providers/mssql/qgsmssqlsourceselect.cpp" line="135"/>
@@ -34111,13 +34136,13 @@ not displayed</source>
         <location filename="../src/providers/mssql/qgsmssqlsourceselect.cpp" line="153"/>
         <location filename="../src/providers/mssql/qgsmssqlsourceselect.cpp" line="331"/>
         <source>Wildcard</source>
-        <translation type="unfinished"></translation>
+        <translation>Šablonas</translation>
     </message>
     <message>
         <location filename="../src/providers/mssql/qgsmssqlsourceselect.cpp" line="154"/>
         <location filename="../src/providers/mssql/qgsmssqlsourceselect.cpp" line="335"/>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>RegExp</translation>
     </message>
     <message>
         <location filename="../src/providers/mssql/qgsmssqlsourceselect.cpp" line="156"/>
@@ -34170,7 +34195,7 @@ not displayed</source>
     <message>
         <location filename="../src/providers/mssql/qgsmssqlsourceselect.cpp" line="219"/>
         <source>Are you sure you want to remove the %1 connection and all associated settings?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ar tikrai norite panaikinti jungtį %1 ir visus susijusius nustatymus?</translation>
     </message>
     <message>
         <location filename="../src/providers/mssql/qgsmssqlsourceselect.cpp" line="221"/>
@@ -34195,7 +34220,7 @@ not displayed</source>
     <message>
         <location filename="../src/providers/mssql/qgsmssqlsourceselect.cpp" line="446"/>
         <source>You must select a table in order to add a layer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Norėdami pridėti sluoksnį turite parinkti lentelę.</translation>
     </message>
     <message>
         <location filename="../src/providers/mssql/qgsmssqlsourceselect.cpp" line="501"/>
@@ -34203,7 +34228,7 @@ not displayed</source>
         <location filename="../src/providers/mssql/qgsmssqlsourceselect.cpp" line="518"/>
         <location filename="../src/providers/mssql/qgsmssqlsourceselect.cpp" line="604"/>
         <source>MSSQL Provider</source>
-        <translation type="unfinished"></translation>
+        <translation>MSSQL tiekėjas</translation>
     </message>
     <message>
         <location filename="../src/providers/mssql/qgsmssqlsourceselect.cpp" line="583"/>
@@ -35214,7 +35239,7 @@ Papildoma klaidos informacija:
     <message>
         <location filename="../src/ui/qgsosmexportdialog.ui" line="20"/>
         <source>Input DB file</source>
-        <translation type="unfinished"></translation>
+        <translation>Įvesties DB failas</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsosmexportdialog.ui" line="29"/>
@@ -35224,17 +35249,17 @@ Papildoma klaidos informacija:
     <message>
         <location filename="../src/ui/qgsosmexportdialog.ui" line="39"/>
         <source>Export type</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksporto tipas</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsosmexportdialog.ui" line="45"/>
         <source>Points (nodes)</source>
-        <translation type="unfinished"></translation>
+        <translation>Taškai</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsosmexportdialog.ui" line="55"/>
         <source>Polylines (open ways)</source>
-        <translation type="unfinished"></translation>
+        <translation>Polilinijos (atviri keliai)</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsosmexportdialog.ui" line="62"/>
@@ -38394,12 +38419,12 @@ klaida:%2
     <message>
         <location filename="../src/plugins/oracle_raster/qgsoracle_plugin.cpp" line="57"/>
         <source>Add Oracle GeoRaster Layer...</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridėti Oracle GeoRaster sluoksnį...</translation>
     </message>
     <message>
         <location filename="../src/plugins/oracle_raster/qgsoracle_plugin.cpp" line="60"/>
         <source>Add a Oracle Spatial GeoRaster...</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridėti Oracle Spatial GeoRaster...</translation>
     </message>
 </context>
 <context>
@@ -38916,7 +38941,7 @@ Error: %2</source>
     <message>
         <location filename="../src/plugins/oracle_raster/qgsselectgeoraster_ui.cpp" line="208"/>
         <source>Open failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyko atverti</translation>
     </message>
     <message>
         <location filename="../src/plugins/oracle_raster/qgsselectgeoraster_ui.cpp" line="209"/>
@@ -43057,7 +43082,7 @@ Spauskite pagalbos mygtuką, kad gautumėte tinkamas šio formato kūrimo parink
     <message>
         <location filename="../src/ui/qgsrasterhistogramwidgetbase.ui" line="145"/>
         <source>Min</source>
-        <translation type="unfinished">Min</translation>
+        <translation>Min</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsrasterhistogramwidgetbase.ui" line="171"/>
@@ -43073,7 +43098,7 @@ Spauskite pagalbos mygtuką, kad gautumėte tinkamas šio formato kūrimo parink
     <message>
         <location filename="../src/ui/qgsrasterhistogramwidgetbase.ui" line="220"/>
         <source>Max</source>
-        <translation type="unfinished">Maks</translation>
+        <translation>Maks</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsrasterhistogramwidgetbase.ui" line="246"/>
@@ -43111,17 +43136,17 @@ Spauskite pagalbos mygtuką, kad gautumėte tinkamas šio formato kūrimo parink
     <message>
         <location filename="../src/core/raster/qgsrasterinterface.cpp" line="566"/>
         <source>Build Pyramids</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurti piramides</translation>
     </message>
     <message>
         <location filename="../src/core/raster/qgsrasterinterface.cpp" line="556"/>
         <source>Create Datasources</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurti duomenų šaltinius</translation>
     </message>
     <message>
         <location filename="../src/core/raster/qgsrasterinterface.cpp" line="561"/>
         <source>Remove Datasources</source>
-        <translation type="unfinished"></translation>
+        <translation>Naikinti duomenų šaltinius</translation>
     </message>
     <message>
         <location filename="../src/core/raster/qgsrasterinterface.h" line="102"/>
@@ -45438,7 +45463,7 @@ standard deviation ×</source>
     <message>
         <location filename="../src/gui/symbology-ng/qgsrulebasedrendererv2widget.cpp" line="70"/>
         <source>Remove Rule</source>
-        <translation type="unfinished"></translation>
+        <translation>Pašalinti taisyklę</translation>
     </message>
     <message>
         <location filename="../src/gui/symbology-ng/qgsrulebasedrendererv2widget.cpp" line="77"/>
@@ -45702,27 +45727,27 @@ standard deviation ×</source>
     <message>
         <location filename="../src/app/qgssavestyletodbdialog.cpp" line="50"/>
         <source>A name is mandatory</source>
-        <translation type="unfinished"></translation>
+        <translation>Pavadinimas privalomas</translation>
     </message>
     <message>
         <location filename="../src/app/qgssavestyletodbdialog.cpp" line="61"/>
         <source>Attach Qt Designer UI file</source>
-        <translation type="unfinished"></translation>
+        <translation>Prijungti Qt Designer UI failą</translation>
     </message>
     <message>
         <location filename="../src/app/qgssavestyletodbdialog.cpp" line="61"/>
         <source>Qt Designer UI file .ui</source>
-        <translation type="unfinished"></translation>
+        <translation>Qt Designer UI failas .ui</translation>
     </message>
     <message>
         <location filename="../src/app/qgssavestyletodbdialog.cpp" line="82"/>
         <source>Wrong file</source>
-        <translation type="unfinished"></translation>
+        <translation>Netinkamas failas</translation>
     </message>
     <message>
         <location filename="../src/app/qgssavestyletodbdialog.cpp" line="83"/>
         <source>The selected file does not appear to be a valid Qt Designer UI file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Panašu, kad parinktas failas nėra tinkamas Qt Designer UI failas.</translation>
     </message>
 </context>
 <context>
@@ -45734,7 +45759,7 @@ standard deviation ×</source>
     <message>
         <location filename="../src/ui/qgssavetodbdialog.ui" line="14"/>
         <source>Save style</source>
-        <translation type="unfinished"></translation>
+        <translation>Įrašyti stilių</translation>
     </message>
     <message>
         <location filename="../src/ui/qgssavetodbdialog.ui" line="23"/>
@@ -45744,22 +45769,22 @@ standard deviation ×</source>
     <message>
         <location filename="../src/ui/qgssavetodbdialog.ui" line="33"/>
         <source>UI</source>
-        <translation type="unfinished"></translation>
+        <translation>UI</translation>
     </message>
     <message>
         <location filename="../src/ui/qgssavetodbdialog.ui" line="43"/>
         <source>Style Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Stiliaus pavadinimas</translation>
     </message>
     <message>
         <location filename="../src/ui/qgssavetodbdialog.ui" line="66"/>
         <source>Use as default style for this layer</source>
-        <translation type="unfinished"></translation>
+        <translation>Naudoti kaip numatytąjį stilių šiam sluoksniui</translation>
     </message>
     <message>
         <location filename="../src/ui/qgssavetodbdialog.ui" line="88"/>
         <source>Open...</source>
-        <translation type="unfinished"></translation>
+        <translation>Atverti...</translation>
     </message>
     <message>
         <location filename="../src/ui/qgssavetodbdialog.ui" line="97"/>
@@ -46152,12 +46177,12 @@ didinimas</translation>
     <message>
         <location filename="../src/ui/qgssinglebandgrayrendererwidgetbase.ui" line="43"/>
         <source>Min</source>
-        <translation type="unfinished">Min</translation>
+        <translation>Min</translation>
     </message>
     <message>
         <location filename="../src/ui/qgssinglebandgrayrendererwidgetbase.ui" line="53"/>
         <source>Max</source>
-        <translation type="unfinished">Maks</translation>
+        <translation>Maks</translation>
     </message>
     <message>
         <location filename="../src/ui/qgssinglebandgrayrendererwidgetbase.ui" line="63"/>
@@ -47022,8 +47047,6 @@ but implies better performance thereafter.</source>
         <comment>selected geometries</comment>
         <translation type="unfinished">
             <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -47631,12 +47654,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/plugins/spit/qgsspit.cpp" line="168"/>
         <source>Shapefiles</source>
-        <translation type="unfinished">Shape failai</translation>
+        <translation>Shape failai</translation>
     </message>
     <message>
         <location filename="../src/plugins/spit/qgsspit.cpp" line="168"/>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Visi failai</translation>
     </message>
     <message>
         <location filename="../src/plugins/spit/qgsspit.cpp" line="365"/>
@@ -47862,7 +47885,7 @@ Do you want to overwrite the [%2] relation?</source>
     <message>
         <location filename="../src/ui/qgssponsorsbase.ui" line="20"/>
         <source>TextLabel</source>
-        <translation type="unfinished">TextLabel</translation>
+        <translation>TextLabel</translation>
     </message>
     <message>
         <location filename="../src/ui/qgssponsorsbase.ui" line="33"/>
@@ -48792,17 +48815,17 @@ Buvo klaidų su jūsų simbolių duombaze.</translation>
     <message>
         <location filename="../src/gui/symbology-ng/qgssymbollayerv2widget.cpp" line="51"/>
         <source>Size</source>
-        <translation type="unfinished">Dydis</translation>
+        <translation>Dydis</translation>
     </message>
     <message>
         <location filename="../src/gui/symbology-ng/qgssymbollayerv2widget.cpp" line="58"/>
         <source>area</source>
-        <translation type="unfinished">plotas</translation>
+        <translation>plotas</translation>
     </message>
     <message>
         <location filename="../src/gui/symbology-ng/qgssymbollayerv2widget.cpp" line="61"/>
         <source>diameter</source>
-        <translation type="unfinished"></translation>
+        <translation>diametras</translation>
     </message>
 </context>
 <context>
@@ -48836,12 +48859,12 @@ Buvo klaidų su jūsų simbolių duombaze.</translation>
     <message>
         <location filename="../src/gui/symbology-ng/qgssymbolv2selectordialog.cpp" line="404"/>
         <source>Invalid Selection!</source>
-        <translation type="unfinished"></translation>
+        <translation>Netinkamas pažymėjimas!</translation>
     </message>
     <message>
         <location filename="../src/gui/symbology-ng/qgssymbolv2selectordialog.cpp" line="404"/>
         <source>Kindly select a symbol to add layer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prašome parinkti simbolį, kad pridėtumėte sluoksnį.</translation>
     </message>
 </context>
 <context>
@@ -48949,17 +48972,17 @@ Buvo klaidų su jūsų simbolių duombaze.</translation>
     <message>
         <location filename="../src/plugins/interpolation/qgstininterpolatordialogbase.ui" line="14"/>
         <source>Triangle based interpolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Trianguliacija paremta interpoliacija</translation>
     </message>
     <message>
         <location filename="../src/plugins/interpolation/qgstininterpolatordialogbase.ui" line="26"/>
         <source>Interpolation method</source>
-        <translation type="unfinished">Interpoliacijos metodas</translation>
+        <translation>Interpoliacijos metodas</translation>
     </message>
     <message>
         <location filename="../src/plugins/interpolation/qgstininterpolatordialogbase.ui" line="46"/>
         <source>Export triangulation to shapefile after interpolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksportuoti trianguliaciją į shape failą po interpoliacijos</translation>
     </message>
     <message>
         <location filename="../src/plugins/interpolation/qgstininterpolatordialogbase.ui" line="59"/>
@@ -51355,12 +51378,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ui/qgswmssourceselectbase.ui" line="14"/>
         <source>Add Layer(s) from a WM(T)S Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridėti sluoksnį(ius) iš WM(T)S stoties</translation>
     </message>
     <message>
         <location filename="../src/ui/qgswmssourceselectbase.ui" line="79"/>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Naujas</translation>
     </message>
     <message>
         <location filename="../src/ui/qgswmssourceselectbase.ui" line="89"/>
@@ -51504,7 +51527,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ui/qgswmssourceselectbase.ui" line="180"/>
         <source>Image encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Piešinio koduotė</translation>
     </message>
     <message>
         <location filename="../src/ui/qgswmssourceselectbase.ui" line="60"/>
@@ -51937,8 +51960,6 @@ Response was:
         <source>(and %n more)</source>
         <comment>crs</comment>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -52516,8 +52537,6 @@ Response was:
         <comment>tile request count</comment>
         <translation type="unfinished">
             <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -52526,8 +52545,6 @@ Response was:
         <source>, %n cache hits</source>
         <comment>tile cache hits</comment>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -52538,8 +52555,6 @@ Response was:
         <comment>tile cache missed</comment>
         <translation type="unfinished">
             <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -52548,8 +52563,6 @@ Response was:
         <source>, %n errors.</source>
         <comment>errors</comment>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -52641,8 +52654,6 @@ Bandytas URL: %1</translation>
         <source>(and %n more)</source>
         <comment>crs</comment>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -53137,11 +53148,11 @@ Bandytas URL: %1</translation>
     <name>SLDatabase</name>
     <message>
         <source>Run &amp;Vacuum</source>
-        <translation type="unfinished"></translation>
+        <translation>Vykdyti &amp;Vacuum</translation>
     </message>
     <message>
         <source>&amp;Database</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Duombazė</translation>
     </message>
     <message>
         <source>Sorry</source>
@@ -53450,7 +53461,7 @@ Aprašymas: %2</translation>
         <location filename="../src/plugins/sqlanywhere/sasourceselect.cpp" line="80"/>
         <location filename="../src/plugins/sqlanywhere/sasourceselect.cpp" line="223"/>
         <source>Line Interpretation</source>
-        <translation type="unfinished">Linijos interpretavimas</translation>
+        <translation>Linijos interpretavimas</translation>
     </message>
     <message>
         <location filename="../src/plugins/sqlanywhere/sasourceselect.cpp" line="81"/>
@@ -53616,7 +53627,7 @@ Description: %3</source>
     <message>
         <source>Unable to save edits. Reason:
  %s</source>
-        <translation type="unfinished">Nepavyksta įrašyti pakeitimų. Priežastis:
+        <translation>Nepavyksta įrašyti pakeitimų. Priežastis:
  %s</translation>
     </message>
     <message>
@@ -60954,7 +60965,7 @@ Returns a string representation of a color based on its hue, saturation, value a
     <name>geometryThread</name>
     <message>
         <source>Merge all</source>
-        <translation type="unfinished">Sulieti viską</translation>
+        <translation>Sulieti viską</translation>
     </message>
     <message>
         <source>Polygon area</source>
@@ -63091,7 +63102,7 @@ Returns a string representation of a color based on its hue, saturation, value a
     <message>
         <location filename="../src/plugins/grass/grasslabels-i18n.cpp" line="428"/>
         <source>Vector</source>
-        <translation type="unfinished">Vektorius</translation>
+        <translation>Vektorius</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/grasslabels-i18n.cpp" line="429"/>

@@ -15325,8 +15325,7 @@ Veuillez contacter les développeurs.
         <location filename="../src/app/qgisapp.cpp" line="4425"/>
         <location filename="../src/app/qgisapp.cpp" line="4446"/>
         <source>Commit errors</source>
-        <translation>Erreurs de commi:
-%s</translation>
+        <translation>Erreurs de commit</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="4426"/>
@@ -35802,8 +35801,7 @@ at line %2 column %3</source>
         <location filename="../src/app/qgsguivectorlayertools.cpp" line="133"/>
         <location filename="../src/app/qgsguivectorlayertools.cpp" line="154"/>
         <source>Commit errors</source>
-        <translation>Erreurs de commi:
-%s</translation>
+        <translation>Erreurs de commit</translation>
     </message>
     <message>
         <location filename="../src/app/qgsguivectorlayertools.cpp" line="134"/>
