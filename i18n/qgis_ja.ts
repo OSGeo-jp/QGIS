@@ -9437,12 +9437,12 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1200"/>
         <source>Should multipoint soundings be split into many single point sounding features. Multipoint geometries are not well handled by many formats, so it can be convenient to split single sounding features with many points into many single point features.</source>
-        <translation type="unfinished"></translation>
+        <translation>マルチポイントサウンディングは多くのシングルポイントサウンディング地物に分割されるべきです.マルチポイントジオメトリは多くの形式ではうまく扱えません,ですからシングルサウンディング地物に分割して多くの点をシングル地物にすると便利です.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1307"/>
         <source>Controls whether layer and field names will be laundered for easier use in SQLite. Laundered names will be converted to lower case and some special characters(&apos; - #) will be changed to underscores.</source>
-        <translation type="unfinished"></translation>
+        <translation>レイヤとフィールド名がSQLite内で簡単に使えるようにする整理をコントロールします.整理された名前は小文字といくつかの特殊文字(&apos; - #)はアンダースコアに変換されます.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1365"/>
@@ -33975,12 +33975,12 @@ Extended error information:
     <message>
         <location filename="../src/app/openstreetmap/qgsosmdownloaddialog.cpp" line="111"/>
         <source>Could not transform canvas extent.</source>
-        <translation type="unfinished"></translation>
+        <translation>キャンバスの領域を変換できません.</translation>
     </message>
     <message>
         <location filename="../src/app/openstreetmap/qgsosmdownloaddialog.cpp" line="151"/>
         <source>Could not transform layer extent.</source>
-        <translation type="unfinished"></translation>
+        <translation>レイヤの領域を変換できません.</translation>
     </message>
     <message>
         <location filename="../src/app/openstreetmap/qgsosmdownloaddialog.cpp" line="186"/>
@@ -43661,7 +43661,7 @@ standard deviation ×</source>
     <message>
         <location filename="../src/gui/editorwidgets/qgsrelreferenceconfigdlg.cpp" line="97"/>
         <source>Preview Expression</source>
-        <translation type="unfinished"></translation>
+        <translation>式のプレビュー</translation>
     </message>
 </context>
 <context>
@@ -43679,7 +43679,7 @@ standard deviation ×</source>
     <message>
         <location filename="../src/ui/editorwidgets/qgsrelreferenceconfigdlgbase.ui" line="35"/>
         <source>Expression Builder</source>
-        <translation type="unfinished"></translation>
+        <translation>式ビルダ</translation>
     </message>
     <message>
         <location filename="../src/ui/editorwidgets/qgsrelreferenceconfigdlgbase.ui" line="65"/>
@@ -48626,12 +48626,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/core/qgsvectorlayer.cpp" line="749"/>
         <source>Simplify transform error caught: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>簡素化変換エラー %1:</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorlayer.cpp" line="749"/>
         <source>CRS</source>
-        <translation type="unfinished">CRS</translation>
+        <translation>CRS</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorlayer.cpp" line="3968"/>
