@@ -60,7 +60,7 @@ class QgsComposerView : QGraphicsView
       ActiveUntilMouseRelease
     };
 
-    QgsComposerView( QWidget* parent = 0, const char* name = 0, Qt::WFlags f = 0 );
+    QgsComposerView( QWidget* parent = 0, const char* name = 0, Qt::WindowFlags f = 0 );
 
     /**Add an item group containing the selected items*/
     void groupItems();
@@ -108,6 +108,20 @@ class QgsComposerView : QGraphicsView
 
     /**Set zoom level, where a zoom level of 1.0 corresponds to 100%*/
     void setZoomLevel( double zoomLevel );
+
+    /**Sets whether a preview effect should be used to alter the view's appearance
+     * @param enabled Set to true to enable the preview effect on the view
+     * @note added in 2.3
+     * @see setPreviewMode
+    */
+    void setPreviewModeEnabled( bool enabled );
+    /**Sets the preview mode which should be used to modify the view's appearance. Preview modes are only used
+     * if setPreviewMode is set to true.
+     * @param mode PreviewMode to be used to draw the view
+     * @note added in 2.3
+     * @see setPreviewModeEnabled
+    */
+    void setPreviewMode( QgsPreviewEffect::PreviewMode mode );
 
   protected:
     void mousePressEvent( QMouseEvent* );

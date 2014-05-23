@@ -117,7 +117,7 @@ void QgsMssqlSourceSelectDelegate::setModelData( QWidget *editor, QAbstractItemM
     model->setData( index, le->text() );
 }
 
-QgsMssqlSourceSelect::QgsMssqlSourceSelect( QWidget *parent, Qt::WFlags fl, bool managerMode, bool embeddedMode )
+QgsMssqlSourceSelect::QgsMssqlSourceSelect( QWidget *parent, Qt::WindowFlags fl, bool managerMode, bool embeddedMode )
     : QDialog( parent, fl )
     , mManagerMode( managerMode )
     , mEmbeddedMode( embeddedMode )
@@ -183,6 +183,7 @@ QgsMssqlSourceSelect::QgsMssqlSourceSelect( QWidget *parent, Qt::WFlags fl, bool
   mSearchColumnComboBox->setCurrentIndex( 2 );
 
   restoreGeometry( settings.value( "/Windows/MSSQLSourceSelect/geometry" ).toByteArray() );
+  mHoldDialogOpen->setChecked( settings.value( "/Windows/MSSQLSourceSelect/HoldDialogOpen", false ).toBool() );
 
   for ( int i = 0; i < mTableModel.columnCount(); i++ )
   {
@@ -396,6 +397,7 @@ QgsMssqlSourceSelect::~QgsMssqlSourceSelect()
 
   QSettings settings;
   settings.setValue( "/Windows/MSSQLSourceSelect/geometry", saveGeometry() );
+  settings.setValue( "/Windows/MSSQLSourceSelect/HoldDialogOpen", mHoldDialogOpen->isChecked() );
 
   for ( int i = 0; i < mTableModel.columnCount(); i++ )
   {
@@ -448,7 +450,10 @@ void QgsMssqlSourceSelect::addTables()
   else
   {
     emit addDatabaseLayers( mSelectedTables, "mssql" );
-    accept();
+    if ( !mHoldDialogOpen->isChecked() )
+    {
+      accept();
+    }
   }
 }
 
@@ -756,19 +761,19 @@ void QgsMssqlGeomColumnTypeThread::run()
     {
       QString table;
       table = QString( "%1[%2]" )
-              .arg( layerProperty.schemaName.isEmpty() ? "" : QString("[%1].").arg( layerProperty.schemaName ))
+              .arg( layerProperty.schemaName.isEmpty() ? "" : QString( "[%1]." ).arg( layerProperty.schemaName ) )
               .arg( layerProperty.tableName );
 
-      QString query = QString("SELECT %3"
-                              " UPPER([%1].STGeometryType()),"
-                              " [%1].STSrid"
-                            " FROM %2"
-                            " WHERE [%1] IS NOT NULL %4"
-                            " GROUP BY [%1].STGeometryType(), [%1].STSrid")
-                             .arg( layerProperty.geometryColName )
-                             .arg( table )
-                             .arg( mUseEstimatedMetadata ? "TOP 1" : "" )
-                             .arg( layerProperty.sql.isEmpty() ? "" : QString( " AND %1" ).arg( layerProperty.sql ) );
+      QString query = QString( "SELECT %3"
+                               " UPPER([%1].STGeometryType()),"
+                               " [%1].STSrid"
+                               " FROM %2"
+                               " WHERE [%1] IS NOT NULL %4"
+                               " GROUP BY [%1].STGeometryType(), [%1].STSrid" )
+                      .arg( layerProperty.geometryColName )
+                      .arg( table )
+                      .arg( mUseEstimatedMetadata ? "TOP 1" : "" )
+                      .arg( layerProperty.sql.isEmpty() ? "" : QString( " AND %1" ).arg( layerProperty.sql ) );
 
       // issue the sql query
       QSqlDatabase db = QSqlDatabase::database( mConnectionName );

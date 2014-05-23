@@ -579,25 +579,17 @@ void QgsDxfExport::writeEntities()
 
     QgsSymbolV2RenderContext sctx( ctx, QgsSymbolV2::MM , 1.0, false, 0, 0 );
     QgsFeatureRendererV2* renderer = vl->rendererV2();
-    renderer->startRender( ctx, vl );
+    renderer->startRender( ctx, vl->pendingFields() );
 
-    QSet<int> attrIndex;
-    bool labelLayer = ( labelEngine.prepareLayer( vl, attrIndex, ctx ) != 0 );
+    QStringList attributes = renderer->usedAttributes();
+
+    bool labelLayer = ( labelEngine.prepareLayer( vl, attributes, ctx ) != 0 );
 
     if ( mSymbologyExport == QgsDxfExport::SymbolLayerSymbology && renderer->usingSymbolLevels() )
     {
       writeEntitiesSymbolLevels( vl );
       renderer->stopRender( ctx );
       continue;
-    }
-
-    //combine renderer and label attributes
-    const QgsFields& fields = vl->pendingFields();
-    QList<QString> attributes = renderer->usedAttributes();
-    QSet<int>::const_iterator attrIndexIt = attrIndex.constBegin();
-    for ( ; attrIndexIt != attrIndex.constEnd(); ++attrIndexIt )
-    {
-      attributes.append( fields.at( *attrIndexIt ).name() );
     }
 
     QgsFeatureRequest freq = QgsFeatureRequest().setSubsetOfAttributes(
@@ -652,7 +644,7 @@ void QgsDxfExport::writeEntities()
 
         if ( labelLayer )
         {
-          labelEngine.registerFeature( vl, fet, ctx );
+          labelEngine.registerFeature( vl->id(), fet, ctx );
         }
       }
     }
@@ -680,7 +672,7 @@ void QgsDxfExport::writeEntitiesSymbolLevels( QgsVectorLayer* layer )
 
   QgsRenderContext ctx = renderContext();
   QgsSymbolV2RenderContext sctx( ctx, QgsSymbolV2::MM , 1.0, false, 0, 0 );
-  renderer->startRender( ctx, layer );
+  renderer->startRender( ctx, layer->pendingFields() );
 
   //get iterator
   QgsFeatureRequest req;

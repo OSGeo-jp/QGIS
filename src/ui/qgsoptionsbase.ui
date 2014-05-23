@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>801</width>
+    <width>820</width>
     <height>636</height>
    </rect>
   </property>
@@ -248,7 +248,7 @@
        <item>
         <widget class="QStackedWidget" name="mOptionsStackedWidget">
          <property name="currentIndex">
-          <number>0</number>
+          <number>5</number>
          </property>
          <widget class="QWidget" name="mOptionsPageGeneral">
           <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -268,8 +268,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>627</width>
-                <height>586</height>
+                <width>399</width>
+                <height>538</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_28">
@@ -824,6 +824,13 @@
                    </widget>
                   </item>
                   <item>
+                   <widget class="QCheckBox" name="mLayerDeleteConfirmationChkBx">
+                    <property name="text">
+                     <string>Prompt for confirmation when a layer is to be removed</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
                    <widget class="QCheckBox" name="chbWarnOldProjectVersion">
                     <property name="text">
                      <string>Warn when opening a project file saved with an older version of QGIS</string>
@@ -924,8 +931,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>577</width>
-                <height>804</height>
+                <width>515</width>
+                <height>820</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_22">
@@ -1029,6 +1036,42 @@
                       <width>0</width>
                       <height>120</height>
                      </size>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QgsCollapsibleGroupBox" name="mQSettingsGrpBx">
+                 <property name="title">
+                  <string>QSettings</string>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_13">
+                  <item row="0" column="1">
+                   <spacer name="horizontalSpacer_42">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QPushButton" name="mRestoreDefaultWindowStateBtn">
+                    <property name="text">
+                     <string>Reset</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="mRestoreDefaultWindowStateLbl">
+                    <property name="text">
+                     <string>Reset the User Interface settings, to reset QGIS to it's default view</string>
                     </property>
                    </widget>
                   </item>
@@ -1250,8 +1293,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>627</width>
-                <height>586</height>
+                <width>407</width>
+                <height>367</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_27">
@@ -1560,8 +1603,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>621</width>
-                <height>797</height>
+                <width>524</width>
+                <height>669</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_29">
@@ -1570,72 +1613,106 @@
                  <property name="title">
                   <string>Rendering behavior</string>
                  </property>
-                 <layout class="QGridLayout" name="_4">
-                  <item row="1" column="0">
-                   <widget class="QCheckBox" name="chkEnableBackbuffer">
-                    <property name="toolTip">
-                     <string>Better graphics performance at the cost of loosing the possibility to cancel rendering and incremental feature drawing</string>
-                    </property>
-                    <property name="text">
-                     <string>Enable back buffer</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="0">
+                 <layout class="QVBoxLayout" name="verticalLayout_9">
+                  <item>
                    <widget class="QCheckBox" name="chkAddedVisibility">
                     <property name="text">
                      <string>By default new la&amp;yers added to the map should be displayed</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="4" column="0" colspan="2">
+                  <item>
                    <widget class="QCheckBox" name="chkUseRenderCaching">
                     <property name="text">
                      <string>Use render caching where possible to speed up redraws</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="2" column="0">
+                  <item>
                    <layout class="QHBoxLayout" name="horizontalLayout_26">
                     <item>
-                     <widget class="QLabel" name="labelUpdateThreshold">
+                     <widget class="QCheckBox" name="chkParallelRendering">
                       <property name="text">
-                       <string>Number of features to draw before updating the display</string>
+                       <string>Render layers in parallel using many CPU cores</string>
                       </property>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QSpinBox" name="spinBoxUpdateThreshold">
-                      <property name="maximumSize">
-                       <size>
-                        <width>200</width>
-                        <height>16777215</height>
-                       </size>
-                      </property>
-                      <property name="toolTip">
-                       <string>Map display will be updated (drawn) after this many features have been read from the data source</string>
-                      </property>
-                      <property name="maximum">
-                       <number>1000000</number>
-                      </property>
-                      <property name="value">
-                       <number>1000</number>
+                     <widget class="Line" name="line_6">
+                      <property name="orientation">
+                       <enum>Qt::Vertical</enum>
                       </property>
                      </widget>
+                    </item>
+                    <item>
+                     <widget class="QCheckBox" name="chkMaxThreads">
+                      <property name="text">
+                       <string>Max cores to use:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QSpinBox" name="spinMaxThreads"/>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer_41">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
                     </item>
                    </layout>
                   </item>
-                  <item row="3" column="0" colspan="2">
-                   <widget class="QLabel" name="textLabel3">
-                    <property name="text">
-                     <string>&lt;b&gt;Note:&lt;/b&gt; Set below 1000 to prevent display updates until all features have been rendered</string>
-                    </property>
-                   </widget>
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_4">
+                    <item>
+                     <widget class="QLabel" name="label_56">
+                      <property name="text">
+                       <string>Map update interval</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QSpinBox" name="spinMapUpdateInterval">
+                      <property name="suffix">
+                       <string> ms</string>
+                      </property>
+                      <property name="maximum">
+                       <number>999999</number>
+                      </property>
+                      <property name="singleStep">
+                       <number>50</number>
+                      </property>
+                      <property name="value">
+                       <number>250</number>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer_41">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                   </layout>
                   </item>
-                  <item row="5" column="0" colspan="2">
+                  <item>
                    <widget class="QgsCollapsibleGroupBox" name="mSimplifyDrawingGroupBox">
                     <property name="title">
-                     <string>Enable feature simplication by default for newly added layers</string>
+                     <string>Enable feature simplification by default for newly added layers</string>
                     </property>
                     <property name="checkable">
                      <bool>true</bool>
@@ -1649,7 +1726,7 @@
                       </widget>
                      </item>
                      <item row="1" column="1">
-                      <widget class="QLabel" name="label_56">
+                      <widget class="QLabel" name="label_65">
                        <property name="text">
                         <string>Simplification threshold (higher values result in more simplification): </string>
                        </property>
@@ -1749,13 +1826,6 @@
                    <widget class="QCheckBox" name="chkAntiAliasing">
                     <property name="text">
                      <string>Make lines appear less jagged at the expense of some drawing performance</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QCheckBox" name="chkUseQPixmap">
-                    <property name="text">
-                     <string>Fix problems with incorrectly filled polygons</string>
                     </property>
                    </widget>
                   </item>
@@ -2166,8 +2236,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>627</width>
-                <height>586</height>
+                <width>413</width>
+                <height>305</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_25">
@@ -2502,32 +2572,58 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>611</width>
-                <height>674</height>
+                <width>647</width>
+                <height>589</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_30">
                <item>
-                <widget class="QgsCollapsibleGroupBox" name="groupBox_7">
+                <widget class="QgsCollapsibleGroupBox" name="mIdentifyGroupBox">
                  <property name="title">
                   <string>Identify</string>
                  </property>
-                 <layout class="QGridLayout" name="layout_7">
-                  <item row="0" column="0" colspan="2">
-                   <widget class="QCheckBox" name="cbxIdentifyResultsDocked">
-                    <property name="text">
-                     <string>Open identify results in a dock window (QGIS restart required)</string>
-                    </property>
-                   </widget>
+                 <layout class="QVBoxLayout" name="verticalLayout_37">
+                  <item>
+                   <layout class="QHBoxLayout" name="mIdentifyRadiusHorizontalLayout">
+                    <item>
+                     <widget class="QLabel" name="textLabel1_3">
+                      <property name="text">
+                       <string>Search radius for identifying features and displaying map tips</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QDoubleSpinBox" name="spinBoxIdentifyValue">
+                      <property name="suffix">
+                       <string> mm</string>
+                      </property>
+                      <property name="maximum">
+                       <double>100.000000000000000</double>
+                      </property>
+                      <property name="singleStep">
+                       <double>1.000000000000000</double>
+                      </property>
+                      <property name="value">
+                       <double>2.000000000000000</double>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer_44">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                   </layout>
                   </item>
-                  <item row="2" column="0" colspan="2">
-                   <widget class="QCheckBox" name="cbxAutoFeatureForm">
-                    <property name="text">
-                     <string>Open feature form, if a single feature is identified</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="4" column="0" colspan="2">
+                  <item>
                    <widget class="QLabel" name="textLabel2">
                     <property name="text">
                      <string>&lt;b&gt;Note:&lt;/b&gt; Specify the search radius as a percentage of the map width</string>
@@ -2537,38 +2633,97 @@
                     </property>
                    </widget>
                   </item>
-                  <item row="1" column="1">
-                   <widget class="QComboBox" name="cmbIdentifyMode"/>
-                  </item>
-                  <item row="3" column="0">
-                   <widget class="QLabel" name="textLabel1_3">
-                    <property name="text">
-                     <string>Search radius for identifying features and displaying map tips</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="3" column="1">
-                   <widget class="QDoubleSpinBox" name="spinBoxIdentifyValue">
-                    <property name="suffix">
-                     <string>%</string>
-                    </property>
-                    <property name="maximum">
-                     <double>100.000000000000000</double>
-                    </property>
-                    <property name="singleStep">
-                     <double>0.010000000000000</double>
-                    </property>
-                    <property name="value">
-                     <double>5.000000000000000</double>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="0">
-                   <widget class="QLabel" name="label_4">
-                    <property name="text">
-                     <string>Mode</string>
-                    </property>
-                   </widget>
+                  <item>
+                   <layout class="QHBoxLayout" name="mIdentifyHighlightHorizontalLayout">
+                    <item>
+                     <widget class="QLabel" name="mIdentifyHighlighColorLabel">
+                      <property name="text">
+                       <string>Highlight color</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QgsColorButton" name="mIdentifyHighlightColorButton">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>100</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>100</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="toolTip">
+                       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The color used to highlight identified feature. The alpha channel is only used for polygons fill, lines and outlines are fully opaque.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                      </property>
+                      <property name="text">
+                       <string/>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="mIdentifyHighlightBufferLabel">
+                      <property name="toolTip">
+                       <string/>
+                      </property>
+                      <property name="text">
+                       <string>Buffer</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QDoubleSpinBox" name="mIdentifyHighlightBufferSpinBox">
+                      <property name="toolTip">
+                       <string>Lines / outlines buffer in millimeters.</string>
+                      </property>
+                      <property name="suffix">
+                       <string> mm</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="mIdentifyHighlightMinWidthLabel">
+                      <property name="toolTip">
+                       <string/>
+                      </property>
+                      <property name="text">
+                       <string>Minimum width</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QDoubleSpinBox" name="mIdentifyHighlightMinWidthSpinBox">
+                      <property name="toolTip">
+                       <string>Minimum line / outline width in millimeters.</string>
+                      </property>
+                      <property name="suffix">
+                       <string> mm</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer_45">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                   </layout>
                   </item>
                  </layout>
                 </widget>
@@ -2896,7 +3051,7 @@
           </layout>
          </widget>
          <widget class="QWidget" name="mOptionsPageComposer">
-          <layout class="QVBoxLayout" name="verticalLayout_9">
+          <layout class="QVBoxLayout" name="verticalLayout_36">
            <property name="margin">
             <number>0</number>
            </property>
@@ -2913,8 +3068,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>627</width>
-                <height>586</height>
+                <width>381</width>
+                <height>326</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_39">
@@ -2928,7 +3083,7 @@
                  </property>
                  <layout class="QGridLayout" name="gridLayout_8">
                   <item row="1" column="0">
-                   <layout class="QHBoxLayout" name="horizontalLayout_4">
+                   <layout class="QHBoxLayout" name="horizontalLayout_39">
                     <item>
                      <widget class="QLabel" name="label_60">
                       <property name="text">
@@ -3124,8 +3279,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>611</width>
-                <height>598</height>
+                <width>374</width>
+                <height>529</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_31">
@@ -3615,8 +3770,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>627</width>
-                <height>586</height>
+                <width>345</width>
+                <height>350</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -3745,8 +3900,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>611</width>
-                <height>714</height>
+                <width>491</width>
+                <height>647</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_15">
@@ -3999,8 +4154,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>627</width>
-                <height>586</height>
+                <width>225</width>
+                <height>201</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_32">
@@ -4089,8 +4244,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>611</width>
-                <height>669</height>
+                <width>389</width>
+                <height>586</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_33">
@@ -4474,6 +4629,22 @@
     <hint type="destinationlabel">
      <x>923</x>
      <y>34</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>chkMaxThreads</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>spinMaxThreads</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>589</x>
+     <y>110</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>689</x>
+     <y>110</y>
     </hint>
    </hints>
   </connection>

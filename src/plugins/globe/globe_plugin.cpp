@@ -81,6 +81,37 @@ static const QgisPlugin::PLUGINTYPE sPluginType = QgisPlugin::UI;
 static const QString sIcon = ":/globe/globe.png";
 static const QString sExperimental = QString( "true" );
 
+#if 0
+#include <qgsmessagelog.h>
+
+class QgsMsgTrap : public std::streambuf
+{
+  public:
+    inline virtual int_type overflow( int_type c = std::streambuf::traits_type::eof() )
+    {
+      if ( c == std::streambuf::traits_type::eof() )
+        return std::streambuf::traits_type::not_eof( c );
+
+      switch ( c )
+      {
+        case '\r':
+          break;
+        case '\n':
+          QgsMessageLog::logMessage( buf, QObject::tr( "Globe" ) );
+          buf.clear();
+          break;
+        default:
+          buf += c;
+          break;
+      }
+      return c;
+    }
+
+  private:
+    QString buf;
+} msgTrap;
+#endif
+
 
 //constructor
 GlobePlugin::GlobePlugin( QgisInterface* theQgisInterface )
@@ -111,13 +142,12 @@ GlobePlugin::GlobePlugin( QgisInterface* theQgisInterface )
   {
     // OSG_PLUGINS_PATH value set by CMake option
     QString ogsPlugins( OSG_PLUGINS_PATH );
-#ifdef HAVE_MACAPP_BUNDLED_OSG
-    if ( !QgsApplication::isRunningFromBuildDir() )
+    QString bundlePlugins = QgsApplication::pluginPath() + "/../osgPlugins";
+    if ( QFile::exists( bundlePlugins ) )
     {
       // add internal osg plugin path if bundled osg
-      ogsPlugins = QgsApplication::pluginPath() + "/../osgPlugins";
+      ogsPlugins = bundlePlugins;
     }
-#endif
     if ( QFile::exists( ogsPlugins ) )
     {
       osgDB::Registry::instance()->setLibraryFilePathList( QDir::cleanPath( ogsPlugins ).toStdString() );
@@ -256,6 +286,11 @@ void GlobePlugin::initGui()
            SLOT( blankProjectReady() ) );
   connect( this, SIGNAL( xyCoordinates( const QgsPoint & ) ),
            mQGisIface->mapCanvas(), SIGNAL( xyCoordinates( const QgsPoint & ) ) );
+
+#if 0
+  mCoutRdBuf = std::cout.rdbuf( &msgTrap );
+  mCerrRdBuf = std::cerr.rdbuf( &msgTrap );
+#endif
 }
 
 void GlobePlugin::run()
@@ -528,8 +563,21 @@ double GlobePlugin::getSelectedElevation()
 void GlobePlugin::syncExtent()
 {
   QgsMapCanvas* mapCanvas = mQGisIface->mapCanvas();
-  QgsMapRenderer* mapRenderer = mapCanvas->mapRenderer();
+  const QgsMapSettings &mapSettings = mapCanvas->mapSettings();
   QgsRectangle extent = mapCanvas->extent();
+
+  long epsgGlobe = 4326;
+  QgsCoordinateReferenceSystem globeCrs;
+  globeCrs.createFromOgcWmsCrs( QString( "EPSG:%1" ).arg( epsgGlobe ) );
+
+  // transform extent to WGS84
+  if ( mapSettings.destinationCrs().authid().compare( QString( "EPSG:%1" ).arg( epsgGlobe ), Qt::CaseInsensitive ) != 0 )
+  {
+    QgsCoordinateReferenceSystem srcCRS( mapSettings.destinationCrs() );
+    QgsCoordinateTransform* coordTransform = new QgsCoordinateTransform( srcCRS, globeCrs );
+    extent = coordTransform->transformBoundingBox( extent );
+    delete coordTransform;
+  }
 
   osgEarth::Util::EarthManipulator* manip = dynamic_cast<osgEarth::Util::EarthManipulator*>( mOsgViewer->getCameraManipulator() );
   //rotate earth to north and perpendicular to camera
@@ -537,9 +585,9 @@ void GlobePlugin::syncExtent()
 
   QgsDistanceArea dist;
 
-  dist.setSourceCrs( mapRenderer->destinationCrs().srsid() );
-  dist.setEllipsoidalMode( mapRenderer->hasCrsTransformEnabled() );
-  dist.setEllipsoid( QgsProject::instance()->readEntry( "Measure", "/Ellipsoid", GEO_NONE ) );
+  dist.setSourceCrs( globeCrs );
+  dist.setEllipsoidalMode( true );
+  dist.setEllipsoid( "WGS84" );
 
   QgsPoint ll = QgsPoint( extent.xMinimum(), extent.yMinimum() );
   QgsPoint ul = QgsPoint( extent.xMinimum(), extent.yMaximum() );
@@ -927,6 +975,13 @@ void GlobePlugin::unload()
   mQGisIface->removeToolBarIcon( mQActionPointer );
 
   delete mQActionPointer;
+
+#if 0
+  if ( mCoutRdBuf )
+    std::cout.rdbuf( mCoutRdBuf );
+  if ( mCerrRdBuf )
+    std::cerr.rdbuf( mCerrRdBuf );
+#endif
 }
 
 void GlobePlugin::help()

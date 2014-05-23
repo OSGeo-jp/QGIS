@@ -1,4 +1,4 @@
-%Module(name=qgis.gui,
+%Module(name=qgis._gui,
         version=0,
         keyword_arguments="Optional")
 
@@ -15,6 +15,8 @@
 %Include qgsattributeeditor.sip
 %Include qgsattributeeditorcontext.sip
 %Include qgsattributedialog.sip
+%Include qgsattributeform.sip
+%Include qgsattributeforminterface.sip
 %Include qgsbusyindicatordialog.sip
 %Include qgscollapsiblegroupbox.sip
 %Include qgscolorbutton.sip
@@ -28,7 +30,11 @@
 %Include qgsexpressionbuilderdialog.sip
 %Include qgsexpressionbuilderwidget.sip
 %Include qgsexpressionhighlighter.sip
+%Include qgsfieldcombobox.sip
+%Include qgsfieldexpressionwidget.sip
+%Include qgsfieldmodel.sip
 %Include qgsfieldvalidator.sip
+%Include qgsfieldproxymodel.sip
 %Include qgsfiledropedit.sip
 %Include qgsfilterlineedit.sip
 %Include qgsformannotationitem.sip
@@ -44,6 +50,9 @@
 %Include qgsmapcanvasmap.sip
 %Include qgsmapcanvassnapper.sip
 %Include qgsmaplayeractionregistry.sip
+%Include qgsmaplayercombobox.sip
+%Include qgsmaplayermodel.sip
+%Include qgsmaplayerproxymodel.sip
 %Include qgsmapoverviewcanvas.sip
 %Include qgsmaptip.sip
 %Include qgsmaptool.sip
@@ -68,6 +77,8 @@
 %Include qgsrasterpyramidsoptionswidget.sip
 %Include qgsrubberband.sip
 %Include qgsscalecombobox.sip
+%Include qgsscalerangewidget.sip
+%Include qgsscalevisibilitydialog.sip
 %Include qgssearchquerybuilder.sip
 %Include qgstextannotationitem.sip
 %Include qgsvertexmarker.sip
@@ -82,6 +93,8 @@
 %Include qgshighlight.sip
 %Include qgsoptionsdialogbase.sip
 %Include qgssvgannotationitem.sip
+%Include qgsextentgroupbox.sip
+%Include qgsprevieweffect.sip
 
 %Include attributetable/qgsattributetabledelegate.sip
 %Include attributetable/qgsattributetablefiltermodel.sip
@@ -136,3 +149,5 @@
 %Include editorwidgets/core/qgseditorwidgetfactory.sip
 %Include editorwidgets/core/qgseditorwidgetregistry.sip
 %Include editorwidgets/core/qgseditorwidgetwrapper.sip
+
+%Include layertree/qgslayertreeview.sip

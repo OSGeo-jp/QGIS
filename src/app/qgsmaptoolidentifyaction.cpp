@@ -86,11 +86,6 @@ void QgsMapToolIdentifyAction::canvasPressEvent( QMouseEvent *e )
 
 void QgsMapToolIdentifyAction::canvasReleaseEvent( QMouseEvent *e )
 {
-  if ( !mCanvas || mCanvas->isDrawing() )
-  {
-    return;
-  }
-
   resultsDialog()->clear();
   connect( this, SIGNAL( identifyProgress( int, int ) ), QgisApp::instance(), SLOT( showProgress( int, int ) ) );
   connect( this, SIGNAL( identifyMessage( QString ) ), QgisApp::instance(), SLOT( showStatusMessage( QString ) ) );
@@ -102,9 +97,10 @@ void QgsMapToolIdentifyAction::canvasReleaseEvent( QMouseEvent *e )
 
   if ( !results.isEmpty() )
   {
-    // Show the dialog before items are inserted so that items can resize themselfs
+    // Show the dialog before items are inserted so that items can resize themselves
     // according to dialog size also the first time, see also #9377
-    resultsDialog()->QDialog::show();
+    if ( results.size() != 1 || !QSettings().value( "/Map/identifyAutoFeatureForm", false ).toBool() )
+      resultsDialog()->QDialog::show();
 
     QList<IdentifyResult>::const_iterator result;
     for ( result = results.begin(); result != results.end(); ++result )
@@ -117,16 +113,7 @@ void QgsMapToolIdentifyAction::canvasReleaseEvent( QMouseEvent *e )
   }
   else
   {
-    QSettings mySettings;
-    bool myDockFlag = mySettings.value( "/qgis/dockIdentifyResults", false ).toBool();
-    if ( !myDockFlag )
-    {
-      resultsDialog()->hide();
-    }
-    else
-    {
-      resultsDialog()->clear();
-    }
+    resultsDialog()->clear();
     QgisApp::instance()->statusBar()->showMessage( tr( "No features at this position found." ) );
   }
 }

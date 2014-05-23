@@ -376,16 +376,6 @@ class QgsVectorLayer : QgsMapLayer
      */
     void setRendererV2( QgsFeatureRendererV2* r /Transfer/ );
 
-    /** Draw layer with renderer V2. QgsFeatureRenderer::startRender() needs to be called before using this method
-     * @note added in 1.4
-     */
-    void drawRendererV2( QgsFeatureIterator &fit, QgsRenderContext& rendererContext, bool labeling );
-
-    /** Draw layer with renderer V2 using symbol levels. QgsFeatureRenderer::startRender() needs to be called before using this method
-     * @note added in 1.4
-     */
-    void drawRendererV2Levels( QgsFeatureIterator &fit, QgsRenderContext& rendererContext, bool labeling );
-
     /** Returns point, line or polygon */
     QGis::GeometryType geometryType() const;
 
@@ -681,6 +671,11 @@ class QgsVectorLayer : QgsMapLayer
       @note added in version 1.6*/
     virtual void reload();
 
+    /** Return new instance of QgsMapLayerRenderer that will be used for rendering of given context
+     * @note added in 2.4
+     */
+    virtual QgsMapLayerRenderer* createMapRenderer( QgsRenderContext& rendererContext ) /Factory/;
+
     /** Draws the layer
      *  @return false if an error occurred during drawing
      */
@@ -865,12 +860,6 @@ class QgsVectorLayer : QgsMapLayer
     /** set string representing 'true' for a checkbox (added in 1.4) */
     void setCheckedState( int idx, QString checked, QString notChecked );
 
-    /** return string representing 'true' for a checkbox (added in 1.4)
-     * @note not available in python bindings
-     * FIXME: need SIP binding for QPair<QString, QString>
-     */
-    // QPair<QString, QString> checkedState( int idx );
-
     /** get edit form (added in 1.4) */
     QString editForm();
 
@@ -898,15 +887,15 @@ class QgsVectorLayer : QgsMapLayer
     void setEditFormInit( QString function );
 
     /**access value map*/
-    QMap<QString, QVariant> &valueMap( int idx );
+    QMap<QString, QVariant> valueMap( int idx );
 
     /**access range */
-    RangeData &range( int idx );
+    RangeData range( int idx ) /Deprecated/;
 
     /**access relations
      * @note added in 1.8
      **/
-    ValueRelationData &valueRelation( int idx );
+    ValueRelationData valueRelation( int idx ) /Deprecated/;
 
     /**
      * Get relations, where the foreign key is on this layer
@@ -919,12 +908,12 @@ class QgsVectorLayer : QgsMapLayer
     /**access date format
      * @note added in 1.9
      */
-    QString &dateFormat( int idx );
+    QString dateFormat( int idx ) /Deprecated/;
 
     /**access widget size for photo and webview widget
      * @note added in 1.9
      */
-    QSize &widgetSize( int idx );
+    QSize widgetSize( int idx ) /Deprecated/;
 
     /**is edit widget editable
      * @note added in 1.9
@@ -1025,21 +1014,20 @@ class QgsVectorLayer : QgsMapLayer
     /** @note not available in python bindings */
     // inline QgsGeometryCache* cache();
 
-    /** Simplification flags for fast rendering of features */
-    enum SimplifyHint
-    {
-      NoSimplification           = 0, //!< No simplification can be applied
-      GeometrySimplification     = 1, //!< The geometries can be simplified using the current map2pixel context state
-      AntialiasingSimplification = 2, //!< The geometries can be rendered with 'AntiAliasing' disabled because of it is '1-pixel size'
-      FullSimplification         = 3, //!< All simplification hints can be applied ( Geometry + AA-disabling )
-    };
-    /** Set the simplification settings for fast rendering of features  */
+    /** Set the simplification settings for fast rendering of features
+     *  @note added in 2.2
+     */
     void setSimplifyMethod( const QgsVectorSimplifyMethod& simplifyMethod );
-    /** Returns the simplification settings for fast rendering of features  */
+    /** Returns the simplification settings for fast rendering of features
+     *  @note added in 2.2
+     */
     const QgsVectorSimplifyMethod& simplifyMethod() const;
 
-    /** Returns whether the VectorLayer can apply the specified simplification hint */
-    bool simplifyDrawingCanbeApplied( const QgsRenderContext& renderContext, int simplifyHint ) const;
+    /** Returns whether the VectorLayer can apply the specified simplification hint
+     *  @note Do not use in 3rd party code - may be removed in future version!
+     *  @note added in 2.2
+     */
+    bool simplifyDrawingCanbeApplied( const QgsRenderContext& renderContext, QgsVectorSimplifyMethod::SimplifyHint simplifyHint ) const;
 
   public slots:
     /**

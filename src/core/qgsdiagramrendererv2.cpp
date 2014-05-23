@@ -18,9 +18,29 @@
 #include "diagram/qgspiediagram.h"
 #include "diagram/qgshistogramdiagram.h"
 #include "qgsrendercontext.h"
+
 #include <QDomElement>
 #include <QPainter>
 
+QgsDiagramLayerSettings::QgsDiagramLayerSettings()
+    : placement( AroundPoint )
+    , placementFlags( OnLine )
+    , priority( 5 )
+    , obstacle( false )
+    , dist( 0.0 )
+    , renderer( 0 )
+    , palLayer( 0 )
+    , ct( 0 )
+    , xform( 0 )
+    , xPosColumn( -1 )
+    , yPosColumn( -1 )
+{
+}
+
+QgsDiagramLayerSettings::~QgsDiagramLayerSettings()
+{
+  delete renderer;
+}
 
 void QgsDiagramLayerSettings::readXML( const QDomElement& elem, const QgsVectorLayer* layer )
 {
@@ -249,7 +269,8 @@ void QgsDiagramSettings::writeXML( QDomElement& rendererElem, QDomDocument& doc,
   rendererElem.appendChild( categoryElem );
 }
 
-QgsDiagramRendererV2::QgsDiagramRendererV2(): mDiagram( 0 )
+QgsDiagramRendererV2::QgsDiagramRendererV2()
+    : mDiagram( 0 )
 {
 }
 
@@ -262,6 +283,11 @@ void QgsDiagramRendererV2::setDiagram( QgsDiagram* d )
 {
   delete mDiagram;
   mDiagram = d;
+}
+
+QgsDiagramRendererV2::QgsDiagramRendererV2( const QgsDiagramRendererV2& other )
+    : mDiagram( other.mDiagram ? other.mDiagram->clone() : 0 )
+{
 }
 
 void QgsDiagramRendererV2::renderDiagram( const QgsFeature& feature, QgsRenderContext& c, const QPointF& pos )
@@ -364,6 +390,11 @@ QgsSingleCategoryDiagramRenderer::~QgsSingleCategoryDiagramRenderer()
 {
 }
 
+QgsDiagramRendererV2* QgsSingleCategoryDiagramRenderer::clone() const
+{
+  return new QgsSingleCategoryDiagramRenderer( *this );
+}
+
 bool QgsSingleCategoryDiagramRenderer::diagramSettings( const QgsFeature&, const QgsRenderContext& c, QgsDiagramSettings& s )
 {
   Q_UNUSED( c );
@@ -411,6 +442,11 @@ QgsLinearlyInterpolatedDiagramRenderer::QgsLinearlyInterpolatedDiagramRenderer()
 
 QgsLinearlyInterpolatedDiagramRenderer::~QgsLinearlyInterpolatedDiagramRenderer()
 {
+}
+
+QgsDiagramRendererV2 *QgsLinearlyInterpolatedDiagramRenderer::clone() const
+{
+  return new QgsLinearlyInterpolatedDiagramRenderer( *this );
 }
 
 QList<QgsDiagramSettings> QgsLinearlyInterpolatedDiagramRenderer::diagramSettings() const

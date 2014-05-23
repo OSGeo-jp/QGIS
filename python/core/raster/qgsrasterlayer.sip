@@ -124,6 +124,11 @@ class QgsRasterLayer : QgsMapLayer
     @note added in version 1.6*/
     virtual void reload();
 
+    /** Return new instance of QgsMapLayerRenderer that will be used for rendering of given context
+     * @note added in 2.4
+     */
+    virtual QgsMapLayerRenderer* createMapRenderer( QgsRenderContext& rendererContext ) /Factory/;
+
     /** \brief This is called when the view on the raster layer needs to be redrawn */
     bool draw( QgsRenderContext& rendererContext );
 
@@ -131,12 +136,6 @@ class QgsRasterLayer : QgsMapLayer
     void draw( QPainter * theQPainter,
                QgsRasterViewPort * myRasterViewPort,
                const QgsMapToPixel* theQgsMapToPixel = 0 );
-
-    /** \brief [ data provider interface ] If an operation returns 0 (e.g. draw()), this function returns the text of the error associated with the failure  */
-    QString lastError();
-
-    /** \brief [ data provider interface ] If an operation returns 0 (e.g. draw()), this function returns the text of the error associated with the failure */
-    QString lastErrorTitle();
 
     /**Returns a list with classification items (Text and color)
       @note this method was added in version 1.8*/
@@ -183,8 +182,14 @@ class QgsRasterLayer : QgsMapLayer
     /** \brief Returns the sublayers of this layer - Useful for providers that manage their own layers, such as WMS */
     virtual QStringList subLayers() const;
 
-    /** \brief Draws a preview of the rasterlayer into a pixmap */
-    QPixmap previewAsPixmap( QSize size, QColor bgColor = QColor( 255, 255, 255 ) );
+    /** \brief Draws a preview of the rasterlayer into a pixmap
+    @note - use previewAsImage() for rendering with QGIS>=2.4 */
+    QPixmap previewAsPixmap( QSize size, QColor bgColor = QColor( 255, 255, 255 ) ) /Deprecated/;
+
+    /** \brief Draws a preview of the rasterlayer into a QImage
+     @note added in 2.4 */
+    QImage previewAsImage( QSize size, QColor bgColor = QColor( 255, 255, 255 ),
+                           QImage::Format format = QImage::Format_ARGB32_Premultiplied );
 
     /** \brief Emit a signal asking for a repaint. (inherited from maplayer) */
     void triggerRepaint();
@@ -208,8 +213,8 @@ class QgsRasterLayer : QgsMapLayer
   public slots:
     void showStatusMessage( const QString & theMessage );
 
-    /** \brief Propagate progress updates from GDAL up to the parent app */
-    void updateProgress( int, int );
+    //! @deprecated since 2.4 - does nothing
+    void updateProgress( int, int ) /Deprecated/;
 
     /** \brief receive progress signal from provider */
     void onProgress( int, double, QString );

@@ -1,4 +1,22 @@
-qgis (2.1.0) UNRELEASED; urgency=low
+qgis (2.3.0) UNRELEASED; urgency=medium
+
+  * New development version 2.3 after branch of 2.2
+  * enable globe on jessie
+  * add dependency on libqt4-sql-sqlite to qgis-provider
+  * merge debian packageing changes
+  * merge distribution specific file templates into one file template
+  * include metasearch plugins and add it's dependencies
+  * include custom widgets
+
+ -- Jürgen E. Fischer <jef@norbit.de>  Mon, 19 May 2014 16:50:23 +0200
+
+qgis (2.2.0) unstable; urgency=medium
+
+  * Release of 2.2
+
+ -- Jürgen E. Fischer <jef@norbit.de>  Sat, 22 Feb 2014 09:49:29 +0100
+
+qgis (2.1.0) unstable; urgency=low
 
   * new development version 2.1 after branch of 2.0
   * drop qgis_icon.xpm and use "upstream" version
@@ -7,7 +25,7 @@ qgis (2.1.0) UNRELEASED; urgency=low
   * add support for Ubuntu trusty
   * run crssync on copy of srs.db (Closes #738117)
 
- -- Jürgen E. Fischer <jef@norbit.de>  Mon, 10 Feb 2014 20:22:57 +0100
+ -- Jürgen E. Fischer <jef@norbit.de>  Sat, 22 Feb 2014 09:48:46 +0100
 
 qgis (1.9.0) UNRELEASED; urgency=low
 

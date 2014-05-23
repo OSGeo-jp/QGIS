@@ -39,13 +39,14 @@ email                : a.furieri@lqt.it
 #define strcasecmp(a,b) stricmp(a,b)
 #endif
 
-QgsSpatiaLiteSourceSelect::QgsSpatiaLiteSourceSelect( QWidget * parent, Qt::WFlags fl, bool embedded ):
+QgsSpatiaLiteSourceSelect::QgsSpatiaLiteSourceSelect( QWidget * parent, Qt::WindowFlags fl, bool embedded ):
     QDialog( parent, fl )
 {
   setupUi( this );
 
   QSettings settings;
   restoreGeometry( settings.value( "/Windows/SpatiaLiteSourceSelect/geometry" ).toByteArray() );
+  mHoldDialogOpen->setChecked( settings.value( "/Windows/SpatiaLiteSourceSelect/HoldDialogOpen", false ).toBool() );
 
   setWindowTitle( tr( "Add SpatiaLite Table(s)" ) );
   connectionsGroupBox->setTitle( tr( "Databases" ) );
@@ -116,6 +117,7 @@ QgsSpatiaLiteSourceSelect::~QgsSpatiaLiteSourceSelect()
 {
   QSettings settings;
   settings.setValue( "/Windows/SpatiaLiteSourceSelect/geometry", saveGeometry() );
+  settings.setValue( "/Windows/SpatiaLiteSourceSelect/HoldDialogOpen", mHoldDialogOpen->isChecked() );
 }
 
 // Slot for performing action when the Add button is clicked
@@ -154,7 +156,7 @@ void QgsSpatiaLiteSourceSelect::updateStatistics()
 
   // trying to connect to SpatiaLite DB
   QgsSpatiaLiteConnection conn( subKey );
-  if ( conn.updateStatistics() == true )
+  if ( conn.updateStatistics() )
   {
     QMessageBox::information( this, tr( "Update Statistics" ),
                               tr( "Internal statistics successfully updated for: %1" ).arg( subKey ) );
@@ -408,7 +410,10 @@ void QgsSpatiaLiteSourceSelect::addTables()
   else
   {
     emit addDatabaseLayers( m_selectedTables, "spatialite" );
-    accept();
+    if ( !mHoldDialogOpen->isChecked() )
+    {
+      accept();
+    }
   }
 }
 

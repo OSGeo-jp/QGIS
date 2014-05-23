@@ -23,6 +23,7 @@
 #include "qgsmaprenderer.h"
 #include "qgsmultibandcolorrenderer.h"
 #include "qgsrasterlayer.h"
+#include "qgsfontutils.h"
 #include <QObject>
 #include <QtTest>
 
@@ -47,7 +48,7 @@ class TestQgsComposerMap: public QObject
   private:
     QgsComposition* mComposition;
     QgsComposerMap* mComposerMap;
-    QgsMapRenderer* mMapRenderer;
+    QgsMapSettings mMapSettings;
     QgsRasterLayer* mRasterLayer;
     QString mReport;
 };
@@ -67,10 +68,9 @@ void TestQgsComposerMap::initTestCase()
   QgsMapLayerRegistry::instance()->addMapLayers( QList<QgsMapLayer*>() << mRasterLayer );
 
   //create composition with composer map
-  mMapRenderer = new QgsMapRenderer();
-  mMapRenderer->setLayerSet( QStringList() << mRasterLayer->id() );
-  mMapRenderer->setProjectionsEnabled( false );
-  mComposition = new QgsComposition( mMapRenderer );
+  mMapSettings.setLayers( QStringList() << mRasterLayer->id() );
+  mMapSettings.setCrsTransformEnabled( false );
+  mComposition = new QgsComposition( mMapSettings );
   mComposition->setPaperSize( 297, 210 ); //A4 landscape
   mComposerMap = new QgsComposerMap( mComposition, 20, 20, 200, 100 );
   mComposerMap->setFrameEnabled( true );
@@ -82,7 +82,6 @@ void TestQgsComposerMap::initTestCase()
 void TestQgsComposerMap::cleanupTestCase()
 {
   delete mComposition;
-  delete mMapRenderer;
   delete mRasterLayer;
 
   QString myReportFile = QDir::tempPath() + QDir::separator() + "qgistest.html";
@@ -109,7 +108,7 @@ void TestQgsComposerMap::render()
   mComposerMap->setNewExtent( QgsRectangle( 781662.375, 3339523.125, 793062.375, 3345223.125 ) );
   QgsCompositionChecker checker( "composermap_render", mComposition );
 
-  QVERIFY( checker.testComposition( mReport ) );
+  QVERIFY( checker.testComposition( mReport, 0, 100 ) );
 }
 
 void TestQgsComposerMap::grid()
@@ -121,6 +120,7 @@ void TestQgsComposerMap::grid()
   mComposerMap->setShowGridAnnotation( true );
   mComposerMap->setGridPenWidth( 0.5 );
   mComposerMap->setGridPenColor( QColor( 0, 255, 0 ) );
+  mComposerMap->setGridAnnotationFont( QgsFontUtils::getStandardTestFont() );
   mComposerMap->setGridAnnotationPrecision( 0 );
   mComposerMap->setGridAnnotationPosition( QgsComposerMap::Disabled, QgsComposerMap::Left );
   mComposerMap->setGridAnnotationPosition( QgsComposerMap::OutsideMapFrame, QgsComposerMap::Right );
@@ -133,7 +133,7 @@ void TestQgsComposerMap::grid()
   qWarning() << "grid annotation font: " << mComposerMap->gridAnnotationFont().toString() << " exactMatch:" << mComposerMap->gridAnnotationFont().exactMatch();
   QgsCompositionChecker checker( "composermap_grid", mComposition );
 
-  bool testResult = checker.testComposition( mReport );
+  bool testResult = checker.testComposition( mReport, 0, 100 );
   mComposerMap->setGridEnabled( false );
   mComposerMap->setShowGridAnnotation( false );
   QVERIFY( testResult );
@@ -149,7 +149,7 @@ void TestQgsComposerMap::overviewMap()
   overviewMap->setOverviewFrameMap( mComposerMap->id() );
   QgsCompositionChecker checker( "composermap_overview", mComposition );
 
-  bool testResult = checker.testComposition( mReport );
+  bool testResult = checker.testComposition( mReport, 0, 100 );
   mComposition->removeComposerItem( overviewMap );
   QVERIFY( testResult );
 }
@@ -166,7 +166,7 @@ void TestQgsComposerMap::overviewMapBlending()
 
   QgsCompositionChecker checker( "composermap_overview_blending", mComposition );
 
-  bool testResult = checker.testComposition( mReport );
+  bool testResult = checker.testComposition( mReport, 0, 100 );
   mComposition->removeComposerItem( overviewMapBlend );
   QVERIFY( testResult );
 }
@@ -183,7 +183,7 @@ void TestQgsComposerMap::overviewMapInvert()
 
   QgsCompositionChecker checker( "composermap_overview_invert", mComposition );
 
-  bool testResult = checker.testComposition( mReport );
+  bool testResult = checker.testComposition( mReport, 0, 100 );
   mComposition->removeComposerItem( overviewMapInvert );
   QVERIFY( testResult );
 }
@@ -231,7 +231,7 @@ void TestQgsComposerMap::zebraStyle()
 
   QgsCompositionChecker checker( "composermap_zebrastyle", mComposition );
 
-  bool testResult = checker.testComposition( mReport );
+  bool testResult = checker.testComposition( mReport, 0, 100 );
   QVERIFY( testResult );
 }
 
@@ -248,7 +248,7 @@ void TestQgsComposerMap::overviewMapCenter()
 
   QgsCompositionChecker checker( "composermap_overview_center", mComposition );
 
-  bool testResult = checker.testComposition( mReport );
+  bool testResult = checker.testComposition( mReport, 0, 100 );
   mComposition->removeComposerItem( overviewMapCenter );
   QVERIFY( testResult );
 }

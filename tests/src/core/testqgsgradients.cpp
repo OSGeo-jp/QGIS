@@ -65,7 +65,7 @@ class TestQgsGradients: public QObject
     bool mTestHasError;
     bool setQml( QString theType );
     bool imageCheck( QString theType );
-    QgsMapRenderer * mpMapRenderer;
+    QgsMapSettings mMapSettings;
     QgsVectorLayer * mpPolysLayer;
     QgsGradientFillSymbolLayerV2* mGradientFill;
     QgsFillSymbolV2* mFillSymbol;
@@ -96,7 +96,7 @@ void TestQgsGradients::initTestCase()
                                      myPolyFileInfo.completeBaseName(), "ogr" );
 
   QgsVectorSimplifyMethod simplifyMethod;
-  simplifyMethod.setSimplifyHints( QgsVectorLayer::NoSimplification );
+  simplifyMethod.setSimplifyHints( QgsVectorSimplifyMethod::NoSimplification );
   mpPolysLayer->setSimplifyMethod( simplifyMethod );
 
   // Register the layer with the registry
@@ -114,10 +114,7 @@ void TestQgsGradients::initTestCase()
   // since maprender does not require a qui
   // and is more light weight
   //
-  mpMapRenderer = new QgsMapRenderer();
-  QStringList myLayers;
-  myLayers << mpPolysLayer->id();
-  mpMapRenderer->setLayerSet( myLayers );
+  mMapSettings.setLayers( QStringList() << mpPolysLayer->id() );
   mReport += "<h1>Gradient Renderer Tests</h1>\n";
 
 }
@@ -250,7 +247,7 @@ void TestQgsGradients::gradientSymbolFromQml()
   mReport += "<h2>Gradient symbol from QML test</h2>\n";
   QVERIFY( setQml( "gradient" ) );
   QgsVectorSimplifyMethod simplifyMethod;
-  simplifyMethod.setSimplifyHints( QgsVectorLayer::NoSimplification );
+  simplifyMethod.setSimplifyHints( QgsVectorSimplifyMethod::NoSimplification );
   mpPolysLayer->setSimplifyMethod( simplifyMethod );
   QVERIFY( imageCheck( "gradient_from_qml" ) );
 }
@@ -280,10 +277,10 @@ bool TestQgsGradients::imageCheck( QString theTestType )
 {
   //use the QgsRenderChecker test utility class to
   //ensure the rendered output matches our control image
-  mpMapRenderer->setExtent( mpPolysLayer->extent() );
+  mMapSettings.setExtent( mpPolysLayer->extent() );
   QgsRenderChecker myChecker;
   myChecker.setControlName( "expected_" + theTestType );
-  myChecker.setMapRenderer( mpMapRenderer );
+  myChecker.setMapSettings( mMapSettings );
   bool myResultFlag = myChecker.runTest( theTestType );
   mReport += myChecker.report();
   return myResultFlag;

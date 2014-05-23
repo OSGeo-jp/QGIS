@@ -631,6 +631,72 @@ static QVariant fcnTrim( const QVariantList& values, const QgsFeature* , QgsExpr
   return QVariant( str.trimmed() );
 }
 
+static QVariant fcnWordwrap( const QVariantList& values, const QgsFeature* , QgsExpression* parent )
+{
+  if ( values.length() == 2 || values.length() == 3 )
+  {
+    QString str = getStringValue( values.at( 0 ), parent );
+    int wrap = getIntValue( values.at( 1 ), parent );
+
+    if ( !str.isEmpty() && wrap != 0 )
+    {
+      QString newstr;
+      QString delimiterstr;
+      if ( values.length() == 3 ) delimiterstr = getStringValue( values.at( 2 ), parent );
+      if ( delimiterstr.isEmpty() ) delimiterstr = " ";
+      int delimiterlength = delimiterstr.length();
+
+      QStringList lines = str.split( "\n" );
+      int strlength, strcurrent, strhit, lasthit;
+
+      for ( int i = 0; i < lines.size(); i++ )
+      {
+        strlength = lines[i].length();
+        strcurrent = 0;
+        strhit = 0;
+        lasthit = 0;
+
+        while ( strcurrent < strlength )
+        {
+          // positive wrap value = desired maximum line width to wrap
+          // negative wrap value = desired minimum line width before wrap
+          if ( wrap > 0 )
+          {
+            //first try to locate delimiter backwards
+            strhit = lines[i].lastIndexOf( delimiterstr, strcurrent + wrap );
+            if ( strhit == lasthit || strhit == -1 )
+            {
+              //if no new backward delimiter found, try to locate forward
+              strhit = lines[i].indexOf( delimiterstr, strcurrent + qAbs( wrap ) );
+            }
+            lasthit = strhit;
+          }
+          else
+          {
+            strhit = lines[i].indexOf( delimiterstr, strcurrent + qAbs( wrap ) );
+          }
+          if ( strhit > -1 )
+          {
+            newstr.append( lines[i].midRef( strcurrent , strhit - strcurrent ) );
+            newstr.append( "\n" );
+            strcurrent = strhit + delimiterlength;
+          }
+          else
+          {
+            newstr.append( lines[i].midRef( strcurrent ) );
+            strcurrent = strlength;
+          }
+        }
+        if ( i < lines.size() - 1 ) newstr.append( "\n" );
+      }
+
+      return QVariant( newstr );
+    }
+  }
+
+  return QVariant();
+}
+
 static QVariant fcnLength( const QVariantList& values, const QgsFeature* , QgsExpression* parent )
 {
   QString str = getStringValue( values.at( 0 ), parent );
@@ -1019,6 +1085,56 @@ static QVariant fcnGeomPerimeter( const QVariantList& , const QgsFeature* f, Qgs
   ENSURE_GEOM_TYPE( f, g, QGis::Polygon );
   QgsDistanceArea* calc = parent->geomCalculator();
   return QVariant( calc->measurePerimeter( f->geometry() ) );
+}
+
+static QVariant fcnBounds( const QVariantList& values, const QgsFeature* , QgsExpression* parent )
+{
+  QgsGeometry geom = getGeometry( values.at( 0 ), parent );
+  QgsGeometry* geomBounds = QgsGeometry::fromRect( geom.boundingBox() );
+  if ( geomBounds )
+  {
+    return QVariant::fromValue( *geomBounds );
+  }
+  else
+  {
+    return QVariant();
+  }
+}
+
+static QVariant fcnBoundsWidth( const QVariantList& values, const QgsFeature* , QgsExpression* parent )
+{
+  QgsGeometry geom = getGeometry( values.at( 0 ), parent );
+  return QVariant::fromValue( geom.boundingBox().width() );
+}
+
+static QVariant fcnBoundsHeight( const QVariantList& values, const QgsFeature* , QgsExpression* parent )
+{
+  QgsGeometry geom = getGeometry( values.at( 0 ), parent );
+  return QVariant::fromValue( geom.boundingBox().height() );
+}
+
+static QVariant fcnXMin( const QVariantList& values, const QgsFeature* , QgsExpression* parent )
+{
+  QgsGeometry geom = getGeometry( values.at( 0 ), parent );
+  return QVariant::fromValue( geom.boundingBox().xMinimum() );
+}
+
+static QVariant fcnXMax( const QVariantList& values, const QgsFeature* , QgsExpression* parent )
+{
+  QgsGeometry geom = getGeometry( values.at( 0 ), parent );
+  return QVariant::fromValue( geom.boundingBox().xMaximum() );
+}
+
+static QVariant fcnYMin( const QVariantList& values, const QgsFeature* , QgsExpression* parent )
+{
+  QgsGeometry geom = getGeometry( values.at( 0 ), parent );
+  return QVariant::fromValue( geom.boundingBox().yMinimum() );
+}
+
+static QVariant fcnYMax( const QVariantList& values, const QgsFeature* , QgsExpression* parent )
+{
+  QgsGeometry geom = getGeometry( values.at( 0 ), parent );
+  return QVariant::fromValue( geom.boundingBox().yMaximum() );
 }
 
 static QVariant fcnBbox( const QVariantList& values, const QgsFeature* , QgsExpression* parent )
@@ -1416,7 +1532,7 @@ const QStringList &QgsExpression::BuiltinFunctions()
     << "coalesce" << "regexp_match" << "$now" << "age" << "year"
     << "month" << "week" << "day" << "hour"
     << "minute" << "second" << "lower" << "upper"
-    << "title" << "length" << "replace" << "trim"
+    << "title" << "length" << "replace" << "trim" << "wordwrap"
     << "regexp_replace" << "regexp_substr"
     << "substr" << "concat" << "strpos" << "left"
     << "right" << "rpad" << "lpad"
@@ -1484,6 +1600,7 @@ const QList<QgsExpression::Function*> &QgsExpression::Functions()
     << new StaticFunction( "upper", 1, fcnUpper, "String" )
     << new StaticFunction( "title", 1, fcnTitle, "String" )
     << new StaticFunction( "trim", 1, fcnTrim, "String" )
+    << new StaticFunction( "wordwrap", -1, fcnWordwrap, "String" )
     << new StaticFunction( "length", 1, fcnLength, "String" )
     << new StaticFunction( "replace", 3, fcnReplace, "String" )
     << new StaticFunction( "regexp_replace", 3, fcnRegexpReplace, "String" )
@@ -1507,14 +1624,18 @@ const QList<QgsExpression::Function*> &QgsExpression::Functions()
     << new StaticFunction( "color_hsva", 4, fncColorHsva, "Color" )
     << new StaticFunction( "color_cmyk", 4, fcnColorCmyk, "Color" )
     << new StaticFunction( "color_cmyka", 5, fncColorCmyka, "Color" )
-    << new StaticFunction( "xat", 1, fcnXat, "Geometry", "", true )
-    << new StaticFunction( "yat", 1, fcnYat, "Geometry", "", true )
+    << new StaticFunction( "$geometry", 0, fcnGeometry, "Geometry", "" , true )
     << new StaticFunction( "$area", 0, fcnGeomArea, "Geometry", "", true )
     << new StaticFunction( "$length", 0, fcnGeomLength, "Geometry", "", true )
     << new StaticFunction( "$perimeter", 0, fcnGeomPerimeter, "Geometry", "", true )
     << new StaticFunction( "$x", 0, fcnX, "Geometry", "", true )
     << new StaticFunction( "$y", 0, fcnY, "Geometry", "" , true )
-    << new StaticFunction( "$geometry", 0, fcnGeometry, "Geometry", "" , true )
+    << new StaticFunction( "xat", 1, fcnXat, "Geometry", "", true )
+    << new StaticFunction( "yat", 1, fcnYat, "Geometry", "", true )
+    << new StaticFunction( "xmin", 1, fcnXMin, "Geometry", "", true )
+    << new StaticFunction( "xmax", 1, fcnXMax, "Geometry", "", true )
+    << new StaticFunction( "ymin", 1, fcnYMin, "Geometry", "", true )
+    << new StaticFunction( "ymax", 1, fcnYMax, "Geometry", "", true )
     << new StaticFunction( "geomFromWKT", 1, fcnGeomFromWKT, "Geometry" )
     << new StaticFunction( "geomFromGML", 1, fcnGeomFromGML, "Geometry" )
     << new StaticFunction( "bbox", 2, fcnBbox, "Geometry" )
@@ -1527,6 +1648,9 @@ const QList<QgsExpression::Function*> &QgsExpression::Functions()
     << new StaticFunction( "within", 2, fcnWithin, "Geometry" )
     << new StaticFunction( "buffer", -1, fcnBuffer, "Geometry" )
     << new StaticFunction( "centroid", 1, fcnCentroid, "Geometry" )
+    << new StaticFunction( "bounds", 1, fcnBounds, "Geometry", "", true )
+    << new StaticFunction( "bounds_width", 1, fcnBoundsWidth, "Geometry", "", true )
+    << new StaticFunction( "bounds_height", 1, fcnBoundsHeight, "Geometry", "", true )
     << new StaticFunction( "convexHull", 1, fcnConvexHull, "Geometry" )
     << new StaticFunction( "difference", 2, fcnDifference, "Geometry" )
     << new StaticFunction( "distance", 2, fcnDistance, "Geometry" )
@@ -2112,9 +2236,62 @@ bool QgsExpression::NodeBinaryOperator::prepare( QgsExpression* parent, const Qg
   return resL && resR;
 }
 
+int QgsExpression::NodeBinaryOperator::precedence() const
+{
+  // see left/right in qgsexpressionparser.yy
+  switch ( mOp )
+  {
+    case boOr:
+      return 1;
+
+    case boAnd:
+      return 2;
+
+    case boEQ:
+    case boNE:
+    case boLE:
+    case boGE:
+    case boLT:
+    case boGT:
+    case boRegexp:
+    case boLike:
+    case boILike:
+    case boNotLike:
+    case boNotILike:
+    case boIs:
+    case boIsNot:
+      return 3;
+
+    case boPlus:
+    case boMinus:
+      return 4;
+
+    case boMul:
+    case boDiv:
+    case boMod:
+      return 5;
+
+    case boPow:
+      return 6;
+
+    case boConcat:
+      return 7;
+  }
+  Q_ASSERT( 0 && "unexpected binary operator" );
+  return -1;
+}
+
 QString QgsExpression::NodeBinaryOperator::dump() const
 {
-  return QString( "%1 %2 %3" ).arg( mOpLeft->dump() ).arg( BinaryOperatorText[mOp] ).arg( mOpRight->dump() );
+  QgsExpression::NodeBinaryOperator *lOp = dynamic_cast<QgsExpression::NodeBinaryOperator *>( mOpLeft );
+  QgsExpression::NodeBinaryOperator *rOp = dynamic_cast<QgsExpression::NodeBinaryOperator *>( mOpRight );
+
+  QString fmt;
+  fmt += lOp && lOp->precedence() < precedence() ? "(%1)" : "%1";
+  fmt += " %2 ";
+  fmt += rOp && rOp->precedence() < precedence() ? "(%3)" : "%3";
+
+  return fmt.arg( mOpLeft->dump() ).arg( BinaryOperatorText[mOp] ).arg( mOpRight->dump() );
 }
 
 //
@@ -2337,13 +2514,13 @@ bool QgsExpression::NodeCondition::prepare( QgsExpression* parent, const QgsFiel
 
 QString QgsExpression::NodeCondition::dump() const
 {
-  QString msg = QString( "CASE " );
+  QString msg = QString( "CASE" );
   foreach ( WhenThen* cond, mConditions )
   {
-    msg += QString( "WHEN %1 THEN %2" ).arg( cond->mWhenExp->dump() ).arg( cond->mThenExp->dump() );
+    msg += QString( " WHEN %1 THEN %2" ).arg( cond->mWhenExp->dump() ).arg( cond->mThenExp->dump() );
   }
   if ( mElseExp )
-    msg += QString( "ELSE %1" ).arg( mElseExp->dump() );
+    msg += QString( " ELSE %1" ).arg( mElseExp->dump() );
   msg += QString( " END" );
   return msg;
 }

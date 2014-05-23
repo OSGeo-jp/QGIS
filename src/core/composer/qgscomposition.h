@@ -32,11 +32,11 @@
 #include "qgsaddremoveitemcommand.h"
 #include "qgscomposeritemcommand.h"
 #include "qgsatlascomposition.h"
+#include "qgspaperitem.h"
 
 class QgisApp;
 class QgsComposerFrame;
 class QgsComposerMap;
-class QgsPaperItem;
 class QGraphicsRectItem;
 class QgsMapRenderer;
 class QDomElement;
@@ -90,6 +90,10 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
       ZValueAbove
     };
 
+    //! @deprecated since 2.4 - use the constructor with QgsMapSettings
+    Q_DECL_DEPRECATED QgsComposition( QgsMapRenderer* mapRenderer );
+    explicit QgsComposition( const QgsMapSettings& mapSettings );
+
     /**Composition atlas modes*/
     enum AtlasMode
     {
@@ -98,7 +102,6 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
       ExportAtlas   // The composition is being exported as an atlas
     };
 
-    QgsComposition( QgsMapRenderer* mapRenderer );
     ~QgsComposition();
 
     /**Changes size of paper item*/
@@ -214,12 +217,12 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
      @return QgsComposerMap or 0 pointer if the composer map item does not exist*/
     const QgsComposerMap* getComposerMapById( int id ) const;
 
-    /*Returns the composer html with specified id (a string as named in the
+    /**Returns the composer html with specified id (a string as named in the
       composer user interface item properties).
       @note Added in QGIS 2.0
-      @param id - A QString representing the id of the item.
+      @param item the item.
       @return QgsComposerHtml pointer or 0 pointer if no such item exists.
-    */
+     */
     const QgsComposerHtml* getComposerHtmlByItem( QgsComposerItem *item ) const;
 
     /**Returns a composer item given its text identifier.
@@ -228,7 +231,7 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
       @param theId - A QString representing the identifier of the item to
         retrieve.
       @return QgsComposerItem pointer or 0 pointer if no such item exists.
-      **/
+     */
     const QgsComposerItem* getComposerItemById( QString theId ) const;
 
     /**Returns a composer item given its unique identifier.
@@ -238,7 +241,7 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
     const QgsComposerItem* getComposerItemByUuid( QString theUuid ) const;
 
     int printResolution() const {return mPrintResolution;}
-    void setPrintResolution( int dpi ) {mPrintResolution = dpi;}
+    void setPrintResolution( int dpi );
 
     bool printAsRaster() const {return mPrintAsRaster;}
     void setPrintAsRaster( bool enabled ) { mPrintAsRaster = enabled; }
@@ -257,7 +260,12 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
     void setUseAdvancedEffects( bool effectsEnabled );
 
     /**Returns pointer to map renderer of qgis map canvas*/
-    QgsMapRenderer* mapRenderer() {return mMapRenderer;}
+    //! @deprecated since 2.4 - use mapSettings() instead. May return null if not initialized with QgsMapRenderer
+    Q_DECL_DEPRECATED QgsMapRenderer* mapRenderer() {return mMapRenderer;}
+
+    //! Return setting of QGIS map canvas
+    //! @note added in 2.4
+    const QgsMapSettings& mapSettings() const { return mMapSettings; }
 
     QgsComposition::PlotStyle plotStyle() const {return mPlotStyle;}
     void setPlotStyle( QgsComposition::PlotStyle style ) {mPlotStyle = style;}
@@ -443,6 +451,11 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
     /** Sets the current atlas mode of the composition. Returns false if the mode could not be changed. */
     bool setAtlasMode( QgsComposition::AtlasMode mode );
 
+    /** Return pages in the correct order
+     @note composerItems(QList< QgsPaperItem* > &) may not return pages in the correct order
+     @note added in version 2.4*/
+    QList< QgsPaperItem* > pages() { return mPages; }
+
   public slots:
     /**Casts object to the proper subclass type and calls corresponding itemAdded signal*/
     void sendItemAddedSignal( QgsComposerItem* item );
@@ -451,9 +464,26 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
     @note added in version 2.2*/
     void updateBounds();
 
+    /**Forces items in the composition to refresh. For instance, this causes maps to redraw
+     * and rebuild cached images, html items to reload their source url, and attribute tables
+     * to refresh their contents.
+    @note added in version 2.3*/
+    void refreshItems();
+
+    /**Clears any selected items and sets an item as the current selection.
+     * @param item item to set as selected
+     * @note added in version 2.3*/
+    void setSelectedItem( QgsComposerItem* item );
+
+  protected:
+    void init();
+
+
   private:
     /**Pointer to map renderer of QGIS main map*/
     QgsMapRenderer* mMapRenderer;
+    const QgsMapSettings& mMapSettings;
+
     QgsComposition::PlotStyle mPlotStyle;
     double mPageWidth;
     double mPageHeight;
@@ -551,6 +581,9 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
     void paperSizeChanged();
     void nPagesChanged();
 
+    /**Is emitted when the compositions print resolution changes*/
+    void printResolutionChanged();
+
     /**Is emitted when selected item changed. If 0, no item is selected*/
     void selectedItemChanged( QgsComposerItem* selected );
     /**Is emitted when new composer arrow has been added to the view*/
@@ -573,6 +606,9 @@ class CORE_EXPORT QgsComposition : public QGraphicsScene
     void composerTableAdded( QgsComposerAttributeTable* table );
     /**Is emitted when a composer item has been removed from the scene*/
     void itemRemoved( QgsComposerItem* );
+
+    /**Is emitted when item in the composition must be refreshed*/
+    void refreshItemsTriggered();
 
     /**Is emitted when the composition has an updated status bar message for the composer window*/
     void statusMsgChanged( QString message );

@@ -35,6 +35,7 @@
 #include <QMessageBox>
 
 #include "qgscustomization.h"
+#include "qgsfontutils.h"
 #include "qgspluginregistry.h"
 #include "qgsmessagelog.h"
 #include "qgspythonrunner.h"
@@ -114,6 +115,7 @@ void usage( std::string const & appName )
             << "\t[--optionspath path]\tuse the given QSettings path\n"
             << "\t[--configpath path]\tuse the given path for all user configuration\n"
             << "\t[--code path]\trun the given python file on load\n"
+            << "\t[--defaultui]\tstart by resetting user ui settings to default\n"
             << "\t[--help]\t\tthis text\n\n"
             << "  FILE:\n"
             << "    Files specified on the command line can include rasters,\n"
@@ -452,6 +454,7 @@ int main( int argc, char *argv[] )
   myHideSplash = true;
 #endif
 
+  bool myRestoreDefaultWindowState = false;
   bool myRestorePlugins = true;
   bool myCustomization = true;
 
@@ -515,7 +518,7 @@ int main( int argc, char *argv[] )
       }
       else if ( i + 1 < argc && ( arg == "--snapshot" || arg == "-s" ) )
       {
-        mySnapshotFileName = QDir::convertSeparators( QFileInfo( args[++i] ).absoluteFilePath() );
+        mySnapshotFileName = QDir::toNativeSeparators( QFileInfo( args[++i] ).absoluteFilePath() );
       }
       else if ( i + 1 < argc && ( arg == "--width" || arg == "-w" ) )
       {
@@ -531,7 +534,7 @@ int main( int argc, char *argv[] )
       }
       else if ( i + 1 < argc && ( arg == "--project" || arg == "-p" ) )
       {
-        myProjectFileName = QDir::convertSeparators( QFileInfo( args[++i] ).absoluteFilePath() );
+        myProjectFileName = QDir::toNativeSeparators( QFileInfo( args[++i] ).absoluteFilePath() );
       }
       else if ( i + 1 < argc && ( arg == "--extent" || arg == "-e" ) )
       {
@@ -539,23 +542,27 @@ int main( int argc, char *argv[] )
       }
       else if ( i + 1 < argc && ( arg == "--optionspath" || arg == "-o" ) )
       {
-        optionpath = QDir::convertSeparators( QDir( args[++i] ).absolutePath() );
+        optionpath = QDir::toNativeSeparators( QDir( args[++i] ).absolutePath() );
       }
       else if ( i + 1 < argc && ( arg == "--configpath" || arg == "-c" ) )
       {
-        configpath = QDir::convertSeparators( QDir( args[++i] ).absolutePath() );
+        configpath = QDir::toNativeSeparators( QDir( args[++i] ).absolutePath() );
       }
       else if ( i + 1 < argc && ( arg == "--code" || arg == "-f" ) )
       {
-        pythonfile = QDir::convertSeparators( QFileInfo( args[++i] ).absoluteFilePath() );
+        pythonfile = QDir::toNativeSeparators( QFileInfo( args[++i] ).absoluteFilePath() );
       }
       else if ( i + 1 < argc && ( arg == "--customizationfile" || arg == "-z" ) )
       {
-        customizationfile = QDir::convertSeparators( QFileInfo( args[++i] ).absoluteFilePath() );
+        customizationfile = QDir::toNativeSeparators( QFileInfo( args[++i] ).absoluteFilePath() );
+      }
+      else if ( arg == "--defaultui" || arg == "-d" )
+      {
+        myRestoreDefaultWindowState = true;
       }
       else
       {
-        myFileList.append( QDir::convertSeparators( QFileInfo( args[i] ).absoluteFilePath() ) );
+        myFileList.append( QDir::toNativeSeparators( QFileInfo( args[i] ).absoluteFilePath() ) );
       }
     }
   }
@@ -571,7 +578,7 @@ int main( int argc, char *argv[] )
     // check for a .qgs
     for ( int i = 0; i < args.size(); i++ )
     {
-      QString arg = QDir::convertSeparators( QFileInfo( args[i] ).absoluteFilePath() );
+      QString arg = QDir::toNativeSeparators( QFileInfo( args[i] ).absoluteFilePath() );
       if ( arg.contains( ".qgs" ) )
       {
         myProjectFileName = arg;
@@ -736,14 +743,9 @@ int main( int argc, char *argv[] )
     }
   }
 
-  // load standard test font from testdata.qrc (for unit tests)
-  QFile testFont( ":/testdata/font/FreeSansQGIS.ttf" );
-  if ( testFont.open( QIODevice::ReadOnly ) )
-  {
-    int fontID = QFontDatabase::addApplicationFontFromData( testFont.readAll() );
-    Q_UNUSED( fontID );
-    QgsDebugMsg( QString( "Test font %1loaded from testdata.qrc" ).arg( fontID != -1 ? "" : "NOT " ) );
-  } // else app wasn't built with ENABLE_TESTS
+#ifdef QGISDEBUG
+  QgsFontUtils::loadStandardTestFonts( QStringList() << "Roman" << "Bold" );
+#endif
 
   // Set the application style.  If it's not set QT will use the platform style except on Windows
   // as it looks really ugly so we use QPlastiqueStyle.
@@ -817,6 +819,36 @@ int main( int argc, char *argv[] )
     }
   }
 
+  // For non static builds on mac and win (static builds are not supported)
+  // we need to be sure we can find the qt image
+  // plugins. In mac be sure to look in the
+  // application bundle...
+#ifdef Q_WS_WIN
+  QCoreApplication::addLibraryPath( QApplication::applicationDirPath()
+                                    + QDir::separator() + "qtplugins" );
+#endif
+#ifdef Q_OS_MACX
+  // IMPORTANT: do before Qt uses any plugins, e.g. before loading splash screen
+  QString  myPath( QCoreApplication::applicationDirPath().append( "/../PlugIns" ) );
+  // Check if it contains a standard Qt-specific plugin subdirectory
+  if ( !QFile::exists( myPath + "/imageformats" ) )
+  {
+    // We are either running from build dir bundle, or launching binary directly.
+    // Use system Qt plugins, since they are not bundled.
+    // An app bundled with QGIS_MACAPP_BUNDLE=0 will still have Plugins/qgis in it
+    myPath = QT_PLUGINS_DIR;
+  }
+
+  // First clear the plugin search paths so we can be sure only plugins we define
+  // are being used. Note: this strips QgsApplication::pluginPath()
+  QStringList myPathList;
+  QCoreApplication::setLibraryPaths( myPathList );
+
+  QgsDebugMsg( QString( "Adding Mac QGIS and Qt plugins dirs to search path: %1" ).arg( myPath ) );
+  QCoreApplication::addLibraryPath( QgsApplication::pluginPath() );
+  QCoreApplication::addLibraryPath( myPath );
+#endif
+
   //set up splash screen
   QString mySplashPath( QgsCustomization::instance()->splashPath() );
   QPixmap myPixmap( mySplashPath + QString( "splash.png" ) );
@@ -832,57 +864,18 @@ int main( int argc, char *argv[] )
     mypSplash->show();
   }
 
-  // For non static builds on mac and win (static builds are not supported)
-  // we need to be sure we can find the qt image
-  // plugins. In mac be sure to look in the
-  // application bundle...
-#ifdef Q_WS_WIN
-  QCoreApplication::addLibraryPath( QApplication::applicationDirPath()
-                                    + QDir::separator() + "qtplugins" );
-#endif
-#ifdef Q_OS_MACX
-  //qDebug("Adding qt image plugins to plugin search path...");
-  CFURLRef myBundleRef = CFBundleCopyBundleURL( CFBundleGetMainBundle() );
-  CFStringRef myMacPath = CFURLCopyFileSystemPath( myBundleRef, kCFURLPOSIXPathStyle );
-  const char *mypPathPtr = CFStringGetCStringPtr( myMacPath, CFStringGetSystemEncoding() );
-  CFRelease( myBundleRef );
-  CFRelease( myMacPath );
-  QString myPath( mypPathPtr );
-  // if we are not in a bundle assume that the app is built
-  // as a non bundle app and that image plugins will be
-  // in system Qt frameworks. If the app is a bundle
-  // lets try to set the qt plugin search path...
-  QFileInfo myInfo( myPath );
-  if ( myInfo.isBundle() )
+  // optionally restore default window state
+  // use restoreDefaultWindowState setting only if NOT using command line (then it is set already)
+  if ( myRestoreDefaultWindowState || mySettings.value( "/qgis/restoreDefaultWindowState", false ).toBool() )
   {
-    // First clear the plugin search paths so we can be sure
-    // only plugins from the bundle are being used
-    QStringList myPathList;
-    QCoreApplication::setLibraryPaths( myPathList );
-    // Now set the paths inside the bundle
-    myPath += "/Contents/Plugins";
-    QCoreApplication::addLibraryPath( myPath );
-    if ( QgsApplication::isRunningFromBuildDir() )
-    {
-      QCoreApplication::addLibraryPath( QTPLUGINSDIR );
-    }
-    //next two lines should not be needed, testing only
-#if 0
-    QCoreApplication::addLibraryPath( myPath + "/imageformats" );
-    QCoreApplication::addLibraryPath( myPath + "/sqldrivers" );
-    foreach ( myPath, myApp.libraryPaths() )
-    {
-      qDebug( "Path:" + myPath.toLocal8Bit() );
-    }
-    qDebug( "Added %s to plugin search path", qPrintable( myPath ) );
-    QList<QByteArray> myFormats = QImageReader::supportedImageFormats();
-    for ( int x = 0; x < myFormats.count(); ++x )
-    {
-      qDebug( "Format: " + myFormats[x] );
-    }
-#endif
+    QgsDebugMsg( "Resetting /UI/state settings!" );
+    mySettings.remove( "/UI/state" );
+    mySettings.remove( "/qgis/restoreDefaultWindowState" );
   }
-#endif
+
+  // set max. thread count
+  // this should be done in QgsApplication::init() but it doesn't know the settings dir.
+  QgsApplication::setMaxThreads( QSettings().value( "/qgis/max_threads", -1 ).toInt() );
 
   QgisApp *qgis = new QgisApp( mypSplash, myRestorePlugins ); // "QgisApp" used to find canonical instance
   qgis->setObjectName( "QgisApp" );

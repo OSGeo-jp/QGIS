@@ -127,6 +127,15 @@ QgsCoordinateTransform::~QgsCoordinateTransform()
   }
 }
 
+QgsCoordinateTransform* QgsCoordinateTransform::clone() const
+{
+  QgsCoordinateTransform* tr = new QgsCoordinateTransform( sourceCrs(), destCRS() );
+  tr->setSourceDatumTransform( sourceDatumTransform() );
+  tr->setDestinationDatumTransform( destinationDatumTransform() );
+  tr->initialise();
+  return tr;
+}
+
 void QgsCoordinateTransform::setSourceCrs( const QgsCoordinateReferenceSystem& theCRS )
 {
   mSourceCRS = theCRS;
@@ -424,6 +433,17 @@ void QgsCoordinateTransform::transformInPlace(
     throw;
   }
 }
+
+#ifdef QT_ARCH_ARM
+void QgsCoordinateTransform::transformInPlace( qreal& x, qreal& y, double& z,
+    TransformDirection direction ) const
+{
+  double xd = ( double ) x, yd = ( double ) y;
+  transformInPlace( xd, yd, z, direction );
+  x = xd;
+  y = yd;
+}
+#endif
 
 #ifdef ANDROID
 void QgsCoordinateTransform::transformInPlace( float& x, float& y, float& z,

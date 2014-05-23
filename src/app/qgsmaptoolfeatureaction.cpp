@@ -57,11 +57,6 @@ void QgsMapToolFeatureAction::canvasPressEvent( QMouseEvent *e )
 
 void QgsMapToolFeatureAction::canvasReleaseEvent( QMouseEvent *e )
 {
-  if ( !mCanvas || mCanvas->isDrawing() )
-  {
-    return;
-  }
-
   QgsMapLayer *layer = mCanvas->currentLayer();
 
   if ( !layer || layer->type() != QgsMapLayer::VectorLayer )
@@ -108,13 +103,6 @@ bool QgsMapToolFeatureAction::doAction( QgsVectorLayer *layer, int x, int y )
 
   QgsPoint point = mCanvas->getCoordinateTransform()->toMapCoordinates( x, y );
 
-  // load identify radius from settings
-  QSettings settings;
-  double identifyValue = settings.value( "/Map/identifyRadius", QGis::DEFAULT_IDENTIFY_RADIUS ).toDouble();
-
-  if ( identifyValue <= 0.0 )
-    identifyValue = QGis::DEFAULT_IDENTIFY_RADIUS;
-
   QgsFeatureList featList;
 
   // toLayerCoordinates will throw an exception for an 'invalid' point.
@@ -123,7 +111,7 @@ bool QgsMapToolFeatureAction::doAction( QgsVectorLayer *layer, int x, int y )
   try
   {
     // create the search rectangle
-    double searchRadius = mCanvas->extent().width() * ( identifyValue / 100.0 );
+    double searchRadius = searchRadiusMU( mCanvas );
 
     QgsRectangle r;
     r.setXMinimum( point.x() - searchRadius );

@@ -130,6 +130,17 @@ void QgsAttributeTableFilterModel::setFilteredFeatures( QgsFeatureIds ids )
   invalidateFilter();
 }
 
+QgsFeatureIds QgsAttributeTableFilterModel::filteredFeatures()
+{
+  QgsFeatureIds ids;
+  for (int i = 0; i < rowCount(); ++i)
+  {
+      QModelIndex row = index( i, 0 );
+      ids << rowToId( row );
+  }
+  return ids;
+}
+
 void QgsAttributeTableFilterModel::setFilterMode( FilterMode filterMode )
 {
   if ( filterMode != mFilterMode )
@@ -223,7 +234,7 @@ void QgsAttributeTableFilterModel::generateListOfVisibleFeatures()
     return;
 
   bool filter = false;
-  QgsRectangle rect = mCanvas->mapRenderer()->mapToLayerCoordinates( layer(), mCanvas->extent() );
+  QgsRectangle rect = mCanvas->mapSettings().mapToLayerCoordinates( layer(), mCanvas->extent() );
   QgsRenderContext renderContext;
   QgsFeatureRendererV2* renderer = layer()->rendererV2();
 
@@ -235,9 +246,10 @@ void QgsAttributeTableFilterModel::generateListOfVisibleFeatures()
     return;
   }
 
+  const QgsMapSettings& ms = mCanvas->mapSettings();
   if ( layer()->hasScaleBasedVisibility() &&
-       ( layer()->minimumScale() > mCanvas->mapRenderer()->scale() ||
-         layer()->maximumScale() <= mCanvas->mapRenderer()->scale() ) )
+       ( layer()->minimumScale() > ms.scale() ||
+         layer()->maximumScale() <= ms.scale() ) )
   {
     QgsDebugMsg( "Out of scale limits" );
   }
@@ -249,15 +261,15 @@ void QgsAttributeTableFilterModel::generateListOfVisibleFeatures()
       // mapRenderer()->renderContext()->scale is not automaticaly updated when
       // render extent changes (because it's scale is used to identify if changed
       // since last render) -> use local context
-      renderContext.setExtent( mCanvas->mapRenderer()->rendererContext()->extent() );
-      renderContext.setMapToPixel( mCanvas->mapRenderer()->rendererContext()->mapToPixel() );
-      renderContext.setRendererScale( mCanvas->mapRenderer()->scale() );
+      renderContext.setExtent( ms.visibleExtent() );
+      renderContext.setMapToPixel( ms.mapToPixel() );
+      renderContext.setRendererScale( ms.scale() );
     }
 
     filter = renderer && renderer->capabilities() & QgsFeatureRendererV2::Filter;
   }
 
-  renderer->startRender( renderContext, layer() );
+  renderer->startRender( renderContext, layer()->pendingFields() );
 
   QgsFeatureIterator features = masterModel()->layerCache()->getFeatures( QgsFeatureRequest().setFlags( QgsFeatureRequest::NoGeometry ).setFilterRect( rect ) );
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1050</width>
-    <height>487</height>
+    <height>506</height>
    </rect>
   </property>
   <widget class="QWidget" name="centralwidget"/>
@@ -88,6 +88,16 @@
      <addaction name="mActionDecorationNorthArrow"/>
      <addaction name="mActionDecorationCopyright"/>
     </widget>
+    <widget class="QMenu" name="menuPreview_Mode">
+     <property name="title">
+      <string>Preview Mode</string>
+     </property>
+     <addaction name="mActionPreviewModeOff"/>
+     <addaction name="mActionPreviewModeGrayscale"/>
+     <addaction name="mActionPreviewModeMono"/>
+     <addaction name="mActionPreviewProtanope"/>
+     <addaction name="mActionPreviewDeuteranope"/>
+    </widget>
     <addaction name="mActionPan"/>
     <addaction name="mActionPanToSelected"/>
     <addaction name="mActionZoomIn"/>
@@ -105,10 +115,12 @@
     <addaction name="mActionZoomActualSize"/>
     <addaction name="separator"/>
     <addaction name="menuDecorations"/>
+    <addaction name="menuPreview_Mode"/>
     <addaction name="mActionMapTips"/>
     <addaction name="mActionNewBookmark"/>
     <addaction name="mActionShowBookmarks"/>
     <addaction name="mActionDraw"/>
+    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="mLayerMenu">
     <property name="title">
@@ -123,6 +135,7 @@
     </widget>
     <addaction name="mNewLayerMenu"/>
     <addaction name="mActionEmbedLayers"/>
+    <addaction name="mActionAddLayerDefinition"/>
     <addaction name="mActionAddOgrLayer"/>
     <addaction name="mActionAddRasterLayer"/>
     <addaction name="mActionAddPgLayer"/>
@@ -144,9 +157,10 @@
     <addaction name="mActionAllEdits"/>
     <addaction name="separator"/>
     <addaction name="mActionLayerSaveAs"/>
-    <addaction name="mActionLayerSelectionSaveAs"/>
+    <addaction name="mActionSaveLayerDefinition"/>
     <addaction name="mActionRemoveLayer"/>
     <addaction name="mActionDuplicateLayer"/>
+    <addaction name="mActionSetLayerScaleVisibility"/>
     <addaction name="mActionSetLayerCRS"/>
     <addaction name="mActionSetProjectCRSFromLayer"/>
     <addaction name="mActionLayerProperties"/>
@@ -1306,11 +1320,6 @@
     <string>Save As...</string>
    </property>
   </action>
-  <action name="mActionLayerSelectionSaveAs">
-   <property name="text">
-    <string>Save Selection as Vector File...</string>
-   </property>
-  </action>
   <action name="mActionRemoveLayer">
    <property name="icon">
     <iconset resource="../../images/images.qrc">
@@ -2152,7 +2161,7 @@ Acts on currently active editable layer</string>
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="../../images/images.qrc">
+    <iconset>
      <normaloff>:/images/themes/default/mActionFillRing.png</normaloff>:/images/themes/default/mActionFillRing.png</iconset>
    </property>
    <property name="text">
@@ -2160,6 +2169,79 @@ Acts on currently active editable layer</string>
    </property>
    <property name="toolTip">
     <string>Fill Ring</string>
+   </property>
+  </action>
+  <action name="mActionAddLayerDefinition">
+   <property name="text">
+    <string>Add from Layer Definition File...</string>
+   </property>
+  </action>
+  <action name="mActionSaveLayerDefinition">
+   <property name="text">
+    <string>Save As Layer Definition File...</string>
+   </property>
+  </action>
+  <action name="mActionPreviewModeOff">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Normal</string>
+   </property>
+   <property name="toolTip">
+    <string>Normal preview mode</string>
+   </property>
+  </action>
+  <action name="mActionPreviewModeGrayscale">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Simulate photocopy (grayscale)</string>
+   </property>
+   <property name="toolTip">
+    <string>Simulate photocopy (grayscale)</string>
+   </property>
+  </action>
+  <action name="mActionPreviewModeMono">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Simulate fax (mono)</string>
+   </property>
+   <property name="toolTip">
+    <string>Simulate fax (mono)</string>
+   </property>
+  </action>
+  <action name="mActionPreviewProtanope">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Simulate color blindness (protanope)</string>
+   </property>
+   <property name="toolTip">
+    <string>Simulate color blindness (protanope)</string>
+   </property>
+  </action>
+  <action name="mActionPreviewDeuteranope">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Simulate color blindness (deuteranope)</string>
+   </property>
+   <property name="toolTip">
+    <string>Simulate color blindness (deuteranope)</string>
+   </property>
+  </action>
+  <action name="mActionSetLayerScaleVisibility">
+   <property name="text">
+    <string>Set Scale Visibility of Layer(s)</string>
    </property>
   </action>
  </widget>

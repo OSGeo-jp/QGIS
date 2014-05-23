@@ -53,34 +53,52 @@
 QgsComposition::QgsComposition( QgsMapRenderer* mapRenderer )
     : QGraphicsScene( 0 )
     , mMapRenderer( mapRenderer )
-    , mPlotStyle( QgsComposition::Preview )
-    , mPageWidth( 297 )
-    , mPageHeight( 210 )
-    , mSpaceBetweenPages( 10 )
-    , mPageStyleSymbol( 0 )
-    , mPrintAsRaster( false )
-    , mGenerateWorldFile( false )
-    , mWorldFileMap( 0 )
-    , mUseAdvancedEffects( true )
-    , mSnapToGrid( false )
-    , mGridVisible( false )
-    , mSnapGridResolution( 0 )
-    , mSnapGridTolerance( 0 )
-    , mSnapGridOffsetX( 0 )
-    , mSnapGridOffsetY( 0 )
-    , mAlignmentSnap( true )
-    , mGuidesVisible( true )
-    , mSmartGuides( true )
-    , mAlignmentSnapTolerance( 0 )
-    , mSelectionHandles( 0 )
-    , mActiveItemCommand( 0 )
-    , mActiveMultiFrameCommand( 0 )
+    , mMapSettings( mapRenderer->mapSettings() )
     , mAtlasComposition( this )
-    , mAtlasMode( QgsComposition::AtlasOff )
-    , mPreventCursorChange( false )
 {
+  init();
+}
+
+QgsComposition::QgsComposition( const QgsMapSettings& mapSettings )
+    : QGraphicsScene( 0 )
+    , mMapRenderer( 0 )
+    , mMapSettings( mapSettings )
+    , mAtlasComposition( this )
+{
+  init();
+}
+
+void QgsComposition::init()
+{
+  // these members should be ideally in constructor's initialization list, but now we have two constructors...
+  mPlotStyle = QgsComposition::Preview;
+  mPageWidth = 297;
+  mPageHeight = 210;
+  mSpaceBetweenPages = 10;
+  mPageStyleSymbol = 0;
+  mPrintAsRaster = false;
+  mGenerateWorldFile = false;
+  mWorldFileMap = 0;
+  mUseAdvancedEffects = true;
+  mSnapToGrid = false;
+  mGridVisible = false;
+  mSnapGridResolution = 0;
+  mSnapGridTolerance = 0;
+  mSnapGridOffsetX = 0;
+  mSnapGridOffsetY = 0;
+  mAlignmentSnap = true;
+  mGuidesVisible = true;
+  mSmartGuides = true;
+  mAlignmentSnapTolerance = 0;
+  mSelectionHandles = 0;
+  mActiveItemCommand = 0;
+  mActiveMultiFrameCommand = 0;
+  mAtlasMode = QgsComposition::AtlasOff;
+  mPreventCursorChange = false;
+
   setBackgroundBrush( QColor( 215, 215, 215 ) );
   createDefaultPageStyleSymbol();
+
   addPaperItem();
 
   updateBounds();
@@ -98,6 +116,8 @@ QgsComposition::QgsComposition( QgsMapRenderer* mapRenderer )
   loadSettings();
 }
 
+
+/*
 QgsComposition::QgsComposition()
     : QGraphicsScene( 0 ),
     mMapRenderer( 0 ),
@@ -130,7 +150,7 @@ QgsComposition::QgsComposition()
   //load default composition settings
   loadDefaults();
   loadSettings();
-}
+}*/
 
 QgsComposition::~QgsComposition()
 {
@@ -159,6 +179,18 @@ void QgsComposition::loadDefaults()
 void QgsComposition::updateBounds()
 {
   setSceneRect( compositionBounds() );
+}
+
+void QgsComposition::refreshItems()
+{
+  emit refreshItemsTriggered();
+}
+
+void QgsComposition::setSelectedItem( QgsComposerItem *item )
+{
+  clearSelection();
+  item->setSelected( true );
+  emit selectedItemChanged( item );
 }
 
 QRectF QgsComposition::compositionBounds() const
@@ -257,6 +289,7 @@ void QgsComposition::createDefaultPageStyleSymbol()
   properties.insert( "color", "white" );
   properties.insert( "style", "solid" );
   properties.insert( "style_border", "no" );
+  properties.insert( "joinstyle", "miter" );
   mPageStyleSymbol = QgsFillSymbolV2::createSimple( properties );
 }
 
@@ -486,6 +519,11 @@ const QgsComposerItem* QgsComposition::getComposerItemByUuid( QString theUuid ) 
   return 0;
 }
 
+void QgsComposition::setPrintResolution( int dpi )
+{
+  mPrintResolution = dpi;
+  emit printResolutionChanged();
+}
 
 void QgsComposition::setUseAdvancedEffects( bool effectsEnabled )
 {
@@ -847,6 +885,12 @@ void QgsComposition::addItemsFromXML( const QDomElement& elem, const QDomDocumen
   {
     QDomElement currentComposerMapElem = composerMapList.at( i ).toElement();
     QgsComposerMap* newMap = new QgsComposerMap( this );
+
+    if ( mapsToRestore )
+    {
+      newMap->setUpdatesEnabled( false );
+    }
+
     newMap->readXML( currentComposerMapElem, doc );
     newMap->assignFreeId();
 
@@ -854,6 +898,7 @@ void QgsComposition::addItemsFromXML( const QDomElement& elem, const QDomDocumen
     {
       mapsToRestore->insert( newMap, ( int )( newMap->previewMode() ) );
       newMap->setPreviewMode( QgsComposerMap::Rectangle );
+      newMap->setUpdatesEnabled( true );
     }
     addComposerMap( newMap, false );
     newMap->setZValue( newMap->zValue() + zOrderOffset );
@@ -1148,12 +1193,19 @@ void QgsComposition::raiseItem( QgsComposerItem* item )
   QMutableLinkedListIterator<QgsComposerItem*> it( mItemZList );
   if ( it.findNext( item ) )
   {
-    if ( it.hasNext() )
+    it.remove();
+    while ( it.hasNext() )
     {
-      it.remove();
+      //search through item z list to find next item which is present in the scene
+      //(deleted items still exist in the z list so that they can be restored to their correct stacking order,
+      //but since they are not in the scene they should be ignored here)
       it.next();
-      it.insert( item );
+      if ( it.value() && it.value()->scene() )
+      {
+        break;
+      }
     }
+    it.insert( item );
   }
 }
 
@@ -1246,13 +1298,19 @@ void QgsComposition::lowerItem( QgsComposerItem* item )
   QMutableLinkedListIterator<QgsComposerItem*> it( mItemZList );
   if ( it.findNext( item ) )
   {
-    it.previous();
-    if ( it.hasPrevious() )
+    it.remove();
+    while ( it.hasPrevious() )
     {
-      it.remove();
+      //search through item z list to find previous item which is present in the scene
+      //(deleted items still exist in the z list so that they can be restored to their correct stacking order,
+      //but since they are not in the scene they should be ignored here)
       it.previous();
-      it.insert( item );
+      if ( it.value() && it.value()->scene() )
+      {
+        break;
+      }
     }
+    it.insert( item );
   }
 }
 
@@ -2517,6 +2575,7 @@ bool QgsComposition::setAtlasMode( QgsComposition::AtlasMode mode )
     if ( ! atlasHasFeatures )
     {
       mAtlasMode = QgsComposition::AtlasOff;
+      mAtlasComposition.endRender();
       return false;
     }
   }
@@ -2557,3 +2616,4 @@ double QgsComposition::relativePosition( double position, double beforeMin, doub
   //return linearly scaled position
   return m * position + c;
 }
+

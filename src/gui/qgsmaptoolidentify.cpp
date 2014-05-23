@@ -90,11 +90,6 @@ QList<QgsMapToolIdentify::IdentifyResult> QgsMapToolIdentify::identify( int x, i
   mLastExtent = mCanvas->extent();
   mLastMapUnitsPerPixel = mCanvas->mapUnitsPerPixel();
 
-  if ( !mCanvas || mCanvas->isDrawing() )
-  {
-    return results;
-  }
-
   if ( mode == DefaultQgsSetting )
   {
     QSettings settings;
@@ -125,7 +120,7 @@ QList<QgsMapToolIdentify::IdentifyResult> QgsMapToolIdentify::identify( int x, i
     QMap< QgsMapLayer*, QList<IdentifyResult> >::const_iterator resultIt = mLayerIdResults.constBegin();
     for ( ; resultIt != mLayerIdResults.constEnd(); ++resultIt )
     {
-      QAction* action = new QAction( resultIt.key()->name(), 0 );
+      QAction* action = new QAction( QString( "%1 (%2)" ).arg( resultIt.key()->name() ).arg( resultIt.value().size() ), 0 );
       action->setData( resultIt.key()->id() );
       //add point/line/polygon icon
       QgsVectorLayer* vl = qobject_cast<QgsVectorLayer*>( resultIt.key() );
@@ -150,7 +145,14 @@ QList<QgsMapToolIdentify::IdentifyResult> QgsMapToolIdentify::identify( int x, i
       {
         action->setIcon( QgsApplication::getThemeIcon( "/mIconRaster.png" ) );
       }
-      QObject::connect( action, SIGNAL( hovered() ), this, SLOT( handleMenuHover() ) );
+      connect( action, SIGNAL( hovered() ), this, SLOT( handleMenuHover() ) );
+      layerSelectionMenu.addAction( action );
+    }
+
+    if ( mLayerIdResults.size() > 1 )
+    {
+      QAction *action = new QAction( tr( "All (%1)" ).arg( idResult.size() ), 0 );
+      connect( action, SIGNAL( hovered() ), this, SLOT( handleMenuHover() ) );
       layerSelectionMenu.addAction( action );
     }
 
@@ -159,11 +161,18 @@ QList<QgsMapToolIdentify::IdentifyResult> QgsMapToolIdentify::identify( int x, i
     QAction* selectedAction = layerSelectionMenu.exec( globalPos );
     if ( selectedAction )
     {
-      QgsMapLayer* selectedLayer = QgsMapLayerRegistry::instance()->mapLayer( selectedAction->data().toString() );
-      QMap< QgsMapLayer*, QList<IdentifyResult> >::const_iterator sIt = mLayerIdResults.find( selectedLayer );
-      if ( sIt != mLayerIdResults.constEnd() )
+      if ( selectedAction->data().toString().isEmpty() )
       {
-        results = sIt.value();
+        results = idResult;
+      }
+      else
+      {
+        QgsMapLayer* selectedLayer = QgsMapLayerRegistry::instance()->mapLayer( selectedAction->data().toString() );
+        QMap< QgsMapLayer*, QList<IdentifyResult> >::const_iterator sIt = mLayerIdResults.find( selectedLayer );
+        if ( sIt != mLayerIdResults.constEnd() )
+        {
+          results = sIt.value();
+        }
       }
     }
 
@@ -259,8 +268,8 @@ bool QgsMapToolIdentify::identifyVectorLayer( QList<IdentifyResult> *results, Qg
     return false;
 
   if ( layer->hasScaleBasedVisibility() &&
-       ( layer->minimumScale() > mCanvas->mapRenderer()->scale() ||
-         layer->maximumScale() <= mCanvas->mapRenderer()->scale() ) )
+       ( layer->minimumScale() > mCanvas->mapSettings().scale() ||
+         layer->maximumScale() <= mCanvas->mapSettings().scale() ) )
   {
     QgsDebugMsg( "Out of scale limits" );
     return false;
@@ -269,13 +278,6 @@ bool QgsMapToolIdentify::identifyVectorLayer( QList<IdentifyResult> *results, Qg
   QMap< QString, QString > commonDerivedAttributes;
 
   commonDerivedAttributes.insert( tr( "(clicked coordinate)" ), point.toString() );
-
-  // load identify radius from settings
-  QSettings settings;
-  double identifyValue = settings.value( "/Map/identifyRadius", QGis::DEFAULT_IDENTIFY_RADIUS ).toDouble();
-
-  if ( identifyValue <= 0.0 )
-    identifyValue = QGis::DEFAULT_IDENTIFY_RADIUS;
 
   int featureCount = 0;
 
@@ -287,7 +289,7 @@ bool QgsMapToolIdentify::identifyVectorLayer( QList<IdentifyResult> *results, Qg
   try
   {
     // create the search rectangle
-    double searchRadius = mCanvas->extent().width() * ( identifyValue / 100.0 );
+    double searchRadius = searchRadiusMU( mCanvas );
 
     QgsRectangle r;
     r.setXMinimum( point.x() - searchRadius );
@@ -313,11 +315,12 @@ bool QgsMapToolIdentify::identifyVectorLayer( QList<IdentifyResult> *results, Qg
 
   bool filter = false;
 
+  QgsRenderContext context( QgsRenderContext::fromMapSettings( mCanvas->mapSettings() ) );
   QgsFeatureRendererV2* renderer = layer->rendererV2();
   if ( renderer && renderer->capabilities() & QgsFeatureRendererV2::ScaleDependent )
   {
     // setup scale for scale dependent visibility (rule based)
-    renderer->startRender( *( mCanvas->mapRenderer()->rendererContext() ), layer );
+    renderer->startRender( context, layer->pendingFields() );
     filter = renderer->capabilities() & QgsFeatureRendererV2::Filter;
   }
 
@@ -341,7 +344,7 @@ bool QgsMapToolIdentify::identifyVectorLayer( QList<IdentifyResult> *results, Qg
 
   if ( renderer && renderer->capabilities() & QgsFeatureRendererV2::ScaleDependent )
   {
-    renderer->stopRender( *( mCanvas->mapRenderer()->rendererContext() ) );
+    renderer->stopRender( context );
   }
 
   QgsDebugMsg( "Feature count on identify: " + QString::number( featureCount ) );
@@ -381,12 +384,12 @@ QMap< QString, QString > QgsMapToolIdentify::featureDerivedAttributes( QgsFeatur
     if ( wkbType == QGis::WKBLineString || wkbType == QGis::WKBLineString25D )
     {
       // Add the start and end points in as derived attributes
-      QgsPoint pnt = mCanvas->mapRenderer()->layerToMapCoordinates( layer, feature->geometry()->asPolyline().first() );
+      QgsPoint pnt = mCanvas->mapSettings().layerToMapCoordinates( layer, feature->geometry()->asPolyline().first() );
       str = QLocale::system().toString( pnt.x(), 'g', 10 );
       derivedAttributes.insert( tr( "firstX", "attributes get sorted; translation for lastX should be lexically larger than this one" ), str );
       str = QLocale::system().toString( pnt.y(), 'g', 10 );
       derivedAttributes.insert( tr( "firstY" ), str );
-      pnt = mCanvas->mapRenderer()->layerToMapCoordinates( layer, feature->geometry()->asPolyline().last() );
+      pnt = mCanvas->mapSettings().layerToMapCoordinates( layer, feature->geometry()->asPolyline().last() );
       str = QLocale::system().toString( pnt.x(), 'g', 10 );
       derivedAttributes.insert( tr( "lastX", "attributes get sorted; translation for firstX should be lexically smaller than this one" ), str );
       str = QLocale::system().toString( pnt.y(), 'g', 10 );
@@ -409,7 +412,7 @@ QMap< QString, QString > QgsMapToolIdentify::featureDerivedAttributes( QgsFeatur
             ( wkbType == QGis::WKBPoint || wkbType == QGis::WKBPoint25D ) )
   {
     // Include the x and y coordinates of the point as a derived attribute
-    QgsPoint pnt = mCanvas->mapRenderer()->layerToMapCoordinates( layer, feature->geometry()->asPoint() );
+    QgsPoint pnt = mCanvas->mapSettings().layerToMapCoordinates( layer, feature->geometry()->asPoint() );
     QString str = QLocale::system().toString( pnt.x(), 'g', 10 );
     derivedAttributes.insert( "X", str );
     str = QLocale::system().toString( pnt.y(), 'g', 10 );
@@ -422,14 +425,13 @@ QMap< QString, QString > QgsMapToolIdentify::featureDerivedAttributes( QgsFeatur
 bool QgsMapToolIdentify::identifyRasterLayer( QList<IdentifyResult> *results, QgsRasterLayer *layer, QgsPoint point, QgsRectangle viewExtent, double mapUnitsPerPixel )
 {
   QgsDebugMsg( "point = " + point.toString() );
-  if ( !layer ) return false;
+  if ( !layer )
+    return false;
 
   QgsRasterDataProvider *dprovider = layer->dataProvider();
   int capabilities = dprovider->capabilities();
   if ( !dprovider || !( capabilities & QgsRasterDataProvider::Identify ) )
-  {
     return false;
-  }
 
   QgsPoint pointInCanvasCrs = point;
   try
@@ -462,7 +464,7 @@ bool QgsMapToolIdentify::identifyRasterLayer( QList<IdentifyResult> *results, Qg
 
   QgsRasterIdentifyResult identifyResult;
   // We can only use current map canvas context (extent, width, height) if layer is not reprojected,
-  if ( mCanvas->hasCrsTransformEnabled() && dprovider->crs() != mCanvas->mapRenderer()->destinationCrs() )
+  if ( mCanvas->hasCrsTransformEnabled() && dprovider->crs() != mCanvas->mapSettings().destinationCrs() )
   {
     // To get some reasonable response for point/line WMS vector layers we must
     // use a context with approximately a resolution in layer CRS units
@@ -575,8 +577,6 @@ bool QgsMapToolIdentify::identifyRasterLayer( QList<IdentifyResult> *results, Qg
             if ( featureType.compare( sublayer, Qt::CaseInsensitive ) != 0 || labels.isEmpty() )
             {
               labels << featureType;
-
-
             }
 
             QMap< QString, QString > derAttributes = derivedAttributes;
@@ -664,10 +664,27 @@ void QgsMapToolIdentify::handleMenuHover()
         QList<IdentifyResult>::const_iterator idListIt = idList.constBegin();
         for ( ; idListIt != idList.constEnd(); ++idListIt )
         {
-          QgsHighlight* hl = new QgsHighlight( mCanvas, idListIt->mFeature.geometry(), vl );
+          QgsHighlight *hl = new QgsHighlight( mCanvas, idListIt->mFeature.geometry(), vl );
           hl->setColor( QColor( 255, 0, 0 ) );
           hl->setWidth( 2 );
           mRubberBands.append( hl );
+          connect( vl, SIGNAL( destroyed() ), this, SLOT( layerDestroyed() ) );
+        }
+      }
+    }
+    else
+    {
+      for ( QMap< QgsMapLayer*, QList<IdentifyResult> >::const_iterator lIt = mLayerIdResults.constBegin(); lIt != mLayerIdResults.constEnd(); ++lIt )
+      {
+        const QList<IdentifyResult>& idList = lIt.value();
+        QList<IdentifyResult>::const_iterator idListIt = idList.constBegin();
+        for ( ; idListIt != idList.constEnd(); ++idListIt )
+        {
+          QgsHighlight *hl = new QgsHighlight( mCanvas, idListIt->mFeature.geometry(), lIt.key() );
+          hl->setColor( QColor( 255, 0, 0 ) );
+          hl->setWidth( 2 );
+          mRubberBands.append( hl );
+          connect( lIt.key(), SIGNAL( destroyed() ), this, SLOT( layerDestroyed() ) );
         }
       }
     }
@@ -678,8 +695,23 @@ void QgsMapToolIdentify::deleteRubberBands()
 {
   QList<QgsHighlight*>::const_iterator it = mRubberBands.constBegin();
   for ( ; it != mRubberBands.constEnd(); ++it )
-  {
     delete *it;
-  }
   mRubberBands.clear();
+}
+
+void QgsMapToolIdentify::layerDestroyed()
+{
+  QList<QgsHighlight*>::iterator it = mRubberBands.begin();
+  while ( it != mRubberBands.end() )
+  {
+    if (( *it )->layer() == sender() )
+    {
+      delete *it;
+      it = mRubberBands.erase( it );
+    }
+    else
+    {
+      ++it;
+    }
+  }
 }

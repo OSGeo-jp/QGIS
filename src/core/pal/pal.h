@@ -116,7 +116,7 @@ namespace pal
   /**
    *  \brief Pal main class.
    *
-   *  A pal object will contains layers and global informations such as which search method
+   *  A pal object will contains layers and global information such as which search method
    *  will be used, the map resolution (dpi) ....
    *
    *  \author Maxence Laurent <maxence _dot_ laurent _at_ heig-vd _dot_ ch>
@@ -171,6 +171,13 @@ namespace pal
        * \brief show partial labels (cut-off by the map canvas) or not
        */
       bool showPartial;
+
+
+      typedef bool ( *FnIsCancelled )( void* ctx );
+      /** Callback that may be called from PAL to check whether the job has not been cancelled in meanwhile */
+      FnIsCancelled fnIsCancelled;
+      /** Application-specific context for the cancellation check function */
+      void* fnIsCancelledContext;
 
       /**
        * \brief Problem factory
@@ -339,6 +346,11 @@ namespace pal
                                            PalStat **stat,
                                            bool displayAll );
 
+      /** Register a function that returns whether this job has been cancelled - PAL calls it during the computation */
+      void registerCancellationCallback( FnIsCancelled fnCancelled, void* context );
+
+      /** Check whether the job has been cancelled */
+      inline bool isCancelled() { return fnIsCancelled ? fnIsCancelled( fnIsCancelledContext ) : false; }
 
       Problem* extractProblem( double scale, double bbox[4] );
 

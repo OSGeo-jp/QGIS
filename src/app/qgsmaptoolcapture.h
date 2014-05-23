@@ -20,7 +20,6 @@
 #include "qgsmaptooledit.h"
 #include "qgspoint.h"
 #include "qgsgeometry.h"
-#include "qgslegend.h"
 
 #include <QPoint>
 #include <QList>
@@ -60,9 +59,6 @@ class APP_EXPORT QgsMapToolCapture : public QgsMapToolEdit
     virtual void canvasReleaseEvent( QMouseEvent * e ) = 0;
 
     virtual void keyPressEvent( QKeyEvent* e );
-
-    //! Resize rubber band
-    virtual void renderComplete();
 
     //! deactive the tool
     virtual void deactivate();
@@ -119,7 +115,7 @@ class APP_EXPORT QgsMapToolCapture : public QgsMapToolEdit
 
     bool mCaptureModeFromLayer;
 
-    QList<QgsVertexMarker *> mSnappingMarkers;
+    QgsVertexMarker* mSnappingMarker;
 };
 
 #endif

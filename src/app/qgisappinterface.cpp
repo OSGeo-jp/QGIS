@@ -34,7 +34,7 @@
 #include "qgsmaplayerregistry.h"
 #include "qgsmapcanvas.h"
 #include "qgsproject.h"
-#include "qgslegend.h"
+#include "qgslayertreeview.h"
 #include "qgsshortcutsmanager.h"
 #include "qgsattributedialog.h"
 #include "qgsfield.h"
@@ -46,11 +46,11 @@
 
 QgisAppInterface::QgisAppInterface( QgisApp * _qgis )
     : qgis( _qgis ),
-    legendIface( _qgis->legend() ),
+    legendIface( _qgis->layerTreeView() ),
     pluginManagerIface( _qgis->pluginManager() )
 {
   // connect signals
-  connect( qgis->legend(), SIGNAL( currentLayerChanged( QgsMapLayer * ) ),
+  connect( qgis->layerTreeView(), SIGNAL( currentLayerChanged( QgsMapLayer * ) ),
            this, SIGNAL( currentLayerChanged( QgsMapLayer * ) ) );
   connect( qgis, SIGNAL( currentThemeChanged( QString ) ),
            this, SIGNAL( currentThemeChanged( QString ) ) );
@@ -78,6 +78,11 @@ QgsLegendInterface* QgisAppInterface::legendInterface()
 QgsPluginManagerInterface* QgisAppInterface::pluginManagerInterface()
 {
   return &pluginManagerIface;
+}
+
+QgsLayerTreeView*QgisAppInterface::layerTreeView()
+{
+  return qgis->layerTreeView();
 }
 
 void QgisAppInterface::zoomFull()
@@ -283,6 +288,11 @@ void QgisAppInterface::removeWebToolBarIcon( QAction *qAction )
 QToolBar* QgisAppInterface::addToolBar( QString name )
 {
   return qgis->addToolBar( name );
+}
+
+void QgisAppInterface::addToolBar( QToolBar *toolbar, Qt::ToolBarArea area )
+{
+  return qgis->addToolBar( toolbar, area );
 }
 
 void QgisAppInterface::openURL( QString url, bool useQgisDocDirectory )
@@ -536,7 +546,7 @@ QAction *QgisAppInterface::actionRollbackAllEdits() { return qgis->actionRollbac
 QAction *QgisAppInterface::actionCancelEdits() { return qgis->actionCancelEdits(); }
 QAction *QgisAppInterface::actionCancelAllEdits() { return qgis->actionCancelAllEdits(); }
 QAction *QgisAppInterface::actionLayerSaveAs() { return qgis->actionLayerSaveAs(); }
-QAction *QgisAppInterface::actionLayerSelectionSaveAs() { return qgis->actionLayerSelectionSaveAs(); }
+QAction *QgisAppInterface::actionLayerSelectionSaveAs() { return 0; }
 QAction *QgisAppInterface::actionRemoveLayer() { return qgis->actionRemoveLayer(); }
 QAction *QgisAppInterface::actionDuplicateLayer() { return qgis->actionDuplicateLayer(); }
 QAction *QgisAppInterface::actionLayerProperties() { return qgis->actionLayerProperties(); }
@@ -614,7 +624,7 @@ QDialog* QgisAppInterface::getFeatureForm( QgsVectorLayer *l, QgsFeature &featur
   QgsDistanceArea myDa;
 
   myDa.setSourceCrs( l->crs().srsid() );
-  myDa.setEllipsoidalMode( QgisApp::instance()->mapCanvas()->mapRenderer()->hasCrsTransformEnabled() );
+  myDa.setEllipsoidalMode( QgisApp::instance()->mapCanvas()->mapSettings().hasCrsTransformEnabled() );
   myDa.setEllipsoid( QgsProject::instance()->readEntry( "Measure", "/Ellipsoid", GEO_NONE ) );
 
   QgsAttributeDialog *dialog = new QgsAttributeDialog( l, &feature, false, NULL, true );

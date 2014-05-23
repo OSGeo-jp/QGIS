@@ -1,3 +1,7 @@
+
+// abstract feature iterator implementations are not part of public API
+
+/*
 class QgsVectorLayerFeatureIterator : QgsAbstractFeatureIterator
 {
 %TypeHeaderCode
@@ -26,8 +30,9 @@ class QgsVectorLayerFeatureIterator : QgsAbstractFeatureIterator
     void addJoinedAttributes( QgsFeature &f );
 
     /** Update feature with uncommited attribute updates */
-    void updateChangedAttributes( QgsFeature& f );
+    /*void updateChangedAttributes( QgsFeature& f );*/
 
     /** Update feature with uncommited geometry updates */
-    void updateFeatureGeometry( QgsFeature& f );
+    /*void updateFeatureGeometry( QgsFeature& f );
 };
+*/

@@ -43,7 +43,7 @@ class APP_EXPORT QgsOptions : public QgsOptionsDialogBase, private Ui::QgsOption
      * @param name name for the widget
      * @param modal true for modal dialog
      */
-    QgsOptions( QWidget *parent = 0, Qt::WFlags fl = QgisGui::ModalDialogFlags );
+    QgsOptions( QWidget *parent = 0, Qt::WindowFlags fl = QgisGui::ModalDialogFlags );
     //! Destructor
     ~QgsOptions();
     /**
@@ -93,10 +93,6 @@ class APP_EXPORT QgsOptions : public QgsOptionsDialogBase, private Ui::QgsOption
      */
     void on_mProjectOnLaunchPushBtn_pressed();
 
-    //! Slot to change backbuffering. This is handled when the user changes
-    // the value of the checkbox
-    void toggleEnableBackbuffer( int );
-
     /**
      * Return the desired state of newly added layers. If a layer
      * is to be drawn when added to the map, this function returns
@@ -139,11 +135,16 @@ class APP_EXPORT QgsOptions : public QgsOptionsDialogBase, private Ui::QgsOption
      */
     void on_mBoldGroupBoxTitleChkBx_clicked( bool chkd );
 
+    void on_mProxyTypeComboBox_currentIndexChanged( int idx );
+
     /**Add a new URL to exclude from Proxy*/
     void on_mAddUrlPushButton_clicked();
 
     /**Remove an URL to exclude from Proxy*/
     void on_mRemoveUrlPushButton_clicked();
+
+    /**Slot to flag restoring/delete window state settings upon restart*/
+    void on_mRestoreDefaultWindowStateBtn_clicked();
 
     /** Slot to enable custom environment variables table and buttons
      * @note added in QGIS 1.9

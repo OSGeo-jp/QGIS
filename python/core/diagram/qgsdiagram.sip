@@ -5,6 +5,10 @@ class QgsDiagram
 %End
   public:
     virtual ~QgsDiagram();
+    /** Returns an instance that is equivalent to this one
+     * @note added in 2.4 */
+    virtual QgsDiagram* clone() const = 0;
+    
     void clearCache();
     QgsExpression* getExpression( const QString& expression, const QgsFields* fields );
     /** @deprecated `void renderDiagram( const QgsFeature& feature, QgsRenderContext& c, const QgsDiagramSettings& s, const QPointF& position )` should be used instead */
@@ -20,6 +24,9 @@ class QgsDiagram
     virtual QSizeF diagramSize( const QgsFeature& feature, const QgsRenderContext& c, const QgsDiagramSettings& s, const QgsDiagramInterpolationSettings& is ) = 0;
 
   protected:
+    QgsDiagram();
+    QgsDiagram( const QgsDiagram& other );
+
     /** Changes the pen width to match the current settings and rendering context
      *  @param pen The pen to modify
      *  @param s   The settings that specify the pen width

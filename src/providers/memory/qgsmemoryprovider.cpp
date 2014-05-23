@@ -167,14 +167,12 @@ QgsMemoryProvider::QgsMemoryProvider( QString uri )
 
 QgsMemoryProvider::~QgsMemoryProvider()
 {
-  while ( !mActiveIterators.empty() )
-  {
-    QgsMemoryFeatureIterator *it = *mActiveIterators.begin();
-    QgsDebugMsg( "closing active iterator" );
-    it->close();
-  }
-
   delete mSpatialIndex;
+}
+
+QgsAbstractFeatureSource* QgsMemoryProvider::featureSource() const
+{
+  return new QgsMemoryFeatureSource( this );
 }
 
 QString QgsMemoryProvider::dataSourceUri() const
@@ -254,7 +252,7 @@ QString QgsMemoryProvider::storageType() const
 
 QgsFeatureIterator QgsMemoryProvider::getFeatures( const QgsFeatureRequest& request )
 {
-  return QgsFeatureIterator( new QgsMemoryFeatureIterator( this, request ) );
+  return QgsFeatureIterator( new QgsMemoryFeatureIterator( new QgsMemoryFeatureSource( this ), true, request ) );
 }
 
 
@@ -453,6 +451,7 @@ void QgsMemoryProvider::updateExtent()
   }
   else
   {
+    mExtent.setMinimal();
     Q_FOREACH( const QgsFeature& feat, mFeatures )
     {
       if ( feat.geometry() )

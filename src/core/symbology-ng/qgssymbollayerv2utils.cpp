@@ -1,9 +1,9 @@
 /***************************************************************************
-    qgssymbollayerv2utils.cpp
-    ---------------------
-    begin                : November 2009
-    copyright            : (C) 2009 by Martin Dobias
-    email                : wonder dot sk at gmail dot com
+ qgssymbollayerv2utils.cpp
+ ---------------------
+ begin                : November 2009
+ copyright            : (C) 2009 by Martin Dobias
+ email                : wonder dot sk at gmail dot com
  ***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -325,6 +325,19 @@ QPointF QgsSymbolLayerV2Utils::decodePoint( QString str )
   return QPointF( lst[0].toDouble(), lst[1].toDouble() );
 }
 
+QString QgsSymbolLayerV2Utils::encodeMapUnitScale( const QgsMapUnitScale& mapUnitScale )
+{
+  return QString( "%1,%2" ).arg( mapUnitScale.minScale ).arg( mapUnitScale.maxScale );
+}
+
+QgsMapUnitScale QgsSymbolLayerV2Utils::decodeMapUnitScale( const QString& str )
+{
+  QStringList lst = str.split( ',' );
+  if ( lst.count() != 2 )
+    return QgsMapUnitScale();
+  return QgsMapUnitScale( lst[0].toDouble(), lst[1].toDouble() );
+}
+
 QString QgsSymbolLayerV2Utils::encodeOutputUnit( QgsSymbolV2::OutputUnit unit )
 {
   switch ( unit )
@@ -349,7 +362,7 @@ QgsSymbolV2::OutputUnit QgsSymbolLayerV2Utils::decodeOutputUnit( QString str )
     return QgsSymbolV2::MapUnit;
   }
 
-  // milimeters are default
+  // millimeters are default
   return QgsSymbolV2::MM;
 }
 
@@ -518,7 +531,7 @@ double QgsSymbolLayerV2Utils::estimateMaxSymbolBleed( QgsSymbolV2* symbol )
   return maxBleed;
 }
 
-QIcon QgsSymbolLayerV2Utils::symbolLayerPreviewIcon( QgsSymbolLayerV2* layer, QgsSymbolV2::OutputUnit u, QSize size )
+QIcon QgsSymbolLayerV2Utils::symbolLayerPreviewIcon( QgsSymbolLayerV2* layer, QgsSymbolV2::OutputUnit u, QSize size, const QgsMapUnitScale& scale )
 {
   QPixmap pixmap( size );
   pixmap.fill( Qt::transparent );
@@ -526,7 +539,7 @@ QIcon QgsSymbolLayerV2Utils::symbolLayerPreviewIcon( QgsSymbolLayerV2* layer, Qg
   painter.begin( &pixmap );
   painter.setRenderHint( QPainter::Antialiasing );
   QgsRenderContext renderContext = createRenderContext( &painter );
-  QgsSymbolV2RenderContext symbolContext( renderContext, u );
+  QgsSymbolV2RenderContext symbolContext( renderContext, u, 1.0, false, 0, 0, 0, scale );
   layer->drawPreviewIcon( symbolContext, size );
   painter.end();
   return QIcon( pixmap );
@@ -585,6 +598,8 @@ void QgsSymbolLayerV2Utils::drawStippledBackround( QPainter* painter, QRect rect
 #include <cfloat>
 
 
+#if !defined(GEOS_VERSION_MAJOR) || !defined(GEOS_VERSION_MINOR) || \
+ ((GEOS_VERSION_MAJOR<3) || ((GEOS_VERSION_MAJOR==3) && (GEOS_VERSION_MINOR<3)))
 // calculate line's angle and tangent
 static bool lineInfo( QPointF p1, QPointF p2, double& angle, double& t )
 {
@@ -644,14 +659,87 @@ static QPointF linesIntersection( QPointF p1, double t1, QPointF p2, double t2 )
   y = p1.y() + t1 * ( x - p1.x() );
   return QPointF( x, y );
 }
+#endif
 
 
-QPolygonF offsetLine( QPolygonF polyline, double dist )
+QList<QPolygonF> offsetLine( QPolygonF polyline, double dist )
 {
-  QPolygonF newLine;
+  QList<QPolygonF> resultLine;
 
   if ( polyline.count() < 2 )
-    return newLine;
+  {
+    resultLine.append( polyline );
+    return resultLine;
+  }
+
+  QPolygonF newLine;
+
+  // need at least geos 3.3 for OffsetCurve tool
+#if defined(GEOS_VERSION_MAJOR) && defined(GEOS_VERSION_MINOR) && \
+ ((GEOS_VERSION_MAJOR>3) || ((GEOS_VERSION_MAJOR==3) && (GEOS_VERSION_MINOR>=3)))
+
+  unsigned int i, pointCount = polyline.count();
+
+  QgsPolyline tempPolyline( pointCount );
+  QPointF* tempPtr = polyline.data();
+  for ( i = 0; i < pointCount; ++i, tempPtr++ )
+    tempPolyline[i] = QgsPoint( tempPtr->rx(), tempPtr->ry() );
+
+  QgsGeometry* tempGeometry = QgsGeometry::fromPolyline( tempPolyline );
+  if ( tempGeometry )
+  {
+    const GEOSGeometry* geosGeom = tempGeometry->asGeos();
+    GEOSGeometry* offsetGeom = GEOSOffsetCurve( geosGeom, dist, 8 /*quadSegments*/, 0 /*joinStyle*/, 5.0 /*mitreLimit*/ );
+
+    if ( offsetGeom )
+    {
+      tempGeometry->fromGeos( offsetGeom );
+
+      if ( QGis::flatType( tempGeometry->wkbType() ) == QGis::WKBLineString )
+      {
+        tempPolyline = tempGeometry->asPolyline();
+
+        pointCount = tempPolyline.count();
+        newLine.resize( pointCount );
+
+        QgsPoint* tempPtr2 = tempPolyline.data();
+        for ( i = 0; i < pointCount; ++i, tempPtr2++ )
+          newLine[i] = QPointF( tempPtr2->x(), tempPtr2->y() );
+        resultLine.append( newLine );
+
+        delete tempGeometry;
+        return resultLine;
+      }
+      else if ( QGis::flatType( tempGeometry->wkbType() ) == QGis::WKBMultiLineString )
+      {
+        QgsMultiPolyline tempMPolyline = tempGeometry->asMultiPolyline();
+
+        for ( int part = 0; part < tempMPolyline.count(); ++part )
+        {
+          tempPolyline = tempMPolyline[ part ];
+
+          pointCount = tempPolyline.count();
+          newLine.resize( pointCount );
+
+          QgsPoint* tempPtr2 = tempPolyline.data();
+          for ( i = 0; i < pointCount; ++i, tempPtr2++ )
+            newLine[i] = QPointF( tempPtr2->x(), tempPtr2->y() );
+          resultLine.append( newLine );
+
+          newLine = QPolygonF();
+        }
+        delete tempGeometry;
+        return resultLine;
+      }
+    }
+    delete tempGeometry;
+  }
+
+  // returns original polyline when 'GEOSOffsetCurve' fails!
+  resultLine.append( polyline );
+  return resultLine;
+
+#else
 
   double angle = 0.0, t_new, t_old = 0;
   QPointF pt_old, pt_new;
@@ -687,7 +775,11 @@ QPolygonF offsetLine( QPolygonF polyline, double dist )
   // last line segment:
   pt_new = offsetPoint( p2, angle + M_PI / 2, dist );
   newLine.append( pt_new );
-  return newLine;
+
+  resultLine.append( newLine );
+  return resultLine;
+
+#endif
 }
 
 /////
@@ -755,6 +847,13 @@ QgsSymbolV2* QgsSymbolLayerV2Utils::loadSymbol( QDomElement& element )
   if ( element.hasAttribute( "outputUnit" ) )
   {
     symbol->setOutputUnit( decodeOutputUnit( element.attribute( "outputUnit" ) ) );
+  }
+  if ( element.hasAttribute(( "mapUnitScale" ) ) )
+  {
+    QgsMapUnitScale mapUnitScale;
+    mapUnitScale.minScale = element.attribute( "mapUnitMinScale", "0.0" ).toDouble();
+    mapUnitScale.maxScale = element.attribute( "mapUnitMaxScale", "0.0" ).toDouble();
+    symbol->setMapUnitScale( mapUnitScale );
   }
   symbol->setAlpha( element.attribute( "alpha", "1.0" ).toDouble() );
 
@@ -1238,9 +1337,9 @@ bool QgsSymbolLayerV2Utils::convertPolygonSymbolizerToPointMarker( QDomElement &
   QgsDebugMsg( "Entered." );
 
   /* SE 1.1 says about PolygonSymbolizer:
-     if a point geometry is referenced instead of a polygon,
-     then a small, square, ortho-normal polygon should be
-     constructed for rendering.
+  if a point geometry is referenced instead of a polygon,
+  then a small, square, ortho-normal polygon should be
+  constructed for rendering.
    */
 
   QgsSymbolLayerV2List layers;
@@ -2558,21 +2657,108 @@ QDomElement QgsSymbolLayerV2Utils::saveColorRamp( QString name, QgsVectorColorRa
   return rampEl;
 }
 
-// parse color definition with format "rgb(0,0,0)" or "0,0,0"
-// should support other formats like FFFFFF
 QColor QgsSymbolLayerV2Utils::parseColor( QString colorStr )
 {
-  if ( colorStr.startsWith( "rgb(" ) )
-  {
-    colorStr = colorStr.mid( 4, colorStr.size() - 5 ).trimmed();
-  }
-  QStringList p = colorStr.split( QChar( ',' ) );
-  if ( p.count() != 3 )
-    return QColor();
-  return QColor( p[0].toInt(), p[1].toInt(), p[2].toInt() );
+  bool hasAlpha;
+  return parseColorWithAlpha( colorStr, hasAlpha );
 }
 
-double QgsSymbolLayerV2Utils::lineWidthScaleFactor( const QgsRenderContext& c, QgsSymbolV2::OutputUnit u )
+QColor QgsSymbolLayerV2Utils::parseColorWithAlpha( const QString colorStr, bool &containsAlpha )
+{
+  QColor parsedColor;
+
+  //color in hex format "#aabbcc"
+  if ( QColor::isValidColor( colorStr ) )
+  {
+    //string is a valid hex color string
+    parsedColor.setNamedColor( colorStr );
+    if ( parsedColor.isValid() )
+    {
+      containsAlpha = false;
+      return parsedColor;
+    }
+  }
+
+  //color in hex format, without #
+  QRegExp hexColorRx2( "^\\s*(?:[0-9a-fA-F]{3}){1,2}\\s*$" );
+  if ( hexColorRx2.indexIn( colorStr ) != -1 )
+  {
+    //add "#" and parse
+    parsedColor.setNamedColor( QString( "#" ) + colorStr );
+    if ( parsedColor.isValid() )
+    {
+      containsAlpha = false;
+      return parsedColor;
+    }
+  }
+
+  //color in (rrr,ggg,bbb) format, brackets and rgb prefix optional
+  QRegExp rgbFormatRx( "^\\s*(?:rgb)?\\(?\\s*([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\\s*,\\s*([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\\s*,\\s*([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\\s*\\)?\\s*;?\\s*$" );
+  if ( rgbFormatRx.indexIn( colorStr ) != -1 )
+  {
+    int r = rgbFormatRx.cap( 1 ).toInt();
+    int g = rgbFormatRx.cap( 2 ).toInt();
+    int b = rgbFormatRx.cap( 3 ).toInt();
+    parsedColor.setRgb( r, g, b );
+    if ( parsedColor.isValid() )
+    {
+      containsAlpha = false;
+      return parsedColor;
+    }
+  }
+
+  //color in (r%,g%,b%) format, brackets and rgb prefix optional
+  QRegExp rgbPercentFormatRx( "^\\s*(?:rgb)?\\(?\\s*(100|0*\\d{1,2})\\s*%\\s*,\\s*(100|0*\\d{1,2})\\s*%\\s*,\\s*(100|0*\\d{1,2})\\s*%\\s*\\)?\\s*;?\\s*$" );
+  if ( rgbPercentFormatRx.indexIn( colorStr ) != -1 )
+  {
+    int r = qRound( rgbPercentFormatRx.cap( 1 ).toDouble() * 2.55 );
+    int g = qRound( rgbPercentFormatRx.cap( 2 ).toDouble() * 2.55 );
+    int b = qRound( rgbPercentFormatRx.cap( 3 ).toDouble() * 2.55 );
+    parsedColor.setRgb( r, g, b );
+    if ( parsedColor.isValid() )
+    {
+      containsAlpha = false;
+      return parsedColor;
+    }
+  }
+
+  //color in (r,g,b,a) format, brackets and rgba prefix optional
+  QRegExp rgbaFormatRx( "^\\s*(?:rgba)?\\(?\\s*([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\\s*,\\s*([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\\s*,\\s*([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\\s*,\\s*(0|0?\\.\\d*|1(?:\\.0*)?)\\s*\\)?\\s*;?\\s*$" );
+  if ( rgbaFormatRx.indexIn( colorStr ) != -1 )
+  {
+    int r = rgbaFormatRx.cap( 1 ).toInt();
+    int g = rgbaFormatRx.cap( 2 ).toInt();
+    int b = rgbaFormatRx.cap( 3 ).toInt();
+    int a = qRound( rgbaFormatRx.cap( 4 ).toDouble() * 255.0 );
+    parsedColor.setRgb( r, g, b, a );
+    if ( parsedColor.isValid() )
+    {
+      containsAlpha = true;
+      return parsedColor;
+    }
+  }
+
+  //color in (r%,g%,b%,a) format, brackets and rgba prefix optional
+  QRegExp rgbaPercentFormatRx( "^\\s*(?:rgba)?\\(?\\s*(100|0*\\d{1,2})\\s*%\\s*,\\s*(100|0*\\d{1,2})\\s*%\\s*,\\s*(100|0*\\d{1,2})\\s*%\\s*,\\s*(0|0?\\.\\d*|1(?:\\.0*)?)\\s*\\)?\\s*;?\\s*$" );
+  if ( rgbaPercentFormatRx.indexIn( colorStr ) != -1 )
+  {
+    int r = qRound( rgbaPercentFormatRx.cap( 1 ).toDouble() * 2.55 );
+    int g = qRound( rgbaPercentFormatRx.cap( 2 ).toDouble() * 2.55 );
+    int b = qRound( rgbaPercentFormatRx.cap( 3 ).toDouble() * 2.55 );
+    int a = qRound( rgbaPercentFormatRx.cap( 4 ).toDouble() * 255.0 );
+    parsedColor.setRgb( r, g, b, a );
+    if ( parsedColor.isValid() )
+    {
+      containsAlpha = true;
+      return parsedColor;
+    }
+  }
+
+  //couldn't parse string as color
+  return QColor();
+}
+
+double QgsSymbolLayerV2Utils::lineWidthScaleFactor( const QgsRenderContext& c, QgsSymbolV2::OutputUnit u, const QgsMapUnitScale& scale )
 {
 
   if ( u == QgsSymbolV2::MM )
@@ -2581,7 +2767,7 @@ double QgsSymbolLayerV2Utils::lineWidthScaleFactor( const QgsRenderContext& c, Q
   }
   else //QgsSymbol::MapUnit
   {
-    double mup = c.mapToPixel().mapUnitsPerPixel();
+    double mup = scale.computeMapUnitsPerPixel( c );
     if ( mup > 0 )
     {
       return 1.0 / mup;
@@ -2593,7 +2779,7 @@ double QgsSymbolLayerV2Utils::lineWidthScaleFactor( const QgsRenderContext& c, Q
   }
 }
 
-double QgsSymbolLayerV2Utils::pixelSizeScaleFactor( const QgsRenderContext& c, QgsSymbolV2::OutputUnit u )
+double QgsSymbolLayerV2Utils::pixelSizeScaleFactor( const QgsRenderContext& c, QgsSymbolV2::OutputUnit u, const QgsMapUnitScale& scale )
 {
   if ( u == QgsSymbolV2::MM )
   {
@@ -2601,10 +2787,10 @@ double QgsSymbolLayerV2Utils::pixelSizeScaleFactor( const QgsRenderContext& c, Q
   }
   else //QgsSymbol::MapUnit
   {
-    double mup = c.mapToPixel().mapUnitsPerPixel();
+    double mup = scale.computeMapUnitsPerPixel( c );
     if ( mup > 0 )
     {
-      return c.rasterScaleFactor() / c.mapToPixel().mapUnitsPerPixel();
+      return c.rasterScaleFactor() / mup;
     }
     else
     {
@@ -2732,6 +2918,30 @@ void QgsSymbolLayerV2Utils::blurImageInPlace( QImage& image, const QRect& rect, 
     for ( int j = c1; j < c2; j++, p -= 4 )
       for ( int i = i1; i <= i2; i++ )
         p[i] = ( rgba[i] += (( p[i] << 4 ) - rgba[i] ) * alpha / 16 ) >> 4;
+  }
+}
+
+void QgsSymbolLayerV2Utils::premultiplyColor( QColor &rgb, int alpha )
+{
+  int r = 0, g = 0, b = 0;
+  double alphaFactor = 1.0;
+
+  if ( alpha != 255 && alpha > 0 )
+  {
+    // Semi-transparent pixel. We need to adjust the colors for ARGB32_Premultiplied images
+    // where color values have to be premultiplied by alpha
+
+    rgb.getRgb( &r, &g, &b );
+
+    alphaFactor = alpha / 255.;
+    r *= alphaFactor;
+    g *= alphaFactor;
+    b *= alphaFactor;
+    rgb.setRgb( r, g, b, alpha );
+  }
+  else if ( alpha == 0 )
+  {
+    rgb.setRgb( 0, 0, 0, 0 );
   }
 }
 
@@ -2997,3 +3207,5 @@ QString QgsSymbolLayerV2Utils::fieldOrExpressionFromExpression( QgsExpression* e
 
   return expression->expression();
 }
+
+

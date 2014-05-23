@@ -30,6 +30,11 @@ QgsHistogramDiagram::~QgsHistogramDiagram()
 {
 }
 
+QgsDiagram* QgsHistogramDiagram::clone() const
+{
+  return new QgsHistogramDiagram( *this );
+}
+
 QSizeF QgsHistogramDiagram::diagramSize( const QgsFeature& feature, const QgsRenderContext& c, const QgsDiagramSettings& s, const QgsDiagramInterpolationSettings& is )
 {
   Q_UNUSED( c );

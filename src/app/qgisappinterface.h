@@ -24,10 +24,6 @@
 
 class QgisApp;
 
-#ifdef _MSC_VER
-#  pragma warning( push )
-#  pragma warning( disable: 4996 )  // declared deprecated
-#endif
 
 /** \class QgisAppInterface
  * \brief Interface class to provide access to private methods in QgisApp
@@ -51,6 +47,8 @@ class APP_EXPORT QgisAppInterface : public QgisInterface
     QgsLegendInterface* legendInterface();
 
     QgsPluginManagerInterface* pluginManagerInterface();
+
+    QgsLayerTreeView* layerTreeView();
 
     /* Exposed functions */
 
@@ -150,6 +148,10 @@ class APP_EXPORT QgisAppInterface : public QgisInterface
     //! Add toolbar with specified name
     QToolBar* addToolBar( QString name );
 
+    //! Add a toolbar
+    //! @note added in 2.3
+    void addToolBar( QToolBar* toolbar, Qt::ToolBarArea area = Qt::TopToolBarArea );
+
     /** Open a url in the users browser. By default the QGIS doc directory is used
      * as the base for the URL. To open a URL that is not relative to the installed
      * QGIS documentation, set useQgisDocDirectory to false.
@@ -157,6 +159,9 @@ class APP_EXPORT QgisAppInterface : public QgisInterface
      * @param useQgisDocDirectory If true, the URL will be formed by concatenating
      * url to the QGIS documentation directory path (<prefix>/share/doc)
      */
+#ifndef Q_MOC_RUN
+    Q_DECL_DEPRECATED
+#endif
     void openURL( QString url, bool useQgisDocDirectory = true );
 
     /** Return a pointer to the map canvas used by qgisapp */
@@ -503,9 +508,5 @@ class APP_EXPORT QgisAppInterface : public QgisInterface
     //! Pointer to the PluginManagerInterface object
     QgsAppPluginManagerInterface pluginManagerIface;
 };
-
-#ifdef _MSC_VER
-#  pragma warning( pop )
-#endif
 
 #endif //#define QGISAPPINTERFACE_H

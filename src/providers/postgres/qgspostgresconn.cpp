@@ -36,6 +36,7 @@
 #include <netinet/in.h>
 #endif
 
+
 QgsPostgresResult::~QgsPostgresResult()
 {
   if ( mRes )
@@ -125,23 +126,27 @@ Oid QgsPostgresResult::PQoidValue()
   return ::PQoidValue( mRes );
 }
 
+
 QMap<QString, QgsPostgresConn *> QgsPostgresConn::sConnectionsRO;
 QMap<QString, QgsPostgresConn *> QgsPostgresConn::sConnectionsRW;
 const int QgsPostgresConn::sGeomTypeSelectLimit = 100;
 
-QgsPostgresConn *QgsPostgresConn::connectDb( QString conninfo, bool readonly )
+QgsPostgresConn *QgsPostgresConn::connectDb( QString conninfo, bool readonly, bool shared )
 {
   QMap<QString, QgsPostgresConn *> &connections =
     readonly ? QgsPostgresConn::sConnectionsRO : QgsPostgresConn::sConnectionsRW;
 
-  if ( connections.contains( conninfo ) )
+  if ( shared )
   {
-    QgsDebugMsg( QString( "Using cached connection for %1" ).arg( conninfo ) );
-    connections[conninfo]->mRef++;
-    return connections[conninfo];
+    if ( connections.contains( conninfo ) )
+    {
+      QgsDebugMsg( QString( "Using cached connection for %1" ).arg( conninfo ) );
+      connections[conninfo]->mRef++;
+      return connections[conninfo];
+    }
   }
 
-  QgsPostgresConn *conn = new QgsPostgresConn( conninfo, readonly );
+  QgsPostgresConn *conn = new QgsPostgresConn( conninfo, readonly, shared );
 
   if ( conn->mRef == 0 )
   {
@@ -149,17 +154,22 @@ QgsPostgresConn *QgsPostgresConn::connectDb( QString conninfo, bool readonly )
     return 0;
   }
 
-  connections.insert( conninfo, conn );
+  if ( shared )
+  {
+    connections.insert( conninfo, conn );
+  }
 
   return conn;
 }
 
-QgsPostgresConn::QgsPostgresConn( QString conninfo, bool readOnly )
+QgsPostgresConn::QgsPostgresConn( QString conninfo, bool readOnly, bool shared )
     : mRef( 1 )
     , mOpenCursors( 0 )
     , mConnInfo( conninfo )
     , mGotPostgisVersion( false )
     , mReadOnly( readOnly )
+    , mNextCursorId( 0 )
+    , mShared( shared )
 {
   QgsDebugMsg( QString( "New PostgreSQL connection for " ) + conninfo );
 
@@ -195,8 +205,9 @@ QgsPostgresConn::QgsPostgresConn( QString conninfo, bool readOnly )
 
   if ( PQstatus() != CONNECTION_OK )
   {
+    QString errorMsg = PQerrorMessage();
     PQfinish();
-    QgsMessageLog::logMessage( tr( "Connection to database failed" ), tr( "PostGIS" ) );
+    QgsMessageLog::logMessage( tr( "Connection to database failed" ) + "\n" + errorMsg, tr( "PostGIS" ) );
     mRef = 0;
     return;
   }
@@ -263,17 +274,17 @@ void QgsPostgresConn::disconnect()
   if ( --mRef > 0 )
     return;
 
-  QMap<QString, QgsPostgresConn *>& connections = mReadOnly ? sConnectionsRO : sConnectionsRW;
+  if ( mShared )
+  {
+    QMap<QString, QgsPostgresConn *>& connections = mReadOnly ? sConnectionsRO : sConnectionsRW;
 
-  QString key = connections.key( this, QString::null );
+    QString key = connections.key( this, QString::null );
 
-  Q_ASSERT( !key.isNull() );
-  connections.remove( key );
+    Q_ASSERT( !key.isNull() );
+    connections.remove( key );
+  }
 
-  if ( !QApplication::instance() || QThread::currentThread() == QApplication::instance()->thread() )
-    deleteLater();
-  else
-    delete this;
+  delete this;
 }
 
 /* private */
@@ -761,8 +772,10 @@ QString QgsPostgresConn::quotedValue( QVariant value )
     case QVariant::String:
       QString v = value.toString();
       v.replace( "'", "''" );
-      v.replace( "\\\"", "\\\\\"" );
-      return v.prepend( "'" ).append( "'" );
+      if ( v.contains( "\\" ) )
+        return v.replace( "\\", "\\\\" ).prepend( "E'" ).append( "'" );
+      else
+        return v.prepend( "'" ).append( "'" );
   }
 }
 
@@ -841,6 +854,11 @@ bool QgsPostgresConn::closeCursor( QString cursorName )
   }
 
   return true;
+}
+
+QString QgsPostgresConn::uniqueCursorName()
+{
+  return QString( "qgis_%1" ).arg( ++mNextCursorId );
 }
 
 bool QgsPostgresConn::PQexecNR( QString query, bool retry )
@@ -1357,7 +1375,7 @@ QGis::WkbType QgsPostgresConn::wkbTypeFromPostgis( QString type )
   {
     return QGis::WKBMultiPolygon;
   }
-  else if ( type == "MULTIPOLYGONM" )
+  else if ( type == "MULTIPOLYGONM" || type == "TIN" || type == "POLYHEDRALSURFACE" )
   {
     return QGis::WKBMultiPolygon25D;
   }
@@ -1369,9 +1387,9 @@ QGis::WkbType QgsPostgresConn::wkbTypeFromPostgis( QString type )
 
 QGis::WkbType QgsPostgresConn::wkbTypeFromOgcWkbType( unsigned int wkbType )
 {
-  // polyhedralsurface / TIN / triangle => Polygon
+  // polyhedralsurface / TIN / triangle => MultiPolygon
   if ( wkbType % 100 >= 15 )
-    wkbType = wkbType / 1000 * 1000 + QGis::WKBPolygon;
+    wkbType = wkbType / 1000 * 1000 + QGis::WKBMultiPolygon;
 
   switch ( wkbType / 1000 )
   {

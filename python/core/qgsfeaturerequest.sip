@@ -65,7 +65,10 @@ class QgsFeatureRequest
     QgsFeatureRequest& setSubsetOfAttributes( const QStringList& attrNames, const QgsFields& fields );
 
     //! Set a simplification method for geometries that will be fetched
+    //! @note added in 2.2
     QgsFeatureRequest& setSimplifyMethod( const QgsSimplifyMethod& simplifyMethod );
+    //! Get simplification method for geometries that will be fetched
+    //! @note added in 2.2
     const QgsSimplifyMethod& simplifyMethod() const;
 
     /**
@@ -79,4 +82,24 @@ class QgsFeatureRequest
      */
     bool acceptFeature( const QgsFeature& feature );
 
+};
+
+
+/** base class that can be used for any class that is capable of returning features
+ * @note added in 2.4
+ */
+class QgsAbstractFeatureSource
+{
+%TypeHeaderCode
+#include <qgsfeaturerequest.h>
+%End
+
+public:
+  virtual ~QgsAbstractFeatureSource();
+
+  virtual QgsFeatureIterator getFeatures( const QgsFeatureRequest& request ) = 0;
+
+protected:
+  void iteratorOpened( QgsAbstractFeatureIterator* it );
+  void iteratorClosed( QgsAbstractFeatureIterator* it );
 };

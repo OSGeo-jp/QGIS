@@ -22,6 +22,8 @@
 #include <QClipboard>
 #include <QMimeData>
 #include <QGridLayout>
+#include <QScrollBar>
+#include <QDesktopWidget>
 
 #include "qgsapplication.h"
 #include "qgscomposerview.h"
@@ -44,7 +46,7 @@
 #include "qgsmapcanvas.h" //for QgsMapCanvas::WheelAction
 #include "qgscursors.h"
 
-QgsComposerView::QgsComposerView( QWidget* parent, const char* name, Qt::WFlags f )
+QgsComposerView::QgsComposerView( QWidget* parent, const char* name, Qt::WindowFlags f )
     : QGraphicsView( parent )
     , mRubberBandItem( 0 )
     , mRubberBandLineItem( 0 )
@@ -59,6 +61,7 @@ QgsComposerView::QgsComposerView( QWidget* parent, const char* name, Qt::WFlags 
     , mMousePanning( false )
     , mKeyPanning( false )
     , mMovingItemContent( false )
+    , mPreviewEffect( 0 )
 {
   Q_UNUSED( f );
   Q_UNUSED( name );
@@ -67,6 +70,9 @@ QgsComposerView::QgsComposerView( QWidget* parent, const char* name, Qt::WFlags 
   setMouseTracking( true );
   viewport()->setMouseTracking( true );
   setFrameShape( QFrame::NoFrame );
+
+  mPreviewEffect = new QgsPreviewEffect( this );
+  viewport()->setGraphicsEffect( mPreviewEffect );
 }
 
 void QgsComposerView::setCurrentTool( QgsComposerView::Tool t )
@@ -1497,6 +1503,26 @@ void QgsComposerView::setZoomLevel( double zoomLevel )
   updateRulers();
   update();
   emit zoomLevelChanged();
+}
+
+void QgsComposerView::setPreviewModeEnabled( bool enabled )
+{
+  if ( !mPreviewEffect )
+  {
+    return;
+  }
+
+  mPreviewEffect->setEnabled( enabled );
+}
+
+void QgsComposerView::setPreviewMode( QgsPreviewEffect::PreviewMode mode )
+{
+  if ( !mPreviewEffect )
+  {
+    return;
+  }
+
+  mPreviewEffect->setMode( mode );
 }
 
 void QgsComposerView::paintEvent( QPaintEvent* event )

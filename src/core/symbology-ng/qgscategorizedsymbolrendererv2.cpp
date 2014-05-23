@@ -339,30 +339,30 @@ void QgsCategorizedSymbolRendererV2::sortByLabel( Qt::SortOrder order )
   }
 }
 
-void QgsCategorizedSymbolRendererV2::startRender( QgsRenderContext& context, const QgsVectorLayer *vlayer )
+void QgsCategorizedSymbolRendererV2::startRender( QgsRenderContext& context, const QgsFields& fields )
 {
   // make sure that the hash table is up to date
   rebuildHash();
 
   // find out classification attribute index from name
-  mAttrNum = vlayer ? vlayer->fieldNameIndex( mAttrName ) : -1;
+  mAttrNum = fields.fieldNameIndex( mAttrName );
   if ( mAttrNum == -1 )
   {
     mExpression.reset( new QgsExpression( mAttrName ) );
-    mExpression->prepare( vlayer->pendingFields() );
+    mExpression->prepare( fields );
   }
 
   QgsCategoryList::iterator it = mCategories.begin();
   for ( ; it != mCategories.end(); ++it )
   {
-    it->symbol()->startRender( context, vlayer );
+    it->symbol()->startRender( context, &fields );
 
     if ( mRotation.data() || mSizeScale.data() )
     {
       QgsSymbolV2* tempSymbol = it->symbol()->clone();
       tempSymbol->setRenderHints(( mRotation.data() ? QgsSymbolV2::DataDefinedRotation : 0 ) |
                                  ( mSizeScale.data() ? QgsSymbolV2::DataDefinedSizeScale : 0 ) );
-      tempSymbol->startRender( context, vlayer );
+      tempSymbol->startRender( context, &fields );
       mTempSymbols[ it->value().toString()] = tempSymbol;
     }
   }

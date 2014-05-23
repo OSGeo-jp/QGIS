@@ -32,6 +32,8 @@ class QgisInterface : QObject
 
     virtual QgsPluginManagerInterface* pluginManagerInterface() = 0;
 
+    virtual QgsLayerTreeView* layerTreeView() = 0;
+
   public slots: // TODO: do these functions really need to be slots?
 
     /* Exposed functions */
@@ -161,6 +163,10 @@ class QgisInterface : QObject
 
     //! Add toolbar with specified name
     virtual QToolBar *addToolBar( QString name ) = 0 /Factory/;
+
+    //! Add a toolbar
+    //! @note added in 2.3
+    virtual void addToolBar( QToolBar* toolbar /Transfer/, Qt::ToolBarArea area = Qt::TopToolBarArea ) = 0;
 
     /** Return a pointer to the map canvas */
     virtual QgsMapCanvas * mapCanvas() = 0;
@@ -476,7 +482,8 @@ class QgisInterface : QObject
     /** @note added in 1.9 */
     virtual QAction *actionCancelAllEdits() = 0;
     virtual QAction *actionLayerSaveAs() = 0;
-    virtual QAction *actionLayerSelectionSaveAs() = 0;
+    /** @note deprecated in 2.4 - returns null pointer */
+    virtual QAction *actionLayerSelectionSaveAs() = 0 /Deprecated/;
     virtual QAction *actionRemoveLayer() = 0;
     /** @note added in 1.9 */
     virtual QAction *actionDuplicateLayer() = 0;

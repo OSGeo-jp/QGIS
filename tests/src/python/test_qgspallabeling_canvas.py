@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
-"""QGIS unit tests for QgsPalLabeling: label rendering to screen canvas
+"""QGIS unit tests for QgsPalLabeling: label rendering output to map canvas
 
-From build dir: ctest -R PyQgsPalLabelingCanvas -V
-Set the following env variables when manually running tests:
-  PAL_SUITE to run specific tests (define in __main__)
-  PAL_VERBOSE to output individual test summary
-  PAL_CONTROL_IMAGE to trigger building of new control images
-  PAL_REPORT to open any failed image check reports in web browser
+From build dir, run: ctest -R PyQgsPalLabelingCanvas -V
+
+See <qgis-src-dir>/tests/testdata/labeling/README.rst for description.
 
 .. note:: This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -33,37 +30,63 @@ from utilities import (
 )
 
 from test_qgspallabeling_base import TestQgsPalLabeling, runSuite
-from test_qgspallabeling_tests import TestPointBase
+from test_qgspallabeling_tests import (
+    TestPointBase,
+    suiteTests
+)
 
 
-class TestCanvasPoint(TestQgsPalLabeling, TestPointBase):
+class TestCanvasBase(TestQgsPalLabeling):
+
+    layer = None
+    """:type: QgsVectorLayer"""
 
     @classmethod
     def setUpClass(cls):
-        TestQgsPalLabeling.setUpClass()
-        cls.layer = TestQgsPalLabeling.loadFeatureLayer('point')
+        if not cls._BaseSetup:
+            TestQgsPalLabeling.setUpClass()
+
+    @classmethod
+    def tearDownClass(cls):
+        TestQgsPalLabeling.tearDownClass()
+        cls.removeMapLayer(cls.layer)
+        cls.layer = None
 
     def setUp(self):
         """Run before each test."""
-        self.configTest('pal_canvas', 'sp')
-        TestQgsPalLabeling.setDefaultEngineSettings()
-        self.lyr = self.defaultSettings()
-
-    def tearDown(self):
-        """Run after each test."""
-        pass
+        super(TestCanvasBase, self).setUp()
+        self._Mismatch = 0
+        self._ColorTol = 0
+        self._Mismatches.clear()
+        self._ColorTols.clear()
 
     def checkTest(self, **kwargs):
         self.lyr.writeToLayer(self.layer)
-        self.saveContolImage()
+        self.saveControlImage()
         self.assertTrue(*self.renderCheck())
+
+
+class TestCanvasBasePoint(TestCanvasBase):
+
+    @classmethod
+    def setUpClass(cls):
+        TestCanvasBase.setUpClass()
+        cls.layer = TestQgsPalLabeling.loadFeatureLayer('point')
+
+
+class TestCanvasPoint(TestCanvasBasePoint, TestPointBase):
+
+    def setUp(self):
+        """Run before each test."""
+        super(TestCanvasPoint, self).setUp()
+        self.configTest('pal_canvas', 'sp')
 
 
 if __name__ == '__main__':
     # NOTE: unless PAL_SUITE env var is set all test class methods will be run
-    # ex: 'TestGroup(Point|Line|Curved|Polygon|Feature).test_method'
-    suite = [
-        'TestCanvasPoint.test_text_size_map_unit'
-    ]
+    # SEE: test_qgspallabeling_tests.suiteTests() to define suite
+    suite = (
+        ['TestCanvasPoint.' + t for t in suiteTests()['sp_suite']]
+    )
     res = runSuite(sys.modules[__name__], suite)
     sys.exit(not res.wasSuccessful())

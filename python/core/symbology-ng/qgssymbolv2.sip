@@ -74,7 +74,7 @@ class QgsSymbolV2
     //! delete layer at specified index and set a new one
     bool changeSymbolLayer( int index, QgsSymbolLayerV2 *layer /Transfer/ );
 
-    void startRender( QgsRenderContext& context, const QgsVectorLayer* layer = 0 );
+    void startRender( QgsRenderContext& context, const QgsFields* fields = 0 );
     void stopRender( QgsRenderContext& context );
 
     void setColor( const QColor& color );
@@ -92,6 +92,9 @@ class QgsSymbolV2
 
     OutputUnit outputUnit() const;
     void setOutputUnit( OutputUnit u );
+
+    QgsMapUnitScale mapUnitScale() const;
+    void setMapUnitScale( const QgsMapUnitScale& scale );
 
     //! Get alpha transparency 1 for opaque, 0 for invisible
     qreal alpha() const;
@@ -128,7 +131,7 @@ class QgsSymbolV2RenderContext
 %End
 
   public:
-    QgsSymbolV2RenderContext( QgsRenderContext& c, QgsSymbolV2::OutputUnit u , qreal alpha = 1.0, bool selected = false, int renderHints = 0, const QgsFeature* f = 0 );
+    QgsSymbolV2RenderContext( QgsRenderContext& c, QgsSymbolV2::OutputUnit u , qreal alpha = 1.0, bool selected = false, int renderHints = 0, const QgsFeature* f = 0, const QgsFields* fields = 0, const QgsMapUnitScale& mapUnitScale = QgsMapUnitScale() );
     ~QgsSymbolV2RenderContext();
 
     QgsRenderContext& renderContext();
@@ -136,6 +139,9 @@ class QgsSymbolV2RenderContext
 
     QgsSymbolV2::OutputUnit outputUnit() const;
     void setOutputUnit( QgsSymbolV2::OutputUnit u );
+
+    QgsMapUnitScale mapUnitScale() const;
+    void setMapUnitScale( const QgsMapUnitScale& scale);
 
     //! Get alpha transparency 1 for opaque, 0 for invisible
     qreal alpha() const;
@@ -151,10 +157,14 @@ class QgsSymbolV2RenderContext
     void setRenderHints( int hints );
 
     void setFeature( const QgsFeature* f );
+    //! Current feature being rendered - may be null
     const QgsFeature* feature() const;
 
-    void setLayer( const QgsVectorLayer* layer );
-    const QgsVectorLayer* layer() const;
+    //! Fields of the layer. Currently only available in startRender() calls
+    //! to allow symbols with data-defined properties prepare the expressions
+    //! (other times fields() returns null)
+    //! @note added in 2.4
+    const QgsFields* fields() const;
 
     double outputLineWidth( double width ) const;
     double outputPixelSize( double size ) const;

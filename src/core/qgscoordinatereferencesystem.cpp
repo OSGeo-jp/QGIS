@@ -1130,7 +1130,8 @@ long QgsCoordinateReferenceSystem::findMatchingProj()
 
 bool QgsCoordinateReferenceSystem::operator==( const QgsCoordinateReferenceSystem &theSrs ) const
 {
-  return mIsValidFlag && theSrs.mIsValidFlag && theSrs.authid() == authid();
+  return ( !mIsValidFlag && !theSrs.mIsValidFlag ) ||
+         ( mIsValidFlag && theSrs.mIsValidFlag && theSrs.authid() == authid() );
 }
 
 bool QgsCoordinateReferenceSystem::operator!=( const QgsCoordinateReferenceSystem &theSrs ) const
@@ -1467,7 +1468,7 @@ bool QgsCoordinateReferenceSystem::saveAsUserCRS( QString name )
 
   QString mySql;
 
-  QString proj4String=mProj4;
+  QString proj4String = mProj4;
   if ( proj4String.isEmpty() )
   {
     proj4String = toProj4();
@@ -2052,8 +2053,6 @@ bool QgsCoordinateReferenceSystem::syncDatumTransform( const QString& dbPath )
 
     insert += map[i].dst;
     values += QString( "%%1" ).arg( i + 1 );
-
-    qWarning( "%d: src=%s dst=%s idx=%d", i, map[i].src, map[i].dst, map[i].idx );
   }
 
   insert = "INSERT INTO tbl_datum_transform(" + insert + ") VALUES (" + values + ")";

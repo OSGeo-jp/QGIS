@@ -64,7 +64,8 @@ class QgsMapTool : QObject
 %End
 
     //! Called when rendering has finished. Default implementation does nothing.
-    virtual void renderComplete();
+    //! @deprecated since 2.4 - not called anymore - map tools must not directly depend on rendering progress
+    virtual void renderComplete() /Deprecated/;
 
 
     /** Use this to associate a QAction to this maptool. Then when the setMapTool
@@ -104,6 +105,24 @@ class QgsMapTool : QObject
 
     //! returns pointer to the tool's map canvas
     QgsMapCanvas* canvas();
+
+    /** return the tool name
+    * @note added in 2.3
+    */
+    QString toolName();
+
+    static double searchRadiusMM();
+
+    static double searchRadiusMU( const QgsRenderContext& context );
+
+    static double searchRadiusMU( QgsMapCanvas * canvas );
+
+  signals:
+    //! emit a message
+    void messageEmitted( QString message, QgsMessageBar::MessageLevel = QgsMessageBar::INFO );
+
+    //! emit signal to clear previous message
+    void messageDiscarded();
 
   protected:
 

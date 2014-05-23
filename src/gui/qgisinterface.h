@@ -26,14 +26,15 @@ class QMainWindow;
 class QWidget;
 
 class QgsComposerView;
-class QgsMapLayer;
+class QgsFeature;
+class QgsLayerTreeView;
+class QgsLegendInterface;
 class QgsMapCanvas;
+class QgsMapLayer;
+class QgsMessageBar;
+class QgsPluginManagerInterface;
 class QgsRasterLayer;
 class QgsVectorLayer;
-class QgsLegendInterface;
-class QgsPluginManagerInterface;
-class QgsFeature;
-class QgsMessageBar;
 class QgsVectorLayerTools;
 
 #include <QObject>
@@ -43,10 +44,6 @@ class QgsVectorLayerTools;
 
 #include <qgis.h>
 
-#ifdef _MSC_VER
-#  pragma warning( push )
-#  pragma warning( disable: 4996 )  // was declared deprecated
-#endif
 
 /** \ingroup gui
  * QgisInterface
@@ -78,6 +75,8 @@ class GUI_EXPORT QgisInterface : public QObject
     virtual QgsLegendInterface* legendInterface() = 0;
 
     virtual QgsPluginManagerInterface* pluginManagerInterface() = 0;
+
+    virtual QgsLayerTreeView* layerTreeView() = 0;
 
   public slots: // TODO: do these functions really need to be slots?
 
@@ -208,6 +207,10 @@ class GUI_EXPORT QgisInterface : public QObject
 
     //! Add toolbar with specified name
     virtual QToolBar *addToolBar( QString name ) = 0;
+
+    //!  Add a toolbar
+    //! @note added in 2.3
+    virtual void addToolBar( QToolBar* toolbar, Qt::ToolBarArea area = Qt::TopToolBarArea ) = 0;
 
     /** Return a pointer to the map canvas */
     virtual QgsMapCanvas * mapCanvas() = 0;
@@ -530,6 +533,10 @@ class GUI_EXPORT QgisInterface : public QObject
     /** @note added in 1.9 */
     virtual QAction *actionCancelAllEdits() = 0;
     virtual QAction *actionLayerSaveAs() = 0;
+    /** @note deprecated in 2.4 - returns null pointer */
+#ifndef Q_MOC_RUN
+    Q_DECL_DEPRECATED
+#endif
     virtual QAction *actionLayerSelectionSaveAs() = 0;
     virtual QAction *actionRemoveLayer() = 0;
     /** @note added in 1.9 */
@@ -623,11 +630,6 @@ class GUI_EXPORT QgisInterface : public QObject
       */
     void newProjectCreated();
 };
-
-#ifdef _MSC_VER
-#  pragma warning( pop )
-#  pragma warning( disable: 4190 )
-#endif
 
 // FIXME: also in core/qgis.h
 #ifndef QGISEXTERN

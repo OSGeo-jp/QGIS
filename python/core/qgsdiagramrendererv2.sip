@@ -24,6 +24,8 @@ struct QgsDiagramLayerSettings
 
     QgsDiagramLayerSettings();
 
+    ~QgsDiagramLayerSettings();
+
     //pal placement properties
     Placement placement;
     LinePlacementFlags placementFlags;
@@ -121,6 +123,10 @@ class QgsDiagramRendererV2
     QgsDiagramRendererV2();
     virtual ~QgsDiagramRendererV2();
 
+    /** Returns new instance that is equivalent to this one
+     * @note added in 2.4 */
+    virtual QgsDiagramRendererV2* clone() const = 0;
+
     /**Returns size of the diagram for a feature in map units. Returns an invalid QSizeF in case of error*/
     virtual QSizeF sizeMapUnits( const QgsFeature& feature, const QgsRenderContext& c );
 
@@ -174,6 +180,8 @@ class QgsSingleCategoryDiagramRenderer : QgsDiagramRendererV2
     QgsSingleCategoryDiagramRenderer();
     ~QgsSingleCategoryDiagramRenderer();
 
+    QgsDiagramRendererV2* clone() const;
+
     QString rendererName() const;
 
     QList<QString> diagramAttributes() const;
@@ -200,6 +208,8 @@ class QgsLinearlyInterpolatedDiagramRenderer : QgsDiagramRendererV2
   public:
     QgsLinearlyInterpolatedDiagramRenderer();
     ~QgsLinearlyInterpolatedDiagramRenderer();
+
+    QgsDiagramRendererV2* clone() const;
 
     /**Returns list with all diagram settings in the renderer*/
     QList<QgsDiagramSettings> diagramSettings() const;

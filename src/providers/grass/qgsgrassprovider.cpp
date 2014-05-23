@@ -50,11 +50,16 @@
 
 extern "C"
 {
+#include <grass/version.h>
 #include <grass/gprojects.h>
 #include <grass/gis.h>
 #include <grass/dbmi.h>
+#if GRASS_VERSION_MAJOR < 7
 #include <grass/Vect.h>
-#include <grass/version.h>
+#else
+#include <grass/vector.h>
+#define BOUND_BOX bound_box
+#endif
 }
 
 #ifdef _MSC_VER
@@ -277,14 +282,13 @@ QgsGrassProvider::~QgsGrassProvider()
 {
   QgsDebugMsg( "entered." );
 
-  while ( !mActiveIterators.empty() )
-  {
-    QgsGrassFeatureIterator *it = *mActiveIterators.begin();
-    QgsDebugMsg( "closing active iterator" );
-    it->close();
-  }
-
   closeLayer( mLayerId );
+}
+
+
+QgsAbstractFeatureSource* QgsGrassProvider::featureSource() const
+{
+  return new QgsGrassFeatureSource( this );
 }
 
 
@@ -300,7 +304,10 @@ QgsFeatureIterator QgsGrassProvider::getFeatures( const QgsFeatureRequest& reque
   if ( isEdited() || isFrozen() || !mValid )
     return QgsFeatureIterator();
 
-  return QgsFeatureIterator( new QgsGrassFeatureIterator( this, request ) );
+  // check if outdated and update if necessary
+  ensureUpdated();
+
+  return QgsFeatureIterator( new QgsGrassFeatureIterator( new QgsGrassFeatureSource( this ), true, request ) );
 }
 
 
@@ -376,7 +383,7 @@ bool QgsGrassProvider::isValid()
 
 // ------------------------------------------------------------------------------------------------------
 // Compare categories in GATT
-static int cmpAtt( const void *a, const void *b )
+int QgsGrassProvider::cmpAtt( const void *a, const void *b )
 {
   GATT *p1 = ( GATT * ) a;
   GATT *p2 = ( GATT * ) b;
@@ -792,13 +799,13 @@ int QgsGrassProvider::openMap( QString gisdbase, QString location, QString mapse
 
   // Do we have topology and cidx (level2)
   int level = 2;
-  try
+  G_TRY
   {
     Vect_set_open_level( 2 );
     Vect_open_old_head( map.map, mapName.toUtf8().data(), mapset.toUtf8().data() );
     Vect_close( map.map );
   }
-  catch ( QgsGrass::Exception &e )
+  G_CATCH( QgsGrass::Exception &e )
   {
     Q_UNUSED( e );
     QgsDebugMsg( QString( "Cannot open GRASS vector head on level2: %1" ).arg( e.what() ) );
@@ -816,12 +823,12 @@ int QgsGrassProvider::openMap( QString gisdbase, QString location, QString mapse
   }
 
   // Open vector
-  try
+  G_TRY
   {
     Vect_set_open_level( level );
     Vect_open_old( map.map, mapName.toUtf8().data(), mapset.toUtf8().data() );
   }
-  catch ( QgsGrass::Exception &e )
+  G_CATCH( QgsGrass::Exception &e )
   {
     Q_UNUSED( e );
     QgsDebugMsg( QString( "Cannot open GRASS vector: %1" ).arg( e.what() ) );
@@ -830,7 +837,7 @@ int QgsGrassProvider::openMap( QString gisdbase, QString location, QString mapse
 
   if ( level == 1 )
   {
-    try
+    G_TRY
     {
 #if defined(GRASS_VERSION_MAJOR) && defined(GRASS_VERSION_MINOR) && \
     ( ( GRASS_VERSION_MAJOR == 6 && GRASS_VERSION_MINOR >= 4 ) || GRASS_VERSION_MAJOR > 6 )
@@ -839,7 +846,7 @@ int QgsGrassProvider::openMap( QString gisdbase, QString location, QString mapse
       Vect_build( map.map, stderr );
 #endif
     }
-    catch ( QgsGrass::Exception &e )
+    G_CATCH( QgsGrass::Exception &e )
     {
       Q_UNUSED( e );
       QgsDebugMsg( QString( "Cannot build topology: %1" ).arg( e.what() ) );
@@ -884,12 +891,12 @@ void QgsGrassProvider::updateMap( int mapId )
   map->lastAttributesModified = di.lastModified();
 
   // Reopen vector
-  try
+  G_TRY
   {
     Vect_set_open_level( 2 );
     Vect_open_old( map->map, map->mapName.toUtf8().data(), map->mapset.toUtf8().data() );
   }
-  catch ( QgsGrass::Exception &e )
+  G_CATCH( QgsGrass::Exception &e )
   {
     Q_UNUSED( e );
     QgsDebugMsg( QString( "Cannot reopen GRASS vector: %1" ).arg( e.what() ) );
@@ -1029,78 +1036,6 @@ void QgsGrassProvider::ensureUpdated()
   }
 }
 
-
-/** Set feature attributes */
-void QgsGrassProvider::setFeatureAttributes( int layerId, int cat, QgsFeature *feature )
-{
-#if QGISDEBUG > 3
-  QgsDebugMsg( QString( "setFeatureAttributes cat = %1" ).arg( cat ) );
-#endif
-  if ( mLayers[layerId].nColumns > 0 )
-  {
-    // find cat
-    GATT key;
-    key.cat = cat;
-
-    GATT *att = ( GATT * ) bsearch( &key, mLayers[layerId].attributes, mLayers[layerId].nAttributes,
-                                    sizeof( GATT ), cmpAtt );
-
-    feature->initAttributes( mLayers[layerId].nColumns );
-
-    for ( int i = 0; i < mLayers[layerId].nColumns; i++ )
-    {
-      if ( att != NULL )
-      {
-        QByteArray cstr( att->values[i] );
-        feature->setAttribute( i, convertValue( mLayers[mLayerId].fields[i].type(), mEncoding->toUnicode( cstr ) ) );
-      }
-      else   /* it may happen that attributes are missing -> set to empty string */
-      {
-        feature->setAttribute( i, QVariant() );
-      }
-    }
-  }
-  else
-  {
-    feature->initAttributes( 1 );
-    feature->setAttribute( 0, QVariant( cat ) );
-  }
-}
-
-void QgsGrassProvider::setFeatureAttributes( int layerId, int cat, QgsFeature *feature, const QgsAttributeList& attlist )
-{
-#if QGISDEBUG > 3
-  QgsDebugMsg( QString( "setFeatureAttributes cat = %1" ).arg( cat ) );
-#endif
-  if ( mLayers[layerId].nColumns > 0 )
-  {
-    // find cat
-    GATT key;
-    key.cat = cat;
-    GATT *att = ( GATT * ) bsearch( &key, mLayers[layerId].attributes, mLayers[layerId].nAttributes,
-                                    sizeof( GATT ), cmpAtt );
-
-    feature->initAttributes( mLayers[layerId].nColumns );
-
-    for ( QgsAttributeList::const_iterator iter = attlist.begin(); iter != attlist.end(); ++iter )
-    {
-      if ( att != NULL )
-      {
-        QByteArray cstr( att->values[*iter] );
-        feature->setAttribute( *iter, convertValue( mLayers[mLayerId].fields[*iter].type(), mEncoding->toUnicode( cstr ) ) );
-      }
-      else   /* it may happen that attributes are missing -> set to empty string */
-      {
-        feature->setAttribute( *iter, QVariant() );
-      }
-    }
-  }
-  else
-  {
-    feature->initAttributes( 1 );
-    feature->setAttribute( 0, QVariant( cat ) );
-  }
-}
 
 /** Get pointer to map */
 struct Map_info *QgsGrassProvider::layerMap( int layerId )
@@ -2146,7 +2081,12 @@ QString *QgsGrassProvider::isOrphan( int field, int cat, int *orphan )
 
 bool QgsGrassProvider::isTopoType() const
 {
-  return mLayerType == TOPO_POINT || mLayerType == TOPO_LINE || mLayerType == TOPO_NODE;
+  return isTopoType( mLayerType );
+}
+
+bool QgsGrassProvider::isTopoType( int layerType )
+{
+  return layerType == TOPO_POINT || layerType == TOPO_LINE || layerType == TOPO_NODE;
 }
 
 void QgsGrassProvider::setTopoFields()

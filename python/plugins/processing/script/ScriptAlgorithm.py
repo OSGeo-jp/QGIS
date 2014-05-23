@@ -26,10 +26,9 @@ __copyright__ = '(C) 2012, Victor Olaya'
 __revision__ = '$Format:%H$'
 
 import os
-import sys
 from PyQt4 import QtGui
 from processing.core.GeoAlgorithm import GeoAlgorithm
-from processing.gui.Help2Html import Help2Html
+from processing.gui.Help2Html import getHtmlFromHelpFile
 from processing.parameters.ParameterRaster import ParameterRaster
 from processing.parameters.ParameterTable import ParameterTable
 from processing.parameters.ParameterVector import ParameterVector
@@ -50,6 +49,7 @@ from processing.outputs.OutputNumber import OutputNumber
 from processing.outputs.OutputString import OutputString
 from processing.outputs.OutputHTML import OutputHTML
 from processing.outputs.OutputFile import OutputFile
+from processing.outputs.OutputDirectory import OutputDirectory
 from processing.outputs.OutputFactory import OutputFactory
 from processing.script.WrongScriptException import WrongScriptException
 
@@ -187,6 +187,9 @@ class ScriptAlgorithm(GeoAlgorithm):
         elif tokens[1].lower().strip().startswith('string'):
             default = tokens[1].strip()[len('string') + 1:]
             param = ParameterString(tokens[0], desc, default)
+        elif tokens[1].lower().strip().startswith('longstring'):
+            default = tokens[1].strip()[len('longstring') + 1:]
+            param = ParameterString(tokens[0], desc, default, multiline = True)
         elif tokens[1].lower().strip().startswith('crs'):
             default = tokens[1].strip()[len('crs') + 1:]
             if not default:
@@ -202,6 +205,8 @@ class ScriptAlgorithm(GeoAlgorithm):
             out = OutputHTML()
         elif tokens[1].lower().strip().startswith('output file'):
             out = OutputFile()
+        elif tokens[1].lower().strip().startswith('output directory'):
+            out = OutputDirectory()
         elif tokens[1].lower().strip().startswith('output number'):
             out = OutputNumber()
         elif tokens[1].lower().strip().startswith('output string'):
@@ -215,7 +220,7 @@ class ScriptAlgorithm(GeoAlgorithm):
             self.addOutput(out)
         else:
             raise WrongScriptException('Could not load script:'
-                                       + self.descriptionFile
+                                       + self.descriptionFile or ''
                                        + '.\n Problem with line "' + line + '"'
                                        )
 
@@ -231,7 +236,7 @@ class ScriptAlgorithm(GeoAlgorithm):
                 self.addOutput(OutputFactory.getFromString(line))
         except Exception:
             raise WrongScriptException('Could not load script:'
-                                       + self.descriptionFile
+                                       + self.descriptionFile or ''
                                        + '.\n Problem with line "' + line + '"'
                                        )
 
@@ -253,10 +258,11 @@ class ScriptAlgorithm(GeoAlgorithm):
         for out in self.outputs:
             out.setValue(ns[out.name])
 
-    def helpFile(self):
+    def help(self):
+        if self.descriptionFile is None:
+            return False, None
         helpfile = self.descriptionFile + '.help'
         if os.path.exists(helpfile):
-            h2h = Help2Html()
-            return h2h.getHtmlFile(self, helpfile)
+            return True, getHtmlFromHelpFile(self, helpfile)
         else:
-            return None
+            return False, None

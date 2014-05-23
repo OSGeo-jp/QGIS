@@ -43,6 +43,12 @@ QgsFieldCalculator::QgsFieldCalculator( QgsVectorLayer* vl )
 
   connect( builder, SIGNAL( expressionParsed( bool ) ), this, SLOT( setOkButtonState() ) );
 
+  QgsDistanceArea myDa;
+  myDa.setSourceCrs( vl->crs().srsid() );
+  myDa.setEllipsoidalMode( QgisApp::instance()->mapCanvas()->mapSettings().hasCrsTransformEnabled() );
+  myDa.setEllipsoid( QgsProject::instance()->readEntry( "Measure", "/Ellipsoid", GEO_NONE ) );
+  builder->setGeomCalculator( myDa );
+
   //default values for field width and precision
   mOutputFieldWidthSpinBox->setValue( 10 );
   mOutputFieldPrecisionSpinBox->setValue( 3 );
@@ -79,21 +85,32 @@ QgsFieldCalculator::QgsFieldCalculator( QgsVectorLayer* vl )
     mNewFieldGroupBox->setCheckable( false );
   }
 
-  mOnlyUpdateSelectedCheckBox->setChecked( vl->selectedFeaturesIds().size() > 0 );
+  bool hasselection = vl->selectedFeaturesIds().size() > 0;
+  mOnlyUpdateSelectedCheckBox->setChecked( hasselection );
+  mOnlyUpdateSelectedCheckBox->setEnabled( hasselection );
+  mOnlyUpdateSelectedCheckBox->setText( tr( "Only update %1 selected features" ).arg( vl->selectedFeaturesIds().size() ) );
+
+  builder->loadRecent( "fieldcalc" );
+
+  QSettings settings;
+  restoreGeometry( settings.value( "/Windows/QgsFieldCalculator/geometry" ).toByteArray() );
 }
 
 QgsFieldCalculator::~QgsFieldCalculator()
 {
+  QSettings settings;
+  settings.setValue( "/Windows/QgsFieldCalculator/geometry", saveGeometry() );
 }
 
 void QgsFieldCalculator::accept()
 {
+  builder->saveToRecent( "fieldcalc" );
 
   // Set up QgsDistanceArea each time we (re-)calculate
   QgsDistanceArea myDa;
 
   myDa.setSourceCrs( mVectorLayer->crs().srsid() );
-  myDa.setEllipsoidalMode( QgisApp::instance()->mapCanvas()->mapRenderer()->hasCrsTransformEnabled() );
+  myDa.setEllipsoidalMode( QgisApp::instance()->mapCanvas()->mapSettings().hasCrsTransformEnabled() );
   myDa.setEllipsoid( QgsProject::instance()->readEntry( "Measure", "/Ellipsoid", GEO_NONE ) );
 
 
@@ -134,6 +151,7 @@ void QgsFieldCalculator::accept()
 
     if ( !mVectorLayer->addAttribute( newField ) )
     {
+      QApplication::restoreOverrideCursor();
       QMessageBox::critical( 0, tr( "Provider error" ), tr( "Could not add the new field to the provider." ) );
       mVectorLayer->destroyEditCommand();
       return;
@@ -153,6 +171,7 @@ void QgsFieldCalculator::accept()
 
     if ( ! exp.prepare( mVectorLayer->pendingFields() ) )
     {
+      QApplication::restoreOverrideCursor();
       QMessageBox::critical( 0, tr( "Evaluation error" ), exp.evalErrorString() );
       return;
     }
@@ -178,7 +197,7 @@ void QgsFieldCalculator::accept()
 
   bool newField = !mUpdateExistingGroupBox->isChecked();
   QVariant emptyAttribute;
-  if( newField )
+  if ( newField )
     emptyAttribute = QVariant( mVectorLayer->pendingFields()[mAttributeId].type() );
 
   QgsFeatureIterator fit = mVectorLayer->getFeatures( QgsFeatureRequest().setFlags( useGeometry ? QgsFeatureRequest::NoFlags : QgsFeatureRequest::NoGeometry ) );

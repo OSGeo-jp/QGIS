@@ -18,13 +18,13 @@
 #include "nodetool/qgsselectedfeature.h"
 #include "nodetool/qgsvertexentry.h"
 
-#include "qgsproject.h"
+#include "qgisapp.h"
+#include "qgslayertreeview.h"
+#include "qgslogger.h"
 #include "qgsmapcanvas.h"
+#include "qgsproject.h"
 #include "qgsrubberband.h"
 #include "qgsvectorlayer.h"
-#include "qgslogger.h"
-#include "qgisapp.h"
-#include "qgslegend.h"
 
 #include <QMouseEvent>
 #include <QRubberBand>
@@ -362,25 +362,31 @@ void QgsMapToolNodeTool::canvasPressEvent( QMouseEvent * e )
 
     if ( snapResults.size() < 1 )
     {
-      displaySnapToleranceWarning();
+      emit messageEmitted( tr( "could not snap to a segment on the current layer." ) );
       return;
     }
 
+    // remove previous warning
+    emit messageDiscarded();
+
     mSelectedFeature = new QgsSelectedFeature( snapResults[0].snappedAtGeometry, vlayer, mCanvas );
-    connect( QgisApp::instance()->legend(), SIGNAL( currentLayerChanged( QgsMapLayer* ) ), this, SLOT( currentLayerChanged( QgsMapLayer* ) ) );
+    connect( QgisApp::instance()->layerTreeView(), SIGNAL( currentLayerChanged( QgsMapLayer* ) ), this, SLOT( currentLayerChanged( QgsMapLayer* ) ) );
     connect( mSelectedFeature, SIGNAL( destroyed() ), this, SLOT( selectedFeatureDestroyed() ) );
     connect( vlayer, SIGNAL( editingStopped() ), this, SLOT( editingToggled() ) );
     mIsPoint = vlayer->geometryType() == QGis::Point;
   }
   else
   {
+    // remove previous warning
+    emit messageDiscarded();
+
     QgsVectorLayer *vlayer = mSelectedFeature->vlayer();
     Q_ASSERT( vlayer );
 
     // some feature already selected
     QgsPoint layerCoordPoint = toLayerCoordinates( vlayer, e->pos() );
 
-    double tol = QgsTolerance::vertexSearchRadius( vlayer, mCanvas->mapRenderer() );
+    double tol = QgsTolerance::vertexSearchRadius( vlayer, mCanvas->mapSettings() );
 
     // get geometry and find if snapping is near it
     int atVertex, beforeVertex, afterVertex;
@@ -651,7 +657,7 @@ void QgsMapToolNodeTool::cleanTool( bool deleteSelectedFeature )
     QgsVectorLayer *vlayer = mSelectedFeature->vlayer();
     Q_ASSERT( vlayer );
 
-    disconnect( QgisApp::instance()->legend(), SIGNAL( currentLayerChanged( QgsMapLayer* ) ), this, SLOT( currentLayerChanged( QgsMapLayer* ) ) );
+    disconnect( QgisApp::instance()->layerTreeView(), SIGNAL( currentLayerChanged( QgsMapLayer* ) ), this, SLOT( currentLayerChanged( QgsMapLayer* ) ) );
     disconnect( mSelectedFeature, SIGNAL( destroyed() ), this, SLOT( selectedFeatureDestroyed() ) );
     disconnect( vlayer, SIGNAL( editingStopped() ), this, SLOT( editingToggled() ) );
 
@@ -673,7 +679,7 @@ void QgsMapToolNodeTool::canvasDoubleClickEvent( QMouseEvent * e )
 
   QList<QgsSnappingResult> snapResults;
   mMoving = false;
-  double tol = QgsTolerance::vertexSearchRadius( vlayer, mCanvas->mapRenderer() );
+  double tol = QgsTolerance::vertexSearchRadius( vlayer, mCanvas->mapSettings() );
   mSnapper.snapToCurrentLayer( e->pos(), snapResults, QgsSnapper::SnapToSegment, tol );
   if ( snapResults.size() < 1 ||
        snapResults.first().snappedAtGeometry != mSelectedFeature->featureId() ||

@@ -95,7 +95,7 @@ class QgsMssqlSourceSelect : public QDialog, private Ui::QgsDbSourceSelectBase
     static void deleteConnection( QString key );
 
     //! Constructor
-    QgsMssqlSourceSelect( QWidget *parent = 0, Qt::WFlags fl = QgisGui::ModalDialogFlags, bool managerMode = false, bool embeddedMode = false );
+    QgsMssqlSourceSelect( QWidget *parent = 0, Qt::WindowFlags fl = QgisGui::ModalDialogFlags, bool managerMode = false, bool embeddedMode = false );
     //! Destructor
     ~QgsMssqlSourceSelect();
     //! Populate the connection list combo box
@@ -158,7 +158,7 @@ class QgsMssqlSourceSelect : public QDialog, private Ui::QgsDbSourceSelectBase
     bool mEmbeddedMode;
 
     // queue another query for the thread
-    void addSearchGeometryColumn(QString connectionName, QgsMssqlLayerProperty layerProperty , bool estimateMetadata);
+    void addSearchGeometryColumn( QString connectionName, QgsMssqlLayerProperty layerProperty , bool estimateMetadata );
 
     // Set the position of the database connection list to the last
     // used one.
