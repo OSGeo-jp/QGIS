@@ -5497,7 +5497,7 @@ GEOS空間演算エラー:1個またはそれ以上の数の地物のジオメ�
     <message>
         <location filename="../src/plugins/heatmap/heatmapguibase.ui" line="309"/>
         <source>Add generated file to map</source>
-        <translation type="unfinished"></translation>
+        <translation>作成したファイルを地図に追加</translation>
     </message>
     <message>
         <location filename="../src/plugins/heatmap/heatmapguibase.ui" line="113"/>
