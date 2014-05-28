@@ -2049,7 +2049,7 @@ This may cause unexpected results.</source>
     </message>
     <message>
         <source>Currently QGIS doesn&apos;t allow simultaneous access from different threads to the same datasource. Make sure your layer&apos;s attribute tables are closed. Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>現在のQGISは異なるスレッドから同じデータソースへの同時アクセスを許していません.あなたのレイヤ属性テーブルが閉じられていることを確認してください.継続しますか?</translation>
     </message>
     <message>
         <source>Sum Line Lengths In Polyons</source>
@@ -3130,7 +3130,7 @@ geometry column - column with unique integer values</source>
     <name>FieldsCalculatorDialog</name>
     <message>
         <source>[Save to temporary file]</source>
-        <translation type="unfinished"></translation>
+        <translation>[一時ファイルへ保存]</translation>
     </message>
     <message>
         <source>Save file</source>
@@ -5497,7 +5497,7 @@ GEOS空間演算エラー:1個またはそれ以上の数の地物のジオメ�
     <message>
         <location filename="../src/plugins/heatmap/heatmapguibase.ui" line="309"/>
         <source>Add generated file to map</source>
-        <translation type="unfinished"></translation>
+        <translation>作成されたファイルを地図に加える</translation>
     </message>
     <message>
         <location filename="../src/plugins/heatmap/heatmapguibase.ui" line="113"/>
@@ -5659,7 +5659,7 @@ GEOS空間演算エラー:1個またはそれ以上の数の地物のジオメ�
     <message>
         <location filename="../src/ui/qgisapp.ui" line="93"/>
         <source>Preview Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>プレビューモード</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="219"/>
@@ -5979,51 +5979,51 @@ GEOS空間演算エラー:1個またはそれ以上の数の地物のジオメ�
     <message>
         <location filename="../src/ui/qgisapp.ui" line="2176"/>
         <source>Add from Layer Definition File...</source>
-        <translation type="unfinished"></translation>
+        <translation>レイヤ定義ファイルを使った追加...</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="2181"/>
         <source>Save As Layer Definition File...</source>
-        <translation type="unfinished"></translation>
+        <translation>レイヤ定義ファイルの保存....</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="2192"/>
         <source>Normal</source>
-        <translation type="unfinished">通常</translation>
+        <translation>通常</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="2195"/>
         <source>Normal preview mode</source>
-        <translation type="unfinished"></translation>
+        <translation>ノーマルプレビューモード</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="2203"/>
         <location filename="../src/ui/qgisapp.ui" line="2206"/>
         <source>Simulate photocopy (grayscale)</source>
-        <translation type="unfinished"></translation>
+        <translation>フォトコピーシミュレート(グレイスケール)</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="2214"/>
         <location filename="../src/ui/qgisapp.ui" line="2217"/>
         <source>Simulate fax (mono)</source>
-        <translation type="unfinished"></translation>
+        <translation>ファックスシミュレート(単色)</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="2225"/>
         <location filename="../src/ui/qgisapp.ui" line="2228"/>
         <source>Simulate color blindness (protanope)</source>
-        <translation type="unfinished"></translation>
+        <translation>色覚異常シミュレート(protanop)</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="2236"/>
         <location filename="../src/ui/qgisapp.ui" line="2239"/>
         <source>Simulate color blindness (deuteranope)</source>
-        <translation type="unfinished"></translation>
+        <translation>色覚異常シミュレート(deuteranope)</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="2244"/>
         <source>Set Scale Visibility of Layer(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>レイヤの表示スケール設定</translation>
     </message>
     <message>
         <source>Need Support?</source>
@@ -6893,76 +6893,76 @@ Shift+クリックで非表示
     <message>
         <location filename="../python/plugins/MetaSearch/ui/manageconnectionsdialog.ui" line="14"/>
         <source>Manage connections</source>
-        <translation type="unfinished">コネクション管理</translation>
+        <translation>コネクション管理</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/manageconnectionsdialog.ui" line="22"/>
         <source>Save to file</source>
-        <translation type="unfinished">ファイルへ保存</translation>
+        <translation>ファイルへ保存</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/manageconnectionsdialog.ui" line="32"/>
         <source>Browse</source>
-        <translation type="unfinished">ブラウズ</translation>
+        <translation>ブラウズ</translation>
     </message>
     <message>
         <source>Load from file</source>
-        <translation type="unfinished">ファイルからのロード</translation>
+        <translation>ファイルからのロード</translation>
     </message>
     <message>
         <source>Load</source>
-        <translation type="unfinished">読み込み</translation>
+        <translation>読み込み</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">保存</translation>
+        <translation>保存</translation>
     </message>
     <message>
         <source>eXtensible Markup Language (*.xml *.XML)</source>
-        <translation type="unfinished"></translation>
+        <translation>拡張マークアップランゲージ (*.xml *.XML)</translation>
     </message>
     <message>
         <source>Save connections</source>
-        <translation type="unfinished">コネクションの保存</translation>
+        <translation>コネクションの保存</translation>
     </message>
     <message>
         <source>Load connections</source>
-        <translation type="unfinished"></translation>
+        <translation>コネクションのロード</translation>
     </message>
     <message>
         <source>Save Connections</source>
-        <translation type="unfinished"></translation>
+        <translation>コネクションの保存</translation>
     </message>
     <message>
         <source>Saved to %s</source>
-        <translation type="unfinished"></translation>
+        <translation>%　への保存</translation>
     </message>
     <message>
         <source>File %s exists. Overwrite?</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイル %s は存在します.上書きしますか?</translation>
     </message>
     <message>
         <source>Loading Connections</source>
-        <translation type="unfinished"></translation>
+        <translation>コネクションのロード</translation>
     </message>
 </context>
 <context>
     <name>MetaSearch</name>
     <message>
         <source>MetaSearch plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>メタサーチプラグイン</translation>
     </message>
     <message>
         <source>Search Metadata Catalogues</source>
-        <translation type="unfinished"></translation>
+        <translation>メタデータカタログの検索</translation>
     </message>
     <message>
         <source>MetaSearch plugin help</source>
-        <translation type="unfinished"></translation>
+        <translation>メタサーチプラグインヘルプ</translation>
     </message>
     <message>
         <source>Get Help on MetaSearch</source>
-        <translation type="unfinished"></translation>
+        <translation>メタサーチのヘルプ取得</translation>
     </message>
 </context>
 <context>
@@ -6970,307 +6970,307 @@ Shift+クリックで非表示
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="14"/>
         <source>MetaSearch</source>
-        <translation type="unfinished"></translation>
+        <translation>メタサーチ</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="24"/>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="80"/>
         <source>Search</source>
-        <translation type="unfinished">検索</translation>
+        <translation>検索</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="30"/>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>見つける</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="36"/>
         <source>Set global</source>
-        <translation type="unfinished"></translation>
+        <translation>グローバルに設定</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="46"/>
         <source>Map extent</source>
-        <translation type="unfinished"></translation>
+        <translation>地図領域</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="53"/>
         <source>-180</source>
-        <translation type="unfinished"></translation>
+        <translation>-180</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="60"/>
         <source>90</source>
-        <translation type="unfinished">90</translation>
+        <translation>90</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="70"/>
         <source>Records</source>
-        <translation type="unfinished"></translation>
+        <translation>レコード</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="87"/>
         <source>-90</source>
-        <translation type="unfinished"></translation>
+        <translation>-90</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="94"/>
         <source>180</source>
-        <translation type="unfinished">180</translation>
+        <translation>180</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="104"/>
         <source>        From</source>
-        <translation type="unfinished"></translation>
+        <translation>        から</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="111"/>
         <source>Keywords</source>
-        <translation type="unfinished">キーワード</translation>
+        <translation>キーワード</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="121"/>
         <source>Results</source>
-        <translation type="unfinished">結果</translation>
+        <translation>結果</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="127"/>
         <source>&gt;</source>
-        <translation type="unfinished">&gt;</translation>
+        <translation>&gt;</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="134"/>
         <source>&lt;&lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;&lt;</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="141"/>
         <source>Add WCS</source>
-        <translation type="unfinished"></translation>
+        <translation>WCSの追加</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="148"/>
         <source>Add WMS/WMTS</source>
-        <translation type="unfinished"></translation>
+        <translation>WMS/WMTSの追加</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="158"/>
         <source>&lt;</source>
-        <translation type="unfinished">&lt;</translation>
+        <translation>&lt;</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="165"/>
         <source>Add WFS</source>
-        <translation type="unfinished"></translation>
+        <translation>WFSの追加</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="172"/>
         <source>Abstract</source>
-        <translation type="unfinished">要約</translation>
+        <translation>要約</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="186"/>
         <source>Double click to see full record information</source>
-        <translation type="unfinished"></translation>
+        <translation>ダブルクリックするとレコードのすべての情報が表示されます</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="211"/>
         <source>Type</source>
-        <translation type="unfinished">タイプ</translation>
+        <translation>タイプ</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="216"/>
         <source>Title</source>
-        <translation type="unfinished">タイトル</translation>
+        <translation>タイトル</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="224"/>
         <source>View search results as XML</source>
-        <translation type="unfinished"></translation>
+        <translation>検索結果をXMLで見る</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="231"/>
         <source>&gt;&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&gt;&gt;</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="254"/>
         <source>Services</source>
-        <translation type="unfinished"></translation>
+        <translation>サービス</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="263"/>
         <source>Service info</source>
-        <translation type="unfinished"></translation>
+        <translation>サービス情報</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="270"/>
         <source>GetCapabilities response</source>
-        <translation type="unfinished"></translation>
+        <translation>GetCapabilitiesレスポンス</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="277"/>
         <source>New</source>
-        <translation type="unfinished">新規</translation>
+        <translation>新規</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="284"/>
         <source>Edit</source>
-        <translation type="unfinished">編集</translation>
+        <translation>編集</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="291"/>
         <source>Delete</source>
-        <translation type="unfinished">削除</translation>
+        <translation>削除</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="298"/>
         <source>Save</source>
-        <translation type="unfinished">保存</translation>
+        <translation>保存</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="312"/>
         <source>Add default services</source>
-        <translation type="unfinished"></translation>
+        <translation>デフォルトサービスの追加</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="319"/>
         <source>Load</source>
-        <translation type="unfinished">読み込み</translation>
+        <translation>読み込み</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="327"/>
         <source>Settings</source>
-        <translation type="unfinished">設定</translation>
+        <translation>設定</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="339"/>
         <source>Connection naming</source>
-        <translation type="unfinished"></translation>
+        <translation>コネクションの名前つけ</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="345"/>
         <source>When saving the connection of an OWS service</source>
-        <translation type="unfinished"></translation>
+        <translation>OWSサービスのコネクションを保存するとき</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="352"/>
         <source>Use the OWS Service Title and ask before overwriting</source>
-        <translation type="unfinished"></translation>
+        <translation>OWSサービスタイトルを利用して上書きする前に問い合わせます</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="362"/>
         <source>Use the OWS Service Title and always overwrite if already available</source>
-        <translation type="unfinished"></translation>
+        <translation>OWSサービスタイトルを利用してすでに有効なものがある場合常に上書きします</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/maindialog.ui" line="369"/>
         <source>Use a temporary name, which you can change later</source>
-        <translation type="unfinished"></translation>
+        <translation>一時的な名前を使います.これは後で変更できます</translation>
     </message>
     <message>
         <source>No services/connections defined. To get started with MetaSearch, create a new connection by clicking &apos;New&apos; or click &apos;Add default services&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>サービス/コネクションが定義されていません.メタサーチを開始するためには &apos;New&apos;をクリックして新しいコネクションを作るか &apos;デフォルトサービスの追加&apos; をクリックして下さい.</translation>
     </message>
     <message>
         <source>New Catalogue service</source>
-        <translation type="unfinished"></translation>
+        <translation>新しいカタログサービス</translation>
     </message>
     <message>
         <source>Edit Catalogue service</source>
-        <translation type="unfinished"></translation>
+        <translation>カタログサービスの編集</translation>
     </message>
     <message>
         <source>Remove service %s?</source>
-        <translation type="unfinished"></translation>
+        <translation>サービス %s を削除しますか?</translation>
     </message>
     <message>
         <source>Confirm delete</source>
-        <translation type="unfinished"></translation>
+        <translation>削除を確認</translation>
     </message>
     <message>
         <source>%s exists.  Overwrite?</source>
-        <translation type="unfinished"></translation>
+        <translation>%s は存在します. 上書きしますか?</translation>
     </message>
     <message>
         <source>Loading connections</source>
-        <translation type="unfinished">コネクションをロードしています</translation>
+        <translation>コネクションをロードしています</translation>
     </message>
     <message>
         <source>Search error</source>
-        <translation type="unfinished"></translation>
+        <translation>検索エラー</translation>
     </message>
     <message>
         <source>Search error: %s</source>
-        <translation type="unfinished"></translation>
+        <translation>検索エラー: %s</translation>
     </message>
     <message>
         <source>Connection error</source>
-        <translation type="unfinished"></translation>
+        <translation>接続エラー</translation>
     </message>
     <message>
         <source>Connection error: %s</source>
-        <translation type="unfinished"></translation>
+        <translation>接続エラー: %s</translation>
     </message>
     <message>
         <source>0 results</source>
-        <translation type="unfinished"></translation>
+        <translation>結果 0</translation>
     </message>
     <message>
         <source>Showing %d - %d of %d result%s</source>
-        <translation type="unfinished"></translation>
+        <translation>表示中 %d - %d / %d 結果 %s</translation>
     </message>
     <message>
         <source>No abstract</source>
-        <translation type="unfinished"></translation>
+        <translation>要約がありません</translation>
     </message>
     <message>
         <source>End of results. Go to start?</source>
-        <translation type="unfinished"></translation>
+        <translation>結果の最後に到達しました.先頭に移動しますか?</translation>
     </message>
     <message>
         <source>Navigation</source>
-        <translation type="unfinished"></translation>
+        <translation>ナビゲーション</translation>
     </message>
     <message>
         <source>Start of results. Go to end?</source>
-        <translation type="unfinished"></translation>
+        <translation>結果の先頭です.最後に移動しますか?</translation>
     </message>
     <message>
         <source>Error connecting to %s: %s</source>
-        <translation type="unfinished"></translation>
+        <translation>%s への接続に失敗しました %s</translation>
     </message>
     <message>
         <source>Connection %s exists. Overwrite?</source>
-        <translation type="unfinished"></translation>
+        <translation>コネクション %s は存在します.上書きしますか?</translation>
     </message>
     <message>
         <source>Saving server</source>
-        <translation type="unfinished"></translation>
+        <translation>サーバーを保存しています</translation>
     </message>
     <message>
         <source>GetRecords error</source>
-        <translation type="unfinished"></translation>
+        <translation>レコード取得エラー</translation>
     </message>
     <message>
         <source>Error getting response: %s</source>
-        <translation type="unfinished"></translation>
+        <translation>レスポンス取得エラー: %s</translation>
     </message>
     <message>
         <source>Error connecting to service: %s</source>
-        <translation type="unfinished"></translation>
+        <translation>サービス接続エラー: %s</translation>
     </message>
     <message>
         <source>Value Error: %s</source>
-        <translation type="unfinished"></translation>
+        <translation>値エラー: %s</translation>
     </message>
     <message>
         <source>Unknown Error: %s</source>
-        <translation type="unfinished"></translation>
+        <translation>不明なエラー: %s</translation>
     </message>
     <message>
         <source>CSW Connection error</source>
-        <translation type="unfinished"></translation>
+        <translation>CSW 接続エラー</translation>
     </message>
 </context>
 <context>
