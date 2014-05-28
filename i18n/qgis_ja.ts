@@ -9096,7 +9096,7 @@ It will be disabled.</source>
     <message>
         <location filename="../src/providers/grass/qgsgrass.cpp" line="448"/>
         <source>Fatal error occurred in GRASS library. QGIS gets over the error but any next fatal error will cause QGIS exit without warning. This is a problem of GRASS 7.0.0beta1 and hopefully will be fixed in higher GRASS versions. Error message: %1</source>
-        <translation type="unfinished"></translation>
+        <translation> GRASS ライブラリで致命的なエラーが発生しました. QGISはこのエラーを乗り越えましたが次に致命的エラーが発生するとQGISは警告無しで終了します. これは GRASS 7.0.0beta1の問題で 高いバージョンの GRASS では解決していることを希望します. エラーメッセージ: %1</translation>
     </message>
     <message>
         <location filename="../src/providers/grass/qgsgrass.cpp" line="493"/>
@@ -9213,12 +9213,12 @@ It will be disabled.</source>
     <message>
         <location filename="../src/core/raster/qgsrasterlayerrenderer.cpp" line="31"/>
         <source>Could not reproject view extent: %1</source>
-        <translation type="unfinished">ビューの領域を再投影できません: %1</translation>
+        <translation>ビューの領域を再投影できません: %1</translation>
     </message>
     <message>
         <location filename="../src/core/raster/qgsrasterlayerrenderer.cpp" line="41"/>
         <source>Could not reproject layer extent: %1</source>
-        <translation type="unfinished">レイヤの領域を再投影できません: %1</translation>
+        <translation>レイヤの領域を再投影できません: %1</translation>
     </message>
     <message>
         <location filename="../src/plugins/georeferencer/qgsgeorefplugin.cpp" line="65"/>
@@ -9966,12 +9966,12 @@ Error(%2): %3</source>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="580"/>
         <source>By default when creating new .csv files they are created with the line termination conventions of the local platform (CR/LF on Win32 or LF on all other systems). This may be overridden through the use of the LINEFORMAT option.</source>
-        <translation type="unfinished"></translation>
+        <translation>デフォルトで新しい .csvファイルはローカルプラットフォームのライン改行文字(CR/LF Win32 または LF 他のシステム)に変換されて作成されます.これは LINEFORMAT オプションの指定があるとそちらが優先されます.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="613"/>
         <source>Field separator character.</source>
-        <translation type="unfinished"></translation>
+        <translation>フィールド区切り文字.</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorfilewriter.cpp" line="1200"/>
@@ -10298,7 +10298,7 @@ You are seeing this message most likely because you have no DISPLAY environment 
     <message>
         <location filename="../src/core/symbology-ng/qgssymbollayerv2registry.cpp" line="47"/>
         <source>Shapeburst fill</source>
-        <translation type="unfinished"></translation>
+        <translation>形状バースト塗りつぶし</translation>
     </message>
     <message>
         <location filename="../src/core/symbology-ng/qgssymbollayerv2registry.cpp" line="49"/>
@@ -10445,7 +10445,7 @@ You are seeing this message most likely because you have no DISPLAY environment 
     <message>
         <location filename="../src/providers/ogr/qgsogrprovider.cpp" line="1714"/>
         <source>GeoPackage</source>
-        <translation type="unfinished"></translation>
+        <translation>GeoPackage</translation>
     </message>
     <message>
         <location filename="../src/providers/ogr/qgsogrprovider.cpp" line="1719"/>
@@ -10490,7 +10490,7 @@ You are seeing this message most likely because you have no DISPLAY environment 
     <message>
         <location filename="../src/providers/ogr/qgsogrprovider.cpp" line="1776"/>
         <source>OpenFileGDB</source>
-        <translation type="unfinished"></translation>
+        <translation>OpenFileGDB</translation>
     </message>
     <message>
         <location filename="../src/providers/ogr/qgsogrprovider.cpp" line="1780"/>
@@ -10500,12 +10500,12 @@ You are seeing this message most likely because you have no DISPLAY environment 
     <message>
         <location filename="../src/providers/ogr/qgsogrprovider.cpp" line="1796"/>
         <source>Systematic Organization of Spatial Information [SOSI]</source>
-        <translation type="unfinished"></translation>
+        <translation>Systematic Organization of Spatial Information [SOSI]</translation>
     </message>
     <message>
         <location filename="../src/providers/ogr/qgsogrprovider.cpp" line="1801"/>
         <source>SQLite/SpatiaLite</source>
-        <translation type="unfinished"></translation>
+        <translation>SQLite/SpatiaLite</translation>
     </message>
     <message>
         <location filename="../src/providers/ogr/qgsogrprovider.cpp" line="2033"/>
@@ -11183,33 +11183,33 @@ You are seeing this message most likely because you have no DISPLAY environment 
         <location filename="../src/providers/spatialite/qgsspatialiteprovider.cpp" line="5324"/>
         <location filename="../src/providers/spatialite/qgsspatialiteprovider.cpp" line="5428"/>
         <source>Error looking for style. The query was logged</source>
-        <translation type="unfinished"></translation>
+        <translation>スタイル探査エラー.クエリはログに記録されました</translation>
     </message>
     <message>
         <location filename="../src/providers/spatialite/qgsspatialiteprovider.cpp" line="5215"/>
         <source>Unable to save layer style. It&apos;s not possible to create the destination table on the database.</source>
-        <translation type="unfinished"></translation>
+        <translation>レイヤスタイルを保存できません.データベースに対象テーブルを作ることができませんでした.</translation>
     </message>
     <message>
         <location filename="../src/providers/spatialite/qgsspatialiteprovider.cpp" line="5277"/>
         <source>Operation aborted</source>
-        <translation type="unfinished"></translation>
+        <translation>オペレーションが中断しました</translation>
     </message>
     <message>
         <location filename="../src/providers/spatialite/qgsspatialiteprovider.cpp" line="5382"/>
         <source>Error executing loading style. The query was logged</source>
-        <translation type="unfinished"></translation>
+        <translation>スタイルロード処理エラー.クエリはログに記録されました</translation>
     </message>
     <message>
         <location filename="../src/providers/spatialite/qgsspatialiteprovider.cpp" line="5442"/>
         <location filename="../src/providers/spatialite/qgsspatialiteprovider.cpp" line="5443"/>
         <source>No styles available on DB</source>
-        <translation type="unfinished"></translation>
+        <translation>DBにスタイルがありません</translation>
     </message>
     <message>
         <location filename="../src/providers/spatialite/qgsspatialiteprovider.cpp" line="5464"/>
         <source>Error loading styles. The query was logged</source>
-        <translation type="unfinished"></translation>
+        <translation>スタイルローディングエラー.クエリはログに記録されました</translation>
     </message>
     <message>
         <location filename="../src/plugins/compass/qgscompassplugin.cpp" line="35"/>
@@ -11674,48 +11674,48 @@ SQL: %1</translation>
     <message>
         <location filename="../src/core/qgsvectorlayerrenderer.cpp" line="162"/>
         <source>Simplify transform error caught: %1</source>
-        <translation type="unfinished">簡素化変換エラー %1:</translation>
+        <translation>簡素化変換エラーをキャッチ: %1</translation>
     </message>
     <message>
         <location filename="../src/gui/editorwidgets/qgsclassificationwidgetwrapperfactory.cpp" line="34"/>
         <source>Displays a combo box containing values of attributes used for classification.</source>
-        <translation type="unfinished"></translation>
+        <translation>分類に利用する属性値を持つコンボボックスを表示します.</translation>
     </message>
     <message>
         <location filename="../src/gui/editorwidgets/qgscolorwidgetfactory.cpp" line="34"/>
         <source>Field contains a color.</source>
-        <translation type="unfinished"></translation>
+        <translation>フィールドが持っている色.</translation>
     </message>
     <message>
         <location filename="../src/gui/editorwidgets/qgsenumerationwidgetfactory.cpp" line="35"/>
         <source>Combo box with values that can be used within the column&apos;s type. Must be supported by the provider.</source>
-        <translation type="unfinished">カラムの型の値で利用できるコンボボックス.プロバイダのサポートが必要です.</translation>
+        <translation>カラムの型の値で利用できるコンボボックス.プロバイダのサポートが必要です.</translation>
     </message>
     <message>
         <location filename="../src/gui/editorwidgets/qgsfilenamewidgetfactory.cpp" line="33"/>
         <source>Simplifies file selection by adding a file chooser dialog.</source>
-        <translation type="unfinished">ファイル選択ダイアログを加えることで簡素化されたファイル選択.</translation>
+        <translation>ファイル選択ダイアログを加えることで簡素化されたファイル選択.</translation>
     </message>
     <message>
         <location filename="../src/gui/editorwidgets/qgshiddenwidgetfactory.cpp" line="33"/>
         <source>A hidden attribute will be invisible - the user is not able to see it&apos;s contents.</source>
-        <translation type="unfinished">表示されないであろう隠された属性-ユーザーはこのコンテンツを見ることは無い.</translation>
+        <translation>表示されないであろう隠された属性-ユーザーはこのコンテンツを見ることは無い.</translation>
     </message>
     <message>
         <location filename="../src/gui/editorwidgets/qgsuuidwidgetfactory.cpp" line="34"/>
         <source>Read-only field that generates a UUID if empty.</source>
-        <translation type="unfinished">読み込み専用フィールドで値が無い場合はUUIDが作成されます.</translation>
+        <translation>読み込み専用フィールドで値が無い場合はUUIDが作成されます.</translation>
     </message>
     <message>
         <location filename="../src/providers/wms/qgswmscapabilities.cpp" line="121"/>
         <source>empty capabilities document</source>
-        <translation type="unfinished"></translation>
+        <translation>capabilitiesドキュメントの中身がありません</translation>
     </message>
     <message>
         <location filename="../src/providers/wms/qgswmscapabilities.cpp" line="211"/>
         <location filename="../src/providers/wms/qgswmscapabilities.cpp" line="235"/>
         <source>Dom Exception</source>
-        <translation type="unfinished">Dom例外</translation>
+        <translation>Dom例外</translation>
     </message>
     <message>
         <location filename="../src/providers/wms/qgswmscapabilities.cpp" line="213"/>
@@ -11724,7 +11724,7 @@ This is probably due to an incorrect WMS Server URL.
 Response was:
 
 %4</source>
-        <translation type="unfinished">WMS capabilitiesを取得できません %1 行 %2 カラム %3
+        <translation>WMS capabilitiesを取得できません %1 行 %2 カラム %3
 多分WMSサーバーのURLが間違っています
 レスポンスは以下の通りです.
 %4</translation>
@@ -11736,7 +11736,7 @@ This might be due to an incorrect WMS Server URL.
 Tag:%3
 Response was:
 %4</source>
-        <translation type="unfinished">WMS capabilitiesを期待された形式（DTD)で取得できませんでした: %1や%2がありません.
+        <translation>WMS capabilitiesを期待された形式（DTD)で取得できませんでした: %1や%2がありません.
 多分WMSサーバーのURLが間違っていると思われます.
 タグ%3
 レスポンスは以下のとおりです.
@@ -11745,12 +11745,12 @@ Response was:
     <message>
         <location filename="../src/providers/wms/qgswmscapabilities.cpp" line="1467"/>
         <source>Generated default style</source>
-        <translation type="unfinished">生成されたデフォルトスタイル</translation>
+        <translation>生成されたデフォルトスタイル</translation>
     </message>
     <message>
         <location filename="../src/providers/wms/qgswmscapabilities.cpp" line="1468"/>
         <source>Style was missing in capabilities</source>
-        <translation type="unfinished">capabilitiesでスタイルが欠落しています</translation>
+        <translation>capabilitiesでスタイルが欠落しています</translation>
     </message>
 </context>
 <context>
