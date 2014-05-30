@@ -24981,13 +24981,13 @@ MyForms.pyはPYTHONPATH環境変数, qgis/pythonディレクトリ, もしくは
         <location filename="../src/gui/symbology-ng/qgssymbollayerv2widget.cpp" line="2630"/>
         <location filename="../src/gui/symbology-ng/qgssymbollayerv2widget.cpp" line="2631"/>
         <source>Millimeter</source>
-        <translation type="unfinished">ミリメートル</translation>
+        <translation>ミリメートル</translation>
     </message>
     <message>
         <location filename="../src/gui/symbology-ng/qgssymbollayerv2widget.cpp" line="2630"/>
         <location filename="../src/gui/symbology-ng/qgssymbollayerv2widget.cpp" line="2631"/>
         <source>Map unit</source>
-        <translation type="unfinished">地図上の単位</translation>
+        <translation>地図上の単位</translation>
     </message>
 </context>
 <context>
@@ -26223,7 +26223,7 @@ Please reselect a valid file.</source>
     <message>
         <location filename="../src/providers/gdal/qgsgdalprovider.cpp" line="943"/>
         <source>Band</source>
-        <translation type="unfinished">バンド</translation>
+        <translation>バンド</translation>
     </message>
     <message>
         <location filename="../src/providers/gdal/qgsgdalprovider.cpp" line="961"/>
@@ -27382,22 +27382,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/gui/symbology-ng/qgssymbollayerv2widget.cpp" line="742"/>
         <source>Millimeter</source>
-        <translation type="unfinished">ミリメートル</translation>
+        <translation>ミリメートル</translation>
     </message>
     <message>
         <location filename="../src/gui/symbology-ng/qgssymbollayerv2widget.cpp" line="742"/>
         <source>Map unit</source>
-        <translation type="unfinished">地図上の単位</translation>
+        <translation>地図上の単位</translation>
     </message>
     <message>
         <location filename="../src/gui/symbology-ng/qgssymbollayerv2widget.cpp" line="1047"/>
         <source>Color (start)</source>
-        <translation type="unfinished"></translation>
+        <translation>色(始め)</translation>
     </message>
     <message>
         <location filename="../src/gui/symbology-ng/qgssymbollayerv2widget.cpp" line="1048"/>
         <source>Color (end)</source>
-        <translation type="unfinished"></translation>
+        <translation>色（終わり）</translation>
     </message>
     <message>
         <location filename="../src/gui/symbology-ng/qgssymbollayerv2widget.cpp" line="1049"/>
@@ -30632,37 +30632,37 @@ This may be a problem in your network connection or at the WMS server.</source>
     <message>
         <location filename="../src/ui/qgsidentifyresultsbase.ui" line="27"/>
         <source>Tree</source>
-        <translation type="unfinished">ツリー</translation>
+        <translation>ツリー</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsidentifyresultsbase.ui" line="58"/>
         <source>Table</source>
-        <translation type="unfinished">テーブル</translation>
+        <translation>テーブル</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsidentifyresultsbase.ui" line="71"/>
         <source>Layer</source>
-        <translation type="unfinished">レイヤ</translation>
+        <translation>レイヤ</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsidentifyresultsbase.ui" line="76"/>
         <source>FID</source>
-        <translation type="unfinished"></translation>
+        <translation>FID</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsidentifyresultsbase.ui" line="81"/>
         <source>Attribute</source>
-        <translation type="unfinished">属性</translation>
+        <translation>属性</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsidentifyresultsbase.ui" line="86"/>
         <source>Value</source>
-        <translation type="unfinished">値</translation>
+        <translation>値</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsidentifyresultsbase.ui" line="95"/>
         <source>Graph</source>
-        <translation type="unfinished"></translation>
+        <translation>グラフ</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsidentifyresultsbase.ui" line="110"/>
@@ -30693,7 +30693,7 @@ This may be a problem in your network connection or at the WMS server.</source>
     <message>
         <location filename="../src/ui/qgsidentifyresultsbase.ui" line="166"/>
         <source>Clear Results</source>
-        <translation type="unfinished"></translation>
+        <translation>結果をクリアする</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsidentifyresultsbase.ui" line="183"/>
@@ -30708,17 +30708,17 @@ This may be a problem in your network connection or at the WMS server.</source>
     <message>
         <location filename="../src/ui/qgsidentifyresultsbase.ui" line="236"/>
         <source>Help</source>
-        <translation type="unfinished">ヘルプ</translation>
+        <translation>ヘルプ</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsidentifyresultsbase.ui" line="250"/>
         <source>Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>モード</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsidentifyresultsbase.ui" line="273"/>
         <source>Auto open form</source>
-        <translation type="unfinished"></translation>
+        <translation>自動的にフォームを開く</translation>
     </message>
 </context>
 <context>
@@ -30741,22 +30741,22 @@ This may be a problem in your network connection or at the WMS server.</source>
     <message>
         <location filename="../src/app/qgsidentifyresultsdialog.cpp" line="296"/>
         <source>Current layer</source>
-        <translation type="unfinished">カレントレイヤ</translation>
+        <translation>カレントレイヤ</translation>
     </message>
     <message>
         <location filename="../src/app/qgsidentifyresultsdialog.cpp" line="297"/>
         <source>Top down, stop at first</source>
-        <translation type="unfinished">トップダウン 最初の結果のみ</translation>
+        <translation>トップダウン 最初の結果のみ</translation>
     </message>
     <message>
         <location filename="../src/app/qgsidentifyresultsdialog.cpp" line="298"/>
         <source>Top down</source>
-        <translation type="unfinished">トップダウン</translation>
+        <translation>トップダウン</translation>
     </message>
     <message>
         <location filename="../src/app/qgsidentifyresultsdialog.cpp" line="299"/>
         <source>Layer selection</source>
-        <translation type="unfinished">レイヤ選択</translation>
+        <translation>レイヤ選択</translation>
     </message>
     <message>
         <location filename="../src/app/qgsidentifyresultsdialog.cpp" line="433"/>
@@ -30803,7 +30803,7 @@ This may be a problem in your network connection or at the WMS server.</source>
     <message>
         <location filename="../src/app/qgsidentifyresultsdialog.cpp" line="945"/>
         <source>Toggle feature selection</source>
-        <translation type="unfinished"></translation>
+        <translation>地物の選択を切り替える</translation>
     </message>
     <message>
         <location filename="../src/app/qgsidentifyresultsdialog.cpp" line="948"/>
@@ -31582,7 +31582,7 @@ This may be a problem in your network connection or at the WMS server.</source>
     <message>
         <location filename="../src/app/qgslabelinggui.cpp" line="55"/>
         <source>points</source>
-        <translation type="unfinished">ポイント</translation>
+        <translation>ポイント</translation>
     </message>
     <message>
         <location filename="../src/app/qgslabelinggui.cpp" line="55"/>
@@ -31596,7 +31596,7 @@ This may be a problem in your network connection or at the WMS server.</source>
         <location filename="../src/app/qgslabelinggui.cpp" line="63"/>
         <location filename="../src/app/qgslabelinggui.cpp" line="64"/>
         <source>map units</source>
-        <translation type="unfinished">地図上の単位</translation>
+        <translation>地図上の単位</translation>
     </message>
     <message>
         <location filename="../src/app/qgslabelinggui.cpp" line="56"/>
@@ -31609,12 +31609,12 @@ This may be a problem in your network connection or at the WMS server.</source>
         <location filename="../src/app/qgslabelinggui.cpp" line="63"/>
         <location filename="../src/app/qgslabelinggui.cpp" line="64"/>
         <source>mm</source>
-        <translation type="unfinished">mm</translation>
+        <translation>mm</translation>
     </message>
     <message>
         <location filename="../src/app/qgslabelinggui.cpp" line="59"/>
         <source>% of length</source>
-        <translation type="unfinished">長さに対するパーセント</translation>
+        <translation>長さに対するパーセント</translation>
     </message>
     <message>
         <location filename="../src/app/qgslabelinggui.cpp" line="386"/>
@@ -32710,13 +32710,13 @@ This may be a problem in your network connection or at the WMS server.</source>
     <message>
         <location filename="../src/gui/layertree/qgslayertreemodel.cpp" line="598"/>
         <source>Double-click to view legend</source>
-        <translation type="unfinished"></translation>
+        <translation>凡例を表示するにはダブルクリックしてください</translation>
     </message>
     <message>
         <location filename="../src/gui/layertree/qgslayertreemodel.cpp" line="620"/>
         <source>following %1 items
 not displayed</source>
-        <translation type="unfinished">以下の %1個もアイテムが\n表示されませんでした</translation>
+        <translation>以下の %1個のアイテムが\n表示されませんでした</translation>
     </message>
 </context>
 <context>
