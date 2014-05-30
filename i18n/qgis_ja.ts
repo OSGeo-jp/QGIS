@@ -7454,29 +7454,29 @@ Wrong line: %1</source>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/newconnectiondialog.ui" line="14"/>
         <source>Create a new Catalogue connection</source>
-        <translation type="unfinished"></translation>
+        <translation>新しいカタログコネクションの作成</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/newconnectiondialog.ui" line="20"/>
         <source>Name</source>
-        <translation type="unfinished">名称</translation>
+        <translation>名称</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/newconnectiondialog.ui" line="30"/>
         <source>URL</source>
-        <translation type="unfinished">URL</translation>
+        <translation>URL</translation>
     </message>
     <message>
         <source>Save connection</source>
-        <translation type="unfinished">接続を保存する</translation>
+        <translation>接続を保存する</translation>
     </message>
     <message>
         <source>Both Name and URL must be provided</source>
-        <translation type="unfinished"></translation>
+        <translation>名前とURLの両方が必須です</translation>
     </message>
     <message>
         <source>Overwrite %s?</source>
-        <translation type="unfinished"></translation>
+        <translation>%s を上書きしますか?</translation>
     </message>
 </context>
 <context>
@@ -7599,27 +7599,27 @@ Wrong line: %1</source>
     <name>OutputSelectionPanel</name>
     <message>
         <source>[Save to temporary file]</source>
-        <translation type="unfinished"></translation>
+        <translation>[一時ファイルに保存する]</translation>
     </message>
     <message>
         <source>Save to a temporary file</source>
-        <translation type="unfinished"></translation>
+        <translation>一時ファイルに保存する</translation>
     </message>
     <message>
         <source>Save to file...</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイルに保存する...</translation>
     </message>
     <message>
         <source>Save to memory layer</source>
-        <translation type="unfinished"></translation>
+        <translation>メモリレイヤに保存する</translation>
     </message>
     <message>
         <source>Save file</source>
-        <translation type="unfinished">ファイルに保存する</translation>
+        <translation>ファイルに保存する</translation>
     </message>
     <message>
         <source>Select directory</source>
-        <translation type="unfinished">ディレクトリ選択</translation>
+        <translation>ディレクトリ選択</translation>
     </message>
 </context>
 <context>
@@ -7745,7 +7745,7 @@ Wrong line: %1</source>
     </message>
     <message>
         <source>Python warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Python警告</translation>
     </message>
     <message>
         <source>An error has occured while executing Python code:</source>
