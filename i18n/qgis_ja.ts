@@ -12611,32 +12611,32 @@ Please contact the developers.
     <message>
         <location filename="../src/app/qgisapp.cpp" line="6660"/>
         <source>No legend entries selected</source>
-        <translation type="unfinished"></translation>
+        <translation>凡例のエントリが選択されていません</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="6661"/>
         <source>Select the layers and groups you want to remove in the legend.</source>
-        <translation type="unfinished"></translation>
+        <translation>凡例から削除したいレイヤとグループを選択して下さい.</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="6668"/>
         <source>Remove layers and groups</source>
-        <translation type="unfinished"></translation>
+        <translation>レイヤとグループの削除</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/app/qgisapp.cpp" line="6668"/>
         <source>Remove %n legend entries?</source>
         <comment>number of legend items to remove</comment>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n 個の凡例エントリを削除しますか?</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../src/app/qgisapp.cpp" line="6680"/>
         <source>%n legend entries removed.</source>
         <comment>number of removed legend entries</comment>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n 個の凡例エントリが削除されました.</numerusform>
         </translation>
     </message>
     <message>
@@ -12647,12 +12647,12 @@ Please contact the developers.
     <message>
         <location filename="../src/app/qgisapp.cpp" line="6817"/>
         <source>Set scale visibility for selected layers</source>
-        <translation type="unfinished"></translation>
+        <translation>選択レイヤが表示されるスケールを設定ｓて下さい</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="7422"/>
         <source>http://qgis.org/en/site/forusers/commercial_support.html</source>
-        <translation type="unfinished"></translation>
+        <translation>http://qgis.org/en/site/forusers/commercial_support.html</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="7691"/>
@@ -12672,7 +12672,7 @@ Please contact the developers.
     <message>
         <location filename="../src/app/qgisapp.cpp" line="9459"/>
         <source>This project file was saved by an older version of QGIS. When saving this project file, QGIS will update it to the latest version, possibly rendering it useless for older versions of QGIS.</source>
-        <translation type="unfinished"></translation>
+        <translation>このプロジェクトファイルは古いバージョンのQGISによって保存されています.このプロジェクトファイルを保存する時QGISはこれを最新バージョンにアップデートします.ことによると古いバージョンのQGISではレンダリングは役に立ちません.</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="9721"/>
@@ -12936,87 +12936,87 @@ Always ignore these errors?</source>
         <location filename="../src/app/qgisapp.cpp" line="499"/>
         <location filename="../src/app/qgisapp.cpp" line="506"/>
         <source>CRS was undefined</source>
-        <translation type="unfinished"></translation>
+        <translation>CRSが定義されていません</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="499"/>
         <source>defaulting to project CRS %1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>プロジェクトのデフォルトCRS %1 - %2</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="506"/>
         <source>defaulting to CRS %1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>デフォルトCRS %1 - %2</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="671"/>
         <source>Classification</source>
-        <translation type="unfinished">分類</translation>
+        <translation>分類</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="672"/>
         <source>Range</source>
-        <translation type="unfinished">範囲</translation>
+        <translation>範囲</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="673"/>
         <source>Unique Values</source>
-        <translation type="unfinished"></translation>
+        <translation>ユニーク値</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="674"/>
         <source>File Name</source>
-        <translation type="unfinished">ファイル名</translation>
+        <translation>ファイル名</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="675"/>
         <source>Value Map</source>
-        <translation type="unfinished"></translation>
+        <translation>バリューマップ</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="676"/>
         <source>Enumeration</source>
-        <translation type="unfinished">列挙</translation>
+        <translation>列挙</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="677"/>
         <source>Hidden</source>
-        <translation type="unfinished">非表示</translation>
+        <translation>非表示</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="678"/>
         <source>Check Box</source>
-        <translation type="unfinished"></translation>
+        <translation>チェックボックス</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="679"/>
         <source>Text Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>テキスト編集</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="680"/>
         <source>Value Relation</source>
-        <translation type="unfinished"></translation>
+        <translation>値のリレーション</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="681"/>
         <source>Uuid Generator</source>
-        <translation type="unfinished"></translation>
+        <translation>Uuidジェネレータ</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="682"/>
         <source>Photo</source>
-        <translation type="unfinished">写真</translation>
+        <translation>写真</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="683"/>
         <source>Web View</source>
-        <translation type="unfinished"></translation>
+        <translation>ウェブビュー</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="684"/>
         <source>Color</source>
-        <translation type="unfinished">色</translation>
+        <translation>色</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="685"/>
@@ -13026,7 +13026,7 @@ Always ignore these errors?</source>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="686"/>
         <source>Date/Time</source>
-        <translation type="unfinished"></translation>
+        <translation>日付/時刻</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="2549"/>
@@ -13041,12 +13041,12 @@ Always ignore these errors?</source>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3827"/>
         <source>Insufficient permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>不十分な権限</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3828"/>
         <source>The project file is not writable.</source>
-        <translation type="unfinished"></translation>
+        <translation>プロジェクトファイルに書き込みできません.</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="3931"/>
@@ -13288,22 +13288,22 @@ Error: %1</source>
         <location filename="../src/app/qgisapp.cpp" line="5868"/>
         <location filename="../src/app/qgisapp.cpp" line="5874"/>
         <source>Paste features</source>
-        <translation type="unfinished"></translation>
+        <translation>地物の貼り付け</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="5862"/>
         <source>no features could be successfully pasted.</source>
-        <translation type="unfinished"></translation>
+        <translation>貼り付けに成功した地物はありません.</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="5869"/>
         <source>%1 features were successfully pasted.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 の地物が貼り付けに成功しました.</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="5875"/>
         <source>%1 of %2 features could be successfully pasted.</source>
-        <translation type="unfinished"></translation>
+        <translation>%2 のうち %1 個の地物貼り付けに成功しました.</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="5902"/>
@@ -13388,17 +13388,17 @@ Error: %1</source>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="9740"/>
         <source>The request &apos;%1&apos; timed out. Any data received is likely incomplete.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; のリクエストがタイムアウトしました.受信された各データは不完全でしょう.</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="9741"/>
         <source>Network request timeout</source>
-        <translation type="unfinished"></translation>
+        <translation>ネットワークリクエストがタイムアウトしました</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="9741"/>
         <source>A network request timed out, any data received is likely incomplete.</source>
-        <translation type="unfinished"></translation>
+        <translation>ネットワークリクエストがタイムアウトしました,受信した各データはおそらく不完全でしょう.</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="645"/>
@@ -13853,74 +13853,74 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/app/qgsapplayertreeviewmenuprovider.cpp" line="47"/>
         <source>&amp;Set Group CRS</source>
-        <translation type="unfinished">グループCRSの設定(&amp;S)</translation>
+        <translation>グループCRSの設定(&amp;S)</translation>
     </message>
     <message>
         <location filename="../src/app/qgsapplayertreeviewmenuprovider.cpp" line="65"/>
         <source>&amp;Zoom to Best Scale (100%)</source>
-        <translation type="unfinished">最適スケール(100%)にズームする(&amp;Z)</translation>
+        <translation>最適スケール(100%)にズームする(&amp;Z)</translation>
     </message>
     <message>
         <location filename="../src/app/qgsapplayertreeviewmenuprovider.cpp" line="69"/>
         <source>&amp;Stretch Using Current Extent</source>
-        <translation type="unfinished">現在の領域を使って伸ばす(&amp;S)</translation>
+        <translation>現在の領域を使って伸ばす(&amp;S)</translation>
     </message>
     <message>
         <location filename="../src/app/qgsapplayertreeviewmenuprovider.cpp" line="75"/>
         <source>&amp;Duplicate</source>
-        <translation type="unfinished">複製(&amp;D)</translation>
+        <translation>複製(&amp;D)</translation>
     </message>
     <message>
         <location filename="../src/app/qgsapplayertreeviewmenuprovider.cpp" line="78"/>
         <source>&amp;Set Layer Scale Visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>レイヤが表示される縮尺を指定する(&amp;S)</translation>
     </message>
     <message>
         <location filename="../src/app/qgsapplayertreeviewmenuprovider.cpp" line="81"/>
         <source>&amp;Set Layer CRS</source>
-        <translation type="unfinished">レイヤCRSを設定する(&amp;S)</translation>
+        <translation>レイヤCRSを設定する(&amp;S)</translation>
     </message>
     <message>
         <location filename="../src/app/qgsapplayertreeviewmenuprovider.cpp" line="84"/>
         <source>Set &amp;Project CRS from Layer</source>
-        <translation type="unfinished">レイヤのCRSをプロジェクトに設定する(&amp;p)</translation>
+        <translation>レイヤのCRSをプロジェクトに設定する(&amp;p)</translation>
     </message>
     <message>
         <location filename="../src/app/qgsapplayertreeviewmenuprovider.cpp" line="97"/>
         <source>&amp;Open Attribute Table</source>
-        <translation type="unfinished">属性テーブルを開く(&amp;O)</translation>
+        <translation>属性テーブルを開く(&amp;O)</translation>
     </message>
     <message>
         <location filename="../src/app/qgsapplayertreeviewmenuprovider.cpp" line="123"/>
         <location filename="../src/app/qgsapplayertreeviewmenuprovider.cpp" line="135"/>
         <source>Save As...</source>
-        <translation type="unfinished"></translation>
+        <translation>名前をつけて保存...</translation>
     </message>
     <message>
         <location filename="../src/app/qgsapplayertreeviewmenuprovider.cpp" line="124"/>
         <location filename="../src/app/qgsapplayertreeviewmenuprovider.cpp" line="136"/>
         <source>Save As Layer Definition File...</source>
-        <translation type="unfinished"></translation>
+        <translation>レイヤ定義ファイルとして保存....</translation>
     </message>
     <message>
         <location filename="../src/app/qgsapplayertreeviewmenuprovider.cpp" line="127"/>
         <source>&amp;Filter...</source>
-        <translation type="unfinished">フィルタ(&amp;F)...</translation>
+        <translation>フィルタ(&amp;F)...</translation>
     </message>
     <message>
         <location filename="../src/app/qgsapplayertreeviewmenuprovider.cpp" line="147"/>
         <source>&amp;Properties</source>
-        <translation type="unfinished">プロパティ(&amp;P)</translation>
+        <translation>プロパティ(&amp;P)</translation>
     </message>
     <message>
         <location filename="../src/app/qgsapplayertreeviewmenuprovider.cpp" line="160"/>
         <source>Copy Style</source>
-        <translation type="unfinished">スタイルコピー</translation>
+        <translation>スタイルコピー</translation>
     </message>
     <message>
         <location filename="../src/app/qgsapplayertreeviewmenuprovider.cpp" line="163"/>
         <source>Paste Style</source>
-        <translation type="unfinished">スタイルペースト</translation>
+        <translation>スタイルペースト</translation>
     </message>
 </context>
 <context>
@@ -14483,7 +14483,7 @@ SVG検索パス	%8
     <message>
         <location filename="../src/gui/qgsattributeform.cpp" line="157"/>
         <source>Attributes changed</source>
-        <translation type="unfinished">属性が変更されました</translation>
+        <translation>属性が変更されました</translation>
     </message>
 </context>
 <context>
@@ -14549,12 +14549,12 @@ SVG検索パス	%8
     <message>
         <location filename="../src/ui/qgsattributeselectiondialogbase.ui" line="24"/>
         <source>Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>カラム</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsattributeselectiondialogbase.ui" line="76"/>
         <source>Reset</source>
-        <translation type="unfinished">リセット</translation>
+        <translation>リセット</translation>
     </message>
     <message>
         <source>&lt;b&gt;Attribute&lt;/b&gt;</source>
@@ -14622,18 +14622,18 @@ SVG検索パス	%8
     <message>
         <location filename="../src/app/qgsattributetabledialog.cpp" line="230"/>
         <source>Update Filtered</source>
-        <translation type="unfinished"></translation>
+        <translation>アップデートがフィルターされました</translation>
     </message>
     <message>
         <location filename="../src/app/qgsattributetabledialog.cpp" line="357"/>
         <source>Error</source>
-        <translation type="unfinished">エラー</translation>
+        <translation>エラー</translation>
     </message>
     <message>
         <location filename="../src/app/qgsattributetabledialog.cpp" line="357"/>
         <source>An error occured while evaluating the calculation string:
 %1</source>
-        <translation type="unfinished">計算用文字列評価中にエラーが発生しました.
+        <translation>計算用文字列評価中にエラーが発生しました.
 %1</translation>
     </message>
     <message>
@@ -14803,18 +14803,18 @@ SVG検索パス	%8
     <message>
         <location filename="../src/ui/qgsattributetabledialog.ui" line="559"/>
         <source>=</source>
-        <translation type="unfinished">=</translation>
+        <translation>=</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsattributetabledialog.ui" line="573"/>
         <source>update expression...</source>
-        <translation type="unfinished"></translation>
+        <translation>式の更新...</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsattributetabledialog.ui" line="580"/>
         <location filename="../src/app/qgsattributetabledialog.cpp" line="228"/>
         <source>Update All</source>
-        <translation type="unfinished"></translation>
+        <translation>全部を更新</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsattributetabledialog.ui" line="594"/>
@@ -14865,7 +14865,7 @@ SVG検索パス	%8
         <location filename="../src/ui/qgsattributetabledialog.ui" line="516"/>
         <location filename="../src/ui/qgsattributetabledialog.ui" line="536"/>
         <source>mMainViewButtonGroup</source>
-        <translation type="unfinished"></translation>
+        <translation>メインビューボタングループ</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsattributetabledialog.ui" line="632"/>
