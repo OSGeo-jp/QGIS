@@ -56805,17 +56805,17 @@ Would you like to add the new layer to the TOC?</source>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/xmldialog.ui" line="14"/>
         <source>XML Request / Response</source>
-        <translation type="unfinished"></translation>
+        <translation>XMLリクエスト/レスポンス</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/xmldialog.ui" line="20"/>
         <source>Request</source>
-        <translation type="unfinished"></translation>
+        <translation>リクエスト</translation>
     </message>
     <message>
         <location filename="../python/plugins/MetaSearch/ui/xmldialog.ui" line="30"/>
         <source>Response</source>
-        <translation type="unfinished"></translation>
+        <translation>レスポンス</translation>
     </message>
 </context>
 <context>
@@ -57303,7 +57303,149 @@ The Diagram tab allows you to add a graphic overlay to a vector layer. To activa
 The current implementation of diagrams provides support for pie- and bar charts and for linear scaling
 of the diagram size according to a classification attribute.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;ベクタレイヤプロパティ&lt;/h3&gt;
+このダイアログではベクタレイヤの設定とプロパティを変更できます。ここには7個のタブがあります:
+&lt;p&gt;
+&lt;a href=&quot;#symbology&quot;&gt;シンボロジ&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#labels&quot;&gt;ラベル&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#attributes&quot;&gt;フィールド&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#general&quot;&gt;一般情報&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#metadata&quot;&gt;メタデータ&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#actions&quot;&gt;アクション&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#diagram&quot;&gt;ダイアグラム&lt;/a&gt;&lt;br/&gt;
+
+&lt;a name=&quot;symbology&quot;&gt;
+&lt;h4&gt;シンボロジ&lt;/h4&gt;
+&lt;/a&gt;
+レイヤのシンボロジを変更する場合、作業したいレイヤの凡例エントリをダブルクリックすると&lt;label&gt;レイヤプロパティ&lt;/label&gt;ダイアログが表示されます.&lt;p&gt;
+このダイアログではベクタレイヤのスタイルを指定できます.選択されたレンダリングオプションによって地物群を分類することもできます.
+
+&lt;h5&gt;凡例タイプ&lt;/h5&gt;
+QGISはベクタ地物表示を制御するための多くのシンボロジレンダラをサポートしています。現在は以下のレンダラが利用可能です:
+&lt;ul&gt;
+&lt;li&gt;&lt;label&gt;共通シンボル&lt;/label&gt; - 単一のスタイルをレイヤの全てのオブジェクトに適用します.
+&lt;li&gt;&lt;label&gt;分類された(カテゴリ)&lt;/label&gt; - レイヤ内のオブジェクトは指定フィールドの値を使って、それぞれの値毎に定義された描画方法を利用して表示されます.
+&lt;li&gt;&lt;label&gt;段階に分けられた(グラデーション)&lt;/label&gt; - レイヤ内のオブジェクトは指定フィールドの数値の値によって分類された連続した色の階調を使って描画されます.
+&lt;li&gt;&lt;label&gt;ルールに基づいた&lt;/label&gt;
+&lt;li&gt;&lt;label&gt;点の移動&lt;/label&gt;
+&lt;/ul&gt;
+
+&lt;!--
+&lt;h5&gt;新シンボロジー&lt;/h5&gt;
+レイヤの描画に新しいシンボロジーを利用したい場合は&lt;label&gt;新シンボロジー&lt;/label&gt; ボタンをクリックしてください.
+--&gt;
+
+&lt;h5&gt;ベクタ透過性&lt;/h5&gt;
+QGISではそれぞれのベクタレイヤに透過性を指定することができます. これは&lt;label&gt;透過性&lt;/label&gt;スライダを動かして指定できます. この機能は多くのベクタレイヤを重ね合わせ表示する場合にとても便利です.
+
+&lt;h5&gt;スタイルの保存&lt;/h5&gt;
+レイヤの描画スタイルを定義したらレイヤスタイルを個別のファイルとして保存できます（*.qmlで終わるファイル名で).&lt;label&gt;スタイルを保存&lt;/label&gt;ボタンをクリックするとこの機能を実行できます.&lt;!--言うまでもなく--&gt;&lt;label&gt;スタイルを読み込み...&lt;/label&gt; ボタンで保存したレイヤスタイルファイルをロードできます.&lt;br/&gt;
+もしあなたが設定中のレイヤがロードされる時はいつも現在のスタイルを利用したい場合は&lt;label&gt;既定スタイルとして保存&lt;/label&gt;ボタンをクリックします. さらにあなたが変更したスタイルに満足できなかった場合は&lt;label&gt;既定のスタイルに戻す&lt;/label&gt;ボタンを使うと既定のスタイルに戻すことができます.
+
+&lt;a name=&quot;labels&quot;&gt;
+&lt;h4&gt;ラベル&lt;/h4&gt;
+&lt;/a&gt;
+ラベルタブでは地物のラベル表示やフォント、配置、スタイル、アラインメント、縁取り（バッファリング）などラベル表示に関する様々な設定を行うことができます.&lt;br/&gt;
+&lt;label&gt;ラベル表示&lt;/label&gt;チェックボックスをチェックするとラベルを表示できます.
+&lt;h5&gt;基本ラベルオプション&lt;/h5&gt;
+ラベルに表示するフィールドを選択して下さい.&lt;p&gt;
+フォントと色を設定するためには&lt;label&gt;フォント&lt;/label&gt; と &lt;label&gt;色&lt;/label&gt;ボタンを選択して下さい. さらにテキストラベルの角度と配置方法を設定することができます.&lt;p&gt;
+もしラベルが複数行にわたる文字列の場合&lt;label&gt;複数行のラベルですか?&lt;/label&gt;をチェックしてください(ラベル(廃止予定)の場合). QGISは改行コードをラベルフィールド中でチェックして、それにしたがってラインブレークを挿入します.改行コードはシングルキャラクタの\nです(バックスラッシュ\と文字nのような2個の分割されたキャラクタではありません).
+
+&lt;h5&gt;配置&lt;/h5&gt;
+ラベルの配置を変更する場合 &lt;label&gt;配置&lt;/label&gt;グループにあるラジオボタンを選択して下さい.
+
+&lt;h5&gt;フォントサイズ単位&lt;/h5&gt;
+&lt;label&gt;フォントサイズ 単位&lt;/label&gt;では &lt;label&gt;ポイント&lt;/label&gt;か&lt;label&gt;地図上の単位&lt;/label&gt;を選択できます.
+
+&lt;h5&gt;バッファラベル&lt;/h5&gt;
+ラベルをバッファするとはラベルを目立たせるために背後に取り囲む描画をすることを意味します.ラベルをバッファする手順は以下のとおりです:
+&lt;ol&gt;
+&lt;li&gt;&lt;label&gt;バッファラベル&lt;/label&gt;チェックボックスをクリックしてバッファリングを有効にします.
+&lt;li&gt;バッファを行うサイズをスピンボックスを使って指定します.
+&lt;li&gt;&lt;label&gt;色&lt;/label&gt;をクリックして色を選択します.カラーセレクタで利用したい色を選びます.好みに合わせてバッファの透過度を指定することもできます.
+&lt;li&gt;&lt;label&gt;適用&lt;/label&gt;をクリックすると変更状況を地図で見ることができます.
+&lt;/ol&gt;
+注　バッファのサイズを地図上の単位で指定することも可能です.
+
+&lt;h5&gt;データで定義された配置,プロパティ,バッファ,位置&lt;/h5&gt;
+&lt;label&gt;ラベル&lt;/label&gt;タブの残りのエントリーはラベルの見かけをレイヤの属性値を使って制御します. &lt;label&gt;データで定義された&lt;/label&gt;で始まるエントリはラベルのためのすべてのパラメータにレイヤのフィールドの値を利用します.
+
+
+&lt;a name=&quot;attributes&quot;&gt;
+&lt;h4&gt;フィールド&lt;/h4&gt;
+&lt;/a&gt;
+&lt;label&gt;フィールド&lt;/label&gt;タブでは選択されたデータセットのフィールドを操作できます. &lt;label&gt;新規カラム&lt;/label&gt; と &lt;label&gt;カラム削除&lt;/label&gt;ボタンはデータセットが編集モードの時に利用できます. バージョン1.6以上のGDALがインストールされている場合OGRライブラリは新規カラムの追加をサポートしますが削除はできません.さもなければPostGISレイヤのカラムのみが編集可能です.&lt;p&gt;
+&lt;label&gt;編集モード切替&lt;/label&gt;ボタンは編集モードを切り替えます.&lt;p&gt;
+フィールドタブには編集ウィジェットカラムがあります. このカラムは指定された属性テーブルカラムに追加することを許される値の定義または値の範囲の定義を行います. &lt;label&gt;ウィジェットの編集&lt;/label&gt; ボタンをクリックするとダイアログが開き異なるウィジェットを定義できます. このようなウィジェットがあります:&lt;br/&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;label&gt;行編集&lt;/label&gt;シンプルテキストを入力可能な編集フィールド  (または数値フィールドの入力数値を制限する).
+&lt;li&gt;&lt;label&gt;分類&lt;/label&gt; プロパティダイアログシンボロジータブで凡例タイプとして&lt;label&gt;ユニーク値&lt;/label&gt;を選択した場合は分類された値のコンボボックスを表示します.
+&lt;li&gt;&lt;label&gt;範囲&lt;/label&gt; 指定範囲の数値の入力を許可します.編集ウィジットはスライダーかスピンボックスを利用できます.
+&lt;li&gt;&lt;label&gt;ユニーク値&lt;/label&gt; ユーザーはすでに属性テーブルに入力されている値からのみ選択できます. &lt;label&gt;編集可能&lt;/label&gt; がアクティブになるとオートコンプリートつきで付加情報可能なラインエディットが表示されます.そうでなければコンボボックスが利用されます.
+&lt;li&gt;&lt;label&gt;ファイル名&lt;/label&gt; ファイル選択ダイアログによって追加されるシンプルな選択.
+&lt;li&gt;&lt;label&gt;バリューマップ&lt;/label&gt; 事前に定義された項目のコンボボックスです.値は属性に格納されます、説明はコンボボックスで表示されます . 値は手作業またはレイヤ、csvファイルからロードして定義できます.
+&lt;li&gt;&lt;label&gt;列挙&lt;/label&gt;カラムの型で利用できる値のコンボボックスを開きます.この機能は現状ではpostgresプロバイダーでのみ利用できます.
+&lt;li&gt;&lt;label&gt;変わらない&lt;/label&gt;変わらない属性カラムはリードオンリイです.ユーザーは内容を変更できません .
+&lt;li&gt;&lt;label&gt;非表示&lt;/label&gt; 非表示属性カラムはユーザーに見えません.
+&lt;li&gt;&lt;label&gt;チェックボックス&lt;/label&gt; チェックボックスが表示されます. 値は属性が入力されたチェックボックスの状態を表します.
+&lt;li&gt;&lt;label&gt;テキスト編集&lt;/label&gt;マルチラインのテキストが編集できるテキスト編集フィールドが表示されます.
+&lt;li&gt;&lt;label&gt;カレンダー&lt;/label&gt;
+&lt;li&gt;&lt;label&gt;値のリレーション&lt;/label&gt;
+&lt;li&gt;&lt;label&gt;UUIDジェネレータ&lt;/label&gt;
+&lt;li&gt;&lt;label&gt;写真&lt;/label&gt;
+&lt;li&gt;&lt;label&gt;ウェブビュー&lt;/label&gt;
+&lt;li&gt;&lt;label&gt;色&lt;/label&gt;
+&lt;/ul&gt;
+
+&lt;a name=&quot;general&quot;&gt;
+&lt;h4&gt;一般情報&lt;/h4&gt;
+&lt;/a&gt;
+一般情報タブでは表示名やスケール依存レンダリングオプション、ベクタファイル(OGRがサポートする形式とPostGISのみ)への空間インデックスの作成と指定ベクタレイヤに対する投影法の確認や設定ができます.&lt;p&gt;
+また&lt;label&gt;クエリビルダー&lt;/label&gt;を使ってフィルター条件式を設定できます.
+
+&lt;h5&gt;サブセット&lt;/h5&gt;
+&lt;label&gt;クエリビルダー&lt;/label&gt; ボタンを使うとレイヤの地物を条件式に合致したサブセットとして利用することができます.
+
+&lt;a name=&quot;metadata&quot;&gt;
+&lt;h4&gt;メタデータ&lt;/h4&gt;
+&lt;/a&gt;
+&lt;label&gt;メタデータ&lt;/label&gt;タブではレイヤについての型と場所、地物の数,地物の型,編集可能な項目の情報が表示されます. レイヤの空間参照系セクションでは提供されている投影法の情報がタブに表示されます. この機能はレイヤ情報を取得するすばやい方法です.
+
+&lt;a name=&quot;actions&quot;&gt;
+&lt;h4&gt;アクション&lt;/h4&gt;
+&lt;/a&gt;
+QGISでは地物の属性にもとづいたアクションを提供できます.この機能ではいろいろなアクションを使えます.たとえば地物の属性の値を引数としてプログラムを実行したりパラメータをwebレポーティングに送信したりするような機能です.&lt;br/&gt;
+アクションは外部アプリケーションを頻繁に起動したい場合やベクタレイヤのうちのいくつかの情報をwebページベースで閲覧したい場合に便利です.&lt;p&gt;
+
+アクションの新しい実装は式の評価にQGISの式エンジンを使っています.それぞれの式は実行時に評価され結果に置き換えられます.&lt;p&gt;
+式は&lt;code&gt;[%&lt;/code&gt;と&lt;code&gt;%]&lt;/code&gt;に囲まれなければなりません.それを自動的に行うためにGUIにはいくつかのボタンがあります.
+&lt;label&gt;式の挿入...&lt;/label&gt;ボタンは&lt;label&gt;式ビルダー&lt;/label&gt;を起動します.それを使えば式を簡単に書くことができます.&lt;label&gt;フィールドを挿入&lt;/label&gt;ボタンは&lt;code&gt;[% &quot;fieldname&quot; %]&lt;/code&gt;といったプレースホルダーをアクションに挿入します.ここでfieldnameはドロップダウンリストで選択されたフィールドの名前です.&lt;p&gt;
+
+さらに詳しい情報はユーザーガイドを参照して下さい.
+
+&lt;h5&gt;アクションの利用&lt;/h5&gt;
+アクションは&lt;label&gt;地物情報表示&lt;/label&gt;ダイアログから起動できます.ツールバーの&lt;label&gt;地物アクションの実行&lt;/label&gt;ツールでも起動できます.
+
+アクションでは&lt;label&gt;式ビルダ&lt;/label&gt;で利用できるデフォルトセットに加えて少しですがカスタム式が利用できます.&lt;br/&gt;
+&lt;label&gt;地物情報表示&lt;/label&gt;ダイアログからアクションを実行中の場合は, カスタム式&lt;code&gt;$currfield&lt;/code&gt;はダイアログで選択されたフィールドの値に置き換えられます.
+&lt;label&gt;地物アクションの実行&lt;/label&gt;ツールを使う場合, 次のようなカスタム式が利用可能です(この場合$currfieldは使えません):
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;$clickx&lt;/code&gt; キャンバスでクリックした位置のx座標を返します&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;$clicky&lt;/code&gt; キャンバスでクリックした位置のy座標を返します&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;$layerid&lt;/code&gt; 凡例で選択されているレイヤのIDを返します&lt;/li&gt;
+&lt;/ul&gt;
+
+注: &lt;label&gt;地物アクションの実行&lt;/label&gt;ツールはマッチしているすべての地物についてアクションを実行しますが,&lt;label&gt;地物情報表示&lt;/label&gt;ではアクションを実行する地物を選択できます.&lt;p&gt;
+
+&lt;a name=&quot;diagram&quot;&gt;
+&lt;h4&gt;ダイアグラム&lt;/h4&gt;
+&lt;/a&gt;
+ダイアグラムタブではベクタレイヤにグラフをオーバーレイ表示できます. この機能を有効にする時は &lt;label&gt;プラグインマネージャ&lt;/label&gt;を開いて&lt;label&gt;グラフのオーバーレイ&lt;/label&gt;プラグインを選択して下さい. そうするとベクタ&lt;label&gt;レイヤプロパティ&lt;/label&gt;ダイアログにグラフの設定を入力する新しいタブができます.&lt;p&gt;
+現在のグラフ機能では円グラフと棒グラフと分類された属性値に従ったグラフの大きさの線形スケーリングがサポートされています.
+
+</translation>
     </message>
     <message>
         <location filename="../src/core/qgscontexthelp_texts.cpp" line="518"/>
@@ -57475,7 +57617,166 @@ that will be automatically deleted after running.&lt;/li&gt;
 	from the close button. This allows you to save the geometry to be restored to the next start.
 &lt;/p&gt;
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;style&gt;
+	#toolbarConsole td{
+		background: #f6f6f6;
+	}
+&lt;/style&gt;
+&lt;h3&gt;QGIS Python コンソール&lt;/h3&gt;
+&lt;a href=&quot;#console&quot;&gt;コンソール&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;#editor&quot;&gt;エディタ&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;#settings&quot;&gt;設定&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+&lt;table&gt;
+	&lt;tr&gt;
+		&lt;td&gt;
+			&lt;p align=&apos;justify&apos;&gt;
+				QGIS Python コンソールはpythonコマンドを実行するための対話型シェルです. 
+				またpython ファイルエディタを使ってpythonスクリプトを編集,保存することができます. 
+				コンシールとエディタの両方はPyQScintilla2 パッケージで作成されています.&lt;br&gt;
+				コンソールは2個のペインに分割されていて上下のペインは水平分割線で大きさを変えられます. 
+　　　　　　　　　　　　　　　　ペインの表示エリアはリードオンリーでコマンドの出力を表示します. 
+                                入力エリアに対してテキストをドラッグアンドドロップやコピーアンドペーストできます.
+				またテキストを選択してコンテキストメニューの&lt;label&gt;Enter selected&lt;/label&gt;コマンドをクリックすると
+　　　　　　　　　　　　　　　　コードスニペッツを実行できます. 
+				選択テキストがインタプリタプロンプト (&gt;&gt;&gt;, ...)を含んでいても問題ありません. 入力エリアペインは入力コマンド用対話型pythonシェルです.&lt;br&gt;pythonファイルエディタを利用する場合ツールバーの
+				&lt;label&gt;Show editor&lt;/label&gt; ボタンを使って下さい.
+　　　　　　　　　　　　　　　　 エディタを使うとpythonファイルを編集と保存できコードを管理するための基本機能が提供されます (コードのコメントとアンコメント,文法にチェック,codepad.orgを使ったコード共有等).
+			&lt;/p&gt;
+		&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;a name=&quot;console&quot;&gt;
+&lt;h4&gt;コンソール&lt;/h4&gt;
+&lt;/a&gt;
+&lt;b&gt;&lt;i&gt;主な機能:&lt;/i&gt;&lt;/b&gt;
+&lt;table&gt;
+	&lt;tr&gt;
+		&lt;td&gt;
+			&lt;ul&gt;
+			&lt;li&gt;コードの補完,以下のAPIについての文法によるハイライトとコールチップス:
+				&lt;ol&gt;
+				&lt;li&gt;Python&lt;/li&gt;
+				&lt;li&gt;PyQGIS&lt;/li&gt;
+				&lt;li&gt;PyQt4&lt;/li&gt;
+				&lt;li&gt;QScintilla2&lt;/li&gt;
+				&lt;li&gt;osgeo-gdal-ogr&lt;/li&gt;
+				&lt;/ol&gt;
+			&lt;/li&gt;
+			&lt;br&gt;
+			&lt;li&gt;&lt;label&gt;Ctrl+Alt+Space&lt;/label&gt; 自動補完リストの表示.&lt;/li&gt;
+			&lt;br&gt;
+			&lt;li&gt;&lt;label&gt;Ctrl+Shift+Space&lt;/label&gt; コマンドヒストリリストの表示.&lt;/li&gt;
+			&lt;br&gt;
+                        &lt;li&gt;出力ペインで &lt;label&gt;Enter selected&lt;/label&gt; コマンドを選んでコードすにっぷすの実行.&lt;/li&gt;
+			&lt;br&gt;
+			&lt;li&gt;&lt;label&gt;_api&lt;/label&gt;という入力でQGIS API文書を開けますく.&lt;/li&gt;
+			&lt;br&gt;
+			&lt;li&gt;&lt;label&gt;_pyqgis&lt;/label&gt;と入力するとPyQGIS Cookbookを開けます.&lt;/li&gt;
+			&lt;br&gt;
+			&lt;li&gt;入力ペインのコンテキストメニューでコマンドヒストリの保存とクリアができます. 
+			ヒストリはファイル ~/.qgis2/console_history.txt に保存されます&lt;/li&gt;
+			&lt;br&gt;
+			&lt;/ul&gt;
+		&lt;/td&gt;
+		&lt;td&gt;&lt;img src=&quot;qrc:/images/themes/default/console/consoleHelp.png&quot; /&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;b&gt;&lt;i&gt;ツールバー:&lt;/i&gt;&lt;/b&gt;
+	&lt;table width=&quot;100%&quot; id=&apos;toolbarConsole&apos;&gt;
+		&lt;tr&gt;
+			&lt;td&gt;&lt;img src=&quot;qrc:/images/themes/default/console/iconClearConsole.png&quot; /&gt;&lt;/td&gt;
+			&lt;td colspan=&quot;2&quot;&gt;pythonコンソールのクリア&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td&gt;&lt;img src=&quot;qrc:/images/themes/default/console/iconClassConsole.png&quot; /&gt;&lt;/td&gt;
+			&lt;td&gt;&lt;img src=&quot;qrc:/images/themes/default/console/iconProcessingConsole.png&quot; /&gt;&lt;/td&gt;
+			&lt;td&gt;プロセッシングクラスのインポート&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td&gt;&lt;/td&gt;
+			&lt;td&gt;&lt;img src=&quot;qrc:/images/themes/default/console/iconQtCoreConsole.png&quot; /&gt;&lt;/td&gt;
+			&lt;td&gt;PyQt4.QtCore クラスのインポート&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td&gt;&lt;/td&gt;
+			&lt;td&gt;&lt;img src=&quot;qrc:/images/themes/default/console/iconQtGuiConsole.png&quot; /&gt;&lt;/td&gt;
+			&lt;td&gt;PyQt4.QtGuiクラスのインポート&lt;/td&gt;
+		&lt;/tr&gt;
+                &lt;tr&gt;
+			&lt;td&gt;&lt;img src=&quot;qrc:/images/themes/default/console/iconRunConsole.png&quot; /&gt;&lt;/td&gt;
+			&lt;td colspan=&quot;2&quot;&gt;コマンドの実行 (Enter キーを押すのに似ています)&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td&gt;&lt;img src=&quot;qrc:/images/themes/default/console/iconSettingsConsole.png&quot; /&gt;&lt;/td&gt;
+			&lt;td colspan=&quot;2&quot;&gt;設定&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td&gt;&lt;img src=&quot;qrc:/images/themes/default/console/iconHelpConsole.png&quot; /&gt;&lt;/td&gt;
+			&lt;td colspan=&quot;2&quot;&gt;ヘルプ&lt;/td&gt;
+		&lt;/tr&gt;
+&lt;/table&gt;
+&lt;a name=&quot;editor&quot;&gt;
+&lt;h4&gt;編集&lt;/h4&gt;
+&lt;/a&gt;
+&lt;b&gt;&lt;i&gt;主な機能:&lt;/i&gt;&lt;/b&gt;
+&lt;table&gt;
+	&lt;tr&gt;
+		&lt;td&gt;
+			&lt;img src=&quot;qrc:/images/themes/default/console/editorHelp.png&quot; /&gt;
+			&lt;img src=&quot;qrc:/images/themes/default/console/classBrowserHelp.png&quot; /&gt;
+		&lt;/td&gt;
+		&lt;td&gt;
+			&lt;ul&gt;
+			&lt;li&gt;コードの補完,以下のAPIについての文法によるハイライトとコールチップス:
+				&lt;ol&gt;
+				&lt;li&gt;Python&lt;/li&gt;
+				&lt;li&gt;PyQGIS&lt;/li&gt;
+				&lt;li&gt;PyQt4&lt;/li&gt;
+				&lt;li&gt;QScintilla2&lt;/li&gt;
+				&lt;li&gt;osgeo-gdal-ogr&lt;/li&gt;
+				&lt;/ol&gt;
+			&lt;/li&gt;
+			&lt;br&gt;
+			&lt;li&gt;&lt;label&gt;Ctrl+Space&lt;/label&gt; 自動補完リストの表示.&lt;/li&gt;
+			&lt;br&gt;
+			&lt;li&gt;codepad.orgを使ったコードスニペットの共有.&lt;/li&gt;
+			&lt;br&gt;
+			&lt;li&gt;&lt;label&gt;Ctrl+4&lt;/label&gt; 文法のチェック.&lt;/li&gt; 
+			&lt;br&gt;
+			&lt;li&gt;オブジェクトインスペクタ: クラスと関数のブラウザ.&lt;/li&gt;
+			&lt;br&gt;
+			&lt;li&gt;マウスクリックでオブジェクト定義に移動します. (オブジェクトインスペクタから)&lt;/li&gt;
+			&lt;br&gt;
+			&lt;li&gt;&lt;label&gt;Enter selected&lt;/label&gt; コマンドでコードスニペッツを実行します.&lt;/li&gt;
+			&lt;br&gt;
+			&lt;li&gt;&lt;label&gt;Run script&lt;/label&gt; コマンドでスクリプト全体を実行します
+			(このコマンドを実行すると .pycという拡張子のバイトコンパイルされたファイルを生成します)&lt;/li&gt;
+			&lt;br&gt;
+			&lt;/ul&gt;
+		&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;a name=&quot;settings&quot;&gt;
+&lt;h4&gt;設定&lt;/h4&gt;
+&lt;/a&gt;
+&lt;b&gt;&lt;i&gt;pythonコンソールの追加設定:&lt;/i&gt;&lt;/b&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;label&gt;自動補完:&lt;/label&gt; チェックされているとコード補完が有効になります. インストールされているAPIとカレントAPIドキュメントを利用してコード自動補完が行われます&lt;/li&gt;
+&lt;br&gt;
+&lt;li&gt;&lt;label&gt;自動補完スレッショルド:&lt;/label&gt; 自動補完リストを表示するスレッショルド(タイプされた文字中)&lt;/li&gt;
+&lt;br&gt;
+&lt;li&gt;&lt;label&gt;自動括弧挿入:&lt;/label&gt; チェックされていると括弧を自動的に閉じます&lt;/li&gt;
+&lt;br&gt;
+&lt;li&gt;&lt;label&gt;スクリプト実行前に自動保存:&lt;/label&gt; 編集を行った後のスクリプトファイルを実行時に自動的に保存します.この機能は実行後に自動的に削除される作業用フォルダの作業用ファイルにスクリプトを保存します.&lt;/li&gt;
+&lt;br&gt;
+&lt;li&gt;&lt;label&gt;事前ロードされたAPIファイルの利用:&lt;/label&gt; 事前ロードされたAPIファイルかあなたのシステムに保存されている他のAPIファイルを利用するか選択することができます.&lt;/li&gt;
+&lt;br&gt;
+&lt;li&gt;&lt;label&gt;事前準備されたAPIファイルの利用:&lt;/label&gt; チェックされていると *.pap ファイルがコード補完に利用されます. 事前準備されたAPIファイルを作成するためには*.api ファイルをロードして &lt;label&gt;Compile Apis...&lt;/label&gt;ボタンをクリックしてコンパイルして下さい.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p style=&apos;border: 1px solid; background:#f6f6f6;&apos; align=&apos;justify&apos;&gt;
+	&lt;b&gt;注:&lt;/b&gt; コンソールウィジェットの状態を保存したい場合Python コンソールをクローズボタンで閉じて下さい. これによって次回起動時に保存されたコンソールの位置が復元されます.
+&lt;/p&gt;
+</translation>
     </message>
     <message>
         <location filename="../src/core/qgscontexthelp_texts.cpp" line="863"/>
@@ -57553,7 +57854,81 @@ Informs you about active system locale. To change it tick &lt;label&gt;Override 
 &lt;/a&gt;
 Tick &lt;label&gt;Use proxy for web access&lt;/label&gt; to define host, port, user, and password.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;オプション&lt;/h3&gt;
+このダイアログではQGISの基本的オプションを設定できます.このダイアログには8個のタブがあります:
+&lt;p&gt;
+
+&lt;a href=&quot;#general&quot;&gt;一般情報&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#ren&quot;&gt;レンダリング &amp; SVG&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#map&quot;&gt;マップツールズ&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#over&quot;&gt;オーバーレイ&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#digit&quot;&gt;デジタイズ&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#crs&quot;&gt;CRS&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#loc&quot;&gt;ロケール&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#net&quot;&gt;ネットワークとプロキシ&lt;/a&gt;&lt;br/&gt;
+
+&lt;a name=&quot;general&quot;&gt;
+&lt;h4&gt;一般情報&lt;/h4&gt;
+&lt;/a&gt;
+このタブではプロジェクトに関して開く/保存,地図のデフォルトの見かけやお好みのアイコンテーマ等の多くの一般情報を設定できます.
+&lt;a name=&quot;ren&quot;&gt;
+&lt;h4&gt;レンダリング &amp; SVG&lt;/h4&gt;
+&lt;/a&gt;
+このタブでは地図レイヤのレンダリングオプションを設定できます.&lt;br&gt;
+デフォルトでQGISはマップキャンバスがリフレッシュされると全ての可視レイヤを描画しなおします.次のイベントにはマップキャンバスのリフレッシュによるトリガーイベントが含まれます:
+&lt;ul&gt;
+&lt;li&gt;レイヤの追加
+&lt;li&gt;パンとズーム
+&lt;li&gt;QGISウィンドウの大きさ変更
+&lt;li&gt;レイヤの表示属性変更
+&lt;/ul&gt;
+QGISでは多くの方法でレンダリングプロセスをコントロールできます:&lt;p&gt;
+新しいレイヤをロードする時に描画しないオプションが設定可能です.&lt;br&gt;
+これはレイヤが新規に地図に追加される時の凡例のデフォルト可視チェックボックスがチェックされていないことを意味します.このオプションを設定するためには &lt;label&gt;地図に新しくレイヤを追加した際にそのレイヤが表示されることをデフォルトにします&lt;/label&gt;チェックボックスのチェックをはずして下さい.&lt;p&gt;
+あなたは描画途中に地図に地物が描画されるようにオプションを設定できます. &lt;br&gt;
+デフォルトでQGISでは全てのレイヤデータがレンダリングされるまで地物の表示を行いません. 地物がデータストアから読み込まれる途中で表示を更新したい場合は&lt;label&gt;表示更新前に描画する地物の数&lt;/label&gt;に適切な値を設定して下さい. ここの値が0の場合（この値いがデフォルトです）描画途中の更新は行われません.設定した値が小さい値の場合パフォーマンスの低下を招きます、なぜならば地物の読み込み中に地図キャンバスが頻繁に更新されるからです. 500以上の値を推奨します.
+&lt;a name=&quot;map&quot;&gt;
+&lt;h4&gt;マップツールズ&lt;/h4&gt;
+&lt;/a&gt;
+&lt;h5&gt;地物情報表示&lt;/h5&gt;
+&lt;label&gt;モード&lt;/label&gt;では &lt;label&gt;地物情報表示&lt;/label&gt; ツールでどのレイヤの情報を表示するか設定します.  &lt;label&gt;カレントレイヤ&lt;/label&gt;を &lt;label&gt;トップダウン&lt;/label&gt;に切り替えると&lt;label&gt;地物情報表示&lt;/label&gt;ツールを使った時に全ての情報表示可能なレイヤの情報が表示されます.
+&lt;h5&gt;計測ツール&lt;/h5&gt;
+ここでは距離計測のための楕円体、計測単位とラバーバンドの色を設定できます.
+&lt;h5&gt;移動とズーム&lt;/h5&gt;
+マウスホィールの動作とズーム倍率を設定できます.
+&lt;a name=&quot;over&quot;&gt;
+&lt;h4&gt;オーバーレイ&lt;/h4&gt;
+&lt;/a&gt;
+ラベルの配置アルゴリズムを定義できます.  &lt;label&gt;中央点 (fastest)&lt;/label&gt;, &lt;label&gt;チェイン (fast)&lt;/label&gt;, &lt;label&gt;ポップミュージックタブチェイン (遅い)&lt;/label&gt;, &lt;label&gt;ポップミュージックタブ (遅い)&lt;/label&gt; and &lt;label&gt;ポップミュージックチェイン (とても遅い)&lt;/label&gt;の中から選択して下さい.
+
+&lt;a name=&quot;digit&quot;&gt;
+&lt;h4&gt;デジタイズ&lt;/h4&gt;
+&lt;/a&gt;
+&lt;h5&gt;ラバーバンド&lt;/h5&gt;
+&lt;label&gt;デジタイズ&lt;/label&gt;タブでは入力ラインの太さと色を設定できます.
+&lt;h5&gt;スナップ&lt;/h5&gt;
+ここではプロジェクト全体でのスナップ許容値を定義できます. &lt;p&gt;
+&lt;label&gt;頂点&lt;/label&gt;, &lt;label&gt;セグメント&lt;/label&gt;または &lt;label&gt;頂点とセグメント&lt;/label&gt;の中からデフォルトを選べます. また頂点編集で利用するスナップの既定値や検索半径を定義できます. 許容値は地図上の単位かピクセル数で定義できます.ピクセルを選択するとズーム操作によって許容値が変わらないという利点があります . &lt;p&gt;
+レイヤ別のスナップ許容値は &lt;label&gt;設定&lt;/label&gt; &lt;!--(または &lt;label&gt;ファイル&lt;/label&gt;)--&gt; &lt;label&gt;プロジェクトプロパティ...&lt;/label&gt;を選択すると定義できます.  &lt;label&gt;一般情報&lt;/label&gt; タブの, セクション &lt;label&gt;デジタイズ&lt;/label&gt;で&lt;label&gt;スナップオプション...&lt;/label&gt;をクリックするとレイヤ単位のスナップモードの有効化と許容値の調整を行うことができます.
+&lt;h5&gt;頂点マーク&lt;/h5&gt;
+マーカースタイルを &lt;label&gt;半透明の円&lt;/label&gt;, &lt;label&gt;十字&lt;/label&gt; or &lt;label&gt;無し&lt;/label&gt;から選択できます、またサイズを指定できます; また選択されている地物のみのマーカーを設定することもできます.
+&lt;h5&gt;属性値の入力&lt;/h5&gt;
+デフォルトで新規の地物をデジタイズした後QGISはその地物の属性値の入力を求めてきます. &lt;label&gt;地物が作成された後の属性ポップアップウィンドウ表示をやめる&lt;/label&gt; をクリックすると属性入力は後の処理にすることができます.
+&lt;a name=&quot;crs&quot;&gt;
+&lt;h4&gt;CRS&lt;/h4&gt;
+&lt;/a&gt;
+QGISはもはや最初にロードされたレイヤの空間参照系を地図のCRSに設定はしません. CRSを持たないレイヤを使ってQGISセッションを開始した場合はそれらのレイヤのCRSをチェックして定義する必要があります. このタブではその作業を全体に対して行えます.&lt;p&gt;
+グローバルなデフォルトCRSは &lt;i&gt;proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs&lt;/i&gt; という値でQGISでは定義されていますが、もちろん変更することができます,また新規の定義はそれに続くQGISセッションのために保存されます.
+&lt;a name=&quot;lov&quot;&gt;
+&lt;h4&gt;ロケール&lt;/h4&gt;
+&lt;/a&gt;
+アクティブシステムロケール情報を知らせます.
+変更するためには &lt;label&gt;システムロケールを上書きする&lt;/label&gt;をチェックしてQGISを再起動して下さい.
+&lt;a name=&quot;net&quot;&gt;
+&lt;h4&gt;ネットワークとプロキシ&lt;/h4&gt;
+&lt;/a&gt;
+&lt;label&gt;ウェブアクセスにプロキシを利用する&lt;/label&gt;をクリックするとホスト、ポート、ユーザー、パスワードを指定できます .
+</translation>
     </message>
     <message>
         <location filename="../src/core/qgscontexthelp_texts.cpp" line="1023"/>
@@ -58706,7 +59081,63 @@ The &lt;label&gt;Field Calculator&lt;/label&gt; button in the attribute table al
 The results can be written to a new attribute column or it can be used to update values in an already existing column.&lt;br&gt;
 The vector layer needs to be in editing mode, before you can click on the &lt;label&gt;Field calculator&lt;/label&gt; icon to open the dialog.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;属性テーブル&lt;/h3&gt;
+属性テーブルは選択されたレイヤの地物の属性を表示します. テーブルの各行はいくつかのカラムに示される属性を持つ1つの地物を表しています. テーブル内の地物は検索や選択、移動あるいは編集することができます. 
+デフォルトでは属性テーブルは独立したウィンドウです. あなたがそれを開いてもダイアログが見えない場合は、多分QGISのメインウィンドウの下に隠されているでしょう.
+あなたはそれをドックウィンドウにすることもできます. ドックウィンドウにするには&lt;label&gt;設定 &gt; オプション&lt;/label&gt;ダイアログのデータソースタブで&lt;label&gt;ドックウィンドウで属性テーブルを開く&lt;/label&gt;にチェックします.&lt;p&gt;
+レイヤの総地物数とフィルタ後の地物数、選択されている地物数はウィンドウのタイトルバーに表示されます.&lt;p&gt;
+
+&lt;p&gt;
+&lt;a href=&quot;#Selecting&quot;&gt;選択&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#Sorting&quot;&gt;並べ替え&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#Filtering&quot;&gt;フィルタ&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#Editing&quot;&gt;編集&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#FieldCalc&quot;&gt;フィールド計算機&lt;/a&gt;&lt;br/&gt;
+
+&lt;a name=&quot;Selecting&quot;&gt;
+&lt;h4&gt;選択&lt;/h4&gt;
+&lt;/a&gt;
+行を選択するには行の左側の行番号をクリックします. マウスボタンを押したままにして選択の終端まで動かせば後続の行を選択することができます. 連続していない複数の行を選択するには&lt;label&gt;Ctrl&lt;/label&gt;キーを押したままにします.&lt;br&gt;
+連続している行を選択するには&lt;label&gt;Shift&lt;/label&gt;キーを押しながら行の左側の行ヘッダーをクリックします. 現在のカーソル位置とクリックされた行の間のすべての行が選択されます.
+
+&lt;a name=&quot;Sorting&quot;&gt;
+&lt;h4&gt;並べ替え&lt;/h4&gt;
+&lt;/a&gt;
+各列は、その列ヘッダをクリックすることで並べ替えることができます. 小さな三角はソート順序を示します. 下向き三角は上から下に降順(大きい順)となっていることを意味し、上向き三角は上から下に昇順(小さい順)になっていることを意味します.&lt;br&gt;
+現在のソートカラムに関わらず選択されている行を常に上部に表示するには&lt;label&gt;選択部分を先頭に移動する&lt;/label&gt;ボタンをアクティブにします.
+
+&lt;a name=&quot;Filtering&quot;&gt;
+&lt;h4&gt;フィルタ&lt;/h4&gt;
+&lt;/a&gt;
+データの部分に素早く移動するには左下のフィルタボタンを使用することができます. 次のオプションが利用可能です.
+&lt;h5&gt;全ての地物を表示する&lt;/h5&gt;
+レイヤの全ての地物を表示する.
+&lt;h5&gt;選択した地物を表示する&lt;/h5&gt;
+現在選択されている全ての地物を表示する.
+&lt;h5&gt;地図上に表示されている地物を表示&lt;/h5&gt;
+現在の可視領域とスケールベースの可視性を考慮に入れて、現在マップキャンバスに表示されている全ての地物を表示する. 
+&lt;h5&gt;編集された地物と新しい地物を表示&lt;/h5&gt;
+編集された地物と新規作成された地物のみ表示します.
+このモードではコミット(保存)されていない変更を有する地物が表示されます.したがってこれはコミット(保存)する前に変更を見直すのによいフィルタです. 削除された地物はこのモードで表示されないことに注意して下さい.
+&lt;h5&gt;カラムフィルタ&lt;/h5&gt;
+属性によってフィルタすることができる単純なフィルタです. 属性がテキストを含む場合、部分文字列を検索します.したがって&lt;b&gt;man&lt;/b&gt;を検索すれば&lt;b&gt;woman&lt;/b&gt;を含んでいるレコードも表示します.
+フィルタ文字列を変更した後に&lt;label&gt;Enter&lt;/label&gt;キーを押すか&lt;label&gt;適用&lt;/label&gt;ボタンをクリックして下さい. &lt;label&gt;大文字小文字を区別する&lt;/label&gt;チェックボックスをチェックすると検索文字列が&lt;b&gt;night&lt;/b&gt;の時に&lt;b&gt;Night&lt;/b&gt;はフィルタされて表示されません.
+&lt;h5&gt;応用フィルタ&lt;/h5&gt;
+より複雑な検索のために、このモードは強力な式ビルダを提供します. それはSQLのWHERE節に類似しています. 構文の詳細については式ビルダーのビルトイン・ヘルプを参照してください.
+
+&lt;a name=&quot;Editing&quot;&gt;
+&lt;h4&gt;編集&lt;/h4&gt;
+&lt;/a&gt;
+属性値を編集するにはまず始めにレイヤを編集モードに切り替えなければなりません. 編集モードに切り替えるには&lt;label&gt;編集モード切替&lt;/label&gt;(鉛筆)ボタンを押すか&lt;label&gt;Ctrl + E&lt;/label&gt;を押して下さい.
+その後、編集したい値をダブルクリックするか、それにカーソルを置いて&lt;label&gt;Space&lt;/label&gt;キーを押します. &lt;label&gt;ベクタレイヤプロパティ &gt; フィールド&lt;/label&gt;でフィールド編集に使われるウィジェットをカスタマイズできます.
+
+&lt;a name=&quot;FieldCalc&quot;&gt;
+&lt;h4&gt;フィールド計算機&lt;/h4&gt;
+&lt;/a&gt;
+属性テーブルの&lt;label&gt;フィールド計算機&lt;/label&gt;ボタンでは既存の属性値や定義されている関数を用いて計算を実行することができます. 例えばジオメトリの長さや面積を計算できます.
+結果は新しい属性カラムに書くことができますし、既存のカラムの値を更新することもできます.&lt;br&gt;
+&lt;label&gt;フィールド計算機&lt;/label&gt;アイコンをクリックしてダイアログを開くにはベクタレイヤは編集モードである必要があります.
+</translation>
     </message>
     <message>
         <location filename="../src/core/qgscontexthelp_texts.cpp" line="1436"/>
@@ -61610,7 +62041,21 @@ None
 &lt;pre&gt; intersects(  $atlasgeometry,  $geometry ) &lt;/pre&gt;
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;$atlasgeometry 関数&lt;/h3&gt;
+地図帳で反復処理されている現在の地物のジオメトリを返します.
+地図帳の使用中にルールに基づいてジオメトリを表示するのに使用できます.
+例えば他のレイヤのジオメトリをそれらが地図帳で反復処理されている地物のジオメトリと交差する時だけ表示することができます.
+
+&lt;h4&gt;構文&lt;/h4&gt;
+&lt;pre&gt;$atlasgeometry&lt;/pre&gt;
+
+&lt;h4&gt;引数&lt;/h4&gt;
+なし
+
+&lt;h4&gt;サンプル&lt;/h4&gt;
+&lt;pre&gt; intersects(  $atlasgeometry,  $geometry ) &lt;/pre&gt;
+
+</translation>
     </message>
     <message>
         <location filename="../src/core/qgsexpression_texts.cpp" line="2057"/>
@@ -62376,7 +62821,20 @@ None
 &lt;pre&gt;$atlasfeatureid = $id&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;$atlasfeatureid 関数&lt;/h3&gt;
+地図帳を使用しているときに現在の行の地物IDを返します.
+ルールに基づいたジオメトリの描画で地図帳の現在の地物IDを使用することができます. 例えば地物のIDに基いて地物の表示・非表示を切り替えることができます.
+
+&lt;h4&gt;構文&lt;/h4&gt;
+&lt;pre&gt;$atlasfeatureid&lt;/pre&gt;
+
+&lt;h4&gt;引数&lt;/h4&gt;
+なし
+
+&lt;h4&gt;サンプル&lt;/h4&gt;
+&lt;pre&gt;$atlasfeatureid = $id&lt;/pre&gt;
+
+</translation>
     </message>
     <message>
         <location filename="../src/core/qgsexpression_texts.cpp" line="146"/>
@@ -62393,7 +62851,19 @@ geom &amp;rarr; a geometry
 &lt;pre&gt; xmin($geometry) &amp;rarr; returns minimum x coordinate of $geometry&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;xmin 関数&lt;/h3&gt;
+ジオメトリのX座標の最小値を返します. 計算はこのジオメトリの空間参照系で行われます.
+
+&lt;h4&gt;構文&lt;/h4&gt;
+&lt;pre&gt;xmin(geom)&lt;/pre&gt;
+
+&lt;h4&gt;引数&lt;/h4&gt;
+geom &amp;rarr; a geometry
+
+&lt;h4&gt;サンプル&lt;/h4&gt;
+&lt;pre&gt; xmin($geometry) &amp;rarr; $geometry のX座標の最小値を返す&lt;/pre&gt;
+
+</translation>
     </message>
     <message>
         <location filename="../src/core/qgsexpression_texts.cpp" line="278"/>
@@ -62456,7 +62926,27 @@ The color ramps available vary between QGIS installations.  This function
 may not give the expected results if you move your Quantum project.
 &lt;/p&gt;
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+&lt;h3&gt;ramp_color() 関数&lt;/h3&gt;
+カラーランプから色を表す文字列を返します.
+
+&lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
+     ramp_color(&lt;i&gt;ramp_name,value&lt;/i&gt;)&lt;/p&gt;
+
+&lt;p&gt;&lt;h4&gt;引数&lt;/h4&gt;
+&lt;!-- List args for functions here--&gt;
+&lt;i&gt;  ramp_name&lt;/i&gt; &amp;rarr; カラーランプの名前を表す文字列. 例えば、&apos;Spectral&apos;.&lt;br&gt;
+&lt;i&gt;  value&lt;/i&gt; &amp;rarr; 選択する色の階調での位置. 0から1の間の実数.&lt;br&gt;
+
+&lt;p&gt;&lt;h4&gt;サンプル&lt;/h4&gt;
+&lt;!-- Show example of function.--&gt;
+     ramp_color(&apos;Spectral&apos;,0.3) &amp;rarr; &apos;253,190,115,255&apos;&lt;/p&gt;
+
+&lt;p&gt;&lt;h4&gt;注:&lt;/h4&gt;
+利用できるカラーランプはインストールされたQGISによって異なります.
+あなたがプロジェクトを他のQGISに移動した場合、この関数は期待される結果を与えないかもしれません.
+&lt;/p&gt;
+</translation>
     </message>
     <message>
         <location filename="../src/core/qgsexpression_texts.cpp" line="539"/>
@@ -62473,7 +62963,19 @@ geom &amp;rarr; a geometry
 &lt;pre&gt; ymax($geometry) &amp;rarr; returns maximum y coordinate of $geometry&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;ymax 関数&lt;/h3&gt;
+ジオメトリのY座標の最大値を返します. 計算はこのジオメトリの空間参照系で行われます.
+
+&lt;h4&gt;構文&lt;/h4&gt;
+&lt;pre&gt;ymax(geom)&lt;/pre&gt;
+
+&lt;h4&gt;引数&lt;/h4&gt;
+geom &amp;rarr; a geometry
+
+&lt;h4&gt;サンプル&lt;/h4&gt;
+&lt;pre&gt; ymax($geometry) &amp;rarr; $geometry のY座標の最大値を返す&lt;/pre&gt;
+
+</translation>
     </message>
     <message>
         <location filename="../src/core/qgsexpression_texts.cpp" line="998"/>
@@ -62493,7 +62995,22 @@ Returns a string representation of a color based on its hue, saturation, and val
 &lt;!-- Show example of function.--&gt;
      color_hsv(40,100,100) &amp;rarr; &apos;255,170,0&apos;&lt;/p&gt;
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;color_hsv() 関数&lt;/h3&gt;
+色相、彩度、明度に基づいて色を表す文字列を返します
+
+&lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
+     color_hsv(&lt;i&gt;hue, saturation, value&lt;/i&gt;)&lt;/p&gt;
+
+&lt;p&gt;&lt;h4&gt;引数&lt;/h4&gt;
+&lt;!-- List args for functions here--&gt;
+&lt;i&gt;  hue&lt;/i&gt; &amp;rarr; 色相. 0から360までの整数.&lt;br&gt;
+&lt;i&gt;  saturation&lt;/i&gt; &amp;rarr; 彩度. 0から100までの整数のパーセント.&lt;br&gt;
+&lt;i&gt;  value&lt;/i&gt; &amp;rarr; 明度. 0から100までの整数のパーセント.&lt;br&gt;
+
+&lt;p&gt;&lt;h4&gt;サンプル&lt;/h4&gt;
+&lt;!-- Show example of function.--&gt;
+     color_hsv(40,100,100) &amp;rarr; &apos;255,170,0&apos;&lt;/p&gt;
+</translation>
     </message>
     <message>
         <location filename="../src/core/qgsexpression_texts.cpp" line="1072"/>
@@ -62510,7 +63027,19 @@ geom &amp;rarr; a geometry
 &lt;pre&gt; xmax($geometry) &amp;rarr; returns maximum x coordinate of $geometry&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;xmax 関数&lt;/h3&gt;
+ジオメトリのX座標の最大値を返します. 計算はこのジオメトリの空間参照系で行われます.
+
+&lt;h4&gt;構文&lt;/h4&gt;
+&lt;pre&gt;xmax(geom)&lt;/pre&gt;
+
+&lt;h4&gt;引数&lt;/h4&gt;
+geom &amp;rarr; a geometry
+
+&lt;h4&gt;サンプル&lt;/h4&gt;
+&lt;pre&gt; xmax($geometry) &amp;rarr; $geometry のX座標の最大値を返す&lt;/pre&gt;
+
+</translation>
     </message>
     <message>
         <location filename="../src/core/qgsexpression_texts.cpp" line="1168"/>
@@ -62562,7 +63091,23 @@ Returns a string representation of a color based on its red, green, and blue com
 &lt;!-- Show example of function.--&gt;
      color_rgb(255,127,0) &amp;rarr; &apos;255,127,0&apos;&lt;/p&gt;
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+&lt;h3&gt;color_rgb() 関数&lt;/h3&gt;
+赤、緑、青の要素に基づいて色を表す文字列を返します
+
+&lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
+     color_rgb(&lt;i&gt;red, green, blue&lt;/i&gt;)&lt;/p&gt;
+
+&lt;p&gt;&lt;h4&gt;引数&lt;/h4&gt;
+&lt;!-- List args for functions here--&gt;
+&lt;i&gt;  red&lt;/i&gt; &amp;rarr; 赤の要素. 0から255までの整数の値.&lt;br&gt;
+&lt;i&gt;  green&lt;/i&gt; &amp;rarr; 緑の要素. 0から255までの整数の値.&lt;br&gt;
+&lt;i&gt;  blue&lt;/i&gt; &amp;rarr; 青の要素. 0から255までの整数の値.&lt;br&gt;
+
+&lt;p&gt;&lt;h4&gt;サンプル&lt;/h4&gt;
+&lt;!-- Show example of function.--&gt;
+     color_rgb(255,127,0) &amp;rarr; &apos;255,127,0&apos;&lt;/p&gt;
+</translation>
     </message>
     <message>
         <location filename="../src/core/qgsexpression_texts.cpp" line="1199"/>
@@ -62579,7 +63124,19 @@ geom &amp;rarr; a geometry
 &lt;pre&gt; bounds_width($geometry) &amp;rarr; returns width of bounding box of $geometry&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;bounds_width 関数&lt;/h3&gt;
+ジオメトリのバウンディングボックスの幅を返します. 計算はこのジオメトリの空間参照系で行われます.
+
+&lt;h4&gt;構文&lt;/h4&gt;
+&lt;pre&gt;bounds_width(geom)&lt;/pre&gt;
+
+&lt;h4&gt;引数&lt;/h4&gt;
+geom &amp;rarr; a geometry
+
+&lt;h4&gt;サンプル&lt;/h4&gt;
+&lt;pre&gt; bounds_width($geometry) &amp;rarr; $geometry のバウンディングボックスの幅を返す&lt;/pre&gt;
+
+</translation>
     </message>
     <message>
         <location filename="../src/core/qgsexpression_texts.cpp" line="1269"/>
@@ -62596,7 +63153,19 @@ geom &amp;rarr; a geometry
 &lt;pre&gt; bounds($geometry) &amp;rarr; returns bounding box of $geometry&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;bounds 関数&lt;/h3&gt;
+ジオメトリのバウンディングボックスを表すジオメトリを返します. 計算はこのジオメトリの空間参照系で行われます.
+
+&lt;h4&gt;構文&lt;/h4&gt;
+&lt;pre&gt;bounds(geom)&lt;/pre&gt;
+
+&lt;h4&gt;引数&lt;/h4&gt;
+geom &amp;rarr; a geometry
+
+&lt;h4&gt;サンプル&lt;/h4&gt;
+&lt;pre&gt; bounds($geometry) &amp;rarr; $geometry のバウンディングボックスを返す&lt;/pre&gt;
+
+</translation>
     </message>
     <message>
         <location filename="../src/core/qgsexpression_texts.cpp" line="1282"/>
@@ -62618,7 +63187,24 @@ Returns a string representation of a color based on its cyan, magenta, yellow an
 &lt;!-- Show example of function.--&gt;
      color_cmyk(100,50,0,10) &amp;rarr; &apos;0,115,230&apos;&lt;/p&gt;
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+&lt;h3&gt;color_cmyk() 関数&lt;/h3&gt;
+シアン、マゼンタ、イエロー、ブラックの要素に基づいて色を表す文字列を返します
+
+&lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
+     color_cmyk(&lt;i&gt;cyan, magenta, yellow, black&lt;/i&gt;)&lt;/p&gt;
+
+&lt;p&gt;&lt;h4&gt;引数&lt;/h4&gt;
+&lt;!-- List args for functions here--&gt;
+&lt;i&gt;  cyan&lt;/i&gt; &amp;rarr; シアンの要素. 0から100までの整数のパーセント.&lt;br&gt;
+&lt;i&gt;  magenta&lt;/i&gt; &amp;rarr; マゼンタの要素. 0から100までの整数のパーセント.&lt;br&gt;
+&lt;i&gt;  yellow&lt;/i&gt; &amp;rarr; イエローの要素. 0から100までの整数のパーセント.&lt;br&gt;
+&lt;i&gt;  black&lt;/i&gt; &amp;rarr; ブラックの要素. 0から100までの整数のパーセント.&lt;br&gt;
+
+&lt;p&gt;&lt;h4&gt;サンプル&lt;/h4&gt;
+&lt;!-- Show example of function.--&gt;
+     color_cmyk(100,50,0,10) &amp;rarr; &apos;0,115,230&apos;&lt;/p&gt;
+</translation>
     </message>
     <message>
         <location filename="../src/core/qgsexpression_texts.cpp" line="1314"/>
@@ -62638,7 +63224,22 @@ Returns a string representation of a color based on its hue, saturation, and lig
 &lt;!-- Show example of function.--&gt;
      color_hsl(100,50,70) &amp;rarr; &apos;166,217,140&apos;&lt;/p&gt;
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;color_hsl() 関数&lt;/h3&gt;
+色相、彩度、輝度に基づいて色を表す文字列を返します
+
+&lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
+     color_hsl(&lt;i&gt;hue, saturation, lightness&lt;/i&gt;)&lt;/p&gt;
+
+&lt;p&gt;&lt;h4&gt;引数&lt;/h4&gt;
+&lt;!-- List args for functions here--&gt;
+&lt;i&gt;  hue&lt;/i&gt; &amp;rarr; 色相. 0から360までの整数.&lt;br&gt;
+&lt;i&gt;  saturation&lt;/i&gt; &amp;rarr; 彩度. 0から100までの整数のパーセント.&lt;br&gt;
+&lt;i&gt;  lightness&lt;/i&gt; &amp;rarr; 輝度. 0から100までの整数のパーセント.&lt;br&gt;
+
+&lt;p&gt;&lt;h4&gt;サンプル&lt;/h4&gt;
+&lt;!-- Show example of function.--&gt;
+     color_hsl(100,50,70) &amp;rarr; &apos;166,217,140&apos;&lt;/p&gt;
+</translation>
     </message>
     <message>
         <location filename="../src/core/qgsexpression_texts.cpp" line="1703"/>
@@ -62694,7 +63295,23 @@ Returns a string wrapped to a maximum/minimum number of characters.
      wordwrap(&apos;UNIVERSITY OF QGIS&apos;,13) &amp;rarr; &apos;UNIVERSITY OF&amp;#92;nQGIS&apos;&lt;br&gt;
      wordwrap(&apos;UNIVERSITY OF QGIS&apos;,-3) &amp;rarr; &apos;UNIVERSITY&amp;#92;nOF QGIS&apos;&lt;/p&gt;
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;wordwrap() 関数&lt;/h3&gt;
+指定した最大文字数または最小文字数に合わせてワードラップされた文字列を返します.
+
+&lt;p&gt;&lt;h4&gt;構文&lt;/h4&gt;
+     wordwrap(&lt;i&gt;string,wrap_length[,delimiter_string]&lt;/i&gt;)&lt;/p&gt;
+
+&lt;p&gt;&lt;h4&gt;引数&lt;/h4&gt;
+&lt;!-- List args for functions here--&gt;
+&lt;i&gt;  string&lt;/i&gt; &amp;rarr; ワードラップする文字列.&lt;br&gt;
+&lt;i&gt;  wrap_length&lt;/i&gt; &amp;rarr; 正の数の場合はワードラップするのに理想的な最大文字数を表します. 負の数の場合は最小文字数を表します.&lt;br&gt;
+&lt;i&gt;  delimiter_string&lt;/i&gt; &amp;rarr; 改行に使う区切り文字列 (&lt;u&gt;オプション&lt;/u&gt;).&lt;br&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;h4&gt;サンプル&lt;/h4&gt;
+&lt;!-- Show example of function.--&gt;
+     wordwrap(&apos;UNIVERSITY OF QGIS&apos;,13) &amp;rarr; &apos;UNIVERSITY OF&amp;#92;nQGIS&apos;&lt;br&gt;
+     wordwrap(&apos;UNIVERSITY OF QGIS&apos;,-3) &amp;rarr; &apos;UNIVERSITY&amp;#92;nOF QGIS&apos;&lt;/p&gt;
+</translation>
     </message>
     <message>
         <location filename="../src/core/qgsexpression_texts.cpp" line="1953"/>
@@ -65248,7 +65865,19 @@ geom &amp;rarr; a geometry
 &lt;pre&gt; bounds_height($geometry) &amp;rarr; returns height of bounding box of $geometry&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;bounds_height 関数&lt;/h3&gt;
+ジオメトリのバウンディングボックスの高さを返します. 計算はこのジオメトリの空間参照系で行われます.
+
+&lt;h4&gt;構文&lt;/h4&gt;
+&lt;pre&gt;bounds_height(geom)&lt;/pre&gt;
+
+&lt;h4&gt;引数&lt;/h4&gt;
+geom &amp;rarr; a geometry
+
+&lt;h4&gt;サンプル&lt;/h4&gt;
+&lt;pre&gt; bounds_height($geometry) &amp;rarr; $geometry のバウンディングボックスの高さを返す&lt;/pre&gt;
+
+</translation>
     </message>
     <message>
         <location filename="../src/core/qgsexpression_texts.cpp" line="2088"/>
@@ -65265,7 +65894,19 @@ geom &amp;rarr; a geometry
 &lt;pre&gt; ymin($geometry) &amp;rarr; returns minimum y coordinate of $geometry&lt;/pre&gt;
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;ymin 関数&lt;/h3&gt;
+ジオメトリのY座標の最小値を返します. 計算はこのジオメトリの空間参照系で行われます.
+
+&lt;h4&gt;構文&lt;/h4&gt;
+&lt;pre&gt;ymin(geom)&lt;/pre&gt;
+
+&lt;h4&gt;引数&lt;/h4&gt;
+geom &amp;rarr; a geometry
+
+&lt;h4&gt;サンプル&lt;/h4&gt;
+&lt;pre&gt; ymin($geometry) &amp;rarr; $geometry のY座標の最小値を返す&lt;/pre&gt;
+
+</translation>
     </message>
     <message>
         <location filename="../src/core/qgsexpression_texts.cpp" line="2101"/>
@@ -68451,19 +69092,19 @@ Convert a string into Qt data type.
     <name>parent</name>
     <message>
         <source>Cannot parse XML file: %s</source>
-        <translation type="unfinished"></translation>
+        <translation>XMLファイルを解析できません: %s</translation>
     </message>
     <message>
         <source>Cannot open file: %s</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイルを開けません: %s</translation>
     </message>
     <message>
         <source>Invalid CSW connections XML.</source>
-        <translation type="unfinished"></translation>
+        <translation>CSW接続情報XMLが不正です.</translation>
     </message>
     <message>
         <source>Loading Connections</source>
-        <translation type="unfinished"></translation>
+        <translation>接続情報をロードしています</translation>
     </message>
 </context>
 <context>
@@ -68749,12 +69390,12 @@ Convert a string into Qt data type.
     <message>
         <location filename="../python/plugins/processing/ui/widgetOutputSelect.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">フォーム</translation>
+        <translation>フォーム</translation>
     </message>
     <message>
         <location filename="../python/plugins/processing/ui/widgetOutputSelect.ui" line="29"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 </TS>
