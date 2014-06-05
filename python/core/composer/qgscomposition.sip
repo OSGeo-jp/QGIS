@@ -15,7 +15,7 @@ class QgsComposition : QGraphicsScene
     /** \brief Plot type */
     enum PlotStyle
     {
-      Preview = 0, // Use cache etc
+      Preview,     // Use cache etc
       Print,       // Render well
       Postscript   // Fonts need different scaling!
     };
@@ -28,15 +28,15 @@ class QgsComposition : QGraphicsScene
       Crosses
     };
 
-    //! @deprecated since 2.4 - use the constructor with QgsMapSettings
-    QgsComposition( QgsMapRenderer* mapRenderer ) /Deprecated/;
-    explicit QgsComposition( const QgsMapSettings& mapSettings );
-
     enum ZValueDirection
     {
       ZValueBelow,
       ZValueAbove
     };
+
+    //! @deprecated since 2.4 - use the constructor with QgsMapSettings
+    QgsComposition( QgsMapRenderer* mapRenderer ) /Deprecated/;
+    explicit QgsComposition( const QgsMapSettings& mapSettings );
 
     /**Composition atlas modes*/
     enum AtlasMode
@@ -48,7 +48,9 @@ class QgsComposition : QGraphicsScene
 
     ~QgsComposition();
 
-    /**Changes size of paper item*/
+    /**Changes size of paper item. Also moves all items so that they retain
+     * their same relative position to the top left corner of their current page.
+    */
     void setPaperSize( double width, double height );
 
     /**Returns height of paper item*/
@@ -154,7 +156,9 @@ class QgsComposition : QGraphicsScene
     QList<const QgsComposerMap*> composerMapItems() const;
 %End
 
-    /**Return composer items of a specific type*/
+    /**Return composer items of a specific type
+      @note not available in python bindings
+     */
     // template<class T> void composerItems( QList<T*>& itemList );
 
     /**Returns the composer map with specified id
@@ -164,9 +168,9 @@ class QgsComposition : QGraphicsScene
     /**Returns the composer html with specified id (a string as named in the
       composer user interface item properties).
       @note Added in QGIS 2.0
-      @param id - A QString representing the id of the item.
+      @param item the item.
       @return QgsComposerHtml pointer or 0 pointer if no such item exists.
-    */
+     */
     const QgsComposerHtml* getComposerHtmlByItem( QgsComposerItem *item ) const;
 
     /**Returns a composer item given its text identifier.
@@ -175,7 +179,7 @@ class QgsComposition : QGraphicsScene
       @param theId - A QString representing the identifier of the item to
         retrieve.
       @return QgsComposerItem pointer or 0 pointer if no such item exists.
-      **/
+     */
     const QgsComposerItem* getComposerItemById( QString theId ) const;
 
     /**Returns a composer item given its unique identifier.
@@ -403,7 +407,7 @@ class QgsComposition : QGraphicsScene
   public slots:
     /**Casts object to the proper subclass type and calls corresponding itemAdded signal*/
     void sendItemAddedSignal( QgsComposerItem* item );
-    
+
     /**Updates the scene bounds of the composition
     @note added in version 2.2*/
     void updateBounds();
@@ -413,7 +417,7 @@ class QgsComposition : QGraphicsScene
      * to refresh their contents.
     @note added in version 2.3*/
     void refreshItems();
-    
+
     /**Clears any selected items and sets an item as the current selection.
      * @param item item to set as selected
      * @note added in version 2.3*/
@@ -422,7 +426,7 @@ class QgsComposition : QGraphicsScene
   protected:
     void init();
 
-    
+
   signals:
     void paperSizeChanged();
     void nPagesChanged();
@@ -452,7 +456,7 @@ class QgsComposition : QGraphicsScene
     void composerTableAdded( QgsComposerAttributeTable* table );
     /**Is emitted when a composer item has been removed from the scene*/
     void itemRemoved( QgsComposerItem* );
-    
+
     /**Is emitted when item in the composition must be refreshed*/
-    void refreshItemsTriggered();    
+    void refreshItemsTriggered();
 };

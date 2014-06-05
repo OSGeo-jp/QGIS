@@ -254,6 +254,8 @@ class CORE_EXPORT QgsPalLayerSettings
       Hali = 11, //horizontal alignment for data defined label position (Left, Center, Right)
       Vali = 12, //vertical alignment for data defined label position (Bottom, Base, Half, Cap, Top)
       Rotation = 14, //data defined rotation
+      RepeatDistance = 84,
+      RepeatDistanceUnit = 85,
 
       // rendering
       ScaleVisibility = 23,
@@ -266,7 +268,6 @@ class CORE_EXPORT QgsPalLayerSettings
       Show = 15,
       AlwaysShow = 20
     };
-
 
     // whether to label this layer
     bool enabled;
@@ -373,9 +374,14 @@ class CORE_EXPORT QgsPalLayerSettings
     unsigned int placementFlags;
 
     bool centroidWhole; // whether centroid calculated from whole or visible polygon
+    bool centroidInside; // whether centroid-point calculated must be inside polygon 
     double dist; // distance from the feature (in mm)
     bool distInMapUnits; //true if distance is in map units (otherwise in mm)
     QgsMapUnitScale distMapUnitScale;
+
+    double repeatDistance;
+    SizeUnit repeatDistanceUnit;
+    QgsMapUnitScale repeatDistanceMapUnitScale;
 
     // offset labels of point/centroid features default to center
     // move label to quadrant: left/down, don't move, right/up (-1, 0, 1)
@@ -597,6 +603,8 @@ class CORE_EXPORT QgsLabelComponent
         , mDpiRatio( 1.0 )
     {}
 
+    // methods
+
     const QString& text() { return mText; }
     void setText( const QString& text ) { mText = text; }
 
@@ -670,7 +678,6 @@ class CORE_EXPORT QgsLabelComponent
 };
 
 
-
 /**
  * Class that stores computed placement from labeling engine.
  * @note added in 2.4
@@ -694,7 +701,7 @@ class CORE_EXPORT QgsLabelingResults
     friend class QgsPalLabeling;
 };
 
-
+Q_NOWARN_DEPRECATED_PUSH
 class CORE_EXPORT QgsPalLabeling : public QgsLabelingEngineInterface
 {
   public:
@@ -737,9 +744,7 @@ class CORE_EXPORT QgsPalLabeling : public QgsLabelingEngineInterface
 
     //! called when we're going to start with rendering
     //! @deprecated since 2.4 - use override with QgsMapSettings
-    Q_NOWARN_DEPRECATED_PUSH
     Q_DECL_DEPRECATED virtual void init( QgsMapRenderer* mr );
-    Q_NOWARN_DEPRECATED_POP
     //! called when we're going to start with rendering
     virtual void init( const QgsMapSettings& mapSettings );
     //! called to find out whether the layer is used for labeling
@@ -768,14 +773,12 @@ class CORE_EXPORT QgsPalLabeling : public QgsLabelingEngineInterface
     //! called when we're done with rendering
     virtual void exit();
 
-    Q_NOWARN_DEPRECATED_PUSH
     //! return infos about labels at a given (map) position
     //! @deprecated since 2.4 - use takeResults() and methods of QgsLabelingResults
     Q_DECL_DEPRECATED virtual QList<QgsLabelPosition> labelsAtPosition( const QgsPoint& p );
     //! return infos about labels within a given (map) rectangle
     //! @deprecated since 2.4 - use takeResults() and methods of QgsLabelingResults
     Q_DECL_DEPRECATED virtual QList<QgsLabelPosition> labelsWithinRect( const QgsRectangle& r );
-    Q_NOWARN_DEPRECATED_POP
 
     //! Return pointer to recently computed results (in drawLabeling()) and pass the ownership of results to the caller
     //! @note added in 2.4
@@ -856,7 +859,7 @@ class CORE_EXPORT QgsPalLabeling : public QgsLabelingEngineInterface
 
     QgsLabelingResults* mResults;
 };
+Q_NOWARN_DEPRECATED_POP
+
 
 #endif // QGSPALLABELING_H
-
-

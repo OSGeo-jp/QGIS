@@ -515,7 +515,7 @@ bool QgsAttributeTableModel::setData( const QModelIndex &index, const QVariant &
 
   if ( mChangedCellBounds.isNull() )
   {
-    mChangedCellBounds = QRect( index.column(), index.row(), 0, 0 );
+    mChangedCellBounds = QRect( index.column(), index.row(), 0, 1 );
   }
   else
   {

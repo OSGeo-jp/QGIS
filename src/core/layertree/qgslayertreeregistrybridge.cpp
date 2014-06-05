@@ -20,15 +20,17 @@
 #include "qgslayertree.h"
 
 #include "qgsproject.h"
+#include "qgslogger.h"
 
 QgsLayerTreeRegistryBridge::QgsLayerTreeRegistryBridge( QgsLayerTreeGroup *root, QObject *parent )
     : QObject( parent )
     , mRoot( root )
     , mEnabled( true )
+    , mNewLayersVisible( true )
     , mInsertionPointGroup( root )
     , mInsertionPointIndex( 0 )
 {
-  connect( QgsMapLayerRegistry::instance(), SIGNAL( layersAdded( QList<QgsMapLayer*> ) ), this, SLOT( layersAdded( QList<QgsMapLayer*> ) ) );
+  connect( QgsMapLayerRegistry::instance(), SIGNAL( legendLayersAdded( QList<QgsMapLayer*> ) ), this, SLOT( layersAdded( QList<QgsMapLayer*> ) ) );
   connect( QgsMapLayerRegistry::instance(), SIGNAL( layersWillBeRemoved( QStringList ) ), this, SLOT( layersWillBeRemoved( QStringList ) ) );
 
   connect( mRoot, SIGNAL( willRemoveChildren( QgsLayerTreeNode*, int, int ) ), this, SLOT( groupWillRemoveChildren( QgsLayerTreeNode*, int, int ) ) );
@@ -46,10 +48,14 @@ void QgsLayerTreeRegistryBridge::layersAdded( QList<QgsMapLayer*> layers )
   if ( !mEnabled )
     return;
 
+  int i = 0;
   foreach ( QgsMapLayer* layer, layers )
   {
+    QgsLayerTreeLayer* nodeLayer = new QgsLayerTreeLayer( layer );
+    nodeLayer->setVisible( mNewLayersVisible ? Qt::Checked : Qt::Unchecked );
+
     // add new layer to the top
-    QgsLayerTreeLayer* nodeLayer = mInsertionPointGroup->insertLayer( mInsertionPointIndex, layer );
+    mInsertionPointGroup->insertChildNode( mInsertionPointIndex + i++, nodeLayer );
 
     // check whether the layer is marked as embedded
     QString projectFile = QgsProject::instance()->layerIsEmbedded( nodeLayer->layerId() );
@@ -63,6 +69,8 @@ void QgsLayerTreeRegistryBridge::layersAdded( QList<QgsMapLayer*> layers )
 
 void QgsLayerTreeRegistryBridge::layersWillBeRemoved( QStringList layerIds )
 {
+  QgsDebugMsg( QString( "%1 layers will be removed, enabled:%2" ).arg( layerIds.count() ).arg( mEnabled ) );
+
   if ( !mEnabled )
     return;
 
@@ -110,6 +118,8 @@ void QgsLayerTreeRegistryBridge::groupRemovedChildren()
     if ( !mRoot->findLayer( layerId ) )
       toRemove << layerId;
   mLayerIdsForRemoval.clear();
+
+  QgsDebugMsg( QString( "%1 layers will be removed" ).arg( toRemove.count() ) );
 
   QgsMapLayerRegistry::instance()->removeMapLayers( toRemove );
 }

@@ -38,7 +38,7 @@ QgsFieldExpressionWidget::QgsFieldExpressionWidget( QWidget *parent )
 
   mButton = new QToolButton( this );
   mButton->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum );
-  mButton->setIcon( QgsApplication::getThemeIcon( "/mIconExpressionEditorOpen.svg" ) );
+  mButton->setIcon( QgsApplication::getThemeIcon( "/mIconExpression.svg" ) );
 
   layout->addWidget( mCombo );
   layout->addWidget( mButton );
@@ -124,8 +124,19 @@ void QgsFieldExpressionWidget::setField( const QString &fieldName )
   QModelIndex idx = mFieldProxyModel->sourceFieldModel()->indexFromName( fieldName );
   if ( !idx.isValid() )
   {
-    // new expression
-    idx = mFieldProxyModel->sourceFieldModel()->setExpression( fieldName );
+    // try to remove quotes and white spaces
+    QString simpleFieldName = fieldName.trimmed();
+    if ( simpleFieldName.startsWith( '"' ) && simpleFieldName.endsWith( '"' ) )
+    {
+      simpleFieldName.remove( 0, 1 ).chop( 1 );
+      idx = mFieldProxyModel->sourceFieldModel()->indexFromName( simpleFieldName );
+    }
+
+    if ( !idx.isValid() )
+    {
+      // new expression
+      idx = mFieldProxyModel->sourceFieldModel()->setExpression( fieldName );
+    }
   }
   QModelIndex proxyIndex = mFieldProxyModel->mapFromSource( idx );
   mCombo->setCurrentIndex( proxyIndex.row() );

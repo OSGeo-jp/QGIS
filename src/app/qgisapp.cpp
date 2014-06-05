@@ -397,7 +397,7 @@ void QgisApp::emitCustomSrsValidation( QgsCoordinateReferenceSystem &srs )
 void QgisApp::layerTreeViewDoubleClicked( const QModelIndex& index )
 {
   // temporary solution for WMS legend
-  if ( mLayerTreeView->layerTreeModel()->index2symnode( index ) )
+  if ( mLayerTreeView->layerTreeModel()->isIndexSymbologyNode( index ) )
   {
     QModelIndex parent = mLayerTreeView->layerTreeModel()->parent( index );
     QgsLayerTreeNode* node = mLayerTreeView->layerTreeModel()->index2node( parent );
@@ -1670,6 +1670,10 @@ void QgisApp::createStatusBar()
   mProgressBar->setWhatsThis( tr( "Progress bar that displays the status "
                                   "of rendering layers and other time-intensive operations" ) );
   statusBar()->addPermanentWidget( mProgressBar, 1 );
+
+  connect( mMapCanvas, SIGNAL( renderStarting() ), this, SLOT( canvasRefreshStarted() ) );
+  connect( mMapCanvas, SIGNAL( mapCanvasRefreshed() ), this, SLOT( canvasRefreshFinished() ) );
+
   // Bumped the font up one point size since 8 was too
   // small on some platforms. A point size of 9 still provides
   // plenty of display space on 1024x768 resolutions
@@ -2025,8 +2029,12 @@ void QgisApp::setupConnections()
            this, SLOT( legendLayerSelectionChanged() ) );
   connect( mLayerTreeView->layerTreeModel()->rootGroup(), SIGNAL( addedChildren( QgsLayerTreeNode*, int, int ) ),
            this, SLOT( markDirty() ) );
+  connect( mLayerTreeView->layerTreeModel()->rootGroup(), SIGNAL( addedChildren( QgsLayerTreeNode*, int, int ) ),
+           this, SLOT( updateNewLayerInsertionPoint() ) );
   connect( mLayerTreeView->layerTreeModel()->rootGroup(), SIGNAL( removedChildren( QgsLayerTreeNode*, int, int ) ),
            this, SLOT( markDirty() ) );
+  connect( mLayerTreeView->layerTreeModel()->rootGroup(), SIGNAL( removedChildren( QgsLayerTreeNode*, int, int ) ),
+           this, SLOT( updateNewLayerInsertionPoint() ) );
   connect( mLayerTreeView->layerTreeModel()->rootGroup(), SIGNAL( visibilityChanged( QgsLayerTreeNode*, Qt::CheckState ) ),
            this, SLOT( markDirty() ) );
   connect( mLayerTreeView->layerTreeModel()->rootGroup(), SIGNAL( customPropertyChanged( QgsLayerTreeNode*, QString ) ),
@@ -2299,7 +2307,7 @@ void QgisApp::initLayerTreeView()
 
   connect( mLayerTreeView, SIGNAL( doubleClicked( QModelIndex ) ), this, SLOT( layerTreeViewDoubleClicked( QModelIndex ) ) );
   connect( mLayerTreeView, SIGNAL( currentLayerChanged( QgsMapLayer* ) ), this, SLOT( activeLayerChanged( QgsMapLayer* ) ) );
-  connect( mLayerTreeView->selectionModel(), SIGNAL( currentChanged( QModelIndex, QModelIndex ) ), this, SLOT( layerTreeViewCurrentChanged( QModelIndex, QModelIndex ) ) );
+  connect( mLayerTreeView->selectionModel(), SIGNAL( currentChanged( QModelIndex, QModelIndex ) ), this, SLOT( updateNewLayerInsertionPoint() ) );
 
   mLayerTreeDock->setWidget( mLayerTreeView );
   addDockWidget( Qt::LeftDockWidgetArea, mLayerTreeDock );
@@ -2322,13 +2330,12 @@ void QgisApp::initLayerTreeView()
 }
 
 
-void QgisApp::layerTreeViewCurrentChanged( const QModelIndex& current, const QModelIndex& previous )
+void QgisApp::updateNewLayerInsertionPoint()
 {
-  Q_UNUSED( previous );
-
   // defaults
   QgsLayerTreeGroup* parentGroup = mLayerTreeView->layerTreeModel()->rootGroup();
   int index = 0;
+  QModelIndex current = mLayerTreeView->currentIndex();
 
   if ( current.isValid() )
   {
@@ -3131,7 +3138,6 @@ void QgisApp::addDatabaseLayers( QStringList const & layerPathList, QString cons
   }
 
   QgsMapLayerRegistry::instance()->addMapLayers( myList );
-  statusBar()->showMessage( mMapCanvas->extent().toString( 2 ) );
 
   // draw the map
   mMapCanvas->freeze( false );
@@ -3196,11 +3202,6 @@ void QgisApp::addMssqlLayer()
 void QgisApp::addOracleLayer()
 {
 #ifdef HAVE_ORACLE
-  if ( mMapCanvas && mMapCanvas->isDrawing() )
-  {
-    return;
-  }
-
   // show the Oracle dialog
   QDialog *dbs = dynamic_cast<QDialog*>( QgsProviderRegistry::instance()->selectWidget( "oracle", this ) );
   if ( !dbs )
@@ -3333,6 +3334,8 @@ void QgisApp::fileNew( bool thePromptToSaveFlag, bool forceBlank )
 
   QgsProject* prj = QgsProject::instance();
   prj->clear();
+
+  prj->layerTreeRegistryBridge()->setNewLayersVisible( settings.value( "/qgis/new_layers_visible", true ).toBool() );
 
   mLayerTreeCanvasBridge->clear();
 
@@ -5730,10 +5733,6 @@ void QgisApp::addRing()
 
 void QgisApp::fillRing()
 {
-  if ( mMapCanvas && mMapCanvas->isDrawing() )
-  {
-    return;
-  }
   mMapCanvas->setMapTool( mMapTools.mFillRing );
 }
 
@@ -6145,6 +6144,16 @@ void QgisApp::refreshMapCanvas()
   mMapCanvas->clearCache();
   //then refresh
   mMapCanvas->refresh();
+}
+
+void QgisApp::canvasRefreshStarted()
+{
+  showProgress( -1, 0 ); // trick to make progress bar show busy indicator
+}
+
+void QgisApp::canvasRefreshFinished()
+{
+  showProgress( 0, 0 ); // stop the busy indicator
 }
 
 void QgisApp::toggleMapTips()
@@ -7228,6 +7237,8 @@ void QgisApp::showOptionsDialog( QWidget *parent, QString currentPage )
     // set the theme if it changed
     setTheme( optionsDialog->theme() );
 
+    QgsProject::instance()->layerTreeRegistryBridge()->setNewLayersVisible( mySettings.value( "/qgis/new_layers_visible", true ).toBool() );
+
     mMapCanvas->enableAntiAliasing( mySettings.value( "/qgis/enable_anti_aliasing" ).toBool() );
 
     int action = mySettings.value( "/qgis/wheel_action", 2 ).toInt();
@@ -7524,7 +7535,6 @@ QgsVectorLayer* QgisApp::addVectorLayer( QString vectorLayerPath, QString baseNa
       QList<QgsMapLayer *> myList;
       myList << layer;
       QgsMapLayerRegistry::instance()->addMapLayers( myList );
-      statusBar()->showMessage( mMapCanvas->extent().toString( 2 ) );
     }
   }
   else
@@ -7569,8 +7579,6 @@ void QgisApp::addMapLayer( QgsMapLayer *theMapLayer )
     QgsMapLayerRegistry::instance()->addMapLayers( myList );
     // add it to the mapcanvas collection
     // not necessary since adding to registry adds to canvas mMapCanvas->addLayer(theMapLayer);
-
-    statusBar()->showMessage( mMapCanvas->extent().toString( 2 ) );
   }
   else
   {
@@ -8342,6 +8350,23 @@ void QgisApp::showProgress( int theProgress, int theTotalSteps )
     }
     mProgressBar->setMaximum( theTotalSteps );
     mProgressBar->setValue( theProgress );
+
+    if ( mProgressBar->maximum() == 0 )
+    {
+      // for busy indicator (when minimum equals to maximum) the oxygen Qt style (used in KDE)
+      // has some issues and does not start busy indicator animation. This is an ugly fix
+      // that forces creation of a temporary progress bar that somehow resumes the animations.
+      // Caution: looking at the code below may introduce mild pain in stomach.
+      if ( strcmp( QApplication::style()->metaObject()->className(), "Oxygen::Style" ) == 0 )
+      {
+        QProgressBar pb;
+        pb.setAttribute( Qt::WA_DontShowOnScreen ); // no visual annoyance
+        pb.setMaximum( 0 );
+        pb.show();
+        qApp->processEvents();
+      }
+    }
+
   }
 }
 
@@ -9191,8 +9216,6 @@ QgsRasterLayer* QgisApp::addRasterLayerPrivate(
     // draw the map
     mMapCanvas->freeze( false );
     mMapCanvas->refresh();
-    //update status
-    statusBar()->showMessage( mMapCanvas->extent().toString( 2 ) );
     // Let render() do its own cursor management
     //    QApplication::restoreOverrideCursor();
   }
@@ -9314,7 +9337,6 @@ bool QgisApp::addRasterLayers( QStringList const &theFileNameQStringList, bool g
     }
   }
 
-  statusBar()->showMessage( mMapCanvas->extent().toString( 2 ) );
   mMapCanvas->freeze( false );
   mMapCanvas->refresh();
 
@@ -9546,6 +9568,20 @@ void QgisApp::projectChanged( const QDomDocument &doc )
 
 void QgisApp::writeProject( QDomDocument &doc )
 {
+  // QGIS server does not use QgsProject for loading of QGIS project.
+  // In order to allow reading of new projects, let's also write the original <legend> tag to the project.
+  // Ideally the server should be ported to new layer tree implementation, but that requires
+  // non-trivial changes to the server components.
+  // The <legend> tag is ignored by QGIS application in >= 2.4 and this way also the new project files
+  // can be opened in older versions of QGIS without loosing information about layer groups.
+
+  QgsLayerTreeNode* clonedRoot = QgsProject::instance()->layerTreeRoot()->clone();
+  QgsLayerTreeUtils::removeChildrenOfEmbeddedGroups( QgsLayerTree::toGroup( clonedRoot ) );
+  QDomElement oldLegendElem = QgsLayerTreeUtils::writeOldLegend( doc, QgsLayerTree::toGroup( clonedRoot ),
+                              mLayerTreeCanvasBridge->hasCustomLayerOrder(), mLayerTreeCanvasBridge->customLayerOrder() );
+  delete clonedRoot;
+  doc.firstChildElement( "qgis" ).appendChild( oldLegendElem );
+
   projectChanged( doc );
 }
 
