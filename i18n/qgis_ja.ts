@@ -8655,7 +8655,7 @@ Would you like to specify path (GISBASE) to your GRASS installation?</source>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodel.cpp" line="200"/>
         <source>Data description</source>
-        <translation>データ記述</translation>
+        <translation>データ説明</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassmodel.cpp" line="209"/>
@@ -14601,7 +14601,7 @@ Parser error:
         <location filename="../src/ui/qgsattributeloadfrommap.ui" line="29"/>
         <location filename="../src/ui/qgsattributeloadfrommap.ui" line="45"/>
         <source>Description</source>
-        <translation>記述</translation>
+        <translation>説明</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsattributeloadfrommap.ui" line="40"/>
@@ -21466,7 +21466,7 @@ and current file is [%3]</source>
     <message>
         <location filename="../src/app/qgscustomization.cpp" line="55"/>
         <source>Description</source>
-        <translation>記述</translation>
+        <translation>説明</translation>
     </message>
     <message>
         <location filename="../src/app/qgscustomization.cpp" line="226"/>
@@ -26329,7 +26329,7 @@ Please reselect a valid file.</source>
     <message>
         <location filename="../src/providers/gdal/qgsgdalprovider.cpp" line="241"/>
         <source>Dataset Description</source>
-        <translation>データセットについての記述</translation>
+        <translation>データセットについての説明</translation>
     </message>
     <message>
         <location filename="../src/providers/gdal/qgsgdalprovider.cpp" line="262"/>
@@ -43172,7 +43172,7 @@ Proceed?</source>
     <message>
         <location filename="../src/ui/qgsprojectpropertiesbase.ui" line="367"/>
         <source>Descriptive project name</source>
-        <translation>プロジェクト名称を記述</translation>
+        <translation>記述的なプロジェクト名</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsprojectpropertiesbase.ui" line="383"/>
@@ -44455,7 +44455,7 @@ Click on help button to get valid creation options for this format.</source>
     <message>
         <location filename="../src/app/qgsrasterlayerproperties.cpp" line="206"/>
         <source>Description</source>
-        <translation>記述</translation>
+        <translation>説明</translation>
     </message>
     <message>
         <location filename="../src/app/qgsrasterlayerproperties.cpp" line="1244"/>
@@ -46187,7 +46187,7 @@ standard deviation ×</source>
     <message>
         <location filename="../src/ui/qgsrendererrulepropsdialogbase.ui" line="69"/>
         <source>Description</source>
-        <translation>記述</translation>
+        <translation>説明</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsrendererrulepropsdialogbase.ui" line="81"/>
@@ -51948,7 +51948,7 @@ Error was:%2</source>
     <message>
         <location filename="../src/ui/qgsvectorlayerpropertiesbase.ui" line="1250"/>
         <source>Description</source>
-        <translation>記述</translation>
+        <translation>説明</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsvectorlayerpropertiesbase.ui" line="1292"/>
@@ -52904,7 +52904,7 @@ Error was:%2</source>
     <message>
         <location filename="../src/ui/qgswmssourceselectbase.ui" line="425"/>
         <source>Description</source>
-        <translation>記述</translation>
+        <translation>説明</translation>
     </message>
     <message>
         <location filename="../src/ui/qgswmssourceselectbase.ui" line="438"/>
