@@ -88,7 +88,7 @@
         <location filename="../src/plugins/coordinate_capture/coordinatecapture.cpp" line="137"/>
         <source>Coordinate in map canvas coordinate reference system (lat,lon or east,north)</source>
         <translatorcomment>経度,緯度の順は実際の表示順に合わせました</translatorcomment>
-        <translation>マップキャンバスが参照する座標系の座標(経度,緯度または東,北)</translation>
+        <translation>マップキャンバスの座標参照系の座標(経度,緯度または東,北)</translation>
     </message>
     <message>
         <location filename="../src/plugins/coordinate_capture/coordinatecapture.cpp" line="140"/>
@@ -2049,7 +2049,7 @@ This may cause unexpected results.</source>
     </message>
     <message>
         <source>Currently QGIS doesn&apos;t allow simultaneous access from different threads to the same datasource. Make sure your layer&apos;s attribute tables are closed. Continue?</source>
-        <translation>現在のQGISは異なるスレッドから同じデータソースへの同時アクセスを許していません.あなたのレイヤ属性テーブルが閉じられていることを確認してください.継続しますか?</translation>
+        <translation>現在のQGISは異なるスレッドから同じデータソースへの同時アクセスを許していません.レイヤ属性テーブルが閉じられていることを確認してください.継続しますか?</translation>
     </message>
     <message>
         <source>Sum Line Lengths In Polyons</source>
@@ -5038,7 +5038,7 @@ Would you like to add the new layer to the TOC?</source>
     </message>
     <message>
         <source>Currently QGIS doesn&apos;t allow simultaneous access from                                  different threads to the same datasource. Make sure your layer&apos;s                                  attribute tables are closed. Continue?</source>
-        <translation>現在のQGISは異なるスレッドから同じデータソースへの同時アクセスを許していません.あなたのレイヤ属性テーブルが閉じられていることを確認してください.継続しますか?</translation>
+        <translation>現在のQGISは異なるスレッドから同じデータソースへの同時アクセスを許していません.レイヤ属性テーブルが閉じられていることを確認してください.継続しますか?</translation>
     </message>
     <message>
         <source>Unable to delete incomplete shapefile.</source>
@@ -6001,7 +6001,7 @@ GEOS空間演算エラー:1個またはそれ以上の数の地物のジオメ�
     <message>
         <location filename="../src/ui/qgisapp.ui" line="2181"/>
         <source>Save As Layer Definition File...</source>
-        <translation>レイヤ定義ファイルの保存....</translation>
+        <translation>レイヤ定義ファイルの保存...</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="2192"/>
@@ -6466,7 +6466,7 @@ Shift+クリックで非表示
     <message>
         <location filename="../src/ui/qgisapp.ui" line="1087"/>
         <source>New Bookmark...</source>
-        <translation>新しいブックマーク....</translation>
+        <translation>新しいブックマーク...</translation>
     </message>
     <message>
         <location filename="../src/ui/qgisapp.ui" line="1090"/>
@@ -6968,7 +6968,7 @@ Shift+クリックで非表示
     </message>
     <message>
         <source>Saved to %s</source>
-        <translation>%　への保存</translation>
+        <translation>%sへの保存</translation>
     </message>
     <message>
         <source>File %s exists. Overwrite?</source>
@@ -7406,7 +7406,7 @@ Shift+クリックで非表示
         <source>Unable to save edits. Reason:
  %s</source>
         <translation>編集結果を保存できませんでした.理由:
-%1</translation>
+ %s</translation>
     </message>
     <message>
         <source>This model can&apos;t be saved in its                                      original location (probably you do not                                      have permission to do it). Please, use                                      the &apos;Save as...&apos; option.</source>
@@ -12699,7 +12699,7 @@ Please contact the developers.
     <message>
         <location filename="../src/app/qgisapp.cpp" line="6826"/>
         <source>Set scale visibility for selected layers</source>
-        <translation>選択レイヤが表示されるスケールを設定ｓて下さい</translation>
+        <translation>選択レイヤが表示されるスケールを設定して下さい</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="7433"/>
@@ -13405,7 +13405,7 @@ Error: %1</source>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="6098"/>
         <source>Cannot parse style: %1:%2:%3</source>
-        <translation>スタイルのペーストができません:%1:%2:%3</translation>
+        <translation>スタイルを解析できません: %1:%2:%3</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="6110"/>
@@ -13440,7 +13440,7 @@ Error: %1</source>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="9776"/>
         <source>The request &apos;%1&apos; timed out. Any data received is likely incomplete.</source>
-        <translation>&apos;%1&apos; のリクエストがタイムアウトしました.受信された各データは不完全でしょう.</translation>
+        <translation>&apos;%1&apos; のリクエストがタイムアウトしました.受信されたデータは不完全でしょう.</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="9777"/>
@@ -13450,7 +13450,7 @@ Error: %1</source>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="9777"/>
         <source>A network request timed out, any data received is likely incomplete.</source>
-        <translation>ネットワークリクエストがタイムアウトしました,受信した各データはおそらく不完全でしょう.</translation>
+        <translation>ネットワークリクエストがタイムアウトしました,受信したデータはおそらく不完全でしょう.</translation>
     </message>
     <message>
         <location filename="../src/app/qgisapp.cpp" line="645"/>
@@ -13951,7 +13951,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/app/qgsapplayertreeviewmenuprovider.cpp" line="88"/>
         <source>Set &amp;Project CRS from Layer</source>
-        <translation>レイヤのCRSをプロジェクトに設定する(&amp;p)</translation>
+        <translation>レイヤのCRSをプロジェクトに設定する(&amp;P)</translation>
     </message>
     <message>
         <location filename="../src/app/qgsapplayertreeviewmenuprovider.cpp" line="101"/>
@@ -13968,7 +13968,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/app/qgsapplayertreeviewmenuprovider.cpp" line="128"/>
         <location filename="../src/app/qgsapplayertreeviewmenuprovider.cpp" line="140"/>
         <source>Save As Layer Definition File...</source>
-        <translation>レイヤ定義ファイルとして保存....</translation>
+        <translation>レイヤ定義ファイルとして保存...</translation>
     </message>
     <message>
         <location filename="../src/app/qgsapplayertreeviewmenuprovider.cpp" line="131"/>
@@ -14095,7 +14095,7 @@ SVG検索パス	%8
     <message>
         <location filename="../src/core/composer/qgsatlascomposition.cpp" line="370"/>
         <source>Atlas feature %1 of %2</source>
-        <translation>の地図帳地物 %2 中 %1 </translation>
+        <translation>地図帳地物 %2のうち%1</translation>
     </message>
     <message>
         <location filename="../src/core/composer/qgsatlascomposition.cpp" line="730"/>
@@ -14124,7 +14124,7 @@ SVG検索パス	%8
 Parser error:
 %2</source>
         <translation>ファイル名パターンを &apos;%1&apos; として設定できませんでした.
-解析エラーr:
+解析エラー:
 %2</translation>
     </message>
     <message>
@@ -14721,7 +14721,7 @@ Parser error:
     <message>
         <location filename="../src/app/qgsattributetabledialog.cpp" line="231"/>
         <source>Update Filtered</source>
-        <translation>アップデートがフィルターされました</translation>
+        <translation>フィルタされたものを更新</translation>
     </message>
     <message>
         <location filename="../src/app/qgsattributetabledialog.cpp" line="359"/>
@@ -17755,7 +17755,7 @@ Please try a lower resolution or a smaller papersize</source>
     <message>
         <location filename="../src/app/composer/qgscomposerhtmlwidget.cpp" line="132"/>
         <source>Use smart breaks changed</source>
-        <translation>変更されたスーマートブレークの使用</translation>
+        <translation>スマートブレークの使用が変更されました</translation>
     </message>
 </context>
 <context>
@@ -17803,7 +17803,7 @@ Please try a lower resolution or a smaller papersize</source>
     <message>
         <location filename="../src/ui/qgscomposerhtmlwidgetbase.ui" line="123"/>
         <source>Use smart page breaks</source>
-        <translation>スマートページブレークの利用</translation>
+        <translation>スマートページブレークの使用</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposerhtmlwidgetbase.ui" line="138"/>
@@ -17843,7 +17843,7 @@ Please try a lower resolution or a smaller papersize</source>
     <message>
         <location filename="../src/app/composer/qgscomposeritemwidget.cpp" line="226"/>
         <source>Item frame toggled</source>
-        <translation>アイテムフレームの有効無効が切替れれました</translation>
+        <translation>アイテムフレームの有効無効が切替わりました</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposeritemwidget.cpp" line="132"/>
@@ -19109,7 +19109,7 @@ Please try a lower resolution or a smaller papersize</source>
     <message>
         <location filename="../src/ui/qgscomposermapwidgetbase.ui" line="264"/>
         <source>Controlled by atlas</source>
-        <translation>地図帳に制御されました</translation>
+        <translation>地図帳による制御を有効にする</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposermapwidgetbase.ui" line="282"/>
@@ -19315,7 +19315,7 @@ Please try a lower resolution or a smaller papersize</source>
     <message>
         <location filename="../src/ui/qgscomposermapwidgetbase.ui" line="247"/>
         <source>Set to map canvas extent</source>
-        <translation>地図キャンバスの領域指定</translation>
+        <translation>地図キャンバスの領域を指定</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposermapwidgetbase.ui" line="158"/>
@@ -19421,7 +19421,7 @@ Please try a lower resolution or a smaller papersize</source>
     <message>
         <location filename="../src/app/composer/qgscomposerpicturewidget.cpp" line="140"/>
         <source>Expression based image path</source>
-        <translation>式に基ずくイメージパス</translation>
+        <translation>式に基づくイメージパス</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposerpicturewidget.cpp" line="156"/>
@@ -20321,7 +20321,7 @@ Please try a lower resolution or a smaller papersize</source>
     <message>
         <location filename="../src/ui/qgscomposertablewidgetbase.ui" line="270"/>
         <source>Follow column alignment</source>
-        <translation>付き従うカラムの配置</translation>
+        <translation>カラムの配置に従う</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposertablewidgetbase.ui" line="275"/>
@@ -22035,7 +22035,7 @@ and current file is [%3]</source>
     <message>
         <location filename="../src/ui/qgsdbsourceselectbase.ui" line="134"/>
         <source>Hold dialog open</source>
-        <translation>ホールドダイアログオープン</translation>
+        <translation>ダイアログを開いたままにする</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsdbsourceselectbase.ui" line="143"/>
@@ -24640,7 +24640,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/app/qgsfieldcalculator.cpp" line="91"/>
         <source>Only update %1 selected features</source>
-        <translation>選択されている地物 %1 のみ更新する</translation>
+        <translation>選択されている%1個の地物のみ更新する</translation>
     </message>
     <message>
         <location filename="../src/app/qgsfieldcalculator.cpp" line="126"/>
@@ -25382,7 +25382,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/app/gps/qgsgpsinformationwidget.cpp" line="486"/>
         <source>Disconnected...</source>
-        <translation>切断しました....</translation>
+        <translation>切断しました...</translation>
     </message>
     <message>
         <location filename="../src/app/gps/qgsgpsinformationwidget.cpp" line="488"/>
@@ -34272,7 +34272,7 @@ not displayed</source>
     <message>
         <location filename="../src/ui/qgsmapunitscaledialog.ui" line="54"/>
         <source>Scale only within the following map unit scale range:</source>
-        <translation>以下の地図単位がスケールの範囲にあるときのみスケールする:</translation>
+        <translation>以下の地図単位のスケールの範囲にあるときのみスケールする:</translation>
     </message>
 </context>
 <context>
@@ -46481,7 +46481,7 @@ standard deviation ×</source>
     <message>
         <location filename="../src/ui/qgsrulebasedrendererv2widget.ui" line="117"/>
         <source>Count features</source>
-        <translation>地物カウント</translation>
+        <translation>地物を数える</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsrulebasedrendererv2widget.ui" line="67"/>
