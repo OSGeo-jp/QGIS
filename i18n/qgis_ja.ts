@@ -5038,7 +5038,7 @@ Would you like to add the new layer to the TOC?</source>
     </message>
     <message>
         <source>Currently QGIS doesn&apos;t allow simultaneous access from                                  different threads to the same datasource. Make sure your layer&apos;s                                  attribute tables are closed. Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>現行の QGIS は異なるスレッドからの同時アクセスを                                  同一のデータソースに許していません.あなたのレイヤの属性テーブルが                                  閉じられているかどうか確認して下さい.続けますか?</translation>
     </message>
     <message>
         <source>Unable to delete incomplete shapefile.</source>
@@ -31241,7 +31241,8 @@ This may be a problem in your network connection or at the WMS server.</source>
         <location filename="../src/gui/symbology-ng/qgsinvertedpolygonrendererwidget.cpp" line="46"/>
         <source>The inverted polygon renderer only applies to polygon and multipolygon layers. 
 &apos;%1&apos; is not a polygon layer and then cannot be displayed</source>
-        <translation type="unfinished"></translation>
+        <translation>逆転ポリゴンレンダラはポリゴンとマルチポリゴンレイヤのみで利用できます. 
+&apos;%1&apos; はポリゴンレイヤではないので表示できません</translation>
     </message>
 </context>
 <context>
@@ -50254,7 +50255,7 @@ There was a problem with your symbol database.</source>
     <message>
         <location filename="../src/ui/qgssymbolv2selectordialogbase.ui" line="155"/>
         <source>Save symbol</source>
-        <translation type="unfinished">シンボルの保存</translation>
+        <translation>シンボルの保存</translation>
     </message>
     <message>
         <location filename="../src/ui/qgssymbolv2selectordialogbase.ui" line="158"/>
@@ -50905,7 +50906,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/gui/qgsunitselectionwidget.cpp" line="78"/>
         <source>Adjust scaling range</source>
-        <translation type="unfinished"></translation>
+        <translation>スケールの幅を調整して下さい</translation>
     </message>
 </context>
 <context>
