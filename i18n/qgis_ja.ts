@@ -4963,9 +4963,7 @@ JPEG,JPEG2000,MrSID,ECW,のようなカラー索引をサポートしないデ�
         <source>Currently QGIS doesn&apos;t allow simultaneous access from 
                                  different threads to the same datasource. Make sure your layer&apos;s 
                                  attribute tables are closed. Continue?</source>
-        <translation type="unfinished">現行の QGIS は異なるスレッドからの同時アクセスを 
-                                 同一のデータソースに許していません.あなたのレイヤの属性テーブルが 
-                                 閉じられているかどうか確認して下さい.続けますか?</translation>
+        <translation>現在のQGISは異なるスレッドから同じデータソースへの同時アクセスを許していません.レイヤ属性テーブルが閉じられていることを確認してください.継続しますか?</translation>
     </message>
     <message>
         <source>Created output shapefile:
@@ -7367,8 +7365,7 @@ Shift+クリックで非表示
     <message>
         <source>Model doesn&apos;t contains any algorithms and/or 
                              parameters and can&apos;t be executed</source>
-        <translation type="unfinished">モデルにはアルゴリズムと/または
-                            パラメータが無くて実行できません</translation>
+        <translation>モデルにはアルゴリズムまたはパラメータが無いので実行できません</translation>
     </message>
     <message>
         <source>Model doesn&apos;t contains any algorithms and/or                              parameters and can&apos;t be executed</source>
@@ -7423,18 +7420,15 @@ Shift+クリックで非表示
                                      original location (probably you do not 
                                      have permission to do it). Please, use 
                                      the &apos;Save as...&apos; option.</source>
-        <translation type="unfinished">このモデルはオリジナルの場所に 
-                                     保存できません (多分あなたが 
-                                     保存の権限を持っていません). ’名前をつけて保存&apos;オプション 
-                                     を利用して下さい.</translation>
+        <translation>このモデルはオリジナルの場所に保存できません (多分あなたが保存の権限を持っていません). ’名前をつけて保存&apos;オプションを利用して下さい.</translation>
     </message>
     <message>
         <source>The selected model could not be loaded.
 
                                  Wrong line: %s</source>
-        <translation type="unfinished">指定モデルはロードできませんでした.
+        <translation>選択されたモデルをロードできませんでした.
 
-                                 不正な行: %1</translation>
+不正な行: %s</translation>
     </message>
     <message>
         <source>Unable to save edits. Reason:
@@ -21954,7 +21948,7 @@ and current file is [%3]</source>
         <location filename="../src/gui/qgsdatumtransformdialog.cpp" line="242"/>
         <location filename="../src/gui/qgsdatumtransformdialog.cpp" line="244"/>
         <source>unknown</source>
-        <translation type="unfinished">不明</translation>
+        <translation>不明</translation>
     </message>
 </context>
 <context>
@@ -21987,17 +21981,17 @@ and current file is [%3]</source>
     <message>
         <location filename="../src/ui/qgsdatumtransformdialogbase.ui" line="70"/>
         <source>Destination CRS</source>
-        <translation type="unfinished">変換先CRS</translation>
+        <translation>変換先CRS</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsdatumtransformdialogbase.ui" line="91"/>
         <source>Source CRS</source>
-        <translation type="unfinished">変換前CRS</translation>
+        <translation>変換前CRS</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsdatumtransformdialogbase.ui" line="108"/>
         <source>Layer</source>
-        <translation type="unfinished">レイヤ</translation>
+        <translation>レイヤ</translation>
     </message>
 </context>
 <context>
@@ -30949,12 +30943,12 @@ This may be a problem in your network connection or at the WMS server.</source>
     <message>
         <location filename="../src/app/qgsidentifyresultsdialog.cpp" line="660"/>
         <source>Table</source>
-        <translation type="unfinished">テーブル</translation>
+        <translation>テーブル</translation>
     </message>
     <message>
         <location filename="../src/app/qgsidentifyresultsdialog.cpp" line="661"/>
         <source>Graph</source>
-        <translation type="unfinished">グラフ</translation>
+        <translation>グラフ</translation>
     </message>
     <message>
         <location filename="../src/app/qgsidentifyresultsdialog.cpp" line="695"/>
@@ -31291,7 +31285,7 @@ This may be a problem in your network connection or at the WMS server.</source>
     <message>
         <location filename="../src/ui/qgsinvertedpolygonrendererwidgetbase.ui" line="37"/>
         <source>Merge polygons before rendering (slow)</source>
-        <translation type="unfinished"></translation>
+        <translation>レンダリングの前にポリゴンをマージする (遅い)</translation>
     </message>
 </context>
 <context>
@@ -42936,7 +42930,7 @@ Proceed?</source>
     <message>
         <location filename="../src/ui/qgsprojectpropertiesbase.ui" line="1765"/>
         <source>Quality for JPEG images ( 10 : smaller image - 100 : best quality )</source>
-        <translation type="unfinished"></translation>
+        <translation>JPEG画像の品質 (10 : 小さい画像 - 100 : 最高品質)</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsprojectpropertiesbase.ui" line="1799"/>
@@ -51013,7 +51007,7 @@ Error was:%2</source>
     <message>
         <location filename="../src/gui/editorwidgets/qgsvaluerelationconfigdlg.cpp" line="65"/>
         <source>Edit filter expression</source>
-        <translation type="unfinished">フィルタ条件式の編集</translation>
+        <translation>フィルタ条件式の編集</translation>
     </message>
 </context>
 <context>
@@ -51504,22 +51498,22 @@ Error was:%2</source>
     <message>
         <location filename="../src/core/qgsvectorlayereditbuffer.cpp" line="332"/>
         <source>Provider: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>プロバイダ: %1</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorlayereditbuffer.cpp" line="333"/>
         <source>Storage: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ストレージ: %1</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorlayereditbuffer.cpp" line="335"/>
         <source>expected field</source>
-        <translation type="unfinished"></translation>
+        <translation>期待されたフィールド</translation>
     </message>
     <message>
         <location filename="../src/core/qgsvectorlayereditbuffer.cpp" line="342"/>
         <source>retrieved field</source>
-        <translation type="unfinished"></translation>
+        <translation>取得されたフィールド</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/core/qgsvectorlayereditbuffer.cpp" line="362"/>
