@@ -21676,7 +21676,7 @@ and current file is [%3]</source>
     <message>
         <location filename="../src/gui/qgsdatadefinedbutton.cpp" line="215"/>
         <source>Data defined override</source>
-        <translation>定義された上書きデータ</translation>
+        <translation>データで定義されたプロパティ(上書き)</translation>
     </message>
     <message>
         <location filename="../src/gui/qgsdatadefinedbutton.cpp" line="238"/>
@@ -21712,7 +21712,7 @@ and current file is [%3]</source>
     <message>
         <location filename="../src/gui/qgsdatadefinedbutton.cpp" line="468"/>
         <source>&lt;b&gt;&lt;u&gt;Data defined override&lt;/u&gt;&lt;/b&gt;&lt;br&gt;</source>
-        <translation>&lt;b&gt;&lt;u&gt;定義された上書きデータ&lt;/u&gt;&lt;/b&gt;&lt;br&gt;</translation>
+        <translation>&lt;b&gt;&lt;u&gt;データで定義されたプロパティ(上書き)&lt;/u&gt;&lt;/b&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/gui/qgsdatadefinedbutton.cpp" line="474"/>
@@ -23673,7 +23673,7 @@ Leave empty to automatically apply the maximum value.</source>
     <message>
         <location filename="../src/ui/qgsdiagrampropertiesbase.ui" line="592"/>
         <source>Data defined position</source>
-        <translation>定義された位置のデータ</translation>
+        <translation>データで定義された位置</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsdiagrampropertiesbase.ui" line="610"/>
@@ -31425,12 +31425,12 @@ This may be a problem in your network connection or at the WMS server.</source>
     <message>
         <location filename="../src/ui/qgslabeldialogbase.ui" line="703"/>
         <source>Data defined buffer</source>
-        <translation>定義されたバッファのデータ</translation>
+        <translation>データで定義されたバッファ</translation>
     </message>
     <message>
         <location filename="../src/ui/qgslabeldialogbase.ui" line="763"/>
         <source>Data defined position</source>
-        <translation>定義された位置のデータ</translation>
+        <translation>データで定義された位置</translation>
     </message>
     <message>
         <location filename="../src/ui/qgslabeldialogbase.ui" line="215"/>
@@ -38295,7 +38295,7 @@ Always network: always load from network and do not check if the cache has a val
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="1203"/>
         <source>Use custom variables (restart required - include separators)</source>
-        <translation>カスタム変数の利用(再起動が必要 - 区切り文字を含む)</translation>
+        <translation>カスタム変数を用いる(再起動が必要 - 区切り文字を含む)</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="1320"/>
@@ -48268,7 +48268,7 @@ but implies better performance thereafter.</source>
         <source>%n selected geometries</source>
         <comment>selected geometries</comment>
         <translation>
-            <numerusform>%n選択されたジオメトリ</numerusform>
+            <numerusform>%n個の選択されたジオメトリ</numerusform>
         </translation>
     </message>
     <message>
