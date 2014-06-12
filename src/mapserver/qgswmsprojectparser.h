@@ -55,6 +55,7 @@ class QgsWMSProjectParser: public QgsWMSConfigParser
 
     double maxWidth() const;
     double maxHeight() const;
+    double imageQuality() const;
 
     //printing
     QgsComposition* initComposition( const QString& composerTemplate, QgsMapRenderer* mapRenderer, QList< QgsComposerMap*>& mapList, QList< QgsComposerLabel* >& labelList, QList<const QgsComposerHtml *>& htmlFrameList ) const;
@@ -96,6 +97,9 @@ class QgsWMSProjectParser: public QgsWMSConfigParser
 
     /**Draw text annotation items from the QGIS projectfile*/
     void drawOverlays( QPainter* p, int dpi, int width, int height ) const;
+
+    /**Load PAL engine settings from projectfile*/
+    void loadLabelSettings( QgsLabelingEngineInterface* lbl ) const;
 
     int nLayers() const;
 

@@ -152,7 +152,7 @@ void QgsMapCanvasRendererSync::onCrsTransformR2C()
 
 void QgsMapCanvasRendererSync::onDestCrsC2R()
 {
-  mRenderer->setDestinationCrs( mCanvas->mapSettings().destinationCrs() );
+  mRenderer->setDestinationCrs( mCanvas->mapSettings().destinationCrs(), true, false );
 }
 
 void QgsMapCanvasRendererSync::onDestCrsR2C()
@@ -479,6 +479,8 @@ void QgsMapCanvas::setCrsTransformEnabled( bool enabled )
     return;
 
   mSettings.setCrsTransformEnabled( enabled );
+
+  updateDatumTransformEntries();
 
   refresh();
 
@@ -1555,11 +1557,18 @@ void QgsMapCanvas::connectNotify( const char * signal )
 
 void QgsMapCanvas::updateDatumTransformEntries()
 {
+  if ( !mSettings.hasCrsTransformEnabled() )
+    return;
+
   QString destAuthId = mSettings.destinationCrs().authid();
   foreach ( QString layerID, mSettings.layers() )
   {
     QgsMapLayer* layer = QgsMapLayerRegistry::instance()->mapLayer( layerID );
     if ( !layer )
+      continue;
+
+    QgsVectorLayer *vl = qobject_cast<QgsVectorLayer *>( layer );
+    if ( vl && vl->geometryType() == QGis::NoGeometry )
       continue;
 
     // if there are more options, ask the user which datum transform to use

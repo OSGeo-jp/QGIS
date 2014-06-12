@@ -45,7 +45,7 @@ exps = [(r"\*(.*?)\*", r"<i>\1</i>"),
 
 def getHtmlFromRstFile(rst):
     if not os.path.exists(rst):
-        return ''
+        return None
     with open(rst) as f:
         lines = f.readlines()
     s = "".join(lines)
@@ -57,8 +57,11 @@ def getHtmlFromRstFile(rst):
 def getHtmlFromHelpFile(alg, helpFile):
     if not os.path.exists(helpFile):
         return None
-    with open(helpFile) as f:    
-        descriptions = json.load(f)
+    try:
+        with open(helpFile) as f:    
+            descriptions = json.load(f)
+    except:
+        return None
     s = '<html><body><h2>Algorithm description</h2>\n'
     s += '<p>' + getDescription(ALG_DESC, descriptions) + '</p>\n'
     s += '<h2>Input parameters</h2>\n'

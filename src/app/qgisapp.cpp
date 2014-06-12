@@ -2305,6 +2305,8 @@ void QgisApp::initLayerTreeView()
   mLayerTreeView->setModel( model );
   mLayerTreeView->setMenuProvider( new QgsAppLayerTreeViewMenuProvider( mLayerTreeView, mMapCanvas ) );
 
+  setupLayerTreeViewFromSettings();
+
   connect( mLayerTreeView, SIGNAL( doubleClicked( QModelIndex ) ), this, SLOT( layerTreeViewDoubleClicked( QModelIndex ) ) );
   connect( mLayerTreeView, SIGNAL( currentLayerChanged( QgsMapLayer* ) ), this, SLOT( activeLayerChanged( QgsMapLayer* ) ) );
   connect( mLayerTreeView->selectionModel(), SIGNAL( currentChanged( QModelIndex, QModelIndex ) ), this, SLOT( updateNewLayerInsertionPoint() ) );
@@ -2315,6 +2317,10 @@ void QgisApp::initLayerTreeView()
   mLayerTreeCanvasBridge = new QgsLayerTreeMapCanvasBridge( QgsProject::instance()->layerTreeRoot(), mMapCanvas, this );
   connect( QgsProject::instance(), SIGNAL( writeProject( QDomDocument& ) ), mLayerTreeCanvasBridge, SLOT( writeProject( QDomDocument& ) ) );
   connect( QgsProject::instance(), SIGNAL( readProject( QDomDocument ) ), mLayerTreeCanvasBridge, SLOT( readProject( QDomDocument ) ) );
+
+  bool otfTransformAutoEnable = QSettings().value( "/Projections/otfTransformAutoEnable", true ).toBool();
+  mLayerTreeCanvasBridge->setAutoEnableCrsTransform( otfTransformAutoEnable );
+  mLayerTreeCanvasBridge->setAutoSetupOnFirstLayer( otfTransformAutoEnable );
 
   mMapLayerOrder = new QgsCustomLayerOrderWidget( mLayerTreeCanvasBridge, this );
   mMapLayerOrder->setObjectName( "theMapLayerOrder" );
@@ -2327,6 +2333,13 @@ void QgisApp::initLayerTreeView()
   mLayerOrderDock->setWidget( mMapLayerOrder );
   addDockWidget( Qt::LeftDockWidgetArea, mLayerOrderDock );
   mLayerOrderDock->hide();
+}
+
+void QgisApp::setupLayerTreeViewFromSettings()
+{
+  QSettings s;
+
+  mLayerTreeView->layerTreeModel()->setFlag( QgsLayerTreeModel::ShowRasterPreviewIcon, s.value( "/qgis/createRasterLegendIcons", false ).toBool() );
 }
 
 
@@ -7239,6 +7252,8 @@ void QgisApp::showOptionsDialog( QWidget *parent, QString currentPage )
 
     QgsProject::instance()->layerTreeRegistryBridge()->setNewLayersVisible( mySettings.value( "/qgis/new_layers_visible", true ).toBool() );
 
+    setupLayerTreeViewFromSettings();
+
     mMapCanvas->enableAntiAliasing( mySettings.value( "/qgis/enable_anti_aliasing" ).toBool() );
 
     int action = mySettings.value( "/qgis/wheel_action", 2 ).toInt();
@@ -7275,6 +7290,10 @@ void QgisApp::showOptionsDialog( QWidget *parent, QString currentPage )
     qobject_cast<QgsMeasureTool*>( mMapTools.mMeasureDist )->updateSettings();
     qobject_cast<QgsMeasureTool*>( mMapTools.mMeasureArea )->updateSettings();
     qobject_cast<QgsMapToolMeasureAngle*>( mMapTools.mMeasureAngle )->updateSettings();
+
+    bool otfTransformAutoEnable = mySettings.value( "/Projections/otfTransformAutoEnable", true ).toBool();
+    mLayerTreeCanvasBridge->setAutoEnableCrsTransform( otfTransformAutoEnable );
+    mLayerTreeCanvasBridge->setAutoSetupOnFirstLayer( otfTransformAutoEnable );
   }
 
   delete optionsDialog;
@@ -9590,11 +9609,18 @@ void QgisApp::readProject( const QDomDocument &doc )
   projectChanged( doc );
 
   // force update of canvas, without automatic changes to extent and OTF projections
+  bool autoEnableCrsTransform = mLayerTreeCanvasBridge->autoEnableCrsTransform();
+  bool autoSetupOnFirstLayer = mLayerTreeCanvasBridge->autoSetupOnFirstLayer();
   mLayerTreeCanvasBridge->setAutoEnableCrsTransform( false );
   mLayerTreeCanvasBridge->setAutoSetupOnFirstLayer( false );
+
   mLayerTreeCanvasBridge->setCanvasLayers();
-  mLayerTreeCanvasBridge->setAutoEnableCrsTransform( true );
-  mLayerTreeCanvasBridge->setAutoSetupOnFirstLayer( true );
+
+  if ( autoEnableCrsTransform )
+    mLayerTreeCanvasBridge->setAutoEnableCrsTransform( true );
+
+  if ( autoSetupOnFirstLayer )
+    mLayerTreeCanvasBridge->setAutoSetupOnFirstLayer( true );
 }
 
 void QgisApp::showLayerProperties( QgsMapLayer *ml )
