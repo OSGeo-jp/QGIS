@@ -205,8 +205,8 @@ class ModelerDialog(QDialog, Ui_DlgModeler):
         # TODO: enable alg cloning without saving to file
         if len(self.alg.algs) == 0:
             QMessageBox.warning(self, self.tr('Empty model'),
-                    self.tr("Model doesn't contains any algorithms and/or \
-                             parameters and can't be executed"))
+                    self.tr("Model doesn't contains any algorithms and/or "
+                            "parameters and can't be executed"))
             return
 
         if self.alg.descriptionFile is None:
@@ -296,10 +296,10 @@ class ModelerDialog(QDialog, Ui_DlgModeler):
                             % unicode(sys.exc_info()[1]))
                 else:
                     QMessageBox.warning(self, self.tr("Can't save model"),
-                            self.tr("This model can't be saved in its \
-                                     original location (probably you do not \
-                                     have permission to do it). Please, use \
-                                     the 'Save as...' option."))
+                            self.tr("This model can't be saved in its "
+                                    "original location (probably you do not "
+                                    "have permission to do it). Please, use "
+                                    "the 'Save as...' option."))
                 return
             fout.write(text)
             fout.close()
@@ -335,8 +335,8 @@ class ModelerDialog(QDialog, Ui_DlgModeler):
                 self.hasChanged = False
             except WrongModelException, e:
                 QMessageBox.critical(self, self.tr('Could not open model'),
-                        self.tr('The selected model could not be loaded.\n\
-                                 Wrong line: %s') % e.msg)
+                        self.tr('The selected model could not be loaded.\n'
+                                'Wrong line: %s') % e.msg)
 
     def repaintModel(self):
         self.scene = ModelerScene()

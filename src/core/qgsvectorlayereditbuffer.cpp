@@ -245,8 +245,6 @@ bool QgsVectorLayerEditBuffer::commitChanges( QStringList& commitErrors )
 
   QgsFields oldFields = L->pendingFields();
 
-  bool hadPendingDeletes = !mDeletedFeatureIds.isEmpty();
-
   //
   // delete attributes
   //
@@ -321,7 +319,7 @@ bool QgsVectorLayerEditBuffer::commitChanges( QStringList& commitErrors )
       attributeChangesOk = false;   // don't try attribute updates - they'll fail.
     }
 
-    for ( int i = 0; i < oldFields.count(); ++i )
+    for ( int i = 0; i < qMin( oldFields.count(), newFields.count() ); ++i )
     {
       const QgsField& oldField = oldFields[i];
       const QgsField& newField = newFields[i];
@@ -502,13 +500,6 @@ bool QgsVectorLayerEditBuffer::commitChanges( QStringList& commitErrors )
       commitErrors << tr( "ERROR: %n geometries not changed.", "not changed geometries count", mChangedGeometries.size() );
       success = false;
     }
-  }
-
-  // for shapes run a REPACK after each transaction
-  // TODO: enhance provider interface to allow moving this there
-  if ( success && hadPendingDeletes && L->providerType() == "ogr" && L->storageType() == "ESRI Shapefile" )
-  {
-    provider->createSpatialIndex();
   }
 
   if ( !success && provider->hasErrors() )

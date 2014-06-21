@@ -49,6 +49,12 @@ QModelIndex QgsFieldModel::indexFromName( const QString &fieldName )
   return QModelIndex();
 }
 
+bool QgsFieldModel::isField( const QString& expression )
+{
+  int index = mFields.indexFromName( expression );
+  return index >= 0;
+}
+
 void QgsFieldModel::setLayer( QgsVectorLayer *layer )
 {
   if ( mLayer )
@@ -129,11 +135,12 @@ void QgsFieldModel::removeExpression()
 
 QModelIndex QgsFieldModel::index( int row, int column, const QModelIndex &parent ) const
 {
-  Q_UNUSED( parent );
-  if ( row < 0 || row >= rowCount() )
-    return QModelIndex();
+  if ( hasIndex( row, column, parent ) )
+  {
+    return createIndex( row, column, row );
+  }
 
-  return createIndex( row, column, row );
+  return QModelIndex();
 }
 
 QModelIndex QgsFieldModel::parent( const QModelIndex &child ) const
@@ -144,7 +151,11 @@ QModelIndex QgsFieldModel::parent( const QModelIndex &child ) const
 
 int QgsFieldModel::rowCount( const QModelIndex &parent ) const
 {
-  Q_UNUSED( parent );
+  if ( parent.isValid() )
+  {
+    return 0;
+  }
+
   return mAllowExpression ? mFields.count() + mExpression.count() : mFields.count();
 }
 
@@ -157,9 +168,6 @@ int QgsFieldModel::columnCount( const QModelIndex &parent ) const
 QVariant QgsFieldModel::data( const QModelIndex &index, int role ) const
 {
   if ( !index.isValid() )
-    return QVariant();
-
-  if ( !mLayer )
     return QVariant();
 
   qint64 exprIdx = index.internalId() - mFields.count();
@@ -207,10 +215,8 @@ QVariant QgsFieldModel::data( const QModelIndex &index, int role ) const
     {
       if ( exprIdx >= 0 )
       {
-        if ( !mLayer )
-          return false;
         QgsExpression exp( mExpression[exprIdx] );
-        exp.prepare( mLayer->pendingFields() );
+        exp.prepare( mLayer ? mLayer->pendingFields() : QgsFields() );
         return !exp.hasParserError();
       }
       return true;
@@ -237,10 +243,12 @@ QVariant QgsFieldModel::data( const QModelIndex &index, int role ) const
       {
         return mFields[index.internalId()].name();
       }
-      else
+      else if ( mLayer )
       {
         return mLayer->attributeDisplayName( index.internalId() );
       }
+      else
+        return QVariant();
     }
 
     case Qt::ForegroundRole:
@@ -248,10 +256,8 @@ QVariant QgsFieldModel::data( const QModelIndex &index, int role ) const
       if ( exprIdx >= 0 )
       {
         // if expression, test validity
-        if ( !mLayer )
-          return false;
         QgsExpression exp( mExpression[exprIdx] );
-        exp.prepare( mLayer->pendingFields() );
+        exp.prepare( mLayer ? mLayer->pendingFields() : QgsFields() );
         if ( exp.hasParserError() )
         {
           return QBrush( QColor( Qt::red ) );

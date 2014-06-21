@@ -1,3 +1,17 @@
+/***************************************************************************
+  qgsmaprendererjob.cpp
+  --------------------------------------
+  Date                 : December 2013
+  Copyright            : (C) 2013 by Martin Dobias
+  Email                : wonder dot sk at gmail dot com
+ ***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
 
 #include "qgsmaprendererjob.h"
 
@@ -50,7 +64,7 @@ QgsMapRendererSequentialJob::QgsMapRendererSequentialJob( const QgsMapSettings& 
 {
   QgsDebugMsg( "SEQUENTIAL construct" );
 
-  mImage = QImage( mSettings.outputSize(), QImage::Format_ARGB32_Premultiplied );
+  mImage = QImage( mSettings.outputSize(), mSettings.outputImageFormat() );
 }
 
 QgsMapRendererSequentialJob::~QgsMapRendererSequentialJob()
@@ -168,6 +182,7 @@ QgsMapRendererCustomPainterJob::QgsMapRendererCustomPainterJob( const QgsMapSett
     , mPainter( painter )
     , mLabelingEngine( 0 )
     , mActive( false )
+    , mRenderSynchronously( false )
 {
   QgsDebugMsg( "QPAINTER construct" );
 }
@@ -223,19 +238,18 @@ void QgsMapRendererCustomPainterJob::start()
 
   QgsDebugMsg( "Rendering prepared in (seconds): " + QString( "%1" ).arg( prepareTime.elapsed() / 1000.0 ) );
 
-  // now we are ready to start rendering!
-  if ( !mLayerJobs.isEmpty() )
+  if ( mRenderSynchronously )
   {
-    connect( &mFutureWatcher, SIGNAL( finished() ), SLOT( futureFinished() ) );
+    // do the rendering right now!
+    doRender();
+    return;
+  }
 
-    mFuture = QtConcurrent::run( staticRender, this );
-    mFutureWatcher.setFuture( mFuture );
-  }
-  else
-  {
-    // just make sure we will clean up and emit finished() signal
-    QTimer::singleShot( 0, this, SLOT( futureFinished() ) );
-  }
+  // now we are ready to start rendering!
+  connect( &mFutureWatcher, SIGNAL( finished() ), SLOT( futureFinished() ) );
+
+  mFuture = QtConcurrent::run( staticRender, this );
+  mFutureWatcher.setFuture( mFuture );
 }
 
 
@@ -294,6 +308,23 @@ bool QgsMapRendererCustomPainterJob::isActive() const
 QgsLabelingResults* QgsMapRendererCustomPainterJob::takeLabelingResults()
 {
   return mLabelingEngine ? mLabelingEngine->takeResults() : 0;
+}
+
+
+void QgsMapRendererCustomPainterJob::waitForFinishedWithEventLoop( QEventLoop::ProcessEventsFlags flags )
+{
+  QEventLoop loop;
+  connect( &mFutureWatcher, SIGNAL( finished() ), &loop, SLOT( quit() ) );
+  loop.exec( flags );
+}
+
+
+void QgsMapRendererCustomPainterJob::renderSynchronously()
+{
+  mRenderSynchronously = true;
+  start();
+  futureFinished();
+  mRenderSynchronously = false;
 }
 
 
@@ -410,7 +441,7 @@ void QgsMapRendererJob::drawOldLabeling( const QgsMapSettings& settings, QgsRend
     {
       ct = settings.layerTransfrom( ml );
       if ( ct )
-         reprojectToLayerExtent( ct, ml->crs().geographicFlag(), r1, r2 );
+        reprojectToLayerExtent( ct, ml->crs().geographicFlag(), r1, r2 );
     }
 
     renderContext.setCoordinateTransform( ct );
@@ -548,6 +579,7 @@ LayerRenderJobs QgsMapRendererJob::prepareJobs( QPainter* painter, QgsPalLabelin
   {
     bool cacheValid = mCache->init( mSettings.visibleExtent(), mSettings.scale() );
     QgsDebugMsg( QString( "CACHE VALID: %1" ).arg( cacheValid ) );
+    Q_UNUSED( cacheValid );
   }
 
   mGeometryCaches.clear();
@@ -639,7 +671,8 @@ LayerRenderJobs QgsMapRendererJob::prepareJobs( QPainter* painter, QgsPalLabelin
       // Flattened image for drawing when a blending mode is set
       QImage * mypFlattenedImage = 0;
       mypFlattenedImage = new QImage( mSettings.outputSize().width(),
-                                      mSettings.outputSize().height(), QImage::Format_ARGB32_Premultiplied );
+                                      mSettings.outputSize().height(),
+                                      mSettings.outputImageFormat() );
       if ( mypFlattenedImage->isNull() )
       {
         mErrors.append( Error( layerId, "Insufficient memory for image " + QString::number( mSettings.outputSize().width() ) + "x" + QString::number( mSettings.outputSize().height() ) ) );
@@ -900,6 +933,7 @@ void QgsMapRendererParallelJob::renderLayerStatic( LayerRenderJob& job )
   job.renderer->render();
   int tt = t.elapsed();
   QgsDebugMsg( QString( "job %1 end [%2 ms]" ).arg(( ulong ) &job, 0, 16 ).arg( tt ) );
+  Q_UNUSED( tt );
 }
 
 
@@ -915,7 +949,7 @@ void QgsMapRendererParallelJob::renderLabelsStatic( QgsMapRendererParallelJob* s
 
 QImage QgsMapRendererJob::composeImage( const QgsMapSettings& settings, const LayerRenderJobs& jobs )
 {
-  QImage image( settings.outputSize(), QImage::Format_ARGB32_Premultiplied );
+  QImage image( settings.outputSize(), settings.outputImageFormat() );
   image.fill( settings.backgroundColor().rgb() );
 
   QPainter painter( &image );

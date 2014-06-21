@@ -544,7 +544,7 @@ QgsOptions::QgsOptions( QWidget *parent, Qt::WindowFlags fl ) :
   //set the state of the checkboxes
   //Changed to default to true as of QGIS 1.7
   chkAntiAliasing->setChecked( settings.value( "/qgis/enable_anti_aliasing", true ).toBool() );
-  chkUseRenderCaching->setChecked( settings.value( "/qgis/enable_render_caching", false ).toBool() );
+  chkUseRenderCaching->setChecked( settings.value( "/qgis/enable_render_caching", true ).toBool() );
   chkParallelRendering->setChecked( settings.value( "/qgis/parallel_rendering", false ).toBool() );
   spinMapUpdateInterval->setValue( settings.value( "/qgis/map_update_interval", 250 ).toInt() );
   chkMaxThreads->setChecked( QgsApplication::maxThreads() != -1 );
@@ -574,7 +574,6 @@ QgsOptions::QgsOptions( QWidget *parent, Qt::WindowFlags fl ) :
   cbxSnappingOptionsDocked->setChecked( settings.value( "/qgis/dockSnapping", false ).toBool() );
   cbxAddPostgisDC->setChecked( settings.value( "/qgis/addPostgisDC", false ).toBool() );
   cbxAddOracleDC->setChecked( settings.value( "/qgis/addOracleDC", false ).toBool() );
-  cbxAddNewLayersToCurrentGroup->setChecked( settings.value( "/qgis/addNewLayersToCurrentGroup", false ).toBool() );
   cbxCreateRasterLegendIcons->setChecked( settings.value( "/qgis/createRasterLegendIcons", false ).toBool() );
   cbxCopyWKTGeomFromTable->setChecked( settings.value( "/qgis/copyGeometryAsWKT", true ).toBool() );
   leNullValue->setText( settings.value( "qgis/nullValue", "NULL" ).toString() );
@@ -1066,7 +1065,6 @@ void QgsOptions::saveOptions()
   settings.setValue( "/qgis/dockSnapping", cbxSnappingOptionsDocked->isChecked() );
   settings.setValue( "/qgis/addPostgisDC", cbxAddPostgisDC->isChecked() );
   settings.setValue( "/qgis/addOracleDC", cbxAddOracleDC->isChecked() );
-  settings.setValue( "/qgis/addNewLayersToCurrentGroup", cbxAddNewLayersToCurrentGroup->isChecked() );
   settings.setValue( "/qgis/defaultLegendGraphicResolution", mLegendGraphicResolutionSpinBox->value() );
   bool createRasterLegendIcons = settings.value( "/qgis/createRasterLegendIcons", false ).toBool();
   settings.setValue( "/qgis/createRasterLegendIcons", cbxCreateRasterLegendIcons->isChecked() );

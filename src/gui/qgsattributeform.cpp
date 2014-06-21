@@ -188,15 +188,24 @@ bool QgsAttributeForm::save()
       {
         mLayer->beginEditCommand( mEditCommandMessage );
 
+        int n = 0;
         for ( int i = 0; i < dst.count(); ++i )
         {
-          if ( dst[i] == src[i] || !src[i].isValid() )
+          if ( dst[i] == src[i] || !dst[i].isValid() )
+          {
+            QgsDebugMsg( "equal or invalid destination" );
+            QgsDebugMsg( QString( "dst:'%1' (type:%2,isNull:%3,isValid:%4)" )
+                         .arg( dst[i].toString() ).arg( dst[i].typeName() ).arg( dst[i].isNull() ).arg( dst[i].isValid() ) );
+            QgsDebugMsg( QString( "src:'%1' (type:%2,isNull:%3,isValid:%4)" )
+                         .arg( src[i].toString() ).arg( src[i].typeName() ).arg( src[i].isNull() ).arg( src[i].isValid() ) );
             continue;
+          }
 
           success &= mLayer->changeAttributeValue( mFeature.id(), i, dst[i], src[i] );
+          n++;
         }
 
-        if ( success )
+        if ( success && n > 0 )
         {
           mLayer->endEditCommand();
           mFeature.setAttributes( dst );
@@ -308,6 +317,7 @@ void QgsAttributeForm::init()
       QFileInfo fi( mLayer->editForm() );
       loader.setWorkingDirectory( fi.dir() );
       formWidget = loader.load( &file, this );
+      formWidget->setWindowFlags( Qt::Widget );
       layout()->addWidget( formWidget );
       formWidget->show();
       file.close();
@@ -368,26 +378,30 @@ void QgsAttributeForm::init()
       QString fieldName = mLayer->attributeDisplayName( idx );
 
       const QString widgetType = mLayer->editorWidgetV2( idx );
-      const QgsEditorWidgetConfig widgetConfig = mLayer->editorWidgetV2Config( idx );
-      bool labelOnTop = mLayer->labelOnTop( idx );
 
-      // This will also create the widget
-      QWidget *l = new QLabel( fieldName );
-      QgsEditorWidgetWrapper* eww = QgsEditorWidgetRegistry::instance()->create( widgetType, mLayer, idx, widgetConfig, 0, this, mContext );
-      QWidget *w = eww ? eww->widget() : new QLabel( QString( "<p style=\"color: red; font-style: italic;\">Failed to create widget with type '%1'</p>" ).arg( widgetType ) );
-
-      if ( eww )
-        mWidgets.append( eww );
-
-      if ( labelOnTop )
+      if ( widgetType != "Hidden" )
       {
-        gridLayout->addWidget( l, row++, 0, 1, 2 );
-        gridLayout->addWidget( w, row++, 0, 1, 2 );
-      }
-      else
-      {
-        gridLayout->addWidget( l, row, 0 );
-        gridLayout->addWidget( w, row++, 1 );
+        const QgsEditorWidgetConfig widgetConfig = mLayer->editorWidgetV2Config( idx );
+        bool labelOnTop = mLayer->labelOnTop( idx );
+
+        // This will also create the widget
+        QWidget *l = new QLabel( fieldName );
+        QgsEditorWidgetWrapper* eww = QgsEditorWidgetRegistry::instance()->create( widgetType, mLayer, idx, widgetConfig, 0, this, mContext );
+        QWidget *w = eww ? eww->widget() : new QLabel( QString( "<p style=\"color: red; font-style: italic;\">Failed to create widget with type '%1'</p>" ).arg( widgetType ) );
+
+        if ( eww )
+          mWidgets.append( eww );
+
+        if ( labelOnTop )
+        {
+          gridLayout->addWidget( l, row++, 0, 1, 2 );
+          gridLayout->addWidget( w, row++, 0, 1, 2 );
+        }
+        else
+        {
+          gridLayout->addWidget( l, row, 0 );
+          gridLayout->addWidget( w, row++, 1 );
+        }
       }
     }
 

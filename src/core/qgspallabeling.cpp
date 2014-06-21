@@ -1927,7 +1927,13 @@ void QgsPalLayerSettings::registerFeature( QgsFeature& f, const QgsRenderContext
   // fix invalid polygons
   if ( geom->type() == QGis::Polygon && !geom->isGeosValid() )
   {
-    geom->fromGeos( GEOSBuffer( geom->asGeos(), 0, 0 ) );
+    QgsGeometry* bufferGeom = geom->buffer( 0, 0 );
+    if ( !bufferGeom )
+    {
+      return;
+    }
+    geom = bufferGeom;
+    clonedGeometry.reset( geom );
   }
 
   // CLIP the geometry if it is bigger than the extent
@@ -1938,11 +1944,13 @@ void QgsPalLayerSettings::registerFeature( QgsFeature& f, const QgsRenderContext
     do_clip = !extentGeom->contains( geom );
     if ( do_clip )
     {
-      geom = geom->intersection( extentGeom ); // creates new geometry
-      if ( !geom )
+      QgsGeometry* clipGeom = geom->intersection( extentGeom ); // creates new geometry
+      if ( !clipGeom )
       {
         return;
       }
+      geom = clipGeom;
+      clonedGeometry.reset( geom );
     }
   }
 
@@ -3211,6 +3219,7 @@ QgsPalLabeling::QgsPalLabeling()
   mShowingShadowRects = false;
   mShowingAllLabels = false;
   mShowingPartialsLabels = p.getShowPartial();
+  mDrawOutlineLabels = true;
 }
 
 QgsPalLabeling::~QgsPalLabeling()
@@ -4443,6 +4452,11 @@ void QgsPalLabeling::drawLabel( pal::LabelPosition* label, QgsRenderContext& con
         textp.setPen( Qt::NoPen );
         textp.setBrush( tmpLyr.textColor );
         textp.drawPath( path );
+        // TODO: why are some font settings lost on drawPicture() when using drawText() inside QPicture?
+        //       e.g. some capitalization options, but not others
+        //textp.setFont( tmpLyr.textFont );
+        //textp.setPen( tmpLyr.textColor );
+        //textp.drawText( 0, 0, component.text() );
         textp.end();
 
         if ( tmpLyr.shadowDraw && tmpLyr.shadowUnder == QgsPalLayerSettings::ShadowText )
@@ -4459,20 +4473,24 @@ void QgsPalLabeling::drawLabel( pal::LabelPosition* label, QgsRenderContext& con
         {
           painter->setCompositionMode( tmpLyr.blendMode );
         }
-//        painter->setPen( Qt::NoPen );
-//        painter->setBrush( tmpLyr.textColor );
-//        painter->drawPath( path );
 
         // scale for any print output or image saving @ specific dpi
         painter->scale( component.dpiRatio(), component.dpiRatio() );
-        _fixQPictureDPI( painter );
-        painter->drawPicture( 0, 0, textPict );
 
-        // regular text draw, for testing optimization
-//        painter->setFont( tmpLyr.textFont );
-//        painter->setPen( tmpLyr.textColor );
-//        painter->drawText( 0, 0, multiLineList.at( i ) );
-
+        if ( mDrawOutlineLabels )
+        {
+          // draw outlined text
+          _fixQPictureDPI( painter );
+          painter->drawPicture( 0, 0, textPict );
+        }
+        else
+        {
+          // draw text as text (for SVG and PDF exports)
+          painter->setFont( tmpLyr.textFont );
+          painter->setPen( tmpLyr.textColor );
+          painter->setRenderHint( QPainter::TextAntialiasing );
+          painter->drawText( 0, 0, component.text() );
+        }
       }
       painter->restore();
     }
@@ -5004,6 +5022,8 @@ void QgsPalLabeling::loadEngineSettings()
                         "PAL", "/ShowingAllLabels", false, &saved );
   mShowingPartialsLabels = QgsProject::instance()->readBoolEntry(
                              "PAL", "/ShowingPartialsLabels", p.getShowPartial(), &saved );
+  mDrawOutlineLabels = QgsProject::instance()->readBoolEntry(
+                         "PAL", "/DrawOutlineLabels", true, &saved );
 }
 
 void QgsPalLabeling::saveEngineSettings()
@@ -5016,6 +5036,7 @@ void QgsPalLabeling::saveEngineSettings()
   QgsProject::instance()->writeEntry( "PAL", "/ShowingShadowRects", mShowingShadowRects );
   QgsProject::instance()->writeEntry( "PAL", "/ShowingAllLabels", mShowingAllLabels );
   QgsProject::instance()->writeEntry( "PAL", "/ShowingPartialsLabels", mShowingPartialsLabels );
+  QgsProject::instance()->writeEntry( "PAL", "/DrawOutlineLabels", mDrawOutlineLabels );
 }
 
 void QgsPalLabeling::clearEngineSettings()
@@ -5028,6 +5049,7 @@ void QgsPalLabeling::clearEngineSettings()
   QgsProject::instance()->removeEntry( "PAL", "/ShowingShadowRects" );
   QgsProject::instance()->removeEntry( "PAL", "/ShowingAllLabels" );
   QgsProject::instance()->removeEntry( "PAL", "/ShowingPartialsLabels" );
+  QgsProject::instance()->removeEntry( "PAL", "/DrawOutlineLabels" );
 }
 
 QgsLabelingEngineInterface* QgsPalLabeling::clone()
@@ -5037,6 +5059,7 @@ QgsLabelingEngineInterface* QgsPalLabeling::clone()
   lbl->mShowingCandidates = mShowingCandidates;
   lbl->mShowingShadowRects = mShowingShadowRects;
   lbl->mShowingPartialsLabels = mShowingPartialsLabels;
+  lbl->mDrawOutlineLabels = mDrawOutlineLabels;
   return lbl;
 }
 

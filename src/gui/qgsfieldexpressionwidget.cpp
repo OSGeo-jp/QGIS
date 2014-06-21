@@ -52,6 +52,8 @@ QgsFieldExpressionWidget::QgsFieldExpressionWidget( QWidget *parent )
   connect( mCombo->lineEdit(), SIGNAL( editingFinished() ), this, SLOT( expressionEditingFinished() ) );
   connect( mCombo, SIGNAL( activated( int ) ), this, SLOT( currentFieldChanged() ) );
   connect( mButton, SIGNAL( clicked() ), this, SLOT( editExpression() ) );
+  // NW TODO - Fix in 2.6
+//  connect( mCombo->lineEdit(), SIGNAL( returnPressed() ), this, SIGNAL( returnPressed() ) );
 }
 
 void QgsFieldExpressionWidget::setExpressionDialogTitle( QString title )
@@ -64,37 +66,52 @@ void QgsFieldExpressionWidget::setFilters( QgsFieldProxyModel::Filters filters )
   mFieldProxyModel->setFilters( filters );
 }
 
+void QgsFieldExpressionWidget::setLeftHandButtonStyle( bool isLeft )
+{
+  QHBoxLayout* layout = dynamic_cast<QHBoxLayout*>( this->layout() );
+  if ( isLeft )
+  {
+    QLayoutItem* item = layout->takeAt( 1 );
+    layout->insertWidget( 0, item->widget() );
+  }
+  else
+    layout->addWidget( mCombo );
+}
+
 void QgsFieldExpressionWidget::setGeomCalculator( const QgsDistanceArea &da )
 {
   mDa = QSharedPointer<const QgsDistanceArea>( new QgsDistanceArea( da ) );
 }
 
+QString QgsFieldExpressionWidget::currentText()
+{
+  return mCombo->currentText();
+}
+
+bool QgsFieldExpressionWidget::isValidExpression( QString *expressionError )
+{
+  QString temp;
+  QgsVectorLayer* vl = layer();
+  return QgsExpression::isValid( currentText(), vl ? vl->pendingFields() : QgsFields(), expressionError ? *expressionError : temp );
+}
+
+bool QgsFieldExpressionWidget::isExpression()
+{
+  return !mFieldProxyModel->sourceFieldModel()->isField( currentText() );
+}
+
 QString QgsFieldExpressionWidget::currentField( bool *isExpression , bool *isValid )
 {
-  if ( isExpression )
-  {
-    *isExpression = false;
-  }
+  QString text = currentText();
   if ( isValid )
   {
-    *isValid = true;
+    *isValid = isValidExpression();
   }
-
-  int i = mCombo->currentIndex();
-  const QModelIndex proxyIndex = mFieldProxyModel->index( i, 0 );
-  if ( !proxyIndex.isValid() )
-    return "";
-
   if ( isExpression )
   {
-    *isExpression = mFieldProxyModel->data( proxyIndex, QgsFieldModel::IsExpressionRole ).toBool();
+    *isExpression = this->isExpression();
   }
-  if ( isValid )
-  {
-    *isValid = mFieldProxyModel->data( proxyIndex, QgsFieldModel::ExpressionValidityRole ).toBool();
-  }
-  QString expression = mFieldProxyModel->data( proxyIndex, QgsFieldModel::ExpressionRole ).toString();
-  return expression;
+  return text;
 }
 
 QgsVectorLayer *QgsFieldExpressionWidget::layer()
@@ -145,11 +162,8 @@ void QgsFieldExpressionWidget::setField( const QString &fieldName )
 
 void QgsFieldExpressionWidget::editExpression()
 {
-  QString currentExpression = currentField();
+  QString currentExpression = currentText();
   QgsVectorLayer* vl = layer();
-
-  if ( !vl )
-    return;
 
   QgsExpressionBuilderDialog dlg( vl, currentExpression );
   if ( !mDa.isNull() )
@@ -168,10 +182,12 @@ void QgsFieldExpressionWidget::editExpression()
 void QgsFieldExpressionWidget::expressionEdited( const QString expression )
 {
   updateLineEditStyle( expression );
+  emit fieldChanged( expression, isValidExpression() );
 }
 
 void QgsFieldExpressionWidget::expressionEditingFinished()
 {
+  QgsDebugMsg( "Editing finsihed" );
   const QString expression = mCombo->lineEdit()->text();
   QModelIndex idx = mFieldProxyModel->sourceFieldModel()->setExpression( expression );
   QModelIndex proxyIndex = mFieldProxyModel->mapFromSource( idx );
@@ -247,10 +263,8 @@ void QgsFieldExpressionWidget::updateLineEditStyle( const QString expression )
 bool QgsFieldExpressionWidget::isExpressionValid( const QString expressionStr )
 {
   QgsVectorLayer* vl = layer();
-  if ( !vl )
-    return false;
 
   QgsExpression expression( expressionStr );
-  expression.prepare( vl->pendingFields() );
+  expression.prepare( vl ? vl->pendingFields() : QgsFields() );
   return !expression.hasParserError();
 }

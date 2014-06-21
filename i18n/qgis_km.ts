@@ -4810,7 +4810,7 @@ The &apos;gray&apos; value (from GDAL 1.7.0) enables to expand a dataset with a 
         <source>Currently QGIS doesn&apos;t allow simultaneous access from 
                                  different threads to the same datasource. Make sure your layer&apos;s 
                                  attribute tables are closed. Continue?</source>
-        <translation type="unfinished">
+        <translation type="obsolete">
             </translation>
     </message>
     <message>
@@ -4877,6 +4877,10 @@ Would you like to add the new layer to the TOC?</source>
         <source>Created output shapefile:
 %s
 %s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Currently QGIS doesn&apos;t allow simultaneous access from different threads to the same datasource. Make sure your layer&apos;s attribute tables are closed. Continue?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7197,11 +7201,6 @@ Wrong line: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Model doesn&apos;t contains any algorithms and/or 
-                             parameters and can&apos;t be executed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save Model As Image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7225,6 +7224,10 @@ Wrong line: %1</source>
         <source>The selected model could not be loaded.
 
                                  Wrong line: %s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Model doesn&apos;t contains any algorithms and/or parameters and can&apos;t be executed</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11626,30 +11629,6 @@ It will be disabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>empty response</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>WFS service exception:%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>unsuccessful service response: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>WFS exception report (code=%1 text=%2)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>missing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>unhandled response: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source> sq. NM</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15397,10 +15376,6 @@ Parser error:
         <translation type="unfinished">
             </translation>
     </message>
-    <message>
-        <source>[update field expression]</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>QgsAttributeTableModel</name>
@@ -15421,7 +15396,7 @@ Parser error:
     <name>QgsAttributeTypeDialog</name>
     <message>
         <source>Attribute Edit Dialog</source>
-        <translation type="unfinished">
+        <translation type="obsolete">
             </translation>
     </message>
     <message>
@@ -15707,6 +15682,10 @@ Error was:%2</source>
     </message>
     <message>
         <source>Label on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Widget Properties</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -18183,6 +18162,10 @@ Please try a lower resolution or a smaller papersize</source>
         <source>Page</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source> mm</source>
+        <translation type="unfinished"> ម.ម​.</translation>
+    </message>
 </context>
 <context>
     <name>QgsComposerLabelWidget</name>
@@ -18229,6 +18212,10 @@ Please try a lower resolution or a smaller papersize</source>
         <source>Label rotation changed</source>
         <translation type="obsolete">
             </translation>
+    </message>
+    <message>
+        <source>Label color changed</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -18758,7 +18745,7 @@ Please try a lower resolution or a smaller papersize</source>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished">mm</translation>
+        <translation type="obsolete">mm</translation>
     </message>
     <message>
         <source>WMS LegendGraphic</source>
@@ -19556,6 +19543,10 @@ Please try a lower resolution or a smaller papersize</source>
     <message>
         <source>Predefined scale (best fit)</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> mm</source>
+        <translation type="unfinished"> ម.ម​.</translation>
     </message>
 </context>
 <context>
@@ -20598,6 +20589,10 @@ Please try a lower resolution or a smaller papersize</source>
     <message>
         <source>Right</source>
         <translation type="unfinished">ស្ដាំ</translation>
+    </message>
+    <message>
+        <source> mm</source>
+        <translation type="unfinished"> ម.ម​.</translation>
     </message>
 </context>
 <context>
@@ -22510,7 +22505,7 @@ p, li { white-space: pre-wrap; }
     <name>QgsDecorationGridDialog</name>
     <message>
         <source>Dialog</source>
-        <translation>ប្រអប់</translation>
+        <translation type="obsolete">ប្រអប់</translation>
     </message>
     <message>
         <source>Enable grid</source>
@@ -22623,6 +22618,10 @@ p, li { white-space: pre-wrap; }
         <source>Horizontal and Vertical</source>
         <translation type="unfinished">
             </translation>
+    </message>
+    <message>
+        <source>Grid properties</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -24332,6 +24331,10 @@ Parser error:
     </message>
     <message>
         <source>Show partials labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Draw text as outlines (recommended)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -30209,12 +30212,12 @@ at line %2 column %3</source>
     </message>
     <message>
         <source>New file</source>
-        <translation type="unfinished">
+        <translation type="obsolete">
             </translation>
     </message>
     <message>
         <source>New datasource</source>
-        <translation type="unfinished">
+        <translation type="obsolete">
             </translation>
     </message>
     <message>
@@ -30262,6 +30265,11 @@ at line %2 column %3</source>
             <numerusform></numerusform>
         </translation>
     </message>
+    <message>
+        <source>Datasource</source>
+        <translation type="unfinished">
+            </translation>
+    </message>
 </context>
 <context>
     <name>QgsHandleBadLayersBase</name>
@@ -30272,35 +30280,35 @@ at line %2 column %3</source>
     </message>
     <message>
         <source>Layer name</source>
-        <translation type="unfinished">
+        <translation type="obsolete">
             </translation>
     </message>
     <message>
         <source>Type</source>
-        <translation>ប្រភេទ</translation>
+        <translation type="obsolete">ប្រភេទ</translation>
     </message>
     <message>
         <source>Provider</source>
-        <translation>ក្រុមហ៊ុន​ផ្ដល់</translation>
+        <translation type="obsolete">ក្រុមហ៊ុន​ផ្ដល់</translation>
     </message>
     <message>
         <source>Original filename</source>
-        <translation type="unfinished">
+        <translation type="obsolete">
             </translation>
     </message>
     <message>
         <source>New filename</source>
-        <translation type="unfinished">
+        <translation type="obsolete">
             </translation>
     </message>
     <message>
         <source>Original datasource</source>
-        <translation type="unfinished">
+        <translation type="obsolete">
             </translation>
     </message>
     <message>
         <source>New datasource</source>
-        <translation type="unfinished">
+        <translation type="obsolete">
             </translation>
     </message>
 </context>
@@ -30546,11 +30554,11 @@ This may be a problem in your network connection or at the WMS server.</source>
     </message>
     <message>
         <source>Tree</source>
-        <translation type="unfinished">មែក​ធាង</translation>
+        <translation type="obsolete">មែក​ធាង</translation>
     </message>
     <message>
         <source>Table</source>
-        <translation type="unfinished">តារាង</translation>
+        <translation type="obsolete">តារាង</translation>
     </message>
     <message>
         <source>Layer</source>
@@ -30570,10 +30578,6 @@ This may be a problem in your network connection or at the WMS server.</source>
         <translation type="unfinished">តម្លៃ</translation>
     </message>
     <message>
-        <source>Graph</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Clear Results</source>
         <translation type="unfinished"></translation>
     </message>
@@ -30588,6 +30592,18 @@ This may be a problem in your network connection or at the WMS server.</source>
     <message>
         <source>Auto open form</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select identify mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select view mode for raster layers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">មើល</translation>
     </message>
 </context>
 <context>
@@ -30756,6 +30772,15 @@ This may be a problem in your network connection or at the WMS server.</source>
     <message>
         <source>Graph</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tree</source>
+        <translation type="unfinished">មែក​ធាង</translation>
+    </message>
+    <message>
+        <source>feature id</source>
+        <translation type="unfinished">
+            </translation>
     </message>
 </context>
 <context>
@@ -37928,7 +37953,7 @@ Always network: always load from network and do not check if the cache has a val
     </message>
     <message>
         <source>Add new layers to selected or current group</source>
-        <translation type="unfinished">
+        <translation type="obsolete">
             </translation>
     </message>
     <message>
@@ -39779,7 +39804,7 @@ Error: %4</source>
     <name>QgsPasteTransformations</name>
     <message>
         <source>&amp;Add New Transfer</source>
-        <translation type="unfinished">
+        <translation type="obsolete">
             </translation>
     </message>
 </context>
@@ -40302,6 +40327,10 @@ Error: %4</source>
     </message>
     <message>
         <source>Specify the size of the preview. If you leave it set to 0, an optimal size will be estimated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The field contains a filename for a picture. The widget will show a preview of this picture.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -46119,7 +46148,7 @@ standard deviation ×</source>
     <name>QgsRelationAddDlgBase</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">ប្រអប់</translation>
+        <translation type="obsolete">ប្រអប់</translation>
     </message>
     <message>
         <source>Referencing Field</source>
@@ -46144,6 +46173,11 @@ standard deviation ×</source>
     <message>
         <source>Id</source>
         <translation type="unfinished">លេខ​សម្គាល់​</translation>
+    </message>
+    <message>
+        <source>Add relation</source>
+        <translation type="unfinished">
+            </translation>
     </message>
 </context>
 <context>
@@ -52442,6 +52476,30 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">
             </translation>
     </message>
+    <message>
+        <source>empty response</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WFS service exception:%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unsuccessful service response: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WFS exception report (code=%1 text=%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>missing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unhandled response: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QgsWFSRootItem</name>
@@ -52838,8 +52896,13 @@ Features</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Failed to parse capabilities:
-</source>
+        <source>The server you are trying to connect to does not seem to be a WMS server. Please check the URL.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Instead of the capabilities string that was expected, the following response has been received:
+
+%1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -53598,6 +53661,10 @@ Response was:
     <message>
         <source>Height</source>
         <translation type="unfinished">កម្ពស់</translation>
+    </message>
+    <message>
+        <source>Field contains a filename or URL for a webpage</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -54542,7 +54609,7 @@ Reason phrase: %2</source>
     <name>QgsWmtsDimensionsBase</name>
     <message>
         <source>Dialog</source>
-        <translation>ប្រអប់</translation>
+        <translation type="obsolete">ប្រអប់</translation>
     </message>
     <message>
         <source>Dimension</source>
@@ -54561,6 +54628,10 @@ Reason phrase: %2</source>
     <message>
         <source>Default</source>
         <translation>លំនាំដើម</translation>
+    </message>
+    <message>
+        <source>Select dimensions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -58751,6 +58822,45 @@ that will be automatically deleted after running.&lt;/li&gt;
 </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;h3&gt;Attribute table&lt;/h3&gt;
+The attribute table displays features of a selected layer. Each row in the table represents one map feature with its attributes shown in several columns. The features in the table can be searched, selected, moved or even edited.  By default the attribute table is a separate window. If you opened it and cannot see it anymore, it is most likely hidden under the main QGIS window. You can make it also a docked window, by checking &lt;label&gt;Open attribute table in a dock window&lt;/label&gt; in &lt;label&gt;Settings &gt; Options &gt; General&lt;/label&gt;.&lt;p&gt;
+
+The number of total number of layer features, filtered features and selected features is printed on the window header.&lt;p&gt;
+&lt;p&gt;
+&lt;a href=&quot;#Selecting&quot;&gt;Selecting&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#Sorting&quot;&gt;Sorting&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#Searching&quot;&gt;Searching&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#Field&quot;&gt;Field Calculator&lt;/a&gt;&lt;br/&gt;
+
+&lt;a name=&quot;Selecting&quot;&gt;
+&lt;h4&gt;Selecting&lt;/h4&gt;
+&lt;/a&gt;
+Rows can be selected by clicking on the row number on the left side of the row. Selecting a row doesn&apos;t change the current cursor position. Multiple rows can be marked by holding the &lt;label&gt;Ctrl&lt;/label&gt; key.&lt;br&gt;
+A continuous selection can be made by holding the &lt;label&gt;Shift&lt;/label&gt; key and clicking on several row headers on the left side of the rows. All rows between the current cursor position and the clicked row are selected.
+
+&lt;a name=&quot;Sorting&quot;&gt;
+&lt;h4&gt;Sorting&lt;/h4&gt;
+&lt;/a&gt;
+Each column can be sorted by clicking on its column header. A small arrow indicates the sort order (downward pointing means descending values from the top row down, upward pointing means ascending values from the top row down).&lt;br&gt;
+Use &lt;label&gt;Move selected to top&lt;/label&gt; button to sort selected rows and display them in first table rows.  To show selected records only, use the check box &lt;label&gt;Show selected records only&lt;/label&gt;.
+
+&lt;a name=&quot;Searching&quot;&gt;
+&lt;h4&gt;Searching&lt;/h4&gt;
+&lt;/a&gt;
+For a simple search by attributes on only one column the &lt;label&gt;Look for&lt;/label&gt; field can be used. Select the field (column) from which the search should be performed from the drop down menu and hit the &lt;label&gt;Search&lt;/label&gt; button.&lt;br&gt;
+For more complex searches use the &lt;label&gt;Advanced search&lt;/label&gt;. This button opens the Query Builder and allows you to select table features matching a SQL-like WHERE clause.
+
+&lt;a name=&quot;Field&quot;&gt;
+&lt;h4&gt;Field Calculator&lt;/h4&gt;
+&lt;/a&gt;
+The &lt;label&gt;Field Calculator&lt;/label&gt; button in the attribute table allows to perform calculations on basis of existing attribute values or defined functions, e.g. to calculate length or area of geometry features.&lt;br&gt;
+The results can be written to a new attribute column or it can be used to update values in an already existing column.&lt;br&gt;
+You have to bring the vector layer in editing mode, before you can click on the &lt;label&gt;Field calculator&lt;/label&gt; icon to open the dialog.
+
+</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dxf2shpConverter</name>
@@ -61696,28 +61806,6 @@ Restricts an input value to a specified range.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;h3&gt;IS expression&lt;/h3&gt;
-Returns 1 if a is the same as b.
-
-&lt;h4&gt;Syntax&lt;/h4&gt;
-&lt;pre&gt;a is b&lt;/pre&gt;
-
-&lt;h4&gt;Arguments&lt;/h4&gt;
-None
-
-&lt;h4&gt;Example&lt;/h4&gt;
-&lt;pre&gt; &apos;A&apos; IS &apos;A&apos;  &amp;rarr; returns 1 &lt;/pre&gt;
-&lt;pre&gt; &apos;A&apos; IS &apos;a&apos;  &amp;rarr; returns 0 &lt;/pre&gt;
-&lt;pre&gt; 4 IS 4      &amp;rarr; returns 1 &lt;/pre&gt;
-&lt;pre&gt; 4 IS 2+2    &amp;rarr; returns 1 &lt;/pre&gt;
-&lt;pre&gt; 4 IS 2      &amp;rarr; returns 0 &lt;/pre&gt;
-&lt;pre&gt; 4 IS 2      &amp;rarr; returns 0 &lt;/pre&gt;
-&lt;pre&gt; $geometry IS NULL  &amp;rarr; returns 0, if your geometry is not NULL&lt;/pre&gt;
-
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;h3&gt;disjoint function&lt;/h3&gt;
 Returns 1 if the geometries do not &quot;spatially intersect&quot; - if they do not share any space together. 
 
@@ -61999,23 +62087,6 @@ geometry &amp;rarr; geometry
 
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;pre&gt; geomToWKT( symDifference(  geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 8 8)&apos; ))   )   &amp;rarr; returns LINESTRING(5 5, 8 8)&lt;/pre&gt;
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;h3&gt;contains function&lt;/h3&gt;
- Returns true if and only if no points of b lie in the exterior of a, and at least one point of the interior of b lies in the interior of a. 
-
-&lt;h4&gt;Syntax&lt;/h4&gt;
-&lt;pre&gt;contains( geometry a , geometry a)&lt;/pre&gt;
-
-&lt;h4&gt;Arguments&lt;/h4&gt;
-geometry &amp;rarr; geometry
-geometry &amp;rarr; geometry
-
-&lt;h4&gt;Example&lt;/h4&gt;
-&lt;pre&gt; contains( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;POINT( 0.5 0.5 )&apos; ))    &amp;rarr; returns 1&lt;/pre&gt;
-&lt;pre&gt; contains( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))          &amp;rarr; returns 0&lt;/pre&gt;
 </source>
         <translation type="unfinished"></translation>
     </message>
@@ -62304,6 +62375,44 @@ geom &amp;rarr; a geometry
 
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;pre&gt; ymin($geometry) &amp;rarr; returns minimum y coordinate of $geometry&lt;/pre&gt;
+
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;h3&gt;contains function&lt;/h3&gt;
+Returns true if and only if no points of b lie in the exterior of a, and at least one point of the interior of b lies in the interior of a. 
+
+&lt;h4&gt;Syntax&lt;/h4&gt;
+&lt;pre&gt;contains( geometry a , geometry b)&lt;/pre&gt;
+
+&lt;h4&gt;Arguments&lt;/h4&gt;
+geometry &amp;rarr; geometry
+geometry &amp;rarr; geometry
+
+&lt;h4&gt;Example&lt;/h4&gt;
+&lt;pre&gt; contains( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;POINT( 0.5 0.5 )&apos; ))    &amp;rarr; returns 1&lt;/pre&gt;
+&lt;pre&gt; contains( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))          &amp;rarr; returns 0&lt;/pre&gt;
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;h3&gt;IS expression&lt;/h3&gt;
+Returns 1 if a is the same as b.
+
+&lt;h4&gt;Syntax&lt;/h4&gt;
+&lt;pre&gt;a IS b&lt;/pre&gt;
+
+&lt;h4&gt;Arguments&lt;/h4&gt;
+None
+
+&lt;h4&gt;Example&lt;/h4&gt;
+&lt;pre&gt; &apos;A&apos; IS &apos;A&apos;  &amp;rarr; returns 1 &lt;/pre&gt;
+&lt;pre&gt; &apos;A&apos; IS &apos;a&apos;  &amp;rarr; returns 0 &lt;/pre&gt;
+&lt;pre&gt; 4 IS 4      &amp;rarr; returns 1 &lt;/pre&gt;
+&lt;pre&gt; 4 IS 2+2    &amp;rarr; returns 1 &lt;/pre&gt;
+&lt;pre&gt; 4 IS 2      &amp;rarr; returns 0 &lt;/pre&gt;
+&lt;pre&gt; $geometry IS NULL  &amp;rarr; returns 0, if your geometry is not NULL&lt;/pre&gt;
 
 </source>
         <translation type="unfinished"></translation>

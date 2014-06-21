@@ -5233,12 +5233,6 @@ Vai vēlaties pievienot jauno slāni TOC?</translation>
         <translation type="obsolete">Slānis &apos;%1&apos; atjaunināts</translation>
     </message>
     <message>
-        <source>Currently QGIS doesn&apos;t allow simultaneous access from 
-                                 different threads to the same datasource. Make sure your layer&apos;s 
-                                 attribute tables are closed. Continue?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Layer &apos;{0}&apos; updated</source>
         <translation>Slānis {0} atjaunināts</translation>
     </message>
@@ -5255,6 +5249,10 @@ Vai vēlaties pievienot jauno slāni TOC?</translation>
         <translation>Izveidots izvades shapefile:
 %s
 %s</translation>
+    </message>
+    <message>
+        <source>Currently QGIS doesn&apos;t allow simultaneous access from different threads to the same datasource. Make sure your layer&apos;s attribute tables are closed. Continue?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7389,11 +7387,6 @@ Acts on currently active editable layer</source>
         <translation>Modelim ir nesaglabātas izmaiņas. Aizvērt modelētāju bez saglabāšanas? </translation>
     </message>
     <message>
-        <source>Model doesn&apos;t contains any algorithms and/or 
-                             parameters and can&apos;t be executed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save Model As Image</source>
         <translation>Saglabāt modeli kā attēlu</translation>
     </message>
@@ -7421,6 +7414,10 @@ Acts on currently active editable layer</source>
         <translation>Izvēlētais modelis nevar tikt ielādēts.
 
 ------------------------Kļūdaina rinda: %s</translation>
+    </message>
+    <message>
+        <source>Model doesn&apos;t contains any algorithms and/or parameters and can&apos;t be executed</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11212,30 +11209,6 @@ It will be disabled.</source>
     <message>
         <source>Unable to determine number of geometry columns of layer %1.%2: 
 %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>empty response</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>WFS service exception:%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>unsuccessful service response: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>WFS exception report (code=%1 text=%2)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>missing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>unhandled response: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -15527,10 +15500,6 @@ Parser error:
 %1</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>[update field expression]</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>QgsAttributeTableModel</name>
@@ -15596,7 +15565,7 @@ Kļūda bija %2</translation>
     </message>
     <message>
         <source>Attribute Edit Dialog</source>
-        <translation>Atribūtu rediģēšanas dialogs</translation>
+        <translation type="obsolete">Atribūtu rediģēšanas dialogs</translation>
     </message>
     <message>
         <source>Line edit</source>
@@ -15740,6 +15709,10 @@ Kļūda bija %2</translation>
     </message>
     <message>
         <source>Label on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Widget Properties</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -18080,6 +18053,10 @@ Please try a lower resolution or a smaller papersize</source>
         <source>Page</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source> mm</source>
+        <translation type="unfinished"> mm</translation>
+    </message>
 </context>
 <context>
     <name>QgsComposerLabelWidget</name>
@@ -18113,6 +18090,10 @@ Please try a lower resolution or a smaller papersize</source>
     </message>
     <message>
         <source>Insert expression</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label color changed</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -18611,7 +18592,7 @@ Please try a lower resolution or a smaller papersize</source>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished">mm</translation>
+        <translation type="obsolete">mm</translation>
     </message>
     <message>
         <source>WMS LegendGraphic</source>
@@ -19319,6 +19300,10 @@ Please try a lower resolution or a smaller papersize</source>
     <message>
         <source>Predefined scale (best fit)</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> mm</source>
+        <translation type="unfinished"> mm</translation>
     </message>
 </context>
 <context>
@@ -20261,6 +20246,10 @@ Please try a lower resolution or a smaller papersize</source>
     <message>
         <source>Right</source>
         <translation type="unfinished">Pa labi</translation>
+    </message>
+    <message>
+        <source> mm</source>
+        <translation type="unfinished"> mm</translation>
     </message>
 </context>
 <context>
@@ -22181,7 +22170,7 @@ p, li { white-space: pre-wrap; }
     <name>QgsDecorationGridDialog</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialogs</translation>
+        <translation type="obsolete">Dialogs</translation>
     </message>
     <message>
         <source>Enable grid</source>
@@ -22270,6 +22259,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Horizontal and Vertical</source>
         <translation type="unfinished">Horizontals un vertikāls</translation>
+    </message>
+    <message>
+        <source>Grid properties</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -24154,6 +24147,10 @@ Parser error:
     </message>
     <message>
         <source>Show partials labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Draw text as outlines (recommended)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -29550,11 +29547,11 @@ rindā %2 kolonnā %3</translation>
     </message>
     <message>
         <source>New file</source>
-        <translation>Jauns fails</translation>
+        <translation type="obsolete">Jauns fails</translation>
     </message>
     <message>
         <source>New datasource</source>
-        <translation>Jauns datu avots</translation>
+        <translation type="obsolete">Jauns datu avots</translation>
     </message>
     <message>
         <source>none</source>
@@ -29589,6 +29586,10 @@ rindā %2 kolonnā %3</translation>
             <numerusform>Joprojām ir %n neapstrādāti slāņi, kuri tiks zaudēti, ja aizvērsi logu.</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Datasource</source>
+        <translation type="unfinished">Datu avots</translation>
+    </message>
 </context>
 <context>
     <name>QgsHandleBadLayersBase</name>
@@ -29598,31 +29599,31 @@ rindā %2 kolonnā %3</translation>
     </message>
     <message>
         <source>Layer name</source>
-        <translation>Sāņa nosaukums</translation>
+        <translation type="obsolete">Sāņa nosaukums</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation>Tips</translation>
+        <translation type="obsolete">Tips</translation>
     </message>
     <message>
         <source>Provider</source>
-        <translation>Sniedzējs</translation>
+        <translation type="obsolete">Sniedzējs</translation>
     </message>
     <message>
         <source>Original filename</source>
-        <translation>Sākotnējais faila nosaukums</translation>
+        <translation type="obsolete">Sākotnējais faila nosaukums</translation>
     </message>
     <message>
         <source>New filename</source>
-        <translation>Jauns faila nosaukums</translation>
+        <translation type="obsolete">Jauns faila nosaukums</translation>
     </message>
     <message>
         <source>Original datasource</source>
-        <translation>Sākotnējais datu avots</translation>
+        <translation type="obsolete">Sākotnējais datu avots</translation>
     </message>
     <message>
         <source>New datasource</source>
-        <translation>Jauns datu avots</translation>
+        <translation type="obsolete">Jauns datu avots</translation>
     </message>
 </context>
 <context>
@@ -29926,11 +29927,11 @@ Tā varētu būt problēma ar jūsu tīkla savienojumu vai arī ar WMS serveri.<
     </message>
     <message>
         <source>Tree</source>
-        <translation type="unfinished">Koks</translation>
+        <translation type="obsolete">Koks</translation>
     </message>
     <message>
         <source>Table</source>
-        <translation type="unfinished">Tabula</translation>
+        <translation type="obsolete">Tabula</translation>
     </message>
     <message>
         <source>Layer</source>
@@ -29949,10 +29950,6 @@ Tā varētu būt problēma ar jūsu tīkla savienojumu vai arī ar WMS serveri.<
         <translation type="unfinished">Vērtība</translation>
     </message>
     <message>
-        <source>Graph</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Clear Results</source>
         <translation type="unfinished"></translation>
     </message>
@@ -29967,6 +29964,18 @@ Tā varētu būt problēma ar jūsu tīkla savienojumu vai arī ar WMS serveri.<
     <message>
         <source>Auto open form</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select identify mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select view mode for raster layers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Skats</translation>
     </message>
 </context>
 <context>
@@ -30098,6 +30107,14 @@ Tā varētu būt problēma ar jūsu tīkla savienojumu vai arī ar WMS serveri.<
     <message>
         <source>Graph</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tree</source>
+        <translation type="unfinished">Koks</translation>
+    </message>
+    <message>
+        <source>feature id</source>
+        <translation type="unfinished">objekta id</translation>
     </message>
 </context>
 <context>
@@ -36848,10 +36865,6 @@ Always network: always load from network and do not check if the cache has a val
         <translation>32</translation>
     </message>
     <message>
-        <source>Add new layers to selected or current group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Attribute table row cache</source>
         <translation type="unfinished"></translation>
     </message>
@@ -38444,7 +38457,7 @@ Error: %4</source>
     <name>QgsPasteTransformations</name>
     <message>
         <source>&amp;Add New Transfer</source>
-        <translation>&amp;Pievienot jaunu pārsūtīšanu</translation>
+        <translation type="obsolete">&amp;Pievienot jaunu pārsūtīšanu</translation>
     </message>
 </context>
 <context>
@@ -39077,6 +39090,10 @@ Pārliecinieties, ka jums ir SELECT tiesības tai tabulai, kas satur PostGIS ģe
     </message>
     <message>
         <source>Specify the size of the preview. If you leave it set to 0, an optimal size will be estimated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The field contains a filename for a picture. The widget will show a preview of this picture.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -44649,7 +44666,7 @@ standard deviation ×</source>
     <name>QgsRelationAddDlgBase</name>
     <message>
         <source>Dialog</source>
-        <translation>Dialogs</translation>
+        <translation type="obsolete">Dialogs</translation>
     </message>
     <message>
         <source>Referencing Field</source>
@@ -44674,6 +44691,10 @@ standard deviation ×</source>
     <message>
         <source>Id</source>
         <translation>Id</translation>
+    </message>
+    <message>
+        <source>Add relation</source>
+        <translation type="unfinished">Pievienot relāciju</translation>
     </message>
 </context>
 <context>
@@ -51174,6 +51195,30 @@ Kļūda bija %2</translation>
         <source>WFS</source>
         <translation type="unfinished">WFS</translation>
     </message>
+    <message>
+        <source>empty response</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WFS service exception:%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unsuccessful service response: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WFS exception report (code=%1 text=%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>missing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unhandled response: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QgsWFSRootItem</name>
@@ -51568,8 +51613,13 @@ Kļūda bija %2</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Failed to parse capabilities:
-</source>
+        <source>The server you are trying to connect to does not seem to be a WMS server. Please check the URL.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Instead of the capabilities string that was expected, the following response has been received:
+
+%1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -52160,6 +52210,10 @@ Response was:
     <message>
         <source>Height</source>
         <translation type="unfinished">Augstums</translation>
+    </message>
+    <message>
+        <source>Field contains a filename or URL for a webpage</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -52963,7 +53017,7 @@ Reason phrase: %2</source>
     <name>QgsWmtsDimensionsBase</name>
     <message>
         <source>Dialog</source>
-        <translation>Dialogs</translation>
+        <translation type="obsolete">Dialogs</translation>
     </message>
     <message>
         <source>Dimension</source>
@@ -52980,6 +53034,10 @@ Reason phrase: %2</source>
     <message>
         <source>Default</source>
         <translation>Noklusēts</translation>
+    </message>
+    <message>
+        <source>Select dimensions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -57119,6 +57177,45 @@ that will be automatically deleted after running.&lt;/li&gt;
 </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;h3&gt;Attribute table&lt;/h3&gt;
+The attribute table displays features of a selected layer. Each row in the table represents one map feature with its attributes shown in several columns. The features in the table can be searched, selected, moved or even edited.  By default the attribute table is a separate window. If you opened it and cannot see it anymore, it is most likely hidden under the main QGIS window. You can make it also a docked window, by checking &lt;label&gt;Open attribute table in a dock window&lt;/label&gt; in &lt;label&gt;Settings &gt; Options &gt; General&lt;/label&gt;.&lt;p&gt;
+
+The number of total number of layer features, filtered features and selected features is printed on the window header.&lt;p&gt;
+&lt;p&gt;
+&lt;a href=&quot;#Selecting&quot;&gt;Selecting&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#Sorting&quot;&gt;Sorting&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#Searching&quot;&gt;Searching&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#Field&quot;&gt;Field Calculator&lt;/a&gt;&lt;br/&gt;
+
+&lt;a name=&quot;Selecting&quot;&gt;
+&lt;h4&gt;Selecting&lt;/h4&gt;
+&lt;/a&gt;
+Rows can be selected by clicking on the row number on the left side of the row. Selecting a row doesn&apos;t change the current cursor position. Multiple rows can be marked by holding the &lt;label&gt;Ctrl&lt;/label&gt; key.&lt;br&gt;
+A continuous selection can be made by holding the &lt;label&gt;Shift&lt;/label&gt; key and clicking on several row headers on the left side of the rows. All rows between the current cursor position and the clicked row are selected.
+
+&lt;a name=&quot;Sorting&quot;&gt;
+&lt;h4&gt;Sorting&lt;/h4&gt;
+&lt;/a&gt;
+Each column can be sorted by clicking on its column header. A small arrow indicates the sort order (downward pointing means descending values from the top row down, upward pointing means ascending values from the top row down).&lt;br&gt;
+Use &lt;label&gt;Move selected to top&lt;/label&gt; button to sort selected rows and display them in first table rows.  To show selected records only, use the check box &lt;label&gt;Show selected records only&lt;/label&gt;.
+
+&lt;a name=&quot;Searching&quot;&gt;
+&lt;h4&gt;Searching&lt;/h4&gt;
+&lt;/a&gt;
+For a simple search by attributes on only one column the &lt;label&gt;Look for&lt;/label&gt; field can be used. Select the field (column) from which the search should be performed from the drop down menu and hit the &lt;label&gt;Search&lt;/label&gt; button.&lt;br&gt;
+For more complex searches use the &lt;label&gt;Advanced search&lt;/label&gt;. This button opens the Query Builder and allows you to select table features matching a SQL-like WHERE clause.
+
+&lt;a name=&quot;Field&quot;&gt;
+&lt;h4&gt;Field Calculator&lt;/h4&gt;
+&lt;/a&gt;
+The &lt;label&gt;Field Calculator&lt;/label&gt; button in the attribute table allows to perform calculations on basis of existing attribute values or defined functions, e.g. to calculate length or area of geometry features.&lt;br&gt;
+The results can be written to a new attribute column or it can be used to update values in an already existing column.&lt;br&gt;
+You have to bring the vector layer in editing mode, before you can click on the &lt;label&gt;Field calculator&lt;/label&gt; icon to open the dialog.
+
+</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dxf2shpConverter</name>
@@ -60098,28 +60195,6 @@ Restricts an input value to a specified range.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;h3&gt;IS expression&lt;/h3&gt;
-Returns 1 if a is the same as b.
-
-&lt;h4&gt;Syntax&lt;/h4&gt;
-&lt;pre&gt;a is b&lt;/pre&gt;
-
-&lt;h4&gt;Arguments&lt;/h4&gt;
-None
-
-&lt;h4&gt;Example&lt;/h4&gt;
-&lt;pre&gt; &apos;A&apos; IS &apos;A&apos;  &amp;rarr; returns 1 &lt;/pre&gt;
-&lt;pre&gt; &apos;A&apos; IS &apos;a&apos;  &amp;rarr; returns 0 &lt;/pre&gt;
-&lt;pre&gt; 4 IS 4      &amp;rarr; returns 1 &lt;/pre&gt;
-&lt;pre&gt; 4 IS 2+2    &amp;rarr; returns 1 &lt;/pre&gt;
-&lt;pre&gt; 4 IS 2      &amp;rarr; returns 0 &lt;/pre&gt;
-&lt;pre&gt; 4 IS 2      &amp;rarr; returns 0 &lt;/pre&gt;
-&lt;pre&gt; $geometry IS NULL  &amp;rarr; returns 0, if your geometry is not NULL&lt;/pre&gt;
-
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;h3&gt;disjoint function&lt;/h3&gt;
 Returns 1 if the geometries do not &quot;spatially intersect&quot; - if they do not share any space together. 
 
@@ -60401,23 +60476,6 @@ geometry &amp;rarr; geometry
 
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;pre&gt; geomToWKT( symDifference(  geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 8 8)&apos; ))   )   &amp;rarr; returns LINESTRING(5 5, 8 8)&lt;/pre&gt;
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;h3&gt;contains function&lt;/h3&gt;
- Returns true if and only if no points of b lie in the exterior of a, and at least one point of the interior of b lies in the interior of a. 
-
-&lt;h4&gt;Syntax&lt;/h4&gt;
-&lt;pre&gt;contains( geometry a , geometry a)&lt;/pre&gt;
-
-&lt;h4&gt;Arguments&lt;/h4&gt;
-geometry &amp;rarr; geometry
-geometry &amp;rarr; geometry
-
-&lt;h4&gt;Example&lt;/h4&gt;
-&lt;pre&gt; contains( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;POINT( 0.5 0.5 )&apos; ))    &amp;rarr; returns 1&lt;/pre&gt;
-&lt;pre&gt; contains( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))          &amp;rarr; returns 0&lt;/pre&gt;
 </source>
         <translation type="unfinished"></translation>
     </message>
@@ -60706,6 +60764,44 @@ geom &amp;rarr; a geometry
 
 &lt;h4&gt;Example&lt;/h4&gt;
 &lt;pre&gt; ymin($geometry) &amp;rarr; returns minimum y coordinate of $geometry&lt;/pre&gt;
+
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;h3&gt;contains function&lt;/h3&gt;
+Returns true if and only if no points of b lie in the exterior of a, and at least one point of the interior of b lies in the interior of a. 
+
+&lt;h4&gt;Syntax&lt;/h4&gt;
+&lt;pre&gt;contains( geometry a , geometry b)&lt;/pre&gt;
+
+&lt;h4&gt;Arguments&lt;/h4&gt;
+geometry &amp;rarr; geometry
+geometry &amp;rarr; geometry
+
+&lt;h4&gt;Example&lt;/h4&gt;
+&lt;pre&gt; contains( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;POINT( 0.5 0.5 )&apos; ))    &amp;rarr; returns 1&lt;/pre&gt;
+&lt;pre&gt; contains( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))          &amp;rarr; returns 0&lt;/pre&gt;
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;h3&gt;IS expression&lt;/h3&gt;
+Returns 1 if a is the same as b.
+
+&lt;h4&gt;Syntax&lt;/h4&gt;
+&lt;pre&gt;a IS b&lt;/pre&gt;
+
+&lt;h4&gt;Arguments&lt;/h4&gt;
+None
+
+&lt;h4&gt;Example&lt;/h4&gt;
+&lt;pre&gt; &apos;A&apos; IS &apos;A&apos;  &amp;rarr; returns 1 &lt;/pre&gt;
+&lt;pre&gt; &apos;A&apos; IS &apos;a&apos;  &amp;rarr; returns 0 &lt;/pre&gt;
+&lt;pre&gt; 4 IS 4      &amp;rarr; returns 1 &lt;/pre&gt;
+&lt;pre&gt; 4 IS 2+2    &amp;rarr; returns 1 &lt;/pre&gt;
+&lt;pre&gt; 4 IS 2      &amp;rarr; returns 0 &lt;/pre&gt;
+&lt;pre&gt; $geometry IS NULL  &amp;rarr; returns 0, if your geometry is not NULL&lt;/pre&gt;
 
 </source>
         <translation type="unfinished"></translation>

@@ -186,6 +186,7 @@ void QgsComposerMap::draw( QPainter *painter, const QgsRectangle& extent, const 
   jobMapSettings.setMapUnits( ms.mapUnits() );
   jobMapSettings.setBackgroundColor( Qt::transparent );
   jobMapSettings.setShowSelection( false );
+  jobMapSettings.setOutputImageFormat( ms.outputImageFormat() );
 
   //set layers to render
   QStringList theLayerSet = layersToRender();
@@ -220,8 +221,10 @@ void QgsComposerMap::draw( QPainter *painter, const QgsRectangle& extent, const 
 
   // render
   QgsMapRendererCustomPainterJob job( jobMapSettings, painter );
-  job.start();
-  job.waitForFinished();
+  // Render the map in this thread. This is done because of problems
+  // with printing to printer on Windows (printing to PDF is fine though).
+  // Raster images were not displayed - see #10599
+  job.renderSynchronously();
 }
 
 void QgsComposerMap::cache( void )
@@ -654,6 +657,18 @@ void QgsComposerMap::zoomContent( int delta, double x, double y )
   currentMapExtent()->setYMaximum( centerY + newIntervalY / 2 );
   currentMapExtent()->setYMinimum( centerY - newIntervalY / 2 );
 
+  if ( mAtlasDriven && mAtlasScalingMode == Fixed && mComposition->atlasMode() != QgsComposition::AtlasOff )
+  {
+    //if map is atlas controlled and set to fixed scaling mode, then scale changes should be treated as permanant
+    //and also apply to the map's original extent (see #9602)
+    //we can't use the scaleRatio calculated earlier, as the scale can vary depending on extent for geographic coordinate systems
+    QgsScaleCalculator calculator;
+    calculator.setMapUnits( mComposition->mapSettings().mapUnits() );
+    calculator.setDpi( 25.4 );  //QGraphicsView units are mm
+    double scaleRatio = scale() / calculator.calculate( mExtent, rect().width() );
+    mExtent.scale( scaleRatio );
+  }
+
   cache();
   update();
   emit itemChanged();
@@ -788,6 +803,19 @@ void QgsComposerMap::setNewScale( double scaleDenominator )
 
   double scaleRatio = scaleDenominator / currentScaleDenominator;
   currentMapExtent()->scale( scaleRatio );
+
+  if ( mAtlasDriven && mAtlasScalingMode == Fixed && mComposition->atlasMode() != QgsComposition::AtlasOff )
+  {
+    //if map is atlas controlled and set to fixed scaling mode, then scale changes should be treated as permanant
+    //and also apply to the map's original extent (see #9602)
+    //we can't use the scaleRatio calculated earlier, as the scale can vary depending on extent for geographic coordinate systems
+    QgsScaleCalculator calculator;
+    calculator.setMapUnits( mComposition->mapSettings().mapUnits() );
+    calculator.setDpi( 25.4 );  //QGraphicsView units are mm
+    scaleRatio = scaleDenominator / calculator.calculate( mExtent, rect().width() );
+    mExtent.scale( scaleRatio );
+  }
+
   mCacheUpdated = false;
   cache();
   update();
@@ -1179,7 +1207,7 @@ bool QgsComposerMap::readXML( const QDomElement& itemElem, const QDomDocument& d
     mKeepLayerSet = false;
   }
 
-  QString drawCanvasItemsFlag = itemElem.attribute( "drawCanvasItems" );
+  QString drawCanvasItemsFlag = itemElem.attribute( "drawCanvasItems", "true" );
   if ( drawCanvasItemsFlag.compare( "true", Qt::CaseInsensitive ) == 0 )
   {
     mDrawCanvasItems = true;
@@ -1405,21 +1433,46 @@ void QgsComposerMap::drawGrid( QPainter* p )
   QRectF thisPaintRect = QRectF( 0, 0, QGraphicsRectItem::rect().width(), QGraphicsRectItem::rect().height() );
   p->setClipRect( thisPaintRect );
 
+  QPaintDevice* thePaintDevice = p->device();
+  if ( !thePaintDevice )
+  {
+    return;
+  }
+
   // set the blend mode for drawing grid lines
   p->save();
   p->setCompositionMode( mGridBlendMode );
+  p->setRenderHint( QPainter::Antialiasing );
+
+  //setup painter scaling to dots so that raster symbology is drawn to scale
+  double dotsPerMM = thePaintDevice->logicalDpiX() / 25.4;
+  p->scale( 1 / dotsPerMM, 1 / dotsPerMM ); // scale painter from mm to dots
+
+  //setup render context
+  QgsMapSettings ms = mComposition->mapSettings();
+  //context units should be in dots
+  ms.setOutputSize( QSizeF( rect().width() * dotsPerMM, rect().height() * dotsPerMM ).toSize() );
+  ms.setExtent( *currentMapExtent() );
+  ms.setOutputDpi( p->device()->logicalDpiX() );
+  QgsRenderContext context = QgsRenderContext::fromMapSettings( ms );
+  context.setForceVectorOutput( true );
+  context.setPainter( p );
 
   //simpler approach: draw vertical lines first, then horizontal ones
   if ( mGridStyle == QgsComposerMap::Solid )
   {
+    //need to scale line to dots, rather then mm, since the painter has been scaled to dots
+    QLineF line;
     for ( ; vIt != verticalLines.constEnd(); ++vIt )
     {
-      drawGridLine( vIt->second, p );
+      line = QLineF( vIt->second.p1() * dotsPerMM, vIt->second.p2() * dotsPerMM )  ;
+      drawGridLine( line, context );
     }
 
     for ( ; hIt != horizontalLines.constEnd(); ++hIt )
     {
-      drawGridLine( hIt->second, p );
+      line = QLineF( hIt->second.p1() * dotsPerMM, hIt->second.p2() * dotsPerMM )  ;
+      drawGridLine( line, context );
     }
   }
   else //cross
@@ -1429,7 +1482,7 @@ void QgsComposerMap::drawGrid( QPainter* p )
     {
       //start mark
       crossEnd1 = QgsSymbolLayerV2Utils::pointOnLineWithDistance( vIt->second.p1(), vIt->second.p2(), mCrossLength );
-      drawGridLine( QLineF( vIt->second.p1(), crossEnd1 ), p );
+      drawGridLine( QLineF( vIt->second.p1() * dotsPerMM, crossEnd1 * dotsPerMM ), context );
 
       //test for intersection with every horizontal line
       hIt = horizontalLines.constBegin();
@@ -1439,12 +1492,12 @@ void QgsComposerMap::drawGrid( QPainter* p )
         {
           crossEnd1 = QgsSymbolLayerV2Utils::pointOnLineWithDistance( intersectionPoint, vIt->second.p1(), mCrossLength );
           crossEnd2 = QgsSymbolLayerV2Utils::pointOnLineWithDistance( intersectionPoint, vIt->second.p2(), mCrossLength );
-          drawGridLine( QLineF( crossEnd1, crossEnd2 ), p );
+          drawGridLine( QLineF( crossEnd1 * dotsPerMM, crossEnd2 * dotsPerMM ), context );
         }
       }
       //end mark
       QPointF crossEnd2 = QgsSymbolLayerV2Utils::pointOnLineWithDistance( vIt->second.p2(), vIt->second.p1(), mCrossLength );
-      drawGridLine( QLineF( vIt->second.p2(), crossEnd2 ), p );
+      drawGridLine( QLineF( vIt->second.p2() * dotsPerMM, crossEnd2 * dotsPerMM ), context );
     }
 
     hIt = horizontalLines.constBegin();
@@ -1452,7 +1505,7 @@ void QgsComposerMap::drawGrid( QPainter* p )
     {
       //start mark
       crossEnd1 = QgsSymbolLayerV2Utils::pointOnLineWithDistance( hIt->second.p1(), hIt->second.p2(), mCrossLength );
-      drawGridLine( QLineF( hIt->second.p1(), crossEnd1 ), p );
+      drawGridLine( QLineF( hIt->second.p1() * dotsPerMM, crossEnd1 * dotsPerMM ), context );
 
       vIt = verticalLines.constBegin();
       for ( ; vIt != verticalLines.constEnd(); ++vIt )
@@ -1461,12 +1514,12 @@ void QgsComposerMap::drawGrid( QPainter* p )
         {
           crossEnd1 = QgsSymbolLayerV2Utils::pointOnLineWithDistance( intersectionPoint, hIt->second.p1(), mCrossLength );
           crossEnd2 = QgsSymbolLayerV2Utils::pointOnLineWithDistance( intersectionPoint, hIt->second.p2(), mCrossLength );
-          drawGridLine( QLineF( crossEnd1, crossEnd2 ), p );
+          drawGridLine( QLineF( crossEnd1 * dotsPerMM, crossEnd2 * dotsPerMM ), context );
         }
       }
       //end mark
       crossEnd1 = QgsSymbolLayerV2Utils::pointOnLineWithDistance( hIt->second.p2(), hIt->second.p1(), mCrossLength );
-      drawGridLine( QLineF( hIt->second.p2(), crossEnd1 ), p );
+      drawGridLine( QLineF( hIt->second.p2() * dotsPerMM, crossEnd1 * dotsPerMM ), context );
     }
   }
   // reset composition mode
@@ -1502,24 +1555,15 @@ void QgsComposerMap::drawGridFrame( QPainter* p, const QList< QPair< double, QLi
   drawGridFrameBorder( p, bottomGridFrame, QgsComposerMap::Bottom );
 }
 
-void QgsComposerMap::drawGridLine( const QLineF& line, QPainter* p )
+void QgsComposerMap::drawGridLine( const QLineF& line, QgsRenderContext& context )
 {
-  if ( !mGridLineSymbol || !p )
+  if ( !mGridLineSymbol )
   {
     return;
   }
-
-  //setup render context
-  QgsRenderContext context;
-  context.setPainter( p );
   if ( mPreviewMode == Rectangle )
   {
     return;
-  }
-  else
-  {
-    context.setScaleFactor( 1.0 );
-    context.setRasterScaleFactor( mComposition->printResolution() / 25.4 );
   }
 
   QPolygonF poly;
@@ -2529,22 +2573,34 @@ void QgsComposerMap::drawOverviewMapExtent( QPainter* p )
   QgsRectangle thisExtent = *currentMapExtent();
   QgsRectangle intersectRect = thisExtent.intersect( &otherExtent );
 
-  QgsRenderContext context;
+  //setup painter scaling to dots so that raster symbology is drawn to scale
+  double dotsPerMM = p->device()->logicalDpiX() / 25.4;
+
+  //setup render context
+  QgsMapSettings ms = mComposition->mapSettings();
+  //context units should be in dots
+  ms.setOutputSize( QSizeF( rect().width() * dotsPerMM, rect().height() * dotsPerMM ).toSize() );
+  ms.setExtent( *currentMapExtent() );
+  ms.setOutputDpi( p->device()->logicalDpiX() );
+  QgsRenderContext context = QgsRenderContext::fromMapSettings( ms );
+  context.setForceVectorOutput( true );
   context.setPainter( p );
-  context.setScaleFactor( 1.0 );
-  context.setRasterScaleFactor( mComposition->printResolution() / 25.4 );
 
   p->save();
   p->setCompositionMode( mOverviewBlendMode );
   p->translate( mXOffset, mYOffset );
+  p->scale( 1 / dotsPerMM, 1 / dotsPerMM ); // scale painter from mm to dots
+  p->setRenderHint( QPainter::Antialiasing );
+
   mOverviewFrameMapSymbol->startRender( context );
 
   //construct a polygon corresponding to the intersecting map extent
+  //need to scale line to dots, rather then mm, since the painter has been scaled to dots
   QPolygonF intersectPolygon;
-  double x = ( intersectRect.xMinimum() - thisExtent.xMinimum() ) / thisExtent.width() * rect().width();
-  double y = ( thisExtent.yMaximum() - intersectRect.yMaximum() ) / thisExtent.height() * rect().height();
-  double width = intersectRect.width() / thisExtent.width() * rect().width();
-  double height = intersectRect.height() / thisExtent.height() * rect().height();
+  double x = dotsPerMM * ( intersectRect.xMinimum() - thisExtent.xMinimum() ) / thisExtent.width() * rect().width();
+  double y = dotsPerMM * ( thisExtent.yMaximum() - intersectRect.yMaximum() ) / thisExtent.height() * rect().height();
+  double width = dotsPerMM * intersectRect.width() / thisExtent.width() * rect().width();
+  double height = dotsPerMM * intersectRect.height() / thisExtent.height() * rect().height();
   intersectPolygon << QPointF( x, y ) << QPointF( x + width, y ) << QPointF( x + width, y + height ) << QPointF( x, y + height ) << QPointF( x, y );
 
   QList<QPolygonF> rings; //empty list
@@ -2558,7 +2614,7 @@ void QgsComposerMap::drawOverviewMapExtent( QPainter* p )
     //We are inverting the overview frame (ie, shading outside the intersecting extent)
     //Construct a polygon corresponding to the overview map extent
     QPolygonF outerPolygon;
-    outerPolygon << QPointF( 0, 0 ) << QPointF( rect().width(), 0 ) << QPointF( rect().width(), rect().height() ) << QPointF( 0, rect().height() ) << QPointF( 0, 0 );
+    outerPolygon << QPointF( 0, 0 ) << QPointF( rect().width() * dotsPerMM, 0 ) << QPointF( rect().width() * dotsPerMM, rect().height() * dotsPerMM ) << QPointF( 0, rect().height() * dotsPerMM ) << QPointF( 0, 0 );
 
     //Intersecting extent is an inner ring for the shaded area
     rings.append( intersectPolygon );

@@ -32,6 +32,7 @@ QgsLayerTreeModel::QgsLayerTreeModel( QgsLayerTreeGroup* rootNode, QObject *pare
     : QAbstractItemModel( parent )
     , mRootNode( rootNode )
     , mFlags( ShowSymbology )
+    , mAutoCollapseSymNodesCount( -1 )
 {
   Q_ASSERT( mRootNode );
 
@@ -40,6 +41,8 @@ QgsLayerTreeModel::QgsLayerTreeModel( QgsLayerTreeGroup* rootNode, QObject *pare
   connect( mRootNode, SIGNAL( willRemoveChildren( QgsLayerTreeNode*, int, int ) ), this, SLOT( nodeWillRemoveChildren( QgsLayerTreeNode*, int, int ) ) );
   connect( mRootNode, SIGNAL( removedChildren( QgsLayerTreeNode*, int, int ) ), this, SLOT( nodeRemovedChildren() ) );
   connect( mRootNode, SIGNAL( visibilityChanged( QgsLayerTreeNode*, Qt::CheckState ) ), this, SLOT( nodeVisibilityChanged( QgsLayerTreeNode* ) ) );
+
+  mFontLayer.setBold( true );
 }
 
 QgsLayerTreeModel::~QgsLayerTreeModel()
@@ -244,11 +247,9 @@ QVariant QgsLayerTreeModel::data( const QModelIndex &index, int role ) const
   }
   else if ( role == Qt::FontRole )
   {
-    QFont f;
+    QFont f( QgsLayerTree::isLayer( node ) ? mFontLayer : ( QgsLayerTree::isGroup( node ) ? mFontGroup : QFont() ) );
     if ( node->customProperty( "embedded" ).toInt() )
       f.setItalic( true );
-    if ( QgsLayerTree::isLayer( node ) )
-      f.setBold( true );
     if ( index == mCurrentIndex )
       f.setUnderline( true );
     return f;
@@ -429,11 +430,17 @@ void QgsLayerTreeModel::refreshLayerSymbology( QgsLayerTreeLayer* nodeLayer )
   emit dataChanged( idx, idx );
 
   // update children
-  beginRemoveRows( idx, 0, rowCount( idx ) - 1 );
+  int oldNodeCount = rowCount( idx );
+  beginRemoveRows( idx, 0, oldNodeCount - 1 );
   removeSymbologyFromLayer( nodeLayer );
   endRemoveRows();
 
   addSymbologyToLayer( nodeLayer );
+  int newNodeCount = rowCount( idx );
+
+  // automatic collapse of symbology nodes - useful if a layer has many symbology nodes
+  if ( mAutoCollapseSymNodesCount != -1 && oldNodeCount != newNodeCount && newNodeCount >= mAutoCollapseSymNodesCount )
+    nodeLayer->setExpanded( false );
 }
 
 QModelIndex QgsLayerTreeModel::currentIndex() const
@@ -450,6 +457,45 @@ void QgsLayerTreeModel::setCurrentIndex( const QModelIndex& currentIndex )
     emit dataChanged( oldIndex, oldIndex );
   if ( currentIndex.isValid() )
     emit dataChanged( currentIndex, currentIndex );
+}
+
+
+void QgsLayerTreeModel::setLayerTreeNodeFont( int nodeType, const QFont& font )
+{
+  if ( nodeType == QgsLayerTreeNode::NodeGroup )
+  {
+    if ( mFontGroup != font )
+    {
+      mFontGroup = font;
+      recursivelyEmitDataChanged();
+    }
+  }
+  else if ( nodeType == QgsLayerTreeNode::NodeLayer )
+  {
+    if ( mFontLayer != font )
+    {
+      mFontLayer = font;
+      recursivelyEmitDataChanged();
+    }
+  }
+  else
+  {
+    QgsDebugMsg( "invalid node type" );
+  }
+}
+
+
+QFont QgsLayerTreeModel::layerTreeNodeFont( int nodeType ) const
+{
+  if ( nodeType == QgsLayerTreeNode::NodeGroup )
+    return mFontGroup;
+  else if ( nodeType == QgsLayerTreeNode::NodeLayer )
+    return mFontLayer;
+  else
+  {
+    QgsDebugMsg( "invalid node type" );
+    return QFont();
+  }
 }
 
 void QgsLayerTreeModel::nodeWillAddChildren( QgsLayerTreeNode* node, int indexFrom, int indexTo )
@@ -545,6 +591,9 @@ void QgsLayerTreeModel::layerNeedsUpdate()
 
   QModelIndex index = node2index( nodeLayer );
   emit dataChanged( index, index );
+
+  if ( nodeLayer->customProperty( "showFeatureCount" ).toInt() )
+    refreshLayerSymbology( nodeLayer );
 }
 
 
@@ -595,6 +644,9 @@ void QgsLayerTreeModel::addSymbologyToVectorLayer( QgsLayerTreeLayer* nodeL )
   QSize iconSize( 16, 16 );
   QgsLegendSymbolList items = r->legendSymbolItems();
 
+  if ( items.count() == 0 )
+    return;
+
   beginInsertRows( node2index( nodeL ), 0, items.count() - 1 );
 
   typedef QPair<QString, QgsSymbolV2*> XY;
@@ -628,6 +680,9 @@ void QgsLayerTreeModel::addSymbologyToRasterLayer( QgsLayerTreeLayer* nodeL )
     if ( !img.isNull() )
       lst << new QgsLayerTreeModelSymbologyNode( nodeL, tr( "Double-click to view legend" ) );
   }
+
+  if ( rasterItemList.count() == 0 )
+    return;
 
   // Paletted raster may have many colors, for example UInt16 may have 65536 colors
   // and it is very slow, so we limit max count
@@ -667,6 +722,9 @@ void QgsLayerTreeModel::addSymbologyToPluginLayer( QgsLayerTreeLayer* nodeL )
   QSize iconSize( 16, 16 );
   QgsLegendSymbologyList symbologyList = player->legendSymbologyItems( iconSize );
 
+  if ( symbologyList.count() == 0 )
+    return;
+
   beginInsertRows( node2index( nodeL ), 0, symbologyList.count() - 1 );
 
   typedef QPair<QString, QPixmap> XY;
@@ -692,6 +750,13 @@ void QgsLayerTreeModel::connectToLayer( QgsLayerTreeLayer* nodeLayer )
   if ( testFlag( ShowSymbology ) )
   {
     addSymbologyToLayer( nodeLayer );
+
+    // automatic collapse of symbology nodes - useful if a layer has many symbology nodes
+    if ( !mRootNode->customProperty( "loading" ).toBool() )
+    {
+      if ( mAutoCollapseSymNodesCount != -1 && rowCount( node2index( nodeLayer ) )  >= mAutoCollapseSymNodesCount )
+        nodeLayer->setExpanded( false );
+    }
   }
 
   QgsMapLayer* layer = nodeLayer->layer();
@@ -705,6 +770,7 @@ void QgsLayerTreeModel::connectToLayer( QgsLayerTreeLayer* nodeLayer )
     connect( layer, SIGNAL( editingStarted() ), this, SLOT( layerNeedsUpdate() ), Qt::UniqueConnection );
     connect( layer, SIGNAL( editingStopped() ), this, SLOT( layerNeedsUpdate() ), Qt::UniqueConnection );
     connect( layer, SIGNAL( layerModified() ), this, SLOT( layerNeedsUpdate() ), Qt::UniqueConnection );
+    connect( layer, SIGNAL( layerNameChanged() ), this, SLOT( layerNeedsUpdate() ), Qt::UniqueConnection );
   }
 }
 
@@ -742,6 +808,20 @@ void QgsLayerTreeModel::disconnectFromLayer( QgsLayerTreeLayer* nodeLayer )
     // last instance of the layer in the tree: disconnect from all signals from layer!
     disconnect( nodeLayer->layer(), 0, this, 0 );
   }
+}
+
+void QgsLayerTreeModel::recursivelyEmitDataChanged( const QModelIndex& idx )
+{
+  QgsLayerTreeNode* node = index2node( idx );
+  if ( !node )
+    return;
+
+  int count = node->children().count();
+  if ( count == 0 )
+    return;
+  emit dataChanged( index( 0, 0, idx ), index( count - 1, 0, idx ) );
+  for ( int i = 0; i < count; ++i )
+    recursivelyEmitDataChanged( index( i, 0, idx ) );
 }
 
 

@@ -30,7 +30,7 @@ QgsAtlasCompositionWidget::QgsAtlasCompositionWidget( QWidget* parent, QgsCompos
 {
   setupUi( this );
 
-  mAtlasCoverageLayerComboBox->setFilters( QgsMapLayerProxyModel::HasGeometry );
+  mAtlasCoverageLayerComboBox->setFilters( QgsMapLayerProxyModel::VectorLayer );
 
   connect( mAtlasCoverageLayerComboBox, SIGNAL( layerChanged( QgsMapLayer* ) ), mAtlasSortFeatureKeyComboBox, SLOT( setLayer( QgsMapLayer* ) ) );
   connect( mAtlasCoverageLayerComboBox, SIGNAL( layerChanged( QgsMapLayer* ) ), this, SLOT( changeCoverageLayer( QgsMapLayer* ) ) );
@@ -123,8 +123,18 @@ void QgsAtlasCompositionWidget::on_mAtlasFilenameExpressionButton_clicked()
     QString expression =  exprDlg.expressionText();
     if ( !expression.isEmpty() )
     {
-      // will emit a textChanged signal
+      //set atlas filename expression
       mAtlasFilenamePatternEdit->setText( expression );
+      if ( ! atlasMap->setFilenamePattern( expression ) )
+      {
+        //expression could not be set
+        QMessageBox::warning( this
+                              , tr( "Could not evaluate filename pattern" )
+                              , tr( "Could not set filename pattern as '%1'.\nParser error:\n%2" )
+                              .arg( expression )
+                              .arg( atlasMap->filenamePatternErrorString() )
+                            );
+      }
     }
   }
 }

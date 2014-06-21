@@ -1,7 +1,23 @@
+/***************************************************************************
+  qgsmapsettings.h
+  --------------------------------------
+  Date                 : December 2013
+  Copyright            : (C) 2013 by Martin Dobias
+  Email                : wonder dot sk at gmail dot com
+ ***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+
 #ifndef QGSMAPSETTINGS_H
 #define QGSMAPSETTINGS_H
 
 #include <QColor>
+#include <QImage>
 #include <QSize>
 #include <QStringList>
 
@@ -87,6 +103,11 @@ class CORE_EXPORT QgsMapSettings
     void setFlag( Flag flag, bool on = true );
     Flags flags() const;
     bool testFlag( Flag flag ) const;
+
+    //! sets format of internal QImage
+    void setOutputImageFormat( QImage::Format format ) { mImageFormat = format; }
+    //! format of internal QImage, default QImage::Format_ARGB32_Premultiplied
+    QImage::Format outputImageFormat() const { return mImageFormat; }
 
     bool hasValidSettings() const;
     QgsRectangle visibleExtent() const;
@@ -177,6 +198,8 @@ class CORE_EXPORT QgsMapSettings
     bool mShowSelection;
 
     Flags mFlags;
+
+    QImage::Format mImageFormat;
 
     // derived properties
     bool mValid; //!< whether the actual settings are valid (set in updateDerived())
