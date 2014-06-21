@@ -7236,10 +7236,6 @@ Shift+クリックで非表示
         <translation type="obsolete">モデルにはアルゴリズムまたはパラメータが無いので実行できません</translation>
     </message>
     <message>
-        <source>Model doesn&apos;t contains any algorithms and/or parameters and can&apos;t be executed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save Model As Image</source>
         <translation>モデルをイメージとして保存する</translation>
     </message>
@@ -7278,13 +7274,13 @@ Shift+クリックで非表示
                                      original location (probably you do not 
                                      have permission to do it). Please, use 
                                      the &apos;Save as...&apos; option.</source>
-        <translation type="obsolete">このモデルはオリジナルの場所に保存できません (多分あなたが保存の権限を持っていません). ’名前をつけて保存&apos;オプションを利用して下さい.</translation>
+        <translation>このモデルはオリジナルの場所に保存できません (多分あなたが保存の権限を持っていません). ’名前をつけて保存&apos;オプションを利用して下さい.</translation>
     </message>
     <message>
         <source>The selected model could not be loaded.
 
                                  Wrong line: %s</source>
-        <translation type="obsolete">選択されたモデルをロードできませんでした.
+        <translation>選択されたモデルをロードできませんでした.
 
 不正な行: %s</translation>
     </message>
@@ -7293,7 +7289,7 @@ Shift+クリックで非表示
         <translation>モデルを保存できません</translation>
     </message>
     <message>
-        <source>This model can&apos;t be saved in its original location (probably you do not have permission to do it). Please, use the &apos;Save as...&apos; option.</source>
+        <source>Model doesn&apos;t contains any algorithms and/or parameters and can&apos;t be executed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7311,11 +7307,6 @@ Shift+クリックで非表示
     <message>
         <source>Could not open model</source>
         <translation>モデルを開けませんでした</translation>
-    </message>
-    <message>
-        <source>The selected model could not be loaded.
-Wrong line: %s</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Parameters</source>
@@ -10837,8 +10828,8 @@ You are seeing this message most likely because you have no DISPLAY environment 
         <translation>結果のバッファがありません</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2417"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2905"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2406"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2894"/>
         <location filename="../src/providers/postgres/qgspostgresprovider.cpp" line="2887"/>
         <location filename="../src/providers/postgres/qgspostgresprovider.cpp" line="3258"/>
         <location filename="../src/providers/postgres/qgspostgresprovider.cpp" line="3321"/>
@@ -10853,12 +10844,12 @@ You are seeing this message most likely because you have no DISPLAY environment 
         <translation>データベースへの接続に失敗しました</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2429"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2418"/>
         <source>No owner name found</source>
         <translation>owner名が見つかりません</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2616"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2605"/>
         <location filename="../src/providers/postgres/qgspostgresprovider.cpp" line="3017"/>
         <source>Creation of data source %1 failed: 
 %2</source>
@@ -10866,37 +10857,37 @@ You are seeing this message most likely because you have no DISPLAY environment 
 %2</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2650"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2639"/>
         <location filename="../src/providers/postgres/qgspostgresprovider.cpp" line="3035"/>
         <source>Loading of the layer %1 failed</source>
         <translation>レイヤ%1のロードに失敗しました</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2693"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2682"/>
         <source>Field name clash found (%1 not remappable)</source>
         <translation>壊れているフィールド名が見つかりました（&apos;%1&apos;を変換出来ません）</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2912"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2901"/>
         <source>%1 not owner of the table %2.</source>
         <translation>%1はテーブル%2のownerではありません.</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2928"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2917"/>
         <source>Unable to determine number of geometry columns of layer %1.%2: 
 %3</source>
         <translation>レイヤ中のジオメトリカラムの数がわかりません %1.%2: 
 %3</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2961"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2950"/>
         <source>Unable to delete layer %1.%2: 
 %3</source>
         <translation>レイヤ%2(owner=%1)を削除できませんでした
 %3</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2971"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2960"/>
         <source>Unable to clean metadata %1.%2: 
 %3</source>
         <translation>%2(owner=%1)のメタデータを消去できません
@@ -10988,14 +10979,14 @@ You are seeing this message most likely because you have no DISPLAY environment 
     </message>
     <message>
         <location filename="../src/providers/mssql/qgsmssqlprovider.cpp" line="1712"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2729"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2718"/>
         <location filename="../src/providers/postgres/qgspostgresprovider.cpp" line="3080"/>
         <source>Unsupported type for field %1</source>
         <translation>フィールド%1はサポートされていない型です</translation>
     </message>
     <message>
         <location filename="../src/providers/mssql/qgsmssqlprovider.cpp" line="1726"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2748"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2737"/>
         <location filename="../src/providers/postgres/qgspostgresprovider.cpp" line="3100"/>
         <source>Creation of fields failed</source>
         <translation>フィールドの作成に失敗しました</translation>
@@ -14657,7 +14648,7 @@ Parser error:
     <message>
         <location filename="../src/ui/qgsattributetypeedit.ui" line="14"/>
         <source>Edit Widget Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>ウィジェットプロパティの編集</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsattributetypeedit.ui" line="43"/>
@@ -15265,17 +15256,17 @@ Database:%2</source>
 <context>
     <name>QgsCategorizedSymbolRendererV2Model</name>
     <message>
-        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="186"/>
+        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="181"/>
         <source>Symbol</source>
         <translation>シンボル</translation>
     </message>
     <message>
-        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="186"/>
+        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="181"/>
         <source>Value</source>
         <translation>値</translation>
     </message>
     <message>
-        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="186"/>
+        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="181"/>
         <source>Label</source>
         <translation>ラベル</translation>
     </message>
@@ -15283,48 +15274,48 @@ Database:%2</source>
 <context>
     <name>QgsCategorizedSymbolRendererV2Widget</name>
     <message>
-        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="382"/>
+        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="374"/>
         <source>Random colors</source>
         <translation>ランダムカラー</translation>
     </message>
     <message>
-        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="427"/>
+        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="419"/>
         <source>Symbol levels...</source>
         <translation>シンボルレベル...</translation>
     </message>
     <message>
-        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="637"/>
+        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="629"/>
         <source>High number of classes!</source>
         <translation>クラスが多いです!</translation>
     </message>
     <message>
-        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="638"/>
+        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="630"/>
         <source>Classification would yield %1 entries which might not be expected. Continue?</source>
         <translation>%1エントリの分類が発生します. 続けますか?</translation>
     </message>
     <message>
-        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="658"/>
-        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="660"/>
+        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="650"/>
+        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="652"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
     <message>
-        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="658"/>
+        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="650"/>
         <source>There are no available color ramps. You can add them in Style Manager.</source>
         <translation>利用できるカラーランプがありません。スタイルマネージャでそれらを追加できます。</translation>
     </message>
     <message>
-        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="660"/>
+        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="652"/>
         <source>The selected color ramp is not available.</source>
         <translation>選択されたカラーランプは利用できません。</translation>
     </message>
     <message>
-        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="674"/>
+        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="666"/>
         <source>Confirm Delete</source>
         <translation>削除を確認</translation>
     </message>
     <message>
-        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="675"/>
+        <location filename="../src/gui/symbology-ng/qgscategorizedsymbolrendererv2widget.cpp" line="667"/>
         <source>The classification field was changed from &apos;%1&apos; to &apos;%2&apos;.
 Should the existing classes be deleted before classification?</source>
         <translation>分類フィールドが&apos;%1&apos;から&apos;%2&apos;に変更されました。
@@ -16121,32 +16112,32 @@ Please try a lower resolution or a smaller papersize</source>
 <context>
     <name>QgsComposerAttributeTableColumnModel</name>
     <message>
-        <location filename="../src/core/composer/qgscomposerattributetablemodel.cpp" line="108"/>
+        <location filename="../src/core/composer/qgscomposerattributetablemodel.cpp" line="116"/>
         <source>Center</source>
         <translation>中央</translation>
     </message>
     <message>
-        <location filename="../src/core/composer/qgscomposerattributetablemodel.cpp" line="110"/>
+        <location filename="../src/core/composer/qgscomposerattributetablemodel.cpp" line="118"/>
         <source>Right</source>
         <translation>右</translation>
     </message>
     <message>
-        <location filename="../src/core/composer/qgscomposerattributetablemodel.cpp" line="113"/>
+        <location filename="../src/core/composer/qgscomposerattributetablemodel.cpp" line="121"/>
         <source>Left</source>
         <translation>左</translation>
     </message>
     <message>
-        <location filename="../src/core/composer/qgscomposerattributetablemodel.cpp" line="147"/>
+        <location filename="../src/core/composer/qgscomposerattributetablemodel.cpp" line="155"/>
         <source>Attribute</source>
         <translation>属性</translation>
     </message>
     <message>
-        <location filename="../src/core/composer/qgscomposerattributetablemodel.cpp" line="150"/>
+        <location filename="../src/core/composer/qgscomposerattributetablemodel.cpp" line="158"/>
         <source>Heading</source>
         <translation>ヘッディング</translation>
     </message>
     <message>
-        <location filename="../src/core/composer/qgscomposerattributetablemodel.cpp" line="153"/>
+        <location filename="../src/core/composer/qgscomposerattributetablemodel.cpp" line="161"/>
         <source>Alignment</source>
         <translation>配置</translation>
     </message>
@@ -17268,7 +17259,7 @@ Please try a lower resolution or a smaller papersize</source>
     <message>
         <location filename="../src/ui/qgscomposeritemwidgetbase.ui" line="331"/>
         <source> mm</source>
-        <translation type="unfinished"> mm</translation>
+        <translation> mm</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposeritemwidgetbase.ui" line="338"/>
@@ -17331,7 +17322,7 @@ Please try a lower resolution or a smaller papersize</source>
     <message>
         <location filename="../src/app/composer/qgscomposerlabelwidget.cpp" line="123"/>
         <source>Label color changed</source>
-        <translation type="unfinished"></translation>
+        <translation>ラベルカラーが変更されました</translation>
     </message>
     <message>
         <location filename="../src/app/composer/qgscomposerlabelwidget.cpp" line="148"/>
@@ -18419,7 +18410,7 @@ Please try a lower resolution or a smaller papersize</source>
         <location filename="../src/ui/qgscomposermapwidgetbase.ui" line="581"/>
         <location filename="../src/ui/qgscomposermapwidgetbase.ui" line="765"/>
         <source> mm</source>
-        <translation type="unfinished"> mm</translation>
+        <translation> mm</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposermapwidgetbase.ui" line="487"/>
@@ -19353,22 +19344,22 @@ Please try a lower resolution or a smaller papersize</source>
 <context>
     <name>QgsComposerTableSortColumnsProxyModel</name>
     <message>
-        <location filename="../src/core/composer/qgscomposerattributetablemodel.cpp" line="499"/>
+        <location filename="../src/core/composer/qgscomposerattributetablemodel.cpp" line="507"/>
         <source>Descending</source>
         <translation>下</translation>
     </message>
     <message>
-        <location filename="../src/core/composer/qgscomposerattributetablemodel.cpp" line="502"/>
+        <location filename="../src/core/composer/qgscomposerattributetablemodel.cpp" line="510"/>
         <source>Ascending</source>
         <translation>上</translation>
     </message>
     <message>
-        <location filename="../src/core/composer/qgscomposerattributetablemodel.cpp" line="534"/>
+        <location filename="../src/core/composer/qgscomposerattributetablemodel.cpp" line="542"/>
         <source>Attribute</source>
         <translation>属性</translation>
     </message>
     <message>
-        <location filename="../src/core/composer/qgscomposerattributetablemodel.cpp" line="537"/>
+        <location filename="../src/core/composer/qgscomposerattributetablemodel.cpp" line="545"/>
         <source>Sort Order</source>
         <translation>ソート順序</translation>
     </message>
@@ -19533,7 +19524,7 @@ Please try a lower resolution or a smaller papersize</source>
         <location filename="../src/ui/qgscomposertablewidgetbase.ui" line="199"/>
         <location filename="../src/ui/qgscomposertablewidgetbase.ui" line="243"/>
         <source> mm</source>
-        <translation type="unfinished"> mm</translation>
+        <translation> mm</translation>
     </message>
     <message>
         <location filename="../src/ui/qgscomposertablewidgetbase.ui" line="209"/>
@@ -19647,7 +19638,7 @@ Please try a lower resolution or a smaller papersize</source>
         <translation>アイテムの中のコンテンツを移動</translation>
     </message>
     <message>
-        <location filename="../src/gui/qgscomposerview.cpp" line="1457"/>
+        <location filename="../src/gui/qgscomposerview.cpp" line="1462"/>
         <source>Zoom item content</source>
         <translation>アイテムコンテントにズームする</translation>
     </message>
@@ -19692,25 +19683,25 @@ Please try a lower resolution or a smaller papersize</source>
         <translation>図形が追加されました</translation>
     </message>
     <message>
-        <location filename="../src/gui/qgscomposerview.cpp" line="900"/>
+        <location filename="../src/gui/qgscomposerview.cpp" line="905"/>
         <source>Html item added</source>
         <translation>HTMLアイテムが追加されました</translation>
     </message>
     <message>
-        <location filename="../src/gui/qgscomposerview.cpp" line="905"/>
+        <location filename="../src/gui/qgscomposerview.cpp" line="910"/>
         <source>Html frame added</source>
         <translation>HTMLフレームが追加されました</translation>
     </message>
     <message>
-        <location filename="../src/gui/qgscomposerview.cpp" line="1349"/>
-        <location filename="../src/gui/qgscomposerview.cpp" line="1358"/>
-        <location filename="../src/gui/qgscomposerview.cpp" line="1367"/>
-        <location filename="../src/gui/qgscomposerview.cpp" line="1376"/>
+        <location filename="../src/gui/qgscomposerview.cpp" line="1354"/>
+        <location filename="../src/gui/qgscomposerview.cpp" line="1363"/>
+        <location filename="../src/gui/qgscomposerview.cpp" line="1372"/>
+        <location filename="../src/gui/qgscomposerview.cpp" line="1381"/>
         <source>Item moved</source>
         <translation>アイテムが移動されました</translation>
     </message>
     <message>
-        <location filename="../src/gui/qgscomposerview.cpp" line="886"/>
+        <location filename="../src/gui/qgscomposerview.cpp" line="891"/>
         <source>Table added</source>
         <translation>表が追加されました</translation>
     </message>
@@ -21405,7 +21396,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ui/qgsdecorationgriddialog.ui" line="14"/>
         <source>Grid properties</source>
-        <translation type="unfinished"></translation>
+        <translation>グリッドプロパティ</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsdecorationgriddialog.ui" line="34"/>
@@ -23334,7 +23325,7 @@ Parser error:
     <message>
         <location filename="../src/ui/qgsengineconfigdialog.ui" line="297"/>
         <source>Draw text as outlines (recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>テキストをアウトラインとして描画する(推奨)</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsengineconfigdialog.ui" line="248"/>
@@ -26762,17 +26753,17 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QgsGraduatedSymbolRendererV2Model</name>
     <message>
-        <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="178"/>
+        <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="173"/>
         <source>Symbol</source>
         <translation>シンボル</translation>
     </message>
     <message>
-        <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="178"/>
+        <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="173"/>
         <source>Value</source>
         <translation>値</translation>
     </message>
     <message>
-        <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="178"/>
+        <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="173"/>
         <source>Label</source>
         <translation>ラベル</translation>
     </message>
@@ -26780,41 +26771,41 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QgsGraduatedSymbolRendererV2Widget</name>
     <message>
-        <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="417"/>
+        <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="409"/>
         <source>Symbol levels...</source>
         <translation>シンボルレベル...</translation>
     </message>
     <message>
-        <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="487"/>
-        <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="489"/>
-        <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="521"/>
+        <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="479"/>
+        <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="481"/>
+        <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="513"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
     <message>
-        <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="487"/>
+        <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="479"/>
         <source>There are no available color ramps. You can add them in Style Manager.</source>
         <translation>利用できるカラーランプがありません。スタイルマネージャでそれらを追加できます。</translation>
     </message>
     <message>
-        <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="489"/>
+        <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="481"/>
         <source>The selected color ramp is not available.</source>
         <translation>選択されたカラーランプは利用できません。</translation>
     </message>
     <message>
-        <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="511"/>
+        <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="503"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="511"/>
+        <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="503"/>
         <source>Natural break classification (Jenks) is O(n2) complexity, your classification may take a long time.
 Press cancel to abort breaks calculation or OK to continue.</source>
         <translation>Natural break 分類 (Jenks) は複雑なので分類処理には時間がかかります.
 キャンセルをクリックすると中断しOKを押すと計算を継続します.</translation>
     </message>
     <message>
-        <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="521"/>
+        <location filename="../src/gui/symbology-ng/qgsgraduatedsymbolrendererv2widget.cpp" line="513"/>
         <source>Renderer creation has failed.</source>
         <translation>レンダラ作成に失敗しました.</translation>
     </message>
@@ -28859,8 +28850,9 @@ at line %2 column %3</source>
         <translation>マップセットエラー</translation>
     </message>
     <message>
+        <location filename="../src/plugins/grass/qgsgrassnewmapsetbase.ui" line="2567"/>
         <source>&lt;p align=&quot;center&quot;&gt;Existing masets&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;p align=&quot;center&quot;&gt;既存のマップセット&lt;/p&gt;</translation>
+        <translation>&lt;p align=&quot;center&quot;&gt;既存のマップセット&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassnewmapsetbase.ui" line="2687"/>
@@ -28951,11 +28943,6 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/plugins/grass/qgsgrassnewmapsetbase.ui" line="2587"/>
         <source>Mapset</source>
         <translation>Mapset</translation>
-    </message>
-    <message>
-        <location filename="../src/plugins/grass/qgsgrassnewmapsetbase.ui" line="2567"/>
-        <source>&lt;p align=&quot;center&quot;&gt;Existing mapsets&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassnewmapsetbase.ui" line="2592"/>
@@ -29694,7 +29681,7 @@ at line %2 column %3</source>
     <message>
         <location filename="../src/app/qgshandlebadlayers.cpp" line="86"/>
         <source>Datasource</source>
-        <translation type="unfinished">データソース</translation>
+        <translation>データソース</translation>
     </message>
     <message>
         <location filename="../src/app/qgshandlebadlayers.cpp" line="97"/>
@@ -29999,7 +29986,7 @@ This may be a problem in your network connection or at the WMS server.</source>
     <message>
         <location filename="../src/ui/qgsidentifyresultsbase.ui" line="244"/>
         <source>Select identify mode</source>
-        <translation type="unfinished"></translation>
+        <translation>地物特定モードの選択</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsidentifyresultsbase.ui" line="247"/>
@@ -30009,12 +29996,12 @@ This may be a problem in your network connection or at the WMS server.</source>
     <message>
         <location filename="../src/ui/qgsidentifyresultsbase.ui" line="270"/>
         <source>Select view mode for raster layers</source>
-        <translation type="unfinished"></translation>
+        <translation>ラスタレイヤのビューモードの選択</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsidentifyresultsbase.ui" line="273"/>
         <source>View</source>
-        <translation type="unfinished">ビュー</translation>
+        <translation>ビュー</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsidentifyresultsbase.ui" line="296"/>
@@ -30094,7 +30081,7 @@ This may be a problem in your network connection or at the WMS server.</source>
     <message>
         <location filename="../src/app/qgsidentifyresultsdialog.cpp" line="304"/>
         <source>Tree</source>
-        <translation type="unfinished">ツリー</translation>
+        <translation>ツリー</translation>
     </message>
     <message>
         <location filename="../src/app/qgsidentifyresultsdialog.cpp" line="306"/>
@@ -30104,7 +30091,7 @@ This may be a problem in your network connection or at the WMS server.</source>
     <message>
         <location filename="../src/app/qgsidentifyresultsdialog.cpp" line="438"/>
         <source>feature id</source>
-        <translation type="unfinished">地物ID</translation>
+        <translation>地物ID</translation>
     </message>
     <message>
         <location filename="../src/app/qgsidentifyresultsdialog.cpp" line="698"/>
@@ -33114,10 +33101,12 @@ not displayed</source>
 <context>
     <name>QgsMapToolSplitFeatures</name>
     <message>
+        <location filename="../src/app/qgsmaptoolsplitfeatures.cpp" line="135"/>
         <source>An error occured during feature splitting</source>
-        <translation type="obsolete">要素の分割でエラーが発生しました</translation>
+        <translation>要素の分割でエラーが発生しました</translation>
     </message>
     <message>
+        <location filename="../src/app/qgsmaptoolsplitfeatures.cpp" line="109"/>
         <location filename="../src/app/qgsmaptoolsplitfeatures.cpp" line="117"/>
         <location filename="../src/app/qgsmaptoolsplitfeatures.cpp" line="125"/>
         <location filename="../src/app/qgsmaptoolsplitfeatures.cpp" line="134"/>
@@ -33130,8 +33119,9 @@ not displayed</source>
         <translation>地物の分割</translation>
     </message>
     <message>
+        <location filename="../src/app/qgsmaptoolsplitfeatures.cpp" line="110"/>
         <source>If there are selected features, the split tool only applies to the selected ones. If you like to split all features under the split line, clear the selection</source>
-        <translation type="obsolete">選択されている要素がある場合、分割ツールはその選択された要素に対してのみ有効です。分割ラインと交差する全ての要素に対して分割を行いたい場合は、選択を解除してください</translation>
+        <translation>選択されている要素がある場合、分割ツールはその選択された要素に対してのみ有効です。分割ラインと交差する全ての要素に対して分割を行いたい場合は、選択を解除してください</translation>
     </message>
     <message>
         <location filename="../src/app/qgsmaptoolsplitfeatures.cpp" line="83"/>
@@ -33144,16 +33134,6 @@ not displayed</source>
         <translation>指定点はこのレイヤの座標システムには変換できません</translation>
     </message>
     <message>
-        <location filename="../src/app/qgsmaptoolsplitfeatures.cpp" line="109"/>
-        <source>No features were split</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/app/qgsmaptoolsplitfeatures.cpp" line="110"/>
-        <source>If there are selected features, the split tool only applies to those. If you would like to split all features under the split line, clear the selection.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/app/qgsmaptoolsplitfeatures.cpp" line="118"/>
         <source>Cut edges detected. Make sure the line splits features into multiple parts.</source>
         <translation>切断境界がありました　ラインが地物を切断して複数のパートになっていないか確認して下さい.</translation>
@@ -33162,11 +33142,6 @@ not displayed</source>
         <location filename="../src/app/qgsmaptoolsplitfeatures.cpp" line="126"/>
         <source>The geometry is invalid. Please repair before trying to split it.</source>
         <translation>指定ジオメトリが不正です.分割する前に修正を試みて下さい.</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qgsmaptoolsplitfeatures.cpp" line="135"/>
-        <source>An error occured during splitting.</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -33188,28 +33163,15 @@ not displayed</source>
     </message>
     <message>
         <location filename="../src/app/qgsmaptoolsplitparts.cpp" line="106"/>
-        <source>No parts were split</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/app/qgsmaptoolsplitparts.cpp" line="107"/>
-        <source>If there are selected parts, the split tool only applies to those. If you would like to split all parts under the split line, clear the selection.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/app/qgsmaptoolsplitparts.cpp" line="114"/>
         <location filename="../src/app/qgsmaptoolsplitparts.cpp" line="122"/>
         <source>No part split done</source>
         <translation>分割された部分はありません</translation>
     </message>
     <message>
-        <location filename="../src/app/qgsmaptoolsplitparts.cpp" line="132"/>
-        <source>An error occured during splitting.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
+        <location filename="../src/app/qgsmaptoolsplitparts.cpp" line="107"/>
         <source>If there are selected parts, the split tool only applies to the selected ones. If you like to split all parts under the split line, clear the selection</source>
-        <translation type="obsolete">もし複数の部分が選択されている場合分割ツールは単一の選択に対してのみ処理ができます.もし分割ラインですべての部分を分割したい場合は選択を解除してください</translation>
+        <translation>もし複数の部分が選択されている場合分割ツールは単一の選択に対してのみ処理ができます.もし分割ラインですべての部分を分割したい場合は選択を解除してください</translation>
     </message>
     <message>
         <location filename="../src/app/qgsmaptoolsplitparts.cpp" line="115"/>
@@ -33227,8 +33189,9 @@ not displayed</source>
         <translation>分割エラー</translation>
     </message>
     <message>
+        <location filename="../src/app/qgsmaptoolsplitparts.cpp" line="132"/>
         <source>An error occured during feature splitting</source>
-        <translation type="obsolete">要素の分割でエラーが発生しました</translation>
+        <translation>要素の分割でエラーが発生しました</translation>
     </message>
 </context>
 <context>
@@ -37829,25 +37792,25 @@ Missing some of the .ui template objects:
 <context>
     <name>QgsOracleConn</name>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="114"/>
+        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="110"/>
         <source>Connection to database failed</source>
         <translation>データベースへの接続に失敗しました</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="114"/>
-        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="174"/>
-        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="223"/>
-        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="243"/>
-        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="254"/>
-        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="424"/>
-        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="442"/>
-        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="473"/>
+        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="110"/>
+        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="170"/>
+        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="219"/>
+        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="239"/>
+        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="250"/>
+        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="420"/>
+        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="438"/>
+        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="469"/>
         <source>Oracle</source>
         <translation>Oracle</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="174"/>
-        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="421"/>
+        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="170"/>
+        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="417"/>
         <source>SQL:%1
 error:%2
 </source>
@@ -37855,7 +37818,7 @@ error:%2
 エラー:%2</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="223"/>
+        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="219"/>
         <source>Querying available tables failed.
 SQL:%1
 error:%2
@@ -37865,62 +37828,62 @@ SQL:%1
 エラー:%2</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="243"/>
+        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="239"/>
         <source>Database connection was successful, but the accessible tables could not be determined.</source>
         <translation>データベース接続は成功しました.しかしアクセス可能なテーブルを特定できません.</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="254"/>
+        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="250"/>
         <source>Unable to get list of spatially enabled tables from the database</source>
         <translation>データベースから空間情報が利用できるテーブルリストが取得できません</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="439"/>
+        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="435"/>
         <source>Unsupported geometry type %1 in %2.%3.%4 ignored</source>
         <translation>%2.%3.%4のサポートされていないジオメトリタイプ%1は無視されました</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="471"/>
+        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="467"/>
         <source>View %1.%2 doesn&apos;t have integer columns for use as keys.</source>
         <translation>ビュー%1.%2にはキーとして使う整数値のカラムがありません.</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="582"/>
+        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="578"/>
         <source>Point</source>
         <translation>点</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="586"/>
+        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="582"/>
         <source>Multipoint</source>
         <translation>マルチポイント</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="590"/>
+        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="586"/>
         <source>Line</source>
         <translation>ライン</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="594"/>
+        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="590"/>
         <source>Multiline</source>
         <translation>マルチライン</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="598"/>
+        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="594"/>
         <source>Polygon</source>
         <translation>ポリゴン</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="602"/>
+        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="598"/>
         <source>Multipolygon</source>
         <translation>マルチポリゴン</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="605"/>
+        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="601"/>
         <source>No Geometry</source>
         <translation>ジオメトリ無し</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="608"/>
+        <location filename="../src/providers/oracle/qgsoracleconn.cpp" line="604"/>
         <source>Unknown Geometry</source>
         <translation>不明なジオメトリ</translation>
     </message>
@@ -38283,27 +38246,25 @@ SQL:%1
         <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1111"/>
         <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1377"/>
         <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1428"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1504"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1510"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1566"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1573"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1676"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1886"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2054"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2086"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2115"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2123"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2143"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2151"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2268"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2290"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2318"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2331"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2610"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2622"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2631"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2788"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2797"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1503"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1560"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1665"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1875"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2043"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2075"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2104"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2112"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2132"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2140"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2257"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2279"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2307"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2320"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2599"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2611"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2620"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2777"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2786"/>
         <source>Oracle</source>
         <translation>Oracle</translation>
     </message>
@@ -38430,10 +38391,10 @@ SQL %2</translation>
         <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1181"/>
         <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1400"/>
         <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1450"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1531"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1594"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1850"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2477"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1525"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1583"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1839"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2466"/>
         <source>Could not start transaction</source>
         <translation>トランザクションを開始できません</translation>
     </message>
@@ -38450,11 +38411,11 @@ SQL %2</translation>
     <message>
         <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1340"/>
         <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1419"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1497"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1558"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1668"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1878"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2610"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1496"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1552"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1657"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1867"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2599"/>
         <source>Could not commit transaction</source>
         <translation>トランザクションをコミットできませんでした</translation>
     </message>
@@ -38466,11 +38427,11 @@ SQL %2</translation>
     <message>
         <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1377"/>
         <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1428"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1504"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1566"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1676"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1886"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2622"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1503"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1560"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1665"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1875"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2611"/>
         <source>Could not rollback transaction</source>
         <translation>トランザクションをロールバックできませんでした</translation>
     </message>
@@ -38495,56 +38456,50 @@ SQL %2</translation>
         <translation>コメントを%1に設定できませんでした</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1502"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1501"/>
         <source>Oracle error while adding attributes: %1</source>
         <translation>属性追加中にOracleエラーが発生しました: %1</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1510"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1573"/>
-        <source>Could not reload fields.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1549"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1543"/>
         <source>Dropping column %1 failed</source>
         <translation>カラム%1の削除に失敗しました</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1563"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1557"/>
         <source>Oracle error while deleting attributes: %1</source>
         <translation>属性削除中にOracleエラーが発生しました: %1</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1643"/>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1871"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1632"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1860"/>
         <source>Update of feature %1 failed</source>
         <translation>地物%1の更新に失敗しました</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1673"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1662"/>
         <source>Oracle error while changing attributes: %1</source>
         <translation>属性変更中にOracleエラーが発生しました: %1</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1860"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1849"/>
         <source>Could not prepare update statement.</source>
         <translation>UPDATEステートメントの準備ができませんでした.</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1883"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1872"/>
         <source>Oracle error while changing geometry values: %1</source>
         <translation>ジオメトリ変更中にOracleエラーが発生しました: %1</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2054"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2043"/>
         <source>Could not retrieve extents: %1
 SQL: %2</source>
         <translation>領域を取得できませんでした: %1
 SQL: %2</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2084"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2073"/>
         <source>Could not execute query.
 The error message from the database was:
 %1.
@@ -38555,7 +38510,7 @@ SQL: %2</source>
 SQL: %2</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2112"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2101"/>
         <source>Could not retrieve SRID of %1.
 The error message from the database was:
 %2.
@@ -38566,7 +38521,7 @@ SQL: %3</source>
 SQL: %3</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2120"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2109"/>
         <source>Could not determine SRID of %1.
 The error message from the database was:
 %2.
@@ -38577,14 +38532,14 @@ SQL: %3</source>
 SQL: %3</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2141"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2130"/>
         <source>%1 has no valid geometry types.
 SQL: %2</source>
         <translation>%1には有効なジオメトリタイプがありません.
 SQL: %2</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2148"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2137"/>
         <source>Could not determine geometry type of %1.
 The error message from the database was:
 %2.
@@ -38595,22 +38550,22 @@ SQL: %3</source>
 SQL: %3</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2181"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2170"/>
         <source>Geometry type and srid for empty column %1 of %2 undefined.</source>
         <translation>内容が無いカラム%2 の %1ジオメトリタイプとsridが定義されていません.</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2208"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2197"/>
         <source>Feature type or srid for %1 of %2 could not be determined or was not requested.</source>
         <translation>%2の%1の地物タイプまたはsridは判明しないかリクエストされていません.</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2236"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2225"/>
         <source>Editing and adding disabled for 2D+ layer (%1; %2)</source>
         <translation>2D+layer (%1; %2)では編集と追加は禁止されています</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2263"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2252"/>
         <source>Could not update metadata for %1.%2.
 SQL:%3
 Error: %4</source>
@@ -38619,7 +38574,7 @@ SQL: %3
 エラー: %4 </translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2285"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2274"/>
         <source>Could not insert metadata for %1.%2.
 SQL:%3
 Error: %4</source>
@@ -38628,7 +38583,7 @@ SQL: %3
 エラー: %4</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2315"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2304"/>
         <source>Creation spatial index failed.
 SQL:%1
 Error: %2</source>
@@ -38637,7 +38592,7 @@ SQL: %1
 エラー: %2</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2328"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2317"/>
         <source>Rebuild of spatial index failed.
 SQL:%1
 Error: %2</source>
@@ -38646,52 +38601,52 @@ SQL: %1
 エラー: %2</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2485"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2474"/>
         <source>Could not determine table existence.</source>
         <translation>テーブルの存在が判明しません.</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2497"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2486"/>
         <source>Table %1 could not be dropped.</source>
         <translation>テーブル%1を削除できませんでした.</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2502"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2491"/>
         <source>Table %1 already exists.</source>
         <translation>テーブル%1はすでに存在します.</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2521"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2510"/>
         <source>Table creation failed.</source>
         <translation>テーブルの作成に失敗しました.</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2552"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2541"/>
         <source>Could not lookup authid %1:%2</source>
         <translation>authid %1:%2を調べられません</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2568"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2557"/>
         <source>Could not lookup WKT.</source>
         <translation>WKTを調べられません.</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2579"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2568"/>
         <source>Could not determine new srid.</source>
         <translation>新しいSRIDを決定できません.</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2594"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2583"/>
         <source>CRS not found and could not be created.</source>
         <translation>CRSが見つからず作成することもできませんでした.</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2605"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2594"/>
         <source>Could not insert metadata.</source>
         <translation>メタデータを追加することができません.</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2629"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2618"/>
         <source>Drop created table %1 failed.
 SQL:%2
 Error: %3</source>
@@ -38700,12 +38655,12 @@ SQL:%2
 エラー: %3</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2788"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2777"/>
         <source>Oracle SRID %1 not found.</source>
         <translation>Oracle SRID %1が見つかりません.</translation>
     </message>
     <message>
-        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2793"/>
+        <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="2782"/>
         <source>Lookup of Oracle SRID %1 failed.
 SQL:%2
 Error:%3</source>
@@ -39656,7 +39611,7 @@ Error: %2</source>
     <message>
         <location filename="../src/ui/editorwidgets/qgsphotoconfigdlgbase.ui" line="23"/>
         <source>The field contains a filename for a picture. The widget will show a preview of this picture.</source>
-        <translation type="unfinished"></translation>
+        <translation>フィールドには画像のファイル名が含まれます.ウィジェットはこの画像のプレビューを表示します.</translation>
     </message>
     <message>
         <location filename="../src/ui/editorwidgets/qgsphotoconfigdlgbase.ui" line="33"/>
@@ -40751,61 +40706,61 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QgsPostgresConn</name>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="214"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="210"/>
         <source>Connection to database failed</source>
         <translation>データベースへの接続に失敗しました</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="214"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="210"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="224"/>
         <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="228"/>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="232"/>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="242"/>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="259"/>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="327"/>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="463"/>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="517"/>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="602"/>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="631"/>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="642"/>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="686"/>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="700"/>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="800"/>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="823"/>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="834"/>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="886"/>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="892"/>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="902"/>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="908"/>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="913"/>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="919"/>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="924"/>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1629"/>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1638"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="238"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="255"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="323"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="459"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="513"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="598"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="627"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="638"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="682"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="696"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="796"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="819"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="830"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="882"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="888"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="898"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="904"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="909"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="915"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="920"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1625"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1634"/>
         <source>PostGIS</source>
         <translation>PostGIS</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="228"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="224"/>
         <source>error in setting encoding</source>
         <translation>エンコーディング設定中エラー</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="232"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="228"/>
         <source>undefined return value from encoding setting</source>
         <translation>エンコーディング設定の帰り値が定義されていません</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="242"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="238"/>
         <source>Your database has no working PostGIS support.</source>
         <translation>あなたのデータベースはPostGISサポートが有効ではありません.</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="259"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="255"/>
         <source>Your PostGIS installation has no GEOS support. Feature selection and identification will not work properly. Please install PostGIS with GEOS support (http://geos.refractions.net)</source>
         <translation>あなたの PostGIS  には GEOS サポートがありません。地物選択と情報表示は正しく機能しません.PostGIS を GEOS サポート付きでインストールしてください (http://geos.refractions.net)</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="327"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="323"/>
         <source>SQL:%1
 result:%2
 error:%3
@@ -40815,12 +40770,12 @@ error:%3
 エラー:%3</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="463"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="459"/>
         <source>Database connection was successful, but the accessible tables could not be determined.</source>
         <translation>データベース接続は成功しました.しかしアクセス可能なテーブルを特定できません.</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="515"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="511"/>
         <source>Database connection was successful, but the accessible tables could not be determined. The error message from the database was:
 %1
 </source>
@@ -40829,7 +40784,7 @@ error:%3
 </translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="600"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="596"/>
         <source>Database connection was successful, but the accessible tables could not be determined.
 The error message from the database was:
 %1</source>
@@ -40838,49 +40793,49 @@ The error message from the database was:
 %1</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="631"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="627"/>
         <source>Database connection was successful, but no accessible tables were found.  Please verify that you have SELECT privilege on a table carrying PostGIS geometry.</source>
         <translation>データベース接続は成功しましたがアクセスできるテーブルがみつかりません.PostGISのジオメトリを持つテーブルのSELECT権限を確かめて下さい.</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="642"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="638"/>
         <source>Unable to get list of spatially enabled tables from the database</source>
         <translation>データベースから空間情報が利用できるテーブルリストが取得できません</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="686"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="682"/>
         <source>Retrieval of postgis version failed</source>
         <translation>postgisバージョンの読み取りに失敗しました</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="700"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="696"/>
         <source>Could not parse postgis version string &apos;%1&apos;</source>
         <translation>Postgisバージョン文字列を解析できませんでした &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="798"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="794"/>
         <source>Connection error: %1 returned %2 [%3]</source>
         <translation>接続エラー %1 リターン %2 [%3]</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="821"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="817"/>
         <source>Erroneous query: %1 returned %2 [%3]</source>
         <translation>間違ったクエリ %1  リターン %2 [%3]</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="834"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="830"/>
         <source>Query failed: %1
 Error: no result buffer</source>
         <translation>クエリが失敗しました %1
 エラー　リザルトバッファがありません</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="882"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="878"/>
         <source>Query: %1 returned %2 [%3]</source>
         <translation>クエリ %1 リターン %2 [%3]</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="890"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="886"/>
         <source>%1 cursor states lost.
 SQL: %2
 Result: %3 (%4)</source>
@@ -40889,98 +40844,98 @@ SQL:%2
 結果:%3 (%4)</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="902"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="898"/>
         <source>resetting bad connection.</source>
         <translation>不正な接続をリセットしています.</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="908"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="904"/>
         <source>retry after reset succeeded.</source>
         <translation>リセットが成功した後にリトライする.</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="913"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="909"/>
         <source>retry after reset failed again.</source>
         <translation>リセットが失敗した後に再度リトライする.</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="919"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="915"/>
         <source>connection still bad after reset.</source>
         <translation>リセット後も接続が不正.</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="924"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="920"/>
         <source>bad connection, not retrying.</source>
         <translation>不正な接続.リトライしない.</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1428"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1424"/>
         <source>Point</source>
         <translation>点</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1436"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1432"/>
         <source>Line</source>
         <translation>ライン</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1444"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1440"/>
         <source>Polygon</source>
         <translation>ポリゴン</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1451"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1447"/>
         <source>No Geometry</source>
         <translation>ジオメトリ無し</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1466"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1462"/>
         <source>None</source>
         <translation>なし</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1468"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1464"/>
         <source>Geometry</source>
         <translation>ジオメトリ</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1470"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1466"/>
         <source>Geography</source>
         <translation>ジオグラフィ</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1472"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1468"/>
         <source>TopoGeometry</source>
         <translation>トポジオメトリ</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1628"/>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1638"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1624"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1634"/>
         <source>Query could not be canceled [%1]</source>
         <translation>クエリがキャンセルできません [%1]</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1628"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1624"/>
         <source>PQgetCancel failed</source>
         <translation>PQgetCancelに失敗しました</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1432"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1428"/>
         <source>Multipoint</source>
         <translation>マルチポイント</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1440"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1436"/>
         <source>Multiline</source>
         <translation>マルチライン</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1448"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1444"/>
         <source>Multipolygon</source>
         <translation>マルチポリゴン</translation>
     </message>
     <message>
-        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1454"/>
+        <location filename="../src/providers/postgres/qgspostgresconn.cpp" line="1450"/>
         <source>Unknown Geometry</source>
         <translation>不明なジオメトリ</translation>
     </message>
@@ -42397,22 +42352,22 @@ p, li { white-space: pre-wrap; }
         <translation>指定された範囲から数値を設定できます.編集ウィジェットはスライダーかスピンボックスを利用することもできます.</translation>
     </message>
     <message>
-        <location filename="../src/ui/editorwidgets/qgsrangeconfigdlgbase.ui" line="129"/>
+        <location filename="../src/ui/editorwidgets/qgsrangeconfigdlgbase.ui" line="117"/>
         <source>Step</source>
         <translation>ステップ</translation>
     </message>
     <message>
-        <location filename="../src/ui/editorwidgets/qgsrangeconfigdlgbase.ui" line="136"/>
+        <location filename="../src/ui/editorwidgets/qgsrangeconfigdlgbase.ui" line="124"/>
         <source>Maximum</source>
         <translation>最大値</translation>
     </message>
     <message>
-        <location filename="../src/ui/editorwidgets/qgsrangeconfigdlgbase.ui" line="143"/>
+        <location filename="../src/ui/editorwidgets/qgsrangeconfigdlgbase.ui" line="131"/>
         <source>Minimum</source>
         <translation>最小値</translation>
     </message>
     <message>
-        <location filename="../src/ui/editorwidgets/qgsrangeconfigdlgbase.ui" line="152"/>
+        <location filename="../src/ui/editorwidgets/qgsrangeconfigdlgbase.ui" line="140"/>
         <source>Local minimum/maximum = 0/0</source>
         <translation>ローカル 　最小値/最大値 = 0/0</translation>
     </message>
@@ -44795,7 +44750,7 @@ standard deviation ×</source>
     <message>
         <location filename="../src/ui/qgsrelationadddlgbase.ui" line="14"/>
         <source>Add relation</source>
-        <translation type="unfinished"></translation>
+        <translation>リレーションの追加</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsrelationadddlgbase.ui" line="26"/>
@@ -51002,32 +50957,32 @@ Error was:%2</source>
     <message>
         <location filename="../src/providers/wfs/qgswfsprovider.cpp" line="1659"/>
         <source>empty response</source>
-        <translation type="unfinished">中身のないレスポンス</translation>
+        <translation>中身のないレスポンス</translation>
     </message>
     <message>
         <location filename="../src/providers/wfs/qgswfsprovider.cpp" line="1665"/>
         <source>WFS service exception:%1</source>
-        <translation type="unfinished">WFSサービス例外:%1</translation>
+        <translation>WFSサービス例外:%1</translation>
     </message>
     <message>
         <location filename="../src/providers/wfs/qgswfsprovider.cpp" line="1671"/>
         <source>unsuccessful service response: %1</source>
-        <translation type="unfinished">失敗したサービスのレスポンス:%1</translation>
+        <translation>失敗したサービスのレスポンス:%1</translation>
     </message>
     <message>
         <location filename="../src/providers/wfs/qgswfsprovider.cpp" line="1678"/>
         <source>WFS exception report (code=%1 text=%2)</source>
-        <translation type="unfinished">WFS 例外レポート (コード=%1 テキスト=%2)</translation>
+        <translation>WFS 例外レポート (コード=%1 テキスト=%2)</translation>
     </message>
     <message>
         <location filename="../src/providers/wfs/qgswfsprovider.cpp" line="1679"/>
         <source>missing</source>
-        <translation type="unfinished">欠損しています</translation>
+        <translation>欠損しています</translation>
     </message>
     <message>
         <location filename="../src/providers/wfs/qgswfsprovider.cpp" line="1685"/>
         <source>unhandled response: %1</source>
-        <translation type="unfinished">取り扱えない反応:%1</translation>
+        <translation>取り扱えない反応:%1</translation>
     </message>
 </context>
 <context>
@@ -52139,7 +52094,7 @@ Response was:
     <message>
         <location filename="../src/ui/editorwidgets/qgswebviewconfigdlgbase.ui" line="20"/>
         <source>Field contains a filename or URL for a webpage</source>
-        <translation type="unfinished"></translation>
+        <translation>フィールドにはファイル名かウェッブページのURLが含まれます</translation>
     </message>
     <message>
         <location filename="../src/ui/editorwidgets/qgswebviewconfigdlgbase.ui" line="27"/>
@@ -53040,7 +52995,7 @@ Reason phrase: %2</source>
     <message>
         <location filename="../src/ui/qgswmtsdimensionsbase.ui" line="14"/>
         <source>Select dimensions</source>
-        <translation type="unfinished"></translation>
+        <translation>次元の選択</translation>
     </message>
     <message>
         <location filename="../src/ui/qgswmtsdimensionsbase.ui" line="21"/>
@@ -55526,7 +55481,7 @@ Run topology check again.</source>
 <context>
     <name>context_help</name>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1117"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1107"/>
         <source>&lt;h3&gt;Project Properties&lt;/h3&gt;
 This dialog allows you to set a number of properties related to the &lt;label&gt;Project&lt;/label&gt;. A Project is a saved set of layers and their settings, as well as other information required to restore the project from disk.&lt;p&gt;
 
@@ -55604,7 +55559,7 @@ On this tab you can choose on which layers the identify tool will work.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="840"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1441"/>
         <source>&lt;h3&gt;Open Vector Layer Dialog&lt;/h3&gt;
 
 The open vector layer dialog is used to add vector data to the QGIS map view. Vector data are spatial data described using geometries of points, lines and polygons (enclosed areas).&lt;/p&gt;
@@ -55723,7 +55678,7 @@ which are described and illustrated on &lt;a href=&quot;http://en.wikipedia.org/
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1204"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1256"/>
         <source>&lt;h3&gt;Vector Layer Properties&lt;/h3&gt;
 This dialog allows you to work with vector layer settings and properties. There are seven tabs:
 &lt;p&gt;
@@ -56008,7 +55963,7 @@ QGISでは地物の属性にもとづいたアクションを提供できます.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="65"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="340"/>
         <source>&lt;style&gt;
 	#toolbarConsole td{
 		background: #f6f6f6;
@@ -56339,7 +56294,7 @@ that will be automatically deleted after running.&lt;/li&gt;
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="847"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="156"/>
         <source>&lt;h3&gt;Options&lt;/h3&gt;
 This dialog allows you to select some basic options for QGIS. There are eight tabs:
 &lt;p&gt;
@@ -56491,7 +56446,47 @@ QGISはもはや最初にロードされたレイヤの空間参照系を地図�
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="994"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="822"/>
+        <source>&lt;h3&gt;Attribute table&lt;/h3&gt;
+The attribute table displays features of a selected layer. Each row in the table represents one map feature with its attributes shown in several columns. The features in the table can be searched, selected, moved or even edited.  By default the attribute table is a separate window. If you opened it and cannot see it anymore, it is most likely hidden under the main QGIS window. You can make it also a docked window, by checking &lt;label&gt;Open attribute table in a dock window&lt;/label&gt; in &lt;label&gt;Settings &gt; Options &gt; General&lt;/label&gt;.&lt;p&gt;
+
+The number of total number of layer features, filtered features and selected features is printed on the window header.&lt;p&gt;
+&lt;p&gt;
+&lt;a href=&quot;#Selecting&quot;&gt;Selecting&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#Sorting&quot;&gt;Sorting&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#Searching&quot;&gt;Searching&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;#Field&quot;&gt;Field Calculator&lt;/a&gt;&lt;br/&gt;
+
+&lt;a name=&quot;Selecting&quot;&gt;
+&lt;h4&gt;Selecting&lt;/h4&gt;
+&lt;/a&gt;
+Rows can be selected by clicking on the row number on the left side of the row. Selecting a row doesn&apos;t change the current cursor position. Multiple rows can be marked by holding the &lt;label&gt;Ctrl&lt;/label&gt; key.&lt;br&gt;
+A continuous selection can be made by holding the &lt;label&gt;Shift&lt;/label&gt; key and clicking on several row headers on the left side of the rows. All rows between the current cursor position and the clicked row are selected.
+
+&lt;a name=&quot;Sorting&quot;&gt;
+&lt;h4&gt;Sorting&lt;/h4&gt;
+&lt;/a&gt;
+Each column can be sorted by clicking on its column header. A small arrow indicates the sort order (downward pointing means descending values from the top row down, upward pointing means ascending values from the top row down).&lt;br&gt;
+Use &lt;label&gt;Move selected to top&lt;/label&gt; button to sort selected rows and display them in first table rows.  To show selected records only, use the check box &lt;label&gt;Show selected records only&lt;/label&gt;.
+
+&lt;a name=&quot;Searching&quot;&gt;
+&lt;h4&gt;Searching&lt;/h4&gt;
+&lt;/a&gt;
+For a simple search by attributes on only one column the &lt;label&gt;Look for&lt;/label&gt; field can be used. Select the field (column) from which the search should be performed from the drop down menu and hit the &lt;label&gt;Search&lt;/label&gt; button.&lt;br&gt;
+For more complex searches use the &lt;label&gt;Advanced search&lt;/label&gt;. This button opens the Query Builder and allows you to select table features matching a SQL-like WHERE clause.
+
+&lt;a name=&quot;Field&quot;&gt;
+&lt;h4&gt;Field Calculator&lt;/h4&gt;
+&lt;/a&gt;
+The &lt;label&gt;Field Calculator&lt;/label&gt; button in the attribute table allows to perform calculations on basis of existing attribute values or defined functions, e.g. to calculate length or area of geometry features.&lt;br&gt;
+The results can be written to a new attribute column or it can be used to update values in an already existing column.&lt;br&gt;
+You have to bring the vector layer in editing mode, before you can click on the &lt;label&gt;Field calculator&lt;/label&gt; icon to open the dialog.
+
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1056"/>
         <source>&lt;h3&gt;Add PostGIS Tables&lt;/h3&gt;
 This dialog allows you to add PostGIS layers (tables with a geometry column) to the QGIS map canvas.
 &lt;p&gt;
@@ -56568,7 +56563,7 @@ Ticking &lt;label&gt;Search options&lt;/label&gt; enables additional options for
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1031"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1142"/>
         <source>&lt;h3&gt;Manage and install Plugins&lt;/h3&gt;
 
 &lt;p&gt;
@@ -56739,7 +56734,7 @@ QGISがリポジトリからリストのダウンロードと情報の更新を�
 &lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="961"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1009"/>
         <source>&lt;h3&gt;Create a New PostgreSQL Connection&lt;/h3&gt;
 This dialog allows you to define the settings for a connection to a PostgreSQL database.
 &lt;p&gt;
@@ -56809,7 +56804,7 @@ This dialog allows you to define the settings for a connection to a PostgreSQL d
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="783"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1421"/>
         <source>&lt;h3&gt;GPS Plugin&lt;/h3&gt;
 
 </source>
@@ -56818,7 +56813,7 @@ This dialog allows you to define the settings for a connection to a PostgreSQL d
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="828"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1409"/>
         <source>&lt;h3&gt;Create New Vector Layer&lt;/h3&gt;
 To create a new layer for editing, choose &lt;label&gt;New Vector Layer&lt;/label&gt; from the &lt;label&gt;Layer&lt;/label&gt; menu.&lt;br/&gt;
 With this dialog you can create a shape file layer.
@@ -56845,7 +56840,7 @@ In this section you can see the list of attributes. To delete one of them, click
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="805"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1526"/>
         <source>&lt;h3&gt;Create a New SpatiaLite Layer&lt;/h3&gt;
 You can use this dialog to create a new SpatiaLite database and/or an empty SpatiaLite layer for editing. See below for an explanation of the dialog inputs.
 &lt;h4&gt;Database&lt;/h4&gt;
@@ -56894,7 +56889,7 @@ Click on &lt;label&gt;OK&lt;/label&gt; to create the layer and close the dialog.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1357"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="302"/>
         <source>&lt;h3&gt;Create a new WMS connection&lt;/h3&gt;
 WMS layers can be added quite simply, as long as you know the URL to access the WMS server, you have a serviceable connection to that server, and the server understands HTTP as the data transport mechanism.&lt;p&gt;
 QGIS currently can act as a WMS client that understands WMS 1.1, 1.1.1 and 1.3 servers.
@@ -56973,14 +56968,14 @@ WMSサーバからデータをダウンロードしている間WMSプラグイ�
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1511"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1407"/>
         <source>&lt;h3&gt;Database connection&lt;/h3&gt;
 </source>
         <translation>&lt;h3&gt;データベースコネクション&lt;/h3&gt;
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1473"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="910"/>
         <source>&lt;h3&gt;Add SQL Anywhere Tables&lt;/h3&gt;
 This dialog allows you to add SQL Anywhere layers (tables with a geometry column) to the QGIS map canvas.
 &lt;p&gt;
@@ -57058,7 +57053,7 @@ Ticking &lt;label&gt;Search options&lt;/label&gt; enables additional options for
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1198"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1093"/>
         <source>&lt;h3&gt;Add SpatiaLite Tables&lt;/h3&gt;
 To define a new connection, click on &lt;label&gt;New&lt;/label&gt; button and use the file browser to point to your SpatiaLite database, which is a file with a &lt;i&gt;.sqlite&lt;/i&gt; extension.&lt;p&gt;
 The connections you define will be remembered for further use and available to choose from the drop down menu.
@@ -57069,7 +57064,7 @@ The connections you define will be remembered for further use and available to c
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="285"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="950"/>
         <source>&lt;h3&gt;Spatial Bookmarks&lt;/h3&gt;
 Spatial Bookmarks allow you to &quot;bookmark&quot; a geographic location and return to it later.
 &lt;p&gt;
@@ -57147,7 +57142,7 @@ To update the extent of a bookmark, click on it then click the &lt;label&gt;Upda
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="233"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="858"/>
         <source>&lt;h3&gt;Attribute table&lt;/h3&gt;
 The attribute table displays features of a selected layer. Each row in the table represents one map feature with its attributes shown in several columns. The features in the table can be searched, selected, moved or even edited.  By default the attribute table is a separate window. If you opened it and cannot see it anymore, it is most likely hidden under the main QGIS window. You can make it also a docked window, by checking &lt;label&gt;Open attribute table in a dock window&lt;/label&gt; in &lt;label&gt;Settings &gt; Options &gt; General&lt;/label&gt;.&lt;p&gt;
 
@@ -57259,7 +57254,7 @@ The vector layer needs to be in editing mode, before you can click on the &lt;la
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="354"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1494"/>
         <source>&lt;h3&gt;Copyright Label Plugin&lt;/h3&gt;
 Draws a copyright label with information.&lt;br/&gt;
 You can add any random text to the map not only a copyright label.
@@ -57326,7 +57321,7 @@ This plugin supports basic HTML markup tags for formatting text. For example:
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="723"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="96"/>
         <source>&lt;h3&gt;Field Calculator&lt;/h3&gt;
 The field calculator allows you to update fields with expressions.
 
@@ -57449,7 +57444,7 @@ The field calculator allows you to update fields with expressions.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="786"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1097"/>
         <source>&lt;h3&gt;Identify Features&lt;/h3&gt;
 &lt;p&gt;
 The results dialog shows all the features identified within the search tolerance. To see the results details, expand the feature information on the left of each feature.
@@ -57473,7 +57468,7 @@ Identifiable layers can be set in the Project Properties dialog &lt;label&gt;Set
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="390"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="990"/>
         <source>&lt;h3&gt;Scale bar Plugin&lt;/h3&gt;
 Draws a scale bar on the map.
 &lt;p&gt;
@@ -57512,7 +57507,7 @@ QGISでは地図フレームと同じ単位でのみ縮尺を表示できます.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1426"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1241"/>
         <source>&lt;h3&gt;Finding shortest path&lt;/h3&gt;
 &lt;p&gt;Road graph is a C++ plugin for QGIS, that calculates the shortest path between two points on any line layer and plots this path over the road network. Before using the plugin to configure it. This can be done in the menu &lt;label&gt;Plugins &amp;rarr; Road graph &amp;rarr; Settings&lt;/label&gt;&lt;/p&gt;
 &lt;p&gt;
@@ -57550,7 +57545,7 @@ Pressing the &lt;label&gt;Calculate&lt;/label&gt; button will run the shortest p
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="409"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="508"/>
         <source>&lt;h3&gt;Delimited Text File Layer&lt;/h3&gt;
 Loads and displays delimited text files
 &lt;p&gt;
@@ -58165,14 +58160,14 @@ if layer.isValid():
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="803"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1235"/>
         <source>&lt;h3&gt;New OGR Database Connection Dialog&lt;/h3&gt;
 </source>
         <translation>&lt;h3&gt;新OGRデータベース接続ダイアログ&lt;/h3&gt;
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1152"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1448"/>
         <source>&lt;h3&gt;Query Builder&lt;/h3&gt;
 The query builder allows you to create provider specific filter expressions.
 
@@ -58266,7 +58261,7 @@ are sometimes limited (e.g. for shape files) or behave diffently.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="796"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1228"/>
         <source>&lt;h3&gt;Measure Tools&lt;/h3&gt;
 There are two measure tools: length and area. With them, you can measure both distances and areas on the map canvas. Currently the tools provide results in metric units only. A single right mouse click stops the measuring, while two right mouse clicks starts measuring anew.
 &lt;h4&gt;Measuring Lengths&lt;/h4&gt;
@@ -58283,7 +58278,7 @@ To measure areas, select the tool and click to create the area. The total area i
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1395"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="65"/>
         <source>&lt;h3&gt;Road graph plugin settings&lt;/h3&gt;
 &lt;p&gt;Road graph is a C++ plugin for QGIS, that calculates the shortest path between two points on any polyline layer and plots this path over the road network.&lt;/p&gt;
 &lt;p&gt;
@@ -58358,7 +58353,7 @@ To measure areas, select the tool and click to create the area. The total area i
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="386"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1237"/>
         <source>&lt;h3&gt; North Arrow Plugin&lt;/h3&gt;
 Displays a north arrow overlayed onto the map.
 &lt;p&gt;
@@ -58369,7 +58364,7 @@ At present there is only one style available. You can adjust the angle of the ar
 現時点では１種類のスタイルだけが利用可能です. 矢印の角度を調整したりQGISに自動的に方向を決定させたりすることが可能です. もしQGISに方向を決定させるように選択した場合は矢印がどの方向を向くべきか推測されます. 矢印を配置する場所については地図キャンバスの4隅に対応する4個の選択肢があります.</translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1343"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1042"/>
         <source>&lt;h3&gt;Save vector layer as...&lt;/h3&gt;
 
 &lt;p&gt;This dialog allows you to save vector data in various formats using GDAL/OGR.
@@ -58404,7 +58399,7 @@ See &lt;a href=&quot;http://gdal.org/ogr/ogr_formats.html&quot;&gt;OGR Vector fo
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="325"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1395"/>
         <source>&lt;h3&gt;Print Composer&lt;/h3&gt;
 
 &lt;p&gt;
@@ -58430,14 +58425,14 @@ Click on one of the icons along the top of the composer window to select what ty
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1202"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="948"/>
         <source>&lt;h3&gt;Style Manager&lt;/h3&gt;
 </source>
         <translation>&lt;h3&gt;スタイルマネージャ&lt;/h3&gt;
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="337"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1424"/>
         <source>&lt;h3&gt;Custom Coordinate Reference System Definition&lt;/h3&gt;
 If QGIS does not provide the coordinate reference system you need, you can define a custom CRS. &lt;p&gt;
 To define a CRS, select &lt;label&gt;Custom CRS&lt;/label&gt; from the &lt;label&gt;Edit&lt;/label&gt; (Gnome, OSX) or &lt;label&gt;Settings&lt;/label&gt; (KDE, Windows) menu. Custom CRS are stored in your QGIS user database. In addition to your custom CRS, this database also contains your spatial bookmarks and other custom data.
@@ -58473,7 +58468,7 @@ QGISでカスタムCRSを定義する場合Proj.4投影ライブラリを理解�
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="1441"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="270"/>
         <source>&lt;h3&gt;Create a New SQL Anywhere Connection&lt;/h3&gt;
 This dialog allows you to define the settings for a connection to a
 SQL Anywhere database.
@@ -58539,7 +58534,7 @@ SQL Anywhere database.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgscontexthelp_texts.cpp" line="921"/>
+        <location filename="../src/core/qgscontexthelp_texts.cpp" line="230"/>
         <source>&lt;h3&gt;Create a New Oracle Connection&lt;/h3&gt;
 This dialog allows you to define the settings for a connection to a Oracle database.
 &lt;p&gt;
@@ -59678,7 +59673,7 @@ Plugin will not be enabled.</source>
 <context>
     <name>function_help</name>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="200"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1682"/>
         <source>&lt;h3&gt;$rownum function&lt;/h3&gt;
 Returns the number of the current row.
 
@@ -59707,7 +59702,7 @@ None
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="39"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="234"/>
         <source>&lt;h3&gt;$atlasgeometry function&lt;/h3&gt;
 Returns the geometry of the current feature iterated in atlas.
 Can be used for rule based display of geometry when using atlas.
@@ -59741,7 +59736,7 @@ None
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="805"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="2017"/>
         <source>
 &lt;h3&gt;color_rgba() function&lt;/h3&gt;
 Returns a string representation of a color based on its red, green, blue, and alpha (transparency) components
@@ -59780,7 +59775,7 @@ Returns a string representation of a color based on its red, green, blue, and al
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="327"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="2014"/>
         <source>&lt;h3&gt;Conditionals Group&lt;/h3&gt;
 This group contains functions to handle conditional checks in expressions.
 </source>
@@ -59789,7 +59784,7 @@ This group contains functions to handle conditional checks in expressions.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="349"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1117"/>
         <source>&lt;h3&gt;Fields and Values&lt;/h3&gt;
 Contains a list of fields from the layer.  Sample values can also be accessed via right-click.
 &lt;br&gt;&lt;br&gt;
@@ -59812,7 +59807,7 @@ WFSレイヤからの値ロードはサポートされていません.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="55"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="138"/>
         <source>&lt;h3&gt;$feature function&lt;/h3&gt;
 In atlas generation, returns the current feature number that is iterated over on the coverage layer.
 
@@ -59841,7 +59836,7 @@ None
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="339"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1015"/>
         <source>&lt;h3&gt;Field&lt;/h3&gt;
 Double click to add field name to expression string.
 &lt;br&gt;&lt;br&gt;
@@ -59864,7 +59859,7 @@ WFSレイヤからの値ロードはサポートされていません.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="149"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1025"/>
         <source>&lt;h3&gt;$numpages function&lt;/h3&gt;
 Returns the total number of pages in the composition.
 
@@ -59893,7 +59888,7 @@ None
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="632"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1002"/>
         <source>&lt;h3&gt;centroid function&lt;/h3&gt;
 Returns the geometric center of a geometry.
 
@@ -59922,7 +59917,7 @@ b &amp;rarr; ジオメトリ
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1990"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="587"/>
         <source>&lt;h3&gt;within function&lt;/h3&gt;
 Returns 1 if the geometry a is completely inside geometry b
 
@@ -59953,7 +59948,7 @@ geometry &amp;rarr; ジオメトリ
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="106"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="614"/>
         <source>&lt;h3&gt;$map function&lt;/h3&gt;
 Returns the id of the current map item if the map is being drawn in a composition, or &quot;canvas&quot; if the map is being
 drawn within the main QGIS window.
@@ -59988,7 +59983,7 @@ $map &amp;rarr; &quot;canvas&quot; (QGISのメインキャンバス)&lt;/pre&gt;
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="952"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="163"/>
         <source>&lt;h3&gt;distance function&lt;/h3&gt;
  Returns the minimum distance (based on spatial ref) between two geometries in projected units.
 
@@ -60017,7 +60012,7 @@ b &amp;rarr; ジオメトリ
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="925"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="989"/>
         <source>&lt;h3&gt;difference function&lt;/h3&gt;
 Returns a geometry that represents that part of geometry a that does not intersect with geometry b.
 
@@ -60046,7 +60041,7 @@ geometry &amp;rarr; ジオメトリ
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="411"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="176"/>
         <source>&lt;h3&gt;NOT&lt;/h3&gt;
 Returns 1 if a is not the same as b.
 
@@ -60078,7 +60073,7 @@ aがbと等しくない場合に1を返します.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1780"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1466"/>
         <source>&lt;h3&gt;symDifference function&lt;/h3&gt;
 Returns a geometry that represents the portions of a and b that do not intersect.
 
@@ -60137,7 +60132,7 @@ geometry &amp;rarr; ジオメトリ
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="175"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1854"/>
         <source>&lt;h3&gt;$perimeter function&lt;/h3&gt;
 Returns the perimeter length of the current feature.
 
@@ -60166,7 +60161,7 @@ None
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="359"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="41"/>
         <source>&lt;h3&gt;Geometry Group&lt;/h3&gt;
 This group contains functions that operate on geometry objects e.g length, area.
 </source>
@@ -60175,7 +60170,7 @@ This group contains functions that operate on geometry objects e.g length, area.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="837"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="770"/>
         <source>&lt;h3&gt;concat() function&lt;/h3&gt;
 Concatenates several strings to one.
 
@@ -60206,7 +60201,7 @@ Concatenates several strings to one.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="213"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="919"/>
         <source>&lt;h3&gt;$scale function&lt;/h3&gt;
 Returns the current scale of the map canvas.
 &lt;br&gt;
@@ -60235,7 +60230,7 @@ Note: This function is only available in some contexts and will be 0 otherwise.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="475"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1926"/>
         <source>&lt;h3&gt;age() function&lt;/h3&gt;
 Returns the difference between two dates.
 &lt;br&gt;&lt;br&gt;
@@ -60303,7 +60298,7 @@ use &lt;code&gt;day&lt;/code&gt; to extract number of days&lt;br&gt;
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="2071"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="854"/>
         <source>&lt;h3&gt;year() function&lt;/h3&gt;
 Extract the year part from a date, or the number of years
 from a &lt;code&gt;Interval&lt;/code&gt;
@@ -60345,7 +60340,7 @@ from a &lt;code&gt;Interval&lt;/code&gt;
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="521"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="440"/>
         <source>&lt;h3&gt;atan() function&lt;/h3&gt;
 Returns arcustanget of a value in radians.
 
@@ -60373,7 +60368,7 @@ Returns arcustanget of a value in radians.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1746"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="347"/>
         <source>&lt;h3&gt;strpos() function&lt;/h3&gt;
 Return the index of a regular expression in a string.
 
@@ -60412,7 +60407,7 @@ Returns -1 if the expression isn&apos;t found.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1422"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1251"/>
         <source>&lt;h3&gt;minute() function&lt;/h3&gt;
 Extract the minute from a datetime or time, or the number of minutes
 from a &lt;code&gt;Interval&lt;/code&gt;
@@ -60456,7 +60451,7 @@ from a &lt;code&gt;Interval&lt;/code&gt;
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="426"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="76"/>
         <source>&lt;h3&gt;OR logical operator&lt;/h3&gt;
 Returns 1 when condition a or b is true.
 
@@ -60487,7 +60482,7 @@ None
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="24"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="250"/>
         <source>&lt;h3&gt;$atlasfeatureid function&lt;/h3&gt;
 Returns the feature id of the current row while using atlas.
 This enables you to use features of atlas in rules 
@@ -60519,7 +60514,7 @@ None
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="2046"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1763"/>
         <source>&lt;h3&gt;xmin function&lt;/h3&gt;
 Returns the minimum x coordinate of a geometry. Calculations are in the Spatial Reference System of this Geometry. 
 
@@ -60548,7 +60543,7 @@ geom &amp;rarr; a geometry
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="94"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="977"/>
         <source>&lt;h3&gt;$length function&lt;/h3&gt;
 Returns the length of the current feature.
 
@@ -60575,7 +60570,7 @@ None
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="323"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="499"/>
         <source>
 &lt;h3&gt;Color Group&lt;/h3&gt;
 This group contains functions for manipulating colors
@@ -60586,7 +60581,7 @@ This group contains functions for manipulating colors
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1477"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="552"/>
         <source>
 &lt;h3&gt;ramp_color() function&lt;/h3&gt;
 Returns a string representing a color from a color ramp. 
@@ -60631,7 +60626,7 @@ may not give the expected results if you move your Quantum project.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="2091"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="379"/>
         <source>&lt;h3&gt;ymax function&lt;/h3&gt;
 Returns the maximum y coordinate of a geometry. Calculations are in the Spatial Reference System of this Geometry. 
 
@@ -60660,7 +60655,7 @@ geom &amp;rarr; a geometry
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="755"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="705"/>
         <source>&lt;h3&gt;color_hsv() function&lt;/h3&gt;
 Returns a string representation of a color based on its hue, saturation, and value attributes
 
@@ -60695,7 +60690,7 @@ Returns a string representation of a color based on its hue, saturation, and val
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="2033"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1104"/>
         <source>&lt;h3&gt;xmax function&lt;/h3&gt;
 Returns the maximum x coordinate of a geometry. Calculations are in the Spatial Reference System of this Geometry. 
 
@@ -60724,7 +60719,7 @@ geom &amp;rarr; a geometry
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="550"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="691"/>
         <source>&lt;h3&gt;bbox function&lt;/h3&gt;
 Returns 1 if the geometries spatially intersect the bounding box defined and 0 if they don&apos;t.
 
@@ -60755,7 +60750,7 @@ b &amp;rarr; ジオメトリ
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="788"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1087"/>
         <source>
 &lt;h3&gt;color_rgb() function&lt;/h3&gt;
 Returns a string representation of a color based on its red, green, and blue components
@@ -60792,7 +60787,7 @@ Returns a string representation of a color based on its red, green, and blue com
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="590"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1193"/>
         <source>&lt;h3&gt;bounds_width function&lt;/h3&gt;
 Returns the width of the bounding box of a geometry. Calculations are in the Spatial Reference System of this Geometry. 
 
@@ -60821,7 +60816,7 @@ geom &amp;rarr; a geometry
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="564"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="265"/>
         <source>&lt;h3&gt;bounds function&lt;/h3&gt;
 Returns a geometry which represents the bounding box of an input geometry. Calculations are in the Spatial Reference System of this Geometry. 
 
@@ -60850,7 +60845,7 @@ geom &amp;rarr; a geometry
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="685"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="422"/>
         <source>
 &lt;h3&gt;color_cmyk() function&lt;/h3&gt;
 Returns a string representation of a color based on its cyan, magenta, yellow and black components
@@ -60889,7 +60884,7 @@ Returns a string representation of a color based on its cyan, magenta, yellow an
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="722"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1747"/>
         <source>&lt;h3&gt;color_hsl() function&lt;/h3&gt;
 Returns a string representation of a color based on its hue, saturation, and lightness attributes
 
@@ -60924,7 +60919,7 @@ Returns a string representation of a color based on its hue, saturation, and lig
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1348"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1959"/>
         <source>&lt;h3&gt;log10() function&lt;/h3&gt;
 Returns the value of the base 10 logarithm of the passed expression.
 &lt;br&gt;
@@ -60959,7 +60954,7 @@ This function takes one argument.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="2004"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="59"/>
         <source>&lt;h3&gt;wordwrap() function&lt;/h3&gt;
 Returns a string wrapped to a maximum/minimum number of characters.
 
@@ -60996,7 +60991,7 @@ Returns a string wrapped to a maximum/minimum number of characters.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1285"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="741"/>
         <source>&lt;h3&gt;left() function&lt;/h3&gt;
 Returns a substring that contains the &lt;i&gt;n&lt;/i&gt; leftmost characters of the string.
 
@@ -61031,7 +61026,7 @@ Returns a substring that contains the &lt;i&gt;n&lt;/i&gt; leftmost characters o
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1793"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="470"/>
         <source>&lt;h3&gt;tan() function&lt;/h3&gt;
 Returns tangent of an angle.
 
@@ -61059,7 +61054,7 @@ Returns tangent of an angle.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1364"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1400"/>
         <source>&lt;h3&gt;lower() function&lt;/h3&gt;
 Converts a string to lower case letters.
 
@@ -61086,7 +61081,7 @@ Converts a string to lower case letters.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="617"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="44"/>
         <source>&lt;h3&gt;ceil() function&lt;/h3&gt;
 Rounds a number upwards.
 
@@ -61118,7 +61113,7 @@ Rounds a number upwards.
 &lt;code&gt;ceil(-4.9) &amp;rarr; -4&lt;/code&gt;&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1874"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1479"/>
         <source>&lt;h3&gt;toreal() function&lt;/h3&gt;
 Converts a string to real number. Nothing changed if a value cannot be converted to real (e.g &apos;123.56asd&apos; is invalid). Numbers are rounded after saving changes if the precision is smaller than the result of the conversion.
 
@@ -61148,7 +61143,7 @@ Converts a string to real number. Nothing changed if a value cannot be converted
      toreal(&apos;123.45&apos;) &amp;rarr; 123.45&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="2021"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1914"/>
         <source>&lt;h3&gt;xat() function&lt;/h3&gt;
 Retrieves a x coordinate of the current feature
 
@@ -61174,7 +61169,7 @@ Retrieves a x coordinate of the current feature
 &lt;pre&gt;xat(1) &amp;rarr; 5&lt;/pre&gt;</translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1182"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="453"/>
         <source>&lt;h3&gt;format_number() function&lt;/h3&gt;
 Returns a number formatted with the locale separator for thousands. 
 Also truncates the number to the number of supplied places. 
@@ -61211,7 +61206,7 @@ to.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="446"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1285"/>
         <source>&lt;h3&gt;String Group&lt;/h3&gt;
 This group contains functions that operate on strings e.g replace, convert to upper case.
 </source>
@@ -61220,7 +61215,7 @@ This group contains functions that operate on strings e.g replace, convert to up
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="978"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="318"/>
         <source>&lt;h3&gt;floor() function&lt;/h3&gt;
 Rounds a number downwards.
 
@@ -61252,7 +61247,7 @@ Rounds a number downwards.
 &lt;code&gt;floor(-4.9) &amp;rarr; -5&lt;/code&gt;&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1847"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="631"/>
         <source>&lt;h3&gt;toint() function&lt;/h3&gt;
 Converts a string to integer number. Nothing changed if a value cannot be converted to integer (e.g &apos;123asd&apos; is invalid).
 
@@ -61282,7 +61277,7 @@ Converts a string to integer number. Nothing changed if a value cannot be conver
      toint(&apos;123&apos;) &amp;rarr; 123&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="2059"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="151"/>
         <source>&lt;h3&gt;yat() function&lt;/h3&gt;
 Retrieves a y coordinate of the current feature
 
@@ -61309,7 +61304,7 @@ Retrieves a y coordinate of the current feature
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="449"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="409"/>
         <source>&lt;h3&gt;abs() function&lt;/h3&gt;
 Returns the absolute value of a number.&lt;br&gt;
 
@@ -61338,7 +61333,7 @@ abs(&lt;i&gt;value&lt;/i&gt;)&lt;br&gt;
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1888"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="220"/>
         <source>&lt;h3&gt;tostring() function&lt;/h3&gt;
 Converts a number to string.
 
@@ -61368,7 +61363,7 @@ Converts a number to string.
      tostring(123) &amp;rarr; &apos;123&apos;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="993"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="891"/>
         <source>&lt;h3&gt;format() function&lt;/h3&gt;
 Format a string using supplied arguments. 
 
@@ -61399,7 +61394,7 @@ Format a string using supplied arguments.
 &lt;code&gt;format(&apos;This %1 a %2&apos;,&apos;is&apos;, &apos;test&apos;) &amp;rarr; This is a test&lt;/code&gt;&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="703"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="2035"/>
         <source>
 &lt;h3&gt;color_cmyka() function&lt;/h3&gt;
 Returns a string representation of a color based on its cyan, magenta, yellow, black and alpha (transparency) components
@@ -61440,7 +61435,7 @@ Returns a string representation of a color based on its cyan, magenta, yellow, b
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1443"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="118"/>
         <source>&lt;h3&gt;month() function&lt;/h3&gt;
 Extract the month part from a date, or the number of months
 from a &lt;code&gt;Interval&lt;/code&gt;
@@ -61482,7 +61477,7 @@ from a &lt;code&gt;Interval&lt;/code&gt;
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="408"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="661"/>
         <source>&lt;h3&gt;Math Group&lt;/h3&gt;
 This group contains math functions e.g square root, sin and cos
 </source>
@@ -61491,7 +61486,7 @@ This group contains math functions e.g square root, sin and cos
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1650"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="191"/>
         <source>&lt;h3&gt;scale_exp() function&lt;/h3&gt;
 Transforms a given value from an input domain to an output range using an exponential curve. This function can be used to ease values in or out 
 of the specified output range.   
@@ -61554,7 +61549,7 @@ accelerating as the input values approach the domain maximum. Smaller exponents 
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="665"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1867"/>
         <source>&lt;h3&gt;coalesce() function&lt;/h3&gt;
 Returns the first non-NULL value from the expression list.
 &lt;br&gt;
@@ -61597,7 +61592,7 @@ This function can take any number of arguments.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1679"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1288"/>
         <source>&lt;h3&gt;scale_linear() function&lt;/h3&gt;
 Transforms a given value from an input domain to an output range using linear interpolation. 
 
@@ -61640,7 +61635,7 @@ Transforms a given value from an input domain to an output range using linear in
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="11"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1708"/>
         <source>&lt;h3&gt;$area function&lt;/h3&gt;
 Returns the area size of the current feature.
 
@@ -61669,7 +61664,7 @@ None
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1929"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1887"/>
         <source>&lt;h3&gt;trim() function&lt;/h3&gt;
 Removes all leading and trailing whitespace (spaces, tabs, etc) from a string.
 
@@ -61700,7 +61695,7 @@ Removes all leading and trailing whitespace (spaces, tabs, etc) from a string.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1834"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1695"/>
         <source>&lt;h3&gt;todatetime() function&lt;/h3&gt;
 Convert a string into Qt data time type.
 
@@ -61729,7 +61724,7 @@ Convert a string into Qt data time type.
 &lt;code&gt;todatetime(&apos;2012-05-04 12:50:00&apos;) &amp;rarr; 2012-05-04T12:50:00&lt;/code&gt;&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1970"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="721"/>
         <source>&lt;h3&gt;week() function&lt;/h3&gt;
 Extract the week number from a date, or the number of weeks
 from a &lt;code&gt;Interval&lt;/code&gt;
@@ -61771,7 +61766,7 @@ from a &lt;code&gt;Interval&lt;/code&gt;
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="294"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1206"/>
         <source>&lt;h3&gt;CASE expression&lt;/h3&gt;
 A conditional expression that can be used to evaluate multiple expressions and
 return a result.
@@ -61831,7 +61826,7 @@ return a result.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="81"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="678"/>
         <source>&lt;h3&gt;$id function&lt;/h3&gt;
 Returns the feature id of the current row.
 
@@ -61860,7 +61855,7 @@ None
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1315"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="2069"/>
         <source>&lt;h3&gt;ln() function&lt;/h3&gt;
 Returns the value of the natural logarithm of the passed expression.
 &lt;br&gt;
@@ -61894,7 +61889,7 @@ This function takes one argument.
 &lt;code&gt;ln(2.7182818284590452354) &amp;rarr; 1&lt;/code&gt;&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="336"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1161"/>
         <source>&lt;h3&gt;Date and Time Group&lt;/h3&gt;
 This group contains functions for handling date and time data.
 </source>
@@ -61903,7 +61898,7 @@ This group contains functions for handling date and time data.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="136"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="524"/>
         <source>&lt;h3&gt;$numfeatures function&lt;/h3&gt;
 In atlas generation, returns the total number of features within the coverage layer.
 
@@ -61932,7 +61927,7 @@ None
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1631"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1835"/>
         <source>&lt;h3&gt;rpad() function&lt;/h3&gt;
 Returns a string with supplied width padded
 using the fill character.
@@ -61972,7 +61967,7 @@ using the fill character.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1376"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="784"/>
         <source>&lt;h3&gt;lpad() function&lt;/h3&gt;
 Returns a string with supplied width padded
 using the fill character.
@@ -62010,7 +62005,7 @@ using the fill character.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1956"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="802"/>
         <source>&lt;h3&gt;upper() function&lt;/h3&gt;
 Converts a string to upper case letters.
 
@@ -62041,7 +62036,7 @@ Converts a string to upper case letters.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="443"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1308"/>
         <source>&lt;h3&gt;Record Group&lt;/h3&gt;
 This group contains functions that operate on record identifiers.
 </source>
@@ -62050,7 +62045,7 @@ This group contains functions that operate on record identifiers.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1594"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1447"/>
         <source>&lt;h3&gt;right() function&lt;/h3&gt;
 Returns a substring that contains the &lt;i&gt;n&lt;/i&gt; rightmost characters of the string.
 
@@ -62085,7 +62080,7 @@ Returns a substring that contains the &lt;i&gt;n&lt;/i&gt; rightmost characters 
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1301"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="11"/>
         <source>&lt;h3&gt;length() function&lt;/h3&gt;
 Returns the length of a string.
 
@@ -62116,7 +62111,7 @@ Returns the length of a string.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1408"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="573"/>
         <source>&lt;h3&gt;min() function&lt;/h3&gt;
 Returns the smallest value in a set of values.
 
@@ -62147,7 +62142,7 @@ Returns the smallest value in a set of values.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="738"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1164"/>
         <source>&lt;h3&gt;color_hsla() function&lt;/h3&gt;
 Returns a string representation of a color based on its hue, saturation, lightness and alpha (transparency) attributes
 
@@ -62184,7 +62179,7 @@ Returns a string representation of a color based on its hue, saturation, lightne
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="508"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="601"/>
         <source>&lt;h3&gt;asin() function&lt;/h3&gt;
 Returns arcussinus of a value in radians.
 
@@ -62212,7 +62207,7 @@ Returns arcussinus of a value in radians.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1733"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1148"/>
         <source>&lt;h3&gt;sqrt() function&lt;/h3&gt;
 Returns square root of a value
 
@@ -62240,7 +62235,7 @@ Returns square root of a value
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="226"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1901"/>
         <source>&lt;h3&gt;$x function&lt;/h3&gt;
 Returns the x coordinate of the current feature.
 
@@ -62269,7 +62264,7 @@ None
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1610"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1412"/>
         <source>&lt;h3&gt;round() function&lt;/h3&gt;
 Rounds a number to number of decimal places.
 &lt;br&gt;
@@ -62314,7 +62309,7 @@ use &lt;code&gt;round(decimal)&lt;/code&gt; 一番近い整数に丸められま
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1007"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1507"/>
         <source>&lt;h3&gt;format_date() function&lt;/h3&gt;
 Format a date type or string into a custom string format. Uses Qt data time format strings.  See &lt;a href=&apos;http://qt-project.org/doc/qt-4.8/qdatetime.html#toString&apos;&gt;QDateTime::toString&lt;/a&gt;
 
@@ -62668,7 +62663,7 @@ Format a date type or string into a custom string format. Uses Qt data time form
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="123"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1975"/>
         <source>&lt;h3&gt;$now function&lt;/h3&gt;
 Returns the current date and time
 
@@ -62697,7 +62692,7 @@ None
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="266"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="90"/>
         <source>&lt;h3&gt;CASE expression&lt;/h3&gt;
 A conditional expression that can be used to evaluate multiple expressions and
 return a result.
@@ -62755,7 +62750,7 @@ return a result.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="330"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="645"/>
         <source>&lt;h3&gt;Conditions Group&lt;/h3&gt;
 This group contains functions that operate on condition.
 </source>
@@ -62764,47 +62759,7 @@ This group contains functions that operate on condition.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="376"/>
-        <source>&lt;h3&gt;IS expression&lt;/h3&gt;
-Returns 1 if a is the same as b.
-
-&lt;h4&gt;Syntax&lt;/h4&gt;
-&lt;pre&gt;a IS b&lt;/pre&gt;
-
-&lt;h4&gt;Arguments&lt;/h4&gt;
-None
-
-&lt;h4&gt;Example&lt;/h4&gt;
-&lt;pre&gt; &apos;A&apos; IS &apos;A&apos;  &amp;rarr; returns 1 &lt;/pre&gt;
-&lt;pre&gt; &apos;A&apos; IS &apos;a&apos;  &amp;rarr; returns 0 &lt;/pre&gt;
-&lt;pre&gt; 4 IS 4      &amp;rarr; returns 1 &lt;/pre&gt;
-&lt;pre&gt; 4 IS 2+2    &amp;rarr; returns 1 &lt;/pre&gt;
-&lt;pre&gt; 4 IS 2      &amp;rarr; returns 0 &lt;/pre&gt;
-&lt;pre&gt; $geometry IS NULL  &amp;rarr; returns 0, if your geometry is not NULL&lt;/pre&gt;
-
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="851"/>
-        <source>&lt;h3&gt;contains function&lt;/h3&gt;
-Returns true if and only if no points of b lie in the exterior of a, and at least one point of the interior of b lies in the interior of a. 
-
-&lt;h4&gt;Syntax&lt;/h4&gt;
-&lt;pre&gt;contains( geometry a , geometry b)&lt;/pre&gt;
-
-&lt;h4&gt;Arguments&lt;/h4&gt;
-geometry &amp;rarr; geometry
-geometry &amp;rarr; geometry
-
-&lt;h4&gt;Example&lt;/h4&gt;
-&lt;pre&gt; contains( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;POINT( 0.5 0.5 )&apos; ))    &amp;rarr; returns 1&lt;/pre&gt;
-&lt;pre&gt; contains( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))          &amp;rarr; returns 0&lt;/pre&gt;
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="905"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1053"/>
         <source>&lt;h3&gt;day() function&lt;/h3&gt;
 Extract the day from a date, or the number of days
 from a &lt;code&gt;Interval&lt;/code&gt;
@@ -62846,7 +62801,7 @@ from a &lt;code&gt;Interval&lt;/code&gt;
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="965"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="841"/>
         <source>&lt;h3&gt;exp() function&lt;/h3&gt;
 Returns exponential of an value.
 
@@ -62874,7 +62829,7 @@ Returns exponential of an value.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1861"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1734"/>
         <source>&lt;h3&gt;tointerval() function&lt;/h3&gt;
 Converts a string to a interval type.  Can be used to take days, hours, month, etc off a date. 
 
@@ -62902,7 +62857,7 @@ Converts a string to a interval type.  Can be used to take days, hours, month, e
 &lt;code&gt;todatetime(&apos;2012-05-05 12:00:00&apos;) - tointerval(&apos;1 day 2 hours&apos;) &amp;rarr; 2012-05-04T10:00:00&lt;/code&gt;&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="771"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1311"/>
         <source>&lt;h3&gt;color_hsva() function&lt;/h3&gt;
 Returns a string representation of a color based on its hue, saturation, value and alpha (transparency) attributes
 
@@ -62939,7 +62894,7 @@ Returns a string representation of a color based on its hue, saturation, value a
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1902"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="648"/>
         <source>&lt;h3&gt;totime() function&lt;/h3&gt;
 Convert a string into Qt time type.
 
@@ -62968,7 +62923,7 @@ Convert a string into Qt time type.
 &lt;code&gt;totime(&apos;12:30:01&apos;) &amp;rarr; 12:30:01&lt;/code&gt;&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1394"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="365"/>
         <source>&lt;h3&gt;max() function&lt;/h3&gt;
 Returns the largest value in a set of values.
 
@@ -62999,7 +62954,7 @@ Returns the largest value in a set of values.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1563"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1038"/>
         <source>&lt;h3&gt;regexp_substr() function&lt;/h3&gt;
 Returns the portion of a string which matches a supplied regular expression.
 
@@ -63032,7 +62987,7 @@ Returns the portion of a string which matches a supplied regular expression.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="462"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="483"/>
         <source>&lt;h3&gt;acos() function&lt;/h3&gt;
 Returns arcuscosinus of a value in radians.
 
@@ -63060,7 +63015,7 @@ Returns arcuscosinus of a value in radians.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1532"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="2054"/>
         <source>&lt;h3&gt;regexp_match() function&lt;/h3&gt;
 Returns true if any part of a string matches the supplied regular expression.
 
@@ -63093,7 +63048,7 @@ Returns true if any part of a string matches the supplied regular expression.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1547"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="25"/>
         <source>&lt;h3&gt;regexp_replace() function&lt;/h3&gt;
 Returns a string with the supplied regular expression replaced.
 
@@ -63128,7 +63083,7 @@ Returns a string with the supplied regular expression replaced.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1806"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="537"/>
         <source>&lt;h3&gt;title() function&lt;/h3&gt;
 Converts all words of a string to title case (all words lower case with leading
 capital letter).
@@ -63160,7 +63115,7 @@ capital letter).
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="534"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="2101"/>
         <source>&lt;h3&gt;atan2() function&lt;/h3&gt;
 Returns arcustangens of y/x using the signs of the two 
 arguments to determine the quadrant of the result
@@ -63193,7 +63148,7 @@ arguments to determine the quadrant of the result
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1498"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="874"/>
         <source>&lt;h3&gt;rand() function&lt;/h3&gt;
 Returns a random integer within the range specified by the minimum and 
 maximum argument (inclusive).
@@ -63229,7 +63184,7 @@ This function takes two arguments.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="333"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1463"/>
         <source>&lt;h3&gt;Conversions Group&lt;/h3&gt;
 This group contains functions to convert on data type to another e.g string to integer, integer to string.
 </source>
@@ -63238,7 +63193,7 @@ This group contains functions to convert on data type to another e.g string to i
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="440"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="496"/>
         <source>&lt;h3&gt;Operators Group&lt;/h3&gt;
 This group contains operators e.g + - * 
 </source>
@@ -63247,7 +63202,7 @@ This group contains operators e.g + - *
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="162"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1776"/>
         <source>&lt;h3&gt;$page function&lt;/h3&gt;
 Returns the current page number within a composition.
 
@@ -63276,7 +63231,76 @@ None
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1699"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1328"/>
+        <source>&lt;h3&gt;contains function&lt;/h3&gt;
+Returns true if and only if no points of b lie in the exterior of a, and at least one point of the interior of b lies in the interior of a. 
+
+&lt;h4&gt;Syntax&lt;/h4&gt;
+&lt;pre&gt;contains( geometry a , geometry b)&lt;/pre&gt;
+
+&lt;h4&gt;Arguments&lt;/h4&gt;
+geometry &amp;rarr; geometry
+geometry &amp;rarr; geometry
+
+&lt;h4&gt;Example&lt;/h4&gt;
+&lt;pre&gt; contains( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;POINT( 0.5 0.5 )&apos; ))    &amp;rarr; returns 1&lt;/pre&gt;
+&lt;pre&gt; contains( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))          &amp;rarr; returns 0&lt;/pre&gt;
+</source>
+        <translation>&lt;h3&gt;contains関数&lt;/h3&gt;
+bの点のうちaの外側のものが無く,少なくともbの内部の1つのポイントがaの内部にある場合 true を返します.
+
+&lt;h4&gt;文法&lt;/h4&gt;
+&lt;pre&gt;contains( geometry a , geometry b)&lt;/pre&gt;
+
+&lt;h4&gt;引数&lt;/h4&gt;
+geometry &amp;rarr; geometry
+geometry &amp;rarr; geometry
+
+&lt;h4&gt;例&lt;/h4&gt;
+&lt;pre&gt; contains( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;POINT( 0.5 0.5 )&apos; ))    &amp;rarr; returns 1&lt;/pre&gt;
+&lt;pre&gt; contains( geomFromWKT( &apos;POLYGON((0 0 , 0 1 , 1 1 , 1 0 , 0 0 ))&apos; ) , geomFromWKT( &apos;LINESTRING(3 3 , 4 4 , 5 5)&apos; ))          &amp;rarr; returns 0&lt;/pre&gt;
+</translation>
+    </message>
+    <message>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="959"/>
+        <source>&lt;h3&gt;IS expression&lt;/h3&gt;
+Returns 1 if a is the same as b.
+
+&lt;h4&gt;Syntax&lt;/h4&gt;
+&lt;pre&gt;a IS b&lt;/pre&gt;
+
+&lt;h4&gt;Arguments&lt;/h4&gt;
+None
+
+&lt;h4&gt;Example&lt;/h4&gt;
+&lt;pre&gt; &apos;A&apos; IS &apos;A&apos;  &amp;rarr; returns 1 &lt;/pre&gt;
+&lt;pre&gt; &apos;A&apos; IS &apos;a&apos;  &amp;rarr; returns 0 &lt;/pre&gt;
+&lt;pre&gt; 4 IS 4      &amp;rarr; returns 1 &lt;/pre&gt;
+&lt;pre&gt; 4 IS 2+2    &amp;rarr; returns 1 &lt;/pre&gt;
+&lt;pre&gt; 4 IS 2      &amp;rarr; returns 0 &lt;/pre&gt;
+&lt;pre&gt; $geometry IS NULL  &amp;rarr; returns 0, if your geometry is not NULL&lt;/pre&gt;
+
+</source>
+        <translation>&lt;h3&gt;IS 式&lt;/h3&gt;
+a が b と同一の場合 1 を返します.
+
+&lt;h4&gt;文法&lt;/h4&gt;
+&lt;pre&gt;a IS b&lt;/pre&gt;
+
+&lt;h4&gt;引数&lt;/h4&gt;
+None
+
+&lt;h4&gt;例&lt;/h4&gt;
+&lt;pre&gt; &apos;A&apos; IS &apos;A&apos;  &amp;rarr; returns 1 &lt;/pre&gt;
+&lt;pre&gt; &apos;A&apos; IS &apos;a&apos;  &amp;rarr; returns 0 &lt;/pre&gt;
+&lt;pre&gt; 4 IS 4      &amp;rarr; returns 1 &lt;/pre&gt;
+&lt;pre&gt; 4 IS 2+2    &amp;rarr; returns 1 &lt;/pre&gt;
+&lt;pre&gt; 4 IS 2      &amp;rarr; returns 0 &lt;/pre&gt;
+&lt;pre&gt; $geometry IS NULL  &amp;rarr; returns 0, if your geometry is not NULL&lt;/pre&gt;
+</translation>
+    </message>
+    <message>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1127"/>
         <source>&lt;h3&gt;second() function&lt;/h3&gt;
 Extract the seconds from a datetime or time, or the number of seconds
 from a &lt;code&gt;Interval&lt;/code&gt;
@@ -63320,7 +63344,7 @@ from a &lt;code&gt;Interval&lt;/code&gt;
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="239"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1789"/>
         <source>&lt;h3&gt;$y function&lt;/h3&gt;
 Returns the y coordinate of the current feature.
 
@@ -63349,7 +63373,7 @@ None
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="878"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1387"/>
         <source>&lt;h3&gt;cos() function&lt;/h3&gt;
 Returns cosinus of an angle.
 
@@ -63377,7 +63401,7 @@ Returns cosinus of an angle.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="577"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="2001"/>
         <source>&lt;h3&gt;bounds_height function&lt;/h3&gt;
 Returns the height of the bounding box of a geometry. Calculations are in the Spatial Reference System of this Geometry. 
 
@@ -63406,7 +63430,7 @@ geom &amp;rarr; a geometry
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="2104"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1272"/>
         <source>&lt;h3&gt;ymin function&lt;/h3&gt;
 Returns the minimum y coordinate of a geometry. Calculations are in the Spatial Reference System of this Geometry. 
 
@@ -63435,7 +63459,7 @@ geom &amp;rarr; a geometry
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1331"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1370"/>
         <source>&lt;h3&gt;log() function&lt;/h3&gt;
 Returns the value of the logarithm of the passed value and base.
 &lt;br&gt;
@@ -63472,7 +63496,7 @@ This function takes two arguments.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1720"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1988"/>
         <source>&lt;h3&gt;sin() function&lt;/h3&gt;
 Returns sinus of an angle.
 
@@ -63500,7 +63524,7 @@ Returns sinus of an angle.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1764"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1235"/>
         <source>&lt;h3&gt;substr() function&lt;/h3&gt;
 Return a part of a string
 
@@ -63535,7 +63559,7 @@ Return a part of a string
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1515"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="392"/>
         <source>&lt;h3&gt;randf() function&lt;/h3&gt;
 Returns a random float within the range specified by the minimum and 
 maximum argument (inclusive).
@@ -63571,7 +63595,7 @@ This function takes two arguments.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="865"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="946"/>
         <source>&lt;h3&gt;convexHull function&lt;/h3&gt;
 Returns the convex hull of a geometry. It represents the minimum convex geometry that encloses all geometries within the set.
 
@@ -63600,7 +63624,7 @@ a &amp;rarr; ジオメトリ
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1943"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="278"/>
         <source>&lt;h3&gt;union function&lt;/h3&gt;
 Returns a geometry that represents the point set union of the geometries.
 
@@ -63629,7 +63653,7 @@ b &amp;rarr; ジオメトリ
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1258"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1822"/>
         <source>&lt;h3&gt;intersection function&lt;/h3&gt;
 Returns a geometry that represents the shared portion of geometry a and geometry b.
 
@@ -63658,7 +63682,7 @@ geometry &amp;rarr; ジオメトリ
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="362"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="333"/>
         <source>&lt;h3&gt;ILIKE expression&lt;/h3&gt;
 Returns 1 if the first parameter matches case-insensitive the supplied pattern. LIKE can be used instead of ILIKE to make the match case-sensitive. Works with numbers also.
 
@@ -63689,7 +63713,7 @@ None
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="394"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1493"/>
         <source>&lt;h3&gt;LIKE expression&lt;/h3&gt;
 Returns 1 if the first parameter matches the supplied pattern. Works with numbers also.
 
@@ -63720,7 +63744,7 @@ None
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1199"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="828"/>
         <source>&lt;h3&gt;geomFromGML function&lt;/h3&gt;
 Returns a geometry from a GML representation of geometry
 
@@ -63749,7 +63773,7 @@ text &amp;rarr; ジオメトリのGML表現
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="823"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1342"/>
         <source>&lt;h3&gt;combine function&lt;/h3&gt;
 Returns the combination of geometry a and geometry b.
 
@@ -63780,7 +63804,7 @@ geometry &amp;rarr; ジオメトリ
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1271"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="664"/>
         <source>&lt;h3&gt;intersects function&lt;/h3&gt;
 Returns 1 if the geometries spatially intersect (share any portion of space) and 0 if they don&apos;t.
 
@@ -63811,7 +63835,7 @@ b &amp;rarr; ジオメトリ
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="645"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1802"/>
         <source>&lt;h3&gt;clamp() function&lt;/h3&gt;
 Restricts an input value to a specified range.
 
@@ -63852,7 +63876,7 @@ Restricts an input value to a specified range.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1578"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="2085"/>
         <source>&lt;h3&gt;replace() function&lt;/h3&gt;
 Returns a string with the the supplied string replaced.
 
@@ -63927,7 +63951,7 @@ aがbと同じ場合に1を返します.
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="938"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1073"/>
         <source>&lt;h3&gt;disjoint function&lt;/h3&gt;
 Returns 1 if the geometries do not &quot;spatially intersect&quot; - if they do not share any space together. 
 
@@ -63958,7 +63982,7 @@ b &amp;rarr; ジオメトリ
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1212"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="291"/>
         <source>&lt;h3&gt;geomFromWKT function&lt;/h3&gt;
 Returns a geometry created from a Well-Known Text (WKT) representation.
 
@@ -63987,7 +64011,7 @@ text &amp;rarr; ジオメトリのWell-Knownテキスト（WKT）表現
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="603"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="905"/>
         <source>&lt;h3&gt;buffer function&lt;/h3&gt;
 Returns a geometry that represents all points whose distance from this geometry is less than or equal to distance. Calculations are in the Spatial Reference System of this Geometry. 
 
@@ -64018,7 +64042,7 @@ b &amp;rarr; バッファの距離
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="891"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1433"/>
         <source>&lt;h3&gt;crosses function&lt;/h3&gt;
 Returns 1 if the supplied geometries have some, but not all, interior points in common.
 
@@ -64049,7 +64073,7 @@ geometry &amp;rarr; ジオメトリ
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1225"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="816"/>
         <source>&lt;h3&gt;geomToWKT function&lt;/h3&gt;
 Returns the Well-Known Text (WKT) representation of the geometry without SRID metadata.
 
@@ -64076,7 +64100,7 @@ a &amp;rarr; ジオメトリ
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1915"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="932"/>
         <source>&lt;h3&gt;touches function&lt;/h3&gt;
 Returns 1 if the geometries have at least one point in common, but their interiors do not intersect.
 
@@ -64107,7 +64131,7 @@ b &amp;rarr; ジオメトリ
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1463"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="304"/>
         <source>&lt;h3&gt;overlaps function&lt;/h3&gt;
 Returns 1 if the geometries share space, are of the same dimension, but are not completely contained by each other.
 
@@ -64138,7 +64162,7 @@ b &amp;rarr; ジオメトリ
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1237"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="503"/>
         <source>&lt;h3&gt;hour() function&lt;/h3&gt;
 Extract the hour from a datetime or time, or the number of hours
 from a &lt;code&gt;Interval&lt;/code&gt;
@@ -64182,7 +64206,7 @@ from a &lt;code&gt;Interval&lt;/code&gt;
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="188"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1181"/>
         <source>&lt;h3&gt;$pi constant&lt;/h3&gt;
 Returns pi as value for calculations
 
@@ -64209,7 +64233,7 @@ None
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="252"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1356"/>
         <source>&lt;h3&gt;AND logical operator&lt;/h3&gt;
 Returns 1 when condition a and b are true.
 
@@ -64240,7 +64264,7 @@ None
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="68"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="757"/>
         <source>&lt;h3&gt;$geometry function&lt;/h3&gt;
 Returns the geometry of the current feature. Can be used for processing with other functions.
 
@@ -64269,7 +64293,7 @@ None
 </translation>
     </message>
     <message>
-        <location filename="../src/core/qgsexpression_texts.cpp" line="1821"/>
+        <location filename="../src/core/qgsexpression_texts.cpp" line="1721"/>
         <source>&lt;h3&gt;todate() function&lt;/h3&gt;
 Convert a string into Qt data type.
 
