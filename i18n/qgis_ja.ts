@@ -4964,7 +4964,7 @@ JPEG,JPEG2000,MrSID,ECW,のようなカラー索引をサポートしないデ�
     </message>
     <message>
         <source>Currently QGIS doesn&apos;t allow simultaneous access from different threads to the same datasource. Make sure your layer&apos;s attribute tables are closed. Continue?</source>
-        <translation type="unfinished">現在のQGISは異なるスレッドから同じデータソースへの同時アクセスを許していません.レイヤ属性テーブルが閉じられていることを確認してください.継続しますか?</translation>
+        <translation>現在のQGISは異なるスレッドから同じデータソースへの同時アクセスを許していません.レイヤ属性テーブルが閉じられていることを確認してください.継続しますか?</translation>
     </message>
     <message>
         <source>Unable to delete incomplete shapefile.</source>
@@ -7290,11 +7290,11 @@ Shift+クリックで非表示
     </message>
     <message>
         <source>Model doesn&apos;t contains any algorithms and/or parameters and can&apos;t be executed</source>
-        <translation type="unfinished"></translation>
+        <translation>モデルにはアルゴリズムまたはパラメータが無いので実行できません</translation>
     </message>
     <message>
         <source>This model can&apos;t be saved in its original location (probably you do not have permission to do it). Please, use the &apos;Save as...&apos; option.</source>
-        <translation type="unfinished"></translation>
+        <translation>このモデルはオリジナルの場所には保存できません（多分あなたにその権限が無いと思われます)　 &apos;Save as...&apos; オプションを利用して下さい.</translation>
     </message>
     <message>
         <source>Model saved</source>
@@ -7315,7 +7315,8 @@ Shift+クリックで非表示
     <message>
         <source>The selected model could not be loaded.
 Wrong line: %s</source>
-        <translation type="unfinished"></translation>
+        <translation>選択されたモデルをロードできませんでした.
+不正な行: %s</translation>
     </message>
     <message>
         <source>Parameters</source>
@@ -28955,7 +28956,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/plugins/grass/qgsgrassnewmapsetbase.ui" line="2567"/>
         <source>&lt;p align=&quot;center&quot;&gt;Existing mapsets&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p align=&quot;center&quot;&gt;既存のマップセット&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/plugins/grass/qgsgrassnewmapsetbase.ui" line="2592"/>
@@ -33146,12 +33147,12 @@ not displayed</source>
     <message>
         <location filename="../src/app/qgsmaptoolsplitfeatures.cpp" line="109"/>
         <source>No features were split</source>
-        <translation type="unfinished"></translation>
+        <translation>分割された地物はありません</translation>
     </message>
     <message>
         <location filename="../src/app/qgsmaptoolsplitfeatures.cpp" line="110"/>
         <source>If there are selected features, the split tool only applies to those. If you would like to split all features under the split line, clear the selection.</source>
-        <translation type="unfinished"></translation>
+        <translation>選択されている要素がある場合,分割ツールはその選択された要素に対してのみ有効です.分割ラインと交差する全ての要素に対して分割を行いたい場合は選択を解除してください.</translation>
     </message>
     <message>
         <location filename="../src/app/qgsmaptoolsplitfeatures.cpp" line="118"/>
@@ -33166,7 +33167,7 @@ not displayed</source>
     <message>
         <location filename="../src/app/qgsmaptoolsplitfeatures.cpp" line="135"/>
         <source>An error occured during splitting.</source>
-        <translation type="unfinished"></translation>
+        <translation>要素の分割中にエラーが発生しました.</translation>
     </message>
 </context>
 <context>
@@ -33189,12 +33190,12 @@ not displayed</source>
     <message>
         <location filename="../src/app/qgsmaptoolsplitparts.cpp" line="106"/>
         <source>No parts were split</source>
-        <translation type="unfinished"></translation>
+        <translation>分割された部分はありません</translation>
     </message>
     <message>
         <location filename="../src/app/qgsmaptoolsplitparts.cpp" line="107"/>
         <source>If there are selected parts, the split tool only applies to those. If you would like to split all parts under the split line, clear the selection.</source>
-        <translation type="unfinished"></translation>
+        <translation>選択されている部分がある場合,分割ツールはその選択された部分に対してのみ有効です.分割ラインと交差する全ての要素に対して分割を行いたい場合は選択を解除してください.</translation>
     </message>
     <message>
         <location filename="../src/app/qgsmaptoolsplitparts.cpp" line="114"/>
@@ -33205,7 +33206,7 @@ not displayed</source>
     <message>
         <location filename="../src/app/qgsmaptoolsplitparts.cpp" line="132"/>
         <source>An error occured during splitting.</source>
-        <translation type="unfinished"></translation>
+        <translation>分割中にエラーが発生しました.</translation>
     </message>
     <message>
         <source>If there are selected parts, the split tool only applies to the selected ones. If you like to split all parts under the split line, clear the selection</source>
@@ -38503,7 +38504,7 @@ SQL %2</translation>
         <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1510"/>
         <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1573"/>
         <source>Could not reload fields.</source>
-        <translation type="unfinished"></translation>
+        <translation>フィールドを再ロードできませんでした.</translation>
     </message>
     <message>
         <location filename="../src/providers/oracle/qgsoracleprovider.cpp" line="1549"/>
@@ -44897,12 +44898,12 @@ standard deviation ×</source>
     <message>
         <location filename="../src/ui/qgsrelationmanagerdialogbase.ui" line="36"/>
         <source>Referenced Layer</source>
-        <translation>参照レイヤ</translation>
+        <translation>参照先レイヤ</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsrelationmanagerdialogbase.ui" line="41"/>
         <source>Referenced Field</source>
-        <translation>参照フィールド</translation>
+        <translation>参照先フィールド</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsrelationmanagerdialogbase.ui" line="46"/>
@@ -51291,14 +51292,16 @@ Error was:%2</source>
     <message>
         <location filename="../src/providers/wms/qgswmssourceselect.cpp" line="472"/>
         <source>The server you are trying to connect to does not seem to be a WMS server. Please check the URL.</source>
-        <translation type="unfinished"></translation>
+        <translation>あなたが接続しようとしているサーバはWMSサーバではないと思われます. URLをチェックして下さい.</translation>
     </message>
     <message>
         <location filename="../src/providers/wms/qgswmssourceselect.cpp" line="474"/>
         <source>Instead of the capabilities string that was expected, the following response has been received:
 
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>capabilities文字列の代わりに以下のレスポンスを受診しました.
+
+%1</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/providers/wms/qgswmssourceselect.cpp" line="919"/>
