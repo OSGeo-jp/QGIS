@@ -738,7 +738,14 @@ void QgsIdentifyResultsDialog::addFeature( QgsRasterLayer *layer,
   {
     QgsIdentifyResultsWebViewItem *attrItem = new QgsIdentifyResultsWebViewItem( lstResults );
     featItem->addChild( attrItem ); // before setHtml()!
-    attrItem->setContent( attributes.begin().value().toUtf8(), currentFormat == QgsRaster::IdentifyFormatHtml ? "text/html" : "text/plain" );
+    if ( !attributes.isEmpty() )
+    {
+      attrItem->setContent( attributes.begin().value().toUtf8(), currentFormat == QgsRaster::IdentifyFormatHtml ? "text/html" : "text/plain" );
+    }
+    else
+    {
+      attrItem->setContent( tr( "No attributes." ).toUtf8(), "text/plain" );
+    }
   }
   else
   {
@@ -1351,7 +1358,7 @@ void QgsIdentifyResultsDialog::layerDestroyed()
     {
       for ( int j = 0; j < layItem->childCount(); j++ )
       {
-        delete mHighlights.take( layItem->child( i ) );
+        delete mHighlights.take( layItem->child( j ) );
       }
     }
   }

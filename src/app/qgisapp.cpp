@@ -3641,6 +3641,14 @@ void QgisApp::newVectorLayer()
     //todo: the last parameter will change accordingly to layer type
     addVectorLayers( fileNames, enc, "file" );
   }
+  else if ( fileName.isNull() )
+  {
+    QLabel *msgLabel = new QLabel( tr( "Layer creation failed. Please check the <a href=\"#messageLog\">message log</a> for further information." ), messageBar() );
+    msgLabel->setWordWrap( true );
+    connect( msgLabel, SIGNAL( linkActivated( QString ) ), mLogDock, SLOT( show() ) );
+    QgsMessageBarItem *item = new QgsMessageBarItem( msgLabel, QgsMessageBar::WARNING );
+    messageBar()->pushItem( item );
+  }
 }
 
 void QgisApp::newSpatialiteLayer()
@@ -4812,6 +4820,9 @@ void QgisApp::saveAsLayerDefinition()
   if ( path.isEmpty() )
     return;
 
+  if ( !path.endsWith( ".qlr" ) )
+    path = path.append( ".qlr" );
+
   QDomDocument doc = QgsMapLayer::asLayerDefinition( layers );
   QFile file( path );
   if ( file.open( QFile::WriteOnly | QFile::Truncate ) )
@@ -5865,6 +5876,11 @@ void QgisApp::editPaste( QgsMapLayer *destinationLayer )
       // convert geometry to match destination layer
       QGis::GeometryType destType = pasteVectorLayer->geometryType();
       bool destIsMulti = QGis::isMultiType( pasteVectorLayer->wkbType() );
+      if ( pasteVectorLayer->storageType() == "ESRI Shapefile" )
+      {
+        // force destination to multi if shapefile
+        destIsMulti = true;
+      }
       if ( destType != QGis::UnknownGeometry )
       {
         QgsGeometry* newGeometry = featureIt->geometry()->convertToType( destType, destIsMulti );
@@ -9753,7 +9769,8 @@ void QgisApp::namSetup()
   connect( nam, SIGNAL( proxyAuthenticationRequired( const QNetworkProxy &, QAuthenticator * ) ),
            this, SLOT( namProxyAuthenticationRequired( const QNetworkProxy &, QAuthenticator * ) ) );
 
-  connect( nam, SIGNAL( requestTimedOut( QNetworkReply* ) ), this, SLOT( namRequestTimedOut( QNetworkReply* ) ) );
+  connect( nam, SIGNAL( requestTimedOut( QNetworkReply* ) ),
+           this, SLOT( namRequestTimedOut( QNetworkReply* ) ) );
 
 #ifndef QT_NO_OPENSSL
   connect( nam, SIGNAL( sslErrors( QNetworkReply *, const QList<QSslError> & ) ),
@@ -9766,15 +9783,43 @@ void QgisApp::namAuthenticationRequired( QNetworkReply *reply, QAuthenticator *a
   QString username = auth->user();
   QString password = auth->password();
 
-  bool ok = QgsCredentials::instance()->get(
-              QString( "%1 at %2" ).arg( auth->realm() ).arg( reply->url().host() ),
-              username, password,
-              tr( "Authentication required" ) );
-  if ( !ok )
-    return;
+  {
+    QMutexLocker lock( QgsCredentials::instance()->mutex() );
 
-  if ( reply->isFinished() )
-    return;
+    do
+    {
+      bool ok = QgsCredentials::instance()->get(
+                  QString( "%1 at %2" ).arg( auth->realm() ).arg( reply->url().host() ),
+                  username, password,
+                  tr( "Authentication required" ) );
+      if ( !ok )
+        return;
+
+      if ( reply->isFinished() )
+        return;
+
+      if ( auth->user() == username && password == auth->password() )
+      {
+        if ( !password.isNull() )
+        {
+          // credentials didn't change - stored ones probably wrong? clear password and retry
+          QgsCredentials::instance()->put(
+            QString( "%1 at %2" ).arg( auth->realm() ).arg( reply->url().host() ),
+            username, QString::null );
+          continue;
+        }
+      }
+      else
+      {
+        // save credentials
+        QgsCredentials::instance()->put(
+          QString( "%1 at %2" ).arg( auth->realm() ).arg( reply->url().host() ),
+          username, password
+        );
+      }
+    }
+    while ( 0 );
+  }
 
   auth->setUser( username );
   auth->setPassword( password );
@@ -9793,12 +9838,39 @@ void QgisApp::namProxyAuthenticationRequired( const QNetworkProxy &proxy, QAuthe
   QString username = auth->user();
   QString password = auth->password();
 
-  bool ok = QgsCredentials::instance()->get(
-              QString( "proxy %1:%2 [%3]" ).arg( proxy.hostName() ).arg( proxy.port() ).arg( auth->realm() ),
-              username, password,
-              tr( "Proxy authentication required" ) );
-  if ( !ok )
-    return;
+  {
+    QMutexLocker lock( QgsCredentials::instance()->mutex() );
+
+    do
+    {
+      bool ok = QgsCredentials::instance()->get(
+                  QString( "proxy %1:%2 [%3]" ).arg( proxy.hostName() ).arg( proxy.port() ).arg( auth->realm() ),
+                  username, password,
+                  tr( "Proxy authentication required" ) );
+      if ( !ok )
+        return;
+
+      if ( auth->user() == username && password == auth->password() )
+      {
+        if ( !password.isNull() )
+        {
+          // credentials didn't change - stored ones probably wrong? clear password and retry
+          QgsCredentials::instance()->put(
+            QString( "proxy %1:%2 [%3]" ).arg( proxy.hostName() ).arg( proxy.port() ).arg( auth->realm() ),
+            username, QString::null );
+          continue;
+        }
+      }
+      else
+      {
+        QgsCredentials::instance()->put(
+          QString( "proxy %1:%2 [%3]" ).arg( proxy.hostName() ).arg( proxy.port() ).arg( auth->realm() ),
+          username, password
+        );
+      }
+    }
+    while ( 0 );
+  }
 
   auth->setUser( username );
   auth->setPassword( password );
@@ -9842,8 +9914,12 @@ void QgisApp::namSslErrors( QNetworkReply *reply, const QList<QSslError> &errors
 
 void QgisApp::namRequestTimedOut( QNetworkReply *reply )
 {
-  QgsMessageLog::logMessage( tr( "The request '%1' timed out. Any data received is likely incomplete." ).arg( reply->url().toString() ), QString::null, QgsMessageLog::WARNING );
-  messageBar()->pushMessage( tr( "Network request timeout" ), tr( "A network request timed out, any data received is likely incomplete." ), QgsMessageBar::WARNING, messageTimeout() );
+  Q_UNUSED( reply );
+  QLabel *msgLabel = new QLabel( tr( "A network request timed out, any data received is likely incomplete." ) +
+                                 tr( " Please check the <a href=\"#messageLog\">message log</a> for further info." ), messageBar() );
+  msgLabel->setWordWrap( true );
+  connect( msgLabel, SIGNAL( linkActivated( QString ) ), mLogDock, SLOT( show() ) );
+  messageBar()->pushItem( new QgsMessageBarItem( msgLabel, QgsMessageBar::WARNING, messageTimeout() ) );
 }
 
 void QgisApp::namUpdate()

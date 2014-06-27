@@ -84,13 +84,23 @@ void QgsFieldModel::layerDeleted()
 
 void QgsFieldModel::updateModel()
 {
-  beginResetModel();
-  mExpression = QList<QString>();
   if ( mLayer )
-    mFields = mLayer->pendingFields();
+  {
+    if ( mFields.toList() != mLayer->pendingFields().toList() )
+    {
+      beginResetModel();
+      mFields = mLayer->pendingFields();
+      endResetModel();
+    }
+    else
+      emit dataChanged( index( 0, 0 ), index( rowCount(), 0 ) );
+  }
   else
+  {
+    beginResetModel();
     mFields = QgsFields();
-  endResetModel();
+    endResetModel();
+  }
 }
 
 void QgsFieldModel::setAllowExpression( bool allowExpression )
@@ -110,20 +120,20 @@ void QgsFieldModel::setAllowExpression( bool allowExpression )
   }
 }
 
-QModelIndex QgsFieldModel::setExpression( const QString &expression )
+void QgsFieldModel::setExpression( const QString &expression )
 {
   if ( !mAllowExpression )
-    return QModelIndex();
+    return;
 
   QModelIndex idx = indexFromName( expression );
   if ( idx.isValid() )
-    return idx;
+    return;
 
   beginResetModel();
-  mExpression = QList<QString>() << expression;
+  mExpression = QList<QString>();
+  if ( !expression.isEmpty() )
+    mExpression << expression;
   endResetModel();
-
-  return index( mFields.count() , 0 );
 }
 
 void QgsFieldModel::removeExpression()

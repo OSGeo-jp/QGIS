@@ -35,6 +35,9 @@ class QgsMapRendererCache;
 class QgsPalLabeling;
 
 
+/** Structure keeping low-level rendering job information.
+ * @note not part of public API!
+ */
 struct LayerRenderJob
 {
   QgsRenderContext context;
@@ -48,7 +51,30 @@ struct LayerRenderJob
 typedef QList<LayerRenderJob> LayerRenderJobs;
 
 
-/** abstract base class renderer jobs that asynchronously start map rendering */
+/**
+ * Abstract base class for map rendering implementations.
+ *
+ * The API is designed in a way that rendering is done asynchronously, therefore
+ * the caller is not blocked while the rendering is in progress. Non-blocking
+ * operation is quite important because the rendering can take considerable
+ * amount of time.
+ *
+ * Common use case:
+ * 0. prepare QgsMapSettings with rendering configuration (extent, layer, map size, ...)
+ * 1. create QgsMapRendererJob subclass with QgsMapSettings instance
+ * 2. connect to job's finished() signal
+ * 3. call start(). Map rendering will start in background, the function immediately returns
+ * 4. at some point, slot connected to finished() signal is called, map rendering is done
+ *
+ * It is possible to cancel the rendering job while it is active by calling cancel() function.
+ *
+ * The following subclasses are available:
+ * - QgsMapRendererSequentialJob - renders map in one background thread to an image
+ * - QgsMapRendererParallelJob - renders map in multiple background threads to an image
+ * - QgsMapRendererCustomPainterJob - renders map with given QPainter in one background thread
+ *
+ * @note added in 2.4
+ */
 class CORE_EXPORT QgsMapRendererJob : public QObject
 {
     Q_OBJECT
@@ -149,6 +175,8 @@ class CORE_EXPORT QgsMapRendererJob : public QObject
 
 /** Intermediate base class adding functionality that allows client to query the rendered image.
  *  The image can be queried even while the rendering is still in progress to get intermediate result
+ *
+ * @note added in 2.4
  */
 class CORE_EXPORT QgsMapRendererQImageJob : public QgsMapRendererJob
 {
@@ -157,157 +185,6 @@ class CORE_EXPORT QgsMapRendererQImageJob : public QgsMapRendererJob
 
     //! Get a preview/resulting image
     virtual QImage renderedImage() = 0;
-};
-
-
-class QgsMapRendererCustomPainterJob;
-
-
-/** job implementation that renders everything sequentially in one thread */
-class CORE_EXPORT QgsMapRendererSequentialJob : public QgsMapRendererQImageJob
-{
-    Q_OBJECT
-  public:
-    QgsMapRendererSequentialJob( const QgsMapSettings& settings );
-    ~QgsMapRendererSequentialJob();
-
-    virtual void start();
-    virtual void cancel();
-    virtual void waitForFinished();
-    virtual bool isActive() const;
-
-    virtual QgsLabelingResults* takeLabelingResults();
-
-    // from QgsMapRendererJobWithPreview
-    virtual QImage renderedImage();
-
-  public slots:
-
-    void internalFinished();
-
-  protected:
-
-    QgsMapRendererCustomPainterJob* mInternalJob;
-    QImage mImage;
-    QPainter* mPainter;
-    QgsLabelingResults* mLabelingResults;
-};
-
-
-
-
-/** job implementation that renders all layers in parallel */
-class CORE_EXPORT QgsMapRendererParallelJob : public QgsMapRendererQImageJob
-{
-    Q_OBJECT
-  public:
-    QgsMapRendererParallelJob( const QgsMapSettings& settings );
-    ~QgsMapRendererParallelJob();
-
-    virtual void start();
-    virtual void cancel();
-    virtual void waitForFinished();
-    virtual bool isActive() const;
-
-    virtual QgsLabelingResults* takeLabelingResults();
-
-    // from QgsMapRendererJobWithPreview
-    virtual QImage renderedImage();
-
-  protected slots:
-    //! layers are rendered, labeling is still pending
-    void renderLayersFinished();
-    //! all rendering is finished, including labeling
-    void renderingFinished();
-
-  protected:
-
-    static void renderLayerStatic( LayerRenderJob& job );
-    static void renderLabelsStatic( QgsMapRendererParallelJob* self );
-
-  protected:
-
-    QImage mFinalImage;
-
-    enum { Idle, RenderingLayers, RenderingLabels } mStatus;
-
-    QFuture<void> mFuture;
-    QFutureWatcher<void> mFutureWatcher;
-
-    LayerRenderJobs mLayerJobs;
-
-    QgsPalLabeling* mLabelingEngine;
-    QgsRenderContext mLabelingRenderContext;
-    QFuture<void> mLabelingFuture;
-    QFutureWatcher<void> mLabelingFutureWatcher;
-};
-
-
-#include <QEventLoop>
-
-/** job implementation that renders everything sequentially using a custom painter.
- *  The returned image is always invalid (because there is none available).
- */
-class CORE_EXPORT QgsMapRendererCustomPainterJob : public QgsMapRendererJob
-{
-    Q_OBJECT
-  public:
-    QgsMapRendererCustomPainterJob( const QgsMapSettings& settings, QPainter* painter );
-    ~QgsMapRendererCustomPainterJob();
-
-    virtual void start();
-    virtual void cancel();
-    virtual void waitForFinished();
-    virtual bool isActive() const;
-    virtual QgsLabelingResults* takeLabelingResults();
-
-    //! @note not available in python bindings
-    const LayerRenderJobs& jobs() const { return mLayerJobs; }
-
-    /**
-     * Wait for the job to be finished - and keep the thread's event loop running while waiting.
-     *
-     * With a call to waitForFinished(), the waiting is done with a synchronization primitive
-     * and does not involve processing of messages. That may cause issues to code which requires
-     * some events to be handled in the main thread. Some plugins hooking into the rendering
-     * pipeline may require this in order to work properly - for example, OpenLayers plugin
-     * which uses a QWebPage in the main thread.
-     *
-     * Ideally the "wait for finished" method should not be used at all. The code triggering
-     * rendering should not need to actively wait for rendering to finish.
-     */
-    void waitForFinishedWithEventLoop( QEventLoop::ProcessEventsFlags flags = QEventLoop::AllEvents );
-
-    /**
-     * Render the map synchronously in this thread. The function does not return until the map
-     * is completely rendered.
-     *
-     * This is an alternative to ordinary API (using start() + waiting for finished() signal).
-     * Users are discouraged to use this method unless they have a strong reason for doing it.
-     * The synchronous rendering blocks the main thread, making the application unresponsive.
-     * Also, it is not possible to cancel rendering while it is in progress.
-     */
-    void renderSynchronously();
-
-  protected slots:
-    void futureFinished();
-
-  protected:
-    static void staticRender( QgsMapRendererCustomPainterJob* self ); // function to be used within the thread
-
-    // these methods are called within worker thread
-    void doRender();
-
-  private:
-    QPainter* mPainter;
-    QFuture<void> mFuture;
-    QFutureWatcher<void> mFutureWatcher;
-    QgsRenderContext mLabelingRenderContext;
-    QgsPalLabeling* mLabelingEngine;
-
-    bool mActive;
-    LayerRenderJobs mLayerJobs;
-    bool mRenderSynchronously;
 };
 
 
