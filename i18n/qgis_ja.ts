@@ -5538,7 +5538,7 @@ Open the results dialog to check it.</source>
     </message>
     <message>
         <source>&amp;Open Recent</source>
-        <translation>最近使用したプロジェクト(&amp;O)</translation>
+        <translation type="obsolete">最近使用したプロジェクト(&amp;O)</translation>
     </message>
     <message>
         <source>New From Template</source>
@@ -6450,6 +6450,10 @@ Shift+クリックで非表示
         <source>Fill Ring</source>
         <translation>リング塗りつぶし</translation>
     </message>
+    <message>
+        <source>Open Recent</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ManageConnectionsDialog</name>
@@ -6748,7 +6752,7 @@ Shift+クリックで非表示
     </message>
     <message>
         <source>Showing %d - %d of %d result%s</source>
-        <translation>表示中 %d - %d / %d 結果 %s</translation>
+        <translation type="obsolete">表示中 %d - %d / %d 結果 %s</translation>
     </message>
     <message>
         <source>Coordinate Transformation Error</source>
@@ -6797,6 +6801,12 @@ Shift+クリックで非表示
     <message>
         <source>CSW Connection error</source>
         <translation>CSW接続エラー</translation>
+    </message>
+    <message numerus="yes">
+        <source>Showing %d - %d of %n result(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -10681,6 +10691,62 @@ Response was:
         <source>Legend</source>
         <translation>凡例</translation>
     </message>
+    <message>
+        <source>Classification</source>
+        <translation type="unfinished">分類</translation>
+    </message>
+    <message>
+        <source>Range</source>
+        <translation type="unfinished">範囲</translation>
+    </message>
+    <message>
+        <source>Unique Values</source>
+        <translation type="unfinished">ユニーク値</translation>
+    </message>
+    <message>
+        <source>File Name</source>
+        <translation type="unfinished">ファイル名</translation>
+    </message>
+    <message>
+        <source>Value Map</source>
+        <translation type="unfinished">バリューマップ</translation>
+    </message>
+    <message>
+        <source>Enumeration</source>
+        <translation type="unfinished">列挙</translation>
+    </message>
+    <message>
+        <source>Check Box</source>
+        <translation type="unfinished">チェックボックス</translation>
+    </message>
+    <message>
+        <source>Text Edit</source>
+        <translation type="unfinished">テキスト編集</translation>
+    </message>
+    <message>
+        <source>Value Relation</source>
+        <translation type="unfinished">値のリレーション</translation>
+    </message>
+    <message>
+        <source>Uuid Generator</source>
+        <translation type="unfinished">Uuidジェネレータ</translation>
+    </message>
+    <message>
+        <source>Photo</source>
+        <translation type="unfinished">写真</translation>
+    </message>
+    <message>
+        <source>Web View</source>
+        <translation type="unfinished">Web ビュー</translation>
+    </message>
+    <message>
+        <source>Relation Reference</source>
+        <translation type="unfinished">リレーションの参照</translation>
+    </message>
+    <message>
+        <source>Date/Time</source>
+        <translation type="unfinished">日付/時刻</translation>
+    </message>
 </context>
 <context>
     <name>QSpatiaLiteDriver</name>
@@ -11569,7 +11635,7 @@ Error: %1</source>
     </message>
     <message>
         <source>The current layer has not selected features</source>
-        <translation>カレントレイヤには選択された地物はありません</translation>
+        <translation type="obsolete">カレントレイヤには選択された地物はありません</translation>
     </message>
     <message>
         <source>Delete features</source>
@@ -12063,6 +12129,10 @@ Always ignore these errors?</source>
         <translation>
             <numerusform>%n SSLエラーが発生しました</numerusform>
         </translation>
+    </message>
+    <message>
+        <source>The current layer has no selected features</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -17558,6 +17628,22 @@ Please try a lower resolution or a smaller papersize</source>
     <message>
         <source>Change...</source>
         <translation>変更...</translation>
+    </message>
+    <message>
+        <source>Add a new overview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove selected overview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move selected overview up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move selected overview down</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

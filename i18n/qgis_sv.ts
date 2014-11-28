@@ -5538,7 +5538,7 @@ Open the results dialog to check it.</source>
     </message>
     <message>
         <source>&amp;Open Recent</source>
-        <translation>&amp;Öppna senaste</translation>
+        <translation type="obsolete">&amp;Öppna senaste</translation>
     </message>
     <message>
         <source>New From Template</source>
@@ -6450,6 +6450,10 @@ Fungear på aktuellt redigerbart lager</translation>
         <source>Fill Ring</source>
         <translation>Fyll hål</translation>
     </message>
+    <message>
+        <source>Open Recent</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ManageConnectionsDialog</name>
@@ -6748,7 +6752,7 @@ Fungear på aktuellt redigerbart lager</translation>
     </message>
     <message>
         <source>Showing %d - %d of %d result%s</source>
-        <translation>Visar %d - %d av %d resultat %s</translation>
+        <translation type="obsolete">Visar %d - %d av %d resultat %s</translation>
     </message>
     <message>
         <source>Coordinate Transformation Error</source>
@@ -6797,6 +6801,13 @@ Fungear på aktuellt redigerbart lager</translation>
     <message>
         <source>CSW Connection error</source>
         <translation>CSW-anslutningsfel</translation>
+    </message>
+    <message numerus="yes">
+        <source>Showing %d - %d of %n result(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -10682,6 +10693,62 @@ Svaret var:
         <source>Legend</source>
         <translation>Teckenförklaring</translation>
     </message>
+    <message>
+        <source>Classification</source>
+        <translation type="unfinished">Klassificering</translation>
+    </message>
+    <message>
+        <source>Range</source>
+        <translation type="unfinished">Intervall</translation>
+    </message>
+    <message>
+        <source>Unique Values</source>
+        <translation type="unfinished">Unika värden</translation>
+    </message>
+    <message>
+        <source>File Name</source>
+        <translation type="unfinished">Filnamn</translation>
+    </message>
+    <message>
+        <source>Value Map</source>
+        <translation type="unfinished">Värdekarta</translation>
+    </message>
+    <message>
+        <source>Enumeration</source>
+        <translation type="unfinished">Uppräkning</translation>
+    </message>
+    <message>
+        <source>Check Box</source>
+        <translation type="unfinished">Kryssruta</translation>
+    </message>
+    <message>
+        <source>Text Edit</source>
+        <translation type="unfinished">Textredigering</translation>
+    </message>
+    <message>
+        <source>Value Relation</source>
+        <translation type="unfinished">Värderelation</translation>
+    </message>
+    <message>
+        <source>Uuid Generator</source>
+        <translation type="unfinished">UUID-generator</translation>
+    </message>
+    <message>
+        <source>Photo</source>
+        <translation type="unfinished">Foto</translation>
+    </message>
+    <message>
+        <source>Web View</source>
+        <translation type="unfinished">Webvy</translation>
+    </message>
+    <message>
+        <source>Relation Reference</source>
+        <translation type="unfinished">Relationsreferens</translation>
+    </message>
+    <message>
+        <source>Date/Time</source>
+        <translation type="unfinished">Datum/Tid</translation>
+    </message>
 </context>
 <context>
     <name>QSpatiaLiteDriver</name>
@@ -11572,7 +11639,7 @@ Fel: %1</translation>
     </message>
     <message>
         <source>The current layer has not selected features</source>
-        <translation>Det nuvarande lagret har inga valda objekt</translation>
+        <translation type="obsolete">Det nuvarande lagret har inga valda objekt</translation>
     </message>
     <message>
         <source>Delete features</source>
@@ -12071,6 +12138,10 @@ Ignorera alltid dessa fel?</translation>
             <numerusform>%n SSL-fel inträffade</numerusform>
             <numerusform>%n SSL-fel inträffade</numerusform>
         </translation>
+    </message>
+    <message>
+        <source>The current layer has no selected features</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -17570,6 +17641,22 @@ Var vänlig försök med en lägre upplösning eller mindre pappersstorlek</tran
     <message>
         <source>Change...</source>
         <translation>Ändra...</translation>
+    </message>
+    <message>
+        <source>Add a new overview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove selected overview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move selected overview up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move selected overview down</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
