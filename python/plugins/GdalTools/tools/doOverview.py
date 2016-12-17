@@ -61,6 +61,8 @@ class GdalToolsDialog(QWidget, Ui_Widget, BaseBatchWidget):
         self.batchCheck.stateChanged.connect(self.switchToolMode)
 
         self.encoding = locale.getdefaultlocale()[1]
+        if self.encoding is None:
+            self.encoding = 'utf-8'
 
         self.init = False  # workaround bug that pyramid options widgets are not initialized at first
 

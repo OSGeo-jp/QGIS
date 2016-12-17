@@ -83,6 +83,8 @@ class GdalToolsBaseDialog(QDialog, Ui_Dialog):
         self.setPluginCommand(pluginCommand)
 
         self.encoding = locale.getdefaultlocale()[1]
+        if self.encoding is None:
+            self.encoding = 'utf-8'
 
     def setPluginCommand(self, cmd):
         # on Windows replace the .py with .bat extension
