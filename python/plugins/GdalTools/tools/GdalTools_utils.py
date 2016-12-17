@@ -29,7 +29,7 @@ __revision__ = '$Format:%H$'
 # setLastUsedDir( QString *file_or_dir path )
 # -------------------------------------------------
 
-from qgis.PyQt.QtCore import QObject, QSettings, QFileInfo, QDir, QCoreApplication, pyqtSignal
+from qgis.PyQt.QtCore import QObject, QSettings, QFileInfo, QDir, QCoreApplication, pyqtSignal, QProcessEnvironment
 from qgis.PyQt.QtWidgets import QFileDialog
 
 from qgis.core import QgsApplication, QgsMapLayerRegistry, QgsRectangle, QgsProviderRegistry, QgsLogger
@@ -917,11 +917,12 @@ def setProcessEnvironment(process):
     }
 
     sep = os.pathsep
-
+    env = QProcessEnvironment.systemEnvironment()
     for name, val in envvar_list.iteritems():
         if val is None or val == "":
             continue
 
+        env.insert(name, val)
         envval = os.getenv(name)
         if envval is None or envval == "":
             envval = unicode(val)
@@ -934,6 +935,7 @@ def setProcessEnvironment(process):
         if envval is not None:
             os.putenv(name, envval)
 
+    process.setProcessEnvironment(env)
 
 def setMacOSXDefaultEnvironment():
     # fix bug #3170: many GDAL Tools don't work in OS X standalone
