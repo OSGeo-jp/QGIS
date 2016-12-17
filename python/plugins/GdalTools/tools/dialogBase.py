@@ -35,6 +35,7 @@ from . import GdalTools_utils as Utils
 from .. import resources_rc  # NOQA
 
 import string
+import locale
 
 
 class GdalToolsBaseDialog(QDialog, Ui_Dialog):
@@ -80,6 +81,8 @@ class GdalToolsBaseDialog(QDialog, Ui_Dialog):
 
         self.setWindowTitle(pluginName)
         self.setPluginCommand(pluginCommand)
+
+        self.encoding = locale.getdefaultlocale()[1]
 
     def setPluginCommand(self, cmd):
         # on Windows replace the .py with .bat extension
@@ -205,9 +208,9 @@ class GdalToolsBaseDialog(QDialog, Ui_Dialog):
             return
 
         # show the error message if there's one, otherwise show the process output message
-        msg = unicode(self.process.readAllStandardError())
+        msg = unicode(self.process.readAllStandardError(), self.encoding)
         if msg == '':
-            outMessages = unicode(self.process.readAllStandardOutput()).splitlines()
+            outMessages = unicode(self.process.readAllStandardOutput(), self.encoding).splitlines()
 
             # make sure to not show the help
             for m in outMessages:

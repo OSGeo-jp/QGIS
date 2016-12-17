@@ -31,6 +31,7 @@ from .ui_widgetOverview import Ui_GdalToolsWidget as Ui_Widget
 from .widgetBatchBase import GdalToolsBaseBatchWidget as BaseBatchWidget
 from . import GdalTools_utils as Utils
 
+import locale
 
 class GdalToolsDialog(QWidget, Ui_Widget, BaseBatchWidget):
 
@@ -58,6 +59,8 @@ class GdalToolsDialog(QWidget, Ui_Widget, BaseBatchWidget):
 
         self.inSelector.selectClicked.connect(self.fillInputFile)
         self.batchCheck.stateChanged.connect(self.switchToolMode)
+
+        self.encoding = locale.getdefaultlocale()[1]
 
         self.init = False  # workaround bug that pyramid options widgets are not initialized at first
 
@@ -180,7 +183,7 @@ class GdalToolsDialog(QWidget, Ui_Widget, BaseBatchWidget):
             BasePluginWidget.onFinished(self, exitCode, status)
             return
 
-        msg = unicode(self.base.process.readAllStandardError())
+        msg = unicode(self.base.process.readAllStandardError(), self.encoding)
         if msg != '':
             self.errors.append(">> " + self.inFiles[self.batchIndex] + "<br>" + msg.replace("\n", "<br>"))
 
